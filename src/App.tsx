@@ -1,9 +1,11 @@
-
+import { Route, Routes } from 'react-router'
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
+	return (
+		<Routes>
+			<Route />
+		</Routes>
+	)
 }
 
 export default App
