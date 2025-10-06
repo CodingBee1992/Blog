@@ -1,7 +1,7 @@
-interface MenuTypes {
+export interface MenuTypes {
 	title: string
 	href: string
-	children?: { title: string; href: string }[]
+	children?: { title: string; href: string }[] 
 }
 
 const dataMenu1: MenuTypes = {

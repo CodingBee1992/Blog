@@ -1,0 +1,1115 @@
+@use "../../../assets/styles/variable" as *;
+
+.container {
+  width: 100%;
+  display: flex;
+  position: fixed;
+  background-color: transparent;
+  padding: 20px 75px 24px 24px;
+  transition: 0.3s all ease-in-out;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  .content {
+    .headerElement {
+      &:hover {
+
+        > .text {
+          color: #a3a3a3;
+        }
+      }
+    }
+  }
+
+  &.active {
+    background-color: #ffffff;
+
+    .content {
+      .logo {
+        .red {
+          color: #eb2d36;
+        }
+
+        .black {
+          color: #231f20;
+        }
+      }
+
+      .headerElement {
+        @include left-right-hover();
+
+        a[href="#"] {
+          > .text {
+            background-image: unset;
+            color: #a3a3a3;
+          }
+        }
+
+        .arrow {
+          color: #000;
+        }
+
+        &:not(.subElement).active {
+          > .text {
+            color: transparent;
+          }
+        }
+
+        &.subElement {
+          background-color: #fff;
+
+          border-bottom: 1px solid #ddd;
+          @include left-right-hover();
+
+          > .text {
+            color: transparent;
+          }
+        }
+      }
+
+      .elementSearchContainer {
+        .elementSearchInput {
+          border: 1px solid rgba(0, 0, 0, 0.3);
+
+          .input {
+            color: #000;
+
+            &::placeholder {
+              color: #000;
+            }
+          }
+
+          .search {
+            .icon {
+              color: #000;
+            }
+
+            &:hover {
+              .icon {
+                color: #eb2d36 !important;
+              }
+            }
+          }
+        }
+
+        .elementSearchList {
+          background-color: #fff;
+
+          .elementSearchListLink {
+            border-bottom: 1px solid #ddd;
+
+            @include left-right-hover();
+
+            .text {
+              color: transparent;
+            }
+
+            &:hover {
+              > .text {
+                background-color: #fffdfd;
+                color: transparent;
+                left: 5px;
+              }
+            }
+
+            &:last-child {
+              border: unset;
+            }
+          }
+        }
+      }
+
+      .btnSearch {
+        .icon {
+          color: #000;
+        }
+      }
+    }
+
+    .menuMobileContainer {
+      .btnMenuMobile {
+        span {
+          background-color: #000000;
+        }
+
+        &:not(.active):hover {
+          span {
+            background-color: #eb2d36;
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.active):hover {
+    background-color: rgba(37, 37, 37, 0.4);
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .row {
+      display: flex;
+
+      &.right {
+        width: 100%;
+        flex-direction: row-reverse;
+      }
+    }
+
+    .logo {
+      .red {
+        color: #ffffff;
+        transition: 0.3s all ease-in-out;
+      }
+
+      .black {
+        color: #ffffff;
+        transition: 0.3s all ease-in-out;
+      }
+
+      margin: 0 48px 5px 0;
+      transition: 0.3s all ease-in-out;
+
+      &:hover {
+        scale: 1.05;
+        .red {
+          color: red;
+        }
+      }
+    }
+
+    .btnSearch {
+      width: 32px;
+      height: 32px;
+      background-color: unset;
+      border: unset;
+      cursor: pointer;
+      padding: 8px;
+      margin: 0 20px 0 0;
+      z-index: 1200;
+
+      .icon {
+        color: #ffffff;
+        transition: 0.3s all ease-in-out;
+      }
+
+      &:hover {
+        .icon {
+          color: #a3a3a3;
+        }
+      }
+    }
+
+    .headerElement {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      z-index: 1100;
+      margin: 3px 24px 0 0;
+
+      &:hover {
+        .text {
+          .anim {
+            color: transparent;
+            background-image: linear-gradient(90deg, #eb2d36 50%, #ffffff 50%);
+            background-position: 100%;
+            background-size: 200% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+
+            &.active {
+              animation: addColor 0.5s ease-in-out forwards;
+            }
+
+            @keyframes addColor {
+              0% {
+                background-position: 100%;
+              }
+
+              100% {
+                background-position: 0%;
+              }
+            }
+          }
+        }
+      }
+
+      a[href="#"] {
+        cursor: auto;
+        pointer-events: none;
+
+        > .text {
+          color: #a3a3a3;
+        }
+      }
+
+      .text {
+        color: #fff;
+        font-family: Lato;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.3s all ease-in-out;
+        opacity: 1;
+        // z-index: 1200;
+        background-position: 100%;
+        pointer-events: none;
+      }
+
+      .arrow {
+        color: #fff;
+        margin: 0 0 0 8px;
+        transition: 0.3s all ease-in-out;
+        z-index: 1201;
+        pointer-events: none;
+      }
+
+      .headerSubElementContainer {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: -10px;
+        transition: 0.5s all ease-in-out;
+        opacity: 0;
+        pointer-events: none;
+        padding: 48px 0 0 0;
+        z-index: 1150;
+
+        &.right {
+          position: absolute;
+          top: 0;
+          right: 0;
+          transform: translateX(100%);
+          margin: 0;
+          padding: 0;
+
+          &.active {
+            pointer-events: all;
+          }
+        }
+
+        &.active {
+          opacity: 1;
+        }
+      }
+
+      &.subElement {
+        padding: 5px 10px;
+        margin: 0;
+        border-bottom: 1px solid transparent;
+        transition: 0.3s all ease-in-out;
+        background-color: transparent;
+
+        .text {
+          color: #fff;
+          white-space: nowrap;
+          transition: 0.3s all;
+          position: relative;
+          left: 0;
+
+          // .anim {
+          //   color: transparent;
+          //   background-image: linear-gradient(90deg, #EB2D36 50%, #ffffff 50%);
+          //   background-position: 100%;
+          //   background-size: 200% 100%;
+          //   background-clip: text;
+          //   -webkit-background-clip: text;
+
+          //   &.active {
+          //     animation: addColor 5.3s ease-in-out forwards;
+          //   }
+
+          //   @keyframes addColor {
+          //     0% {
+          //       background-position: 100%;
+          //     }
+
+          //     100% {
+          //       background-position: 0%;
+          //     }
+          //   }
+          // }
+        }
+      }
+
+      &:not(.subElement).active {
+        > .text {
+          color: #a3a3a3;
+        }
+
+        > .arrow {
+          color: #a3a3a3;
+        }
+
+        > .headerSubElementContainer {
+          pointer-events: all;
+          opacity: 1;
+        }
+      }
+
+      // &.subElement.active {
+      //   >.text {
+      //     color: #a3a3a3;
+      //   }
+
+      //   .headerSubElementContainer {
+      //     opacity: 1;
+      //   }
+      // }
+
+      &.subElement:hover {
+        > .text {
+          color: #a3a3a3;
+          left: 5px;
+        }
+      }
+    }
+
+    .elementSearchContainer {
+      max-width: 400px;
+      width: 100%;
+      height: 22px;
+      margin: 0 30px 0 0;
+      z-index: 1200;
+      position: relative;
+
+      .elementSearchInput {
+        max-width: 400px;
+        width: 100%;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        border-radius: 20px;
+        border: 1px solid transparent;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(5px);
+        padding: 2px 32px 2px 24px;
+        position: relative;
+        transition: 0.3s all ease-in-out;
+
+        .input {
+          width: 100%;
+          background-color: transparent;
+          border: unset;
+          color: #fff;
+          font-family: Lato;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          position: relative;
+
+          &::placeholder {
+            color: #fff;
+            font-family: Lato;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            text-transform: uppercase;
+            opacity: 1;
+          }
+
+          &:focus::placeholder {
+            opacity: 0;
+          }
+        }
+
+        .search {
+          width: 32px;
+          height: 32px;
+          background-color: unset;
+          border: unset;
+          cursor: pointer;
+          padding: 8px;
+          position: absolute;
+          top: 2px;
+          right: 20px;
+
+          .icon {
+            color: #ffffff;
+            transition: 0.3s all ease-in-out;
+          }
+
+          &:hover {
+            .icon {
+              color: #a3a3a3;
+            }
+          }
+        }
+      }
+
+      .elementSearchList {
+        max-height: 0;
+        height: auto;
+        display: none;
+        flex-direction: column;
+        pointer-events: none;
+        overflow: hidden;
+        transition: 0.3s all ease-in-out;
+        margin: 15px 0 0 0;
+        padding: 0 0 0 10px;
+        white-space: nowrap;
+        position: absolute;
+        top: 35px;
+        left: 0;
+
+        .elementSearchListLink {
+          border-bottom: 1px solid transparent;
+          padding: 5px;
+          cursor: pointer;
+          user-select: none;
+          width: 400px;
+
+          @include ellipsisInputSearch(3);
+          color: #fff;
+
+          .text {
+            color: #fff;
+            font-family: Lato;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.3s all ease-in-out;
+            opacity: 1;
+            z-index: 1200;
+            position: relative;
+            left: 0;
+            background-position: 100%;
+          }
+
+          &:hover {
+            > .text {
+              color: #a3a3a3;
+              left: 5px;
+            }
+          }
+        }
+
+        &.show {
+          display: flex;
+          pointer-events: all;
+        }
+
+        &.active {
+          max-height: 325px;
+        }
+      }
+    }
+  }
+
+  .menuMobileContainer {
+    max-width: 340px;
+    width: 100%;
+    height: 55px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(calc(100% - 70px));
+    overflow: hidden;
+    @include scrollbarRed();
+    direction: rtl;
+    background-color: transparent;
+    z-index: 1500;
+
+    &.transitions {
+      transition: 0.3s all ease-in-out;
+    }
+
+    &.beforeActive {
+      height: 100vh;
+    }
+
+    &.active {
+      overflow-y: scroll;
+      transform: translateX(0);
+      background-color: #ffffff;
+
+      .menuMobile {
+        transform: translateX(0);
+      }
+    }
+
+    .menuMobile {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 60px 24px 70px 20px;
+      background-color: #ffffff;
+      transform: translateX(70px);
+      transition: 0.3s all ease-in-out;
+      direction: ltr;
+      z-index: 1510;
+      box-shadow: inset 1px 1px 10px rgba(#bebebe, 0.3);
+
+      .menuMobileElement {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #dddddd;
+        background-color: #ffffff;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.3s all ease-in-out;
+
+        @include left-right-hover();
+
+        .text {
+          width: fit-content;
+          // color: #000;
+          font-family: Lato;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          text-transform: uppercase;
+          position: relative;
+          left: 0;
+          padding: 22px 0 22px 5px;
+          transition: 0.3s all ease-in-out;
+
+          svg {
+            color: #000;
+            position: absolute;
+            top: 28px;
+            right: -15px;
+            transition: 0.3s all ease-in-out;
+          }
+        }
+
+        .menuMobileSubElementContainer {
+          max-height: 0;
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          transition: 0.3s all ease-in-out;
+          padding: 0 0 0 15px;
+          cursor: auto;
+          // pointer-events: none;
+
+          a:first-child {
+            border-top: 1px solid #dddddd;
+          }
+
+          a[href="#"] {
+            cursor: auto;
+            pointer-events: none;
+
+            > .text {
+              background-image: unset;
+              color: #a3a3a3;
+            }
+          }
+        }
+
+        &.disable {
+          cursor: auto;
+          pointer-events: none;
+
+          .text {
+            background-image: unset;
+            color: #a6a6a6;
+          }
+        }
+
+        &:hover {
+          background-color: #fffdfd;
+
+          // >.text{
+          //   color: #a3a3a3;
+          //   left: 5px;
+          // }
+        }
+
+        &.active {
+          border-bottom: 1px solid transparent;
+
+          > .text {
+            background-position: 0;
+          }
+
+          .menuMobileSubElementContainer {
+            max-height: 500px;
+          }
+
+          svg {
+            transform: rotate(180deg);
+          }
+        }
+
+        &.active2 {
+          border-bottom: 1px solid transparent;
+
+          > .text {
+            background-position: 0;
+          }
+
+          .menuMobileSubElementContainer {
+            max-height: 1300px;
+          }
+
+          svg {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+
+    .btnMenuMobile {
+      width: 40px;
+      display: block;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: absolute;
+      top: 20px;
+      left: 0px;
+      transition: 0.3s all ease-in-out;
+      direction: ltr;
+      z-index: 1520;
+
+      span {
+        display: block;
+        width: 100%;
+        height: 4px;
+        background-color: #ffffff;
+        transition: all 0.3s;
+        position: relative;
+        border-radius: 10px;
+
+        + span {
+          margin-top: 8px;
+        }
+      }
+
+      span:nth-child(1) {
+        top: 0;
+        transform: rotate(0);
+      }
+
+      span:nth-child(2) {
+        transform: scale(1);
+      }
+
+      span:nth-child(3) {
+        bottom: 0;
+        transform: rotate(0);
+      }
+
+      &.active {
+        left: 15px;
+
+        span {
+          background: #a6a6a6;
+        }
+
+        span:nth-child(1) {
+          top: 12px;
+          transform: rotate(45deg);
+        }
+
+        span:nth-child(2) {
+          transform: scale(0);
+        }
+
+        span:nth-child(3) {
+          bottom: 12px;
+          transform: rotate(135deg);
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          span {
+            background-color: #eb2d36;
+          }
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:not(.active):hover {
+          span {
+            background-color: #a3a3a3;
+          }
+
+          span:nth-child(1) {
+            animation-duration: 1s;
+            animation-name: span1;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            animation-delay: 0s;
+          }
+
+          span:nth-child(2) {
+            animation-duration: 1.5s;
+            animation-name: span1;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            animation-delay: 0.4s;
+          }
+
+          span:nth-child(3) {
+            animation-duration: 0.9s;
+            animation-name: span1;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            animation-delay: 0.2s;
+          }
+        }
+      }
+
+      @keyframes span1 {
+        0% {
+          width: 100%;
+        }
+
+        50% {
+          width: 90%;
+        }
+
+        100% {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .shadow {
+    display: none;
+    width: 100%;
+    height: 150vh;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: 0.3s all;
+    pointer-events: none;
+    transform: translateY(-25%);
+    animation-name: fedeIn;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+
+    &.active {
+      display: flex;
+    }
+
+    @keyframes fedeIn {
+      0% {
+        opacity: 0;
+        z-index: 10000;
+      }
+
+      50% {
+        z-index: 10000;
+      }
+
+      100% {
+        opacity: 1;
+        z-index: 10000;
+      }
+    }
+  }
+
+  .topSearchContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    z-index: 2000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%);
+    transition: 0.3s all ease-in-out;
+
+    .topContainer {
+      width: 100%;
+      display: flex;
+      background-color: #fff;
+      align-items: center;
+      justify-content: center;
+      z-index: 2100;
+    }
+
+    .blackShadow {
+      width: 100%;
+      height: 100vh;
+      background-color: #000000;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2001;
+      transition: 0.3s all ease-in-out;
+    }
+
+    .topSearchContainerInput {
+      max-width: 1050px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin: 60px 50px;
+      padding: 0 50px 0 0;
+      position: relative;
+    }
+
+    .elementSearchInput {
+      width: 100%;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      border-radius: 20px;
+      border: 1px solid #9d9d9d;
+      background-color: #fff;
+      padding: 2px 32px 2px 24px;
+      position: relative;
+      transition: 0.3s all ease-in-out;
+
+      .input {
+        width: 100%;
+        background-color: transparent;
+        border: unset;
+        color: #000;
+        font-family: Lato;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        position: relative;
+
+        &::placeholder {
+          color: #000;
+          font-family: Lato;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          text-transform: uppercase;
+          opacity: 1;
+        }
+
+        &:focus::placeholder {
+          opacity: 0;
+        }
+      }
+
+      .search {
+        width: 32px;
+        height: 32px;
+        background-color: unset;
+        border: unset;
+        cursor: pointer;
+        padding: 8px;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+
+        .icon {
+          color: #000000;
+          transition: 0.3s all ease-in-out;
+        }
+
+        &:hover {
+          .icon {
+            color: #a3a3a3;
+          }
+        }
+      }
+    }
+
+    .elementSearchList {
+      width: 100%;
+      max-height: 0;
+      height: auto;
+      display: none;
+      flex-direction: column;
+      background-color: #ffffff;
+      pointer-events: none;
+      overflow: hidden;
+      transition: 0.3s all ease-in-out;
+      padding: 0 0 0 10px;
+      white-space: nowrap;
+      position: absolute;
+      top: 95px;
+      left: 0;
+
+      .elementSearchListLink {
+        border-bottom: 1px solid transparent;
+        padding: 5px;
+        cursor: pointer;
+        user-select: none;
+
+        .text {
+          color: #000;
+          font-family: Lato;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          text-transform: uppercase;
+          transition: 0.3s all ease-in-out;
+          opacity: 1;
+          z-index: 1200;
+          position: relative;
+          left: 0;
+          background-position: 100%;
+        }
+
+        &:hover {
+          > .text {
+            color: #a3a3a3;
+            left: 5px;
+          }
+        }
+      }
+
+      &.show {
+        display: flex;
+        pointer-events: all;
+      }
+
+      &.active {
+        max-height: 325px;
+      }
+    }
+
+    .btnClose {
+      width: 40px;
+      height: 40px;
+      color: #ffffff;
+      padding: 5px;
+      position: absolute;
+      right: -80px;
+      top: -40px;
+      cursor: pointer;
+      transition: 0.3s all ease-in-out;
+
+      path {
+        stroke: #7c7c7c;
+      }
+
+      &:hover {
+        color: #ffeaec;
+      }
+    }
+
+    &.active {
+      transform: translateY(0);
+
+      .blackShadow {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .container {
+    .content {
+      .logo {
+        margin: 0 20px 5px 0;
+      }
+
+      .elementSearchContainer {
+        margin: 0 20px 0 0;
+      }
+    }
+    .topSearchContainer {
+      .topContainer {
+        .topSearchContainerInput {
+          .elementSearchList {
+            .elementSearchListLink {
+              width: 100%;
+              max-width: 80vw;
+              color: #000;
+
+              @include ellipsisInputSearch(3);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    padding: 20px 60px 24px 20px;
+
+    .content {
+      .elementSearchContainer {
+        .elementSearchListLink {
+          width: 360px;
+        }
+      }
+    }
+
+    .menuMobileContainer {
+      transform: translateX(calc(100% - 60px));
+    }
+
+    .topSearchContainer {
+      .topSearchContainerInput {
+        padding: 0;
+        margin: 60px 50px 55px;
+
+        .elementSearchInput {
+          height: 40px;
+        }
+
+        .btnClose {
+          top: -45px;
+          right: -35px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .container {
+    .topSearchContainer {
+      .topContainer {
+        .topSearchContainerInput {
+          margin: 60px 20px 50px;
+
+          .elementSearchList {
+            left: -20px;
+            min-width: 100vw;
+
+            .elementSearchListLink {
+              max-width: 90vw;
+            }
+          }
+
+          .elementSearchInput {
+            height: 45px;
+          }
+
+          .btnClose {
+            top: -50px;
+            right: -5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 385px) {
+  .container {
+    .content {
+      .logo {
+        width: 184px;
+        height: 18px;
+        margin: 5px 10px 0 0;
+      }
+    }
+  }
+}
