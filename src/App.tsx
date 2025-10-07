@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router'
 
-import HomePage from './components/pages/HomPage/HomePage'
+
 import DesignPage from './components/pages/categories/DesignPage/DesignPage'
 import LifeStylePage from './components/pages/categories/LifeStylePage/LifeStylePage'
 import PhotographyPage from './components/pages/categories/PhotographyPage/PhotographyPage'
@@ -15,30 +15,33 @@ import StandardPostPage from './components/pages/Blog/StandardPostPage/StandardP
 import StylesPage from './components/pages/StylesPage/StylesPage'
 import AboutPage from './components/pages/AboutPage/AboutPage'
 import ContactPage from './components/pages/ContactPage/ContactPage'
+import StaticLayout from './containers/HomPage/StaticLayout'
+import HomePage from './components/pages/HomePage/HomePage'
 
 const App = () => {
 	return (
 		<Router basename="/">
 			<Routes>
-				<Route path="/" element={<HomePage />}>
+				<Route element={<StaticLayout/>}>
+					<Route path="/" element={<HomePage />} />
 					<Route path="categories/">
-						<Route path="design" element={<DesignPage/>} />
-						<Route path="lifestyle" element={<LifeStylePage/>} />
-						<Route path="photography" element={<PhotographyPage/>} />
-						<Route path="vacation" element={<VacationPage/>} />
-						<Route path="work" element={<WorkPage/>} />
-						<Route path="health" element={<HealthPage/>} />
-						<Route path="family" element={<FamilyPage/>} />
-						<Route path="relationship" element={<RealtionshipPage/>} />
+						<Route path="design" element={<DesignPage />} />
+						<Route path="lifestyle" element={<LifeStylePage />} />
+						<Route path="photography" element={<PhotographyPage />} />
+						<Route path="vacation" element={<VacationPage />} />
+						<Route path="work" element={<WorkPage />} />
+						<Route path="health" element={<HealthPage />} />
+						<Route path="family" element={<FamilyPage />} />
+						<Route path="relationship" element={<RealtionshipPage />} />
 					</Route>
-					<Route path='blog/'>
-						<Route path='video-post' element={<VideoPostPage/>}/>	
-						<Route path='audio-post' element={<AudioPostPage/>}/>	
-						<Route path='standard-post' element={<StandardPostPage/>}/>	
+					<Route path="blog/">
+						<Route path="video-post" element={<VideoPostPage />} />
+						<Route path="audio-post" element={<AudioPostPage />} />
+						<Route path="standard-post" element={<StandardPostPage />} />
 					</Route>
-					<Route path='styles' element={<StylesPage/>}/>
-					<Route path='about' element={<AboutPage/>}/>
-					<Route path='contact' element={<ContactPage/>}/>
+					<Route path="styles" element={<StylesPage />} />
+					<Route path="about" element={<AboutPage />} />
+					<Route path="contact" element={<ContactPage />} />
 				</Route>
 			</Routes>
 		</Router>

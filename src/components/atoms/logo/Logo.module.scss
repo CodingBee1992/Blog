@@ -1,0 +1,14 @@
+@use '../../../assets/styles/variable' as *;
+
+.logo{
+    position: absolute;
+    margin: 0;
+    top: calc(50% - 3px);
+    left: 2.5rem;
+    // width: var(--logo-width);
+    color: var(--color-menu);
+    font-size: var(--logo-Size);
+    font-weight:600;
+    transform: translateY(-50%);
+    z-index: 101;
+}

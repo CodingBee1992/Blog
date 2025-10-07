@@ -1,8 +1,8 @@
-
+import styles from './Logo.module.scss'
 
 const Logo = () => {
   return (
-    <div>
+    <div className={styles.logo}>
       codingBee
     </div>
   )

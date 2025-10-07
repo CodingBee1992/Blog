@@ -1,0 +1,8 @@
+@use "../../../assets/styles/variable" as *;
+
+.menu {
+	display: flex;
+    width: 92%;
+	gap: 2rem;
+	margin-left: calc(var(--logo-width) + 8rem);
+}

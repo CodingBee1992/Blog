@@ -2,7 +2,7 @@
 
 const DesignPage = () => {
   return (
-    <div>DesignPage</div>
+    <div className="absolute top-80 bg-amber-700">DesignPage</div>
   )
 }
 

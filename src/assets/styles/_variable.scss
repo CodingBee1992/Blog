@@ -26,632 +26,619 @@ $mobile: 500px;
 $mobileSmall: 380px;
 
 :root {
-  --fontSizeXXXL: 80px;
-  --fontSizeXXL: 64px;
-  --fontSizeXL: 48px;
-  --fontSizeSmallXL: 40px;
-  --fontSizeSuperBig: 36px;
-  --fontSizeBig: 28px;
-  --fontSizeMiddle: 24px;
-  --fontSize: 20px;
-  --fontSizeMedium: 18px;
-  --fontSizeLittleSmall: 16px;
-  --fontSizeUnderLittleSmall: 15px;
-  --fontError: 15px;
-  --fontSizeSmall: 14px;
-  --fontSizeSuperSmall: 12px;
+	--fontFamily: 'Inter', sans-serif;
+	--logo-width: 96px;
+	--logo-Size: 2.5rem;
 
-  --mainColor: #d12e36;
-  --linkColorHover: #d12e36;
-  --linkColor: #3f3ff7;
-  --white: #ffffff;
-  --black: #000000;
-  --gray: #f6f6f6;
-  --darkGray: #7d7d7d;
-  --lightGray: #e7e7e7;
-  --green: #0f9124;
+	--color-bg: #eff0f0;
 
-  --brightness: 1;
+	--color-menu: #ffff;
+	--menu-size:1.5rem;
+	--sub-menu-size: 1.4rem;
+
+	--text-Size: 1.8rem;
+
+	--header-height: 8.8rem;
 }
 
 //1600px
 @media (max-width: $desktopXL) {
-  :root {
-    --fontSizeSmallXL: 32px;
-  }
+	:root {
+		--fontSizeSmallXL: 32px;
+	}
 }
 
 //1350px
 @media (max-width: $desktopBig) {
-  :root {
-    --fontSizeXXXL: 60px;
-    --fontSizeSuperBig: 32px;
-    --fontSizeBig: 24px;
-    --fontSizeMiddle: 20px;
-    --fontSize: 18px;
-    --fontSizeSmall: 12px;
-  }
+	:root {
+		--fontSizeXXXL: 60px;
+		--fontSizeSuperBig: 32px;
+		--fontSizeBig: 24px;
+		--fontSizeMiddle: 20px;
+		--fontSize: 18px;
+		--fontSizeSmall: 12px;
+	}
 }
 //1250px
 @media (max-width: $desktop) {
-  :root {
-    --fontSizeXXXL: 48px;
-    --fontSizeXL: 40px;
-    --fontSizeSuperBig: 30px;
-    --fontSizeBig: 23px;
-    --fontSizeMiddle: 19px;
-    --fontSize: 17px;
-    --fontSizeSmall: 12px;
-    --fontSizeSmallXL: 26px;
-  }
+	:root {
+		--fontSizeXXXL: 48px;
+		--fontSizeXL: 40px;
+		--fontSizeSuperBig: 30px;
+		--fontSizeBig: 23px;
+		--fontSizeMiddle: 19px;
+		--fontSize: 17px;
+		--fontSizeSmall: 12px;
+		--fontSizeSmallXL: 26px;
+	}
 }
 
 //1200px
 @media (max-width: $desktopSmaller) {
-  :root {
-    --fontSizeSmallXL: 36px;
-  }
+	:root {
+		--fontSizeSmallXL: 36px;
+	}
 }
 
 //1050px
 @media (max-width: $desktopSmall) {
-  :root {
-    --fontSizeXL: 38px;
-    --fontSizeBig: 22px;
-    --fontSizeMiddle: 19px;
-    --fontSize: 17px;
-    --fontSizeMedium: 15px;
-    --fontSizeSmall: 12px;
-  }
+	:root {
+		--fontSizeXL: 38px;
+		--fontSizeBig: 22px;
+		--fontSizeMiddle: 19px;
+		--fontSize: 17px;
+		--fontSizeMedium: 15px;
+		--fontSizeSmall: 12px;
+	}
 }
 //800px
 @media (max-width: $tablet) {
-  :root {
-    --fontSizeXXL: 42px;
-    --fontSizeXL: 35px;
-    --fontSizeSuperBig: 28px;
-    --fontSizeBig: 20px;
-    --fontSizeMiddle: 18px;
-    --fontSize: 16px;
-    --fontSizeSmall: 12px;
-    --fontSizeSmallXL: 32px;
-  }
+	:root {
+		--fontSizeXXL: 42px;
+		--fontSizeXL: 35px;
+		--fontSizeSuperBig: 28px;
+		--fontSizeBig: 20px;
+		--fontSizeMiddle: 18px;
+		--fontSize: 16px;
+		--fontSizeSmall: 12px;
+		--fontSizeSmallXL: 32px;
+	}
 }
 //600px
 @media (max-width: $tabletSmall) {
-  :root {
-    --fontSizeXXXL: 32px;
-    --fontSizeXL: 30px;
-    --fontSizeBig: 20px;
-    --fontSizeMiddle: 18px;
-    --fontSize: 16px;
-    --fontSizeMedium: 14px;
-    --fontSizeSmall: 12px;
-  }
+	:root {
+		--fontSizeXXXL: 32px;
+		--fontSizeXL: 30px;
+		--fontSizeBig: 20px;
+		--fontSizeMiddle: 18px;
+		--fontSize: 16px;
+		--fontSizeMedium: 14px;
+		--fontSizeSmall: 12px;
+	}
 }
 
 //500px
 @media (max-width: $mobile) {
-  :root {
-    --fontSizeXXL: 32px;
-    --fontSizeXL: 26px;
-    --fontSizeSuperBig: 25px;
-    --fontSizeBig: 19px;
-    --fontSizeMiddle: 18px;
-    --fontSize: 16px;
+	:root {
+		--fontSizeXXL: 32px;
+		--fontSizeXL: 26px;
+		--fontSizeSuperBig: 25px;
+		--fontSizeBig: 19px;
+		--fontSizeMiddle: 18px;
+		--fontSize: 16px;
 
-    --fontSizeSmall: 12px;
-    --fontSizeSmallXL: 28px;
-  }
+		--fontSizeSmall: 12px;
+		--fontSizeSmallXL: 28px;
+	}
 }
 //380px
 @media (max-width: $mobileSmall) {
-  :root {
-    --fontSizeXXXL: 24px;
-    --fontSizeXXL: 24px;
-    --fontSizeXL: 22px;
-    --fontSizeBig: 18px;
-    --fontSizeMiddle: 18px;
-    --fontSize: 14px;
-    --fontSizeMedium: 13px;
-    --fontSizeSmall: 12px;
-    --fontSizeSmallXL: 24px;
-  }
+	:root {
+		--fontSizeXXXL: 24px;
+		--fontSizeXXL: 24px;
+		--fontSizeXL: 22px;
+		--fontSizeBig: 18px;
+		--fontSizeMiddle: 18px;
+		--fontSize: 14px;
+		--fontSizeMedium: 13px;
+		--fontSizeSmall: 12px;
+		--fontSizeSmallXL: 24px;
+	}
 }
 
 @mixin left-right-underline-hover($colorHover: $mainColor) {
-  > .text {
-    position: relative;
-    display: inline-block;
+	> .text {
+		position: relative;
+		display: inline-block;
 
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px;
-      background-color: $colorHover;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease-in-out;
-    }
-  }
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 2px;
+			background-color: $colorHover;
+			transform: scaleX(0);
+			transform-origin: left;
+			transition: transform 0.3s ease-in-out;
+		}
+	}
 
-  &:hover {
-    > .text::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-  }
+	&:hover {
+		> .text::after {
+			transform: scaleX(1);
+			transform-origin: left;
+		}
+	}
 }
 
 @mixin left-right-hover($colorHover: $mainColor, $color: var(--black, #000)) {
-  > .text {
-    color: transparent;
-    background-image: linear-gradient(90deg, $colorHover 50%, $color 50%);
-    background-position: 100%;
-    background-size: 200% 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    transition: all 0.3s ease-in-out;
-  }
+	> .text {
+		color: transparent;
+		background-image: linear-gradient(90deg, $colorHover 50%, $color 50%);
+		background-position: 100%;
+		background-size: 200% 100%;
+		background-clip: text;
+		-webkit-background-clip: text;
+		transition: all 0.3s ease-in-out;
+	}
 
-  > .icon {
-    svg {
-      color: $color;
-      transition: 0.3s ease-in-out color;
-    }
+	> .icon {
+		svg {
+			color: $color;
+			transition: 0.3s ease-in-out color;
+		}
 
-    &.iconActive svg {
-      color: $mainColor;
-    }
-  }
+		&.iconActive svg {
+			color: $mainColor;
+		}
+	}
 
-  &:hover {
-    > .text {
-      background-position: 0;
-    }
+	&:hover {
+		> .text {
+			background-position: 0;
+		}
 
-    > .icon svg {
-      color: $mainColor;
-    }
-  }
+		> .icon svg {
+			color: $mainColor;
+		}
+	}
 
-  // &.active {
-  //   >.text {
-  //     background-position: 0;
-  //   }
-  // }
+	// &.active {
+	//   >.text {
+	//     background-position: 0;
+	//   }
+	// }
 }
 
 @mixin checkbox($width: 26px) {
-  .checkbox {
-    width: $width;
-    height: $width;
-    display: flex;
-    -webkit-appearance: none;
-    appearance: none;
-    border: unset;
-    position: relative;
-    flex-shrink: 0;
-    z-index: 1;
-    user-select: none;
-    cursor: pointer;
+	.checkbox {
+		width: $width;
+		height: $width;
+		display: flex;
+		-webkit-appearance: none;
+		appearance: none;
+		border: unset;
+		position: relative;
+		flex-shrink: 0;
+		z-index: 1;
+		user-select: none;
+		cursor: pointer;
 
-    &.round {
-      &:checked::after,
-      &::after {
-        border-radius: 50%;
-      }
+		&.round {
+			&:checked::after,
+			&::after {
+				border-radius: 50%;
+			}
 
-      &::before {
-        left: 0;
-      }
-    }
+			&::before {
+				left: 0;
+			}
+		}
 
-    &:not(.round) {
-      &::before {
-        left: 1px;
-      }
-    }
-  }
+		&:not(.round) {
+			&::before {
+				left: 1px;
+			}
+		}
+	}
 
-  .checkbox::after {
-    content: "";
-    width: $width;
-    height: $width;
-    flex-shrink: 0;
-    background-color: #ffffff;
-    border: 1px solid #dfdfdf;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    transition: 0.3s all ease-in-out;
-  }
+	.checkbox::after {
+		content: '';
+		width: $width;
+		height: $width;
+		flex-shrink: 0;
+		background-color: #ffffff;
+		border: 1px solid #dfdfdf;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 2;
+		transition: 0.3s all ease-in-out;
+	}
 
-  .checkbox:checked::after {
-    content: "";
-    width: $width;
-    height: $width;
-    background-color: #ee2e24;
-    border-color: #ee2e24;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+	.checkbox:checked::after {
+		content: '';
+		width: $width;
+		height: $width;
+		background-color: #ee2e24;
+		border-color: #ee2e24;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 
-  .checkbox::before {
-    content: "";
-    width: $width;
-    height: $width;
-    flex-shrink: 0;
-    background-color: transparent;
-    transition: 0.3s all ease-in-out;
-    z-index: 5;
-    scale: 0.8;
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-    position: relative;
-    top: 0px;
-  }
+	.checkbox::before {
+		content: '';
+		width: $width;
+		height: $width;
+		flex-shrink: 0;
+		background-color: transparent;
+		transition: 0.3s all ease-in-out;
+		z-index: 5;
+		scale: 0.8;
+		clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+		position: relative;
+		top: 0px;
+	}
 
-  .checkbox:checked::before {
-    background-color: #ffffff;
-  }
+	.checkbox:checked::before {
+		background-color: #ffffff;
+	}
 }
 
 @mixin slideCheckbox() {
-  .slideCheckbox {
-    width: 42px;
-    height: 26px;
-    display: flex;
-    -webkit-appearance: none;
-    appearance: none;
-    border: unset;
-    position: relative;
-    flex-shrink: 0;
-    z-index: 1;
-    user-select: none;
-    cursor: pointer;
-  }
+	.slideCheckbox {
+		width: 42px;
+		height: 26px;
+		display: flex;
+		-webkit-appearance: none;
+		appearance: none;
+		border: unset;
+		position: relative;
+		flex-shrink: 0;
+		z-index: 1;
+		user-select: none;
+		cursor: pointer;
+	}
 
-  .slideCheckbox::after {
-    content: "";
-    width: 21px;
-    height: 21px;
-    background-color: #ffffff;
-    border: 1px solid #eaeaea;
-    border-radius: 50%;
-    transition: 0.3s all ease-in-out;
-    margin: auto;
-    z-index: 2;
-    position: absolute;
-    left: 2px;
-    top: 2px;
-  }
+	.slideCheckbox::after {
+		content: '';
+		width: 21px;
+		height: 21px;
+		background-color: #ffffff;
+		border: 1px solid #eaeaea;
+		border-radius: 50%;
+		transition: 0.3s all ease-in-out;
+		margin: auto;
+		z-index: 2;
+		position: absolute;
+		left: 2px;
+		top: 2px;
+	}
 
-  .slideCheckbox::before {
-    content: "";
-    width: 41px;
-    height: 25px;
-    border: 1px solid #d9d9d9;
-    border-radius: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    flex-shrink: 0;
-    padding: 0 8px;
-    background-image: linear-gradient(
-      90deg,
-      #ffffff 5%,
-      #eb2d36 5%,
-      #eb2d36 50%,
-      #ffffff 50%,
-      #ffffff 97%,
-      #eb2d36 97%
-    );
-    background-position: 255%;
-    background-size: 250%;
-    transition: 0.3s all ease-in-out;
-  }
+	.slideCheckbox::before {
+		content: '';
+		width: 41px;
+		height: 25px;
+		border: 1px solid #d9d9d9;
+		border-radius: 20px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 2;
+		flex-shrink: 0;
+		padding: 0 8px;
+		background-image: linear-gradient(
+			90deg,
+			#ffffff 5%,
+			#eb2d36 5%,
+			#eb2d36 50%,
+			#ffffff 50%,
+			#ffffff 97%,
+			#eb2d36 97%
+		);
+		background-position: 255%;
+		background-size: 250%;
+		transition: 0.3s all ease-in-out;
+	}
 
-  .slideCheckbox:checked::before {
-    background-position: 180%;
-    border: 1px solid transparent;
-  }
+	.slideCheckbox:checked::before {
+		background-position: 180%;
+		border: 1px solid transparent;
+	}
 
-  .slideCheckbox:checked::after {
-    left: calc(100% - 8px);
-  }
+	.slideCheckbox:checked::after {
+		left: calc(100% - 8px);
+	}
 
-  .slideCheckbox.active,
-  .slideCheckbox.disable {
-    cursor: auto;
-  }
+	.slideCheckbox.active,
+	.slideCheckbox.disable {
+		cursor: auto;
+	}
 
-  .slideCheckbox.disable::before {
-    background-image: unset;
-    border: 1px solid #d3d3d3;
-    background-color: #d9d9d9;
-  }
+	.slideCheckbox.disable::before {
+		background-image: unset;
+		border: 1px solid #d3d3d3;
+		background-color: #d9d9d9;
+	}
 
-  .slideCheckbox:not(.active):not(.disable):hover::before {
-    box-shadow: 1px 1px 5px 2px rgba($color: #000000, $alpha: 0.15);
-  }
+	.slideCheckbox:not(.active):not(.disable):hover::before {
+		box-shadow: 1px 1px 5px 2px rgba($color: #000000, $alpha: 0.15);
+	}
 }
 
 @mixin scrollbarRed() {
-  scrollbar-color: rgba(237, 0, 0, 0.467) rgba(214, 37, 37, 0.137);
+	scrollbar-color: rgba(237, 0, 0, 0.467) rgba(214, 37, 37, 0.137);
 
-  &::-webkit-scrollbar {
-    width: 5px;
-    background-color: rgba(214, 37, 37, 0.137);
-  }
+	&::-webkit-scrollbar {
+		width: 5px;
+		background-color: rgba(214, 37, 37, 0.137);
+	}
 
-  &::-webkit-scrollbar-thumb {
-    background: rgba(237, 0, 0, 0.467);
-  }
+	&::-webkit-scrollbar-thumb {
+		background: rgba(237, 0, 0, 0.467);
+	}
 }
 
 @mixin img() {
-  .img {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
+	.img {
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
 }
 
 @mixin redScrollbar() {
-  scrollbar-color: rgba(237, 0, 0, 0.467) rgba(214, 37, 37, 0.137);
+	scrollbar-color: rgba(237, 0, 0, 0.467) rgba(214, 37, 37, 0.137);
 
-  &::-webkit-scrollbar {
-    width: 5px;
-    background-color: rgba(214, 37, 37, 0.137);
-  }
+	&::-webkit-scrollbar {
+		width: 5px;
+		background-color: rgba(214, 37, 37, 0.137);
+	}
 
-  &::-webkit-scrollbar-thumb {
-    background: rgba(237, 0, 0, 0.467);
-  }
+	&::-webkit-scrollbar-thumb {
+		background: rgba(237, 0, 0, 0.467);
+	}
 }
 
 @mixin containerPhone() {
-  .containerPhone {
-    width: fit-content;
-    display: flex;
+	.containerPhone {
+		width: fit-content;
+		display: flex;
 
-    .left {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #eb2d36;
-      padding: 12px 14px;
+		.left {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #eb2d36;
+			padding: 12px 14px;
 
-      svg {
-        width: 20px;
-        height: 20px;
-        transition: all 0.3s ease-in-out;
-      }
-    }
+			svg {
+				width: 20px;
+				height: 20px;
+				transition: all 0.3s ease-in-out;
+			}
+		}
 
-    .right {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #ffffff;
-      border: 1px solid #eb2d36;
-      padding: 0 10px;
+		.right {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #ffffff;
+			border: 1px solid #eb2d36;
+			padding: 0 10px;
 
-      .textPhone {
-        font-family: Lato;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 900;
-        line-height: 120%;
-        color: transparent;
-        background-image: linear-gradient(90deg, #eb2d36 50%, #000 50%);
-        background-position: 100%;
-        background-size: 200% 100%;
-        background-clip: text;
-        -webkit-background-clip: text;
-        transition: all 0.3s ease-in-out;
-      }
-    }
+			.textPhone {
+				font-family: Lato;
+				font-size: 14px;
+				font-style: normal;
+				font-weight: 900;
+				line-height: 120%;
+				color: transparent;
+				background-image: linear-gradient(90deg, #eb2d36 50%, #000 50%);
+				background-position: 100%;
+				background-size: 200% 100%;
+				background-clip: text;
+				-webkit-background-clip: text;
+				transition: all 0.3s ease-in-out;
+			}
+		}
 
-    &:hover {
-      .left {
-        svg {
-          scale: 1.1;
-        }
-      }
+		&:hover {
+			.left {
+				svg {
+					scale: 1.1;
+				}
+			}
 
-      .right > .textPhone {
-        background-position: 0;
-      }
-    }
-  }
+			.right > .textPhone {
+				background-position: 0;
+			}
+		}
+	}
 }
 
 @mixin input() {
-  .input {
-    width: 100%;
-    height: 53px;
-    font-size: 18px;
-    border-radius: 10px;
-    border: 1px solid #dadada;
-    padding: 5px 15px;
-    transition: 0.3s all ease-in-out;
-    opacity: 0.8;
+	.input {
+		width: 100%;
+		height: 53px;
+		font-size: 18px;
+		border-radius: 10px;
+		border: 1px solid #dadada;
+		padding: 5px 15px;
+		transition: 0.3s all ease-in-out;
+		opacity: 0.8;
 
-    &.margin {
-      margin: 4px 0 0;
-    }
+		&.margin {
+			margin: 4px 0 0;
+		}
 
-    &.center {
-      text-align: center;
-    }
+		&.center {
+			text-align: center;
+		}
 
-    &:hover {
-      opacity: 1;
-      box-shadow: 1px 1px 1px 1px rgba(#000000, 0.1);
-    }
+		&:hover {
+			opacity: 1;
+			box-shadow: 1px 1px 1px 1px rgba(#000000, 0.1);
+		}
 
-    &:focus {
-      opacity: 1;
-      box-shadow: 1px 1px 1px 1px rgba(#000000, 0.1);
-    }
+		&:focus {
+			opacity: 1;
+			box-shadow: 1px 1px 1px 1px rgba(#000000, 0.1);
+		}
 
-    &::placeholder {
-      color: #a0a0a0;
-      font-family: Lato;
-      font-size: 16px;
-      font-style: italic;
-      font-weight: 400;
-      line-height: 120%;
-      opacity: 1;
-      text-align: center;
-    }
-  }
+		&::placeholder {
+			color: #a0a0a0;
+			font-family: Lato;
+			font-size: 16px;
+			font-style: italic;
+			font-weight: 400;
+			line-height: 120%;
+			opacity: 1;
+			text-align: center;
+		}
+	}
 }
 
 @mixin ellipsis($lines: 9, $line-height: 23px) {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: $lines;
-  line-height: $line-height;
-  max-height: calc($lines * $line-height);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $lines;
+	line-height: $line-height;
+	max-height: calc($lines * $line-height);
 }
 @mixin ellipsisInputSearch($lines: 9) {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: $lines;
-  white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $lines;
+	white-space: nowrap;
 }
 @mixin btn() {
-  .btn {
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: var(--fontSizeMedium);
-    font-weight: 500;
-    font-family: "Lato";
-    border-radius: 23px;
-    padding: 15px;
-    cursor: pointer;
-    user-select: none;
-    transition: 0.3s all ease-in-out;
-    z-index: 90;
-    text-align: center;
-  }
+	.btn {
+		width: fit-content;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: var(--fontSizeMedium);
+		font-weight: 500;
+		font-family: 'Lato';
+		border-radius: 23px;
+		padding: 15px;
+		cursor: pointer;
+		user-select: none;
+		transition: 0.3s all ease-in-out;
+		z-index: 90;
+		text-align: center;
+	}
 }
 
 @mixin btnRed() {
-  .btn {
-    &.btnRed {
-      background-color: $mainColor;
-      color: #ffffff;
-      border: 1px solid $mainColor;
-      text-shadow: 1px 1px 2px #00000055;
+	.btn {
+		&.btnRed {
+			background-color: $mainColor;
+			color: #ffffff;
+			border: 1px solid $mainColor;
+			text-shadow: 1px 1px 2px #00000055;
 
-      &:not(.active):hover {
-        background-color: #ffffff;
-        text-shadow: 1px 1px 2px #00000000;
-        color: $mainColor;
-        box-shadow: 1px 1px 15px 10px rgba($color: #000000, $alpha: 0.1);
-      }
-    }
-  }
+			&:not(.active):hover {
+				background-color: #ffffff;
+				text-shadow: 1px 1px 2px #00000000;
+				color: $mainColor;
+				box-shadow: 1px 1px 15px 10px rgba($color: #000000, $alpha: 0.1);
+			}
+		}
+	}
 }
 
 @mixin btnWhite() {
-  .btn {
-    &.btnWhite {
-      background-color: #ffffff;
-      color: #000000;
-      border: 3px solid $mainColor;
+	.btn {
+		&.btnWhite {
+			background-color: #ffffff;
+			color: #000000;
+			border: 3px solid $mainColor;
 
-      &:not(.active):hover {
-        background-color: $mainColor;
-        text-shadow: 1px 1px 2px #00000000;
-        color: #ffffff;
-        box-shadow: 1px 1px 15px 10px rgba($color: #000000, $alpha: 0.1);
-      }
-    }
-  }
+			&:not(.active):hover {
+				background-color: $mainColor;
+				text-shadow: 1px 1px 2px #00000000;
+				color: #ffffff;
+				box-shadow: 1px 1px 15px 10px rgba($color: #000000, $alpha: 0.1);
+			}
+		}
+	}
 }
 
 @mixin btnBlank() {
-  .btn {
-    &.btnBlank {
-      background-color: #ffffff;
-      color: #000000;
-      border: 2px solid $mainColor;
+	.btn {
+		&.btnBlank {
+			background-color: #ffffff;
+			color: #000000;
+			border: 2px solid $mainColor;
 
-      &:hover {
-        color: #ffffff;
-        background-color: $mainColor;
-        box-shadow: 1px 1px 10px 5px rgba(#000000, 0.1);
-      }
-    }
-  }
+			&:hover {
+				color: #ffffff;
+				background-color: $mainColor;
+				box-shadow: 1px 1px 10px 5px rgba(#000000, 0.1);
+			}
+		}
+	}
 }
 
 @mixin btnGray() {
-  .btn {
-    &.btnGray {
-      background-color: #f8f8f8;
-      color: #000000;
-      border: 1px solid #dfdfdf;
+	.btn {
+		&.btnGray {
+			background-color: #f8f8f8;
+			color: #000000;
+			border: 1px solid #dfdfdf;
 
-      &:hover {
-        background-color: #fff;
-        box-shadow: 1px 1px 10px 5px rgba(#000000, 0.1);
-      }
-    }
-  }
+			&:hover {
+				background-color: #fff;
+				box-shadow: 1px 1px 10px 5px rgba(#000000, 0.1);
+			}
+		}
+	}
 }
 
 @mixin error {
-  .error {
-    height: 25px;
-    color: $mainColor;
-    font-family: Lato;
-    font-size: var(--fontError);
-    font-weight: 400;
-    margin: 0px 0 5px;
-    text-align: center;
-    user-select: none;
-    opacity: 0;
-    transition: 0.3s all ease-in-out;
+	.error {
+		height: 25px;
+		color: $mainColor;
+		font-family: Lato;
+		font-size: var(--fontError);
+		font-weight: 400;
+		margin: 0px 0 5px;
+		text-align: center;
+		user-select: none;
+		opacity: 0;
+		transition: 0.3s all ease-in-out;
 
-    &.errorVisible {
-      opacity: 1;
-    }
-  }
+		&.errorVisible {
+			opacity: 1;
+		}
+	}
 }
 @mixin modal {
-  .modal {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    background-color: #fff;
-    border-radius: 32px;
-    padding: 50px 25px 30px;
-  }
+	.modal {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+		background-color: #fff;
+		border-radius: 32px;
+		padding: 50px 25px 30px;
+	}
 }
 
 %base-input-style {
-  color: #1a1a1a;
-  font-family: Lato;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 120%;
+	color: #1a1a1a;
+	font-family: Lato;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 120%;
 }
