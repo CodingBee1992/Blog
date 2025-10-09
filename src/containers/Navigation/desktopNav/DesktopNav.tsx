@@ -1,18 +1,19 @@
-import type { MenuElement, Size } from '../../../types/types'
+import MenuElement from '../../../components/organism/menuElement/MenuElement'
+import type { Size } from '../../../types/types'
 import type { MenuTypes } from '../dataNavigation/dataNavigation'
 import styles from './DesktopNav.module.scss'
 interface DesktopProps {
 	size: Size
 	dataMenu: MenuTypes[]
-	menuElement: MenuElement
+	
 }
 
-const DesktopNav = ({ size, dataMenu, menuElement }: DesktopProps) => {
+const DesktopNav = ({ size, dataMenu }: DesktopProps) => {
 	return (
 		<div className={styles.menu}>
 			{size.width > 900
 				? dataMenu.map((item: MenuTypes, index: number) => {
-						return menuElement(item, index, index)
+						return <MenuElement data={item} index={index}/>
 				  })
 				: null}
 		</div>

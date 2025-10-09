@@ -1,0 +1,40 @@
+.link {
+	font-size: var(--menu-size);
+	color: var(--color-menu);
+	font-weight: 600;
+	&:hover {
+		color: rgba(255, 255, 255, 0.7);
+	}
+}
+.menuElement {
+	position: relative;
+	display: flex;
+	align-items: center;
+	font-size: var(--menu-size);
+	font-weight: 600;
+	color: var(--color-menu);
+	cursor: pointer;
+	&:hover {
+		color: rgba(255, 255, 255, 0.7);
+	}
+	&:hover .arrow {
+		rotate: 180deg;
+	}
+
+	.title {
+		padding-right: 1rem;
+		pointer-events: none;
+	}
+
+	
+	.arrow {
+		transition: all 0.3s ease-in-out;
+		pointer-events: none;
+	}
+
+	.active {
+		display: block;
+		opacity: 1;
+		visibility: visible;
+	}
+}

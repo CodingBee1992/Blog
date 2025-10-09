@@ -1,0 +1,31 @@
+.subMenu {
+	position: absolute;
+	display: none;
+	flex-direction: column;
+	top: calc(240% + 2px);
+	left: 0;
+	padding: 1.8rem 0;
+	background: #222222;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 1000;
+
+	.subLink {
+		display: block;
+		width: 100%;
+		white-space: nowrap;
+		line-height: 1.8rem;
+		padding: 0.7rem 3rem 0.7rem 2rem;
+		color: rgba(255, 255, 255, 0.7);
+		font-size: var(--sub-menu-size);
+		font-weight: 400;
+		transition: all 0.3s;
+		
+		&:hover {
+			color: var(--color-menu);
+		}
+	}
+	
+}
+
+

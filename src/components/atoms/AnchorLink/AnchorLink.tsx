@@ -22,13 +22,14 @@ const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel }
 
 	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault()
+		
 		removePaginationLinksTags()
+
 		const url = new URL(window.location.origin + href)
 
 		const path = url.pathname
 		const search = url.search
 		const hash = url.hash.replace('#', '')
-		
 
 		if (location.pathname !== path || location.search !== search) {
 			setTimeout(() => {

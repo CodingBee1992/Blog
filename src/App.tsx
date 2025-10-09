@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router'
 
+import { BrowserRouter as Router, Route, Routes} from 'react-router'
 
 import DesignPage from './components/pages/categories/DesignPage/DesignPage'
 import LifeStylePage from './components/pages/categories/LifeStylePage/LifeStylePage'
@@ -18,11 +18,13 @@ import ContactPage from './components/pages/ContactPage/ContactPage'
 import StaticLayout from './containers/HomPage/StaticLayout'
 import HomePage from './components/pages/HomePage/HomePage'
 
+
 const App = () => {
+	
 	return (
 		<Router basename="/">
 			<Routes>
-				<Route element={<StaticLayout/>}>
+				<Route element={<StaticLayout />}>
 					<Route path="/" element={<HomePage />} />
 					<Route path="categories/">
 						<Route path="design" element={<DesignPage />} />
