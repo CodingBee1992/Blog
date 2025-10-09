@@ -1,11 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 interface InitialProps {
-    isLoading: boolean
+    isLoading: boolean,
+    isOpen:boolean
 }
 
 const initialState: InitialProps ={
-    isLoading: false
+    isLoading: false,
+    isOpen:false,
 }
 
 export const themeSlice = createSlice({
@@ -14,8 +16,11 @@ export const themeSlice = createSlice({
     reducers:{
         setIsLoading:(state,action)=>{
             state.isLoading = action.payload
+        },
+        setIsOpen:(state,action)=>{
+            state.isOpen = action.payload
         }
     }
 })
 
-export const {setIsLoading} = themeSlice.actions
+export const {setIsLoading,setIsOpen} = themeSlice.actions

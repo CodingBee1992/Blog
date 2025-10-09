@@ -14,7 +14,7 @@ html{
 
 body{
     height: 100%;
-    background: var(--color-bg);
+    background: var(--Bgc-main);
     font-size: var(--text-Size);
     font-style: normal;
 }

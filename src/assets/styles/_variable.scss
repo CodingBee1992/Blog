@@ -29,14 +29,23 @@ $mobileSmall: 380px;
 	--fontFamily: 'Inter', sans-serif;
 	--logo-width: 96px;
 	--logo-Size: 2.5rem;
+	--logo-color:#ff9900;
+	--logo-hover:#ff7700;
 
-	--color-bg: #eff0f0;
+	--Bgc-main: #eff0f0;
+	--Bgc-nav:#000000;
 
-	--color-menu: #ffff;
-	--menu-size:1.5rem;
-	--sub-menu-size: 1.4rem;
+	--menu-textColor: #ffff;
+	--menu-textColorHover:#ffffffb3;
+	
+	--menu-TextSize:1.5rem;
+	--subMenu-TextSize: 1.4rem;
+	--subMenu-BgColor:#222222;
 
 	--text-Size: 1.8rem;
+	--text-SizeInput:calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
+
+	--border-bottom:#ffffff0d;
 
 	--header-height: 8.8rem;
 }

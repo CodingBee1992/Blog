@@ -6,9 +6,15 @@
     top: calc(50% - 3px);
     left: 2.5rem;
     // width: var(--logo-width);
-    color: var(--color-menu);
+    color: var(--logo-color);
     font-size: var(--logo-Size);
     font-weight:600;
     transform: translateY(-50%);
+    transition: all .3s ease-in-out;
     z-index: 101;
+
+    &:hover{
+        color: var(--logo-hover);
+        scale: 1.05;
+    }
 }

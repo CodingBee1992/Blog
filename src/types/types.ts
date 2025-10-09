@@ -7,3 +7,10 @@ export interface Size {
 }
 
 export type MenuElement = (data: MenuTypes, id: number, key: number) => JSX.Element
+
+
+export interface SearchProps {
+  isOpen?:boolean,
+  handleIsOpen?: () => void
+  
+}

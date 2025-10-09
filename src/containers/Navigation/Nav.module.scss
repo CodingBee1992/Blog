@@ -3,89 +3,17 @@
 .container {
 	--header-height: 8.8rem;
 	display: flex;
+	justify-content: space-between;
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 100dvw;
 	height: var(--header-height);
 	align-items: center;
 	// background-color: transparent;
-	background-color: #011326;
-	// opacity: 0;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-	transition: all 0.3s ease-in-out;
+	background-color: var(--Bgc-nav);
+	border-bottom: 1px solid var(--border-bottom);
 	z-index: 1000;
 	
 	
-
-	// .link {
-	// 	font-size: var(--menu-size);
-	// 	color: var(--color-menu);
-	// 	font-weight: 600;
-	// 	&:hover {
-	// 		color: rgba(255, 255, 255, 0.7);
-	// 	}
-	// }
-
-	// .menuElement {
-	// 	position: relative;
-	// 	display: flex;
-	// 	align-items: center;
-	// 	font-size: var(--menu-size);
-	// 	font-weight: 600;
-	// 	color: var(--color-menu);
-	// 	cursor: pointer;
-	// 	&:hover {
-	// 		color: rgba(255, 255, 255, 0.7);
-	// 	}
-	// 	&:hover .arrow {
-	// 		rotate: 180deg;
-	// 	}
-
-	// 	.title {
-	// 		padding-right: 1rem;
-	// 		pointer-events: none;
-	// 	}
-
-	// 	.subMenu {
-	// 		position: absolute;
-	// 		display: none;
-	// 		flex-direction: column;
-	// 		top: calc(240% + 2px);
-			
-	// 		left: 0;
-	// 		padding: 1.8rem 0;
-	// 		background: #222222;
-	// 		opacity: 0;
-	// 		visibility: hidden;
-	// 		z-index: 200;
-
-	// 		.subLink {
-	// 			display: block;
-	// 			width: 100%;
-	// 			white-space: nowrap;
-	// 			line-height: 1.8rem;
-	// 			padding: 0.7rem 3rem 0.7rem 2rem;
-	// 			color: rgba(255, 255, 255, 0.7);
-	// 			font-size: var(--sub-menu-size);
-	// 			font-weight: 400;
-	// 			transition: all 0.3s;
-
-	// 			&:hover {
-	// 				color: var(--color-menu);
-	// 			}
-	// 		}
-	// 	}
-
-	// 	.arrow {
-	// 		transition: all 0.3s ease-in-out;
-	// 		pointer-events: none;
-	// 	}
-
-	// 	.active {
-	// 		display: block;
-	// 		opacity: 1;
-	// 		visibility: visible;
-	// 	}
-	// }
 }
