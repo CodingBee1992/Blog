@@ -1,8 +1,26 @@
-@use "../../../assets/styles/variable" as *;
+@use '../../../assets/styles/variable' as *;
 
 .menu {
 	display: flex;
-    width: 92%;
 	gap: 2rem;
-	margin-left: calc(var(--logo-width) + 8rem);
+	
+}
+
+.secondNavBgColor {
+	// background-color: rgb(100, 4, 132);
+	background-image: linear-gradient(to right, #c50bc6, #a409a8, #85068b, #68036f, #4c0153);
+}
+
+.navWrapper {
+	justify-content: center;
+	margin-left: 0;
+	margin: 0;
+	width: 100%;
+}
+
+@media (max-width: 1700px) {
+	.menu {
+		max-width: 1400px;
+		margin-left: calc(var(--logo-width) + 8rem);
+	}
 }

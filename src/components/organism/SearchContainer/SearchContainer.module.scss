@@ -26,8 +26,7 @@
 
 		.elementSearchContainer {
 			position: relative;
-			width: 92%;
-			max-width: 1200px;
+			width: 100%;
 
 			.elementSearchForm {
 				.input {
@@ -46,6 +45,7 @@
 				flex-direction: column;
 				position: absolute;
 				top: 0;
+				left: 0;
 				max-height: 0;
 				height: auto;
 				width: 100%;
@@ -93,6 +93,17 @@
 	.container {
 		.searchContainer {
 			padding: 0 6vw;
+
+			.elementSearchContainer{
+
+				.elementSearchList{
+					position: absolute;
+					width: 100dvw;
+					left:-12.7%;
+					padding: 2rem;
+
+				}
+			}
 		}
 	}
 }

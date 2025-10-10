@@ -8,20 +8,24 @@ import SearchButton from '../../components/atoms/SearchButton/SearchButton'
 import SearchContainer from '../../components/organism/SearchContainer/SearchContainer'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
+import { useRef } from 'react'
 
 
 const Navigation = () => {
-	const size = useWindowSize()
 	
+	const size = useWindowSize()
+	const navRef = useRef<HTMLDivElement>(null)
 
-	const {isOpen} = useSelector((state:RootState)=> state.theme)
+
+	const { isOpen } = useSelector((state: RootState) => state.theme)
+
 	
 
 	return (
-		<nav className={styles.container}>
+		<nav ref={navRef} className={styles.container}>
 			<Logo />
-			{size.width > 900 ? <DesktopNav dataMenu={dataNavigation} /> : <MobileNav />}
-			<SearchButton/>
+			{size.width > 900 ? <DesktopNav navRef={navRef} dataMenu={dataNavigation} /> : <MobileNav />}
+			<SearchButton />
 
 			{isOpen && <SearchContainer isOpen={isOpen} />}
 		</nav>

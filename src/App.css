@@ -22,3 +22,10 @@ body{
 a{
     transition: all .3s ease-in-out;
 }
+
+.row{
+    display: flex;
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
