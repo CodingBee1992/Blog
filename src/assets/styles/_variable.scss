@@ -34,18 +34,30 @@ $mobileSmall: 380px;
 
 	--Bgc-main: #eff0f0;
 	--Bgc-nav:#000000;
+	--Bgc-navSecond:linear-gradient(to right, #c50bc6, #a409a8, #85068b, #68036f, #4c0153);;
 
 	--menu-textColor: #ffff;
-	--menu-textColorHover:#ffffffb3;
+	--menu-textColorHover:#d3d3d3d3;
+
+	--subMenu-BgColor:#222222;
+	--subMenu-Color:#d3d3d3d3;
+	--subMenu-ColorHover:#ffff;
 	
+	--closeBtn-Color:#ffff;
+	--closeBtn-ColorHover:#d3d3d3d3;
+	
+	--menuIcon-Color:#ffff;
+	--menuIcon-ColorHover:#d3d3d3d3;
+	
+	--searchElementTextColor:#000000;
+
 	--menu-TextSize:1.5rem;
 	--subMenu-TextSize: 1.4rem;
-	--subMenu-BgColor:#222222;
 
 	--text-Size: 1.8rem;
 	--text-SizeInput:calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
 
-	--border-bottom:#ffffff0d;
+	--borderBottom:#d3d3d3d3;
 
 	
 

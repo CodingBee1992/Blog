@@ -33,6 +33,8 @@
 					width: 100%;
 					font-size: var(--text-SizeInput);
 					color: var(--menu-textColor);
+					background-color: transparent;
+					border: none;
 					outline: none;
 
 					&::placeholder {
@@ -50,19 +52,28 @@
 				height: auto;
 				width: 100%;
 				background-color: var(--Bgc-main);
-				overflow: hidden;
+				// overflow: hidden;
 				opacity: 0;
 				transition: all 0.3s ease-in-out;
 				z-index: -1;
 
 				.elementSearchListLink {
+					display: block;
 					width: 100%;
+					height: 100%;
 					padding: 5px;
-					border-bottom: 1px solid var(--border-bottom);
+					border-bottom: 1px solid var(--borderBottom);
+					color: var(--searchElementTextColor);
 					cursor: pointer;
+					transition: all .3s;
 
 					&:hover {
-						text-decoration: underline;
+						
+						background-color: var(--menu-textColorHover);
+					}
+
+					&:last-child{
+						border-bottom: none;
 					}
 				}
 			}
@@ -83,13 +94,13 @@
 			.icon {
 				width: 28px;
 				height: 28px;
-				color: var(--menu-textColor);
+				color: var(--closeBtn-Color);
 				transition: 0.3s all ease-in-out;
 			}
 
 			&:hover {
 				.icon {
-					color: var(--menu-textColorHover);
+					color: var(--closeBtn-ColorHover);
 				}
 			}
 		}

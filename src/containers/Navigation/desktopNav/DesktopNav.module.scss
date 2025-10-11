@@ -8,7 +8,7 @@
 		color: var(--menu-textColor);
 		font-weight: 600;
 		&:hover {
-			color: rgba(255, 255, 255, 0.7);
+			color: var(--menu-textColorHover);
 		}
 	}
 	.menuElement {
@@ -46,8 +46,7 @@
 }
 
 .secondNavBgColor {
-	// background-color: rgb(100, 4, 132);
-	background-image: linear-gradient(to right, #c50bc6, #a409a8, #85068b, #68036f, #4c0153);
+	background-image: var(--Bgc-navSecond)
 }
 
 @media (max-width: 1700px) {

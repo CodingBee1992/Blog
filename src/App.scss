@@ -1,6 +1,6 @@
-@use './assets/styles/variable' as *;
+@use './assets/styles/variable';
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import 'tailwindcss';
+
 
 *,::before,::after{
     box-sizing: border-box;
@@ -23,6 +23,7 @@ body{
 
 a{
     transition: all .3s ease-in-out;
+    text-decoration: none;
 }
 
 .row{
