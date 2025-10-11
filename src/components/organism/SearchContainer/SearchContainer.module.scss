@@ -7,8 +7,8 @@
 	background-color: #0000004d;
 	opacity: 0;
 	visibility: hidden;
-	transition: all .3s;
-	z-index: 1001;
+	transition: all 0.3s;
+	z-index: 1003;
 
 	.searchContainer {
 		display: flex;
@@ -40,7 +40,7 @@
 					}
 				}
 			}
-			.elementSearchList{
+			.elementSearchList {
 				display: flex;
 				flex-direction: column;
 				position: absolute;
@@ -52,7 +52,7 @@
 				background-color: var(--Bgc-main);
 				overflow: hidden;
 				opacity: 0;
-				transition: all .3s ease-in-out;
+				transition: all 0.3s ease-in-out;
 				z-index: -1;
 
 				.elementSearchListLink {
@@ -60,22 +60,37 @@
 					padding: 5px;
 					border-bottom: 1px solid var(--border-bottom);
 					cursor: pointer;
-					
-					
-					&:hover{
+
+					&:hover {
 						text-decoration: underline;
-						
 					}
 				}
-
 			}
-			.fadeOut{
+			.fadeOut {
 				top: 40px;
 				opacity: 1;
 			}
-			.height{
+			.height {
 				max-height: 325px;
+			}
+		}
+		.close {
+			// padding: 8px;
+			background-color: transparent;
+			border: unset;
+			cursor: pointer;
 
+			.icon {
+				width: 28px;
+				height: 28px;
+				color: var(--menu-textColor);
+				transition: 0.3s all ease-in-out;
+			}
+
+			&:hover {
+				.icon {
+					color: var(--menu-textColorHover);
+				}
 			}
 		}
 	}
@@ -83,8 +98,8 @@
 		transform: translateY(0%);
 	}
 }
-.fadeIn{
-	transition: all .3s;
+.fadeIn {
+	transition: all 0.3s;
 	opacity: 1;
 	visibility: visible;
 }
@@ -94,14 +109,12 @@
 		.searchContainer {
 			padding: 0 6vw;
 
-			.elementSearchContainer{
-
-				.elementSearchList{
+			.elementSearchContainer {
+				.elementSearchList {
 					position: absolute;
 					width: 100dvw;
-					left:-12.7%;
+					left: -12.7%;
 					padding: 2rem;
-
 				}
 			}
 		}

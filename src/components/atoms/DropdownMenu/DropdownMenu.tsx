@@ -5,16 +5,16 @@ import styles from './DropdownMenu.module.scss'
 
 interface DropdownMenuProps {
 	data: MenuTypes
-	handleMouseInDropdown: (e: React.MouseEvent<HTMLElement>) => void
-	handleMouseOutDropdown: (e: React.MouseEvent<HTMLElement>) => void
+	handleMouseInDropdown?: (e: React.MouseEvent<HTMLElement>) => void
+	handleMouseOutDropdown?: (e: React.MouseEvent<HTMLElement>) => void
 }
 
 const DropdownMenu = ({ data, handleMouseInDropdown, handleMouseOutDropdown }: DropdownMenuProps) => {
 	return (
 		<ul
 			className={styles.subMenu}
-			onMouseEnter={e => handleMouseInDropdown(e)}
-			onMouseLeave={e => handleMouseOutDropdown(e)}>
+			onMouseEnter={e => handleMouseInDropdown?.(e)}
+			onMouseLeave={e => handleMouseOutDropdown?.(e)}>
 			{data.children?.map((item: { title: string; href: string }, index: number) => {
 				return (
 					<li key={index}>

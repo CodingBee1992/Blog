@@ -1,20 +1,20 @@
-.close {
-	// padding: 8px;
-    background-color: transparent;
+// .close {
+// 	// padding: 8px;
+//     background-color: transparent;
     
-	border: unset;
-	cursor: pointer;
+// 	border: unset;
+// 	cursor: pointer;
 
-	.icon {
-        width: 28px;
-        height: 28px;
-		color: var(--menu-textColor);
-		transition: 0.3s all ease-in-out;
-	}
+// 	.icon {
+//         width: 28px;
+//         height: 28px;
+// 		color: var(--menu-textColor);
+// 		transition: 0.3s all ease-in-out;
+// 	}
 
-	&:hover {
-		.icon {
-			color: var(--menu-textColorHover);
-		}
-	}
-}
+// 	&:hover {
+// 		.icon {
+// 			color: var(--menu-textColorHover);
+// 		}
+// 	}
+// }

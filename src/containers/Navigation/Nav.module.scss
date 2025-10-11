@@ -1,5 +1,3 @@
-@use '../../assets/styles/variable' as *;
-
 .container {
 	--header-height: 8.8rem;
 	display: flex;
@@ -14,6 +12,13 @@
 	background-color: var(--Bgc-nav);
 	border-bottom: 1px solid var(--border-bottom);
 	z-index: 1000;
-	
-	
+
+	.showHide {
+		display: flex;
+	}
+	.fadeIn {
+		transform: translateX(0);
+		opacity: 1;
+		visibility: visible;
+	}
 }

@@ -1,7 +1,40 @@
-.menu {
-	display: flex;
-	gap: 2rem;
-	padding: 0 2.4rem;
+.mobileContainer {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100dvw;
+	height: 100dvh;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateX(-100%);
+	background-color: var(--Bgc-nav);
+	transition: all 0.5s ease-in-out;
+	z-index: 1002;
+
+	.close {
+		background-color: transparent;
+		border: unset;
+		cursor: pointer;
+
+		.icon {
+			width: 28px;
+			height: 28px;
+			color: var(--menu-textColor);
+			transition: 0.3s all ease-in-out;
+		}
+
+		&:hover {
+			.icon {
+				color: var(--menu-textColorHover);
+			}
+		}
+	}
+	.title {
+		color: var(--menu-textColorHover);
+	}
 
 	.link {
 		font-size: var(--menu-TextSize);
@@ -13,8 +46,7 @@
 	}
 	.menuElement {
 		position: relative;
-		display: flex;
-		align-items: center;
+		
 		font-size: var(--menu-TextSize);
 		font-weight: 600;
 		color: var(--menu-textColor);
@@ -42,17 +74,5 @@
 			opacity: 1;
 			visibility: visible;
 		}
-	}
-}
-
-.secondNavBgColor {
-	// background-color: rgb(100, 4, 132);
-	background-image: linear-gradient(to right, #c50bc6, #a409a8, #85068b, #68036f, #4c0153);
-}
-
-@media (max-width: 1700px) {
-	.menu {
-		max-width: 1400px;
-		margin-left: calc(var(--logo-width) + 8rem);
 	}
 }

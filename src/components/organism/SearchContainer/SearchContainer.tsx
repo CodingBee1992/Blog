@@ -15,15 +15,6 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 
 	const debouncedValue = useDebounce(value, 500)
 
-	// if (isOpen) {
-	// 	setTimeout(() => {
-	// 		searchContainerRef.current?.classList.add(styles.fadeIn)
-	// 	}, 50)
-	// 	setTimeout(() => {
-	// 		searchRef.current?.classList.add(styles.show)
-	// 	}, 300)
-	// }
-
 	useEffect(() => {
 		setTimeout(() => {
 			searchContainerRef.current?.classList.add(styles.fadeIn)
@@ -73,7 +64,7 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 	const searchFocus = (e: FormEvent<HTMLInputElement>) => {
 		const target = e.target as HTMLInputElement
 		const query = target.value.trim()
-		console.log(query)
+		
 		if (query) {
 			searchListRef.current?.classList.add(styles.fadeOut)
 			setTimeout(() => {
@@ -125,7 +116,7 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 						</div>
 					</div>
 
-					<CloseButton handleClose={handleClose} />
+					<CloseButton styles={styles} handleClose={handleClose} />
 				</div>
 			</div>
 		</div>

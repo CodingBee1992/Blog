@@ -1,10 +1,11 @@
 .search {
 	position: absolute;
-	right: 4rem;
+	right: 4rem ;
 	padding: 8px;
     background-color: transparent;
 	border: unset;
 	cursor: pointer;
+	transition: all .3s ease-in-out;
 
 	.icon {
         width: 24px;
@@ -17,5 +18,16 @@
 		.icon {
 			color: var(--menu-textColorHover);
 		}
+	}
+}
+
+@media (max-width: 900px) {
+	.search{
+		right: calc(4rem + 5rem);
+	}
+}
+@media (max-width: 600px) {
+	.search{
+		right: calc(4rem + 4rem);
 	}
 }
