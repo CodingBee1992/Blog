@@ -36,17 +36,17 @@ $mobileSmall: 380px;
 	--Bgc-nav:#000000;
 	--Bgc-navSecond:linear-gradient(to right, #c50bc6, #a409a8, #85068b, #68036f, #4c0153);;
 
-	--menu-textColor: #ffff;
+	--menu-textColor: #ffffff;
 	--menu-textColorHover:#d3d3d3d3;
 
 	--subMenu-BgColor:#222222;
 	--subMenu-Color:#d3d3d3d3;
-	--subMenu-ColorHover:#ffff;
+	--subMenu-ColorHover:#ffffff;
 	
-	--closeBtn-Color:#ffff;
+	--closeBtn-Color:#ffffff;
 	--closeBtn-ColorHover:#d3d3d3d3;
 	
-	--menuIcon-Color:#ffff;
+	--menuIcon-Color:#ffffff;
 	--menuIcon-ColorHover:#d3d3d3d3;
 	
 	--searchElementTextColor:#000000;
@@ -64,110 +64,21 @@ $mobileSmall: 380px;
 	--header-height: 8.8rem;
 }
 
-//1600px
-@media (max-width: $desktopXL) {
-	:root {
-		--fontSizeSmallXL: 32px;
+@media (max-width: 900px) {
+	:root{
+		--lineHeight:calc(2.5 * 3.2rem);
+		--menu-TextSize: calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
 	}
 }
 
-//1350px
-@media (max-width: $desktopBig) {
-	:root {
-		--fontSizeXXXL: 60px;
-		--fontSizeSuperBig: 32px;
-		--fontSizeBig: 24px;
-		--fontSizeMiddle: 20px;
-		--fontSize: 18px;
-		--fontSizeSmall: 12px;
-	}
-}
-//1250px
-@media (max-width: $desktop) {
-	:root {
-		--fontSizeXXXL: 48px;
-		--fontSizeXL: 40px;
-		--fontSizeSuperBig: 30px;
-		--fontSizeBig: 23px;
-		--fontSizeMiddle: 19px;
-		--fontSize: 17px;
-		--fontSizeSmall: 12px;
-		--fontSizeSmallXL: 26px;
+@media (max-width:500px) {
+	:root{
+		--lineHeight:calc(2.5 * 2.8rem);
+		--menu-TextSize: calc(calc(calc((1.7rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
+
 	}
 }
 
-//1200px
-@media (max-width: $desktopSmaller) {
-	:root {
-		--fontSizeSmallXL: 36px;
-	}
-}
-
-//1050px
-@media (max-width: $desktopSmall) {
-	:root {
-		--fontSizeXL: 38px;
-		--fontSizeBig: 22px;
-		--fontSizeMiddle: 19px;
-		--fontSize: 17px;
-		--fontSizeMedium: 15px;
-		--fontSizeSmall: 12px;
-	}
-}
-//800px
-@media (max-width: $tablet) {
-	:root {
-		--fontSizeXXL: 42px;
-		--fontSizeXL: 35px;
-		--fontSizeSuperBig: 28px;
-		--fontSizeBig: 20px;
-		--fontSizeMiddle: 18px;
-		--fontSize: 16px;
-		--fontSizeSmall: 12px;
-		--fontSizeSmallXL: 32px;
-	}
-}
-//600px
-@media (max-width: $tabletSmall) {
-	:root {
-		--fontSizeXXXL: 32px;
-		--fontSizeXL: 30px;
-		--fontSizeBig: 20px;
-		--fontSizeMiddle: 18px;
-		--fontSize: 16px;
-		--fontSizeMedium: 14px;
-		--fontSizeSmall: 12px;
-	}
-}
-
-//500px
-@media (max-width: $mobile) {
-	:root {
-		--fontSizeXXL: 32px;
-		--fontSizeXL: 26px;
-		--fontSizeSuperBig: 25px;
-		--fontSizeBig: 19px;
-		--fontSizeMiddle: 18px;
-		--fontSize: 16px;
-
-		--fontSizeSmall: 12px;
-		--fontSizeSmallXL: 28px;
-	}
-}
-//380px
-@media (max-width: $mobileSmall) {
-	:root {
-		--fontSizeXXXL: 24px;
-		--fontSizeXXL: 24px;
-		--fontSizeXL: 22px;
-		--fontSizeBig: 18px;
-		--fontSizeMiddle: 18px;
-		--fontSize: 14px;
-		--fontSizeMedium: 13px;
-		--fontSizeSmall: 12px;
-		--fontSizeSmallXL: 24px;
-	}
-}
 
 @mixin left-right-underline-hover($colorHover: $mainColor) {
 	> .text {

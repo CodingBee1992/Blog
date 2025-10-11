@@ -1,15 +1,16 @@
 import type { MenuTypes } from '../../../containers/Navigation/dataNavigation/dataNavigation'
 import AnchorLink from '../AnchorLink/AnchorLink'
 
-import styles from './DropdownMenu.module.scss'
+// import styles from './DropdownMenu.module.scss'
 
 interface DropdownMenuProps {
 	data: MenuTypes
 	handleMouseInDropdown?: (e: React.MouseEvent<HTMLElement>) => void
 	handleMouseOutDropdown?: (e: React.MouseEvent<HTMLElement>) => void
+	styles:{[key:string]:string}
 }
 
-const DropdownMenu = ({ data, handleMouseInDropdown, handleMouseOutDropdown }: DropdownMenuProps) => {
+const DropdownMenu = ({ data,styles, handleMouseInDropdown, handleMouseOutDropdown }: DropdownMenuProps) => {
 	return (
 		<ul
 			className={styles.subMenu}

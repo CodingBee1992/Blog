@@ -1,18 +1,37 @@
 .mobileContainer {
-	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 calc(2.5 * 2.5rem);
 	width: 100dvw;
 	height: 100dvh;
-	opacity: 0;
-	visibility: hidden;
-	transform: translateX(-100%);
+	opacity: 1;
+	visibility: visible;
+	// transform: translateX(-100%);
 	background-color: var(--Bgc-nav);
 	transition: all 0.5s ease-in-out;
 	z-index: 1002;
+
+	.mobileElement {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-top: 4rem;
+
+		.title {
+			margin-top: 3rem;
+			font-size: var(--subMenu-TextSize);
+			font-weight: 300;
+			color: var(--menu-textColorHover);
+			letter-spacing: 0.4em;
+			text-transform: uppercase;
+		}
+	}
 
 	.close {
 		background-color: transparent;
@@ -22,57 +41,151 @@
 		.icon {
 			width: 28px;
 			height: 28px;
-			color: var(--menu-textColor);
+			color: var(--closeBtn-Color);
 			transition: 0.3s all ease-in-out;
 		}
 
 		&:hover {
 			.icon {
-				color: var(--menu-textColorHover);
+				color: var(--closeBtn-ColorHover);
+				scale: 1.1;
 			}
 		}
 	}
-	.title {
-		color: var(--menu-textColorHover);
-	}
 
-	.link {
-		font-size: var(--menu-TextSize);
-		color: var(--menu-textColor);
-		font-weight: 600;
-		&:hover {
-			color: rgba(255, 255, 255, 0.7);
-		}
-	}
-	.menuElement {
-		position: relative;
-		
-		font-size: var(--menu-TextSize);
-		font-weight: 600;
-		color: var(--menu-textColor);
-		cursor: pointer;
-		transition: color 0.3s ease-in-out;
-		&:hover {
-			color: var(--menu-textColorHover);
-		}
-		&:hover .arrow {
-			rotate: 180deg;
-		}
+	.mobileLink {
+		display: flex;
+		flex-direction: column;
+		margin-top: 8rem;
+		width: 100%;
 
-		.title {
-			padding-right: 1rem;
-			pointer-events: none;
+		.link {
+			position: relative;
+			width: 100%;
+			padding-left: 2.6rem;
+			color: var(--menu-textColor);
+			font-weight: 600;
+			font-size: var(--menu-TextSize);
+			border-top: 1px dotted rgba(255, 255, 255, 0.05);
+			line-height: var(--lineHeight);
+			&:hover {
+				color: rgba(255, 255, 255, 0.7);
+			}
+			&::before {
+				content: counter(ctr, decimal-leading-zero);
+				counter-increment: ctr;
+				position: absolute;
+				top: 3px;
+				left: 0;
+				font-size: calc((1.8rem / 1.2) / 1.2);
+				font-weight: 300;
+				color: rgba(255, 255, 255, 0.25);
+			}
+			&:last-child {
+				border-bottom: 1px dotted rgba(255, 255, 255, 0.05);
+			}
 		}
-
-		.arrow {
+		.menuElementContainer {
+			width: 100%;
+			border-top: 1px dotted rgba(255, 255, 255, 0.05);
+			line-height: var(--lineHeight);
+			cursor: pointer;
 			transition: all 0.3s ease-in-out;
-			pointer-events: none;
-		}
+			&:hover .menuElement .title {
+				color: var(--menu-textColorHover);
+			}
+			&:hover .arrow {
+				rotate: 180deg;
+			}
 
-		.active {
-			display: block;
-			opacity: 1;
-			visibility: visible;
+			.menuElement {
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 100%;
+				font-size: var(--menu-TextSize);
+				font-weight: 600;
+				color: var(--menu-textColor);
+				pointer-events: none;
+				
+				.title {
+					color: var(--menu-textColor);
+					padding-left: 2.6rem;
+					pointer-events: none;
+					transition: all 0.3s ease-in-out;
+					
+					&::before {
+						content: counter(ctr, decimal-leading-zero);
+						counter-increment: ctr;
+						position: absolute;
+						top: 3px;
+						left: 0;
+						font-size: calc((1.8rem / 1.2) / 1.2);
+						font-weight: 300;
+						color: rgba(255, 255, 255, 0.25);
+					}
+				}
+
+				.arrow {
+					transition: all 0.3s ease-in-out;
+					pointer-events: none;
+				}
+			}
+
+			.subMenu {
+				display: none;
+				flex-direction: column;
+				padding: 1.8rem 0;
+				max-height: 0;
+				height: auto;
+				background: var(--Bgc-nav);
+				opacity: 0;
+				visibility: hidden;
+				z-index: 1000;
+				list-style: none;
+				transition: all 1s ease-in-out;
+
+				.subLink {
+					display: block;
+					width: 100%;
+					white-space: nowrap;
+					line-height: 1.8rem;
+					padding: 0.7rem 3rem 0.7rem 2rem;
+					color: var(--subMenu-Color);
+					font-size: var(--subMenu-TextSize);
+					font-weight: 400;
+					transition: all 0.3s;
+
+					&:hover {
+						color: var(--subMenu-ColorHover);
+					}
+				}
+			}
+
+			.active {
+				display: block;
+				opacity: 1;
+				visibility: visible;
+			}
+			.height{
+				max-height: 100%;
+			}
+		}
+	}
+}
+
+@media (max-width: 500px) {
+	.mobileContainer {
+		padding: 0 calc(4rem);
+
+		.mobileLink {
+			margin-top: 7rem;
+		}
+		.mobileElement {
+			.title {
+				margin-top: 1.5rem;
+			}
 		}
 	}
 }
