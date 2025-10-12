@@ -1,4 +1,4 @@
-import { useRef, type MouseEvent } from 'react'
+import { type MouseEvent } from 'react'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { ImgArrow } from '../../../assets/icons/nav/IconSvg'
 import type { MenuTypes } from '../../../containers/Navigation/dataNavigation/dataNavigation'
@@ -13,6 +13,7 @@ interface MenuElementProps {
 	handleMouseInDropdown?: (e: MouseEvent<HTMLElement>) => void
 	handleMouseOutDropdown?: (e: MouseEvent<HTMLElement>) => void
 	handleOpenCloseDropdown?: (e: MouseEvent<HTMLElement>, index: number) => void
+	
 }
 
 const MenuElement = ({
@@ -24,13 +25,13 @@ const MenuElement = ({
 	handleMouseInDropdown,
 	handleMouseOutDropdown,
 	handleOpenCloseDropdown,
+	
 }: MenuElementProps) => {
-	const menuElementRef = useRef<HTMLDivElement>(null)
 
 	if (data.href === '') {
 		return (
 			<div
-				ref={menuElementRef}
+				
 				key={crypto.randomUUID()}
 				data-element={index}
 				className={styles.menuElementContainer}

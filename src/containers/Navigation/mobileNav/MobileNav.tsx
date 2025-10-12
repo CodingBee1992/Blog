@@ -2,7 +2,7 @@ import CloseButton from '../../../components/atoms/CloseButton/CloseButton'
 import MenuElement from '../../../components/organism/menuElement/MenuElement'
 import type { MenuTypes } from '../dataNavigation/dataNavigation'
 import styles from './MobileNav.module.scss'
-import type { MouseEvent, RefObject } from 'react'
+import { type MouseEvent, type RefObject } from 'react'
 
 interface MobileRefProps {
 	mobileRef: RefObject<HTMLDivElement | null>
@@ -11,28 +11,29 @@ interface MobileRefProps {
 }
 
 const MobileNav = ({ dataMenu, mobileRef, handleCloseMenu }: MobileRefProps) => {
+	const handleOpenCloseDropdown = (e: MouseEvent<HTMLElement>, index: number) => {
+		const target = e.currentTarget as HTMLElement
+		let element
 
+		if (Number(target.dataset.element) === index) {
+			element = target
 
-	const handleOpenCloseDropdown = (e:MouseEvent<HTMLElement>,index:number)=>{
-		const target = e.target as HTMLElement
-		
-		if(+target.dataset.element === index){
-			
-			const element = target.lastElementChild
-			const subMenu = document.querySelectorAll(`.${styles.active}`)
-			if(subMenu){
-				subMenu.forEach(item=> item.classList.remove(styles.active))
+			if (!element.classList.contains(styles.active)) {
+				const activeElements = document.querySelectorAll(`.${styles.active}`)
+
+				if (activeElements) {
+					activeElements.forEach(item => {
+						item.classList.remove(styles.active)
+						
+					})
+				}
+
+				element.classList.add(styles.active)
+				mobileRef.current?.classList.add(styles.overflowActive)
+			} else {
+				element.classList.remove(styles.active)
+				mobileRef.current?.classList.remove(styles.overflowActive)
 			}
-
-			if(element){
-				element?.classList.add(styles.active)
-				
-				setTimeout(() => {
-					element?.classList.add(styles.height)
-					
-				}, 300);
-			}
-
 		}
 	}
 
@@ -44,7 +45,9 @@ const MobileNav = ({ dataMenu, mobileRef, handleCloseMenu }: MobileRefProps) => 
 			</div>
 			<div className={styles.mobileLink}>
 				{dataMenu.map((item: MenuTypes, index: number) => {
-					return <MenuElement styles={styles} data={item} index={index} handleOpenCloseDropdown={handleOpenCloseDropdown}/>
+					return (
+						<MenuElement styles={styles} data={item} index={index} handleOpenCloseDropdown={handleOpenCloseDropdown} />
+					)
 				})}
 			</div>
 		</div>

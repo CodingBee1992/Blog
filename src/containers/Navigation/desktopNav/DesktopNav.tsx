@@ -26,7 +26,7 @@ const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 
 	const handleMouseIn = (e: MouseEvent<HTMLElement>, index: number) => {
 		const target = e.target as HTMLElement
-
+		console.log(target);
 		if (target.dataset.element) {
 			timeOutListIn.forEach(item => {
 				clearInterval(item)
