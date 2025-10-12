@@ -52,7 +52,7 @@
 				height: auto;
 				width: 100%;
 				background-color: var(--Bgc-main);
-				// overflow: hidden;
+				visibility: hidden;
 				opacity: 0;
 				transition: all 0.3s ease-in-out;
 				z-index: -1;
@@ -80,6 +80,7 @@
 			.fadeOut {
 				top: 40px;
 				opacity: 1;
+				visibility: visible;
 			}
 			.height {
 				max-height: 325px;

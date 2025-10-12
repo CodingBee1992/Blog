@@ -42,7 +42,7 @@ const Navigation = () => {
 			{size.width > 900 ? (
 				<DesktopNav navRef={navRef} dataMenu={dataNavigation} />
 			) : (
-				<MobileNav mobileRef={mobileRef} handleCloseMenu={handleOpenCloseMenu} dataMenu={dataNavigation}/>
+				<MobileNav navRef={navRef} mobileRef={mobileRef} handleCloseMenu={handleOpenCloseMenu} dataMenu={dataNavigation}/>
 			)}
 			<SearchButton />
 			{size.width <= 900 ? <MenuIcon handleOpenMenu={handleOpenCloseMenu} /> : null}

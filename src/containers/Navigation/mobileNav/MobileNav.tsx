@@ -1,16 +1,26 @@
+import { useLocation } from 'react-router'
 import CloseButton from '../../../components/atoms/CloseButton/CloseButton'
 import MenuElement from '../../../components/organism/menuElement/MenuElement'
 import type { MenuTypes } from '../dataNavigation/dataNavigation'
 import styles from './MobileNav.module.scss'
-import { type MouseEvent, type RefObject } from 'react'
+import { useEffect, type MouseEvent, type RefObject } from 'react'
 
 interface MobileRefProps {
 	mobileRef: RefObject<HTMLDivElement | null>
+	navRef: RefObject<HTMLDivElement | null>
 	handleCloseMenu: () => void
 	dataMenu: MenuTypes[]
 }
 
-const MobileNav = ({ dataMenu, mobileRef, handleCloseMenu }: MobileRefProps) => {
+const MobileNav = ({ dataMenu, mobileRef, navRef, handleCloseMenu }: MobileRefProps) => {
+	const location = useLocation()
+	useEffect(() => {
+		if (location.pathname !== '/') {
+			navRef.current?.classList.add(styles.secondNavBgColor)
+		} else {
+			navRef.current?.classList.remove(styles.secondNavBgColor)
+		}
+	}, [location.pathname, navRef])
 	const handleOpenCloseDropdown = (e: MouseEvent<HTMLElement>, index: number) => {
 		const target = e.currentTarget as HTMLElement
 		let element
@@ -24,7 +34,6 @@ const MobileNav = ({ dataMenu, mobileRef, handleCloseMenu }: MobileRefProps) => 
 				if (activeElements) {
 					activeElements.forEach(item => {
 						item.classList.remove(styles.active)
-						
 					})
 				}
 

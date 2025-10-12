@@ -26,7 +26,7 @@ const MenuIcon = ({handleOpenMenu}:MenuIconProps) => {
     <button ref={refBtn} className={styles.btn} title='Menu'
     onClick={()=>handleOpenMenu()}
     >
-        <span className={styles.span}>Menu</span>
+        <span className={styles.span}></span>
     </button>
   )
 }

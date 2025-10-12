@@ -17,7 +17,6 @@
 	background-color: var(--Bgc-nav);
 	transition: all 0.5s ease-in-out;
 	z-index: 1002;
-	
 
 	.mobileElement {
 		display: flex;
@@ -141,7 +140,7 @@
 
 			.subMenu {
 				display: block;
-				
+
 				flex-direction: column;
 				height: 100%;
 				padding: 1.8rem 0;
@@ -176,8 +175,11 @@
 		}
 	}
 }
-.overflowActive{
+.overflowActive {
 	overflow-y: scroll;
+}
+.secondNavBgColor {
+	background-image: var(--Bgc-navSecond);
 }
 @media (max-width: 500px) {
 	.mobileContainer {
