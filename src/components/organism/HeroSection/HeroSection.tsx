@@ -1,3 +1,4 @@
+import { ArrowNext, ArrowPrev } from '../../../assets/icons/arrows/Arrows'
 import { socialData } from '../../../utils/socialData'
 import SocialIcon from '../../atoms/SocialIcon/SocialIcon'
 import styles from './HeroSection.module.scss'
@@ -19,7 +20,14 @@ const HeroSection = () => {
 					})}
 				</ul>
 			</div>
-			<div className={styles.arrowsContainer}></div>
+			<div className={styles.arrowsContainer}>
+				<button className={styles.arrowBtn}>
+					<ArrowPrev />
+				</button>
+				<button className={styles.arrowBtn}>
+					<ArrowNext />
+				</button>
+			</div>
 		</section>
 	)
 }

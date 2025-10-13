@@ -2,7 +2,7 @@ import styles from './PostsContent.module.scss'
 
 const PostsContent = () => {
   return (
-    <div className={styles.test}>PostsContent</div>
+    <section className={styles.test}>PostsContent</section>
   )
 }
 

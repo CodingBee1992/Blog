@@ -40,4 +40,24 @@
 			}
 		}
 	}
+
+    .arrowsContainer{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+
+        .arrowBtn{
+            padding: 2rem 2.5rem;
+            border: none;
+            background-color: var(--white);
+            color: var(--black);
+            cursor: pointer;
+            transition: all .3s ease-in-out;
+
+            &:hover {
+                color: var(--arrows-ColorHover);
+                background-color: var(--arrows-BgcHover);
+            }
+        }
+    }
 }
