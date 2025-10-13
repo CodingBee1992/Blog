@@ -15,7 +15,7 @@ import StandardPostPage from './components/pages/Blog/StandardPostPage/StandardP
 import StylesPage from './components/pages/StylesPage/StylesPage'
 import AboutPage from './components/pages/AboutPage/AboutPage'
 import ContactPage from './components/pages/ContactPage/ContactPage'
-import StaticLayout from './containers/HomPage/StaticLayout'
+import StaticLayout from './containers/StaticLayout/StaticLayout'
 import HomePage from './components/pages/HomePage/HomePage'
 
 

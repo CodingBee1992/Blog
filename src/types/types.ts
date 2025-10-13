@@ -1,4 +1,4 @@
-import type { JSX } from 'react'
+import type { JSX, ReactNode } from 'react'
 import type { MenuTypes } from '../containers/Navigation/dataNavigation/dataNavigation'
 
 export interface Size {
@@ -14,3 +14,9 @@ export interface SearchProps {
   handleIsOpen?: () => void
   
 }
+
+export type SocialProps = {
+	path: string
+	icon: ReactNode
+}
+

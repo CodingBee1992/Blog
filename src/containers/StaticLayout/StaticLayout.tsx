@@ -6,6 +6,7 @@ import Loader from '../../components/atoms/loader/Loader'
 import { Outlet, useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
+import Footer from '../Footer/Footer'
 
 const Navigation = lazy(() => import('../Navigation/Navigation'))
 
@@ -39,6 +40,7 @@ const StaticLayout = () => {
 			<div>
 				<Outlet />
 			</div>
+			<Footer/>
 		</div>
 	)
 }
