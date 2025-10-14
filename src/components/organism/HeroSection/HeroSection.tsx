@@ -1,53 +1,91 @@
+import { useState, type MouseEvent, type TouchEvent } from 'react'
 import { ArrowNext, ArrowPrev } from '../../../assets/icons/arrows/Arrows'
+import type { PostDataProps } from '../../../types/types'
+import postData from '../../../utils/postData'
 import { socialData } from '../../../utils/socialData'
+import SliderList from '../../atoms/SliderList/SliderList'
 import SocialIcon from '../../atoms/SocialIcon/SocialIcon'
 import styles from './HeroSection.module.scss'
+import SliderDots from '../../atoms/SliderDots/SliderDots'
 
 const HeroSection = () => {
+	const [number, setNumber] = useState<number>(0)
+	const [swipeStartX, setSwipeStartX] = useState<number>(0)
+	const handleSliderNext = () => {
+		setNumber(prev => (prev >= 2 ? 0 : prev + 1))
+	}
+	const handleSliderPrev = () => {
+		setNumber(prev => (prev <= 0 ? 2 : prev - 1))
+	}
+	// const handleSliderOnMouseDown = (e: TouchEvent<HTMLDivElement>) => {
+	// 	const touchX = e.touches[0].clientX
+	// 	setOnMouseDownValue(touchX)
+	// 	// console.log(target)
+	// }
+	// const handleSliderOnMouseUp = (e: TouchEvent<HTMLDivElement>) => {
+	// 	const target = e.changedTouches[0].clientX
+	// 	setOnMouseUpValue(target)
+	// 	// console.log(target)
+	// }
+	const getClientX = (e: MouseEvent | TouchEvent): number => {
+		if ('touches' in e && e.touches.length > 0) {
+			return e.touches[0].clientX
+		}
+		if ('changedTouches' in e && e.changedTouches.length > 0) {
+			return e.changedTouches[0].clientX
+		}
+		if ('clientX' in e) {
+			return e.clientX
+		}
+		return 0
+	}
+
+	const handleSwipeStart = (e: MouseEvent | TouchEvent) => {
+		setSwipeStartX(getClientX(e))
+	}
+
+	const handleSwipeEnd = (e: MouseEvent | TouchEvent) => {
+		const swipeEndX = getClientX(e)
+
+		const diff = +swipeEndX.toFixed(0) - +swipeStartX.toFixed(0)
+		console.log(diff)
+
+		if (diff > 200) {
+			handleSliderNext()
+		} else if (diff < -200) {
+			handleSliderPrev()
+		}
+
+		setSwipeStartX(0)
+	}
+
 	return (
 		<section id="hero" className={styles.homeContainer}>
 			<div className={styles.sliderContainer}>
-				<div className={styles.sliderListContainer} draggable>
-					<div className={styles.sliderList}>
-						<div className={`${styles.sliderHero} ${styles.sliderFirst}`}>
-							<div className={`${styles.sliderHeroBg} ${styles.sliderHeroFirst}`}></div>
-							<div></div>
-						</div>
-						<div className={`${styles.sliderHero} ${styles.sliderSecond}`}>
-							<div className={`${styles.sliderHeroBg} ${styles.sliderHeroSecond}`}></div>
-							<div></div>
-						</div>
-						<div className={`${styles.sliderHero} ${styles.sliderThird}`}>
-							<div className={`${styles.sliderHeroBg} ${styles.sliderHeroThird}`}></div>
-							<div></div>
-						</div>
-					</div>
-				</div>
+				{postData.map((data: PostDataProps, index: number) => (
+					<SliderList
+						key={index}
+						styles={styles}
+						data={data}
+						index={index}
+						number={number}
+						handleSliderOnMouseDown={handleSwipeStart}
+						handleSliderOnMouseUp={handleSwipeEnd}
+					/>
+				))}
 				<ul className={styles.dots} role="tablist">
-					<li role="presentation">
-						<button type="button" role="tab" aria-controls="slick-slide-00" aria-label="1 of 3" tabIndex={0}>
-							01
-						</button>
-					</li>
-					<li role="presentation">
-						<button type="button" role="tab" aria-controls="slick-slide-01" aria-label="2 of 3" tabIndex={-1}>
-							02
-						</button>
-					</li>
-					<li role="presentation">
-						<button type="button" role="tab" aria-controls="slick-slide-02" aria-label="3 of 3" tabIndex={-1}>
-							03
-						</button>
-					</li>
+					{Array.from({ length: 3 }, (_, index) => {
+						return <SliderDots key={index} styles={styles} index={index} number={number} />
+					})}
 				</ul>
 			</div>
 			<div className={styles.socialContainer}>
 				<p className={styles.socialText}>Follow</p>
 				<span className={styles.lineThrough}></span>
 				<ul className={styles.socialIcons}>
-					{socialData.map(({ path, icon }) => {
+					{socialData.map(({ path, icon }, index) => {
 						return (
-							<SocialIcon href={path} styles={styles}>
+							<SocialIcon key={index} href={path} styles={styles}>
 								{icon}
 							</SocialIcon>
 						)
@@ -55,10 +93,10 @@ const HeroSection = () => {
 				</ul>
 			</div>
 			<div className={styles.arrowsContainer}>
-				<button className={styles.arrowBtn}>
+				<button className={styles.arrowBtn} onClick={() => handleSliderPrev()}>
 					<ArrowPrev />
 				</button>
-				<button className={styles.arrowBtn}>
+				<button className={styles.arrowBtn} onClick={() => handleSliderNext()}>
 					<ArrowNext />
 				</button>
 			</div>

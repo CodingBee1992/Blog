@@ -20,3 +20,11 @@ export type SocialProps = {
 	icon: ReactNode
 }
 
+export interface PostDataProps {
+	id: string
+	image: string,
+	href: string,
+	categories: string[]
+	postedBy: string
+	title: string
+}
