@@ -33,3 +33,9 @@ a{
     margin: 0 auto;
     
 }
+
+@media (max-width:800px) {
+   .row{
+     width: 90%;
+   }
+}
