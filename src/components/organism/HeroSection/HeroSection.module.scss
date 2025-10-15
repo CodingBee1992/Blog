@@ -68,6 +68,7 @@
 						padding-bottom: 20vh;
 						height: 100%;
 						
+						
 						.column {
 							align-self: flex-end;
 							max-width: var(--slideContent-width);
@@ -185,7 +186,7 @@
 
 	.socialContainer {
 		position: absolute;
-		right: 4rem;
+		right: var(--socialPosition-right);
 		bottom: 15dvh;
 		text-align: right;
 		color: white;
@@ -206,8 +207,9 @@
 		.socialIcons {
 			text-align: center;
 			font-size: 2rem;
+			margin-bottom: 2.8rem;
 			.link {
-				margin-bottom: calc(1 * 3.2rem);
+				margin-bottom:var(--margin-bottomSocialLinks);
 				list-style: none;
 
 				a {
@@ -231,10 +233,11 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			padding: 2rem 2.5rem;
+			padding: var(--padding-arrows);
 			border: none;
 			background-color: var(--white);
 			color: var(--black);
+			
 			cursor: pointer;
 			transition: all 0.3s ease-in-out;
 
@@ -258,3 +261,4 @@
 
 	}
 }
+
