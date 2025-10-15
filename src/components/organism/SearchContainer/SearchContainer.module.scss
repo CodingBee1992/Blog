@@ -8,7 +8,7 @@
 	opacity: 0;
 	visibility: hidden;
 	transition: all 0.3s;
-	z-index: 1003;
+	z-index: 1100;
 
 	.searchContainer {
 		display: flex;
@@ -18,7 +18,7 @@
 		padding: 1rem;
 		width: 100%;
 		height: var(--header-height);
-		background-color: var(--Bgc-nav);
+		background-color: var(--Bgc-navSearch);
 		// --webkit-transorm: translateY(-200%);
 		transform: translateY(-200%);
 		// transition: transform 0.3s ease-in-out;

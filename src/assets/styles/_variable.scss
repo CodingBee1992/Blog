@@ -27,6 +27,7 @@ $mobileSmall: 380px;
 
 :root {
 	--fontFamily: 'Inter', sans-serif;
+	--font-3:"DM Serif Display", serif;
 	--logo-width: 96px;
 	--logo-Size: 2.5rem;
 	--logo-color:#ff9900;
@@ -37,6 +38,7 @@ $mobileSmall: 380px;
 
 	--Bgc-main: #eff0f0;
 	--Bgc-nav:transparent;
+	--Bgc-navSearch:#000000;
 	--Bgc-navSecond:linear-gradient(to right, #c50bc6, #a409a8, #85068b, #68036f, #4c0153);;
 
 	--menu-textColor: #ffffff;
@@ -58,8 +60,9 @@ $mobileSmall: 380px;
 	--subMenu-TextSize: 1.4rem;
 
 	--text-Size: 1.8rem;
+	--text-meta:calc(calc((1.8rem / 1.2) / 1.2) * 1.2);
 	--text-SizeInput:calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
-
+	--text-h1:8.8rem;
 	--borderBottom:#ffffff0d;
 
 	--arrows-BgcHover:#000000;

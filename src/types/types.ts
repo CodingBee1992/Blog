@@ -24,7 +24,7 @@ export interface PostDataProps {
 	id: string
 	image: string,
 	href: string,
-	categories: string[]
-	postedBy: string
+	categories:{category: string,href:string}[]
+	author: string
 	title: string
 }
