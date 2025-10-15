@@ -5,42 +5,37 @@
 	background-color: #151515;
 
 	.sliderContainer {
-		position: relative;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
 		width: 100%;
-		height: 100dvh;
 
 		.sliderListContainer {
-			position: absolute;
-			top: 0;
-			left: 0;
-			margin: 0;
-			padding: 0;
-			width: 100%;
-			height: 100%;
+			display: flex;
+			flex-direction: row;
+			overflow: hidden;
 
 			.sliderList {
-				// position: absolute;
-				// top: 0;
-				// left: 0;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
 				width: 100%;
-				height: 100%;
+				min-width: 100%;
+				height: 100dvh;
 
 				.sliderHero {
-					// position: absolute;
-					// top: 0;
-					// left: 0;
+					position: relative;
+					display: block;
 					width: 100%;
 					height: 100%;
 					transition: opacity 1s linear;
-					z-index: 998;
-					opacity: 0;
 
 					.sliderHeroBg {
-						// position: absolute;
-						// top: 0;
-						// left: 0;
-						// right: 0;
-						// bottom: 0;
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
 						width: 100%;
 						height: 100%;
 						background-size: cover;
@@ -69,13 +64,14 @@
 
 					.sliderContent {
 						position: relative;
-						margin-top: -50dvh;
+						padding-top: 20rem;
+						padding-bottom: 20vh;
 						height: 100%;
-						// padding-bottom: 20vh;
-						padding: 0 3.2rem;
-
+						
 						.column {
+							align-self: flex-end;
 							max-width: 50vw;
+							padding: 0 2.4rem;
 							.meta {
 								display: flex;
 								gap: 1rem;
@@ -104,18 +100,36 @@
 							.text {
 								font-size: var(--text-h1);
 								font-family: var(--font-3);
+								word-wrap: break-word;
 								font-weight: 400;
 								// line-height: 1.1;
-								text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+								text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 								position: relative;
-								
-								a{
-									color: #ffffff;
 
+								a {
+									color: #ffffff;
 								}
 							}
 						}
 					}
+					.animated{
+						animation: animate 1s cubic-bezier(0, 0.55, 0.45, 1) 1s both;
+					}
+				}
+				.sliderHero1 {
+					left: 0;
+					z-index: 998;
+					opacity: 0;
+				}
+				.sliderHero2 {
+					left: -100%;
+					z-index: 998;
+					opacity: 0;
+				}
+				.sliderHero3 {
+					left: -200%;
+					z-index: 998;
+					opacity: 0;
 				}
 				.sliderActive {
 					z-index: 999;
@@ -123,48 +137,47 @@
 				}
 			}
 		}
-	}
-	.dots {
-		position: relative;
-		display: flex;
-		gap: 1rem;
-		width: 92%;
-		max-width: 1400px;
-		margin-top: -15dvh;
-		margin-left: auto;
-		margin-right: auto;
-		padding: 0 3.2rem;
-		list-style: none;
-		z-index: 1000;
+		.dots {
+			display: flex;
+			gap: 1rem;
+			width: 92%;
+			max-width: 1400px;
+			margin-top: -15dvh;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 0 3.2rem;
+			list-style: none;
+			z-index: 1000;
 
-		.dot {
-			&::after {
-				content: '';
-				display: inline-block;
-				width: 0;
-				height: 1px;
-				background-color: #ffffff;
-				transform: translateY(-4px);
-				transition: width 0.3s cubic-bezier(0.21, 0.97, 0.75, 0.85);
+			.dot {
+				&::after {
+					content: '';
+					display: inline-block;
+					width: 0;
+					height: 1px;
+					background-color: #ffffff;
+					transform: translateY(-4px);
+					transition: width 0.3s cubic-bezier(0.21, 0.97, 0.75, 0.85);
+				}
+
+				.dotBtn {
+					margin: 0;
+					padding: 0.4rem;
+					line-height: 3.2rem;
+					height: auto;
+					color: white;
+					letter-spacing: 4px;
+					border: none;
+					background-color: transparent;
+					cursor: pointer;
+				}
 			}
 
-			.dotBtn {
-				margin: 0;
-				padding: 0.4rem;
-				line-height: 3.2rem;
-				height: auto;
-				color: white;
-				letter-spacing: 4px;
-				border: none;
-				background-color: transparent;
-				cursor: pointer;
-			}
-		}
-
-		.slickActive {
-			&::after {
-				width: 32px;
-				margin: 0 10px 0 4px;
+			.slickActive {
+				&::after {
+					width: 32px;
+					margin: 0 10px 0 4px;
+				}
 			}
 		}
 	}
@@ -229,5 +242,18 @@
 				background-color: var(--arrows-BgcHover);
 			}
 		}
+	}
+}
+
+@keyframes animate {
+	from {
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(20%);
+	}to{
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+
 	}
 }

@@ -78,6 +78,13 @@ $mobileSmall: 380px;
 	}
 }
 
+@media (max-width:600px) {
+	:root{
+		--text-meta:calc(calc((1.7rem / 1.2) / 1.2) * 1.2);
+		--text-h1:5rem;
+	}
+}
+
 @media (max-width:500px) {
 	:root{
 		--lineHeight:calc(2.5 * 2.8rem);

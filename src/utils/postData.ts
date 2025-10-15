@@ -24,7 +24,7 @@ const postData: PostDataProps[] = [
 			{ category: 'Culture', href: '#' },
 		],
 		author: 'Rico & Jumbo',
-		title: 'Tips and Ideas for better life from Rico & Jumbo',
+		title: 'Deserts in Namibia',
 	},
 	{
 		id: crypto.randomUUID(),
@@ -35,7 +35,7 @@ const postData: PostDataProps[] = [
 			{ category: 'Design', href: '#' },
 		],
 		author: 'Rico & Jumbo',
-		title: 'Tips and Ideas for better life from Rico & Jumbo',
+		title: 'Peru - The Sun of the South America',
 	},
 ]
 

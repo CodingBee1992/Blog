@@ -40,42 +40,55 @@ const HeroSection = () => {
 		const diff = +swipeEndX.toFixed(0) - +swipeStartX.toFixed(0)
 
 		if (diff > 150) {
-			handleSliderNext()
-		} else if (diff < -150) {
 			handleSliderPrev()
+		} else if (diff < -150) {
+			handleSliderNext()
 		}
 
 		setSwipeStartX(0)
 	}
-	const handleSwipeOnClickDots = (e:MouseEvent<HTMLElement>,index:number)=>{
+	const handleSwipeOnClickDots = (e: MouseEvent<HTMLElement>, index: number) => {
 		const target = e.target as HTMLElement
 		const tabIndex = target.tabIndex
-		
 
-		if(tabIndex === index){
+		if (tabIndex === index) {
 			setNumber(tabIndex)
 		}
 	}
 	return (
 		<section id="hero" className={styles.homeContainer}>
 			<div className={styles.sliderContainer}>
-				{postData.map((data: PostDataProps, index: number) => (
-					<SliderList
-						key={index}
-						styles={styles}
-						data={data}
-						index={index}
-						number={number}
-						handleSwipeStart={handleSwipeStart}
-						handleSwipeEnd={handleSwipeEnd}
-					/>
-				))}
-			</div>
+				<div
+					className={styles.sliderListContainer}
+					onMouseDown={e => handleSwipeStart(e)}
+					onMouseUp={e => handleSwipeEnd(e)}
+					onTouchStart={e => handleSwipeStart(e)}
+					onTouchEnd={e => handleSwipeEnd(e)}>
+					{postData.map((data: PostDataProps, index: number) => (
+						<SliderList
+							key={index}
+							styles={styles}
+							data={data}
+							index={index}
+							number={number}
+							
+						/>
+					))}
+				</div>
 				<ul className={styles.dots} role="tablist">
 					{Array.from({ length: 3 }, (_, index) => {
-						return <SliderDots handleSwipeOnClickDots={handleSwipeOnClickDots} key={index} styles={styles} index={index} number={number} />
+						return (
+							<SliderDots
+								handleSwipeOnClickDots={handleSwipeOnClickDots}
+								key={index}
+								styles={styles}
+								index={index}
+								number={number}
+							/>
+						)
 					})}
 				</ul>
+			</div>
 			<div className={styles.socialContainer}>
 				<p className={styles.socialText}>Follow</p>
 				<span className={styles.lineThrough}></span>
