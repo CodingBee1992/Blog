@@ -12,10 +12,10 @@ const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [swipeStartX, setSwipeStartX] = useState<number>(0)
 	const handleSliderNext = () => {
-		setNumber(prev => (prev >= 2 ? 0 : prev + 1))
+		setNumber(prev => (prev >= 3 ? 0 : prev + 1))
 	}
 	const handleSliderPrev = () => {
-		setNumber(prev => (prev <= 0 ? 2 : prev - 1))
+		setNumber(prev => (prev <= 0 ? 3 : prev - 1))
 	}
 	const getClientX = (e: MouseEvent | TouchEvent): number => {
 		if ('touches' in e && e.touches.length > 0) {

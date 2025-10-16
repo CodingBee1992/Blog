@@ -1,6 +1,7 @@
 import bg1 from '../assets/img/sailboat.jpg'
 import bg2 from '../assets/img/sunrise.jpg'
 import bg3 from '../assets/img/boat.jpg'
+import bg4 from '../assets/img/desert1.jpg'
 import type { PostDataProps } from '../types/types'
 
 const postData: PostDataProps[] = [
@@ -20,18 +21,29 @@ const postData: PostDataProps[] = [
 		image: bg2,
 		href: '#',
 		categories: [
-			{ category: 'Food', href: '#' },
+			{ category: 'Travel,', href: '#' },
+			{ category: 'Nature', href: '#' },
+		],
+		author: 'Rico & Jumbo',
+		title: 'Lakes in Africa',
+	},
+	{
+		id: crypto.randomUUID(),
+		image: bg4,
+		href: '#',
+		categories: [
+			{ category: 'Nature', href: '#' },
 			{ category: 'Culture', href: '#' },
 		],
 		author: 'Rico & Jumbo',
-		title: 'Deserts in Namibia',
+		title: 'Namibia Deserts ',
 	},
 	{
 		id: crypto.randomUUID(),
 		image: bg3,
 		href: '#',
 		categories: [
-			{ category: 'Work', href: '#' },
+			{ category: 'Travel', href: '#' },
 			{ category: 'Design', href: '#' },
 		],
 		author: 'Rico & Jumbo',
