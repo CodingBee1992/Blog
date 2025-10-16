@@ -1,13 +1,7 @@
-import HeaderText from '../../../atoms/HeaderText/HeaderText'
-import styles from './WorkPage.module.scss'
+import WorkPageTemplate from "../../../templates/WorkPageTemplate/WorkPageTemplate"
+
 const WorkPage = () => {
-	return (
-		<div className={`${styles.workContainer} sectionPages`}>
-			<HeaderText>
-				<h1>Work</h1>
-			</HeaderText>
-		</div>
-	)
+	return <WorkPageTemplate />
 }
 
 export default WorkPage

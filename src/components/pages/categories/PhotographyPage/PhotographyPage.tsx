@@ -1,14 +1,8 @@
-import HeaderText from '../../../atoms/HeaderText/HeaderText'
-import styles from './PhotographyPage.module.scss'
+import PhotographyPageTemplate from "../../../templates/PhotographyPageTemplate/PhotographyPageTemplate"
+
 
 const PhotographyPage = () => {
-  return (
-    <div className={`${styles.photographyContainer} sectionPages`}>
-      <HeaderText>
-        <h1>Photography</h1>
-      </HeaderText>
-    </div>
-  )
+  return <PhotographyPageTemplate />
 }
 
 export default PhotographyPage

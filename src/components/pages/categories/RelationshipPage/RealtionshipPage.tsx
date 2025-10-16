@@ -1,14 +1,8 @@
-import HeaderText from '../../../atoms/HeaderText/HeaderText'
-import styles from './RealtionshipPage.module.scss'
+import RelationshipPageTemplate from "../../../templates/RelationshipPageTemplate/RelationshipPageTemplate"
+
 
 const RealtionshipPage = () => {
-  return (
-    <section className={`${styles.relationshipContainer} sectionPages`}>
-      <HeaderText>
-        <h1>Relationship</h1>
-      </HeaderText>
-    </section>
-  )
+  return <RelationshipPageTemplate />
 }
 
 export default RealtionshipPage

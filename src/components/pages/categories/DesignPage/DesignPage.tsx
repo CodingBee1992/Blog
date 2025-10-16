@@ -1,15 +1,7 @@
-import HeaderText from '../../../atoms/HeaderText/HeaderText'
-import styles from './DesignPage.module.scss'
+import DesignPageTemplate from '../../../templates/DesignPageTemplate/DesignPageTemplate'
 
 const DesignPage = () => {
-	return (
-		<div className={`${styles.designContainer} sectionPages`}>
-			<HeaderText>
-				
-				<h1>Design</h1>
-			</HeaderText>
-		</div>
-	)
+	return <DesignPageTemplate />
 }
 
 export default DesignPage
