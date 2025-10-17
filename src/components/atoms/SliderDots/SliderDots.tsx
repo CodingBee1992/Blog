@@ -15,7 +15,7 @@ const SliderDots = ({styles,number,index,handleSwipeOnClickDots}:SliderDotsProps
 				className={styles.dotBtn}
 				role="tab"
 				aria-controls={`slick-slide-0${index}`}
-				aria-label={`${index} of 3`}
+				aria-label={`${index} of 4`}
 				tabIndex={index}>
 				{`0${index + 1}`}
 			</button>

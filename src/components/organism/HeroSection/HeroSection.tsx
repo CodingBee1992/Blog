@@ -76,7 +76,7 @@ const HeroSection = () => {
 					))}
 				</div>
 				<ul className={styles.dots} role="tablist">
-					{Array.from({ length: 3 }, (_, index) => {
+					{Array.from({ length: 4 }, (_, index) => {
 						return (
 							<SliderDots
 								handleSwipeOnClickDots={handleSwipeOnClickDots}
