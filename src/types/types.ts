@@ -21,10 +21,11 @@ export type SocialProps = {
 }
 
 export interface PostDataProps {
-	id: string
+	id?: string
 	image: string,
 	href: string,
 	categories:{category: string,href:string}[]
 	author: string
 	title: string
+	text:string
 }

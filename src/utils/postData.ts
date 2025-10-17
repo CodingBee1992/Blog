@@ -15,6 +15,7 @@ const postData: PostDataProps[] = [
 		],
 		author: 'Rico & Jumbo',
 		title: 'Tips and Ideas for better life from Rico & Jumbo',
+		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
 	{
 		id: crypto.randomUUID(),
@@ -26,7 +27,9 @@ const postData: PostDataProps[] = [
 		],
 		author: 'Rico & Jumbo',
 		title: 'Lakes in Africa',
+		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
+	
 	{
 		id: crypto.randomUUID(),
 		image: bg4,
@@ -37,6 +40,7 @@ const postData: PostDataProps[] = [
 		],
 		author: 'Rico & Jumbo',
 		title: 'Namibia Deserts ',
+		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
 	{
 		id: crypto.randomUUID(),
@@ -48,6 +52,55 @@ const postData: PostDataProps[] = [
 		],
 		author: 'Rico & Jumbo',
 		title: 'Peru - The Sun of the South America',
+		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
+	},
+	{
+		id: crypto.randomUUID(),
+		image: bg3,
+		href: '#',
+		categories: [
+			{ category: 'Travel', href: '#' },
+			{ category: 'Design', href: '#' },
+		],
+		author: 'Rico & Jumbo',
+		title: 'Peru - The Sun of the South America',
+		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
+	},
+	{
+		id: crypto.randomUUID(),
+		image: bg3,
+		href: '#',
+		categories: [
+			{ category: 'Travel', href: '#' },
+			{ category: 'Design', href: '#' },
+		],
+		author: 'Rico & Jumbo',
+		title: 'Peru - The Sun of the South America',
+		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
+	},
+	{
+		id: crypto.randomUUID(),
+		image: bg3,
+		href: '#',
+		categories: [
+			{ category: 'Travel', href: '#' },
+			{ category: 'Design', href: '#' },
+		],
+		author: 'Rico & Jumbo',
+		title: 'Peru - The Sun of the South America',
+		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
+	},
+	{
+		id: crypto.randomUUID(),
+		image: bg3,
+		href: '#',
+		categories: [
+			{ category: 'Travel', href: '#' },
+			{ category: 'Design', href: '#' },
+		],
+		author: 'Rico & Jumbo',
+		title: 'Peru - The Sun of the South America',
+		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
 ]
 
