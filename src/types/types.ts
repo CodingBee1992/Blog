@@ -8,11 +8,9 @@ export interface Size {
 
 export type MenuElement = (data: MenuTypes, id: number, key: number) => JSX.Element
 
-
 export interface SearchProps {
-  isOpen?:boolean,
-  handleIsOpen?: () => void
-  
+	isOpen?: boolean
+	handleIsOpen?: () => void
 }
 
 export type SocialProps = {
@@ -22,10 +20,15 @@ export type SocialProps = {
 
 export interface PostDataProps {
 	id?: string
-	image: string,
-	href: string,
-	categories:{category: string,href:string}[]
+	image: string
+	href: string
+	categories: { category: string; href: string }[]
 	author: string
 	title: string
-	text:string
+	text: string
+	// position?: 'position'
+	left?: string
+	top?: string
+	articleRef?:React.Ref<HTMLDivElement>
+	
 }
