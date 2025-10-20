@@ -4,15 +4,15 @@ import postData from '../../../utils/postData'
 import Article from '../../atoms/Article/Article'
 import styles from './PostsContent.module.scss'
 
-
 const PostsContent = () => {
 	const [width, setWidth] = useState<number>(0)
 	const [columns, setColumns] = useState<number>(0)
 	const [percent, setPercent] = useState<number>(0)
-	const [minusHeight,setMinusHeight]=useState<number>(0)
+	const [minusHeight, setMinusHeight] = useState<number>(0)
 	const articleRef = useRef<(HTMLDivElement | null)[]>([])
 	const [wrapperHeight, setWrapperHeight] = useState<number | null>(null)
 
+	const [styledPostData, setStyledPostData] = useState<PostDataProps[]>([])
 	useEffect(() => {
 		const handleSize = () => {
 			setWidth(window.innerWidth)
@@ -23,23 +23,23 @@ const PostsContent = () => {
 
 		if (width > 1400) {
 			setColumns(4)
-			setPercent(25)
 		}
 
 		if (width <= 1400) {
 			setColumns(3)
-			setPercent(33)
 		}
 		if (width < 1100) {
 			setColumns(2)
-			setPercent(50)
 		}
 		if (width <= 700) {
 			setColumns(1)
-			setPercent(100)
 		}
+		if (columns) {
+			setPercent(Math.floor(100 / columns))
+		}
+
 		window.addEventListener('resize', handleSize)
-	}, [width])
+	}, [width, columns, percent])
 
 	useEffect(() => {
 		const article = articleRef.current
@@ -50,20 +50,20 @@ const PostsContent = () => {
 			const arrayArticlesHeight = article.map(item => item?.offsetHeight || 0)
 
 			const totalHeight = arrayArticlesHeight.reduce((acc, h) => acc + (h || 0), 0)
-			console.log(`Total height: ${totalHeight}`);
+
 			const rows = Math.ceil(postData.length / columns)
 
 			const subtractedElement = arrayArticlesHeight.slice(rows, arrayArticlesHeight.length)
-			
+
 			if (subtractedElement.length > 0) {
 				const amountToBeDeducted = subtractedElement.reduce((acc, h) => acc + h, 0)
-				console.log(`Amount to be deducted: ${amountToBeDeducted}`);
 				setMinusHeight(amountToBeDeducted)
+			}else{
+				setMinusHeight(0)
 			}
 
 			if (totalHeight) {
 				const height = totalHeight - minusHeight
-				console.log(`Height: ${height}`);
 				setWrapperHeight(height)
 			}
 		}
@@ -76,16 +76,31 @@ const PostsContent = () => {
 		})
 
 		return () => observer.disconnect()
-	}, [columns, minusHeight])
+	}, [columns, minusHeight, width])
+	
 
-	const styledPostData = postData.map((post, index) => {
-		const heightTop = articleRef.current[index]?.offsetHeight
+	useEffect(() => {
+		
 
-		const left = `${(index % columns) * percent}%`
-		const top = `${Math.floor(index / columns) * heightTop}px`
+		const columnHeights = new Array(columns).fill(0)
+		
+		const updated = postData.map((post,index)=>{
+			const col = index % columns
+			const el = articleRef.current[index]
 
-		return { ...post, top, left }
-	})
+			const height = el?.offsetHeight || 650
+
+			const top = columnHeights[col]
+			columnHeights[col] += height
+			console.log(top);
+			const left = `${col * percent}%`
+
+			return {...post,top:`${top}px`,left}
+
+		})
+
+		setStyledPostData(updated)
+	}, [columns, percent, width])
 
 	return (
 		<section className={styles.postsContainer}>
