@@ -8,11 +8,11 @@ const PostsContent = () => {
 	const [width, setWidth] = useState<number>(0)
 	const [columns, setColumns] = useState<number>(0)
 	const [percent, setPercent] = useState<number>(0)
-	const [minusHeight, setMinusHeight] = useState<number>(0)
 	const articleRef = useRef<(HTMLDivElement | null)[]>([])
 	const [wrapperHeight, setWrapperHeight] = useState<number | null>(null)
 
 	const [styledPostData, setStyledPostData] = useState<PostDataProps[]>([])
+
 	useEffect(() => {
 		const handleSize = () => {
 			setWidth(window.innerWidth)
@@ -42,49 +42,9 @@ const PostsContent = () => {
 	}, [width, columns, percent])
 
 	useEffect(() => {
-		const article = articleRef.current
-
-		if (!article) return
-
-		const updateLayout = () => {
-			const arrayArticlesHeight = article.map(item => item?.offsetHeight || 0)
-
-			const totalHeight = arrayArticlesHeight.reduce((acc, h) => acc + (h || 0), 0)
-
-			const rows = Math.ceil(postData.length / columns)
-
-			const subtractedElement = arrayArticlesHeight.slice(rows, arrayArticlesHeight.length)
-
-			if (subtractedElement.length > 0) {
-				const amountToBeDeducted = subtractedElement.reduce((acc, h) => acc + h, 0)
-				setMinusHeight(amountToBeDeducted)
-			}else{
-				setMinusHeight(0)
-			}
-
-			if (totalHeight) {
-				const height = totalHeight - minusHeight
-				setWrapperHeight(height)
-			}
-		}
-		updateLayout()
-
-		const observer = new ResizeObserver(updateLayout)
-
-		article.forEach(ref => {
-			if (ref) observer.observe(ref)
-		})
-
-		return () => observer.disconnect()
-	}, [columns, minusHeight, width])
-	
-
-	useEffect(() => {
-		
-
 		const columnHeights = new Array(columns).fill(0)
-		
-		const updated = postData.map((post,index)=>{
+
+		const updated = postData.map((post, index) => {
 			const col = index % columns
 			const el = articleRef.current[index]
 
@@ -92,15 +52,22 @@ const PostsContent = () => {
 
 			const top = columnHeights[col]
 			columnHeights[col] += height
-			console.log(top);
+
 			const left = `${col * percent}%`
 
-			return {...post,top:`${top}px`,left}
-
+			return { ...post, top: `${top}px`, left }
 		})
-
 		setStyledPostData(updated)
+
+		if (columnHeights.length > 0) {
+			const height = Math.max(...columnHeights)
+
+			setWrapperHeight(height)
+		}
 	}, [columns, percent, width])
+	
+
+	
 
 	return (
 		<section className={styles.postsContainer}>
