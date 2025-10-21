@@ -1,18 +1,17 @@
 .container {
 	--header-height: 8.8rem;
 	display: flex;
-	// justify-content: space-between;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100dvw;
 	height: var(--header-height);
 	align-items: center;
-	// background-color: transparent;
-	background-color: var(--Bgc-nav);
+	background-color: var(--Bgc-navTransparent);
 	border-bottom: 1px solid var(--borderBottom);
 	z-index: 1100;
-
+	transition: all .3s ease-in-out ;
+	
 	.showHide {
 		display: flex;
 	}
@@ -21,4 +20,8 @@
 		opacity: 1;
 		visibility: visible;
 	}
+
+}
+.bgcNavBlack{
+	background-color: var(--Bgc-navBlack);
 }

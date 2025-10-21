@@ -121,7 +121,7 @@ const PostsContent = () => {
 
 			if (columnHeights.length > 0) {
 				const height = Math.max(...columnHeights)
-				console.log(height)
+				
 				setWrapperHeight(height)
 			}
 		}, 100)

@@ -8,7 +8,7 @@ import SearchButton from '../../components/atoms/SearchButton/SearchButton'
 import SearchContainer from '../../components/organism/SearchContainer/SearchContainer'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import MenuIcon from '../../components/atoms/MenuIcon/MenuIcon'
 
 const Navigation = () => {
@@ -17,6 +17,24 @@ const Navigation = () => {
 	const mobileRef = useRef<HTMLDivElement>(null)
 	const [isOpenMenu, setIsOpenMenu] = useState<boolean>(true)
 	const { isOpen } = useSelector((state: RootState) => state.theme)
+
+	useEffect(() => {
+		const handleScroll = () => {
+			
+
+			if (window.scrollY >= 200) {
+				navRef.current?.classList.add(styles.bgcNavBlack)
+			} else {
+				navRef.current?.classList.remove(styles.bgcNavBlack)
+			}
+		}
+
+		document.addEventListener('scroll', handleScroll)
+
+		return () => {
+			document.removeEventListener('scroll', handleScroll)
+		}
+	}, [])
 
 	const handleOpenCloseMenu = () => {
 		setIsOpenMenu(!isOpenMenu)
@@ -42,7 +60,12 @@ const Navigation = () => {
 			{size.width > 900 ? (
 				<DesktopNav navRef={navRef} dataMenu={dataNavigation} />
 			) : (
-				<MobileNav navRef={navRef} mobileRef={mobileRef} handleCloseMenu={handleOpenCloseMenu} dataMenu={dataNavigation}/>
+				<MobileNav
+					navRef={navRef}
+					mobileRef={mobileRef}
+					handleCloseMenu={handleOpenCloseMenu}
+					dataMenu={dataNavigation}
+				/>
 			)}
 			<SearchButton />
 			{size.width <= 900 ? <MenuIcon handleOpenMenu={handleOpenCloseMenu} /> : null}
