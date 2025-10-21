@@ -55,7 +55,7 @@ const MobileNav = ({ dataMenu, mobileRef, navRef, handleCloseMenu }: MobileRefPr
 			<div className={styles.mobileLink}>
 				{dataMenu.map((item: MenuTypes, index: number) => {
 					return (
-						<MenuElement styles={styles} data={item} index={index} handleOpenCloseDropdown={handleOpenCloseDropdown} />
+						<MenuElement key={index} styles={styles} data={item} index={index} handleOpenCloseDropdown={handleOpenCloseDropdown} />
 					)
 				})}
 			</div>

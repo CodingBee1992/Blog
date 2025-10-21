@@ -18,7 +18,7 @@ const Article = ({
 	
 
 	return (
-		<article
+		<article data-aos="fade-up" 
 			ref={articleRef}
 			className={`${styles.article} ${styles.brick}`}
 			style={{ position: 'absolute', left, top }}>
