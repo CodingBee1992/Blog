@@ -7,12 +7,13 @@ import { Outlet, useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
 import Footer from '../Footer/Footer'
+import useWindowSize from '../../hooks/useWindowSize'
 
 const Navigation = lazy(() => import('../Navigation/Navigation'))
 
 const StaticLayout = () => {
 	const { isLoading } = useSelector((state: RootState) => state.theme)
-
+	const {width} = useWindowSize()
 	const location = useLocation()
 	useEffect(() => {
 		if (!isLoading) {
@@ -28,7 +29,7 @@ const StaticLayout = () => {
 		if (!isLoading) {
 			Aos.refresh()
 		}
-	}, [location.pathname, isLoading])
+	}, [location.pathname, isLoading,width])
 
 	if (isLoading) {
 		return <Loader />
