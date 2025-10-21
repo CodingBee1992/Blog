@@ -1,5 +1,4 @@
-
-import { BrowserRouter as Router, Route, Routes} from 'react-router'
+import { BrowserRouter as Router, Route, Routes } from 'react-router'
 
 import DesignPage from './components/pages/categories/DesignPage/DesignPage'
 import LifeStylePage from './components/pages/categories/LifeStylePage/LifeStylePage'
@@ -9,18 +8,15 @@ import WorkPage from './components/pages/categories/WorkPage/WorkPage'
 import HealthPage from './components/pages/categories/HealthPage/HealthPage'
 import FamilyPage from './components/pages/categories/FamilyPage/FamilyPage'
 import RealtionshipPage from './components/pages/categories/RelationshipPage/RealtionshipPage'
-import AudioPostPage from './components/pages/Blog/AudioPostPage/AudioPostPage'
-import VideoPostPage from './components/pages/Blog/VideoPostPage/VideoPostPage'
-import StandardPostPage from './components/pages/Blog/StandardPostPage/StandardPostPage'
+
 import StylesPage from './components/pages/StylesPage/StylesPage'
 import AboutPage from './components/pages/AboutPage/AboutPage'
 import ContactPage from './components/pages/ContactPage/ContactPage'
 import StaticLayout from './containers/StaticLayout/StaticLayout'
 import HomePage from './components/pages/HomePage/HomePage'
-
+import SinglePostPage from './components/pages/SinglePostPage/SinglePostPage'
 
 const App = () => {
-	
 	return (
 		<Router basename="/">
 			<Routes>
@@ -36,11 +32,7 @@ const App = () => {
 						<Route path="family" element={<FamilyPage />} />
 						<Route path="relationship" element={<RealtionshipPage />} />
 					</Route>
-					<Route path="blog/">
-						<Route path="video-post" element={<VideoPostPage />} />
-						<Route path="audio-post" element={<AudioPostPage />} />
-						<Route path="standard-post" element={<StandardPostPage />} />
-					</Route>
+					<Route path="blog/:id" element={<SinglePostPage />}></Route>
 					<Route path="styles" element={<StylesPage />} />
 					<Route path="about" element={<AboutPage />} />
 					<Route path="contact" element={<ContactPage />} />

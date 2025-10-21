@@ -32,3 +32,9 @@ export interface PostDataProps {
 	articleRef?:React.Ref<HTMLDivElement>
 	
 }
+
+
+
+export interface ArticleTextProps {
+    styles :{[key:string]:string}
+}

@@ -23,15 +23,15 @@ const dataMemu2: MenuTypes = {
     
     ],
 }
-const dataMenu3: MenuTypes ={
-    title:'Blog',
-    href:'',
-    children:[
-        {title:'Video Post',href:'/blog/video-post'},
-        {title:'Audio Post',href:'/blog/audio-post'},
-        {title:'Standard Post',href:'/blog/standard-post'}
-    ]
-}
+// const dataMenu3: MenuTypes ={
+//     title:'Blog',
+//     href:'',
+//     children:[
+//         {title:'Video Post',href:'/blog/video-post'},
+//         {title:'Audio Post',href:'/blog/audio-post'},
+//         {title:'Standard Post',href:'/blog/standard-post'}
+//     ]
+// }
 const dataMenu4:MenuTypes ={
     title:'Styles',
     href:'/styles'
@@ -48,7 +48,7 @@ const dataMenu6:MenuTypes ={
 export const dataNavigation= [
     dataMenu1,
     dataMemu2,
-    dataMenu3,
+    
     dataMenu4,
     dataMenu5,
     dataMenu6

@@ -1,0 +1,11 @@
+.postContainer{
+    padding-top: calc(5.5 * var(--space));
+    background-color: var(--white);
+    width: 100%;
+   
+
+    .postWrapper{
+        width: 100%;
+        padding: 0 var(--gutter-lg);
+    }
+}
