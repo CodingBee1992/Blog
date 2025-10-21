@@ -23,15 +23,7 @@ const dataMemu2: MenuTypes = {
     
     ],
 }
-// const dataMenu3: MenuTypes ={
-//     title:'Blog',
-//     href:'',
-//     children:[
-//         {title:'Video Post',href:'/blog/video-post'},
-//         {title:'Audio Post',href:'/blog/audio-post'},
-//         {title:'Standard Post',href:'/blog/standard-post'}
-//     ]
-// }
+
 const dataMenu4:MenuTypes ={
     title:'Styles',
     href:'/styles'
