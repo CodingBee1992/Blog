@@ -18,24 +18,28 @@ export type SocialProps = {
 	icon: ReactNode
 }
 
-export interface ArticleContentProps {
-	id?: string
-	image?: string
-	href?: string
-	categories?: { category: string; href: string }[]
-	author?: { name: string; href: string }
-	title?: string
-	text?: string
-	// position?: 'position'
-	left?: string
-	top?: string
+export interface PostDataProps {
+	id: number
+	image: string
+	href: string
+	categories: { category: string; href: string }[]
+	author: { name: string; href: string }
+	title: string
+	text: string
+	left?: string 
+	top?: string 
 	articleRef?: React.Ref<HTMLDivElement>
+	styles?:{[key:string]:string}
+}
+export interface ArticleContentProps {
+	id: number
+	image: string
+	href: string
+	categories: { category: string; href: string }[]
+	author: { name: string; href: string }
+	title: string
+	text: string
+	
 }
 
-export interface ArticleTextProps {
-	styles: { [key: string]: string }
-}
 
-// export interface ArticleContentProps {
-//   id:string
-// }

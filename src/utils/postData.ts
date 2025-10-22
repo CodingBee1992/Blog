@@ -2,12 +2,13 @@ import bg1 from '../assets/img/sailboat.jpg'
 import bg2 from '../assets/img/sunrise.jpg'
 import bg3 from '../assets/img/boat.jpg'
 import bg4 from '../assets/img/desert1.jpg'
-import type { ArticleContentProps } from '../types/types'
+import type { PostDataProps } from '../types/types'
 
 
-const postData: ArticleContentProps[] = [
+
+const postData: PostDataProps[] = [
 	{
-		id: crypto.randomUUID(),
+		id: 1001,
 		image: bg1,
 		href: '/blog',
 		categories: [{ category: 'LifeStyle', href: '/categories/lifestyle' }],
@@ -16,7 +17,7 @@ const postData: ArticleContentProps[] = [
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 1002,
 		image: bg2,
 		href: '/blog',
 		categories: [
@@ -29,7 +30,7 @@ const postData: ArticleContentProps[] = [
 	},
 
 	{
-		id: crypto.randomUUID(),
+		id: 1003,
 		image: bg4,
 		href: '/blog',
 		categories: [
@@ -41,7 +42,7 @@ const postData: ArticleContentProps[] = [
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 1004,
 		image: bg3,
 		href: '/blog',
 		categories: [
@@ -53,7 +54,7 @@ const postData: ArticleContentProps[] = [
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 1005,
 		image: bg3,
 		href: '/blog',
 		categories: [
@@ -65,7 +66,7 @@ const postData: ArticleContentProps[] = [
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 1006,
 		image: bg3,
 		href: '/blog',
 		categories: [
@@ -77,7 +78,7 @@ const postData: ArticleContentProps[] = [
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 1007,
 		image: bg3,
 		href: '/blog',
 		categories: [
@@ -89,7 +90,7 @@ const postData: ArticleContentProps[] = [
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 1008,
 		image: bg3,
 		href: '/blog',
 		categories: [

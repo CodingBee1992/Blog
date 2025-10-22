@@ -1,9 +1,9 @@
 
-import type { ArticleContentProps } from '../../../types/types'
+import type { PostDataProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import styles from './Article.module.scss'
 
-const Article = ({ id, href, image, title, categories, author, text, left, top, articleRef }: ArticleContentProps) => {
+const Article = ({ id, href, image, title, categories, author, text, left, top, articleRef }: PostDataProps) => {
 	return (
 		<article
 			data-aos="fade-up"

@@ -1,10 +1,11 @@
 
-import type { ArticleContentProps } from '../../../types/types'
+
+import type { PostDataProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 
 interface SliderListProps {
 	styles: { [key: string]: string }
-	data: ArticleContentProps
+	data: PostDataProps
 	index: number
 	number: number
 }

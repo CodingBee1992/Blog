@@ -8,12 +8,13 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
 import Footer from '../Footer/Footer'
 import useWindowSize from '../../hooks/useWindowSize'
+import { SinglePostProvider } from '../../slices/createPostContext'
 
 const Navigation = lazy(() => import('../Navigation/Navigation'))
 
 const StaticLayout = () => {
 	const { isLoading } = useSelector((state: RootState) => state.theme)
-	const {width} = useWindowSize()
+	const { width } = useWindowSize()
 	const location = useLocation()
 	useEffect(() => {
 		if (!isLoading) {
@@ -29,20 +30,22 @@ const StaticLayout = () => {
 		if (!isLoading) {
 			Aos.refresh()
 		}
-	}, [location.pathname, isLoading,width])
+	}, [location.pathname, isLoading, width])
 
 	if (isLoading) {
 		return <Loader />
 	}
 
 	return (
-		<div data-aos="fade-zoom-in">
-			<Navigation/>
-			<div>
-				<Outlet />
+		<SinglePostProvider>
+			<div data-aos="fade-zoom-in">
+				<Navigation />
+				<div>
+					<Outlet />
+				</div>
+				<Footer />
 			</div>
-			<Footer/>
-		</div>
+		</SinglePostProvider>
 	)
 }
 
