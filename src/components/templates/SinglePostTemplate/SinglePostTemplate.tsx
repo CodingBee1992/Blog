@@ -1,8 +1,13 @@
+
 import ArticleContent from '../../organism/ArticleContent/ArticleContent'
 import CommentsContent from '../../organism/CommentsContent/CommentsContent'
 import styles from './SinglePostTemplate.module.scss'
 
 const SinglePostTemplate = () => {
+
+  const url = window.location.search
+  console.log(url);
+
   return (
     <div className={styles.postContainer}>
         <div className={`${styles.column} row`}>

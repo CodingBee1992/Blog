@@ -1,4 +1,5 @@
 import type { PostDataProps } from '../../../types/types'
+import AnchorLink from '../AnchorLink/AnchorLink'
 
 interface SliderListProps {
 	styles: { [key: string]: string }
@@ -21,18 +22,18 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 							<span className={styles.categories}>
 								{data.categories.map((item, index) => {
 									return (
-										<a key={index} href={item.href}>
+										<AnchorLink key={index} href={item.href}>
 											{item.category}
-										</a>
+										</AnchorLink>
 									)
 								})}
 							</span>
 							<span className={styles.postedBy}>
-								Posted by <span className={styles.author}>{data.author}</span>
+								Posted by <span className={styles.author}>{data.author.name}</span>
 							</span>
 						</div>
 						<h1 className={styles.text}>
-							<a href={data.href}>{data.title}</a>
+							<AnchorLink href={`${data.href}/${data.id}`}>{data.title}</AnchorLink>
 						</h1>
 					</div>
 				</div>

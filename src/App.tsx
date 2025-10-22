@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router'
 
-import DesignPage from './components/pages/categories/DesignPage/DesignPage'
+
 import LifeStylePage from './components/pages/categories/LifeStylePage/LifeStylePage'
 import PhotographyPage from './components/pages/categories/PhotographyPage/PhotographyPage'
 import VacationPage from './components/pages/categories/VacationPage/VacationPage'
@@ -15,6 +15,9 @@ import ContactPage from './components/pages/ContactPage/ContactPage'
 import StaticLayout from './containers/StaticLayout/StaticLayout'
 import HomePage from './components/pages/HomePage/HomePage'
 import SinglePostPage from './components/pages/SinglePostPage/SinglePostPage'
+import TravelPage from './components/pages/categories/TravelPage/TravelPage'
+import NaturePage from './components/pages/categories/NaturePage/NaturePage'
+import CulturePage from './components/pages/categories/CulturePage/CulturePage'
 
 const App = () => {
 	return (
@@ -23,8 +26,11 @@ const App = () => {
 				<Route element={<StaticLayout />}>
 					<Route path="/" element={<HomePage />} />
 					<Route path="categories/">
-						<Route path="design" element={<DesignPage />} />
+						
 						<Route path="lifestyle" element={<LifeStylePage />} />
+						<Route path="culture" element={<CulturePage />} />
+						<Route path="travel" element={<TravelPage />} />
+						<Route path="nature" element={<NaturePage />} />
 						<Route path="photography" element={<PhotographyPage />} />
 						<Route path="vacation" element={<VacationPage />} />
 						<Route path="work" element={<WorkPage />} />

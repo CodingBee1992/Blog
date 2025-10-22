@@ -139,12 +139,14 @@ const PostsContent = () => {
 						<span></span>
 					</div>
 					{styledPostData.map(
-						({ title, href, image, categories, author, text, left, top }: PostDataProps, index: number) => {
+						({id, title, href, image, categories, author, text, left, top }: PostDataProps, index: number) => {
+							
 							return (
 								<Article 
 									articleRef={el => {
 										articleRef.current[index] = el
 									}}
+									id={id}
 									key={index}
 									href={href}
 									image={image}

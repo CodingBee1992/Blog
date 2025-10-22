@@ -1,7 +1,9 @@
 import type { PostDataProps } from '../../../types/types'
+import AnchorLink from '../AnchorLink/AnchorLink'
 import styles from './Article.module.scss'
 
 const Article = ({
+	id,
 	href,
 	image,
 	title,
@@ -23,9 +25,9 @@ const Article = ({
 			className={`${styles.article} ${styles.brick}`}
 			style={{ position: 'absolute', left, top }}>
 			<div className={styles.articleImage}>
-				<a href={href}>
+				<AnchorLink href={`${href}/${id}`}>
 					<img src={image} alt="Article Image" />
-				</a>
+				</AnchorLink>
 			</div>
 			<div className={styles.articleText}>
 				<div className={styles.articleHeaderText}>
@@ -34,15 +36,15 @@ const Article = ({
 						<span className={styles.byline}>
 							By:{' '}
 							<span className={styles.author}>
-								<a href="#">{author}</a>
+								<a href="#">{author.name}</a>
 							</span>
 						</span>
 						<span className={styles.categories}>
 							{categories.map((item, index) => {
 								return (
-									<a key={index} href={item.href}>
+									<AnchorLink key={index} href={item.href}>
 										{item.category}
-									</a>
+									</AnchorLink>
 								)
 							})}
 						</span>
@@ -51,9 +53,9 @@ const Article = ({
 				<div className={styles.articleTextContent}>
 					<p>{text}</p>
 				</div>
-				<a href="#" className={styles.readMoreLink}>
+				<AnchorLink href={`${href}/${id}`} className={styles.readMoreLink}>
 					Read More
-				</a>
+				</AnchorLink>
 			</div>
 		</article>
 	)

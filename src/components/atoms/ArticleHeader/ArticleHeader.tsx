@@ -2,7 +2,7 @@
 
 const ArticleHeader = () => {
   return (
-    <div>ArticleHeader</div>
+    <div></div>
   )
 }
 

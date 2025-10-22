@@ -23,18 +23,15 @@ export interface PostDataProps {
 	image: string
 	href: string
 	categories: { category: string; href: string }[]
-	author: string
+	author: { name: string; href: string }
 	title: string
 	text: string
 	// position?: 'position'
 	left?: string
 	top?: string
-	articleRef?:React.Ref<HTMLDivElement>
-	
+	articleRef?: React.Ref<HTMLDivElement>
 }
 
-
-
 export interface ArticleTextProps {
-    styles :{[key:string]:string}
+	styles: { [key: string]: string }
 }
