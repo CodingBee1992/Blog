@@ -1,8 +1,13 @@
+import type { ArticleContentProps } from "../../../types/types"
 
 
-const ArticleHeader = () => {
+
+const ArticleHeader = ({title}:ArticleContentProps) => {
+
+ 
+
   return (
-    <div></div>
+    <div>{title}</div>
   )
 }
 

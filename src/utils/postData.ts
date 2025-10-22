@@ -2,9 +2,10 @@ import bg1 from '../assets/img/sailboat.jpg'
 import bg2 from '../assets/img/sunrise.jpg'
 import bg3 from '../assets/img/boat.jpg'
 import bg4 from '../assets/img/desert1.jpg'
-import type { PostDataProps } from '../types/types'
+import type { ArticleContentProps } from '../types/types'
 
-const postData: PostDataProps[] = [
+
+const postData: ArticleContentProps[] = [
 	{
 		id: crypto.randomUUID(),
 		image: bg1,

@@ -38,7 +38,7 @@ const App = () => {
 						<Route path="family" element={<FamilyPage />} />
 						<Route path="relationship" element={<RealtionshipPage />} />
 					</Route>
-					<Route path="blog/:id" element={<SinglePostPage />}></Route>
+					<Route path="blog/" element={<SinglePostPage />}></Route>
 					<Route path="styles" element={<StylesPage />} />
 					<Route path="about" element={<AboutPage />} />
 					<Route path="contact" element={<ContactPage />} />

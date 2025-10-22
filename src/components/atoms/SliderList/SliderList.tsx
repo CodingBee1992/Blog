@@ -1,9 +1,10 @@
-import type { PostDataProps } from '../../../types/types'
+
+import type { ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 
 interface SliderListProps {
 	styles: { [key: string]: string }
-	data: PostDataProps
+	data: ArticleContentProps
 	index: number
 	number: number
 }
@@ -33,7 +34,7 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 							</span>
 						</div>
 						<h1 className={styles.text}>
-							<AnchorLink href={`${data.href}/${data.id}`}>{data.title}</AnchorLink>
+							<AnchorLink href={`${data.href}/?id=${data.id}`}>{data.title}</AnchorLink>
 						</h1>
 					</div>
 				</div>

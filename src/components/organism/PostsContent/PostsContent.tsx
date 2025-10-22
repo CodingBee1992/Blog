@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react'
-import type { PostDataProps } from '../../../types/types'
+import type { ArticleContentProps } from '../../../types/types'
 import postData from '../../../utils/postData'
 import Article from '../../atoms/Article/Article'
 import styles from './PostsContent.module.scss'
@@ -11,7 +11,7 @@ const PostsContent = () => {
 	const articleRef = useRef<(HTMLDivElement | null)[]>([])
 	const [wrapperHeight, setWrapperHeight] = useState<number | null>(null)
 
-	const [styledPostData, setStyledPostData] = useState<PostDataProps[]>([])
+	const [styledPostData, setStyledPostData] = useState<ArticleContentProps[]>([])
 
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [pagginationButtons, setPagginationButtons] = useState<number[]>([])
@@ -139,7 +139,7 @@ const PostsContent = () => {
 						<span></span>
 					</div>
 					{styledPostData.map(
-						({id, title, href, image, categories, author, text, left, top }: PostDataProps, index: number) => {
+						({id, title, href, image, categories, author, text, left, top }: ArticleContentProps, index: number) => {
 							
 							return (
 								<Article 

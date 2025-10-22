@@ -1,6 +1,6 @@
 import { useState, type MouseEvent, type TouchEvent } from 'react'
 import { ArrowNext, ArrowPrev } from '../../../assets/icons/arrows/Arrows'
-import type { PostDataProps } from '../../../types/types'
+import type { ArticleContentProps } from '../../../types/types'
 import postData from '../../../utils/postData'
 import { socialData } from '../../../utils/socialData'
 import SliderList from '../../atoms/SliderList/SliderList'
@@ -64,7 +64,7 @@ const HeroSection = () => {
 					onMouseUp={e => handleSwipeEnd(e)}
 					onTouchStart={e => handleSwipeStart(e)}
 					onTouchEnd={e => handleSwipeEnd(e)}>
-					{postData.map((data: PostDataProps, index: number) => (
+					{postData.map((data: ArticleContentProps, index: number) => (
 						<SliderList
 							key={index}
 							styles={styles}

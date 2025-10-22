@@ -1,31 +1,17 @@
-import type { PostDataProps } from '../../../types/types'
+
+import type { ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import styles from './Article.module.scss'
 
-const Article = ({
-	id,
-	href,
-	image,
-	title,
-	categories,
-	author,
-	text,
-	left,
-	top,
-	articleRef,
-	
-}: PostDataProps) => {
-	
-	
-	
-
+const Article = ({ id, href, image, title, categories, author, text, left, top, articleRef }: ArticleContentProps) => {
 	return (
-		<article data-aos="fade-up" 
+		<article
+			data-aos="fade-up"
 			ref={articleRef}
 			className={`${styles.article} ${styles.brick}`}
 			style={{ position: 'absolute', left, top }}>
 			<div className={styles.articleImage}>
-				<AnchorLink href={`${href}/${id}`}>
+				<AnchorLink href={`${href}/?id=${id}`}>
 					<img src={image} alt="Article Image" />
 				</AnchorLink>
 			</div>
@@ -53,7 +39,7 @@ const Article = ({
 				<div className={styles.articleTextContent}>
 					<p>{text}</p>
 				</div>
-				<AnchorLink href={`${href}/${id}`} className={styles.readMoreLink}>
+				<AnchorLink href={`${href}/?id=${id}`} className={styles.readMoreLink}>
 					Read More
 				</AnchorLink>
 			</div>
