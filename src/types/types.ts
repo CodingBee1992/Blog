@@ -23,23 +23,20 @@ export interface PostDataProps {
 	image: string
 	href: string
 	categories: { category: string; href: string }[]
-	author: { name: string; href: string }
+	author: { name: string; avatar: string; href: string }
 	title: string
 	text: string
-	left?: string 
-	top?: string 
+	left?: string
+	top?: string
 	articleRef?: React.Ref<HTMLDivElement>
-	styles?:{[key:string]:string}
+	styles?: { [key: string]: string }
 }
 export interface ArticleContentProps {
 	id: number
 	image: string
 	href: string
 	categories: { category: string; href: string }[]
-	author: { name: string; href: string }
+	author: { name: string; avatar: string; href: string }
 	title: string
 	text: string
-	
 }
-
-

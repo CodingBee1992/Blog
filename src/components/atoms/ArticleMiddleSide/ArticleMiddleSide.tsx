@@ -1,9 +1,12 @@
-import type { ArticleTextProps } from "../../../types/types"
+
+interface ArticleMiddleSideProps {
+  styles:{[key:string]:string}
+}
 
 
-const ArticleMiddleSide = ({styles}:ArticleTextProps) => {
+const ArticleMiddleSide = ({styles}:ArticleMiddleSideProps) => {
   return (
-    <div className={styles.articleMiddleSide}>ArticleMiddleSide</div>
+    <div className={styles.articleMiddleSideContainer}>ArticleMiddleSide</div>
   )
 }
 

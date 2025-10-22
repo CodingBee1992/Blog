@@ -3,7 +3,7 @@ import bg2 from '../assets/img/sunrise.jpg'
 import bg3 from '../assets/img/boat.jpg'
 import bg4 from '../assets/img/desert1.jpg'
 import type { PostDataProps } from '../types/types'
-
+import user from '../assets/avatar/user.jpg'
 
 
 const postData: PostDataProps[] = [
@@ -12,7 +12,7 @@ const postData: PostDataProps[] = [
 		image: bg1,
 		href: '/blog',
 		categories: [{ category: 'LifeStyle', href: '/categories/lifestyle' }],
-		author: { name: 'Rico & Jumbo', href: '/about/author' },
+		author: { name: 'Rico & Jumbo',avatar:user, href: '/about/author' },
 		title: 'Tips and Ideas for better life from Rico & Jumbo',
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
@@ -24,7 +24,7 @@ const postData: PostDataProps[] = [
 			{ category: 'Travel,', href: '/categories/travel' },
 			{ category: 'Nature', href: '/categories/nature' },
 		],
-		author: { name: 'Rico & Jumbo', href: '/about/author' },
+		author: { name: 'Rico & Jumbo',avatar:user, href: '/about/author' },
 		title: 'Lakes in Africa',
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
@@ -37,7 +37,7 @@ const postData: PostDataProps[] = [
 			{ category: 'Nature', href: '/categories/nature' },
 			{ category: 'Culture', href: '/categories/culture' },
 		],
-		author: { name: 'Rico & Jumbo', href: '/about/author' },
+		author: { name: 'Rico & Jumbo',avatar:user, href: '/about/author' },
 		title: 'Namibia Deserts ',
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
@@ -49,7 +49,7 @@ const postData: PostDataProps[] = [
 			{ category: 'Travel', href: '/categories/travel' },
 			{ category: 'Design', href: '/categories/design' },
 		],
-		author: { name: 'Rico & Jumbo', href: '/about/author' },
+		author: { name: 'Rico & Jumbo',avatar:user, href: '/about/author' },
 		title: 'Peru - The Sun of the South America',
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
@@ -61,7 +61,7 @@ const postData: PostDataProps[] = [
 			{ category: 'Travel', href: '/categories/travel' },
 			{ category: 'Design', href: '/categories/design' },
 		],
-		author: { name: 'Rico & Jumbo', href: '/about/author' },
+		author: { name: 'Rico & Jumbo',avatar:user, href: '/about/author' },
 		title: 'Peru - The Sun of the South America',
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
@@ -73,7 +73,7 @@ const postData: PostDataProps[] = [
 			{ category: 'Travel', href: '/categories/travel' },
 			{ category: 'Design', href: '/categories/design' },
 		],
-		author: { name: 'Rico & Jumbo', href: '/about/author' },
+		author: { name: 'Rico & Jumbo',avatar:user, href: '/about/author' },
 		title: 'Peru - The Sun of the South America',
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
@@ -85,7 +85,7 @@ const postData: PostDataProps[] = [
 			{ category: 'Travel', href: '/categories/travel' },
 			{ category: 'Design', href: '/categories/design' },
 		],
-		author: { name: 'Rico & Jumbo', href: '/about/author' },
+		author: { name: 'Rico & Jumbo',avatar:user, href: '/about/author' },
 		title: 'Peru - The Sun of the South America',
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
@@ -97,7 +97,7 @@ const postData: PostDataProps[] = [
 			{ category: 'Travel', href: '/categories/travel' },
 			{ category: 'Design', href: '/categories/design' },
 		],
-		author: { name: 'Rico & Jumbo', href: '/about/author' },
+		author: { name: 'Rico & Jumbo',avatar:user, href: '/about/author' },
 		title: 'Peru - The Sun of the South America',
 		text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi velit quia porro, vero reprehenderit, quasi fugiat, atque rerum incidunt error corrupti culpa cupiditate unde eos tenetur. Quisquam quasi commodi rerum.',
 	},
