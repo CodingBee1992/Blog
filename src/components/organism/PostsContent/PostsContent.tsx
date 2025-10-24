@@ -4,6 +4,7 @@ import postData from '../../../utils/postData'
 import Article from '../../atoms/Article/Article'
 import styles from './PostsContent.module.scss'
 import type { PostDataProps } from '../../../types/types'
+import Aos from 'aos'
 
 const PostsContent = () => {
 	const [width, setWidth] = useState<number>(0)
@@ -122,7 +123,7 @@ const PostsContent = () => {
 
 			if (columnHeights.length > 0) {
 				const heightCol = Math.max(...columnHeights)
-				
+
 				setWrapperHeight(heightCol)
 			}
 		}
@@ -142,7 +143,6 @@ const PostsContent = () => {
 			if (el) observer.observe(el)
 		})
 
-	
 		articleRef.current.forEach((el, index) => {
 			if (el) heightsCache.current[index] = el.offsetHeight
 		})
@@ -152,7 +152,15 @@ const PostsContent = () => {
 			observer.disconnect()
 		}
 	}, [columns, percent, width])
-
+	useEffect(() => {
+		Aos.init({
+			duration: 600,
+			once: false, // lub true, jeśli chcesz tylko raz animować
+		})
+	}, [])
+	useEffect(() => {
+		Aos.refresh()
+	}, [columns, percent, width, styledPostData])
 	return (
 		<section className={styles.postsContainer}>
 			<div className={styles.articleContainer}>
