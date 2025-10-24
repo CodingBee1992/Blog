@@ -6,7 +6,9 @@ interface ArticleMiddleSideProps {
 
 const ArticleMiddleSide = ({styles}:ArticleMiddleSideProps) => {
   return (
-    <div className={styles.articleMiddleSideContainer}>ArticleMiddleSide</div>
+    <div className={styles.articleMiddleSideContainer}>
+          
+    </div>
   )
 }
 

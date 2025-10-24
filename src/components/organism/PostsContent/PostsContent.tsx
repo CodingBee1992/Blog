@@ -11,6 +11,7 @@ const PostsContent = () => {
 	const [percent, setPercent] = useState<number>(0)
 	const articleRef = useRef<(HTMLDivElement | null)[]>([])
 	const [wrapperHeight, setWrapperHeight] = useState<number | null>(null)
+	const heightsCache = useRef<number[]>([])
 
 	const [styledPostData, setStyledPostData] = useState<PostDataProps[]>([])
 
@@ -53,7 +54,7 @@ const PostsContent = () => {
 	const handlePageChange = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
 		const direction = target.dataset.direction
-		
+
 		if (direction === 'prev' && currentPage > 1) {
 			setCurrentPage(prev => prev - 1)
 		}
@@ -102,14 +103,12 @@ const PostsContent = () => {
 	}, [width, columns, percent])
 
 	useEffect(() => {
-		   const timeout = setTimeout(() => {
+		const recalcGrid = () => {
 			const columnHeights = new Array(columns).fill(0)
 
 			const updated = postData.map((post, index) => {
 				const col = index % columns
-				const el = articleRef.current[index]
-
-				const height = el?.offsetHeight || 650
+				const height = heightsCache.current[index] || 650
 
 				const top = columnHeights[col]
 				columnHeights[col] += height
@@ -118,18 +117,42 @@ const PostsContent = () => {
 
 				return { ...post, top: `${top}px`, left }
 			})
+
 			setStyledPostData(updated)
 
 			if (columnHeights.length > 0) {
-				const height = Math.max(...columnHeights)
+				const heightCol = Math.max(...columnHeights)
 				
-				setWrapperHeight(height)
+				setWrapperHeight(heightCol)
 			}
-		}, 100)
+		}
 
-		return () => clearTimeout(timeout)
-	}, [columns, percent, width])
+		const observer = new ResizeObserver(elements => {
+			elements.forEach(el => {
+				const index = articleRef.current.indexOf(el.target as HTMLDivElement)
+
+				if (index === -1) return
+
+				heightsCache.current[index] = Math.floor(el.borderBoxSize[0].blockSize)
+			})
+			recalcGrid()
+		})
+
+		articleRef.current.forEach(el => {
+			if (el) observer.observe(el)
+		})
+
 	
+		articleRef.current.forEach((el, index) => {
+			if (el) heightsCache.current[index] = el.offsetHeight
+		})
+		recalcGrid()
+
+		return () => {
+			observer.disconnect()
+		}
+	}, [columns, percent, width])
+
 	return (
 		<section className={styles.postsContainer}>
 			<div className={styles.articleContainer}>
@@ -139,11 +162,14 @@ const PostsContent = () => {
 						<span></span>
 						<span></span>
 					</div>
+
 					{styledPostData.map(
-						({id, title, href, image, categories, author, text, left, top }: PostDataProps, index: number) => {
-							
+						(
+							{ id, title, href, image, categories, author, articleContent, left, top }: PostDataProps,
+							index: number
+						) => {
 							return (
-								<Article 
+								<Article
 									articleRef={el => {
 										articleRef.current[index] = el
 									}}
@@ -154,7 +180,7 @@ const PostsContent = () => {
 									title={title}
 									categories={categories}
 									author={author}
-									text={text}
+									articleContent={articleContent}
 									left={left}
 									top={top}
 								/>

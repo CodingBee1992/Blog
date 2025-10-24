@@ -1,8 +1,15 @@
-
+import HeaderText from '../../atoms/HeaderText/HeaderText'
+import PostsContent from '../../organism/PostsContent/PostsContent'
+import styles from './NaturePageTemplate.module.scss'
 
 const NaturePageTemplate = () => {
   return (
-    <div>NaturePageTemplate</div>
+    <section className={`${styles.natureContainer} sectionPages`}>
+        <HeaderText >
+          <h1>Nature</h1>
+        </HeaderText>
+        <PostsContent/>
+    </section>
   )
 }
 
