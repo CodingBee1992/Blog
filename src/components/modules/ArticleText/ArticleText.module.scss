@@ -136,7 +136,7 @@
 			.articleContentCallToAction {
 				line-height: calc(1.125 * var(--space));
 			}
-			.articleContentCompletion{
+			.articleContentCompletion {
 				margin-bottom: var(--vspace-1);
 			}
 			.articleContentCallToAction {
@@ -150,6 +150,59 @@
 		top: 11rem;
 		max-width: 200px;
 		height: 100%;
+
+		.prev {
+			margin-bottom: var(--vspace-1_5);
+		}
+
+		.prev,
+		.next {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			cursor: pointer;
+
+			&:hover a {
+				color: #000000;
+			}
+
+			span {
+				font-size: var(--text-xs);
+				font-weight: 600;
+				line-height: var(--vspace-0_5);
+				text-transform: uppercase;
+				letter-spacing: 0.2em;
+				color: #000000;
+			}
+			a {
+				font-size: var(--text-md);
+				font-weight: 300;
+				color: var(--color-text-light);
+				transition: all 0.3s;
+			}
+		}
+		.disabled {
+			cursor: default;
+			&:hover a {
+				color: var(--color-text-light);
+			}
+		}
+		.disabled a {
+			cursor: default;
+			pointer-events: none;
+		}
+	}
+}
+@media (max-width: 1400px) {
+	.articleTextContainer {
+		.articleRightSideContainer {
+			.prev,
+			.next {
+				a {
+					font-size: calc(var(--text-Size) * 1.0556);
+				}
+			}
+		}
 	}
 }
 
@@ -166,6 +219,7 @@
 		}
 
 		.articleLeftSideContainer {
+			position: static;
 			display: flex;
 			flex-direction: row;
 			width: 100%;
@@ -176,6 +230,7 @@
 				padding-right: 4rem;
 
 				.authorAvatar {
+					margin-bottom: 1rem;
 					img {
 						width: 100px;
 						height: 100px;
@@ -183,47 +238,39 @@
 				}
 			}
 		}
+		.articleRightSideContainer {
+			display: flex;
+
+			padding-left: 0;
+			padding-top: var(--vspace-1);
+			font-size: var(--text-md);
+			border-top: 1px solid var(--color-border);
+			max-width: none;
+
+			.prev,
+			.next {
+				flex: 0 0 50%;
+				max-width: 50%;
+				padding-right: 3.2rem;
+				margin-bottom: 0;
+			}
+		}
 	}
 }
 @media (max-width: 1000px) {
 	.articleTextContainer {
 		padding: 0;
-
-		
 	}
 }
-@media (max-width: 700px) {
+@media (max-width: 550px) {
 	.articleTextContainer {
-		padding: 0;
+		.articleRightSideContainer {
+			flex-direction: column;
+			gap: 2rem;
 
-		.articleMiddleSideContainer {
-		
-
-		.articleMainText {
-			
-			font-size: var(--text-md);
-			
-			
-		}
-	
-	}
-
-		.articleLeftSideContainer {
-			display: flex;
-			flex-direction: row;
-			width: 100%;
-			max-width: none;
-
-			.authorContent {
-				max-width: 160px;
-				padding-right: 4rem;
-
-				.authorAvatar {
-					img {
-						width: 100px;
-						height: 100px;
-					}
-				}
+			.prev,
+			.next {
+				max-width: none;
 			}
 		}
 	}
