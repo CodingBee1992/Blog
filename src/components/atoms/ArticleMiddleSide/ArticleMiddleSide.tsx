@@ -4,8 +4,6 @@ interface ArticleMiddleSideProps {
 	styles: { [key: string]: string }
 }
 
-
-
 const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 	const { articleContent, mainText } = usePostContext()
 
@@ -21,23 +19,33 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 				<p>{firstPart}</p>
 				<p>{secondPart}</p>
 			</div>
-			{articleContent.map(({ title, text, imgContent,completion,callToAction }, index) => {
-				return (
-					<div key={index} className={styles.articleContent}>
-						<h3 className={styles.articleContentTitle}>{title}</h3>
-						<p className={styles.articleContentText}>{text}</p>
+			<div className={styles.articleContentContainer}>
+				{articleContent.map(({ title, text, imgContent, completion, callToAction }, index) => {
+					if (title) {
+						return (
+							<div key={index} className={styles.articleContent}>
+								<h3 className={styles.articleContentTitle}>{title}</h3>
+								<p className={styles.articleContentText}>{text}</p>
 
-						{imgContent?.map(({ img, imgtext,alt }, i: number) => (
-							<div key={i} className={styles.articleImage}>
-								<img src={img} alt={alt} />
-								<span className={styles.articleImageText}>{imgtext}</span>
+								{imgContent?.map(({ img, imgtext, alt }, i: number) => (
+									<div key={i} className={styles.articleImage}>
+										<img src={img} alt={alt} />
+										<span className={styles.articleImageText}>{imgtext}</span>
+									</div>
+								))}
 							</div>
-						))}
-						<p className={styles.articleContentCompletion}>{completion}</p>
-						<p className={styles.articleContentCallToAction}>{callToAction}</p>
-					</div>
-				)
-			})}
+						)
+					} else {
+						return (
+							<div key={index}>
+								<p className={styles.articleContentCompletion}>{completion}</p>
+								<p className={styles.articleContentCallToAction}>{callToAction}</p>
+							</div>
+						)
+					}
+				})}
+			</div>
+			<div>Gallery Content</div>
 		</div>
 	)
 }

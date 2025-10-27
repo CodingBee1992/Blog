@@ -160,6 +160,9 @@ $mobileSmall: 380px;
 	:root {
 		--width-post: 100%;
 		--brick-padding: 4rem;
+		--text-display-1: calc(
+			calc(calc(calc(calc(calc(calc((1.7rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2) * 1.2) * 1.2) * 1.2) * 1.2
+		);
 	}
 }
 @media (max-width: 600px) {

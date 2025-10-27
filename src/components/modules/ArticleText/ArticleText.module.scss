@@ -102,34 +102,45 @@
 			font-family: var(--fontFamily);
 			line-height: calc(1.125 * var(--space));
 		}
-		.articleContent {
+		.articleContentContainer {
 			display: flex;
 			flex-direction: column;
-			gap: 2rem;
+			gap: 5rem;
 
-			.articleContentTitle {
-				font-size: var(--text-md);
-			}
-			.articleContentText {
-				line-height: calc(1.125 * var(--space));
-				font-weight: normal;
-			}
-			.articleImage {
-				// width: 30dvw;
-
-				img {
-					width: 100%;
-					max-height: 50dvh;
-					object-fit: cover;
+			.articleContent {
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+				.articleContentTitle {
+					font-size: var(--text-md);
 				}
-				.articleImageText {
-					font-size: 14px;
-					color: var(--color-text);
+				.articleContentText {
+					line-height: calc(1.125 * var(--space));
+					font-weight: normal;
+				}
+				.articleImage {
+					// width: 30dvw;
+
+					img {
+						width: 100%;
+						max-height: 50dvh;
+						object-fit: cover;
+					}
+					.articleImageText {
+						font-size: 14px;
+						color: var(--color-text);
+					}
 				}
 			}
 			.articleContentCompletion,
 			.articleContentCallToAction {
 				line-height: calc(1.125 * var(--space));
+			}
+			.articleContentCompletion{
+				margin-bottom: var(--vspace-1);
+			}
+			.articleContentCallToAction {
+				margin-bottom: var(--vspace-3);
 			}
 		}
 	}
@@ -145,10 +156,57 @@
 @media (max-width: 1200px) {
 	.articleTextContainer {
 		flex-direction: column;
+		padding: 0 5vw;
 
 		.articleMiddleSideContainer {
+			padding: 0;
 			order: -1;
+			border-right: none;
+			border-left: none;
 		}
+
+		.articleLeftSideContainer {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			max-width: none;
+
+			.authorContent {
+				max-width: 160px;
+				padding-right: 4rem;
+
+				.authorAvatar {
+					img {
+						width: 100px;
+						height: 100px;
+					}
+				}
+			}
+		}
+	}
+}
+@media (max-width: 1000px) {
+	.articleTextContainer {
+		padding: 0;
+
+		
+	}
+}
+@media (max-width: 700px) {
+	.articleTextContainer {
+		padding: 0;
+
+		.articleMiddleSideContainer {
+		
+
+		.articleMainText {
+			
+			font-size: var(--text-md);
+			
+			
+		}
+	
+	}
 
 		.articleLeftSideContainer {
 			display: flex;
