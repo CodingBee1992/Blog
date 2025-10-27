@@ -13,36 +13,38 @@ const postData: PostDataProps[] = [
 		categories: [{ category: 'LifeStyle', href: '/categories/lifestyle' }],
 		author: { name: 'Rico & Jumbo', avatar: user, href: '/about/author' },
 		title: 'Tips and Ideas for better life from Rico & Jumbo',
+		mainText:
+			'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
 		articleContent: [
 			{
 				title: 'Pustynia Namibi – królestwo piasku i wiatru',
 				text: 'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła życia nad Atlantykiem',
 				text: 'Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Pustynia jako muzeum geologii',
 				text: 'Namib to nie tylko piasek – to żywe muzeum historii Ziemi. W jej wnętrzu kryją się skały i formacje, które pamiętają czasy, gdy kontynenty dopiero się kształtowały. W regionie Skeleton Coast, znanym z wraków statków i surowego piękna, pustynia styka się z oceanem w jednym z najbardziej spektakularnych kontrastów natury. Tutaj człowiek czuje swoją małość wobec potęgi przyrody. Namib, choć pozornie nieprzyjazna, przyciąga podróżników i fotografów z całego świata – urzeka prostotą i surowym majestatem, który trudno zapomnieć.',
-				img: bg3,
+				imgContent: [{ img: bg3,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Spotkanie z bezkresną Namib',
 				text: 'Kiedy po raz pierwszy stanąłem na skraju pustyni Namib, miałem wrażenie, że trafiłem na inną planetę. Morze pomarańczowego piasku rozciągało się po horyzont, a słońce malowało wydmy w odcieniach złota i czerwieni. Cisza była niemal namacalna – tylko wiatr przesypywał drobinki piasku jak czas w klepsydrze. Wyruszyłem o świcie, by wspiąć się na słynną Dune 45. Z góry krajobraz wyglądał jak ocean w ruchu, zastygły w czasie. Mimo skwaru i pyłu czułem dziwny spokój – jakby pustynia chciała przypomnieć, że piękno często tkwi w prostocie i ciszy. Gdy słońce wzeszło, wszystko wokół zapłonęło kolorem. To widok, którego nie zapomina się nigdy.',
-				img: bg4,
+				imgContent: [{ img: bg4,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła, która daje życie',
 				text: 'Podróżując wzdłuż wybrzeża Namibii, odkryłem, że pustynia potrafi oddychać. Każdego ranka nadciąga z oceanu gęsta mgła – chłodna, mleczna zasłona, która niesie wodę wszystkim stworzeniom ukrytym w piasku. Patrząc, jak żuki ustawiają się na grzbietach wydm, by zebrać krople wilgoci, trudno nie zachwycić się mądrością natury. Namib żyje w rytmie mgły i słońca – surowa, ale pełna tajemnic. W nocy, gdy niebo zapala miliony gwiazd, czuć, że to miejsce nie zna pośpiechu. To jedna z tych podróży, które uczą pokory i zachwytu nad rzeczami pozornie pustymi, a jednak pełnymi życia.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Tam, gdzie pustynia spotyka ocean',
 				text: 'Wybrzeże Szkieletów to jedno z najbardziej surrealistycznych miejsc, jakie widziałem. Z jednej strony Atlantyk – dziki, spieniony i zimny, z drugiej wydmy Namibu, które wyglądają, jakby miały pochłonąć wszystko. Wraki statków wystające z piasku przypominają o sile natury i kruchości ludzkich marzeń o podboju. Jadąc przez ten teren, czułem się jak odkrywca, który zagląda w zapomniany rozdział świata. Pustynia nie potrzebuje ozdób – jej piękno tkwi w surowości i milczeniu. Każdy kilometr tej trasy to spotkanie z samotnością, ale też z niebywałym poczuciem wolności, jakiego nie daje żadne inne miejsce.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				completion:
@@ -62,36 +64,38 @@ const postData: PostDataProps[] = [
 		],
 		author: { name: 'Rico & Jumbo', avatar: user, href: '/about/author' },
 		title: 'Lakes in Africa',
+		mainText:
+			'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
 		articleContent: [
 			{
 				title: 'Pustynia Namibi – królestwo piasku i wiatru',
 				text: 'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła życia nad Atlantykiem',
 				text: 'Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Pustynia jako muzeum geologii',
 				text: 'Namib to nie tylko piasek – to żywe muzeum historii Ziemi. W jej wnętrzu kryją się skały i formacje, które pamiętają czasy, gdy kontynenty dopiero się kształtowały. W regionie Skeleton Coast, znanym z wraków statków i surowego piękna, pustynia styka się z oceanem w jednym z najbardziej spektakularnych kontrastów natury. Tutaj człowiek czuje swoją małość wobec potęgi przyrody. Namib, choć pozornie nieprzyjazna, przyciąga podróżników i fotografów z całego świata – urzeka prostotą i surowym majestatem, który trudno zapomnieć.',
-				img: bg3,
+				imgContent: [{ img: bg3,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Spotkanie z bezkresną Namib',
 				text: 'Kiedy po raz pierwszy stanąłem na skraju pustyni Namib, miałem wrażenie, że trafiłem na inną planetę. Morze pomarańczowego piasku rozciągało się po horyzont, a słońce malowało wydmy w odcieniach złota i czerwieni. Cisza była niemal namacalna – tylko wiatr przesypywał drobinki piasku jak czas w klepsydrze. Wyruszyłem o świcie, by wspiąć się na słynną Dune 45. Z góry krajobraz wyglądał jak ocean w ruchu, zastygły w czasie. Mimo skwaru i pyłu czułem dziwny spokój – jakby pustynia chciała przypomnieć, że piękno często tkwi w prostocie i ciszy. Gdy słońce wzeszło, wszystko wokół zapłonęło kolorem. To widok, którego nie zapomina się nigdy.',
-				img: bg4,
+				imgContent: [{ img: bg4,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła, która daje życie',
 				text: 'Podróżując wzdłuż wybrzeża Namibii, odkryłem, że pustynia potrafi oddychać. Każdego ranka nadciąga z oceanu gęsta mgła – chłodna, mleczna zasłona, która niesie wodę wszystkim stworzeniom ukrytym w piasku. Patrząc, jak żuki ustawiają się na grzbietach wydm, by zebrać krople wilgoci, trudno nie zachwycić się mądrością natury. Namib żyje w rytmie mgły i słońca – surowa, ale pełna tajemnic. W nocy, gdy niebo zapala miliony gwiazd, czuć, że to miejsce nie zna pośpiechu. To jedna z tych podróży, które uczą pokory i zachwytu nad rzeczami pozornie pustymi, a jednak pełnymi życia.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Tam, gdzie pustynia spotyka ocean',
 				text: 'Wybrzeże Szkieletów to jedno z najbardziej surrealistycznych miejsc, jakie widziałem. Z jednej strony Atlantyk – dziki, spieniony i zimny, z drugiej wydmy Namibu, które wyglądają, jakby miały pochłonąć wszystko. Wraki statków wystające z piasku przypominają o sile natury i kruchości ludzkich marzeń o podboju. Jadąc przez ten teren, czułem się jak odkrywca, który zagląda w zapomniany rozdział świata. Pustynia nie potrzebuje ozdób – jej piękno tkwi w surowości i milczeniu. Każdy kilometr tej trasy to spotkanie z samotnością, ale też z niebywałym poczuciem wolności, jakiego nie daje żadne inne miejsce.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				completion:
@@ -112,36 +116,38 @@ const postData: PostDataProps[] = [
 		],
 		author: { name: 'Rico & Jumbo', avatar: user, href: '/about/author' },
 		title: 'Namibia Deserts ',
+		mainText:
+			'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
 		articleContent: [
 			{
 				title: 'Pustynia Namibi – królestwo piasku i wiatru',
 				text: 'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła życia nad Atlantykiem',
 				text: 'Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Pustynia jako muzeum geologii',
 				text: 'Namib to nie tylko piasek – to żywe muzeum historii Ziemi. W jej wnętrzu kryją się skały i formacje, które pamiętają czasy, gdy kontynenty dopiero się kształtowały. W regionie Skeleton Coast, znanym z wraków statków i surowego piękna, pustynia styka się z oceanem w jednym z najbardziej spektakularnych kontrastów natury. Tutaj człowiek czuje swoją małość wobec potęgi przyrody. Namib, choć pozornie nieprzyjazna, przyciąga podróżników i fotografów z całego świata – urzeka prostotą i surowym majestatem, który trudno zapomnieć.',
-				img: bg3,
+				imgContent: [{ img: bg3,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Spotkanie z bezkresną Namib',
 				text: 'Kiedy po raz pierwszy stanąłem na skraju pustyni Namib, miałem wrażenie, że trafiłem na inną planetę. Morze pomarańczowego piasku rozciągało się po horyzont, a słońce malowało wydmy w odcieniach złota i czerwieni. Cisza była niemal namacalna – tylko wiatr przesypywał drobinki piasku jak czas w klepsydrze. Wyruszyłem o świcie, by wspiąć się na słynną Dune 45. Z góry krajobraz wyglądał jak ocean w ruchu, zastygły w czasie. Mimo skwaru i pyłu czułem dziwny spokój – jakby pustynia chciała przypomnieć, że piękno często tkwi w prostocie i ciszy. Gdy słońce wzeszło, wszystko wokół zapłonęło kolorem. To widok, którego nie zapomina się nigdy.',
-				img: bg4,
+				imgContent: [{ img: bg4,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła, która daje życie',
 				text: 'Podróżując wzdłuż wybrzeża Namibii, odkryłem, że pustynia potrafi oddychać. Każdego ranka nadciąga z oceanu gęsta mgła – chłodna, mleczna zasłona, która niesie wodę wszystkim stworzeniom ukrytym w piasku. Patrząc, jak żuki ustawiają się na grzbietach wydm, by zebrać krople wilgoci, trudno nie zachwycić się mądrością natury. Namib żyje w rytmie mgły i słońca – surowa, ale pełna tajemnic. W nocy, gdy niebo zapala miliony gwiazd, czuć, że to miejsce nie zna pośpiechu. To jedna z tych podróży, które uczą pokory i zachwytu nad rzeczami pozornie pustymi, a jednak pełnymi życia.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Tam, gdzie pustynia spotyka ocean',
 				text: 'Wybrzeże Szkieletów to jedno z najbardziej surrealistycznych miejsc, jakie widziałem. Z jednej strony Atlantyk – dziki, spieniony i zimny, z drugiej wydmy Namibu, które wyglądają, jakby miały pochłonąć wszystko. Wraki statków wystające z piasku przypominają o sile natury i kruchości ludzkich marzeń o podboju. Jadąc przez ten teren, czułem się jak odkrywca, który zagląda w zapomniany rozdział świata. Pustynia nie potrzebuje ozdób – jej piękno tkwi w surowości i milczeniu. Każdy kilometr tej trasy to spotkanie z samotnością, ale też z niebywałym poczuciem wolności, jakiego nie daje żadne inne miejsce.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				completion:
@@ -161,36 +167,38 @@ const postData: PostDataProps[] = [
 		],
 		author: { name: 'Rico & Jumbo', avatar: user, href: '/about/author' },
 		title: 'Peru - The Sun of the South America',
+		mainText:
+			'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
 		articleContent: [
 			{
 				title: 'Pustynia Namibi – królestwo piasku i wiatru',
 				text: 'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła życia nad Atlantykiem',
 				text: 'Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Pustynia jako muzeum geologii',
 				text: 'Namib to nie tylko piasek – to żywe muzeum historii Ziemi. W jej wnętrzu kryją się skały i formacje, które pamiętają czasy, gdy kontynenty dopiero się kształtowały. W regionie Skeleton Coast, znanym z wraków statków i surowego piękna, pustynia styka się z oceanem w jednym z najbardziej spektakularnych kontrastów natury. Tutaj człowiek czuje swoją małość wobec potęgi przyrody. Namib, choć pozornie nieprzyjazna, przyciąga podróżników i fotografów z całego świata – urzeka prostotą i surowym majestatem, który trudno zapomnieć.',
-				img: bg3,
+				imgContent: [{ img: bg3,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Spotkanie z bezkresną Namib',
 				text: 'Kiedy po raz pierwszy stanąłem na skraju pustyni Namib, miałem wrażenie, że trafiłem na inną planetę. Morze pomarańczowego piasku rozciągało się po horyzont, a słońce malowało wydmy w odcieniach złota i czerwieni. Cisza była niemal namacalna – tylko wiatr przesypywał drobinki piasku jak czas w klepsydrze. Wyruszyłem o świcie, by wspiąć się na słynną Dune 45. Z góry krajobraz wyglądał jak ocean w ruchu, zastygły w czasie. Mimo skwaru i pyłu czułem dziwny spokój – jakby pustynia chciała przypomnieć, że piękno często tkwi w prostocie i ciszy. Gdy słońce wzeszło, wszystko wokół zapłonęło kolorem. To widok, którego nie zapomina się nigdy.',
-				img: bg4,
+				imgContent: [{ img: bg4,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła, która daje życie',
 				text: 'Podróżując wzdłuż wybrzeża Namibii, odkryłem, że pustynia potrafi oddychać. Każdego ranka nadciąga z oceanu gęsta mgła – chłodna, mleczna zasłona, która niesie wodę wszystkim stworzeniom ukrytym w piasku. Patrząc, jak żuki ustawiają się na grzbietach wydm, by zebrać krople wilgoci, trudno nie zachwycić się mądrością natury. Namib żyje w rytmie mgły i słońca – surowa, ale pełna tajemnic. W nocy, gdy niebo zapala miliony gwiazd, czuć, że to miejsce nie zna pośpiechu. To jedna z tych podróży, które uczą pokory i zachwytu nad rzeczami pozornie pustymi, a jednak pełnymi życia.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Tam, gdzie pustynia spotyka ocean',
 				text: 'Wybrzeże Szkieletów to jedno z najbardziej surrealistycznych miejsc, jakie widziałem. Z jednej strony Atlantyk – dziki, spieniony i zimny, z drugiej wydmy Namibu, które wyglądają, jakby miały pochłonąć wszystko. Wraki statków wystające z piasku przypominają o sile natury i kruchości ludzkich marzeń o podboju. Jadąc przez ten teren, czułem się jak odkrywca, który zagląda w zapomniany rozdział świata. Pustynia nie potrzebuje ozdób – jej piękno tkwi w surowości i milczeniu. Każdy kilometr tej trasy to spotkanie z samotnością, ale też z niebywałym poczuciem wolności, jakiego nie daje żadne inne miejsce.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				completion:
@@ -210,36 +218,38 @@ const postData: PostDataProps[] = [
 		],
 		author: { name: 'Rico & Jumbo', avatar: user, href: '/about/author' },
 		title: 'Peru - The Sun of the South America',
+		mainText:
+			'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
 		articleContent: [
 			{
 				title: 'Pustynia Namibi – królestwo piasku i wiatru',
 				text: 'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła życia nad Atlantykiem',
 				text: 'Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Pustynia jako muzeum geologii',
 				text: 'Namib to nie tylko piasek – to żywe muzeum historii Ziemi. W jej wnętrzu kryją się skały i formacje, które pamiętają czasy, gdy kontynenty dopiero się kształtowały. W regionie Skeleton Coast, znanym z wraków statków i surowego piękna, pustynia styka się z oceanem w jednym z najbardziej spektakularnych kontrastów natury. Tutaj człowiek czuje swoją małość wobec potęgi przyrody. Namib, choć pozornie nieprzyjazna, przyciąga podróżników i fotografów z całego świata – urzeka prostotą i surowym majestatem, który trudno zapomnieć.',
-				img: bg3,
+				imgContent: [{ img: bg3,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Spotkanie z bezkresną Namib',
 				text: 'Kiedy po raz pierwszy stanąłem na skraju pustyni Namib, miałem wrażenie, że trafiłem na inną planetę. Morze pomarańczowego piasku rozciągało się po horyzont, a słońce malowało wydmy w odcieniach złota i czerwieni. Cisza była niemal namacalna – tylko wiatr przesypywał drobinki piasku jak czas w klepsydrze. Wyruszyłem o świcie, by wspiąć się na słynną Dune 45. Z góry krajobraz wyglądał jak ocean w ruchu, zastygły w czasie. Mimo skwaru i pyłu czułem dziwny spokój – jakby pustynia chciała przypomnieć, że piękno często tkwi w prostocie i ciszy. Gdy słońce wzeszło, wszystko wokół zapłonęło kolorem. To widok, którego nie zapomina się nigdy.',
-				img: bg4,
+				imgContent: [{ img: bg4,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła, która daje życie',
 				text: 'Podróżując wzdłuż wybrzeża Namibii, odkryłem, że pustynia potrafi oddychać. Każdego ranka nadciąga z oceanu gęsta mgła – chłodna, mleczna zasłona, która niesie wodę wszystkim stworzeniom ukrytym w piasku. Patrząc, jak żuki ustawiają się na grzbietach wydm, by zebrać krople wilgoci, trudno nie zachwycić się mądrością natury. Namib żyje w rytmie mgły i słońca – surowa, ale pełna tajemnic. W nocy, gdy niebo zapala miliony gwiazd, czuć, że to miejsce nie zna pośpiechu. To jedna z tych podróży, które uczą pokory i zachwytu nad rzeczami pozornie pustymi, a jednak pełnymi życia.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Tam, gdzie pustynia spotyka ocean',
 				text: 'Wybrzeże Szkieletów to jedno z najbardziej surrealistycznych miejsc, jakie widziałem. Z jednej strony Atlantyk – dziki, spieniony i zimny, z drugiej wydmy Namibu, które wyglądają, jakby miały pochłonąć wszystko. Wraki statków wystające z piasku przypominają o sile natury i kruchości ludzkich marzeń o podboju. Jadąc przez ten teren, czułem się jak odkrywca, który zagląda w zapomniany rozdział świata. Pustynia nie potrzebuje ozdób – jej piękno tkwi w surowości i milczeniu. Każdy kilometr tej trasy to spotkanie z samotnością, ale też z niebywałym poczuciem wolności, jakiego nie daje żadne inne miejsce.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				completion:
@@ -259,36 +269,38 @@ const postData: PostDataProps[] = [
 		],
 		author: { name: 'Rico & Jumbo', avatar: user, href: '/about/author' },
 		title: 'Peru - The Sun of the South America',
+		mainText:
+			'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
 		articleContent: [
 			{
 				title: 'Pustynia Namibi – królestwo piasku i wiatru',
 				text: 'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła życia nad Atlantykiem',
 				text: 'Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Pustynia jako muzeum geologii',
 				text: 'Namib to nie tylko piasek – to żywe muzeum historii Ziemi. W jej wnętrzu kryją się skały i formacje, które pamiętają czasy, gdy kontynenty dopiero się kształtowały. W regionie Skeleton Coast, znanym z wraków statków i surowego piękna, pustynia styka się z oceanem w jednym z najbardziej spektakularnych kontrastów natury. Tutaj człowiek czuje swoją małość wobec potęgi przyrody. Namib, choć pozornie nieprzyjazna, przyciąga podróżników i fotografów z całego świata – urzeka prostotą i surowym majestatem, który trudno zapomnieć.',
-				img: bg3,
+				imgContent: [{ img: bg3,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Spotkanie z bezkresną Namib',
 				text: 'Kiedy po raz pierwszy stanąłem na skraju pustyni Namib, miałem wrażenie, że trafiłem na inną planetę. Morze pomarańczowego piasku rozciągało się po horyzont, a słońce malowało wydmy w odcieniach złota i czerwieni. Cisza była niemal namacalna – tylko wiatr przesypywał drobinki piasku jak czas w klepsydrze. Wyruszyłem o świcie, by wspiąć się na słynną Dune 45. Z góry krajobraz wyglądał jak ocean w ruchu, zastygły w czasie. Mimo skwaru i pyłu czułem dziwny spokój – jakby pustynia chciała przypomnieć, że piękno często tkwi w prostocie i ciszy. Gdy słońce wzeszło, wszystko wokół zapłonęło kolorem. To widok, którego nie zapomina się nigdy.',
-				img: bg4,
+				imgContent: [{ img: bg4,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła, która daje życie',
 				text: 'Podróżując wzdłuż wybrzeża Namibii, odkryłem, że pustynia potrafi oddychać. Każdego ranka nadciąga z oceanu gęsta mgła – chłodna, mleczna zasłona, która niesie wodę wszystkim stworzeniom ukrytym w piasku. Patrząc, jak żuki ustawiają się na grzbietach wydm, by zebrać krople wilgoci, trudno nie zachwycić się mądrością natury. Namib żyje w rytmie mgły i słońca – surowa, ale pełna tajemnic. W nocy, gdy niebo zapala miliony gwiazd, czuć, że to miejsce nie zna pośpiechu. To jedna z tych podróży, które uczą pokory i zachwytu nad rzeczami pozornie pustymi, a jednak pełnymi życia.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Tam, gdzie pustynia spotyka ocean',
 				text: 'Wybrzeże Szkieletów to jedno z najbardziej surrealistycznych miejsc, jakie widziałem. Z jednej strony Atlantyk – dziki, spieniony i zimny, z drugiej wydmy Namibu, które wyglądają, jakby miały pochłonąć wszystko. Wraki statków wystające z piasku przypominają o sile natury i kruchości ludzkich marzeń o podboju. Jadąc przez ten teren, czułem się jak odkrywca, który zagląda w zapomniany rozdział świata. Pustynia nie potrzebuje ozdób – jej piękno tkwi w surowości i milczeniu. Każdy kilometr tej trasy to spotkanie z samotnością, ale też z niebywałym poczuciem wolności, jakiego nie daje żadne inne miejsce.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				completion:
@@ -308,36 +320,38 @@ const postData: PostDataProps[] = [
 		],
 		author: { name: 'Rico & Jumbo', avatar: user, href: '/about/author' },
 		title: 'Peru - The Sun of the South America',
+		mainText:
+			'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
 		articleContent: [
 			{
 				title: 'Pustynia Namibi – królestwo piasku i wiatru',
 				text: 'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła życia nad Atlantykiem',
 				text: 'Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Pustynia jako muzeum geologii',
 				text: 'Namib to nie tylko piasek – to żywe muzeum historii Ziemi. W jej wnętrzu kryją się skały i formacje, które pamiętają czasy, gdy kontynenty dopiero się kształtowały. W regionie Skeleton Coast, znanym z wraków statków i surowego piękna, pustynia styka się z oceanem w jednym z najbardziej spektakularnych kontrastów natury. Tutaj człowiek czuje swoją małość wobec potęgi przyrody. Namib, choć pozornie nieprzyjazna, przyciąga podróżników i fotografów z całego świata – urzeka prostotą i surowym majestatem, który trudno zapomnieć.',
-				img: bg3,
+				imgContent: [{ img: bg3,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Spotkanie z bezkresną Namib',
 				text: 'Kiedy po raz pierwszy stanąłem na skraju pustyni Namib, miałem wrażenie, że trafiłem na inną planetę. Morze pomarańczowego piasku rozciągało się po horyzont, a słońce malowało wydmy w odcieniach złota i czerwieni. Cisza była niemal namacalna – tylko wiatr przesypywał drobinki piasku jak czas w klepsydrze. Wyruszyłem o świcie, by wspiąć się na słynną Dune 45. Z góry krajobraz wyglądał jak ocean w ruchu, zastygły w czasie. Mimo skwaru i pyłu czułem dziwny spokój – jakby pustynia chciała przypomnieć, że piękno często tkwi w prostocie i ciszy. Gdy słońce wzeszło, wszystko wokół zapłonęło kolorem. To widok, którego nie zapomina się nigdy.',
-				img: bg4,
+				imgContent: [{ img: bg4,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła, która daje życie',
 				text: 'Podróżując wzdłuż wybrzeża Namibii, odkryłem, że pustynia potrafi oddychać. Każdego ranka nadciąga z oceanu gęsta mgła – chłodna, mleczna zasłona, która niesie wodę wszystkim stworzeniom ukrytym w piasku. Patrząc, jak żuki ustawiają się na grzbietach wydm, by zebrać krople wilgoci, trudno nie zachwycić się mądrością natury. Namib żyje w rytmie mgły i słońca – surowa, ale pełna tajemnic. W nocy, gdy niebo zapala miliony gwiazd, czuć, że to miejsce nie zna pośpiechu. To jedna z tych podróży, które uczą pokory i zachwytu nad rzeczami pozornie pustymi, a jednak pełnymi życia.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Tam, gdzie pustynia spotyka ocean',
 				text: 'Wybrzeże Szkieletów to jedno z najbardziej surrealistycznych miejsc, jakie widziałem. Z jednej strony Atlantyk – dziki, spieniony i zimny, z drugiej wydmy Namibu, które wyglądają, jakby miały pochłonąć wszystko. Wraki statków wystające z piasku przypominają o sile natury i kruchości ludzkich marzeń o podboju. Jadąc przez ten teren, czułem się jak odkrywca, który zagląda w zapomniany rozdział świata. Pustynia nie potrzebuje ozdób – jej piękno tkwi w surowości i milczeniu. Każdy kilometr tej trasy to spotkanie z samotnością, ale też z niebywałym poczuciem wolności, jakiego nie daje żadne inne miejsce.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				completion:
@@ -357,36 +371,38 @@ const postData: PostDataProps[] = [
 		],
 		author: { name: 'Rico & Jumbo', avatar: user, href: '/about/author' },
 		title: 'Peru - The Sun of the South America',
+		mainText:
+			'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
 		articleContent: [
 			{
 				title: 'Pustynia Namibi – królestwo piasku i wiatru',
 				text: 'Pustynia Namib to jedno z najstarszych miejsc na Ziemi – istnieje od ponad 55 milionów lat. Jej nieskończone wydmy o barwach od pomarańczowej po głęboko czerwoną tworzą krajobraz jak z innej planety. To właśnie tutaj, w okolicach Sossusvlei, znajdują się jedne z najwyższych wydm świata, osiągające nawet 300 metrów. Pomimo surowych warunków, życie znalazło tu sposób na przetrwanie. Żuki gromadzące wodę z porannej mgły, oryksy i lisy pustynne są symbolem niezwykłej adaptacji natury. Namib to miejsce, gdzie cisza ma swoją wagę, a horyzont zdaje się nie mieć końca.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła życia nad Atlantykiem',
 				text: 'Na pierwszy rzut oka pustynia Namib wydaje się całkowicie martwa. Jednak to właśnie ona skrywa jedne z najciekawszych zjawisk przyrodniczych na świecie. Każdego ranka z Oceanu Atlantyckiego napływa gęsta mgła, która dostarcza niezbędnej wilgoci organizmom żyjącym w tym suchym środowisku. Drobne rośliny, jak welwiczia przedziwna – żyjąca nawet dwa tysiące lat – wykorzystują tę parę wodną do przetrwania. Mgła jest tu jak deszcz, a życie, choć ukryte, toczy się w rytmie wiatru i słońca. To niezwykły przykład współistnienia pustyni i oceanu.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Pustynia jako muzeum geologii',
 				text: 'Namib to nie tylko piasek – to żywe muzeum historii Ziemi. W jej wnętrzu kryją się skały i formacje, które pamiętają czasy, gdy kontynenty dopiero się kształtowały. W regionie Skeleton Coast, znanym z wraków statków i surowego piękna, pustynia styka się z oceanem w jednym z najbardziej spektakularnych kontrastów natury. Tutaj człowiek czuje swoją małość wobec potęgi przyrody. Namib, choć pozornie nieprzyjazna, przyciąga podróżników i fotografów z całego świata – urzeka prostotą i surowym majestatem, który trudno zapomnieć.',
-				img: bg3,
+				imgContent: [{ img: bg3,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Spotkanie z bezkresną Namib',
 				text: 'Kiedy po raz pierwszy stanąłem na skraju pustyni Namib, miałem wrażenie, że trafiłem na inną planetę. Morze pomarańczowego piasku rozciągało się po horyzont, a słońce malowało wydmy w odcieniach złota i czerwieni. Cisza była niemal namacalna – tylko wiatr przesypywał drobinki piasku jak czas w klepsydrze. Wyruszyłem o świcie, by wspiąć się na słynną Dune 45. Z góry krajobraz wyglądał jak ocean w ruchu, zastygły w czasie. Mimo skwaru i pyłu czułem dziwny spokój – jakby pustynia chciała przypomnieć, że piękno często tkwi w prostocie i ciszy. Gdy słońce wzeszło, wszystko wokół zapłonęło kolorem. To widok, którego nie zapomina się nigdy.',
-				img: bg4,
+				imgContent: [{ img: bg4,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Mgła, która daje życie',
 				text: 'Podróżując wzdłuż wybrzeża Namibii, odkryłem, że pustynia potrafi oddychać. Każdego ranka nadciąga z oceanu gęsta mgła – chłodna, mleczna zasłona, która niesie wodę wszystkim stworzeniom ukrytym w piasku. Patrząc, jak żuki ustawiają się na grzbietach wydm, by zebrać krople wilgoci, trudno nie zachwycić się mądrością natury. Namib żyje w rytmie mgły i słońca – surowa, ale pełna tajemnic. W nocy, gdy niebo zapala miliony gwiazd, czuć, że to miejsce nie zna pośpiechu. To jedna z tych podróży, które uczą pokory i zachwytu nad rzeczami pozornie pustymi, a jednak pełnymi życia.',
-				img: bg1,
+				imgContent: [{ img: bg1,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				title: 'Tam, gdzie pustynia spotyka ocean',
 				text: 'Wybrzeże Szkieletów to jedno z najbardziej surrealistycznych miejsc, jakie widziałem. Z jednej strony Atlantyk – dziki, spieniony i zimny, z drugiej wydmy Namibu, które wyglądają, jakby miały pochłonąć wszystko. Wraki statków wystające z piasku przypominają o sile natury i kruchości ludzkich marzeń o podboju. Jadąc przez ten teren, czułem się jak odkrywca, który zagląda w zapomniany rozdział świata. Pustynia nie potrzebuje ozdób – jej piękno tkwi w surowości i milczeniu. Każdy kilometr tej trasy to spotkanie z samotnością, ale też z niebywałym poczuciem wolności, jakiego nie daje żadne inne miejsce.',
-				img: bg2,
+				imgContent: [{ img: bg2,alt:'Pustynia Namibii', imgtext: 'Pustynia Namibi' }],
 			},
 			{
 				completion:

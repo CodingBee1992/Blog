@@ -173,14 +173,14 @@ const PostsContent = () => {
 
 					{styledPostData.map(
 						(
-							{ id, title, href, image, categories, author, articleContent, left, top }: PostDataProps,
+							{ id, title, href, image, categories, author, mainText, left, top }: PostDataProps,
 							index: number
 						) => {
 							return (
 								<Article
 									articleRef={el => {
 										articleRef.current[index] = el
-									}}
+									} }
 									id={id}
 									key={index}
 									href={href}
@@ -188,10 +188,9 @@ const PostsContent = () => {
 									title={title}
 									categories={categories}
 									author={author}
-									articleContent={articleContent}
+									mainText={mainText}
 									left={left}
-									top={top}
-								/>
+									top={top} articleContent={[]}								/>
 							)
 						}
 					)}

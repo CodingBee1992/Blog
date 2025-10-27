@@ -8,7 +8,7 @@
 
 	.articleLeftSideContainer {
 		position: sticky;
-		top: 10rem;
+		top: 11rem;
 		max-width: 200px;
 		height: 100%;
 		font-size: calc(var(--text-Size) * 0.7778);
@@ -84,7 +84,54 @@
 	}
 
 	.articleMiddleSideContainer {
+		display: flex;
+		flex-direction: column;
+		// gap: 8rem;
+		padding: 0 4.8rem;
 		height: 100%;
+		border-right: 1px solid var(--color-border);
+		border-left: 1px solid var(--color-border);
+
+		.articleMainText {
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+			margin-bottom: 6rem;
+			font-size: var(--text-md);
+			font-weight: 300;
+			font-family: var(--fontFamily);
+			line-height: calc(1.125 * var(--space));
+		}
+		.articleContent {
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+
+			.articleContentTitle {
+				font-size: var(--text-md);
+			}
+			.articleContentText {
+				line-height: calc(1.125 * var(--space));
+				font-weight: normal;
+			}
+			.articleImage {
+				// width: 30dvw;
+
+				img {
+					width: 100%;
+					max-height: 50dvh;
+					object-fit: cover;
+				}
+				.articleImageText {
+					font-size: 14px;
+					color: var(--color-text);
+				}
+			}
+			.articleContentCompletion,
+			.articleContentCallToAction {
+				line-height: calc(1.125 * var(--space));
+			}
+		}
 	}
 
 	.articleRightSideContainer {
@@ -112,7 +159,7 @@
 			.authorContent {
 				max-width: 160px;
 				padding-right: 4rem;
-				
+
 				.authorAvatar {
 					img {
 						width: 100px;

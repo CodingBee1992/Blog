@@ -25,7 +25,14 @@ export interface PostDataProps {
 	categories: { category: string; href: string }[]
 	author: { name: string; avatar: string; href: string }
 	title: string
-	articleContent: {title?:string,text?:string,img?:string,completion?:string,callToAction?:string}[]
+	mainText: string
+	articleContent: {
+		title?: string
+		text?: string
+		imgContent?: { img: string;alt:string; imgtext: string }[]
+		completion?: string
+		callToAction?: string
+	}[]
 	left?: string
 	top?: string
 	articleRef?: React.Ref<HTMLDivElement>
@@ -38,5 +45,12 @@ export interface ArticleContentProps {
 	categories: { category: string; href: string }[]
 	author: { name: string; avatar: string; href: string }
 	title: string
-	articleContent: {title?:string,text?:string,img?:string,completion?:string,callToAction?:string}[]
+	mainText: string
+	articleContent: {
+		title?: string
+		text?: string
+		imgContent?: { img: string,alt:string; imgtext: string }[]
+		completion?: string
+		callToAction?: string
+	}[]
 }

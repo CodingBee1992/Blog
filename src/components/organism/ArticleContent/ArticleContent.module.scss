@@ -1,13 +1,13 @@
 .articleContainer{
     width: 100%;
-    
+    // height: 100%;
 
     .imageContainer{
         margin: 0 auto var(--vspace-2_5);
         width: 100%;
         max-width: 1080px;
-        height: 40%;
-
+        height: 30dvw;
+        max-height: 40dvw;
         .image{
             width: 100%;
             height: 100%;
