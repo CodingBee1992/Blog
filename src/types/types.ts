@@ -29,7 +29,7 @@ export interface PostDataProps {
 	articleContent: {
 		title?: string
 		text?: string
-		imgContent?: { img: string;alt:string; imgtext: string }[]
+		imgContent?: { img: string; alt: string; imgtext: string }[]
 		completion?: string
 		callToAction?: string
 	}[]
@@ -49,8 +49,18 @@ export interface ArticleContentProps {
 	articleContent: {
 		title?: string
 		text?: string
-		imgContent?: { img: string,alt:string; imgtext: string }[]
+		imgContent?: { img: string; alt: string; imgtext: string }[]
 		completion?: string
 		callToAction?: string
 	}[]
+}
+
+export interface CommentsDataProps {
+	id: number
+	postId: number
+	parentId: number | null
+	author:{name:string,avatar:string}
+	comment:string
+	createdAt:string
+	children?:CommentsDataProps[]
 }

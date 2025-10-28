@@ -11,19 +11,18 @@ const ArticleRightSide = ({ styles }: ArticleRightSideProps) => {
 
 	const prevID = id === postData[0].id ? id : id - 1
 	const nextID = id === postData[postData.length - 1].id ? id : id + 1
-
+	
 	const prevPost = postData.find(item => item.id === prevID)
 	const nextPost = postData.find(item => item.id === nextID)
 
-	console.log(nextID)
-	console.log(postData[postData.length - 1].id)
+
 
 	return (
 		<div className={styles.articleRightSideContainer}>
-			<div className={`${styles.prev} ${prevID === postData[0].id ? styles.disabled : ''} `}>
+			<div className={`${styles.prev} ${prevID === id ? styles.disabled : ''} `}>
 				<span>Previous</span>
 				<AnchorLink href={`${href}/?id=${prevID}`} rel="prev">
-					{prevID !== postData[0].id ? prevPost?.title : '-----'}
+					{prevID !== id ? prevPost?.title : '-----'}
 				</AnchorLink>
 			</div>
 			<div className={`${styles.next} ${nextID === id ? styles.disabled : ''}`}>

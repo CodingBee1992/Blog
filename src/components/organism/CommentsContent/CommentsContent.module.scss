@@ -1,0 +1,33 @@
+.commentsContainer{
+    padding-bottom: var(--vspace-4);
+    background-color: #ffffff;
+
+    .commentsContent{
+        padding-top: var(--vspace-0_5);
+        padding-bottom: var(--vspace-0_5);
+        max-width: 980px;
+
+        .column{
+            padding: 0 var(--gutter);
+            flex: 0 0 100%;
+            max-width: 100%;
+
+            h3{
+                margin-top: 0;
+                margin-bottom: var(--vspace-0_5);
+                text-align: center;
+                font-size: var(--text-xl);
+                font-weight: 600;
+                font-family: var(--font-2);
+                font-style: normal;
+                color: var(--color-text-dark);
+            }
+
+            .commentList {
+                position: relative;
+                margin: var(--vspace-2) 0 var(--vspace-1_5);
+                padding: 0;
+            }
+        }
+    }
+}
