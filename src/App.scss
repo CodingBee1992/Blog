@@ -33,6 +33,11 @@ a {
 	max-width: 1400px;
 	margin: 0 auto;
 }
+.column {
+	padding: 0 var(--gutter);
+	flex: 0 0 100%;
+	max-width: 100%;
+}
 .sectionPages {
 	min-height: 100dvh;
 	background-color: var(--white);

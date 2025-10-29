@@ -3,6 +3,7 @@ import commentsData from '../../../utils/commentsData'
 import styles from './CommentsContent.module.scss'
 import Comment from '../../modules/Comment/Comment'
 import type { CommentsDataProps } from '../../../types/types'
+import TextArea from '../../atoms/TextArea/TextArea'
 
 const CommentsContent = () => {
 	const { search } = useLocation()
@@ -14,30 +15,43 @@ const CommentsContent = () => {
 	const roots: CommentsDataProps[] = []
 
 	postComments.forEach(c => map.set(c.id, { ...c, children: [] }))
-	
 
 	postComments.forEach(c => {
 		if (c.parentId) {
 			const parent = map.get(c.parentId)
-			
+
 			if (parent) parent.children?.push(map.get(c.id)!)
-				
 		} else {
 			roots.push(map.get(c.id)!)
 		}
 	})
-	
+
 	return (
 		<div className={styles.commentsContainer}>
 			<div className={`${styles.commentsContent} row`}>
-				<div className={styles.column}>
+				<div className={`column`}>
 					<h3>{postComments.length} Comments</h3>
 
 					<ol className={styles.commentList}>
-						{roots.map(({id,postId,parentId,author,comment,createdAt,children}) => (
-							<Comment key={id}  id={id} postId={postId} parentId={parentId} author={author} comment={comment} createdAt={createdAt} children={children}/>
+						{roots.map(({ id, postId, parentId, author, comment, createdAt, children }) => (
+							<Comment
+								key={id}
+								id={id}
+								postId={postId}
+								parentId={parentId}
+								author={author}
+								comment={comment}
+								createdAt={createdAt}
+								children={children}
+							/>
 						))}
 					</ol>
+				</div>
+			</div>
+			<div className={`${styles.commentFormContainer} row`}>
+				<div className={`column`}>
+					<h3>Add Comment</h3>
+					<TextArea styles={styles} postId={id} />
 				</div>
 			</div>
 		</div>
