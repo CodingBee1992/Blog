@@ -1,6 +1,6 @@
 .commentsContainer {
 	padding-bottom: var(--vspace-4);
-	background-color: #ffffff;
+	// background-color: #ffffff;
 
 	.commentsContent,
 	.commentFormContainer {
@@ -10,7 +10,6 @@
 
 		h3 {
 			margin-top: 0;
-			margin-bottom: var(--vspace-0_5);
 			text-align: center;
 			font-size: var(--text-xl);
 			font-weight: 600;
@@ -27,10 +26,14 @@
 		}
 	}
 	.commentFormContainer {
-		padding-top: var(--vspace-0_5);
+		margin-top: var(--vspace-2);
+
+		background: transparent;
+		max-width: 900px;
 
 		#contactForm {
-            padding-top: var(--vspace-1_75);
+			padding-top: var(--vspace-1_75);
+
 			.commentTextArea {
 				field-sizing: content;
 				padding: 10px;
@@ -38,15 +41,43 @@
 				min-width: 300px;
 				width: 100%;
 				max-width: 100%;
-				font-size: var(--text-Size);
+				margin-bottom: var(--vspace-0_25);
+				font-size: calc(var(--text-Size) * 0.7778);
 				font-family: var(--fontFamily);
 				font-style: normal;
 				font-weight: 400;
 				line-height: var(--vspace-0_75);
 				border: none;
-				box-shadow: 0 0 45px #dddddd;
+				border-bottom: 1px solid #828484;
+				border-top: 1px solid #828484;
+				// box-shadow: 0 0 45px #dddddd;
+				background: transparent;
 				&:focus {
 					outline: none;
+				}
+			}
+			.commentError{
+				font-size: var(--text-xs);
+				color: red;
+			}
+			.addComment {
+				margin-top: var(--vspace-1);
+				padding: 0 3.2rem;
+				width: 100%;
+				height: var(--btn-height);
+				font-size: 18px;
+				line-height: calc(var(--btn-height) - 0.4rem);
+				background-color: #000000;
+				color: #ffffff;
+				text-transform: uppercase;
+				letter-spacing: 0.4em;
+				white-space: nowrap;
+				border: none;
+				cursor: pointer;
+				transition: all 0.3s;
+
+				&:hover {
+					background-color: var(--btn-color-hover);
 				}
 			}
 		}

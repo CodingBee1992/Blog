@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { Dispatch, SetStateAction } from 'react'
+
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
 import authorAvatar from '../../../assets/avatar/user.jpg'
@@ -7,8 +7,7 @@ interface TextAreaProps {
 	styles: Record<string, string>
 	id?: number
 	postId?: number
-	showReply?:boolean
-	setShowReply?: Dispatch<SetStateAction<boolean>>
+	
 }
 
 const schemaComment = z.object({
@@ -17,7 +16,7 @@ const schemaComment = z.object({
 
 type commentFields = z.infer<typeof schemaComment>
 
-const TextArea = ({ styles, id, postId,showReply, setShowReply }: TextAreaProps) => {
+const TextArea = ({ styles, id, postId }: TextAreaProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -46,21 +45,21 @@ const TextArea = ({ styles, id, postId,showReply, setShowReply }: TextAreaProps)
 		}
 	}
 	return (
-		<form name='contactForm' method='post' autoComplete='off' id={styles.contactForm} onSubmit={handleSubmit(onSubmit)}>
+		<form name="contactForm" method="post" autoComplete="off" id={styles.contactForm} onSubmit={handleSubmit(onSubmit)}>
 			<div>
 				<textarea
 					{...register('comment')}
 					className={styles.commentTextArea}
 					name="comment"
-					placeholder="Add comment"
+					placeholder="Your message"
 					id=""
 				/>
-				{errors.comment && <span>{errors.comment.message}</span>}
+				{errors.comment && <span className={styles.commentError}>{errors.comment.message}</span>}
 			</div>
-			<button disabled={isSubmitting} type="submit">
-				{isSubmitting ? 'Sending...' : 'Send'}
+			<button disabled={isSubmitting} type="submit" className={styles.addComment}>
+				{isSubmitting ? 'Sending...' : 'Add Comment'}
 			</button>
-			{showReply && <button onClick={() => setShowReply?.(false)}>Cancel</button>}
+			
 		</form>
 	)
 }

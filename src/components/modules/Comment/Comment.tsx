@@ -31,7 +31,7 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 					<div className={styles.commentMeta}>
 						<div className={styles.commentTime}>{createdAt}</div>
 						<div className={styles.commentReply}>
-							<button onClick={e => handleReply(e)}>Reply</button>
+							{!showReply ? <button onClick={e => handleReply(e)}>Reply</button> : <span onClick={()=> setShowReply(false)}>X</span>}
 							<a href="#" className={styles.commentLogIn}>
 								Log In to Reply
 							</a>
@@ -42,7 +42,7 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 					<p>{comment}</p>
 				</div>
 				{showReply && (
-					<TextArea styles={styles} id={id} postId={postId} showReply={showReply} setShowReply={setShowReply} />
+					<TextArea styles={styles} id={id} postId={postId}/>
 				)}
 				{children && children.length > 0 && (
 					<div>
