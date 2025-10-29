@@ -1,4 +1,4 @@
-import { useRef, useState, type MouseEvent } from 'react'
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import type { CommentsDataProps } from '../../../types/types'
 import styles from './Comment.module.scss'
 import TextArea from '../../atoms/TextArea/TextArea'
@@ -7,19 +7,23 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 	const comRef = useRef<HTMLDivElement>(null)
 	const isLogin = true
 	const [showReply, setShowReply] = useState<boolean>(false)
-
+	const aRef = useRef<HTMLAnchorElement | null>(null)
 	const handleReply = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
-		console.log(comRef.current?.id)
-		console.log(comRef.current?.dataset.postid)
-		console.log(comRef.current?.dataset.parentid)
+
+		const logIn = target.nextElementSibling
 		if (!isLogin) {
-			const logIn = target.nextElementSibling
 			if (logIn) logIn.classList.add(styles.commentLogInShow)
 		} else {
 			setShowReply(true)
 		}
 	}
+
+	useEffect(() => {
+		if (isLogin && aRef.current) {
+			aRef.current.classList.remove(styles.commentLogInShow)
+		}
+	}, [isLogin])
 	return (
 		<div ref={comRef} className={styles.commentContainer} id={`${id}`} data-postid={postId} data-parentid={parentId}>
 			<div className={styles.commentAvatar}>
@@ -31,8 +35,12 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 					<div className={styles.commentMeta}>
 						<div className={styles.commentTime}>{createdAt}</div>
 						<div className={styles.commentReply}>
-							{!showReply ? <button onClick={e => handleReply(e)}>Reply</button> : <span onClick={()=> setShowReply(false)}>X</span>}
-							<a href="#" className={styles.commentLogIn}>
+							{!showReply ? (
+								<button onClick={e => handleReply(e)}>Reply</button>
+							) : (
+								<span onClick={() => setShowReply(false)}>X</span>
+							)}
+							<a ref={aRef} href="#" className={styles.commentLogIn}>
 								Log In to Reply
 							</a>
 						</div>
@@ -41,9 +49,7 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 				<div className={styles.commentText}>
 					<p>{comment}</p>
 				</div>
-				{showReply && (
-					<TextArea styles={styles} id={id} postId={postId}/>
-				)}
+				{showReply && <TextArea styles={styles} id={id} postId={postId} />}
 				{children && children.length > 0 && (
 					<div>
 						{children.map(({ id, postId, parentId, author, comment, createdAt, children }) => (

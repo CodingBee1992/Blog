@@ -28,9 +28,14 @@
 		}
 	}
 }
-
+@media (max-width:1200px) {
+	.articleContainer{
+		padding-bottom: 0;
+	}
+}
 @media (max-width: 700px) {
 	.articleContainer {
+		
 		.imageContainer {
 			height: 50dvw;
 			max-height: 50dvw;
@@ -43,5 +48,10 @@
 				font-size: var(--text-display-1);
 			}
 		}
+	}
+}
+@media (max-width:550px) {
+	.articleContainer{
+		padding-bottom: var(--vspace-2);
 	}
 }

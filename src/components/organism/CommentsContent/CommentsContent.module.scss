@@ -33,6 +33,7 @@
 
 		#contactForm {
 			padding-top: var(--vspace-1_75);
+			padding-bottom: var(--vspace-1_75);
 
 			.commentTextArea {
 				field-sizing: content;
@@ -56,7 +57,7 @@
 					outline: none;
 				}
 			}
-			.commentError{
+			.commentError {
 				font-size: var(--text-xs);
 				color: red;
 			}
