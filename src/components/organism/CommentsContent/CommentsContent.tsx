@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router'
 import commentsData from '../../../utils/commentsData'
 import styles from './CommentsContent.module.scss'
-import Comment from '../../atoms/Comment/Comment'
+import Comment from '../../modules/Comment/Comment'
 import type { CommentsDataProps } from '../../../types/types'
 
 const CommentsContent = () => {
@@ -14,11 +14,12 @@ const CommentsContent = () => {
 	const roots: CommentsDataProps[] = []
 
 	postComments.forEach(c => map.set(c.id, { ...c, children: [] }))
-	console.log(roots)
+	
 
 	postComments.forEach(c => {
 		if (c.parentId) {
 			const parent = map.get(c.parentId)
+			
 			if (parent) parent.children?.push(map.get(c.id)!)
 				
 		} else {
