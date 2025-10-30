@@ -10,7 +10,7 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 	const aRef = useRef<HTMLAnchorElement | null>(null)
 	const handleReply = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
-
+		
 		const logIn = target.nextElementSibling
 		if (!isLogin) {
 			if (logIn) logIn.classList.add(styles.commentLogInShow)
@@ -36,9 +36,9 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 						<div className={styles.commentTime}>{createdAt}</div>
 						<div className={styles.commentReply}>
 							{!showReply ? (
-								<button onClick={e => handleReply(e)}>Reply</button>
+								<button className={styles.commentReplybButton} onClick={e => handleReply(e)}>Reply</button>
 							) : (
-								<span onClick={() => setShowReply(false)}>X</span>
+								<span className={styles.commentHideButton} onClick={() => setShowReply(false)}></span>
 							)}
 							<a ref={aRef} href="#" className={styles.commentLogIn}>
 								Log In to Reply
