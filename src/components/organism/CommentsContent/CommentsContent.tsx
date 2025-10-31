@@ -4,16 +4,20 @@ import styles from './CommentsContent.module.scss'
 import Comment from '../../modules/Comment/Comment'
 import type { CommentsDataProps } from '../../../types/types'
 import TextArea from '../../atoms/TextArea/TextArea'
+import { useFetchCommentsQuery } from '../../../slices/api/commentSlice'
 
 const CommentsContent = () => {
 	const { search } = useLocation()
 	const query = new URLSearchParams(search)
 	const id = Number(query.get('id'))
+	
 	const postComments = commentsData.filter(item => item.postId === id)
 	const isLogin = true
 	const map = new Map<number, CommentsDataProps>()
 	const roots: CommentsDataProps[] = []
-
+	
+	const {data,isFetching} = useFetchCommentsQuery(id)
+	
 	postComments.forEach(c => map.set(c.id, { ...c, children: [] }))
 
 	postComments.forEach(c => {

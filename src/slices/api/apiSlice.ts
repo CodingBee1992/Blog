@@ -16,7 +16,7 @@ export const apiSlice = createApi({
             query:({newPost})=>({
                 url:`${POSTS_URL}`,
                 method:"POST",
-                headers:{'Content-type':'application-json'},
+                headers:{'Content-type':'application/json'},
                 body:newPost
             })
         })
