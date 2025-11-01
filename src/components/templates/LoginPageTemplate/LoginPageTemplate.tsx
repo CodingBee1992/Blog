@@ -3,7 +3,8 @@ import { useLoginMutation } from '../../../slices/api/loginSlice'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router'
-
+import styles from './LoginPageTemplate.module.scss'
+import { useEffect } from 'react'
 const loginSchema = z.object({
 	email: z.email(),
 	password: z.string().min(8),
@@ -12,8 +13,8 @@ const loginSchema = z.object({
 type loginFields = z.infer<typeof loginSchema>
 
 const LoginPageTemplate = () => {
-	const [logIn, { isSuccess,error }] = useLoginMutation()
-    console.log(error);
+	const [logIn, { isSuccess, error }] = useLoginMutation()
+	console.log(error)
 	const navigate = useNavigate()
 	const {
 		register,
@@ -23,34 +24,50 @@ const LoginPageTemplate = () => {
 	} = useForm<loginFields>({
 		resolver: zodResolver(loginSchema),
 	})
-
+	useEffect(() => {
+		if (isSuccess) {
+			navigate('/')
+		}
+	}, [isSuccess, navigate])
 	const onSubmit: SubmitHandler<loginFields> = async data => {
 		try {
-            await new Promise(resolve => setTimeout(resolve,2000))
-            
-            const res = await logIn({...data}).unwrap()
-			
-            console.log(res);
-			if (isSuccess) {
-				navigate('/')
-			}
+			await new Promise(resolve => setTimeout(resolve, 2000))
+
+			const res = await logIn({ ...data }).unwrap()
+			console.log(res);
 		} catch {
 			setError('root', { message: 'Fill all fields' })
 		}
 	}
 
 	return (
-		<div>
-			<form name="logIn" method="post" autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-				<input {...register('email')} type="email" placeholder="Enter your email" />
-				{errors.email && <span>{errors.email.message}</span>}
-				<input {...register('password')} type="password" placeholder="Enter your Password" />
-				{errors.password && <span>{errors.password.message}</span>}
+		<div className={styles.logInContainer}>
+			<div className={styles.loginWrapper}>
+				<div className={styles.greetingText}>
+					<p className={styles.logo}>codingBee</p>
+				</div>
+				<div className={styles.formContainer}>
+					<h1>Sign In</h1>
+					<p>
+						Dont have an account ? <a href="/registration">Sign Up</a>
+					</p>
+					<form
+						name="logInForm"
+						method="post"
+						autoComplete="off"
+						onSubmit={handleSubmit(onSubmit)}
+						className={styles.form}>
+						<input {...register('email')} type="email" placeholder="Enter your email" />
+						{errors.email && <span>{errors.email.message}</span>}
+						<input {...register('password')} type="password" placeholder="Enter your Password" />
+						{errors.password && <span>{errors.password.message}</span>}
 
-				<button disabled={isSubmitting} type="submit">
-					{isSubmitting ? 'Sending...' : 'LogIn'}
-				</button>
-			</form>
+						<button disabled={isSubmitting} type="submit" className={styles.signInButton}>
+							{isSubmitting ? 'SigIn...' : 'SigIn'}
+						</button>
+					</form>
+				</div>
+			</div>
 		</div>
 	)
 }

@@ -18,6 +18,7 @@ import TravelPage from './components/pages/categories/TravelPage/TravelPage'
 import NaturePage from './components/pages/categories/NaturePage/NaturePage'
 import CulturePage from './components/pages/categories/CulturePage/CulturePage'
 import LoginPage from './components/pages/LoginPage/LoginPage'
+import RegistrationPage from './components/pages/RegistrationPage/RegistrationPage'
 
 const App = () => {
 	return (
@@ -43,6 +44,7 @@ const App = () => {
 					<Route path="contact" element={<ContactPage />} />
 				</Route>
 				<Route path="/login" element={<LoginPage />} />
+				<Route path="/registration" element={<RegistrationPage />} />
 			</Routes>
 		</Router>
 	)
