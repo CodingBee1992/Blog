@@ -68,6 +68,7 @@ const Navigation = () => {
 				/>
 			)}
 			<SearchButton />
+			{size.width }
 			{size.width <= 900 ? <MenuIcon handleOpenMenu={handleOpenCloseMenu} /> : null}
 
 			{isOpen && <SearchContainer isOpen={isOpen} />}

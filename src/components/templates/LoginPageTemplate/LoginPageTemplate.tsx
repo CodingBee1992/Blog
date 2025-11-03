@@ -5,6 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router'
 import styles from './LoginPageTemplate.module.scss'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setData, setLogin } from '../../../slices/api/authSlice'
 const loginSchema = z.object({
 	email: z.email(),
 	password: z.string().min(8),
@@ -13,9 +15,9 @@ const loginSchema = z.object({
 type loginFields = z.infer<typeof loginSchema>
 
 const LoginPageTemplate = () => {
-	const [logIn, { isSuccess}] = useLoginMutation()
-	// console.log(error)
-	// console.log(data);
+	const [logIn, { isSuccess }] = useLoginMutation()
+	const dispatch = useDispatch()
+
 	const navigate = useNavigate()
 	const {
 		register,
@@ -35,7 +37,9 @@ const LoginPageTemplate = () => {
 			await new Promise(resolve => setTimeout(resolve, 2000))
 
 			const res = await logIn({ ...data }).unwrap()
-			
+			console.log(res);
+			dispatch(setLogin(true))
+			dispatch(setData(res))
 		} catch {
 			setError('root', { message: 'Fill all fields' })
 		}

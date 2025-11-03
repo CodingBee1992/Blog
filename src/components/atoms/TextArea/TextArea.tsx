@@ -17,13 +17,13 @@ const schemaComment = z.object({
 type commentFields = z.infer<typeof schemaComment>
 
 const TextArea = ({ styles, id, postId }: TextAreaProps) => {
-	const [createComment, { error }] = useCreateCommentMutation()
+	const [createComment] = useCreateCommentMutation()
 
-	console.log(error)
 	const {
 		register,
 		handleSubmit,
-		setError,reset,
+		setError,
+		reset,
 		formState: { isSubmitting, errors },
 	} = useForm<commentFields>({
 		resolver: zodResolver(schemaComment),
@@ -42,7 +42,7 @@ const TextArea = ({ styles, id, postId }: TextAreaProps) => {
 	return (
 		<form name="contactForm" method="post" autoComplete="off" id={styles.contactForm} onSubmit={handleSubmit(onSubmit)}>
 			<div>
-				<textarea 
+				<textarea
 					{...register('comment')}
 					className={styles.commentTextArea}
 					name="comment"

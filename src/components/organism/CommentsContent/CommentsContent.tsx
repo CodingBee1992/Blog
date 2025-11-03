@@ -4,20 +4,22 @@ import styles from './CommentsContent.module.scss'
 import Comment from '../../modules/Comment/Comment'
 import type { CommentsDataProps } from '../../../types/types'
 import TextArea from '../../atoms/TextArea/TextArea'
-import { useFetchCommentsQuery } from '../../../slices/api/commentSlice'
+// import { useFetchCommentsQuery } from '../../../slices/api/commentSlice'
+import { useSelector } from 'react-redux'
+import type { RootState } from '../../../store'
 
 const CommentsContent = () => {
 	const { search } = useLocation()
 	const query = new URLSearchParams(search)
 	const id = Number(query.get('id'))
-	
+
 	const postComments = commentsData.filter(item => item.postId === id)
-	const isLogin = true
+	const { isLogged } = useSelector((state: RootState) => state.auth)
 	const map = new Map<number, CommentsDataProps>()
 	const roots: CommentsDataProps[] = []
 	
-	const {data,isFetching} = useFetchCommentsQuery(id)
-	
+	// const {data,isFetching} = useFetchCommentsQuery(id)
+
 	postComments.forEach(c => map.set(c.id, { ...c, children: [] }))
 
 	postComments.forEach(c => {
@@ -54,7 +56,7 @@ const CommentsContent = () => {
 			</div>
 			<div className={`${styles.commentFormContainer} row`}>
 				<div className={`column`}>
-					{isLogin ? (
+					{isLogged ? (
 						<>
 							<h3>Add Comment</h3>
 							<TextArea styles={styles} postId={id} />

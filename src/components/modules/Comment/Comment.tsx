@@ -2,17 +2,21 @@ import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import type { CommentsDataProps } from '../../../types/types'
 import styles from './Comment.module.scss'
 import TextArea from '../../atoms/TextArea/TextArea'
+import { useSelector } from 'react-redux'
+import type { RootState } from '../../../store'
+import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 
 const Comment = ({ id, postId, parentId, author, comment, createdAt, children }: CommentsDataProps) => {
 	const comRef = useRef<HTMLDivElement>(null)
-	const isLogin = true
+	const { isLogged } = useSelector((state: RootState) => state.auth)
 	const [showReply, setShowReply] = useState<boolean>(false)
 	const aRef = useRef<HTMLAnchorElement | null>(null)
 	const handleReply = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
-		
+
 		const logIn = target.nextElementSibling
-		if (!isLogin) {
+
+		if (!isLogged) {
 			if (logIn) logIn.classList.add(styles.commentLogInShow)
 		} else {
 			setShowReply(true)
@@ -20,10 +24,10 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 	}
 
 	useEffect(() => {
-		if (isLogin && aRef.current) {
+		if (isLogged && aRef.current) {
 			aRef.current.classList.remove(styles.commentLogInShow)
 		}
-	}, [isLogin])
+	}, [isLogged])
 	return (
 		<div ref={comRef} className={styles.commentContainer} id={`${id}`} data-postid={postId} data-parentid={parentId}>
 			<div className={styles.commentAvatar}>
@@ -36,13 +40,15 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 						<div className={styles.commentTime}>{createdAt}</div>
 						<div className={styles.commentReply}>
 							{!showReply ? (
-								<button className={styles.commentReplybButton} onClick={e => handleReply(e)}>Reply</button>
+								<button className={styles.commentReplybButton} onClick={e => handleReply(e)}>
+									Reply
+								</button>
 							) : (
 								<span className={styles.commentHideButton} onClick={() => setShowReply(false)}></span>
 							)}
-							<a ref={aRef} href="#" className={styles.commentLogIn}>
+							<AnchorLink ref={aRef} href="/login" className={styles.commentLogIn}>
 								Log In to Reply
-							</a>
+							</AnchorLink>
 						</div>
 					</div>
 				</div>

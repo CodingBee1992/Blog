@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { ReactNode, RefObject } from 'react'
 import { removePaginationLinksTags } from '../../../utils/removePaginationLinksTag'
 import styles from './AnchorLink.module.scss'
 import { useLocation, useNavigate } from 'react-router'
@@ -12,9 +12,10 @@ interface AnchorLink {
 	className?: string
 	count?: number
 	ariaLabel?: string
+	ref?:RefObject<HTMLAnchorElement | null>
 }
 
-const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel }: AnchorLink) => {
+const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,ref }: AnchorLink) => {
 	const navigate = useNavigate()
 	const location = useLocation()
 	const dispatch = useDispatch()
@@ -47,6 +48,7 @@ const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel }
 	return (
 		<a
 			href={href}
+			ref={ref}
 			onClick={e => handleClick(e)}
 			rel={rel}
 			target={target}
