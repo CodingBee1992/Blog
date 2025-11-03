@@ -5,6 +5,7 @@ import { useCreateAccountMutation } from '../../../slices/api/loginSlice'
 import z from 'zod'
 import styles from './RegistrationPageTemplate.module.scss'
 import { useEffect, useState } from 'react'
+import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 
 const registrationSchema = z.object({
 	name: z.string().min(4),
@@ -14,15 +15,15 @@ const registrationSchema = z.object({
 
 type registrationFields = z.infer<typeof registrationSchema>
 const RegistrationPageTemplate = () => {
-	const [createAccount, { error, isSuccess }] = useCreateAccountMutation()
+	const [createAccount, { error, isSuccess, data }] = useCreateAccountMutation()
 	const [success, setSuccess] = useState<boolean>(false)
-	console.log(isSuccess)
+	console.log(data)
 	const navigate = useNavigate()
 	const {
 		register,
 		handleSubmit,
 		setError,
-		
+
 		formState: { isSubmitting, errors },
 	} = useForm<registrationFields>({
 		resolver: zodResolver(registrationSchema),
@@ -32,7 +33,7 @@ const RegistrationPageTemplate = () => {
 			setSuccess(true)
 			const timer = setTimeout(() => {
 				navigate('/')
-			}, 500)
+			}, 1000)
 
 			return () => clearTimeout(timer)
 		}
@@ -45,7 +46,7 @@ const RegistrationPageTemplate = () => {
 		} catch {
 			if (error) {
 				setError('root', { message: `${error?.data.message}` })
-			} 
+			}
 		}
 	}
 	return (
@@ -57,7 +58,7 @@ const RegistrationPageTemplate = () => {
 				<div className={styles.formContainer}>
 					<h1>Create an account</h1>
 					<p>
-						Already have an account ? <a href="/login">Sign In</a>
+						Already have an account ? <AnchorLink href="/login">Sign In</AnchorLink>
 					</p>
 					<form
 						name="createAccountForm"

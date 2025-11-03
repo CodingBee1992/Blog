@@ -4,17 +4,17 @@ const POSTS_URL = import.meta.env.VITE_POSTS_URL
 
 export const commentSlice = createApi({
 	reducerPath: 'comment',
-	baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}` }),
+	baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}`, credentials:'include' }),
 	endpoints: builder => ({
 		fetchComments: builder.query({
 			query: postId => `${POSTS_URL}/${postId}/comments`,
 		}),
 		createComment: builder.mutation({
-			query: ({ postId, comData }) => ({
+			query: ({ postId, comment,parentId }) => ({
 				url: `${POSTS_URL}/${postId}/comments`,
 				method: 'POST',
 				headers: { 'Content-type': 'application/json' },
-				body: comData,
+				body: {comment,parentId},
 			}),
 		}),
 		updateComment: builder.mutation({

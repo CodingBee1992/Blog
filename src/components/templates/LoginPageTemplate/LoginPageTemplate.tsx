@@ -13,8 +13,9 @@ const loginSchema = z.object({
 type loginFields = z.infer<typeof loginSchema>
 
 const LoginPageTemplate = () => {
-	const [logIn, { isSuccess, error }] = useLoginMutation()
-	console.log(error)
+	const [logIn, { isSuccess}] = useLoginMutation()
+	// console.log(error)
+	// console.log(data);
 	const navigate = useNavigate()
 	const {
 		register,
@@ -34,7 +35,7 @@ const LoginPageTemplate = () => {
 			await new Promise(resolve => setTimeout(resolve, 2000))
 
 			const res = await logIn({ ...data }).unwrap()
-			console.log(res);
+			
 		} catch {
 			setError('root', { message: 'Fill all fields' })
 		}

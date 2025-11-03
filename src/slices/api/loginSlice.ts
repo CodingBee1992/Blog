@@ -4,7 +4,7 @@ const USERS_URL = import.meta.env.VITE_USERS_URL
 
 export const loginSlice = createApi({
 	reducerPath: 'login',
-	baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}` }),
+	baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}`,credentials:'include' }),
 	endpoints: builder => ({
 		login: builder.mutation({
 			query: credentials => ({
@@ -23,7 +23,14 @@ export const loginSlice = createApi({
 				body: data,
 			}),
 		}),
+		logOut: builder.mutation({
+			query: () => ({
+				url: `${USERS_URL}/logout`,
+				method:'POST',
+				headers:{'Content-type':'application/json'}
+			})
+		})
 	}),
 })
 
-export const { useLoginMutation, useCreateAccountMutation } = loginSlice
+export const { useLoginMutation, useCreateAccountMutation,useLogOutMutation } = loginSlice
