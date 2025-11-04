@@ -1,15 +1,17 @@
 .search {
-	position: absolute;
-	right: 4rem ;
+	
 	padding: 8px;
-    background-color: transparent;
+	top: 0;
+	display: flex;
+	align-items: center;
+	background-color: transparent;
 	border: unset;
 	cursor: pointer;
-	transition: all .3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 
 	.icon {
-        width: 24px;
-        height: 24px;
+		width: 24px;
+		height: 24px;
 		color: var(--menu-textColor);
 		transition: 0.3s all ease-in-out;
 	}
@@ -18,16 +20,5 @@
 		.icon {
 			color: var(--menu-textColorHover);
 		}
-	}
-}
-
-@media (max-width: 900px) {
-	.search{
-		right: calc(4rem + 5rem);
-	}
-}
-@media (max-width: 600px) {
-	.search{
-		right: calc(4rem + 4rem);
 	}
 }

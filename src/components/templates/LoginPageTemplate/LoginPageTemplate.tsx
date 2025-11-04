@@ -7,6 +7,7 @@ import styles from './LoginPageTemplate.module.scss'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setData, setLogin } from '../../../slices/api/authSlice'
+import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 const loginSchema = z.object({
 	email: z.email(),
 	password: z.string().min(8),
@@ -37,7 +38,7 @@ const LoginPageTemplate = () => {
 			await new Promise(resolve => setTimeout(resolve, 2000))
 
 			const res = await logIn({ ...data }).unwrap()
-			console.log(res);
+			
 			dispatch(setLogin(true))
 			dispatch(setData(res))
 		} catch {
@@ -54,7 +55,7 @@ const LoginPageTemplate = () => {
 				<div className={styles.formContainer}>
 					<h1>Sign In</h1>
 					<p>
-						Dont have an account ? <a href="/registration">Sign Up</a>
+						Dont have an account ? <AnchorLink href="/registration">Sign Up</AnchorLink>
 					</p>
 					<form
 						name="logInForm"

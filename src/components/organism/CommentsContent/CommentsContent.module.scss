@@ -82,5 +82,23 @@
 				}
 			}
 		}
+		.commentAnchorSignin {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			justify-self: center;
+			margin-top: var(--vspace-2);
+			width: 100%;
+			height: 40px;
+			max-width: 200px;
+			font-size: 18px;
+			color: #ffffff;
+			background-color: #000000;
+			transition: all 0.3s;
+
+			&:hover {
+				background-color: var(--btn-color-hover);
+			}
+		}
 	}
 }

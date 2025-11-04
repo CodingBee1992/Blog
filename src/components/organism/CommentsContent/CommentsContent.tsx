@@ -7,6 +7,7 @@ import TextArea from '../../atoms/TextArea/TextArea'
 // import { useFetchCommentsQuery } from '../../../slices/api/commentSlice'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
+import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 
 const CommentsContent = () => {
 	const { search } = useLocation()
@@ -17,7 +18,7 @@ const CommentsContent = () => {
 	const { isLogged } = useSelector((state: RootState) => state.auth)
 	const map = new Map<number, CommentsDataProps>()
 	const roots: CommentsDataProps[] = []
-	
+
 	// const {data,isFetching} = useFetchCommentsQuery(id)
 
 	postComments.forEach(c => map.set(c.id, { ...c, children: [] }))
@@ -62,7 +63,10 @@ const CommentsContent = () => {
 							<TextArea styles={styles} postId={id} />
 						</>
 					) : (
-						<h3>Log In to Add Comment</h3>
+						<>
+							<h3>Sign In to Add Comment</h3>
+							<AnchorLink className={styles.commentAnchorSignin} href="/login">Sign In</AnchorLink>
+						</>
 					)}
 				</div>
 			</div>

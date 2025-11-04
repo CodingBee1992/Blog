@@ -4,6 +4,7 @@ import MenuElement from '../../../components/organism/menuElement/MenuElement'
 import type { MenuTypes } from '../dataNavigation/dataNavigation'
 import styles from './MobileNav.module.scss'
 import { useEffect, type MouseEvent, type RefObject } from 'react'
+import ControlPanel from '../../../components/organism/ControlPanel/ControlPanel'
 
 interface MobileRefProps {
 	mobileRef: RefObject<HTMLDivElement | null>
@@ -53,9 +54,21 @@ const MobileNav = ({ dataMenu, mobileRef, navRef, handleCloseMenu }: MobileRefPr
 				<h2 className={styles.title}>Navigate to</h2>
 			</div>
 			<div className={styles.mobileLink}>
+				<ControlPanel
+					styles={styles}
+					index={0}
+					handleOpenCloseDropdown={handleOpenCloseDropdown}
+					handleCloseMenu={handleCloseMenu}
+				/>
 				{dataMenu.map((item: MenuTypes, index: number) => {
 					return (
-						<MenuElement key={index} styles={styles} data={item} index={index} handleOpenCloseDropdown={handleOpenCloseDropdown} />
+						<MenuElement
+							key={index}
+							styles={styles}
+							data={item}
+							index={index}
+							handleOpenCloseDropdown={handleOpenCloseDropdown}
+						/>
 					)
 				})}
 			</div>

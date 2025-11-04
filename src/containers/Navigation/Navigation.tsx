@@ -8,20 +8,19 @@ import SearchButton from '../../components/atoms/SearchButton/SearchButton'
 import SearchContainer from '../../components/organism/SearchContainer/SearchContainer'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef} from 'react'
 import MenuIcon from '../../components/atoms/MenuIcon/MenuIcon'
+import ControlPanel from '../../components/organism/ControlPanel/ControlPanel'
 
 const Navigation = () => {
 	const size = useWindowSize()
 	const navRef = useRef<HTMLDivElement>(null)
 	const mobileRef = useRef<HTMLDivElement>(null)
-	const [isOpenMenu, setIsOpenMenu] = useState<boolean>(true)
+	// const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
 	const { isOpen } = useSelector((state: RootState) => state.theme)
 
 	useEffect(() => {
 		const handleScroll = () => {
-			
-
 			if (window.scrollY >= 200) {
 				navRef.current?.classList.add(styles.bgcNavBlack)
 			} else {
@@ -35,10 +34,8 @@ const Navigation = () => {
 			document.removeEventListener('scroll', handleScroll)
 		}
 	}, [])
-
 	const handleOpenCloseMenu = () => {
-		setIsOpenMenu(!isOpenMenu)
-
+		
 		if (!mobileRef.current?.classList.contains(styles.showHide)) {
 			mobileRef.current?.classList.add(styles.showHide)
 
@@ -54,6 +51,7 @@ const Navigation = () => {
 		}
 	}
 
+
 	return (
 		<nav ref={navRef} className={styles.container}>
 			<Logo />
@@ -67,9 +65,11 @@ const Navigation = () => {
 					dataMenu={dataNavigation}
 				/>
 			)}
-			<SearchButton />
-			{size.width }
-			{size.width <= 900 ? <MenuIcon handleOpenMenu={handleOpenCloseMenu} /> : null}
+			<div className={styles.panel}>
+				<SearchButton />
+				{size.width > 900 && <ControlPanel index={0} styles={styles}  />}
+			</div>
+			{size.width <= 900 && <MenuIcon handleOpenMenu={handleOpenCloseMenu} />}
 
 			{isOpen && <SearchContainer isOpen={isOpen} />}
 		</nav>

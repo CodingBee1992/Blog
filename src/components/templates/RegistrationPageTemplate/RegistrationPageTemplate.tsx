@@ -7,6 +7,7 @@ import styles from './RegistrationPageTemplate.module.scss'
 import { useEffect, useState } from 'react'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 
+
 const registrationSchema = z.object({
 	name: z.string().min(4),
 	email: z.email(),
@@ -16,6 +17,7 @@ const registrationSchema = z.object({
 type registrationFields = z.infer<typeof registrationSchema>
 const RegistrationPageTemplate = () => {
 	const [createAccount, { error, isSuccess, data }] = useCreateAccountMutation()
+	
 	const [success, setSuccess] = useState<boolean>(false)
 	console.log(data)
 	const navigate = useNavigate()
@@ -49,6 +51,7 @@ const RegistrationPageTemplate = () => {
 			}
 		}
 	}
+	
 	return (
 		<div className={styles.logInContainer}>
 			<div className={styles.loginWrapper}>

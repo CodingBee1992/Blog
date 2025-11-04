@@ -42,7 +42,7 @@ export const authSlice = createSlice({
 		},
 		setData: (state, action: PayloadAction<SetDataType>) => {
 			const { name, id, avatar } = action.payload
-			console.log(id);
+			
 			state.name = name
 			state.id = id
 			state.avatar = avatar
