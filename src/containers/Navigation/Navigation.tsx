@@ -8,7 +8,7 @@ import SearchButton from '../../components/atoms/SearchButton/SearchButton'
 import SearchContainer from '../../components/organism/SearchContainer/SearchContainer'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
-import { useEffect, useRef} from 'react'
+import { useEffect, useRef } from 'react'
 import MenuIcon from '../../components/atoms/MenuIcon/MenuIcon'
 import ControlPanel from '../../components/organism/ControlPanel/ControlPanel'
 
@@ -16,7 +16,8 @@ const Navigation = () => {
 	const size = useWindowSize()
 	const navRef = useRef<HTMLDivElement>(null)
 	const mobileRef = useRef<HTMLDivElement>(null)
-	// const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
+	const userRef = useRef<HTMLDivElement>(null)
+
 	const { isOpen } = useSelector((state: RootState) => state.theme)
 
 	useEffect(() => {
@@ -35,7 +36,6 @@ const Navigation = () => {
 		}
 	}, [])
 	const handleOpenCloseMenu = () => {
-		
 		if (!mobileRef.current?.classList.contains(styles.showHide)) {
 			mobileRef.current?.classList.add(styles.showHide)
 
@@ -50,7 +50,36 @@ const Navigation = () => {
 			}, 500)
 		}
 	}
+	const openCloseUserMenu = () => {
+		const el = userRef.current as HTMLDivElement
 
+		el.classList.toggle(styles.displayVisibility)
+
+		// setTimeout(() => {
+		// 	el.classList.add(styles.displayVisibility)
+		// }, 500)
+	}
+
+	useEffect(() => {
+		const handleClickOutside = (e: globalThis.MouseEvent) => {
+			const el = userRef.current
+			const target = e.target as Node
+
+			if (!el || !target) return
+
+			if (
+				el.classList.contains(styles.displaySettings) &&
+				!el.contains(target) &&
+				!target.classList.contains(styles.authorAvatar)
+				&& !target.classList.contains(styles.signInBtn)
+			) {
+				el.classList.remove(styles.displaySettings)
+			}
+		}
+
+		window.addEventListener('mousedown', handleClickOutside)
+		return () => window.removeEventListener('mousedown', handleClickOutside)
+	}, [userRef])
 
 	return (
 		<nav ref={navRef} className={styles.container}>
@@ -67,7 +96,9 @@ const Navigation = () => {
 			)}
 			<div className={styles.panel}>
 				<SearchButton />
-				{size.width > 900 && <ControlPanel index={0} styles={styles}  />}
+				{size.width > 900 && (
+					<ControlPanel userRef={userRef} openCloseUserMenu={openCloseUserMenu} index={0} styles={styles} />
+				)}
 			</div>
 			{size.width <= 900 && <MenuIcon handleOpenMenu={handleOpenCloseMenu} />}
 
