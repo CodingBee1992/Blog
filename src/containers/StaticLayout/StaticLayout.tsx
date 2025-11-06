@@ -26,6 +26,7 @@ const StaticLayout = () => {
 		}
 	}, [isLoading])
 
+	
 	useEffect(() => {
 		if (!isLoading) {
 			Aos.refresh()

@@ -34,7 +34,8 @@ const ControlPanel = <T extends HTMLDivElement>({
 		if (isSuccess) {
 			const timer = setTimeout(() => {
 				navigate('/')
-			}, 1000)
+				window.scrollTo(0,0)
+			}, 300)
 
 			return () => clearTimeout(timer)
 		}
@@ -61,8 +62,8 @@ const ControlPanel = <T extends HTMLDivElement>({
 					<button onClick={() => openCloseUserMenu?.()} className={styles.signInBtn}>
 						Sign In
 					</button>
-					<div ref={userRef} className={styles.test}>
-						<div className={styles.controlContainer}>
+					
+						<div ref={userRef} className={styles.controlContainer}>
 							<AnchorLink className={styles.anchorLink} href="/login">
 								Sign In
 							</AnchorLink>
@@ -73,7 +74,7 @@ const ControlPanel = <T extends HTMLDivElement>({
 								</AnchorLink>
 							</div>
 						</div>
-					</div>
+					
 				</>
 			) : (
 				<>

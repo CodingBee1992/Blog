@@ -54,26 +54,22 @@ const Navigation = () => {
 		const el = userRef.current as HTMLDivElement
 
 		el.classList.toggle(styles.displayVisibility)
-
-		// setTimeout(() => {
-		// 	el.classList.add(styles.displayVisibility)
-		// }, 500)
 	}
 
 	useEffect(() => {
 		const handleClickOutside = (e: globalThis.MouseEvent) => {
 			const el = userRef.current
-			const target = e.target as Node
-
+			const target = e.target as HTMLElement
+			
 			if (!el || !target) return
 
 			if (
-				el.classList.contains(styles.displaySettings) &&
+				el.classList.contains(styles.displayVisibility) &&
 				!el.contains(target) &&
-				!target.classList.contains(styles.authorAvatar)
-				&& !target.classList.contains(styles.signInBtn)
+				!target.classList.contains(styles.authorAvatar) &&
+				!target.classList.contains(styles.signInBtn)
 			) {
-				el.classList.remove(styles.displaySettings)
+				el.classList.remove(styles.displayVisibility)
 			}
 		}
 
