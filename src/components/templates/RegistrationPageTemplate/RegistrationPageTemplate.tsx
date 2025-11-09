@@ -6,26 +6,26 @@ import z from 'zod'
 import styles from './RegistrationPageTemplate.module.scss'
 import { useEffect, useState } from 'react'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
-
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 const registrationSchema = z.object({
-	name: z.string().min(4),
-	email: z.email(),
-	password: z.string().min(8),
+	name: z.string().trim().min(4),
+	email: z.email().trim(),
+	password: z.string().trim().min(8),
 })
 
 type registrationFields = z.infer<typeof registrationSchema>
 const RegistrationPageTemplate = () => {
-	const [createAccount, { error, isSuccess, data }] = useCreateAccountMutation()
-	
+	const [createAccount, { isSuccess}] = useCreateAccountMutation()
+
 	const [success, setSuccess] = useState<boolean>(false)
-	console.log(data)
+	
 	const navigate = useNavigate()
 	const {
 		register,
 		handleSubmit,
 		setError,
-
+		clearErrors,
 		formState: { isSubmitting, errors },
 	} = useForm<registrationFields>({
 		resolver: zodResolver(registrationSchema),
@@ -45,13 +45,22 @@ const RegistrationPageTemplate = () => {
 			await new Promise(resolve => setTimeout(resolve, 2000))
 
 			await createAccount({ ...data }).unwrap()
-		} catch {
-			if (error) {
-				setError('root', { message: `${error?.data.message}` })
+			
+			clearErrors()
+		} catch (error) {
+			if (typeof error === 'object' && error !== null) {
+				const fetchError = error as FetchBaseQueryError
+				const messageError =
+					fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
+						? (fetchError.data.message as string)
+						: 'Wystąpił nieoczekiwany błąd'
+				setError('root', { message: messageError })
+			} else {
+				setError('root', { message: 'Wystąpił nieoczekiwany bład' })
 			}
 		}
 	}
-	
+
 	return (
 		<div className={styles.logInContainer}>
 			<div className={styles.loginWrapper}>

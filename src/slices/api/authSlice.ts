@@ -7,22 +7,20 @@ interface SetDataType {
 	id: string
 	avatar: string
 }
-let name =''
+let name = ''
 let id = ''
-let avatar =''
-const stored = localStorage.getItem("user")
-
-if(stored){
+let avatar = ''
+const stored = localStorage.getItem('user')
+if (stored) {
 	try {
-		const decoded = JSON.parse(atob(stored))
+		const decoded = JSON.parse(stored)
+		
 		name = decoded.name || ''
 		id = decoded.id || ''
 		avatar = decoded.avatar || ''
 	} catch (error) {
-		console.warn('Błąd podczas dekodowania usera z localStorage:',error)
+		console.warn('Błąd podczas dekodowania usera z localStorage:', error)
 	}
-
-
 }
 
 const initialState: SetDataType = {
@@ -42,14 +40,17 @@ export const authSlice = createSlice({
 		},
 		setData: (state, action: PayloadAction<SetDataType>) => {
 			const { name, id, avatar } = action.payload
-			
 			state.name = name
 			state.id = id
 			state.avatar = avatar
 
-			const encoded = btoa(JSON.stringify({name,id,avatar}))
+			try {
+				const encoded = JSON.stringify({ name, id, avatar })
 
-			localStorage.setItem('user', encoded)
+				localStorage.setItem('user', encoded)
+			} catch (error) {
+				console.log('Nie udało się zapisać w localStorage:', error)
+			}
 		},
 
 		setLogout: state => {

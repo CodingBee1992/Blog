@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setData, setLogin } from '../../../slices/api/authSlice'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 const loginSchema = z.object({
 	email: z.email(),
 	password: z.string().min(8),
@@ -17,6 +18,7 @@ type loginFields = z.infer<typeof loginSchema>
 
 const LoginPageTemplate = () => {
 	const [logIn, { isSuccess }] = useLoginMutation()
+
 	const dispatch = useDispatch()
 
 	const navigate = useNavigate()
@@ -24,10 +26,12 @@ const LoginPageTemplate = () => {
 		register,
 		handleSubmit,
 		setError,
+		clearErrors,
 		formState: { isSubmitting, errors },
 	} = useForm<loginFields>({
 		resolver: zodResolver(loginSchema),
 	})
+
 	useEffect(() => {
 		if (isSuccess) {
 			navigate('/')
@@ -38,11 +42,22 @@ const LoginPageTemplate = () => {
 			await new Promise(resolve => setTimeout(resolve, 2000))
 
 			const res = await logIn({ ...data }).unwrap()
-			
+
 			dispatch(setLogin(true))
 			dispatch(setData(res))
-		} catch {
-			setError('root', { message: 'Fill all fields' })
+
+			clearErrors()
+		} catch (error: unknown) {
+			if (typeof error === 'object' && error !== null) {
+				const fetchError = error as FetchBaseQueryError
+				const messageError =
+					fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
+						? (fetchError.data.message as string)
+						: 'Wystąpił nieoczekiwany błąd'
+				setError('root', { message: messageError })
+			} else {
+				setError('root', { message: 'Wystąpił nieoczekiwany bład' })
+			}
 		}
 	}
 
@@ -67,6 +82,7 @@ const LoginPageTemplate = () => {
 						{errors.email && <span>{errors.email.message}</span>}
 						<input {...register('password')} type="password" placeholder="Enter your Password" />
 						{errors.password && <span>{errors.password.message}</span>}
+						{errors.root && <span>{errors.root.message}</span>}
 
 						<button disabled={isSubmitting} type="submit" className={styles.signInButton}>
 							{isSubmitting ? 'SigIn...' : 'SigIn'}

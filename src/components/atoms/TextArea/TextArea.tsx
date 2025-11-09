@@ -6,8 +6,8 @@ import z from 'zod'
 import { useCreateCommentMutation } from '../../../slices/api/commentSlice'
 interface TextAreaProps {
 	styles: Record<string, string>
-	id?: number
-	postId?: number
+	parentId?: string | null
+	postId?: string | null
 }
 
 const schemaComment = z.object({
@@ -16,7 +16,7 @@ const schemaComment = z.object({
 
 type commentFields = z.infer<typeof schemaComment>
 
-const TextArea = ({ styles, id, postId }: TextAreaProps) => {
+const TextArea = ({ styles, parentId, postId }: TextAreaProps) => {
 	const [createComment] = useCreateCommentMutation()
 
 	const {
@@ -31,8 +31,9 @@ const TextArea = ({ styles, id, postId }: TextAreaProps) => {
 	const onSubmit: SubmitHandler<commentFields> = async data => {
 		try {
 			await new Promise(resolve => setTimeout(resolve, 2000))
-			const comment = { ...data, parentId: id || null }
+			const comment = { ...data, parentId: parentId || null }
 			console.log(comment)
+			console.log(parentId)
 			await createComment({ postId, ...comment })
 			reset()
 		} catch {

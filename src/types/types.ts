@@ -56,9 +56,9 @@ export interface ArticleContentProps {
 }
 
 export interface CommentsDataProps {
-	id: number
-	postId: number
-	parentId: number | null
+	_id: string
+	postId: string | null
+	parentId: string | null
 	author:{name:string,avatar:string}
 	comment:string
 	createdAt:string

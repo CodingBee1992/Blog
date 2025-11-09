@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 
-const Comment = ({ id, postId, parentId, author, comment, createdAt, children }: CommentsDataProps) => {
+const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }: CommentsDataProps) => {
 	const comRef = useRef<HTMLDivElement>(null)
 	const { isLogged } = useSelector((state: RootState) => state.auth)
 	const [showReply, setShowReply] = useState<boolean>(false)
@@ -29,7 +29,7 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 		}
 	}, [isLogged])
 	return (
-		<div ref={comRef} className={styles.commentContainer} id={`${id}`} data-postid={postId} data-parentid={parentId}>
+		<div ref={comRef} className={styles.commentContainer} id={`${_id}`} data-postid={postId} data-parentid={parentId}>
 			<div className={styles.commentAvatar}>
 				<img src={author.avatar} alt="" className={styles.authorAvatar} />
 			</div>
@@ -55,13 +55,13 @@ const Comment = ({ id, postId, parentId, author, comment, createdAt, children }:
 				<div className={styles.commentText}>
 					<p>{comment}</p>
 				</div>
-				{showReply && <TextArea styles={styles} id={id} postId={postId} />}
+				{showReply && <TextArea styles={styles} parentId={_id} postId={postId} />}
 				{children && children.length > 0 && (
 					<div>
-						{children.map(({ id, postId, parentId, author, comment, createdAt, children }) => (
+						{children.map(({ _id, postId, parentId, author, comment, createdAt, children }) => (
 							<Comment
-								key={id}
-								id={id}
+								key={_id}
+								_id={_id}
 								postId={postId}
 								parentId={parentId}
 								author={author}

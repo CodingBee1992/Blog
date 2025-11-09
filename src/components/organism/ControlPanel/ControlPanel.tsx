@@ -24,7 +24,7 @@ const ControlPanel = <T extends HTMLDivElement>({
 	openCloseUserMenu,
 }: ControlPanelProps<T>) => {
 	const { isLogged, name, avatar } = useSelector((state: RootState) => state.auth)
-
+	
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const [logOut, { isSuccess }] = useLogOutMutation()
@@ -34,7 +34,7 @@ const ControlPanel = <T extends HTMLDivElement>({
 		if (isSuccess) {
 			const timer = setTimeout(() => {
 				navigate('/')
-				window.scrollTo(0,0)
+				window.scrollTo({ top: 0, behavior: 'instant' })
 			}, 300)
 
 			return () => clearTimeout(timer)
@@ -51,7 +51,7 @@ const ControlPanel = <T extends HTMLDivElement>({
 			console.log('Error during logut:', error)
 		}
 	}
-
+	
 	return (
 		<div
 			className={styles.controlPanelContainer}
@@ -62,24 +62,23 @@ const ControlPanel = <T extends HTMLDivElement>({
 					<button onClick={() => openCloseUserMenu?.()} className={styles.signInBtn}>
 						Sign In
 					</button>
-					
-						<div ref={userRef} className={styles.controlContainer}>
-							<AnchorLink className={styles.anchorLink} href="/login">
-								Sign In
+
+					<div ref={userRef} className={styles.controlContainer }>
+						<AnchorLink className={styles.anchorLink} href="/login">
+							Sign In
+						</AnchorLink>
+						<div className={styles.signUpContainer}>
+							<span className={styles.signUpSpan}>Don't have an Account?</span>
+							<AnchorLink className={styles.anchorLink} href="/registration">
+								Sign Up
 							</AnchorLink>
-							<div className={styles.signUpContainer}>
-								<span className={styles.signUpSpan}>Don't have an Account?</span>
-								<AnchorLink className={styles.anchorLink} href="/registration">
-									Sign Up
-								</AnchorLink>
-							</div>
 						</div>
-					
+					</div>
 				</>
 			) : (
 				<>
 					<div className={styles.authorInfo} onClick={() => openCloseUserMenu?.()}>
-						<img src={avatar} alt="" className={styles.authorAvatar} />
+						<img src={`${avatar}`} alt="Avatar" className={styles.authorAvatar} />
 						<span className={styles.author}>{name}</span>
 					</div>
 					<div ref={userRef} className={styles.controlSettings}>
