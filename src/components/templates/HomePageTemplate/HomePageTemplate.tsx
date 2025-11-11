@@ -5,7 +5,7 @@ const HomePageTemplate = () => {
 	return (
 		<>
 			<HeroSection />
-            <PostsContent />
+			<PostsContent />
 		</>
 	)
 }

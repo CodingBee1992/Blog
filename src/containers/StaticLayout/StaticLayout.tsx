@@ -9,7 +9,7 @@ import type { RootState } from '../../store'
 import Footer from '../Footer/Footer'
 import useWindowSize from '../../hooks/useWindowSize'
 import { SinglePostProvider } from '../../slices/createPostContext'
-
+import { ToastContainer } from 'react-toastify'
 const Navigation = lazy(() => import('../Navigation/Navigation'))
 
 const StaticLayout = () => {
@@ -26,7 +26,6 @@ const StaticLayout = () => {
 		}
 	}, [isLoading])
 
-	
 	useEffect(() => {
 		if (!isLoading) {
 			Aos.refresh()
@@ -40,6 +39,7 @@ const StaticLayout = () => {
 	return (
 		<SinglePostProvider>
 			<div data-aos="fade-zoom-in">
+				<ToastContainer />
 				<Navigation />
 				<div>
 					<Outlet />

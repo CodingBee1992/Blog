@@ -6,7 +6,9 @@
 
 		.commentInfo {
 			display: flex;
+			align-items: center;
 			justify-content: space-between;
+			gap: 1rem;
 
 			.commentAuthor {
 				font-size: var(--text-Size);
@@ -16,18 +18,18 @@
 			}
 			.commentMeta {
 				.commentTime {
-					margin-bottom: var(--vspace-0_25);
 					font-size: calc(var(--text-Size) * 0.7778);
 					text-transform: uppercase;
 					letter-spacing: 0.1rem;
+					text-align: right;
 					color: var(--color-text-light);
 				}
 				.commentReply {
 					position: relative;
+					top: 10px;
 					display: flex;
 					flex-direction: column;
 					align-items: end;
-					// justify-self: end;
 
 					.commentReplybButton {
 						position: absolute;
@@ -123,7 +125,11 @@
 			}
 			.commentError {
 				font-size: var(--text-xs);
-				color: red;
+				color: rgb(255, 0, 0);
+			}
+			.resMessage {
+				font-size: var(--text-xs);
+				color: rgb(0, 255, 140);
 			}
 			.addComment {
 				margin-top: var(--vspace-1);
@@ -151,15 +157,17 @@
 
 	.commentAvatar {
 		position: absolute;
+
 		left: 0;
 		display: block;
 		width: 64px;
 		height: 64px;
 
-		img {
+		.authorAvatar {
 			width: 100%;
 			min-height: 100%;
 			border-radius: 100%;
+			border: 2px solid #d3d3d3;
 			object-fit: cover;
 		}
 	}
@@ -190,5 +198,66 @@
 		transform: translateX(0);
 
 		opacity: 1;
+	}
+}
+
+@media (max-width: 800px) {
+	.commentContainer {
+		.commentContent {
+			padding-left: 14%;
+		}
+		.commentLeft {
+			padding-left: 5%;
+		}
+	}
+}
+@media (max-width: 700px) {
+	.commentContainer {
+		.commentAvatar {
+			display: none;
+		}
+		.commentContent {
+			padding-left: 0;
+
+			.commentInfo {
+				flex-direction: column;
+				align-items: start;
+
+				.commentMeta {
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+					margin-bottom: var(--vspace-0_25);
+					width: 100%;
+					.commentTime {
+						font-size: var(--text-xs);
+					}
+					.commentReply {
+						
+						top: 0;
+						display: flex;
+						flex-direction: column;
+						
+
+						.commentReplybButton {
+							position: static;
+						}
+						.commentHideButton {
+							position: absolute;
+							top: -50%;
+							width: 30px;
+							height: 30px;
+
+							
+						}
+						
+						
+					}
+				}
+			}
+		}
+		.commentLeft {
+			padding-left: 5%;
+		}
 	}
 }

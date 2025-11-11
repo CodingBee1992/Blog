@@ -14,26 +14,12 @@ import { useEffect, useState } from 'react'
 const CommentsContent = () => {
 	const { search } = useLocation()
 	const query = new URLSearchParams(search)
-	const id = query.get('id')
-	const { data: postComments } = useFetchCommentsQuery(id!, { skip: !id })
+	const postId = query.get('id')
+	const { data: postComments } = useFetchCommentsQuery(postId!, { skip: !postId })
 	
 	const { isLogged } = useSelector((state: RootState) => state.auth)
-
-	// const postComments = commentsData.filter(item => item.postId === id)
-
-	// const map = new Map<number, CommentsDataProps>()
-	// const roots: CommentsDataProps[] = []
-
-	// postComments.forEach((c: CommentsDataProps) => map.set(c.id, { ...c, children: [] }))
-	// postComments.forEach((c: { parentId: number; id: number }) => {
-	// 	if (c.parentId) {
-	// 		const parent = map.get(c.parentId)
-
-	// 		if (parent) parent.children?.push(map.get(c.id)!)
-	// 	} else {
-	// 		roots.push(map.get(c.id)!)
-	// 	}
-	// })
+	
+	
 
 	const [roots, setRoots] = useState<CommentsDataProps[]>([])
 
@@ -74,7 +60,7 @@ const CommentsContent = () => {
 								<Comment
 									key={_id}
 									_id={_id}
-									postId={id}
+									postId={postId}
 									parentId={parentId}
 									author={author}
 									comment={comment}
@@ -90,7 +76,7 @@ const CommentsContent = () => {
 					{isLogged ? (
 						<>
 							<h3>Add Comment</h3>
-							<TextArea styles={styles} postId={id} />
+							<TextArea styles={styles} postId={postId} />
 						</>
 					) : (
 						<>

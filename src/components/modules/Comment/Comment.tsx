@@ -22,7 +22,11 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 			setShowReply(true)
 		}
 	}
-
+	const dataMessage = new Date(createdAt).toLocaleDateString('en-EN', {
+		day: '2-digit',
+		month: 'long',
+		year: 'numeric',
+	})
 	useEffect(() => {
 		if (isLogged && aRef.current) {
 			aRef.current.classList.remove(styles.commentLogInShow)
@@ -37,7 +41,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 				<div className={styles.commentInfo}>
 					<div className={styles.commentAuthor}>{author.name}</div>
 					<div className={styles.commentMeta}>
-						<div className={styles.commentTime}>{createdAt}</div>
+						<div className={styles.commentTime}>{dataMessage}</div>
 						<div className={styles.commentReply}>
 							{!showReply ? (
 								<button className={styles.commentReplybButton} onClick={e => handleReply(e)}>
@@ -55,10 +59,9 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 				<div className={styles.commentText}>
 					<p>{comment}</p>
 				</div>
-				{showReply && <TextArea styles={styles} parentId={_id} postId={postId} />}
 				{children && children.length > 0 && (
 					<div>
-						{children.map(({ _id, postId, parentId, author, comment, createdAt, children }) => (
+						{children.map(({ _id, parentId, author, comment, createdAt, children }) => (
 							<Comment
 								key={_id}
 								_id={_id}
@@ -72,6 +75,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 						))}
 					</div>
 				)}
+				{showReply && <TextArea styles={styles} parentId={_id} postId={postId} setShowReply={setShowReply} />}
 			</div>
 		</div>
 	)

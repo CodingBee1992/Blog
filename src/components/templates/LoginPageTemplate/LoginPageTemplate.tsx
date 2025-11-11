@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import { setData, setLogin } from '../../../slices/api/authSlice'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+
 const loginSchema = z.object({
 	email: z.email(),
 	password: z.string().min(8),
@@ -39,13 +40,13 @@ const LoginPageTemplate = () => {
 	}, [isSuccess, navigate])
 	const onSubmit: SubmitHandler<loginFields> = async data => {
 		try {
-			await new Promise(resolve => setTimeout(resolve, 2000))
+			// await new Promise(resolve => setTimeout(resolve, 2000))
 
 			const res = await logIn({ ...data }).unwrap()
 
 			dispatch(setLogin(true))
 			dispatch(setData(res))
-
+			
 			clearErrors()
 		} catch (error: unknown) {
 			if (typeof error === 'object' && error !== null) {
