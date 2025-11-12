@@ -59,8 +59,12 @@ export interface CommentsDataProps {
 	_id: string
 	postId: string | null
 	parentId: string | null
-	author:{name:string,avatar:string}
-	comment:string
-	createdAt:string
-	children?:CommentsDataProps[]
+	author: {
+		_id: string
+		name: string
+		avatar: string
+	}
+	comment: string
+	createdAt: string
+	children?: CommentsDataProps[]
 }

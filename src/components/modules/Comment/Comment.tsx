@@ -7,14 +7,25 @@ import type { RootState } from '../../../store'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 
 const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }: CommentsDataProps) => {
-	const comRef = useRef<HTMLDivElement>(null)
-	const { isLogged } = useSelector((state: RootState) => state.auth)
+	const comRef = useRef<HTMLDivElement | null>(null)
+	const { isLogged, id } = useSelector((state: RootState) => state.auth)
 	const [showReply, setShowReply] = useState<boolean>(false)
+	const [isUpdating, setIsUpdating] = useState<boolean>(false)
+	const [updatingText,setUpdatingText]=useState<string | undefined>('')
 	const aRef = useRef<HTMLAnchorElement | null>(null)
+	const crudRef = useRef<HTMLDivElement | null>(null)
+	const textRef = useRef<HTMLDivElement | null>(null)
+	const authorPost = id === author._id
+	
 	const handleReply = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
-
 		const logIn = target.nextElementSibling
+
+		const crud = document.querySelectorAll(`.${styles.deleteUpdateBtns}`)
+
+		if (crud) {
+			crud.forEach(item => item.classList.remove(styles.showCrud))
+		}
 
 		if (!isLogged) {
 			if (logIn) logIn.classList.add(styles.commentLogInShow)
@@ -22,6 +33,23 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 			setShowReply(true)
 		}
 	}
+	const handleShowCrud = (e: MouseEvent<HTMLSpanElement>) => {
+		const target = e.target as HTMLSpanElement
+
+		const sibling = target.nextElementSibling
+
+		const crud = document.querySelectorAll(`.${styles.deleteUpdateBtns}`)
+		if (crud && !sibling?.classList.contains(styles.showCrud)) {
+			crud.forEach(item => item.classList.remove(styles.showCrud))
+		}
+
+		if (!sibling?.classList.contains(styles.showCrud)) {
+			sibling?.classList.add(styles.showCrud)
+		} else {
+			sibling?.classList.remove(styles.showCrud)
+		}
+	}
+
 	const dataMessage = new Date(createdAt).toLocaleDateString('en-EN', {
 		day: '2-digit',
 		month: 'long',
@@ -32,6 +60,35 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 			aRef.current.classList.remove(styles.commentLogInShow)
 		}
 	}, [isLogged])
+
+	useEffect(() => {
+		const globalHideCrud = (e: globalThis.MouseEvent) => {
+			const el = crudRef.current
+			const target = e.target as HTMLElement
+
+			// const crud = document.querySelectorAll(`.${styles.deleteUpdateBtns}`)
+			// if (
+			// 	!target.classList.contains(styles.showCrud) &&
+			// 	!target.classList.contains(styles.deleteUpdateMenu) &&
+			// 	!target.classList.contains(styles.updateBtn) &&
+			// 	!target.classList.contains(styles.deleteBtn)
+			// ) {
+			// 	crud.forEach(item => item.classList.remove(styles.showCrud))
+			// }
+
+			if (
+				!el?.contains(target) &&
+				el?.classList.contains(styles.showCrud) &&
+				!target.classList.contains(styles.deleteUpdateMenu)
+			) {
+				el?.classList.remove(styles.showCrud)
+			}
+		}
+		window.addEventListener('click', globalHideCrud)
+
+		return () => window.removeEventListener('click', globalHideCrud)
+	}, [])
+
 	return (
 		<div ref={comRef} className={styles.commentContainer} id={`${_id}`} data-postid={postId} data-parentid={parentId}>
 			<div className={styles.commentAvatar}>
@@ -42,23 +99,65 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 					<div className={styles.commentAuthor}>{author.name}</div>
 					<div className={styles.commentMeta}>
 						<div className={styles.commentTime}>{dataMessage}</div>
-						<div className={styles.commentReply}>
-							{!showReply ? (
-								<button className={styles.commentReplybButton} onClick={e => handleReply(e)}>
-									Reply
-								</button>
-							) : (
-								<span className={styles.commentHideButton} onClick={() => setShowReply(false)}></span>
+						<div className={styles.commentCrud}>
+							<div className={styles.commentReply}>
+								{!showReply ? (
+									<button className={styles.commentReplybButton} onClick={e => handleReply(e)}>
+										Reply
+									</button>
+								) : (
+									<span
+										className={styles.commentHideButton}
+										onClick={() => {
+											setShowReply(false)
+											setIsUpdating(false)
+										}}></span>
+								)}
+								<AnchorLink ref={aRef} href="/login" className={styles.commentLogIn}>
+									Log In to Reply
+								</AnchorLink>
+							</div>
+							{isLogged && authorPost && !showReply && (
+								<div className={styles.deleteUpdateContainer}>
+									<span
+										className={styles.deleteUpdateMenu}
+										onClick={e => {
+											handleShowCrud(e)
+										}}>
+										...
+									</span>
+									<div ref={crudRef} className={styles.deleteUpdateBtns}>
+										<button
+											className={styles.updateBtn}
+											onClick={() => {
+												setShowReply(true)
+												setIsUpdating(true)
+												setUpdatingText(textRef.current?.textContent)
+											}}>
+											update
+										</button>
+										<button className={styles.deleteBtn}>delete</button>
+									</div>
+								</div>
 							)}
-							<AnchorLink ref={aRef} href="/login" className={styles.commentLogIn}>
-								Log In to Reply
-							</AnchorLink>
 						</div>
 					</div>
 				</div>
-				<div className={styles.commentText}>
+				<div ref={textRef} className={styles.commentText}>
 					<p>{comment}</p>
 				</div>
+				{showReply && (
+					<TextArea
+						styles={styles}
+						parentId={_id}
+						postId={postId}
+						setShowReply={setShowReply}
+						comRef={comRef}
+						isUpdating={isUpdating}
+						updatingText={updatingText}
+						setIsUpdating={setIsUpdating}
+					/>
+				)}
 				{children && children.length > 0 && (
 					<div>
 						{children.map(({ _id, parentId, author, comment, createdAt, children }) => (
@@ -75,7 +174,6 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 						))}
 					</div>
 				)}
-				{showReply && <TextArea styles={styles} parentId={_id} postId={postId} setShowReply={setShowReply} />}
 			</div>
 		</div>
 	)

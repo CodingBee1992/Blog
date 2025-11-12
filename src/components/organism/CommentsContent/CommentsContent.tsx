@@ -66,6 +66,7 @@ const CommentsContent = () => {
 									comment={comment}
 									createdAt={createdAt}
 									children={children}
+									
 								/>
 							))}
 					</ol>
