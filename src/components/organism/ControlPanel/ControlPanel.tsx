@@ -28,7 +28,7 @@ const ControlPanel = <T extends HTMLDivElement>({
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const [logOut, { isSuccess }] = useLogOutMutation()
-	const isAdmin = true
+	const {isAdmin} = useSelector((state:RootState)=> state.auth)
 
 	useEffect(() => {
 		if (isSuccess) {

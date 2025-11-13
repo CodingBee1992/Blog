@@ -5,18 +5,24 @@ import TextArea from '../../atoms/TextArea/TextArea'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import { useDeleteCommentMutation, useFetchCommentsQuery } from '../../../slices/api/commentSlice'
 
 const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }: CommentsDataProps) => {
+	const { isAdmin } = useSelector((state: RootState) => state.auth)
 	const comRef = useRef<HTMLDivElement | null>(null)
 	const { isLogged, id } = useSelector((state: RootState) => state.auth)
 	const [showReply, setShowReply] = useState<boolean>(false)
 	const [isUpdating, setIsUpdating] = useState<boolean>(false)
-	const [updatingText,setUpdatingText]=useState<string | undefined>('')
+	const [updatingText, setUpdatingText] = useState<string | undefined>('')
+	const [resMessage, setResMessage] = useState<string>('')
+	const { refetch } = useFetchCommentsQuery(postId!)
+	const [deleteComment] = useDeleteCommentMutation()
 	const aRef = useRef<HTMLAnchorElement | null>(null)
 	const crudRef = useRef<HTMLDivElement | null>(null)
 	const textRef = useRef<HTMLDivElement | null>(null)
 	const authorPost = id === author._id
-	
+
 	const handleReply = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
 		const logIn = target.nextElementSibling
@@ -66,16 +72,6 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 			const el = crudRef.current
 			const target = e.target as HTMLElement
 
-			// const crud = document.querySelectorAll(`.${styles.deleteUpdateBtns}`)
-			// if (
-			// 	!target.classList.contains(styles.showCrud) &&
-			// 	!target.classList.contains(styles.deleteUpdateMenu) &&
-			// 	!target.classList.contains(styles.updateBtn) &&
-			// 	!target.classList.contains(styles.deleteBtn)
-			// ) {
-			// 	crud.forEach(item => item.classList.remove(styles.showCrud))
-			// }
-
 			if (
 				!el?.contains(target) &&
 				el?.classList.contains(styles.showCrud) &&
@@ -88,7 +84,25 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 
 		return () => window.removeEventListener('click', globalHideCrud)
 	}, [])
+	const handleDeleteComment = async () => {
+		try {
+			const res = await deleteComment({ commentId: _id, postId }).unwrap()
 
+			setResMessage(res?.message)
+
+			await refetch()
+		} catch (error: unknown) {
+			if (typeof error === 'object' && error !== null) {
+				const fetchError = error as FetchBaseQueryError
+				const errorMessage =
+					fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
+						? (fetchError.data.message as string)
+						: 'Something goes wrong'
+
+				setResMessage(errorMessage)
+			}
+		}
+	}
 	return (
 		<div ref={comRef} className={styles.commentContainer} id={`${_id}`} data-postid={postId} data-parentid={parentId}>
 			<div className={styles.commentAvatar}>
@@ -117,7 +131,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 									Log In to Reply
 								</AnchorLink>
 							</div>
-							{isLogged && authorPost && !showReply && (
+							{isLogged && (authorPost || isAdmin) && !showReply && (
 								<div className={styles.deleteUpdateContainer}>
 									<span
 										className={styles.deleteUpdateMenu}
@@ -136,7 +150,9 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 											}}>
 											update
 										</button>
-										<button className={styles.deleteBtn}>delete</button>
+										<button className={styles.deleteBtn} onClick={() => handleDeleteComment()}>
+											delete
+										</button>
 									</div>
 								</div>
 							)}
