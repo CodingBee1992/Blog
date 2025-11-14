@@ -83,8 +83,8 @@ const ControlPanel = <T extends HTMLDivElement>({
 					</div>
 					<div ref={userRef} className={styles.controlSettings}>
 						{isAdmin && (
-							<AnchorLink className={styles.controlLinks} href="/dashboard">
-								Dashboard
+							<AnchorLink className={styles.controlLinks} href="/admin">
+								Admin Panel
 							</AnchorLink>
 						)}
 						<AnchorLink className={styles.controlLinks} href="/settings">

@@ -1,5 +1,9 @@
 .menu {
+	
 	display: flex;
+	width: 92%;
+	max-width: 1400px;
+	margin: 0 auto;
 	gap: 2rem;
 	padding: 0 2.4rem;
 
@@ -26,13 +30,13 @@
 		&:hover .arrow {
 			rotate: 180deg;
 		}
-		.menuElement{
+		.menuElement {
 			pointer-events: none;
 			.title {
 				padding-right: 1rem;
 				pointer-events: none;
 			}
-			
+
 			.arrow {
 				transition: all 0.3s ease-in-out;
 				pointer-events: none;

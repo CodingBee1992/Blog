@@ -97,7 +97,7 @@ const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 	}
 
 	return (
-		<div ref={menuRef} className={`${styles.menu} row`}>
+		<div ref={menuRef} className={`${styles.menu}`}>
 			{dataMenu.map((item: MenuTypes, index: number) => {
 				return (
 					<MenuElement

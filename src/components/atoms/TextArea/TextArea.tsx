@@ -57,38 +57,7 @@ const TextArea = ({
 	})
 
 	const onSubmit: SubmitHandler<commentFields> = async data => {
-		// if (isUpdating) {
-		// 	try {
-		// 		const comment = { ...data,commentId: parentId}
 
-		// 		const res = await updateComment({ postId, ...comment }).unwrap()
-
-		// 		setResMessage(res?.message)
-		// 		if (parentId) {
-		// 			setTimeout(() => {
-		// 				setShowReply?.(false)
-		// 			}, 1000)
-		// 		}
-		// 		await refetch()
-
-		// 		setIsUpdating?.(false)
-		// 		reset()
-		// 	} catch (error: unknown) {
-		// 		if (typeof error === 'object' && error !== null) {
-		// 			const fetchError = error as FetchBaseQueryError
-		// 			const messageError =
-		// 				fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
-		// 					? (fetchError.data.message as string)
-		// 					: 'Wystąpił nieoczekiwany błąd'
-
-		// 			setError('root', { message: messageError })
-		// 		} else {
-		// 			setError('root', { message: 'Wystąpił nieoczekiwany bład' })
-		// 		}
-		// 	}
-
-		// 	return
-		// }
 
 		try {
 			if (isUpdating) {

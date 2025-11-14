@@ -19,8 +19,14 @@ import NaturePage from './components/pages/categories/NaturePage/NaturePage'
 import CulturePage from './components/pages/categories/CulturePage/CulturePage'
 import LoginPage from './components/pages/LoginPage/LoginPage'
 import RegistrationPage from './components/pages/RegistrationPage/RegistrationPage'
+import AdminPanelPage from './components/pages/AdminPanelPage/AdminPanelPage'
 
+import AdminRoute from './containers/StaticLayout/AdminRoute'
+import CreatePostPage from './components/pages/CreatePostPage/CreatePostPage'
+import AdminPanelLayout from './containers/StaticLayout/AdminPanelLayout'
+import UserRoute from './containers/StaticLayout/UserRoute'
 const App = () => {
+	
 	return (
 		<Router basename="/">
 			<Routes>
@@ -43,8 +49,20 @@ const App = () => {
 					<Route path="about" element={<AboutPage />} />
 					<Route path="contact" element={<ContactPage />} />
 				</Route>
-				<Route path="/login" element={<LoginPage />} />
-				<Route path="/registration" element={<RegistrationPage />} />
+				<Route  element={<UserRoute/>}>
+					<Route path="/login" element={<LoginPage />} />
+					<Route path="/registration" element={<RegistrationPage />} />
+				</Route>
+				<Route
+					path="/admin"
+					element={
+						<AdminRoute>
+							<AdminPanelLayout />
+						</AdminRoute>
+					}>
+					<Route path="" element={<AdminPanelPage />} />
+					<Route path="createpost" element={<CreatePostPage />} />
+				</Route>
 			</Routes>
 		</Router>
 	)

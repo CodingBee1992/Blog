@@ -23,6 +23,7 @@ const LoginPageTemplate = () => {
 	const dispatch = useDispatch()
 
 	const navigate = useNavigate()
+	
 	const {
 		register,
 		handleSubmit,
@@ -46,7 +47,7 @@ const LoginPageTemplate = () => {
 
 			dispatch(setLogin(true))
 			dispatch(setData(res))
-			
+
 			clearErrors()
 		} catch (error: unknown) {
 			if (typeof error === 'object' && error !== null) {

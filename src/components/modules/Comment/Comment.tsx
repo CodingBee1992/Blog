@@ -22,7 +22,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 	const crudRef = useRef<HTMLDivElement | null>(null)
 	const textRef = useRef<HTMLDivElement | null>(null)
 	const authorPost = id === author._id
-
+	
 	const handleReply = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
 		const logIn = target.nextElementSibling
@@ -44,6 +44,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 
 		const sibling = target.nextElementSibling
 
+		
 		const crud = document.querySelectorAll(`.${styles.deleteUpdateBtns}`)
 		if (crud && !sibling?.classList.contains(styles.showCrud)) {
 			crud.forEach(item => item.classList.remove(styles.showCrud))
