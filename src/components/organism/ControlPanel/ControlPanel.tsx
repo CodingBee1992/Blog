@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
-import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
+
 import { useEffect, type MouseEvent, type RefObject } from 'react'
 import { setLogout } from '../../../slices/api/authSlice'
 import { useLogOutMutation } from '../../../slices/api/loginSlice'
 import { useNavigate } from 'react-router'
+import ControlPanelSignIn from '../../atoms/ControlPanelSignIn/ControlPanelSignIn'
+import ControlPanelUser from '../../atoms/ControlPanelUser/ControlPanelUser'
 
 interface ControlPanelProps<T extends HTMLElement> {
 	styles: Record<string, string>
@@ -23,12 +25,12 @@ const ControlPanel = <T extends HTMLDivElement>({
 	handleCloseMenu,
 	openCloseUserMenu,
 }: ControlPanelProps<T>) => {
-	const { isLogged, name, avatar } = useSelector((state: RootState) => state.auth)
-	
+	const { isLogged } = useSelector((state: RootState) => state.auth)
+
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const [logOut, { isSuccess }] = useLogOutMutation()
-	const {isAdmin} = useSelector((state:RootState)=> state.auth)
+	
 
 	useEffect(() => {
 		if (isSuccess) {
@@ -51,55 +53,17 @@ const ControlPanel = <T extends HTMLDivElement>({
 			console.log('Error during logut:', error)
 		}
 	}
-	
+
 	return (
 		<div
 			className={styles.controlPanelContainer}
 			data-element={index}
 			onClick={e => handleOpenCloseDropdown?.(e, index)}>
 			{!isLogged ? (
-				<>
-					<button onClick={() => openCloseUserMenu?.()} className={styles.signInBtn}>
-						Sign In
-					</button>
-
-					<div ref={userRef} className={styles.controlContainer }>
-						<AnchorLink className={styles.anchorLink} href="/login">
-							Sign In
-						</AnchorLink>
-						<div className={styles.signUpContainer}>
-							<span className={styles.signUpSpan}>Don't have an Account?</span>
-							<AnchorLink className={styles.anchorLink} href="/registration">
-								Sign Up
-							</AnchorLink>
-						</div>
-					</div>
-				</>
+				<ControlPanelSignIn styles={styles} openCloseUserMenu={openCloseUserMenu} userRef={userRef} />
 			) : (
-				<>
-					<div className={styles.authorInfo} onClick={() => openCloseUserMenu?.()}>
-						<img src={`${avatar}`} alt="Avatar" className={styles.authorAvatar} />
-						<span className={styles.author}>{name}</span>
-					</div>
-					<div ref={userRef} className={styles.controlSettings}>
-						{isAdmin && (
-							<AnchorLink className={styles.controlLinks} href="/admin">
-								Admin Panel
-							</AnchorLink>
-						)}
-						<AnchorLink className={styles.controlLinks} href="/settings">
-							Settings
-						</AnchorLink>
-
-						<button
-							className={styles.signOut}
-							onClick={() => {
-								signOut()
-							}}>
-							Sign Out
-						</button>
-					</div>
-				</>
+				<ControlPanelUser styles={styles} userRef={userRef} openCloseUserMenu={openCloseUserMenu} signOut={signOut} />
+				
 			)}
 		</div>
 	)

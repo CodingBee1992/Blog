@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router'
 import type { RootState } from '../../store'
@@ -11,8 +11,14 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
 	const { isLogged, isAdmin } = useSelector((state: RootState) => state.auth)
 	const [showMessage, setShowMessage] = useState<boolean>(false)
 	const [redirect, setRedirect] = useState<boolean>(false)
-
+	const prevLogged = useRef<boolean | null>(null)
 	useEffect(() => {
+		if (prevLogged.current === true && isLogged === false) {
+			setShowMessage(false)
+			prevLogged.current = isLogged
+			return
+		}
+
 		if (!isLogged || !isAdmin) {
 			setShowMessage(true)
 
@@ -20,10 +26,11 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
 				setRedirect(true)
 			}, 2000)
 			return () => clearTimeout(timer)
-		} else {
-			setShowMessage(false)
-			setRedirect(false)
 		}
+
+		setShowMessage(false)
+		setRedirect(false)
+		prevLogged.current = isLogged
 	}, [isAdmin, isLogged])
 
 	if (!isLogged && redirect) {
@@ -40,7 +47,7 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
 				<>
 					<div style={{ padding: '10rem', textAlign: 'center', color: 'white' }}>
 						<h2>Nie masz dostępu do tej strony</h2>
-						<p>Za chwilę zostaniesz przekierowany na stronę {!isLogged ? 'logowania':'główną'}</p>
+						<p>Za chwilę zostaniesz przekierowany na stronę {!isLogged ? 'logowania' : 'główną'}</p>
 					</div>
 				</>
 			)}

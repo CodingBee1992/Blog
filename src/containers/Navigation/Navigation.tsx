@@ -79,7 +79,7 @@ const Navigation = () => {
 
 	return (
 		<nav ref={navRef} className={styles.container}>
-			<Logo />
+			<Logo  styles={styles}/>
 			{size.width > 900 ? (
 				<DesktopNav navRef={navRef} dataMenu={dataNavigation} />
 			) : (

@@ -1,16 +1,45 @@
-import { Outlet } from "react-router"
-import AdminPanelSideBar from "../../components/organism/AdminPanelSideBar/AdminPanelSideBar"
-import Navigation from "../Navigation/Navigation"
+import { Outlet } from 'react-router'
+import SideBar from '../../components/organism/SideBar/SideBar'
 
+import styles from './AdminPanelLayout.module.scss'
 const AdminPanelLayout = () => {
 	return (
-		<>
-			<Navigation />
-			<div>
-				<AdminPanelSideBar />
-				<Outlet />
-			</div>
-		</>
+		<div className={styles.adminPanelLayoutContainer}>
+			<SideBar>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+				<div>Rico</div>
+			</SideBar>
+			<Outlet />
+		</div>
 	)
 }
 

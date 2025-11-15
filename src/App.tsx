@@ -25,6 +25,7 @@ import AdminRoute from './containers/StaticLayout/AdminRoute'
 import CreatePostPage from './components/pages/CreatePostPage/CreatePostPage'
 import AdminPanelLayout from './containers/StaticLayout/AdminPanelLayout'
 import UserRoute from './containers/StaticLayout/UserRoute'
+import SettingsLayout from './containers/StaticLayout/SettingsLayout'
 const App = () => {
 	
 	return (
@@ -62,6 +63,9 @@ const App = () => {
 					}>
 					<Route path="" element={<AdminPanelPage />} />
 					<Route path="createpost" element={<CreatePostPage />} />
+				</Route>
+				<Route path='/settings' element={<SettingsLayout/>}>
+
 				</Route>
 			</Routes>
 		</Router>

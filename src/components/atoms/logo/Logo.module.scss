@@ -1,18 +1,18 @@
-.logo {
-	position: absolute;
-	margin: 0;
-	top: calc(50% - 3px);
-	left: 2.5rem;
+// .logo {
+// 	position: absolute;
+// 	margin: 0;
+// 	top: calc(50% - 3px);
+// 	left: 2.5rem;
 
-	color: var(--logo-color);
-	font-size: var(--logo-Size);
-	font-weight: 600;
-	transform: translateY(-50%);
-	transition: all 0.3s ease-in-out;
-	z-index: 101;
+// 	color: var(--logo-color);
+// 	font-size: var(--logo-Size);
+// 	font-weight: 600;
+// 	transform: translateY(-50%);
+// 	transition: all 0.3s ease-in-out;
+// 	z-index: 101;
 
-	&:hover {
-		color: var(--logo-hover);
-		scale: 1.05;
-	}
-}
+// 	&:hover {
+// 		color: var(--logo-hover);
+// 		scale: 1.05;
+// 	}
+// }
