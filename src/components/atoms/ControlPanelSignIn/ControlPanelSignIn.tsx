@@ -1,16 +1,17 @@
-import type { RefObject } from "react"
-import AnchorLink from "../AnchorLink/AnchorLink"
 
-interface ControlPanelSignInProps <T extends HTMLElement> {
+import AnchorLink from "../AnchorLink/AnchorLink"
+import useMenuContext from "../../../hooks/useMenuContext"
+
+interface ControlPanelSignInProps {
     styles:Record<string,string>
-    userRef?: RefObject<T | null>
-    openCloseUserMenu?:()=> void
+    
 }
 
-const ControlPanelSignIn = <T extends HTMLDivElement> ({styles,openCloseUserMenu,userRef}:ControlPanelSignInProps<T>) => {
+const ControlPanelSignIn = ({styles}:ControlPanelSignInProps) => {
+	const {userRef,openCloseUserMenu} = useMenuContext()
 	return (
 		<>
-			<button onClick={() => openCloseUserMenu?.()} className={styles.signInBtn}>
+			<button onClick={() => openCloseUserMenu({userRef})} className={styles.signInBtn}>
 				Sign In
 			</button>
 

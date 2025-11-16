@@ -8,14 +8,13 @@ import ControlPanel from '../../../components/organism/ControlPanel/ControlPanel
 import useMenuContext from '../../../hooks/useMenuContext'
 
 interface MobileRefProps {
-	
 	dataMenu: MenuTypes[]
 }
 
-const MobileNav = ({ dataMenu  }: MobileRefProps) => {
-	const {mobileRef,navRef} = useMenuContext()
+const MobileNav = ({ dataMenu }: MobileRefProps) => {
+	const {handleOpenCloseMenu, mobileRef, navRef } = useMenuContext()
 	const location = useLocation()
-
+	
 	useEffect(() => {
 		if (location.pathname !== '/') {
 			navRef.current?.classList.add(styles.secondNavBgColor)
@@ -51,7 +50,7 @@ const MobileNav = ({ dataMenu  }: MobileRefProps) => {
 	return (
 		<div ref={mobileRef} className={styles.mobileContainer}>
 			<div className={styles.mobileElement}>
-				<CloseButton styles={styles}  />
+				<CloseButton styles={styles} handleClose={handleOpenCloseMenu}/>
 				<h2 className={styles.title}>Navigate to</h2>
 			</div>
 			<div className={styles.mobileLink}>
@@ -59,7 +58,6 @@ const MobileNav = ({ dataMenu  }: MobileRefProps) => {
 					styles={styles}
 					index={0}
 					// handleOpenCloseDropdown={handleOpenCloseDropdown}
-					
 				/>
 				{dataMenu.map((item: MenuTypes, index: number) => {
 					return (

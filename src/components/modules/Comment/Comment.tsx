@@ -14,7 +14,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 	const { isLogged, id } = useSelector((state: RootState) => state.auth)
 	const [showReply, setShowReply] = useState<boolean>(false)
 	const [isUpdating, setIsUpdating] = useState<boolean>(false)
-	const [updatingText, setUpdatingText] = useState<string | undefined>('')
+	const [updatingText, setUpdatingText] = useState<string | null | undefined>('')
 	const [resMessage, setResMessage] = useState<string>('')
 	const { refetch } = useFetchCommentsQuery(postId!)
 	const [deleteComment] = useDeleteCommentMutation()
@@ -22,7 +22,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 	const crudRef = useRef<HTMLDivElement | null>(null)
 	const textRef = useRef<HTMLDivElement | null>(null)
 	const authorPost = id === author._id
-	
+
 	const handleReply = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
 		const logIn = target.nextElementSibling
@@ -44,7 +44,6 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 
 		const sibling = target.nextElementSibling
 
-		
 		const crud = document.querySelectorAll(`.${styles.deleteUpdateBtns}`)
 		if (crud && !sibling?.classList.contains(styles.showCrud)) {
 			crud.forEach(item => item.classList.remove(styles.showCrud))
@@ -147,7 +146,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 											onClick={() => {
 												setShowReply(true)
 												setIsUpdating(true)
-												setUpdatingText(textRef.current?.textContent)
+												setUpdatingText(textRef?.current?.textContent)
 											}}>
 											update
 										</button>
@@ -171,7 +170,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 						setShowReply={setShowReply}
 						comRef={comRef}
 						isUpdating={isUpdating}
-						updatingText={updatingText}
+						updatingText={updatingText || null || undefined}
 						setIsUpdating={setIsUpdating}
 					/>
 				)}

@@ -10,7 +10,7 @@ import useMenuContext from '../../../hooks/useMenuContext'
 const MenuIcon = () => {
 	const size = useWindowSize()
 	const refBtn = useRef<HTMLButtonElement>(null)
-	const { mobileRef, handleOpenCloseMenu } = useMenuContext()
+	const {handleOpenCloseMenu } = useMenuContext()
 	useEffect(() => {
 		if (size.width <= 900) {
 			refBtn.current?.classList.add(styles.toggle)
@@ -20,7 +20,7 @@ const MenuIcon = () => {
 	}, [size])
 
 	return (
-		<button ref={refBtn} className={styles.btn} title="Menu" onClick={() => handleOpenCloseMenu({ mobileRef })}>
+		<button ref={refBtn} className={styles.btn} title="Menu" onClick={() => handleOpenCloseMenu()}>
 			<span className={styles.span}></span>
 		</button>
 	)

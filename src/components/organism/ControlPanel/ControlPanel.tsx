@@ -1,27 +1,21 @@
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
 
-import {  type RefObject } from 'react'
 import ControlPanelSignIn from '../../atoms/ControlPanelSignIn/ControlPanelSignIn'
 import ControlPanelUser from '../../atoms/ControlPanelUser/ControlPanelUser'
 import useMenuContext from '../../../hooks/useMenuContext'
 
-interface ControlPanelProps<T extends HTMLElement> {
+interface ControlPanelProps {
 	styles: Record<string, string>
 	index: number
-	userRef?: RefObject<T | null>
-	
-	
-	openCloseUserMenu?: () => void
+
 }
 
-const ControlPanel = <T extends HTMLDivElement>({
+const ControlPanel = ({
 	styles,
 	index,
-	userRef,
 	
-	openCloseUserMenu,
-}: ControlPanelProps<T>) => {
+}: ControlPanelProps) => {
 	const { isLogged } = useSelector((state: RootState) => state.auth)
 	const {handleOpenCloseDropdown}= useMenuContext()
 	
@@ -32,9 +26,9 @@ const ControlPanel = <T extends HTMLDivElement>({
 			data-element={index}
 			onClick={e => handleOpenCloseDropdown(e, index)}>
 			{!isLogged ? (
-				<ControlPanelSignIn styles={styles} openCloseUserMenu={openCloseUserMenu} userRef={userRef} />
+				<ControlPanelSignIn styles={styles} />
 			) : (
-				<ControlPanelUser styles={styles} userRef={userRef} openCloseUserMenu={openCloseUserMenu} />
+				<ControlPanelUser styles={styles} />
 			)}
 		</div>
 	)

@@ -1,26 +1,21 @@
 import { useSelector } from 'react-redux'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import type { RootState } from '../../../store'
-import type { RefObject } from 'react'
-import SignOutBtn from '../SingOutBtn/SignOutBtn'
 
-interface ControlPanelUserProps<T extends HTMLElement> {
+import SignOutBtn from '../SingOutBtn/SignOutBtn'
+import useMenuContext from '../../../hooks/useMenuContext'
+
+interface ControlPanelUserProps {
 	styles: Record<string, string>
-	userRef?: RefObject<T | null>
-	openCloseUserMenu?: () => void
 	
 }
 
-const ControlPanelUser = <T extends HTMLDivElement>({
-	styles,
-	userRef,
-	
-	openCloseUserMenu,
-}: ControlPanelUserProps<T>) => {
+const ControlPanelUser = ({ styles }: ControlPanelUserProps) => {
 	const { isAdmin, name, avatar } = useSelector((state: RootState) => state.auth)
+	const { userRef, openCloseUserMenu } = useMenuContext()
 	return (
 		<div className={styles.controlPanelUser}>
-			<div className={styles.authorInfo} onClick={() => openCloseUserMenu?.()}>
+			<div className={styles.authorInfo} onClick={() => openCloseUserMenu({ userRef })}>
 				<img src={`${avatar}`} alt="Avatar" className={styles.authorAvatar} />
 				<span className={styles.author}>{name}</span>
 			</div>
@@ -34,9 +29,7 @@ const ControlPanelUser = <T extends HTMLDivElement>({
 					Settings
 				</AnchorLink>
 
-				
-
-				<SignOutBtn styles={styles}/>
+				<SignOutBtn styles={styles} />
 			</div>
 		</div>
 	)

@@ -13,3 +13,10 @@
 .overflowActive {
 	overflow-y: scroll !important;
 }
+
+.displayVisibility {
+	visibility: visible !important;
+	opacity: 1 !important;
+
+	transform: scaleY(1) !important;
+}

@@ -1,13 +1,18 @@
-import { createContext, useRef, type MouseEvent, type ReactNode, type RefObject } from 'react'
+import { createContext, useEffect, useRef, type MouseEvent, type ReactNode, type RefObject } from 'react'
 import styles from './menuContext.module.scss'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { useLogOutMutation } from './api/loginSlice'
+import { setLogout } from './api/authSlice'
 interface MenuContextProps {
 	children: ReactNode
 }
 
 interface CreateContextProps {
-	handleOpenCloseMenu: (args: { mobileRef: RefObject<HTMLDivElement | null> }) => void
+	handleOpenCloseMenu: () => void
 	openCloseUserMenu: (args: { userRef: RefObject<HTMLDivElement | null> }) => void
 	handleOpenCloseDropdown: (e: MouseEvent<HTMLElement>, index: number) => void
+	signOut: () => void
 	navRef: RefObject<HTMLDivElement | null>
 	mobileRef: RefObject<HTMLDivElement | null>
 	userRef: RefObject<HTMLDivElement | null>
@@ -20,8 +25,12 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 	const mobileRef = useRef<HTMLDivElement>(null)
 	const userRef = useRef<HTMLDivElement>(null)
 
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const [logOut, { isSuccess }] = useLogOutMutation()
+
 	// Open Close mobile menu context
-	const handleOpenCloseMenu = ({ mobileRef }: { mobileRef: RefObject<HTMLDivElement | null> }) => {
+	const handleOpenCloseMenu = () => {
 		if (!mobileRef.current?.classList.contains(styles.showHide)) {
 			mobileRef.current?.classList.add(styles.showHide)
 
@@ -30,7 +39,6 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 			}, 100)
 		} else {
 			mobileRef.current?.classList.remove(styles.fadeIn)
-			console.log('ok')
 
 			setTimeout(() => {
 				mobileRef.current?.classList.remove(styles.showHide)
@@ -68,10 +76,56 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 		el.classList.toggle(styles.displayVisibility)
 	}
 
+	useEffect(() => {
+		const handleClickOutside = (e: globalThis.MouseEvent) => {
+			const el = userRef.current
+			const target = e.target as HTMLElement
+
+			if (!el || !target) return
+
+			if (
+				el.classList.contains(styles.displayVisibility) &&
+				!el.contains(target) &&
+				!target.classList.contains(styles.authorAvatar) &&
+				!target.classList.contains(styles.signInBtn)
+			) {
+				el.classList.remove(styles.displayVisibility)
+			}
+		}
+
+		window.addEventListener('mousedown', handleClickOutside)
+		return () => window.removeEventListener('mousedown', handleClickOutside)
+	}, [userRef])
+
+	useEffect(() => {
+		if (isSuccess) {
+			const timer = setTimeout(() => {
+				navigate('/')
+				window.scrollTo({ top: 0, behavior: 'instant' })
+			}, 300)
+
+			return () => clearTimeout(timer)
+		}
+	}, [isSuccess, navigate])
+
+	const signOut = async () => {
+		try {
+			const res = await logOut({}).unwrap()
+			console.log(res)
+
+			dispatch(setLogout())
+			// setTimeout(() => {
+			// }, 350)
+		} catch (error) {
+			console.log('Error during logout:', error)
+		}
+	}
+
 	const value: CreateContextProps = {
 		openCloseUserMenu,
 		handleOpenCloseMenu,
 		handleOpenCloseDropdown,
+		signOut,
 		navRef,
 		mobileRef,
 		userRef,
