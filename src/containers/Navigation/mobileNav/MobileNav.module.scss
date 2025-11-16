@@ -4,20 +4,19 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	align-items: center;
 	padding: 0 calc(2.5 * 2.5rem);
 	width: 100dvw;
 	height: 100dvh;
-	opacity: 1;
-	visibility: visible;
+	opacity: 0;
+	visibility: hidden;
 	transform: translateX(-100%);
 	background-color: var(--Bgc-navMobile);
 	transition: all 0.5s ease-in-out;
 	z-index: 1002;
 	overflow: hidden;
-	
 
 	.mobileElement {
 		display: flex;
@@ -116,7 +115,6 @@
 				font-weight: 600;
 				color: var(--menu-textColor);
 				pointer-events: none;
-				
 
 				.title {
 					color: var(--menu-textColor);
@@ -183,9 +181,10 @@
 			line-height: var(--lineHeight);
 			transition: all 0.3s ease-in-out;
 			overflow: hidden;
-			
+
 			cursor: pointer;
-			&:hover .signInBtn, &:hover .authorInfo .author {
+			&:hover .signInBtn,
+			&:hover .authorInfo .author {
 				color: var(--menu-textColorHover);
 			}
 			.signInBtn {
@@ -207,7 +206,6 @@
 				line-height: 1.8rem;
 
 				.anchorLink {
-					
 					display: flex;
 					align-items: center;
 					justify-content: center;
@@ -236,7 +234,7 @@
 			}
 			.authorInfo {
 				padding-left: 2rem;
-				.authorAvatar{
+				.authorAvatar {
 					display: none;
 				}
 				.author {
@@ -289,14 +287,15 @@
 				}
 			}
 		}
-		.active {
-			height: 100%;
-		}
+		// .active {
+		// 	height: 100%;
+		// }
 	}
 }
-.overflowActive {
-	overflow-y: scroll;
-}
+
+// .overflowActive {
+// 	overflow-y: scroll;
+// }
 .secondNavBgColor {
 	background-image: var(--Bgc-navSecond);
 }

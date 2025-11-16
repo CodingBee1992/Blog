@@ -10,6 +10,7 @@ import Footer from '../Footer/Footer'
 import useWindowSize from '../../hooks/useWindowSize'
 import { SinglePostProvider } from '../../slices/createPostContext'
 import { ToastContainer } from 'react-toastify'
+import { MenuProvider } from '../../slices/menuContext'
 const Navigation = lazy(() => import('../Navigation/Navigation'))
 
 const StaticLayout = () => {
@@ -38,6 +39,8 @@ const StaticLayout = () => {
 
 	return (
 		<SinglePostProvider>
+			<MenuProvider>
+
 			<div data-aos="fade-zoom-in">
 				<ToastContainer />
 				<Navigation />
@@ -46,6 +49,7 @@ const StaticLayout = () => {
 				</div>
 				<Footer />
 			</div>
+			</MenuProvider>
 		</SinglePostProvider>
 	)
 }

@@ -1,0 +1,15 @@
+.showHide {
+	display: flex !important;
+}
+.fadeIn {
+	transform: translateX(0) !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+}
+
+.active {
+	height: 100% !important;
+}
+.overflowActive {
+	overflow-y: scroll !important;
+}

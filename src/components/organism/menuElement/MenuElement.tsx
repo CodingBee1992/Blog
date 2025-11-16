@@ -4,6 +4,7 @@ import { ImgArrow } from '../../../assets/icons/nav/IconSvg'
 import type { MenuTypes } from '../../../containers/Navigation/dataNavigation/dataNavigation'
 // import styles from './MenuElement.module.scss'
 import DropdownMenu from '../../atoms/DropdownMenu/DropdownMenu'
+import useMenuContext from '../../../hooks/useMenuContext'
 interface MenuElementProps {
 	data: MenuTypes
 	index: number
@@ -12,7 +13,7 @@ interface MenuElementProps {
 	handleMouseOut?: (e: MouseEvent<HTMLElement>, index: number) => void
 	handleMouseInDropdown?: (e: MouseEvent<HTMLElement>) => void
 	handleMouseOutDropdown?: (e: MouseEvent<HTMLElement>) => void
-	handleOpenCloseDropdown?: (e: MouseEvent<HTMLElement>, index: number) => void
+	
 	
 }
 
@@ -24,9 +25,10 @@ const MenuElement = ({
 	handleMouseOut,
 	handleMouseInDropdown,
 	handleMouseOutDropdown,
-	handleOpenCloseDropdown,
+	
 	
 }: MenuElementProps) => {
+	const {handleOpenCloseDropdown} = useMenuContext()
 
 	if (data.href === '') {
 		return (
@@ -37,7 +39,7 @@ const MenuElement = ({
 				className={styles.menuElementContainer}
 				onMouseEnter={e => handleMouseIn?.(e, index)}
 				onMouseLeave={e => handleMouseOut?.(e, index)}
-				onClick={e => handleOpenCloseDropdown?.(e, index)}>
+				onClick={e => handleOpenCloseDropdown(e, index)}>
 				<div className={styles.menuElement}>
 					<span className={styles.title}>{data.title}</span>
 

@@ -3,18 +3,19 @@ import CloseButton from '../../../components/atoms/CloseButton/CloseButton'
 import MenuElement from '../../../components/organism/menuElement/MenuElement'
 import type { MenuTypes } from '../dataNavigation/dataNavigation'
 import styles from './MobileNav.module.scss'
-import { useEffect, type MouseEvent, type RefObject } from 'react'
+import { useEffect } from 'react'
 import ControlPanel from '../../../components/organism/ControlPanel/ControlPanel'
+import useMenuContext from '../../../hooks/useMenuContext'
 
 interface MobileRefProps {
-	mobileRef: RefObject<HTMLDivElement | null>
-	navRef: RefObject<HTMLDivElement | null>
-	handleCloseMenu: () => void
+	
 	dataMenu: MenuTypes[]
 }
 
-const MobileNav = ({ dataMenu, mobileRef, navRef, handleCloseMenu }: MobileRefProps) => {
+const MobileNav = ({ dataMenu  }: MobileRefProps) => {
+	const {mobileRef,navRef} = useMenuContext()
 	const location = useLocation()
+
 	useEffect(() => {
 		if (location.pathname !== '/') {
 			navRef.current?.classList.add(styles.secondNavBgColor)
@@ -22,43 +23,43 @@ const MobileNav = ({ dataMenu, mobileRef, navRef, handleCloseMenu }: MobileRefPr
 			navRef.current?.classList.remove(styles.secondNavBgColor)
 		}
 	}, [location.pathname, navRef])
-	const handleOpenCloseDropdown = (e: MouseEvent<HTMLElement>, index: number) => {
-		const target = e.currentTarget as HTMLElement
-		let element
+	// const handleOpenCloseDropdown = (e: MouseEvent<HTMLElement>, index: number) => {
+	// 	const target = e.currentTarget as HTMLElement
+	// 	let element
 
-		if (Number(target.dataset.element) === index) {
-			element = target
+	// 	if (Number(target.dataset.element) === index) {
+	// 		element = target
 
-			if (!element.classList.contains(styles.active)) {
-				const activeElements = document.querySelectorAll(`.${styles.active}`)
+	// 		if (!element.classList.contains(styles.active)) {
+	// 			const activeElements = document.querySelectorAll(`.${styles.active}`)
 
-				if (activeElements) {
-					activeElements.forEach(item => {
-						item.classList.remove(styles.active)
-					})
-				}
+	// 			if (activeElements) {
+	// 				activeElements.forEach(item => {
+	// 					item.classList.remove(styles.active)
+	// 				})
+	// 			}
 
-				element.classList.add(styles.active)
-				mobileRef.current?.classList.add(styles.overflowActive)
-			} else {
-				element.classList.remove(styles.active)
-				mobileRef.current?.classList.remove(styles.overflowActive)
-			}
-		}
-	}
+	// 			element.classList.add(styles.active)
+	// 			mobileRef.current?.classList.add(styles.overflowActive)
+	// 		} else {
+	// 			element.classList.remove(styles.active)
+	// 			mobileRef.current?.classList.remove(styles.overflowActive)
+	// 		}
+	// 	}
+	// }
 
 	return (
 		<div ref={mobileRef} className={styles.mobileContainer}>
 			<div className={styles.mobileElement}>
-				<CloseButton styles={styles} handleClose={() => handleCloseMenu()} />
+				<CloseButton styles={styles}  />
 				<h2 className={styles.title}>Navigate to</h2>
 			</div>
 			<div className={styles.mobileLink}>
 				<ControlPanel
 					styles={styles}
 					index={0}
-					handleOpenCloseDropdown={handleOpenCloseDropdown}
-					handleCloseMenu={handleCloseMenu}
+					// handleOpenCloseDropdown={handleOpenCloseDropdown}
+					
 				/>
 				{dataMenu.map((item: MenuTypes, index: number) => {
 					return (
@@ -67,7 +68,7 @@ const MobileNav = ({ dataMenu, mobileRef, navRef, handleCloseMenu }: MobileRefPr
 							styles={styles}
 							data={item}
 							index={index}
-							handleOpenCloseDropdown={handleOpenCloseDropdown}
+							// handleOpenCloseDropdown={handleOpenCloseDropdown}
 						/>
 					)
 				})}

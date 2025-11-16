@@ -2,18 +2,19 @@ import { useSelector } from 'react-redux'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import type { RootState } from '../../../store'
 import type { RefObject } from 'react'
+import SignOutBtn from '../SingOutBtn/SignOutBtn'
 
 interface ControlPanelUserProps<T extends HTMLElement> {
 	styles: Record<string, string>
 	userRef?: RefObject<T | null>
 	openCloseUserMenu?: () => void
-	signOut: () => void
+	
 }
 
 const ControlPanelUser = <T extends HTMLDivElement>({
 	styles,
 	userRef,
-	signOut,
+	
 	openCloseUserMenu,
 }: ControlPanelUserProps<T>) => {
 	const { isAdmin, name, avatar } = useSelector((state: RootState) => state.auth)
@@ -33,13 +34,9 @@ const ControlPanelUser = <T extends HTMLDivElement>({
 					Settings
 				</AnchorLink>
 
-				<button
-					className={styles.signOut}
-					onClick={() => {
-						signOut()
-					}}>
-					Sign Out
-				</button>
+				
+
+				<SignOutBtn styles={styles}/>
 			</div>
 		</div>
 	)

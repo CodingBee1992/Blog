@@ -11,12 +11,14 @@ import type { RootState } from '../../store'
 import { useEffect, useRef } from 'react'
 import MenuIcon from '../../components/atoms/MenuIcon/MenuIcon'
 import ControlPanel from '../../components/organism/ControlPanel/ControlPanel'
+import useMenuContext from '../../hooks/useMenuContext'
 
 const Navigation = () => {
 	const size = useWindowSize()
-	const navRef = useRef<HTMLDivElement>(null)
-	const mobileRef = useRef<HTMLDivElement>(null)
+	// const navRef = useRef<HTMLDivElement>(null)
+	
 	const userRef = useRef<HTMLDivElement>(null)
+	const {navRef} = useMenuContext()
 
 	const { isOpen } = useSelector((state: RootState) => state.theme)
 
@@ -34,22 +36,22 @@ const Navigation = () => {
 		return () => {
 			document.removeEventListener('scroll', handleScroll)
 		}
-	}, [])
-	const handleOpenCloseMenu = () => {
-		if (!mobileRef.current?.classList.contains(styles.showHide)) {
-			mobileRef.current?.classList.add(styles.showHide)
+	}, [navRef])
+	// const handleOpenCloseMenu = () => {
+	// 	if (!mobileRef.current?.classList.contains(styles.showHide)) {
+	// 		mobileRef.current?.classList.add(styles.showHide)
 
-			setTimeout(() => {
-				mobileRef.current?.classList.add(styles.fadeIn)
-			}, 100)
-		} else {
-			mobileRef.current?.classList.remove(styles.fadeIn)
+	// 		setTimeout(() => {
+	// 			mobileRef.current?.classList.add(styles.fadeIn)
+	// 		}, 100)
+	// 	} else {
+	// 		mobileRef.current?.classList.remove(styles.fadeIn)
 
-			setTimeout(() => {
-				mobileRef.current?.classList.remove(styles.showHide)
-			}, 500)
-		}
-	}
+	// 		setTimeout(() => {
+	// 			mobileRef.current?.classList.remove(styles.showHide)
+	// 		}, 500)
+	// 	}
+	// }
 	const openCloseUserMenu = () => {
 		const el = userRef.current as HTMLDivElement
 
@@ -84,9 +86,6 @@ const Navigation = () => {
 				<DesktopNav navRef={navRef} dataMenu={dataNavigation} />
 			) : (
 				<MobileNav
-					navRef={navRef}
-					mobileRef={mobileRef}
-					handleCloseMenu={handleOpenCloseMenu}
 					dataMenu={dataNavigation}
 				/>
 			)}
@@ -96,7 +95,7 @@ const Navigation = () => {
 					<ControlPanel userRef={userRef} openCloseUserMenu={openCloseUserMenu} index={0} styles={styles} />
 				)}
 			</div>
-			{size.width <= 900 && <MenuIcon handleOpenMenu={handleOpenCloseMenu} />}
+			{size.width <= 900 && <MenuIcon  />}
 
 			{isOpen && <SearchContainer isOpen={isOpen} />}
 		</nav>
