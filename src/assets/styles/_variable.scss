@@ -22,6 +22,8 @@ $mobileSmall: 380px;
 	--black: #000000;
 
 	--Bgc-main: #eff0f0;
+	--Bgc-sideBar: #eff0f0;
+	--Bgc-desktopPanel: #eff0f0;
 	--Bgc-navTransparent: transparent;
 	--Bgc-navBlack: #000000;
 	--Bgc-navMobile: #000000;
@@ -111,6 +113,11 @@ $mobileSmall: 380px;
 	--socialPosition-right: 4rem;
 
 	--header-height: 8.8rem;
+
+	// SIDEBAR -----------------------
+	--sideBarColorIcon:#333333;
+	
+	--sideBarBgcHoverLink:#d3d3d3d3;
 }
 @media (max-width: 1600px) {
 	:root {

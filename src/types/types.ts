@@ -68,3 +68,9 @@ export interface CommentsDataProps {
 	createdAt: string
 	children?: CommentsDataProps[]
 }
+
+export interface adminLinksProps {
+	linkName: string
+	icon: ReactNode
+	href: string
+}

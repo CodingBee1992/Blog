@@ -20,7 +20,7 @@ const AdminPanelSideBar = ({ children }: SideBarProps) => {
 		<div className={styles.sideBarContainer}>
 			<div className={styles.sideBarMenu}>
 				<Logo styles={styles} />
-				{children}
+				<div className={styles.sideBarLinks}>{children}</div>
 			</div>
 			<div className={styles.controlPanelUser}>
 				{(!isLogged || (isLogged && isAdmin)) && (
