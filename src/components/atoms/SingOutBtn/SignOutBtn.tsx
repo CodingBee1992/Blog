@@ -3,20 +3,22 @@
 // import { setLogout } from '../../../slices/api/authSlice'
 // import { useNavigate } from 'react-router'
 // import { useEffect } from 'react'
-import { useLocation } from 'react-router'
+
 import useMenuContext from '../../../hooks/useMenuContext'
 
+import type { ReactNode } from 'react'
+
 interface SignOutBtnProps {
-	styles: Record<string, string>
+	children: ReactNode
+	className: string
 }
 
-const SignOutBtn = ({ styles }: SignOutBtnProps) => {
+const SignOutBtn = ({ children, className }: SignOutBtnProps) => {
 	// const dispatch = useDispatch()
 	// const navigate = useNavigate()
 	// const [logOut, { isSuccess }] = useLogOutMutation()
-	const { pathname } = useLocation()
+	
 	const { signOut } = useMenuContext()
-	console.log(pathname)
 
 	// useEffect(() => {
 	// 	if (isSuccess) {
@@ -42,25 +44,14 @@ const SignOutBtn = ({ styles }: SignOutBtnProps) => {
 	// 	}
 	// }
 
-	if (pathname.startsWith('/admin') || pathname.startsWith('/settings')) {
-		return (
-			<button
-				className={styles.signOut}
-				onClick={() => {
-					signOut()
-				}}>
-				Majkel
-			</button>
-		)
-	}
 
 	return (
 		<button
-			className={styles.signOut}
+			className={className}
 			onClick={() => {
 				signOut()
 			}}>
-			Sign Out
+			{children}
 		</button>
 	)
 }

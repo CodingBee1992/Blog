@@ -11,7 +11,7 @@ const ControlPanelSignIn = ({styles}:ControlPanelSignInProps) => {
 	const {userRef,openCloseUserMenu} = useMenuContext()
 	return (
 		<>
-			<button onClick={() => openCloseUserMenu({userRef})} className={styles.signInBtn}>
+			<button onClick={(e) => openCloseUserMenu({e,userRef})} className={styles.signInBtn}>
 				Sign In
 			</button>
 

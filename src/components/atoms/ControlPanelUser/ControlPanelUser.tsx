@@ -15,7 +15,7 @@ const ControlPanelUser = ({ styles }: ControlPanelUserProps) => {
 	const { userRef, openCloseUserMenu } = useMenuContext()
 	return (
 		<div className={styles.controlPanelUser}>
-			<div className={styles.authorInfo} onClick={() => openCloseUserMenu({ userRef })}>
+			<div className={styles.authorInfo} onClick={(e) => openCloseUserMenu({e, userRef })}>
 				<img src={`${avatar}`} alt="Avatar" className={styles.authorAvatar} />
 				<span className={styles.author}>{name}</span>
 			</div>
@@ -29,7 +29,9 @@ const ControlPanelUser = ({ styles }: ControlPanelUserProps) => {
 					Settings
 				</AnchorLink>
 
-				<SignOutBtn styles={styles} />
+				<SignOutBtn className={styles.signOut} >
+					Sign Out
+				</SignOutBtn>
 			</div>
 		</div>
 	)

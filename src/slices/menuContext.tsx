@@ -10,7 +10,7 @@ interface MenuContextProps {
 
 interface CreateContextProps {
 	handleOpenCloseMenu: () => void
-	openCloseUserMenu: (args: { userRef: RefObject<HTMLDivElement | null> }) => void
+	openCloseUserMenu: (args: { e: MouseEvent<HTMLElement>; userRef: RefObject<HTMLDivElement | null> }) => void
 	handleOpenCloseDropdown: (e: MouseEvent<HTMLElement>, index: number) => void
 	signOut: () => void
 	navRef: RefObject<HTMLDivElement | null>
@@ -71,9 +71,19 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 		}
 	}
 
-	const openCloseUserMenu = ({ userRef }: { userRef: RefObject<HTMLDivElement | null> }) => {
+	const openCloseUserMenu = ({
+		e,
+		userRef,
+	}: {
+		e: MouseEvent<HTMLElement>
+		userRef: RefObject<HTMLDivElement | null>
+	}) => {
 		const el = userRef.current as HTMLDivElement
 		el.classList.toggle(styles.displayVisibility)
+		const target = e.target as HTMLElement
+
+		if (!target) return
+		target.classList.toggle(styles.activeMenu)
 	}
 
 	useEffect(() => {
@@ -86,8 +96,9 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 			if (
 				el.classList.contains(styles.displayVisibility) &&
 				!el.contains(target) &&
-				!target.classList.contains(styles.authorAvatar) &&
-				!target.classList.contains(styles.signInBtn)
+				!target.classList.contains(styles.activeMenu)
+				// !target.classList.contains(styles.authorAvatar) &&
+				// !target.classList.contains(styles.signInBtn)
 			) {
 				el.classList.remove(styles.displayVisibility)
 			}
@@ -95,7 +106,7 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 
 		window.addEventListener('mousedown', handleClickOutside)
 		return () => window.removeEventListener('mousedown', handleClickOutside)
-	}, [userRef])
+	}, [])
 
 	useEffect(() => {
 		if (isSuccess) {

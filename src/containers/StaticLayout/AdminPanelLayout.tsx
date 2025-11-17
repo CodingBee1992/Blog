@@ -33,12 +33,7 @@ const AdminPanelLayout = () => {
 					<div>Rico</div>
 					<div>Rico</div>
 					<div>Rico</div>
-					<div>Rico</div>
-					<div>Rico</div>
-					<div>Rico</div>
-					<div>Rico</div>
-					<div>Rico</div>
-					<div>Rico</div>
+					
 				</SideBar>
 				<Outlet />
 			</div>
