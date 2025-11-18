@@ -6,7 +6,9 @@ const SideBarLink = ({ icon, linkName, href }: adminLinksProps) => {
 	const { width } = useWindowSize()
 	return (
 		<AnchorLink className={styles.sideBarLink} href={href}>
-			{icon} {width > 700 && linkName}
+			<div className={styles.sideBarLinkHelper}>
+				{icon} {width > 700 && linkName}
+			</div>
 		</AnchorLink>
 	)
 }

@@ -1,5 +1,3 @@
-
-
 import type { PostDataProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 
@@ -11,12 +9,18 @@ interface SliderListProps {
 }
 
 const SliderList = ({ styles, data, index, number }: SliderListProps) => {
-	const dynamicClass = styles[`sliderHero${index + 1}`]
+	// const dynamicClass = styles[`sliderHero${index + 1}`]
+	// ${dynamicClass} ${number === index ? styles.sliderActive : ''}
 	return (
 		<div className={styles.sliderList}>
 			<div
+				style={
+					number === index
+						? { left: `${index * -100}%`, opacity: 1, zIndex: 999 }
+						: {  opacity: 0, zIndex: 998 }
+				}
 				data-slick-index={index}
-				className={`${styles.sliderHero} ${dynamicClass} ${number === index ? styles.sliderActive : ''} `}>
+				className={`${styles.sliderHero}  `}>
 				<div className={styles.sliderHeroBg} style={{ backgroundImage: `url(${data.image})` }}></div>
 				<div className={`row ${styles.sliderContent} ${number === index ? styles.animated : ''}`}>
 					<div className={styles.column}>

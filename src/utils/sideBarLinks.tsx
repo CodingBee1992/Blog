@@ -1,11 +1,16 @@
 
 
-import { PostsSVG, UsersSVG } from '../assets/icons/adminPanelIcons/AdminPanelIcons'
+import { AdminSVG, PostsSVG, UsersSVG } from '../assets/icons/adminPanelIcons/AdminPanelIcons'
 import type { adminLinksProps } from '../types/types'
 
 
 
 const adminLinks: adminLinksProps[] = [
+	{
+		linkName: 'Admin',
+		href:'/admin',
+		icon: <AdminSVG/>,
+	},
 	{
 		linkName: 'Posts',
 		href:'/createpost',

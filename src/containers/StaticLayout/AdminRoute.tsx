@@ -41,19 +41,18 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
 		return <Navigate to="/" replace />
 	}
 
-	return (
-		<>
-			{showMessage && (
-				<>
-					<div style={{ padding: '10rem', textAlign: 'center', color: 'white' }}>
-						<h2>Nie masz dostępu do tej strony</h2>
-						<p>Za chwilę zostaniesz przekierowany na stronę {!isLogged ? 'logowania' : 'główną'}</p>
-					</div>
-				</>
-			)}
-			{children}
-		</>
-	)
+	if (showMessage) {
+		return (
+			<>
+				<div style={{ padding: '10rem', textAlign: 'center', color: 'white' }}>
+					<h2>Nie masz dostępu do tej strony</h2>
+					<p>Za chwilę zostaniesz przekierowany na stronę {!isLogged ? 'logowania' : 'główną'}</p>
+				</div>
+			</>
+		)
+	}
+
+	return <>{children}</>
 }
 
 export default AdminRoute

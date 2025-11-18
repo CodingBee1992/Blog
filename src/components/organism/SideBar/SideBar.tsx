@@ -13,7 +13,7 @@ interface SideBarProps {
 	children: ReactNode
 }
 
-const AdminPanelSideBar = ({ children }: SideBarProps) => {
+const SideBar = ({ children }: SideBarProps) => {
 	const { isLogged, isAdmin, avatar } = useSelector((state: RootState) => state.auth)
 
 	return (
@@ -38,4 +38,4 @@ const AdminPanelSideBar = ({ children }: SideBarProps) => {
 	)
 }
 
-export default AdminPanelSideBar
+export default SideBar

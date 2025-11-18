@@ -2,14 +2,29 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 1rem;
+
 	width: 100%;
-	padding: 0.5rem 0;
+	padding: 1rem;
 	transition: all 0.3s;
-    color: var(--sideBarColorIcon);
+	color: var(--sideBarColorIcon);
 	cursor: pointer;
 	&:hover {
 		background-color: var(--sideBarBgcHoverLink);
 	}
-	
+	.sideBarLinkHelper {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		width: 50%;
+	}
+}
+
+@media (max-width: 700px) {
+	.sideBarLink {
+		
+		.sideBarLinkHelper {
+
+			justify-content: center;
+		}
+	}
 }

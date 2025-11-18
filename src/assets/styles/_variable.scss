@@ -22,7 +22,7 @@ $mobileSmall: 380px;
 	--black: #000000;
 
 	--Bgc-main: #eff0f0;
-	--Bgc-sideBar: #eff0f0;
+
 	--Bgc-desktopPanel: #eff0f0;
 	--Bgc-navTransparent: transparent;
 	--Bgc-navBlack: #000000;
@@ -79,7 +79,7 @@ $mobileSmall: 380px;
 	--line-left1: 25%;
 	--line-left2: 50%;
 	--line-left3: 75%;
-	
+
 	--gutter: 2.4rem;
 
 	--space: 3.2rem;
@@ -105,7 +105,7 @@ $mobileSmall: 380px;
 	--color-border: #eeeeee;
 	--btn-height: calc(2 * 3.2rem);
 	--btn-heightXs: calc(1.5 * 3.2rem);
-	--btn-color-hover:#282828;
+	--btn-color-hover: #282828;
 	// Brick Padding
 	--brick-padding: 3rem;
 	// Social links
@@ -115,9 +115,13 @@ $mobileSmall: 380px;
 	--header-height: 8.8rem;
 
 	// SIDEBAR -----------------------
-	--sideBarColorIcon:#333333;
-	
-	--sideBarBgcHoverLink:#d3d3d3d3;
+	--Bgc-sideBar: #eff0f0;
+	--sideBarColorIcon: #333333;
+
+	--sideBarBgcHoverLink: #d3d3d3d3;
+
+	// PANEL / SETTINGS PAGES
+	--pageBgc:#ffffff;
 }
 @media (max-width: 1600px) {
 	:root {

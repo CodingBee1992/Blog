@@ -67,12 +67,11 @@
 						padding-top: 20rem;
 						padding-bottom: 20vh;
 						height: 100%;
-						
-						
+
 						.column {
 							align-self: flex-end;
 							max-width: var(--slideContent-width);
-							padding:0 var(--gutter);
+							padding: 0 var(--gutter);
 							.meta {
 								display: flex;
 								gap: 1rem;
@@ -105,43 +104,43 @@
 								font-family: var(--font-3);
 								// word-wrap: break-word;
 								font-weight: 400;
-								
+
 								text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-								
+
 								a {
 									color: #ffffff;
 								}
 							}
 						}
 					}
-					.animated{
+					.animated {
 						animation: animate 1s cubic-bezier(0, 0.55, 0.45, 1) 1s both;
 					}
 				}
-				.sliderHero1 {
-					left: 0;
-					z-index: 998;
-					opacity: 0;
-				}
-				.sliderHero2 {
-					left: -100%;
-					z-index: 998;
-					opacity: 0;
-				}
-				.sliderHero3 {
-					left: -200%;
-					z-index: 998;
-					opacity: 0;
-				}
-				.sliderHero4 {
-					left: -300%;
-					z-index: 998;
-					opacity: 0;
-				}
-				.sliderActive {
-					z-index: 999;
-					opacity: 1;
-				}
+				// .sliderHero1 {
+				// 	left: 0;
+				// 	z-index: 998;
+				// 	opacity: 0;
+				// }
+				// .sliderHero2 {
+				// 	left: -100%;
+				// 	z-index: 998;
+				// 	opacity: 0;
+				// }
+				// .sliderHero3 {
+				// 	left: -200%;
+				// 	z-index: 998;
+				// 	opacity: 0;
+				// }
+				// .sliderHero4 {
+				// 	left: -300%;
+				// 	z-index: 998;
+				// 	opacity: 0;
+				// }
+				// .sliderActive {
+				// 	z-index: 999;
+				// 	opacity: 1;
+				// }
 			}
 		}
 		.dots {
@@ -214,7 +213,7 @@
 			font-size: 2rem;
 			margin-bottom: 2.8rem;
 			.link {
-				margin-bottom:var(--margin-bottomSocialLinks);
+				margin-bottom: var(--margin-bottomSocialLinks);
 				list-style: none;
 
 				a {
@@ -242,7 +241,7 @@
 			border: none;
 			background-color: var(--white);
 			color: var(--black);
-			
+
 			cursor: pointer;
 			transition: all 0.3s ease-in-out;
 
@@ -259,11 +258,10 @@
 		opacity: 0;
 		visibility: hidden;
 		transform: translateY(20%);
-	}to{
+	}
+	to {
 		opacity: 1;
 		visibility: visible;
 		transform: translateY(0);
-
 	}
 }
-

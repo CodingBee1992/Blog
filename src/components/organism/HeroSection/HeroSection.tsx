@@ -11,11 +11,13 @@ import SliderDots from '../../atoms/SliderDots/SliderDots'
 const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [swipeStartX, setSwipeStartX] = useState<number>(0)
+	const sliderLength = postData.slice(0,4)
+	
 	const handleSliderNext = () => {
-		setNumber(prev => (prev >= 3 ? 0 : prev + 1))
+		setNumber(prev => (prev >= sliderLength.length - 1 ? 0 : prev + 1))
 	}
 	const handleSliderPrev = () => {
-		setNumber(prev => (prev <= 0 ? 3 : prev - 1))
+		setNumber(prev => (prev <= 0 ? sliderLength.length - 1 : prev - 1))
 	}
 	const getClientX = (e: MouseEvent | TouchEvent): number => {
 		if ('touches' in e && e.touches.length > 0) {
@@ -65,18 +67,11 @@ const HeroSection = () => {
 					onTouchStart={e => handleSwipeStart(e)}
 					onTouchEnd={e => handleSwipeEnd(e)}>
 					{postData.map((data: PostDataProps, index: number) => (
-						<SliderList
-							key={index}
-							styles={styles}
-							data={data}
-							index={index}
-							number={number}
-							
-						/>
+						<SliderList key={index} styles={styles} data={data} index={index} number={number} />
 					))}
 				</div>
 				<ul className={styles.dots} role="tablist">
-					{Array.from({ length: 4 }, (_, index) => {
+					{Array.from({ length: sliderLength.length }, (_, index) => {
 						return (
 							<SliderDots
 								handleSwipeOnClickDots={handleSwipeOnClickDots}

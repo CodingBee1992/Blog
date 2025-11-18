@@ -1,9 +1,9 @@
-
+import styles from './AdminPanelPageTemplate.module.scss'
 
 
 const AdminPanelPageTemplate = () => {
   return (
-    <div>
+    <div className={styles.adminPanelTemplate}>
         admin panel Page
     </div>
   )
