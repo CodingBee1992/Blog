@@ -2,7 +2,7 @@ import type { Ref } from "react"
 
 interface MenuArrowSVGProps {
 	styles: { [key: string]: string }
-    arrowRef:Ref<SVGSVGElement | null>
+    arrowRef?:Ref<SVGSVGElement | null>
 }
 
 export const MenuArrowSVG = ({ styles, arrowRef }: MenuArrowSVGProps) => {

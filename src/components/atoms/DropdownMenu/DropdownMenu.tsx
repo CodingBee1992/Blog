@@ -8,6 +8,7 @@ interface DropdownMenuProps {
 	handleMouseInDropdown?: (e: React.MouseEvent<HTMLElement>) => void
 	handleMouseOutDropdown?: (e: React.MouseEvent<HTMLElement>) => void
 	styles:{[key:string]:string}
+	
 }
 
 const DropdownMenu = ({ data,styles, handleMouseInDropdown, handleMouseOutDropdown }: DropdownMenuProps) => {

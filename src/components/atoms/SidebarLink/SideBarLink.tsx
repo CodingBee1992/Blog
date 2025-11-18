@@ -1,4 +1,4 @@
-import { useRef, type MouseEvent } from 'react'
+import { useRef} from 'react'
 import { MenuArrowSVG } from '../../../assets/icons/nav/MenuArrowSVG'
 import useWindowSize from '../../../hooks/useWindowSize'
 import type { adminLinksProps } from '../../../types/types'
@@ -14,40 +14,37 @@ interface SideBarLinkProps {
 const SideBarLink = ({ data, index }: SideBarLinkProps) => {
 	const { width } = useWindowSize()
 	const arrowRef = useRef<SVGSVGElement | null>(null)
+	const sideBarLinkRef = useRef<HTMLDivElement>(null)
+	const handleOpenCloseDropdown = () => {
+		if (!sideBarLinkRef.current?.classList.contains(styles.activeSubLinks)) {
+			const activeElements = document.querySelectorAll(`.${styles.activeSubLinks}`)
+			const activeArrows = document.querySelectorAll(`.${styles.rotateArrow}`)
 
-	const handleOpenCloseDropdown = (e: MouseEvent<HTMLElement>, index: number) => {
-		const target = e.currentTarget as HTMLElement
-		let element
-		arrowRef.current?.classList.toggle(styles.rotateArrow)
-		if (Number(target.dataset.element) === index) {
-			element = target
-
-			if (!element.classList.contains(styles.active)) {
-				const activeElements = document.querySelectorAll(`.${styles.active}`)
-
-				if (activeElements) {
-					activeElements.forEach(item => {
-						item.classList.remove(styles.active)
-					})
-				}
-
-				element.classList.add(styles.active)
-				mobileRef.current?.classList.add(styles.overflowActive)
-			} else {
-				element.classList.remove(styles.active)
-				mobileRef.current?.classList.remove(styles.overflowActive)
+			if (activeElements) {
+				activeElements.forEach(item => {
+					item.classList.remove(styles.activeSubLinks)
+				})
 			}
+			if (activeArrows) {
+				activeArrows.forEach(item => {
+					item.classList.remove(styles.rotateArrow)
+				})
+			}
+
+			sideBarLinkRef.current?.classList.add(styles.activeSubLinks)
+			arrowRef.current?.classList.add(styles.rotateArrow)
+		} else {
+			sideBarLinkRef.current?.classList.remove(styles.activeSubLinks)
+			arrowRef.current?.classList.remove(styles.rotateArrow)
 		}
 	}
 
+	
+
 	if (data.href === '') {
 		return (
-			<div
-				key={index}
-				data-element={index}
-				className={`${styles.sideBarLink} ${styles.activeSubLinks}`}
-				onClick={e => handleOpenCloseDropdown(e, index)}>
-				<div className={styles.sideBarLinkHelper}>
+			<div ref={sideBarLinkRef} key={index} data-element={index} className={`${styles.sideBarLink} `}>
+				<div className={styles.sideBarLinkHelper} onClick={() => handleOpenCloseDropdown()}>
 					<div className={styles.sideBarLinkName}>
 						{data.icon} {width > 700 && <p>{data.title}</p>}
 					</div>
@@ -64,13 +61,13 @@ const SideBarLink = ({ data, index }: SideBarLinkProps) => {
 	} else {
 		return (
 			<AnchorLink className={styles.sideBarLink} href={data.href}>
-				<div className={styles.sideBarLinkHelper}>
+				
 					<div className={styles.sideBarLinkHelper}>
 						<div className={styles.sideBarLinkName}>
 							{data.icon} {width > 700 && <p>{data.title}</p>}
 						</div>
 					</div>
-				</div>
+				
 			</AnchorLink>
 		)
 	}

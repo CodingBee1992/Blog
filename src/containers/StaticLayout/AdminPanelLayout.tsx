@@ -12,8 +12,9 @@ const AdminPanelLayout = () => {
 			<div className={styles.adminPanelLayoutContainer}>
 				<SideBar>
 					{adminLinks.map((data,index)=>(
-						<SideBarLink data={data} index={index}/>
+						<SideBarLink key={index} data={data} index={index}/>
 					))}
+					
 					
 					
 				</SideBar>
