@@ -1,6 +1,6 @@
 import { type MouseEvent } from 'react'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
-import { ImgArrow } from '../../../assets/icons/nav/IconSvg'
+import { MenuArrowSVG } from '../../../assets/icons/nav/MenuArrowSVG'
 import type { MenuTypes } from '../../../containers/Navigation/dataNavigation/dataNavigation'
 // import styles from './MenuElement.module.scss'
 import DropdownMenu from '../../atoms/DropdownMenu/DropdownMenu'
@@ -34,7 +34,7 @@ const MenuElement = ({
 		return (
 			<div
 				
-				key={crypto.randomUUID()}
+				key={index}
 				data-element={index}
 				className={styles.menuElementContainer}
 				onMouseEnter={e => handleMouseIn?.(e, index)}
@@ -43,7 +43,7 @@ const MenuElement = ({
 				<div className={styles.menuElement}>
 					<span className={styles.title}>{data.title}</span>
 
-					<ImgArrow styles={styles} />
+					<MenuArrowSVG styles={styles} />
 				</div>
 
 				{data.children?.length ? (

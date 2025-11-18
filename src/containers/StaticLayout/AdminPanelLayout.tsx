@@ -11,8 +11,8 @@ const AdminPanelLayout = () => {
 		<MenuProvider>
 			<div className={styles.adminPanelLayoutContainer}>
 				<SideBar>
-					{adminLinks.map(({icon,linkName,href},index)=>(
-						<SideBarLink key={index} icon={icon} linkName={linkName} href={href}/>
+					{adminLinks.map((data,index)=>(
+						<SideBarLink data={data} index={index}/>
 					))}
 					
 					

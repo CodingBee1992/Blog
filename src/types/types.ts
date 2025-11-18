@@ -70,7 +70,8 @@ export interface CommentsDataProps {
 }
 
 export interface adminLinksProps {
-	linkName: string
-	icon: ReactNode
+	title: string
+	icon?: ReactNode
 	href: string
+	children?:adminLinksProps[]
 }

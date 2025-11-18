@@ -1,25 +1,34 @@
-
-
 import { AdminSVG, PostsSVG, UsersSVG } from '../assets/icons/adminPanelIcons/AdminPanelIcons'
 import type { adminLinksProps } from '../types/types'
 
-
-
 const adminLinks: adminLinksProps[] = [
 	{
-		linkName: 'Admin',
-		href:'/admin',
-		icon: <AdminSVG/>,
+		title: 'Admin',
+		href: '/admin',
+		icon: <AdminSVG />,
+		
 	},
 	{
-		linkName: 'Posts',
-		href:'/createpost',
-		icon: <PostsSVG/>,
+		title: 'Posts',
+		href: '',
+		icon: <PostsSVG />,
+		children: [
+			{title:'List of Posts',href:'/posts/listsofposts'},
+			{title:'Add Posts',href:'/posts/addpost'},
+			{title:'Categories',href:'/posts/categories'},
+			{title:'Tags',href:'/posts/tags'},
+		],
 	},
 	{
-		linkName: 'Users',
-		href:'/users',
+		title: 'Users',
+		href: '',
 		icon: <UsersSVG />,
+		children: [
+			{title:'List',href:'/users/list'},
+			{title:'Add User',href:'/users/adduser'},
+			{title:'Roles & Permissions',href:'/users/roles&permissions'},
+			
+		],
 	},
 ]
 

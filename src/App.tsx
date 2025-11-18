@@ -62,7 +62,7 @@ const App = () => {
 						</AdminRoute>
 					}>
 					<Route path="" element={<AdminPanelPage />} />
-					<Route path="createpost" element={<CreatePostPage />} />
+					<Route path="/admin/posts" element={<CreatePostPage />} />
 				</Route>
 				<Route path='/settings' element={<SettingsLayout/>}>
 

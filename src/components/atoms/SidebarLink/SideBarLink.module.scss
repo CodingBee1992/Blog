@@ -1,29 +1,54 @@
 .sideBarLink {
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	flex-direction: column;
+	// align-items: center;
+	// justify-content: center;
 
 	width: 100%;
-	padding: 1rem;
-	transition: all 0.3s;
+	min-height: var(--SideBarLineHeight);
+	height: var(--SideBarLineHeight);
+	padding-left: 2rem;
+	border-top: 1px dotted rgba(255, 255, 255, 0.1);
+	line-height: var(--SideBarLineHeight);
+	transition: all 0.3s ease-in-out;
 	color: var(--sideBarColorIcon);
+	overflow: hidden;
 	cursor: pointer;
+
 	&:hover {
 		background-color: var(--sideBarBgcHoverLink);
+
 	}
 	.sideBarLinkHelper {
 		display: flex;
+		// flex-direction: row;
 		align-items: center;
-		gap: 1rem;
-		width: 50%;
+		justify-content: space-between;
+		// min-height: var(--SideBarLineHeight);
+		// height: var(--SideBarLineHeight);
+		// line-height: var(--SideBarLineHeight);
+		.sideBarLinkName {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 1rem;
+		}
+		.arrow {
+			margin-right: 2rem;
+			transition: all 0.3s;
+		}
+
+		.rotateArrow {
+			rotate: 180deg;
+		}
 	}
 }
-
+// .activeSubLinks{
+// 	height: 100%;
+// }
 @media (max-width: 700px) {
 	.sideBarLink {
-		
 		.sideBarLinkHelper {
-
 			justify-content: center;
 		}
 	}
