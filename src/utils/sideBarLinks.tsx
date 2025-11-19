@@ -13,10 +13,10 @@ const adminLinks: adminLinksProps[] = [
 		href: '',
 		icon: <PostsSVG />,
 		children: [
-			{title:'List of Posts',href:'/posts/listsofposts'},
-			{title:'Add Posts',href:'/posts/addpost'},
-			{title:'Categories',href:'/posts/categories'},
-			{title:'Tags',href:'/posts/tags'},
+			{title:'List of Posts',href:'/admin/posts/listofposts'},
+			{title:'Add Posts',href:'/admin/posts/addpost'},
+			{title:'Categories',href:'/admin/posts/categories'},
+			{title:'Tags',href:'/admin/posts/tags'},
 		],
 	},
 	{
@@ -24,9 +24,9 @@ const adminLinks: adminLinksProps[] = [
 		href: '',
 		icon: <UsersSVG />,
 		children: [
-			{title:'List',href:'/users/list'},
-			{title:'Add User',href:'/users/adduser'},
-			{title:'Roles & Permissions',href:'/users/roles&permissions'},
+			{title:'List',href:'/admin/users/list'},
+			{title:'Add User',href:'/admin/users/adduser'},
+			{title:'Roles & Permissions',href:'/admin/users/permissions'},
 			
 		],
 	},

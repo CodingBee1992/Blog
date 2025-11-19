@@ -1,5 +1,7 @@
+
 import type { MenuTypes } from '../../../containers/Navigation/dataNavigation/dataNavigation'
 import AnchorLink from '../AnchorLink/AnchorLink'
+import { useLocation } from 'react-router'
 
 // import styles from './DropdownMenu.module.scss'
 
@@ -7,19 +9,28 @@ interface DropdownMenuProps {
 	data: MenuTypes
 	handleMouseInDropdown?: (e: React.MouseEvent<HTMLElement>) => void
 	handleMouseOutDropdown?: (e: React.MouseEvent<HTMLElement>) => void
-	styles:{[key:string]:string}
+	styles: { [key: string]: string }
 	
 }
 
-const DropdownMenu = ({ data,styles, handleMouseInDropdown, handleMouseOutDropdown }: DropdownMenuProps) => {
+const DropdownMenu = ({
+	data,
+	styles,
+	
+	handleMouseInDropdown,
+	handleMouseOutDropdown,
+}: 
+DropdownMenuProps) => {
+	const { pathname } = useLocation()
 	return (
 		<ul
-			className={styles.subMenu}
-			onMouseEnter={e => handleMouseInDropdown?.(e)}
-			onMouseLeave={e => handleMouseOutDropdown?.(e)}>
+		className={styles.subMenu}
+		onMouseEnter={e => handleMouseInDropdown?.(e)}
+		onMouseLeave={e => handleMouseOutDropdown?.(e)}>
 			{data.children?.map((item: { title: string; href: string }, index: number) => {
+				const active = pathname === item.href
 				return (
-					<li key={index}>
+					<li className={`${styles.subMenuLi} ${active ? styles.activeSubMenuLi : ''}`} key={index}>
 						{
 							<AnchorLink className={styles.subLink} href={item.href || '#'} count={index}>
 								{item.title}

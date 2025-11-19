@@ -2,12 +2,12 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	
+
 	min-height: var(--SideBarLineHeight);
 	height: var(--SideBarLineHeight);
 	line-height: var(--SideBarLineHeight);
 	color: var(--sideBarColorIcon);
-	transition: height .3s ease-in-out;
+	transition: height 0.3s ease-in-out;
 	overflow: hidden;
 	cursor: pointer;
 
@@ -25,14 +25,23 @@
 			flex-direction: row;
 			align-items: center;
 			gap: 1rem;
+			pointer-events: none;
 		}
 		.arrow {
 			margin-right: 2rem;
 			transition: all 0.3s;
+			pointer-events: none;
 		}
 
 		.rotateArrow {
 			rotate: 180deg;
+		}
+	}
+	.activeSideBarLink {
+		background-color: rgb(146, 230, 146);
+
+		&:hover {
+			background-color: rgb(146, 230, 146);
 		}
 	}
 	.subMenu {
@@ -46,9 +55,8 @@
 		list-style: none;
 		transition: all 0.3s ease-in-out;
 		z-index: 1000;
-		
 
-		li {
+		.subMenuLi {
 			padding-left: 2rem;
 			.subLink {
 				display: block;
@@ -63,11 +71,20 @@
 				font-weight: 400;
 				transition: all 0.3s ease-in-out;
 			}
+
 			&:hover {
 				background-color: #d3d3d3d3;
 			}
 		}
+		.activeSubMenuLi {
+			background-color: rgb(146, 230, 146);
+
+			&:hover {
+				background-color: rgb(146, 230, 146);
+			}
+		}
 	}
+	
 }
 .activeSubLinks {
 	height: 100%;

@@ -19,15 +19,20 @@ import NaturePage from './components/pages/categories/NaturePage/NaturePage'
 import CulturePage from './components/pages/categories/CulturePage/CulturePage'
 import LoginPage from './components/pages/LoginPage/LoginPage'
 import RegistrationPage from './components/pages/RegistrationPage/RegistrationPage'
-import AdminPanelPage from './components/pages/AdminPanelPage/AdminPanelPage'
 
+import AdminPanelPage from './components/pages/AdminPanel/AdminPanelPage/AdminPanelPage'
 import AdminRoute from './containers/StaticLayout/AdminRoute'
-import CreatePostPage from './components/pages/CreatePostPage/CreatePostPage'
+import AddPostPage from './components/pages/AdminPanel/Posts/AddPostPage/AddPostPage'
 import AdminPanelLayout from './containers/StaticLayout/AdminPanelLayout'
 import UserRoute from './containers/StaticLayout/UserRoute'
 import SettingsLayout from './containers/StaticLayout/SettingsLayout'
+import ListOfPostPage from './components/pages/AdminPanel/Posts/ListOfPostPage/ListOfPostPage'
+import CategoriesPage from './components/pages/AdminPanel/Posts/CategoriesPage/CategoriesPage'
+import TagsPage from './components/pages/AdminPanel/Posts/TagsPage/TagsPage'
+import ListPage from './components/pages/AdminPanel/Users/ListPage/ListPage'
+import AddUserPage from './components/pages/AdminPanel/Users/AddUserPage/AddUserPage'
+import RoleAndPermissionsPage from './components/pages/AdminPanel/Users/RoleAndPermissionsPage/RoleAndPermissionsPage'
 const App = () => {
-	
 	return (
 		<Router basename="/">
 			<Routes>
@@ -50,7 +55,7 @@ const App = () => {
 					<Route path="about" element={<AboutPage />} />
 					<Route path="contact" element={<ContactPage />} />
 				</Route>
-				<Route  element={<UserRoute/>}>
+				<Route element={<UserRoute />}>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/registration" element={<RegistrationPage />} />
 				</Route>
@@ -61,12 +66,21 @@ const App = () => {
 							<AdminPanelLayout />
 						</AdminRoute>
 					}>
-					<Route path="" element={<AdminPanelPage />} />
-					<Route path="/admin/posts" element={<CreatePostPage />} />
+					<Route index element={<AdminPanelPage />} />
+					<Route path="posts/">
+						<Route path="listofposts" element={<ListOfPostPage />} />
+						<Route path="addpost" element={<AddPostPage />} />
+						<Route path="categories" element={<CategoriesPage />} />
+						<Route path="tags" element={<TagsPage />} />
+					</Route>
+					<Route path="users/">
+						<Route path="list" element={<ListPage />} />
+						<Route path="adduser" element={<AddUserPage />} />
+						<Route path="permissions" element={<RoleAndPermissionsPage />} />
+						
+					</Route>
 				</Route>
-				<Route path='/settings' element={<SettingsLayout/>}>
-
-				</Route>
+				<Route path="/settings" element={<SettingsLayout />}></Route>
 			</Routes>
 		</Router>
 	)

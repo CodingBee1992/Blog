@@ -1,6 +1,6 @@
 import type { ReactNode, RefObject } from 'react'
 import { removePaginationLinksTags } from '../../../utils/removePaginationLinksTag'
-import styles from './AnchorLink.module.scss'
+// import styles from './AnchorLink.module.scss'
 import { useLocation, useNavigate } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { setIsLoading } from '../../../slices/themeSlice'
@@ -19,8 +19,8 @@ const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,r
 	const navigate = useNavigate()
 	const location = useLocation()
 	const dispatch = useDispatch()
-	const isActive = location.pathname === href
-
+	// const isActive = location.pathname === href
+// ${isActive ? styles.isActive : ''}
 	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault()
 		
@@ -54,7 +54,7 @@ const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,r
 			target={target}
 			aria-label={ariaLabel}
 			data-main={count}
-			className={`${className ? className : ''} ${isActive ? styles.isActive : ''} `}>
+			className={`${className ? className : ''}  `}>
 			{children}
 		</a>
 	)
