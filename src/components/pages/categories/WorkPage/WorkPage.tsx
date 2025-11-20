@@ -1,4 +1,5 @@
-import WorkPageTemplate from "../../../templates/WorkPageTemplate/WorkPageTemplate"
+import WorkPageTemplate from "../../../templates/MenuCategoriesTemplates/WorkPageTemplate/WorkPageTemplate"
+
 
 const WorkPage = () => {
 	return <WorkPageTemplate />

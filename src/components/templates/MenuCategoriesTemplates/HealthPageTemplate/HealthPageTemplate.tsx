@@ -1,4 +1,5 @@
-import HeaderText from "../../atoms/HeaderText/HeaderText"
+
+import HeaderText from '../../../atoms/HeaderText/HeaderText'
 import styles from './HealthPageTemplate.module.scss'
 
 const HealthPageTemplate = () => {

@@ -1,4 +1,4 @@
-import FamilyPageTemplate from "../../../templates/FamilyPageTemplate/FamilyPageTemplate"
+import FamilyPageTemplate from "../../../templates/MenuCategoriesTemplates/FamilyPageTemplate/FamilyPageTemplate"
 
 
 const FamilyPage = () => {

@@ -77,7 +77,7 @@ const Footer = () => {
 						<div className={styles.subscribeForm}>
 							<form className={styles.form}>
 								<input {...register('email')} type="email" name="email" id="email" placeholder="Your email Address" />
-								{errors.email && <div>{errors.email.message}</div> }
+								{errors.email && <div>{errors.email.message}</div>}
 								<button disabled={isSubmitting} type="submit">
 									Subscribe
 								</button>
@@ -89,6 +89,9 @@ const Footer = () => {
 			<div className={styles.footerBottom}>
 				<div className={`${styles.column} row`}>
 					<span className={styles.copyright}>&copy; Copyright CodingBee {year}</span>
+					<span className={styles.copyright}>
+						Design by <a href="https://www.styleshout.com/" target='_blank'>StyleShout</a>
+					</span>
 				</div>
 			</div>
 		</div>

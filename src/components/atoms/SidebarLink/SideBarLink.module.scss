@@ -38,10 +38,11 @@
 		}
 	}
 	.activeSideBarLink {
-		background-color: rgb(146, 230, 146);
-
+		background-color: var(--sideBarBgcHoverLink);
+		
 		&:hover {
-			background-color: rgb(146, 230, 146);
+			background-color: var(--sideBarBgcHoverLink);
+			
 		}
 	}
 	.subMenu {
@@ -73,14 +74,17 @@
 			}
 
 			&:hover {
-				background-color: #d3d3d3d3;
+				// background-color: #d3d3d3d3;
+				// background-color: rgb(152, 255, 152);
+				background-color: var(--sideBarBgcHoverLink);
 			}
 		}
 		.activeSubMenuLi {
-			background-color: rgb(146, 230, 146);
-
+			background-color: var(--sideBarBgcHoverLink);
+			
 			&:hover {
-				background-color: rgb(146, 230, 146);
+				background-color: var(--sideBarBgcHoverLink);
+				// background-color: rgb(152, 255, 152);
 			}
 		}
 	}

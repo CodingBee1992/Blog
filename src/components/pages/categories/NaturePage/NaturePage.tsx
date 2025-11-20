@@ -1,4 +1,5 @@
-import NaturePageTemplate from '../../../templates/NaturePageTemplate/NaturePageTemplate'
+import NaturePageTemplate from "../../../templates/MenuCategoriesTemplates/NaturePageTemplate/NaturePageTemplate"
+
 
 const NaturePage = () => {
 	return <NaturePageTemplate />

@@ -121,8 +121,8 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 
 	const signOut = async () => {
 		try {
-			const res = await logOut({}).unwrap()
-			console.log(res)
+			 await logOut({}).unwrap()
+			
 
 			dispatch(setLogout())
 			// setTimeout(() => {

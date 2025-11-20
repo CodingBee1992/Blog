@@ -88,13 +88,22 @@
 		.copyright {
 			color: #828484;
 			font-size: calc(1.8rem * 0.7222);
+
+			&:first-child::after {
+				content: '|';
+				padding: 0 1rem 0 1.2rem;
+				color: #828484;
+			}
+
+			a {
+				color: #000000;
+			}
 		}
 	}
 	.column {
-		padding:0 var(--gutter);
+		padding: 0 var(--gutter);
 	}
 }
-
 
 @media (max-width: 1200px) {
 	.footerContainer {
@@ -131,11 +140,11 @@
 				}
 				.footerSiteLinks {
 					grid-column: 1/7;
-                    grid-row: 2/3;
+					grid-row: 2/3;
 				}
 				.footerSocialLinks {
 					grid-column: 7/13;
-                    grid-row: 2/3;
+					grid-row: 2/3;
 				}
 
 				.footerSubscribe {

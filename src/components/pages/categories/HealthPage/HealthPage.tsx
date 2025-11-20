@@ -1,4 +1,5 @@
-import HealthPageTemplate from "../../../templates/HealthPageTemplate/HealthPageTemplate"
+import HealthPageTemplate from "../../../templates/MenuCategoriesTemplates/HealthPageTemplate/HealthPageTemplate"
+
 
 
 const HealthPage = () => {

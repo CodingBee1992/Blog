@@ -1,5 +1,5 @@
 
-import HeaderText from '../../atoms/HeaderText/HeaderText'
+import HeaderText from '../../../atoms/HeaderText/HeaderText'
 import styles from './PhotographyPageTemplate.module.scss'
 const PhotographyPageTemplate = () => {
   return (

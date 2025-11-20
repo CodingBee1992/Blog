@@ -1,4 +1,5 @@
-import HeaderText from "../../atoms/HeaderText/HeaderText"
+
+import HeaderText from '../../../atoms/HeaderText/HeaderText'
 import styles from './WorkPageTemplate.module.scss'
 const WorkPageTemplate = () => {
 	return (

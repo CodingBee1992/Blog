@@ -1,4 +1,5 @@
-import VacationPageTemplate from "../../../templates/VacationPageTemplate/VacationPageTemplate"
+import VacationPageTemplate from "../../../templates/MenuCategoriesTemplates/VacationPageTemplate/VacationPageTemplate"
+
 
 const VacationPage = () => {
   return <VacationPageTemplate />

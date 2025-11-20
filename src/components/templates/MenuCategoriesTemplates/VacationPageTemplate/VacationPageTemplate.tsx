@@ -1,5 +1,6 @@
 
-import HeaderText from '../../atoms/HeaderText/HeaderText'
+
+import HeaderText from '../../../atoms/HeaderText/HeaderText'
 import styles from './VacationPageTemplate.module.scss'
 const VacationPageTemplate = () => {
   return (

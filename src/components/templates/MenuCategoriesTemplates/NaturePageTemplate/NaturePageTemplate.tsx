@@ -1,5 +1,6 @@
-import HeaderText from '../../atoms/HeaderText/HeaderText'
-import PostsContent from '../../organism/PostsContent/PostsContent'
+
+import HeaderText from '../../../atoms/HeaderText/HeaderText'
+import PostsContent from '../../../organism/PostsContent/PostsContent'
 import styles from './NaturePageTemplate.module.scss'
 
 const NaturePageTemplate = () => {

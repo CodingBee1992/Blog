@@ -1,4 +1,5 @@
-import CulturePageTemplate from '../../../templates/CulturePageTemplate/CulturePageTemplate'
+import CulturePageTemplate from "../../../templates/MenuCategoriesTemplates/CulturePageTemplate/CulturePageTemplate"
+
 
 const CulturePage = () => {
 	return <CulturePageTemplate />

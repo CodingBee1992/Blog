@@ -1,4 +1,5 @@
-import PhotographyPageTemplate from "../../../templates/PhotographyPageTemplate/PhotographyPageTemplate"
+import PhotographyPageTemplate from "../../../templates/MenuCategoriesTemplates/PhotographyPageTemplate/PhotographyPageTemplate"
+
 
 
 const PhotographyPage = () => {

@@ -1,4 +1,5 @@
-import HeaderText from "../../atoms/HeaderText/HeaderText"
+
+import HeaderText from '../../../atoms/HeaderText/HeaderText'
 import styles from './FamilyPageTemplate.module.scss'
 const FamilyPageTemplate = () => {
 	return (

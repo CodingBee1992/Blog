@@ -1,4 +1,4 @@
-import AdminPanelPageTemplate from "../../../templates/AdminPanelPageTemplate/AdminPanelPageTemplate"
+import AdminPanelPageTemplate from "../../../templates/AdminPanelTemplates/AdminPanelPageTemplate/AdminPanelPageTemplate"
 
 
 

@@ -1,4 +1,5 @@
-import LifeStylePageTemplate from "../../../templates/LifeStylePageTemplate/LifeStylePageTemplate"
+import LifeStylePageTemplate from "../../../templates/MenuCategoriesTemplates/LifeStylePageTemplate/LifeStylePageTemplate"
+
 
 
 const LifeStylePage = () => {

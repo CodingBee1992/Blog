@@ -1,8 +1,9 @@
+import AddPostPageTemplate from "../../../../templates/AdminPanelTemplates/AddPostPageTemplate/AddPostPageTemplate"
 
 
 const AddPostPage = () => {
   return (
-    <div>Add Post Page</div>
+    <AddPostPageTemplate/>
   )
 }
 

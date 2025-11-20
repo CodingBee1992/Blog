@@ -1,4 +1,4 @@
-import RelationshipPageTemplate from "../../../templates/RelationshipPageTemplate/RelationshipPageTemplate"
+import RelationshipPageTemplate from "../../../templates/MenuCategoriesTemplates/RelationshipPageTemplate/RelationshipPageTemplate"
 
 
 const RealtionshipPage = () => {
