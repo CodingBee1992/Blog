@@ -1,0 +1,92 @@
+import z from 'zod'
+export const postSchema = z.object({
+	mainTitle: z.string().trim().min(4, { message: 'Min 4 characters' }),
+	introduction: z.string().trim().min(5, { message: 'Min 5 characters' }),
+
+	mainImage: z.object({
+		src: z
+			.instanceof(File)
+			.nullable()
+			.refine(v => v !== null, {
+				message: 'Please upload a file',
+			}),
+		alt: z.string().trim().min(1, { message: 'Please fill alt' }),
+		caption: z.string().trim().min(1, { message: 'Please fill caption' }),
+	}),
+
+	articleContent: z.array(
+		z.discriminatedUnion('type', [
+			z.object({
+				type: z.literal('title'),
+				value: z.string().min(1, 'Please fill field'),
+			}),
+			z.object({
+				type: z.literal('text'),
+				value: z.string().min(1, 'Please fill field'),
+			}),
+			z.object({
+				type: z.literal('completion'),
+				value: z.string().min(1, 'Please fill field'),
+			}),
+			z.object({
+				type: z.literal('callToAction'),
+				value: z.string().min(1, 'Please fill field'),
+			}),
+			z.object({
+				type: z.literal('image'),
+				value: z.object({
+					src: z
+						.instanceof(File)
+						.nullable()
+						.refine(v => v !== null, 'Please upload a file'),
+					alt: z.string().min(1, 'Please fill alt'),
+					caption: z.string().min(1, 'Please fill caption'),
+				}),
+			}),
+		])
+		
+	),
+
+	categories: z.array(z.string()).min(1, { message: 'Min 1 Category' }).max(2, { message: 'Max 2 Categories' }),
+	seo: z.object({
+		slug: z.string().min(1, { message: 'Please fill field' }),
+		metaTitle: z.string().min(1, { message: 'Please fill field' }),
+		metaDescription: z.string().min(1, { message: 'Please fill field' }),
+	}),
+	status: z.string(),
+})
+
+export type postSchemaTypes = z.infer<typeof postSchema>
+
+export const defaultValues: postSchemaTypes = {
+	mainTitle: '',
+	introduction: '',
+	mainImage: {
+		src: null,
+		alt: '',
+		caption: '',
+	},
+	articleContent: [
+		{ type: 'title', value: '' },
+		{ type: 'text', value: '' },
+		{
+			type: 'image',
+			value: {
+				src: null,
+				alt: '',
+				caption: '',
+			},
+		},
+		{ type: 'completion', value: '' },
+		{ type: 'callToAction', value: '' },
+	],
+
+	categories: [],
+	seo: {
+		slug: '',
+		metaTitle: '',
+		metaDescription: '',
+		
+	},
+	status: 'draft',
+}
