@@ -1,13 +1,11 @@
-import { useDispatch } from 'react-redux'
 
-import { setIsLoading } from '../../../slices/themeSlice'
 import type React from 'react'
 import { useLocation, useNavigate } from 'react-router'
 interface LogoProps {
 	styles: Record<string, string>
 }
 const Logo = ({ styles }: LogoProps) => {
-	const dispatch = useDispatch()
+	
 	const location = useLocation()
 	const navigate = useNavigate()
 	const handleClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -27,7 +25,7 @@ const Logo = ({ styles }: LogoProps) => {
 			}, 210)
 		}
 
-		dispatch(setIsLoading(true))
+		
 	}
 
 	return (

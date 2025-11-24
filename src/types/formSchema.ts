@@ -54,6 +54,8 @@ export const postSchema = z.object({
 		metaDescription: z.string().min(1, { message: 'Please fill field' }),
 	}),
 	status: z.string(),
+	
+	
 })
 
 export type postSchemaTypes = z.infer<typeof postSchema>
@@ -89,4 +91,5 @@ export const defaultValues: postSchemaTypes = {
 		
 	},
 	status: 'draft',
+	
 }

@@ -1,15 +1,18 @@
-import { usePostContext } from "../../../hooks/usePostContext"
+import { usePostContext } from '../../../hooks/usePostContext'
+
+
+
 
 interface ArticleImageProps {
 	styles: { [key: string]: string }
 }
 
 const ArticleImage = ({ styles }: ArticleImageProps) => {
-	const {image} = usePostContext()
-	
+	const { mainImage } = usePostContext()
+
 	return (
 		<div className={styles.imageContainer}>
-			<img src={image} alt="Post Image" className={styles.image} />
+			<img src={mainImage.src} alt={mainImage.alt} className={styles.image} />
 		</div>
 	)
 }

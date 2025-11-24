@@ -4,23 +4,28 @@ const POSTS_URL = import.meta.env.VITE_POSTS_URL
 
 export const apiSlice = createApi({
     reducerPath:'api',
-    baseQuery:fetchBaseQuery({baseUrl:`${BASE_URL}`}),
+    baseQuery:fetchBaseQuery({baseUrl:`${BASE_URL}`,credentials:'include'}),
     endpoints: builder =>({
 
-        getPost:builder.query({
+        fetchAllPosts:builder.query({
             query: ()=> `${POSTS_URL}`
         }),
-
+        fetchPostsByLimit:builder.query({
+            query: ({limit,page})=> `${POSTS_URL}/paginated/?limit=${limit}&page=${page}`
+        }),
+        fetchPostById:builder.query({
+            query: (postId)=> `${POSTS_URL}/${postId}`
+        }),
 
         createPost: builder.mutation({
-            query:({newPost})=>({
+            query:(updatedData)=>({
                 url:`${POSTS_URL}`,
                 method:"POST",
                 headers:{'Content-type':'application/json'},
-                body:newPost
+                body:updatedData
             })
         })
     })
 })
 
-export const {useGetPostQuery,useCreatePostMutation} =apiSlice
+export const {useFetchAllPostsQuery,useCreatePostMutation,useFetchPostByIdQuery,useFetchPostsByLimitQuery} = apiSlice

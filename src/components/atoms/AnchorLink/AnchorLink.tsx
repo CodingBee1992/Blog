@@ -1,9 +1,7 @@
 import type { ReactNode, RefObject } from 'react'
 import { removePaginationLinksTags } from '../../../utils/removePaginationLinksTag'
-// import styles from './AnchorLink.module.scss'
 import { useLocation, useNavigate } from 'react-router'
-import { useDispatch } from 'react-redux'
-import { setIsLoading } from '../../../slices/themeSlice'
+
 interface AnchorLink {
 	children: ReactNode
 	href: string
@@ -18,7 +16,7 @@ interface AnchorLink {
 const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,ref }: AnchorLink) => {
 	const navigate = useNavigate()
 	const location = useLocation()
-	const dispatch = useDispatch()
+	
 	// const isActive = location.pathname === href
 // ${isActive ? styles.isActive : ''}
 	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -42,7 +40,7 @@ const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,r
 				window.scrollTo({ top: 0, behavior: 'smooth' })
 			}, 210)
 		}
-		dispatch(setIsLoading(true))
+		
 	}
 
 	return (

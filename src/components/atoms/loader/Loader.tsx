@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react'
+import {  useRef } from 'react'
 import styles from './Loader.module.scss'
 // import { has24HoursPassed } from '../../../utils/timePass'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
-import { setIsLoading } from '../../../slices/themeSlice'
+
 
 const Loader = () => {
 	// const [isEnd, setIsEnd] = useState(false)
@@ -14,7 +14,7 @@ const Loader = () => {
 	const loaderRef = useRef<HTMLDivElement>(null)
 	const loaderTimeOutRef = useRef<NodeJS.Timeout>([])
 	const { isLoading } = useSelector((state: RootState) => state.theme)
-	const dispatch = useDispatch()
+	
 
 	
 	// useEffect(() => {
@@ -49,16 +49,16 @@ const Loader = () => {
 	// 	}
 	// }, [is24Hours, isFirstTime])
 	
-	useEffect(() => {
+	// useEffect(() => {
 
-		if (isLoading) {
-			 setTimeout(() => {
-				dispatch(setIsLoading(false))
-			}, 2100)
+	// 	if (isLoading) {
+	// 		 setTimeout(() => {
+	// 			dispatch(setIsLoading(false))
+	// 		}, 2100)
 
 			
-		}
-	}, [dispatch, isLoading])
+	// 	}
+	// }, [dispatch, isLoading])
 
 	return (
 		// <>

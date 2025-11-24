@@ -39,20 +39,32 @@ export interface PostDataProps {
 	styles?: { [key: string]: string }
 }
 export interface ArticleContentProps {
-	id: number
-	image: string
-	href: string
-	categories: { category: string; href: string }[]
-	author: { name: string; avatar: string; href: string }
-	title: string
-	mainText: string
-	articleContent: {
-		title?: string
-		text?: string
-		imgContent?: { img: string; alt: string; imgtext: string }[]
-		completion?: string
-		callToAction?: string
-	}[]
+	_id: string
+	mainTitle: string
+	introduction: string
+	mainImage: { src: string; alt: string; caption: string }
+	author: { name: string; avatar: string }
+	// articleContent: {
+	// 	title?: string
+	// 	text?: string
+	// 	imgContent?: { img: string; alt: string; imgtext: string }[]
+	// 	completion?: string
+	// 	callToAction?: string
+	// }[]
+	articleContent: [
+		{ type: 'title' | 'text' | 'completion' | 'callToAction'|'add'; value: string },
+
+		{ type: 'image'; value: { src: string; alt: string; caption: string } }
+	]
+	categories: string[]
+	id?: string
+	seo?: { slug: string; metaTitle: string; metaDescription: string }
+	status?: string
+	href?: string
+	left?: string
+	top?: string
+	articleRef?: React.Ref<HTMLDivElement>
+	styles?: { [key: string]: string }
 }
 
 export interface CommentsDataProps {
@@ -73,5 +85,5 @@ export interface adminLinksProps {
 	title: string
 	icon?: ReactNode
 	href: string
-	children?:adminLinksProps[]
+	children?: adminLinksProps[]
 }

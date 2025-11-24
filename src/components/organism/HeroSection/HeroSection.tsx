@@ -1,18 +1,22 @@
 import { useState, type MouseEvent, type TouchEvent } from 'react'
 import { ArrowNext, ArrowPrev } from '../../../assets/icons/arrows/Arrows'
-import type { PostDataProps } from '../../../types/types'
-import postData from '../../../utils/postData'
+import type { ArticleContentProps} from '../../../types/types'
+// import postData from '../../../utils/postData'
 import { socialData } from '../../../utils/socialData'
 import SliderList from '../../atoms/SliderList/SliderList'
 import SocialIcon from '../../atoms/SocialIcon/SocialIcon'
 import styles from './HeroSection.module.scss'
 import SliderDots from '../../atoms/SliderDots/SliderDots'
+import { useFetchAllPostsQuery } from '../../../slices/api/apiSlice'
+import Loader from '../../atoms/loader/Loader'
 
 const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [swipeStartX, setSwipeStartX] = useState<number>(0)
-	const sliderLength = postData.slice(0,4)
+	const {data,isFetching} = useFetchAllPostsQuery({})
+	const sliderLength = [1,2,3]
 	
+	if(!data) return null
 	const handleSliderNext = () => {
 		setNumber(prev => (prev >= sliderLength.length - 1 ? 0 : prev + 1))
 	}
@@ -57,6 +61,9 @@ const HeroSection = () => {
 			setNumber(tabIndex)
 		}
 	}
+
+	if(isFetching) return <Loader />
+
 	return (
 		<section id="hero" className={styles.homeContainer}>
 			<div className={styles.sliderContainer}>
@@ -66,7 +73,7 @@ const HeroSection = () => {
 					onMouseUp={e => handleSwipeEnd(e)}
 					onTouchStart={e => handleSwipeStart(e)}
 					onTouchEnd={e => handleSwipeEnd(e)}>
-					{postData.map((data: PostDataProps, index: number) => (
+					{data.map((data: ArticleContentProps, index: number) => (
 						<SliderList key={index} styles={styles} data={data} index={index} number={number} />
 					))}
 				</div>

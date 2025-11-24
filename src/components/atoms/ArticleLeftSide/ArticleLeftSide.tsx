@@ -23,7 +23,7 @@ const ArticleLeftSide = ({ styles }: ArticleLefSideProps) => {
 					<div className={styles.catLinks}>
 						<span>In </span>
 						{categories.map((item, index) => (
-							<a key={index} href={item.href}>{item.category}</a>
+							<a key={index} href={`/categories/${item}`}>{item}</a>
 						))}
 					</div>
 					<span>On</span> 22/10/2025

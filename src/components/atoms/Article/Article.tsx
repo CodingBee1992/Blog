@@ -1,8 +1,10 @@
-import type { PostDataProps } from '../../../types/types'
+
+import type {  ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import styles from './Article.module.scss'
 
-const Article = ({ id, href, image, title, categories, author, mainText, left, top, articleRef }: PostDataProps) => {
+const Article = ({ _id, href, mainImage, mainTitle, categories, author, introduction, left, top, articleRef }: ArticleContentProps) => {
+	
 	return (
 		<article
 			data-aos="fade-up"
@@ -10,13 +12,13 @@ const Article = ({ id, href, image, title, categories, author, mainText, left, t
 			className={`${styles.article} ${styles.brick}`}
 			style={{ position: 'absolute', left, top }}>
 			<div className={styles.articleImage}>
-				<AnchorLink href={`${href}/?id=${id}`}>
-					<img src={image} alt="Article Image" />
+				<AnchorLink href={`${href}/?id=${_id}`}>
+					<img src={mainImage.src} alt={mainImage.alt} />
 				</AnchorLink>
 			</div>
 			<div className={styles.articleText}>
 				<div className={styles.articleHeaderText}>
-					<h1 className={styles.articleTitle}>{title}</h1>
+					<h1 className={styles.articleTitle}>{mainTitle}</h1>
 					<div className={styles.articleMeta}>
 						<span className={styles.byline}>
 							By:{' '}
@@ -27,8 +29,8 @@ const Article = ({ id, href, image, title, categories, author, mainText, left, t
 						<span className={styles.categories}>
 							{categories.map((item, index) => {
 								return (
-									<AnchorLink key={index} href={item.href}>
-										{item.category}
+									<AnchorLink key={index} href={`/categories/${item}`}>
+										{item}
 									</AnchorLink>
 								)
 							})}
@@ -36,9 +38,9 @@ const Article = ({ id, href, image, title, categories, author, mainText, left, t
 					</div>
 				</div>
 				<div className={styles.articleTextContent}>
-					<p>{mainText}</p>
+					<p>{introduction}</p>
 				</div>
-				<AnchorLink href={`${href}/?id=${id}`} className={styles.readMoreLink}>
+				<AnchorLink href={`${href}/?id=${_id}`} className={styles.readMoreLink}>
 					Read More
 				</AnchorLink>
 			</div>

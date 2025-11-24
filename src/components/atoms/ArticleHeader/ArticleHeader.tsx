@@ -5,11 +5,11 @@ interface ArticleHeaderProps {
 }
 
 const ArticleHeader = ({ styles }: ArticleHeaderProps) => {
-	const { title } = usePostContext()
+	const { mainTitle } = usePostContext()
 
 	return (
 		<div className={styles.headerContainer}>
-			<h1 className={styles.headerTitle}>{title}</h1>
+			<h1 className={styles.headerTitle}>{mainTitle}</h1>
 		</div>
 	)
 }

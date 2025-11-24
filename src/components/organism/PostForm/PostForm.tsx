@@ -6,6 +6,7 @@ import RHFTextArea from '../../atoms/RHFTextArea/RHFTextArea'
 import RHFAddFile from '../../atoms/RHFAddFile/RHFAddFile'
 import RHFCategorySelect from '../../atoms/RHFCategorySelect/RHFCategorySelect'
 import RHFSelect from '../../atoms/RHFSelect/RHFSelect'
+import { useCreatePostMutation } from '../../../slices/api/apiSlice'
 
 const allCategories = [
 	'LifeStyle',
@@ -19,11 +20,13 @@ const allCategories = [
 	'Family',
 	'Relationship',
 ]
-const statusOptions =['draft','published']
+const statusOptions = ['draft', 'published']
 
 const PostForm = () => {
+	const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+	const UPLOAD_PRESET = import.meta.env.VITE_UPLOAD_PRESET
 	const buttons = ['title', 'text', 'image'] as const
-
+	const [createPost] = useCreatePostMutation()
 	const methods = useForm<postSchemaTypes>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
@@ -34,21 +37,68 @@ const PostForm = () => {
 		handleSubmit,
 		setError,
 		control,
-
+		reset,
 		formState: { isSubmitting },
 	} = methods
 	const { fields: articleContent, append } = useFieldArray({ control, name: 'articleContent' })
 
+	const uploadToCloudinary = async (file: File | null) => {
+		if (!file) return
+		const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`
+		const formData = new FormData()
+		formData.append('file', file)
+		formData.append('upload_preset', UPLOAD_PRESET)
+
+		const response = await fetch(url, {
+			method: 'POST',
+			body: formData,
+		})
+
+		const data = await response.json()
+		
+		return data.secure_url
+	}
+	
+	
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
 		try {
 			await new Promise(resolve => setTimeout(resolve, 1000))
-			console.log(data)
+
+			let mainImage = data.mainImage
+
+			if (mainImage.src instanceof File) {
+				const url = await uploadToCloudinary(mainImage.src)
+
+				mainImage = { ...mainImage, src: url }
+			}
+
+			const articleContent = await Promise.all(
+				data.articleContent.map(async item => {
+					if (item.type === 'image' && item.value.src instanceof File) {
+						const file = item.value.src
+
+						const url = await uploadToCloudinary(file)
+
+						return { ...item, value: { ...item.value, src: url } }
+					}
+					return item
+				})
+			)
+			
+
+			const updatedData = { ...data, articleContent,mainImage }
+
+			 await createPost({updatedData}).unwrap()
+			
+
+			reset()
+			
 		} catch (error) {
 			console.log(error)
 			setError('root', { message: 'Please fill all fields' })
 		}
 	}
-    
+
 	return (
 		<FormProvider {...methods}>
 			<div>
@@ -56,7 +106,6 @@ const PostForm = () => {
 					{buttons.map((btn, index) => (
 						<button
 							key={index}
-							
 							onClick={() => {
 								if (btn === 'image') {
 									append({ type: btn, value: { src: null, alt: '', caption: '' } })
@@ -127,7 +176,7 @@ const PostForm = () => {
 
 						<RHFInput name="seo.metaDescription" label="Meta Description" />
 					</div>
-                    <RHFSelect  name='status' label='Status' options={statusOptions}/>
+					<RHFSelect name="status" label="Status" options={statusOptions} />
 					<button disabled={isSubmitting} type="submit">
 						Create Post
 					</button>

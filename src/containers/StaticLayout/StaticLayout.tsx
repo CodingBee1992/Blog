@@ -1,8 +1,6 @@
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { lazy, useEffect } from 'react'
-import Loader from '../../components/atoms/loader/Loader'
-
 import { Outlet, useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
@@ -33,24 +31,23 @@ const StaticLayout = () => {
 		}
 	}, [location.pathname, isLoading, width])
 
-	if (isLoading) {
-		return <Loader />
-	}
+	// if (isLoading) {
+	// 	return <Loader />
+	// }
 
 	return (
-		<SinglePostProvider>
-			<MenuProvider>
-
-			<div data-aos="fade-zoom-in">
-				<ToastContainer />
-				<Navigation />
-				<div>
-					<Outlet />
+		<MenuProvider>
+			<SinglePostProvider>
+				<div data-aos="fade-zoom-in">
+					<ToastContainer />
+					<Navigation />
+					<div>
+						<Outlet />
+					</div>
+					<Footer />
 				</div>
-				<Footer />
-			</div>
-			</MenuProvider>
-		</SinglePostProvider>
+			</SinglePostProvider>
+		</MenuProvider>
 	)
 }
 

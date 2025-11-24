@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react'
-
-import postData from '../../../utils/postData'
 import Article from '../../atoms/Article/Article'
 import styles from './PostsContent.module.scss'
-import type { PostDataProps } from '../../../types/types'
+import type { ArticleContentProps } from '../../../types/types'
 import Aos from 'aos'
+import { useFetchPostsByLimitQuery } from '../../../slices/api/apiSlice'
+
 
 const PostsContent = () => {
 	const [width, setWidth] = useState<number>(0)
@@ -14,27 +14,26 @@ const PostsContent = () => {
 	const [wrapperHeight, setWrapperHeight] = useState<number | null>(null)
 	const heightsCache = useRef<number[]>([])
 
-	const [styledPostData, setStyledPostData] = useState<PostDataProps[]>([])
+	const [styledPostData, setStyledPostData] = useState<ArticleContentProps[]>([])
 
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [pagginationButtons, setPagginationButtons] = useState<number[]>([])
 
-	const totalProducts = 3000
-	const itemsPerPage = 30
-	const totalPages = Math.ceil(totalProducts / itemsPerPage)
+	const { data } = useFetchPostsByLimitQuery({ limit: 30, page: currentPage })
+	const { posts = [], totalPages = 1 } = { ...data }
 
 	useEffect(() => {
 		const buttons: (number | string)[] = []
 		const maxVisiblePages = 5
 
-		if (totalPages <= maxVisiblePages + 2) {
-			for (let i = 1; i <= totalPages; i++) {
+		if (totalPages <= maxVisiblePages) {
+			for (let i = 1; i <= maxVisiblePages; i++) {
 				buttons.push(i)
 			}
 		} else {
 			buttons.push(1)
 		}
-		if (currentPage > 4) {
+		if (currentPage > 4 && totalPages > 5) {
 			buttons.push('...')
 		}
 
@@ -47,10 +46,12 @@ const PostsContent = () => {
 		if (currentPage < totalPages - 2) {
 			buttons.push('...')
 		}
-		buttons.push(totalPages)
+		if (totalPages > 5) {
+			buttons.push(totalPages)
+		}
 
 		setPagginationButtons(buttons as number[])
-	}, [currentPage, totalPages, totalProducts])
+	}, [currentPage, totalPages])
 
 	const handlePageChange = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
@@ -107,7 +108,7 @@ const PostsContent = () => {
 		const recalcGrid = () => {
 			const columnHeights = new Array(columns).fill(0)
 
-			const updated = postData.map((post, index) => {
+			const updated = posts.map((post: ArticleContentProps, index: number) => {
 				const col = index % columns
 				const height = heightsCache.current[index] || 650
 
@@ -151,7 +152,7 @@ const PostsContent = () => {
 		return () => {
 			observer.disconnect()
 		}
-	}, [columns, percent, width])
+	}, [columns, percent, width, posts])
 	useEffect(() => {
 		Aos.init({
 			duration: 600,
@@ -173,24 +174,26 @@ const PostsContent = () => {
 
 					{styledPostData.map(
 						(
-							{ id, title, href, image, categories, author, mainText, left, top }: PostDataProps,
-							index: number
+							{ _id, mainTitle, mainImage, categories, author, introduction, left, top }: ArticleContentProps,
+							index:number
 						) => {
 							return (
 								<Article
 									articleRef={el => {
 										articleRef.current[index] = el
-									} }
-									id={id}
+									}}
+									_id={_id}
 									key={index}
-									href={href}
-									image={image}
-									title={title}
+									href="/blog"
+									mainImage={mainImage}
+									mainTitle={mainTitle}
 									categories={categories}
 									author={author}
-									mainText={mainText}
+									introduction={introduction}
 									left={left}
-									top={top} articleContent={[]}								/>
+									top={top}
+									articleContent={[]}
+								/>
 							)
 						}
 					)}
