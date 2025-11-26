@@ -7,6 +7,9 @@ import RHFAddFile from '../../atoms/RHFAddFile/RHFAddFile'
 import RHFCategorySelect from '../../atoms/RHFCategorySelect/RHFCategorySelect'
 import RHFSelect from '../../atoms/RHFSelect/RHFSelect'
 import { useCreatePostMutation } from '../../../slices/api/apiSlice'
+import styles from './PostForm.module.scss'
+import uploadToCloudinary from '../../../hooks/useUploadToCloudinary'
+import { useRef } from 'react'
 
 const allCategories = [
 	'LifeStyle',
@@ -23,10 +26,10 @@ const allCategories = [
 const statusOptions = ['draft', 'published']
 
 const PostForm = () => {
-	const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-	const UPLOAD_PRESET = import.meta.env.VITE_UPLOAD_PRESET
 	const buttons = ['title', 'text', 'image'] as const
+	const fileRef = useRef<(HTMLInputElement | null)[]>([])
 	const [createPost] = useCreatePostMutation()
+
 	const methods = useForm<postSchemaTypes>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
@@ -42,24 +45,27 @@ const PostForm = () => {
 	} = methods
 	const { fields: articleContent, append } = useFieldArray({ control, name: 'articleContent' })
 
-	const uploadToCloudinary = async (file: File | null) => {
-		if (!file) return
-		const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`
-		const formData = new FormData()
-		formData.append('file', file)
-		formData.append('upload_preset', UPLOAD_PRESET)
+	// const uploadToCloudinary = async (file: File | null) => {
+	// 	if (!file) return
+	// 	const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`
+	// 	const formData = new FormData()
+	// 	formData.append('file', file)
+	// 	formData.append('upload_preset', UPLOAD_PRESET)
 
-		const response = await fetch(url, {
-			method: 'POST',
-			body: formData,
-		})
+	// 	const response = await fetch(url, {
+	// 		method: 'POST',
+	// 		body: formData,
+	// 	})
 
-		const data = await response.json()
-		
-		return data.secure_url
+	// 	const data = await response.json()
+
+	// 	return data.secure_url
+	// }
+	const handleResetFields = () => {
+		if (fileRef.current) fileRef.current.forEach(el => el && (el.value = ''))
+		reset()
+		window.scrollTo({ top: 0, behavior: 'smooth' })
 	}
-	
-	
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
 		try {
 			await new Promise(resolve => setTimeout(resolve, 1000))
@@ -84,15 +90,12 @@ const PostForm = () => {
 					return item
 				})
 			)
-			
 
-			const updatedData = { ...data, articleContent,mainImage }
+			const updatedData = { ...data, articleContent, mainImage }
 
-			 await createPost({updatedData}).unwrap()
-			
+			await createPost({ updatedData }).unwrap()
 
 			reset()
-			
 		} catch (error) {
 			console.log(error)
 			setError('root', { message: 'Please fill all fields' })
@@ -101,85 +104,134 @@ const PostForm = () => {
 
 	return (
 		<FormProvider {...methods}>
-			<div>
-				<div>
-					{buttons.map((btn, index) => (
-						<button
-							key={index}
-							onClick={() => {
-								if (btn === 'image') {
-									append({ type: btn, value: { src: null, alt: '', caption: '' } })
-								} else {
-									append({ type: btn, value: '' })
-								}
-							}}>
-							+ {btn}
-						</button>
-					))}
+			<div className={styles.postFormContainer}>
+				<div className={styles.postFormControllersWrapper}>
+					<div className={styles.postFormControllers}>
+						{buttons.map((btn, index) => (
+							<button
+								className={styles.postFormBtns}
+								key={index}
+								onClick={() => {
+									if (btn === 'image') {
+										append({ type: btn, value: { src: null, alt: '', caption: '' } })
+									} else {
+										append({ type: btn, value: '' })
+									}
+								}}>
+								+ {btn}
+							</button>
+						))}
+					</div>
 				</div>
 
-				<form onSubmit={handleSubmit(onSumbit)}>
-					<RHFInput<postSchemaTypes> name="mainTitle" label="Main Title" />
-					<RHFTextArea<postSchemaTypes> name="introduction" label="Introduction" />
-					<div>
-						<RHFAddFile<postSchemaTypes> name="mainImage.src" label="Main Image" />
+				<form onSubmit={handleSubmit(onSumbit)} className={styles.formContainer}>
+					<div className={styles.formWrapper}>
+						<div className={styles.formFlex}>
+							<RHFInput<postSchemaTypes> name="mainTitle" label="Main Title" styles={styles} id={`title-mainTitle`} />
+							<RHFTextArea<postSchemaTypes>
+								name="introduction"
+								label="Introduction"
+								styles={styles}
+								id={`text-Intro`}
+							/>
 
-						<RHFInput name={`mainImage.alt`} label="Alt" />
-						<RHFInput name={`mainImage.caption`} label="Caption" />
-					</div>
+							<RHFAddFile<postSchemaTypes>
+								name="mainImage"
+								label="Main Image"
+								styles={styles}
+								fileRef={fileRef}
+								fileIndex={-1}
+							/>
 
-					{articleContent &&
-						articleContent?.length > 0 &&
-						articleContent.map((field, index) => (
-							<div key={index}>
-								{field.type === 'title' && (
-									<RHFInput<postSchemaTypes> name={`articleContent.${index}.value`} label="Subtitle" />
-								)}
-								{field.type === 'text' && (
-									<RHFTextArea<postSchemaTypes> name={`articleContent.${index}.value`} label="Text" />
-								)}
-								{field.type === 'image' && (
-									<div>
-										<RHFAddFile<postSchemaTypes>
-											name={`articleContent.${index}.value.src`}
-											label="Image"
-											index={index}
-										/>
-										<RHFInput name={`articleContent.${index}.value.alt`} label="Alt" />
-										<RHFInput name={`articleContent.${index}.value.caption`} label="Caption" />
+							{articleContent &&
+								articleContent?.length > 0 &&
+								articleContent.map((field, index) => (
+									<div key={index}>
+										{field.type === 'title' && (
+											<RHFInput<postSchemaTypes>
+												id={`title-${index}`}
+												name={`articleContent.${index}.value`}
+												label="Subtitle"
+												styles={styles}
+											/>
+										)}
+										{field.type === 'text' && (
+											<RHFTextArea<postSchemaTypes>
+												name={`articleContent.${index}.value`}
+												label="Text"
+												styles={styles}
+												id={`text-${index}`}
+											/>
+										)}
+										{field.type === 'image' && (
+											<RHFAddFile<postSchemaTypes>
+												name={`articleContent.${index}.value`}
+												label="Content Image"
+												styles={styles}
+												fileRef={fileRef}
+												fileIndex={index}
+											/>
+										)}
 									</div>
-								)}
+								))}
+							{articleContent &&
+								articleContent.map((field, index) => (
+									<div key={index}>
+										{field.type === 'completion' && (
+											<RHFTextArea
+												name={`articleContent.${index}.value`}
+												label="Completion"
+												styles={styles}
+												id={`text-${index}`}
+											/>
+										)}
+
+										{field.type === 'callToAction' && (
+											<RHFTextArea
+												name={`articleContent.${index}.value`}
+												label="Call to action"
+												styles={styles}
+												id={`text-${index}`}
+											/>
+										)}
+									</div>
+								))}
+						</div>
+						<div className={styles.formOptionsContainer}>
+							<div className={styles.formOptionsWrapper}>
+								<RHFCategorySelect<postSchemaTypes>
+									name="categories"
+									options={allCategories}
+									label="Categories"
+									max={3}
+									styles={styles}
+								/>
+
+								<div className={styles.seoContainer}>
+									<p className={styles.seoTitle}>SEO</p>
+
+									<RHFInput name="seo.slug" label="Slug" styles={styles} id={`title-slug`} />
+
+									<RHFInput name="seo.metaTitle" label="Meta Title" styles={styles} id={`title-metaTitle`} />
+
+									<RHFInput name="seo.metaDescription" label="Meta Description" styles={styles} id={`title-metaDesc`} />
+								</div>
+								<RHFSelect name="status" label="Status" options={statusOptions} styles={styles} />
 							</div>
-						))}
-
-					{articleContent &&
-						articleContent.map((field, index) => (
-							<div key={index}>
-								{field.type === 'completion' && (
-									<RHFTextArea name={`articleContent.${index}.value`} label="Completion" />
-								)}
-
-								{field.type === 'callToAction' && (
-									<RHFTextArea name={`articleContent.${index}.value`} label="Call to action" />
-								)}
-							</div>
-						))}
-
-					<RHFCategorySelect<postSchemaTypes> name="categories" options={allCategories} label="Categories" max={3} />
-
-					<div>
-						<p>SEO</p>
-
-						<RHFInput name="seo.slug" label="Slug" />
-
-						<RHFInput name="seo.metaTitle" label="Meta Title" />
-
-						<RHFInput name="seo.metaDescription" label="Meta Description" />
+						</div>
 					</div>
-					<RHFSelect name="status" label="Status" options={statusOptions} />
-					<button disabled={isSubmitting} type="submit">
-						Create Post
-					</button>
+					<div className={styles.submitBtns}>
+						<button disabled={isSubmitting} type="submit" className={`${styles.submitBtn} ${styles.postFormBtn}`}>
+							{isSubmitting ? 'Creating' : 'Create Post'}
+						</button>
+						<button
+							disabled={isSubmitting}
+							type="button"
+							onClick={() => handleResetFields()}
+							className={`${styles.resetBtn} ${styles.postFormBtn} `}>
+							Reset
+						</button>
+					</div>
 				</form>
 			</div>
 		</FormProvider>

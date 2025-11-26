@@ -1,27 +1,28 @@
 import { useState, type MouseEvent, type TouchEvent } from 'react'
 import { ArrowNext, ArrowPrev } from '../../../assets/icons/arrows/Arrows'
 import type { ArticleContentProps} from '../../../types/types'
-// import postData from '../../../utils/postData'
 import { socialData } from '../../../utils/socialData'
 import SliderList from '../../atoms/SliderList/SliderList'
 import SocialIcon from '../../atoms/SocialIcon/SocialIcon'
 import styles from './HeroSection.module.scss'
 import SliderDots from '../../atoms/SliderDots/SliderDots'
-import { useFetchAllPostsQuery } from '../../../slices/api/apiSlice'
+import { useFetchLimitPostsQuery } from '../../../slices/api/apiSlice'
 import Loader from '../../atoms/loader/Loader'
 
 const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [swipeStartX, setSwipeStartX] = useState<number>(0)
-	const {data,isFetching} = useFetchAllPostsQuery({})
-	const sliderLength = [1,2,3]
+	const limit = 3
+	const {data,isFetching} = useFetchLimitPostsQuery(limit)
 	
-	if(!data) return null
+	// if(!data) return null
+	
+	
 	const handleSliderNext = () => {
-		setNumber(prev => (prev >= sliderLength.length - 1 ? 0 : prev + 1))
+		setNumber(prev => (prev >= limit - 1 ? 0 : prev + 1))
 	}
 	const handleSliderPrev = () => {
-		setNumber(prev => (prev <= 0 ? sliderLength.length - 1 : prev - 1))
+		setNumber(prev => (prev <= 0 ? limit - 1 : prev - 1))
 	}
 	const getClientX = (e: MouseEvent | TouchEvent): number => {
 		if ('touches' in e && e.touches.length > 0) {
@@ -78,7 +79,7 @@ const HeroSection = () => {
 					))}
 				</div>
 				<ul className={styles.dots} role="tablist">
-					{Array.from({ length: sliderLength.length }, (_, index) => {
+					{Array.from({ length: limit }, (_, index) => {
 						return (
 							<SliderDots
 								handleSwipeOnClickDots={handleSwipeOnClickDots}

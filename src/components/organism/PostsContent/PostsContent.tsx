@@ -10,7 +10,7 @@ const PostsContent = () => {
 	const [width, setWidth] = useState<number>(0)
 	const [columns, setColumns] = useState<number>(0)
 	const [percent, setPercent] = useState<number>(0)
-	const articleRef = useRef<(HTMLDivElement | null)[]>([])
+	const articleRef = useRef<(HTMLElement | null)[]>([])
 	const [wrapperHeight, setWrapperHeight] = useState<number | null>(null)
 	const heightsCache = useRef<number[]>([])
 
@@ -20,7 +20,7 @@ const PostsContent = () => {
 	const [pagginationButtons, setPagginationButtons] = useState<number[]>([])
 
 	const { data } = useFetchPostsByLimitQuery({ limit: 30, page: currentPage })
-	const { posts = [], totalPages = 1 } = { ...data }
+	const { posts, totalPages = 1 } = { ...data }
 
 	useEffect(() => {
 		const buttons: (number | string)[] = []
@@ -104,13 +104,15 @@ const PostsContent = () => {
 		window.addEventListener('resize', handleSize)
 	}, [width, columns, percent])
 
+	
 	useEffect(() => {
+		if (!posts || posts.length === 0) return
+
 		const recalcGrid = () => {
 			const columnHeights = new Array(columns).fill(0)
-
 			const updated = posts.map((post: ArticleContentProps, index: number) => {
 				const col = index % columns
-				const height = heightsCache.current[index] || 650
+				const height = heightsCache.current[index] 
 
 				const top = columnHeights[col]
 				columnHeights[col] += height
@@ -128,7 +130,18 @@ const PostsContent = () => {
 				setWrapperHeight(heightCol)
 			}
 		}
+		requestAnimationFrame(() => {
+			const nodes = articleRef.current
+			
+			if (nodes.length !== posts.length) return
 
+			nodes.forEach((el, index) => {
+				if (!el) return
+				heightsCache.current[index] = el.offsetHeight
+			})
+
+			recalcGrid() 
+		})
 		const observer = new ResizeObserver(elements => {
 			elements.forEach(el => {
 				const index = articleRef.current.indexOf(el.target as HTMLDivElement)
@@ -144,15 +157,13 @@ const PostsContent = () => {
 			if (el) observer.observe(el)
 		})
 
-		articleRef.current.forEach((el, index) => {
-			if (el) heightsCache.current[index] = el.offsetHeight
-		})
 		recalcGrid()
 
 		return () => {
 			observer.disconnect()
 		}
 	}, [columns, percent, width, posts])
+
 	useEffect(() => {
 		Aos.init({
 			duration: 600,
@@ -161,7 +172,8 @@ const PostsContent = () => {
 	}, [])
 	useEffect(() => {
 		Aos.refresh()
-	}, [columns, percent, width, styledPostData])
+	}, [columns, percent, width])
+	
 	return (
 		<section className={styles.postsContainer}>
 			<div className={styles.articleContainer}>
@@ -175,7 +187,7 @@ const PostsContent = () => {
 					{styledPostData.map(
 						(
 							{ _id, mainTitle, mainImage, categories, author, introduction, left, top }: ArticleContentProps,
-							index:number
+							index: number
 						) => {
 							return (
 								<Article
@@ -183,7 +195,7 @@ const PostsContent = () => {
 										articleRef.current[index] = el
 									}}
 									_id={_id}
-									key={index}
+									key={_id}
 									href="/blog"
 									mainImage={mainImage}
 									mainTitle={mainTitle}
@@ -192,8 +204,8 @@ const PostsContent = () => {
 									introduction={introduction}
 									left={left}
 									top={top}
-									articleContent={[]}
 								/>
+
 							)
 						}
 					)}

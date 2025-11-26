@@ -3,21 +3,21 @@ import { Controller, useFormContext, type FieldValues, type Path } from 'react-h
 interface RHFInputProps<T extends FieldValues> {
 	name: Path<T>
 	label?: string
+	styles: Record<string, string>
+	id:string
 }
 
-const RHFInput = <T extends FieldValues>({ name, label }: RHFInputProps<T>) => {
+const RHFInput = <T extends FieldValues>({ name, label, styles,id }: RHFInputProps<T>) => {
 	const { control } = useFormContext()
 	return (
 		<Controller
 			name={name}
 			control={control}
 			render={({ field, fieldState: { error } }) => (
-				<div>
-					<label>
-						{label && `${label}:`}
-						<input {...field} type="text" />
-					</label>
-					{error && <span>{error.message}</span>}
+				<div className={styles.formInput}>
+					<label htmlFor={id} >{label && `${label}`}</label>
+					<input id={id} {...field} type="text" />
+					{error && <span className={styles.error}>{error.message}</span>}
 				</div>
 			)}
 		/>

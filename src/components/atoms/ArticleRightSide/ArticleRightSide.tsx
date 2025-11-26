@@ -1,7 +1,6 @@
-import { usePostContext } from '../../../hooks/usePostContext'
-import { useFetchAllPostsQuery } from '../../../slices/api/apiSlice'
-import type { ArticleContentProps } from '../../../types/types'
-// import postData from '../../../utils/postData'
+import { useLocation } from 'react-router'
+import { useFetchPostCreatedAtQuery } from '../../../slices/api/apiSlice'
+
 import AnchorLink from '../AnchorLink/AnchorLink'
 
 interface ArticleRightSideProps {
@@ -9,38 +8,31 @@ interface ArticleRightSideProps {
 }
 
 const ArticleRightSide = ({ styles }: ArticleRightSideProps) => {
-	const post = usePostContext()
-	const { data } = useFetchAllPostsQuery({})
-	
+	const { search } = useLocation()
+	const query = new URLSearchParams(search)
+	const postId = query.get('id')
+	const { data } = useFetchPostCreatedAtQuery(postId)
+
 	if (!data) return null
-	if (!post) return null
 
-	const currentIndex = data.findIndex((item: ArticleContentProps) => item._id === post._id)
-	const nextPost = currentIndex > 0 ? data[currentIndex - 1] : null
-	const prevPost = currentIndex < data.length - 1 ? data[currentIndex + 1] : null
-	const prevID = prevPost?._id || post._id
-	const nextID = nextPost?._id || post._id
-	// const prevID = post._id === data[0].id ? post._id : data[data.indexOf(post._id) - 1].post._id
-	// const nextID = post._id === data[data.length - 1].post._id ? post._id : data[data.indexOf(post._id) + 1].post._id
-	// console.log(nextID)
-	// console.log(prevID)
+	const { prevPost, nextPost } = { ...data }
+	
 
-	// const prevPost = data.find((item: ArticleContentProps) => item._id === prevID)
-	// console.log(prevPost)
-	// const nextPost = data.find((item: ArticleContentProps) => item._id === nextID)
+	const prevID = prevPost?._id || postId
+	const nextID = nextPost?._id || postId
 
 	return (
 		<div className={styles.articleRightSideContainer}>
-			<div className={`${styles.prev} ${prevID === post._id ? styles.disabled : ''} `}>
+			<div className={`${styles.prev} ${prevID === postId ? styles.disabled : ''} `}>
 				<span>Previous</span>
 				<AnchorLink href={`/blog/?id=${prevID}`} rel="prev">
-					{prevID !== post._id ? prevPost?.mainTitle : '-----'}
+					{prevID !== postId ? prevPost?.mainTitle : '-----'}
 				</AnchorLink>
 			</div>
-			<div className={`${styles.next} ${nextID === post._id ? styles.disabled : ''}`}>
+			<div className={`${styles.next} ${nextID === postId ? styles.disabled : ''}`}>
 				<span>Next</span>
 				<AnchorLink href={`/blog/?id=${nextID}`} rel="next">
-					{nextID !== post._id ? nextPost?.mainTitle : '-----'}
+					{nextID !== postId ? nextPost?.mainTitle : '-----'}
 				</AnchorLink>
 			</div>
 		</div>

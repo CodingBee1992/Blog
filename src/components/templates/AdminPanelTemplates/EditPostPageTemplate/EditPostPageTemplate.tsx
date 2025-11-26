@@ -1,7 +1,12 @@
+import PostForm from '../../../organism/PostForm/PostForm'
+import styles from './EditPostPageTemplate.module.scss'
+
 
 const EditPostPageTemplate = () => {
-  return (
-    <div>EditPostPageTemplate</div>
+	return (
+    <div className={styles.editPostContainer}>
+      <PostForm />
+    </div>
   )
 }
 

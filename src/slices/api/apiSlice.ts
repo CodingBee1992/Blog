@@ -7,8 +7,11 @@ export const apiSlice = createApi({
     baseQuery:fetchBaseQuery({baseUrl:`${BASE_URL}`,credentials:'include'}),
     endpoints: builder =>({
 
-        fetchAllPosts:builder.query({
-            query: ()=> `${POSTS_URL}`
+        fetchLimitPosts:builder.query({
+            query: (limit)=> `${POSTS_URL}/limit/?limit=${limit}`
+        }),
+        fetchPostCreatedAt:builder.query({
+            query: (postId)=> `${POSTS_URL}/createdAt/${postId}`
         }),
         fetchPostsByLimit:builder.query({
             query: ({limit,page})=> `${POSTS_URL}/paginated/?limit=${limit}&page=${page}`
@@ -28,4 +31,4 @@ export const apiSlice = createApi({
     })
 })
 
-export const {useFetchAllPostsQuery,useCreatePostMutation,useFetchPostByIdQuery,useFetchPostsByLimitQuery} = apiSlice
+export const {useFetchLimitPostsQuery,useCreatePostMutation,useFetchPostByIdQuery,useFetchPostsByLimitQuery,useFetchPostCreatedAtQuery} = apiSlice

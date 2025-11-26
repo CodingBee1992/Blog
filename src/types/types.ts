@@ -44,15 +44,8 @@ export interface ArticleContentProps {
 	introduction: string
 	mainImage: { src: string; alt: string; caption: string }
 	author: { name: string; avatar: string }
-	// articleContent: {
-	// 	title?: string
-	// 	text?: string
-	// 	imgContent?: { img: string; alt: string; imgtext: string }[]
-	// 	completion?: string
-	// 	callToAction?: string
-	// }[]
-	articleContent: [
-		{ type: 'title' | 'text' | 'completion' | 'callToAction'|'add'; value: string },
+	articleContent?: [
+		{ type: 'title' | 'text' | 'completion' | 'callToAction' | 'add'; value: string },
 
 		{ type: 'image'; value: { src: string; alt: string; caption: string } }
 	]
@@ -63,9 +56,16 @@ export interface ArticleContentProps {
 	href?: string
 	left?: string
 	top?: string
-	articleRef?: React.Ref<HTMLDivElement>
+	articleRef?: React.Ref<HTMLElement>
 	styles?: { [key: string]: string }
+	
 }
+
+export type ExtendedArticleContentProps = {
+	createdAt: string
+	publishedAt: string
+	comments: CommentsDataProps[]
+} & ArticleContentProps
 
 export interface CommentsDataProps {
 	_id: string

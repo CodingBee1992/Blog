@@ -41,7 +41,7 @@ const StaticLayout = () => {
 				<div data-aos="fade-zoom-in">
 					<ToastContainer />
 					<Navigation />
-					<div>
+					<div >
 						<Outlet />
 					</div>
 					<Footer />

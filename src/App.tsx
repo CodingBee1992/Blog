@@ -32,6 +32,7 @@ import TagsPage from './components/pages/AdminPanel/Posts/TagsPage/TagsPage'
 import ListPage from './components/pages/AdminPanel/Users/ListPage/ListPage'
 import AddUserPage from './components/pages/AdminPanel/Users/AddUserPage/AddUserPage'
 import RoleAndPermissionsPage from './components/pages/AdminPanel/Users/RoleAndPermissionsPage/RoleAndPermissionsPage'
+import EditPostPage from './components/pages/AdminPanel/Posts/EditPostPage/EditPostPage'
 const App = () => {
 	return (
 		<Router basename="/">
@@ -70,6 +71,7 @@ const App = () => {
 					<Route path="posts/">
 						<Route path="listofposts" element={<ListOfPostPage />} />
 						<Route path="addpost" element={<AddPostPage />} />
+						<Route path="editpost" element={<EditPostPage />} />
 						<Route path="categories" element={<CategoriesPage />} />
 						<Route path="tags" element={<TagsPage />} />
 					</Route>

@@ -21,10 +21,13 @@ const Logo = ({ styles }: LogoProps) => {
 				navigate({ pathname: path, search: search, hash: hash ? `#${hash}` : undefined })
 			}, 200)
 			setTimeout(() => {
-				window.scrollTo({ top: 0, behavior: 'smooth' })
+				window.scrollTo({ top: 0, behavior: 'instant' })
 			}, 210)
-		}
+		}else{
 
+			window.scrollTo({ top: 0, behavior: 'smooth' })
+		}
+		
 		
 	}
 

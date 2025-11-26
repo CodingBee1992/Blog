@@ -1,9 +1,7 @@
-
+import ListofPostPageTemplate from '../../../../templates/AdminPanelTemplates/ListofPostsPageTemplate/ListofPostPageTemplate'
 
 const ListOfPostPage = () => {
-  return (
-    <div>ListOfPostPage</div>
-  )
+	return <ListofPostPageTemplate />
 }
 
 export default ListOfPostPage

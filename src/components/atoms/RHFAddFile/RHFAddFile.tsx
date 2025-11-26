@@ -1,65 +1,54 @@
 import { Controller, useFormContext, type FieldValues, type Path } from 'react-hook-form'
+import RHFInput from '../RHFInput/RHFInput'
+import type { RefObject} from 'react'
 
 interface RHFAddFileProps<T extends FieldValues> {
 	name: Path<T>
 	label: string
-	index?: number
+	styles: Record<string, string>
+	fileRef: RefObject<(HTMLInputElement | null)[]>
+	fileIndex:number
 }
 
-const RHFAddFile = <T extends FieldValues>({ name, label }: RHFAddFileProps<T>) => {
+const RHFAddFile = <T extends FieldValues>({ name, label, styles, fileRef, fileIndex }: RHFAddFileProps<T>) => {
 	const { control } = useFormContext()
+	const randomIndex = Math.floor(Math.random() * 999)
 
-	// const srcError = get(errors, `${name}.src`)?.message
-	// const altError = get(errors, `${name}.alt`)?.message
-	// const captionError = get(errors, `${name}.caption`)?.message
-
-	
 	return (
 		<Controller
 			control={control}
-			name={name}
-			render={({ field: {value, onChange }, fieldState: { error } }) => (
-				<>
-					<label>
-						{label}
-						<input
-							onChange={e => {
-								const file = e.target.files?.[0]
+			name={`${name}.src`}
+			render={({ field: { value, onChange }, fieldState: { error } }) => (
+				<div className={styles.fileContainer}>
+					<label htmlFor="file">{label}</label>
+					{value && (value as File) instanceof File && (
+						<div className={styles.previewImage}>
+							<img src={URL.createObjectURL(value)} />
+						</div>
+					)}
+					<input
+						ref={(el) =>{
+							if(fileIndex === -1){
+								fileRef.current[0] = el
+							}else{
+								fileRef.current[fileIndex] = el
+							}
+						}}
+						id="file"
+						className={styles.formInput}
+						onChange={e => {
+							const file = e.target.files?.[0]
 
-								onChange(file)
-								
-							}}
-							type="file"
-						/>
-						{/* {srcError && <span>{srcError}</span>} */}
-						{error && <span>{error.message}</span>}
-						{value && (value as File)instanceof File && (
-							<div>
-								<img
-									src={URL.createObjectURL(value)}
-									
-									style={{ width: 150, height: 150, marginTop: 10 }}
-								/>
-								
-							</div>
-						)}
-						{/* <input
-							onChange={e => {
-								onChange({ ...value, alt: e.target.value })
-								
-							}}
-							type="text"
-							placeholder="Alt text"
-						/>
-						{altError && <span>{altError}</span>} */}
-
-						{/* <input onChange={e =>{ 
-							onChange({ ...value, caption: e.target.value })
-							
-							}} type="text" placeholder="Caption" />
-						{captionError && <span>{captionError}</span>} */}
-					</label>
-				</>
+							onChange(file)
+						}}
+						type="file"
+					/>
+					{error && <span className={`${styles.error} ${error ? styles.marginError : ''}`}>{error.message}</span>}
+					<div className={styles.imageBox}>
+						<RHFInput name={`${name}.alt`} label="Alt" styles={styles} id={`title-${randomIndex}`} />
+						<RHFInput name={`${name}.caption`} label="Caption" styles={styles} id={`title-${randomIndex + 1}`} />
+					</div>
+				</div>
 			)}
 		/>
 	)
