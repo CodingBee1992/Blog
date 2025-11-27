@@ -1,10 +1,15 @@
+import type { Ref } from 'react'
 import styles from './AdminPanelIcons.module.scss'
 // <!-- License: BSD. Made by Nuiverse Design: https://gitlab.com/nuinalp/open-source/nuiverse/icons -->
+
+interface IconsProps {
+	className?: string
+	arrowRef?: Ref<SVGSVGElement | null>
+}
+
 const AdminSVG = () => {
-	
 	return (
 		<svg className={styles.icons} xmlns="http://www.w3.org/2000/svg" width={300} height={300} viewBox="0 0 28 28">
-			
 			<path d="M 11.916016 6.28125 A 4 4 0 0 0 7.9160156 10.28125 A 4 4 0 0 0 11.916016 14.28125 A 4 4 0 0 0 15.916016 10.28125 A 4 4 0 0 0 11.916016 6.28125 z M 8.4628906 15.115234 C 5.2252742 16.489124 3.0845987 19.623082 2.9824219 23.138672 C 5.1722039 25.642012 8.3828992 27.230469 11.972656 27.230469 C 13.939081 27.230469 15.782366 26.738864 17.416016 25.896484 C 16.972529 25.303803 16.599939 24.654546 16.285156 23.957031 C 15.297133 21.767701 14.789426 19.133132 14.728516 16.570312 L 14.722656 16.318359 L 12.001953 20.574219 L 8.4628906 15.115234 z M 22.037109 15.308594 C 20.292352 15.308594 17.177734 17.251953 17.177734 17.251953 C 17.287817 21.883593 19.126557 27.009156 22.037109 26.972656 C 22.040309 26.972626 22.043675 26.972696 22.046875 26.972656 C 22.864919 26.962256 23.588979 26.535536 24.179688 25.916016 C 24.770398 25.296496 25.255835 24.472265 25.654297 23.546875 C 26.45122 21.696085 26.896484 19.437792 26.896484 17.576172 L 26.896484 17.308594 L 26.671875 17.166016 C 26.671875 17.166016 25.951124 16.70805 25.029297 16.25 C 24.107471 15.79195 23.009546 15.308594 22.041016 15.308594 L 22.037109 15.308594 z M 22.037109 16.279297 L 22.041016 16.279297 C 22.641611 16.279297 23.726421 16.688174 24.597656 17.121094 C 25.326193 17.483104 25.720925 17.73488 25.896484 17.84375 C 25.857384 19.50574 25.45849 21.539389 24.759766 23.162109 C 24.392753 24.014469 23.950753 24.748774 23.476562 25.246094 C 23.003258 25.742454 22.526857 25.9928 22.037109 26 L 22.037109 16.279297 z " />
 		</svg>
 	)
@@ -74,4 +79,107 @@ const PostsSVG = () => {
 	)
 }
 
-export { UsersSVG, PostsSVG, AdminSVG }
+const PencilSVG = ({ className }: IconsProps) => (
+	<svg
+		width="800px"
+		height="800px"
+		viewBox="0 0 64 64"
+		xmlns="http://www.w3.org/2000/svg"
+		xmlnsXlink="http://www.w3.org/1999/xlink"
+		aria-hidden="true"
+		role="img"
+		className={className ? className : `${styles.pencil}`}
+		preserveAspectRatio="xMidYMid meet">
+		<path fill="#ffce31" d="M7.934 41.132L39.828 9.246l14.918 14.922l-31.895 31.886z" />
+		<path d="M61.3 4.6l-1.9-1.9C55.8-.9 50-.9 46.3 2.7l-6.5 6.5l15 15l6.5-6.5c3.6-3.6 3.6-9.5 0-13.1" fill="#ed4c5c" />
+		<path fill="#93a2aa" d="M35.782 13.31l4.1-4.102l14.92 14.92l-4.1 4.101z" />
+		<path fill="#c7d3d8" d="M37.338 14.865l4.1-4.101l11.739 11.738l-4.102 4.1z" />
+		<path fill="#fed0ac" d="M7.9 41.1l-6.5 17l4.5 4.5l17-6.5z" />
+		<path d="M.3 61.1c-.9 2.4.3 3.5 2.7 2.6l8.2-3.1l-7.7-7.7l-3.2 8.2" fill="#333" />
+		<path fill="#ffdf85" d="M7.89 41.175l27.86-27.86l4.95 4.95l-27.86 27.86z" />
+		<path fill="#ff8736" d="M17.904 51.142l27.86-27.86l4.95 4.95l-27.86 27.86z" />
+	</svg>
+)
+
+const TrashSVG = ({ className }: IconsProps) => (
+	<svg
+		fill="#000000"
+		width="800px"
+		height="800px"
+		viewBox="0 0 36 36"
+		preserveAspectRatio="xMidYMid meet"
+		xmlns="http://www.w3.org/2000/svg"
+		xmlnsXlink="http://www.w3.org/1999/xlink"
+		className={className ? className : `${styles.trash}`}>
+		<path
+			className="clr-i-outline clr-i-outline-path-1"
+			d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"
+		/>
+		<path className="clr-i-outline clr-i-outline-path-2" d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z" />
+		<rect className="clr-i-outline clr-i-outline-path-3" x={21} y={13} width={2} height={15} />
+		<rect className="clr-i-outline clr-i-outline-path-4" x={13} y={13} width={2} height={15} />
+		<path
+			className="clr-i-outline clr-i-outline-path-5"
+			d="M23,5.86H21.1V4H14.9V5.86H13V4a2,2,0,0,1,1.9-2h6.2A2,2,0,0,1,23,4Z"
+		/>
+		<rect x={0} y={0} width={36} height={36} fillOpacity={0} />
+	</svg>
+)
+
+const SortSVG = ({ className }: IconsProps) => (
+	<svg
+		width="800px"
+		height="800px"
+		viewBox="0 0 20 20"
+		xmlns="http://www.w3.org/2000/svg"
+		className={className ? className : `${styles.sort}`}>
+		<path
+			d="M11 17V5.414l3.293 3.293a.999.999 0 101.414-1.414l-5-5a.999.999 0 00-1.414 0l-5 5a.997.997 0 000 1.414.999.999 0 001.414 0L9 5.414V17a1 1 0 102 0z"
+			fill="#000000"
+		/>
+	</svg>
+)
+
+const ArrowDownSVG = ({ className, arrowRef }: IconsProps) => (
+	<svg
+		ref={arrowRef}
+		width="800px"
+		height="800px"
+		viewBox="0 0 48 48"
+		xmlns="http://www.w3.org/2000/svg"
+		className={className ? className : `${styles.sort}`}>
+		<path d="M0 0h48v48H0z" fill="none" />
+		<g id="Shopicon">
+			<g>
+				<polygon points="24,29.171 9.414,14.585 6.586,17.413 24,34.827 41.414,17.413 38.586,14.585  " />
+			</g>
+		</g>
+	</svg>
+)
+
+const ArrowPrevSVG = ({ className }: IconsProps) => (
+	<svg
+		width="800px"
+		height="800px"
+		viewBox="0 0 48 48"
+		xmlns="http://www.w3.org/2000/svg"
+		enableBackground="new 0 0 48 48"
+		className={className ? className : `${styles.arrowPrevSVG}`}>
+		<polygon fill="#000000" points="30.9,43 34,39.9 18.1,24 34,8.1 30.9,5 12,24" />
+	</svg>
+)
+
+const ArrowNextSVG = ({ className }: IconsProps) => (
+	<svg
+		width="800px"
+		height="800px"
+		viewBox="0 0 48 48"
+		xmlns="http://www.w3.org/2000/svg"
+		enableBackground="new 0 0 48 48"
+		className={className ? className : `${styles.arrowNextSVG}`}>
+		<polygon fill="#000000" points="17.1,5 14,8.1 29.9,24 14,39.9 17.1,43 36,24" />
+	</svg>
+)
+
+
+export { UsersSVG, PostsSVG, AdminSVG, PencilSVG, TrashSVG, SortSVG, ArrowDownSVG, ArrowPrevSVG, ArrowNextSVG }

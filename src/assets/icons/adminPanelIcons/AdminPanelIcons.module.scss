@@ -6,3 +6,35 @@
 		fill: var(--sideBarColorIcon);
 	}
 }
+
+.pencil {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	
+}
+.trash {
+	width: 20px;
+	height: 20px;
+	fill: red;
+	cursor: pointer;
+	transition: all 0.3s;
+
+	&:hover {
+		fill: #910000;
+	}
+}
+.sort{
+	width: 15px;
+	height: 15px;
+	
+	cursor: pointer;
+	
+}
+.arrowPrevSVG,.arrowNextSVG{
+	width: 15px;
+	height: 15px;
+	
+	cursor: pointer;
+	
+}
