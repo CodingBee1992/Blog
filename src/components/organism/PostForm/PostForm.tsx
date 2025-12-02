@@ -6,30 +6,22 @@ import RHFTextArea from '../../atoms/RHFTextArea/RHFTextArea'
 import RHFAddFile from '../../atoms/RHFAddFile/RHFAddFile'
 import RHFCategorySelect from '../../atoms/RHFCategorySelect/RHFCategorySelect'
 import RHFSelect from '../../atoms/RHFSelect/RHFSelect'
-import { useCreatePostMutation } from '../../../slices/api/apiSlice'
+import { useCreatePostMutation, useFetchCloudinaryQuery } from '../../../slices/api/apiSlice'
 import styles from './PostForm.module.scss'
 import uploadToCloudinary from '../../../hooks/useUploadToCloudinary'
 import { useRef } from 'react'
+import { allCategories } from '../../../utils/data'
 
-const allCategories = [
-	'LifeStyle',
-	'Culture',
-	'Travel',
-	'Nature',
-	'Photography',
-	'Vacation',
-	'Work',
-	'Health',
-	'Family',
-	'Relationship',
-]
+
 const statusOptions = ['draft', 'published']
 
 const PostForm = () => {
+	const uploadFolder = import.meta.env.VITE_UPLOAD_PRESET
 	const buttons = ['title', 'text', 'image'] as const
 	const fileRef = useRef<(HTMLInputElement | null)[]>([])
 	const [createPost] = useCreatePostMutation()
-
+	const { data:dataSignature} = useFetchCloudinaryQuery({})
+	
 	const methods = useForm<postSchemaTypes>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
@@ -45,22 +37,6 @@ const PostForm = () => {
 	} = methods
 	const { fields: articleContent, append } = useFieldArray({ control, name: 'articleContent' })
 
-	// const uploadToCloudinary = async (file: File | null) => {
-	// 	if (!file) return
-	// 	const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`
-	// 	const formData = new FormData()
-	// 	formData.append('file', file)
-	// 	formData.append('upload_preset', UPLOAD_PRESET)
-
-	// 	const response = await fetch(url, {
-	// 		method: 'POST',
-	// 		body: formData,
-	// 	})
-
-	// 	const data = await response.json()
-
-	// 	return data.secure_url
-	// }
 	const handleResetFields = () => {
 		if (fileRef.current) fileRef.current.forEach(el => el && (el.value = ''))
 		reset()
@@ -69,23 +45,24 @@ const PostForm = () => {
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
 		try {
 			await new Promise(resolve => setTimeout(resolve, 1000))
-
+			
 			let mainImage = data.mainImage
 
 			if (mainImage.src instanceof File) {
-				const url = await uploadToCloudinary(mainImage.src)
-
-				mainImage = { ...mainImage, src: url }
+				const data = await uploadToCloudinary({file:mainImage.src,uploadFolder,dataSignature})
+				console.log(data)
+				mainImage = { ...mainImage, src: data.secure_url }
 			}
 
 			const articleContent = await Promise.all(
-				data.articleContent.map(async item => {
+				data.articleContent.map(async (item) => {
+					
 					if (item.type === 'image' && item.value.src instanceof File) {
 						const file = item.value.src
 
-						const url = await uploadToCloudinary(file)
+						const data = await uploadToCloudinary({file,uploadFolder,dataSignature})
 
-						return { ...item, value: { ...item.value, src: url } }
+						return { ...item, value: { ...item.value, src: data.secure_url } }
 					}
 					return item
 				})
@@ -113,7 +90,7 @@ const PostForm = () => {
 								key={index}
 								onClick={() => {
 									if (btn === 'image') {
-										append({ type: btn, value: { src: null, alt: '', caption: '' } })
+										append({ type: btn, value: { src: null, alt: '', caption: '',public_id:'' } })
 									} else {
 										append({ type: btn, value: '' })
 									}
@@ -127,7 +104,7 @@ const PostForm = () => {
 				<form onSubmit={handleSubmit(onSumbit)} className={styles.formContainer}>
 					<div className={styles.formWrapper}>
 						<div className={styles.formFlex}>
-							<RHFInput<postSchemaTypes> name="mainTitle" label="Main Title" styles={styles} id={`title-mainTitle`} />
+							<RHFInput<postSchemaTypes> name="title" label="Main Title" styles={styles} id={`title-title`} />
 							<RHFTextArea<postSchemaTypes>
 								name="introduction"
 								label="Introduction"

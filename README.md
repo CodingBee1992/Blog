@@ -40,7 +40,7 @@ Design inspirowany stylem Pinterest (masonry grid) – w pełni responsywny i es
 
 ### 📊 Panel Administratora (50% ukończony)
 
-- Zarządzanie użytkownikami (opcjonalnie dopisz – w zależności od stanu)
+- Zarządzanie użytkownikami 
 - Podgląd i moderacja postów
 - Podgląd i moderacja komentarzy  
   _(Można łatwo rozbudować o dodatkowe moduły)_
@@ -128,7 +128,7 @@ cd frontend
 npm install
 
 Start aplikacji
-npm run dev || lub cd .. :arrow_right: npm run frontend
+npm run dev || lub cd ..  npm run frontend
 
 
 Frontend uruchomi się pod adresem:
@@ -172,15 +172,12 @@ Dokończenie panelu administratora
 
 System ról (Admin / User)
 
-Wgrywanie obrazków / Cloudinary / S3
-
 Kategorie postów / tagi
 
 Lajki / oceny postów
 
 Notatki prywatne użytkownika
 
-Wyszukiwarka po tytułach i tagach
 
 📄 Licencja / Prawa autorskie
 
@@ -264,7 +261,7 @@ Features a Pinterest-style responsive layout (masonry / waterfall grid) for a cl
 - React Hook Form
 - ZOD
 - JS-Cookie
-- CSS / SCSS / Styled Components (depending on implementation)
+- CSS / SCSS / Styled Components 
 - Responsive design
 
 ### Backend
@@ -272,7 +269,7 @@ Features a Pinterest-style responsive layout (masonry / waterfall grid) for a cl
 - **Node.js + Express**
 - REST API architecture
 - Controllers, routes, middleware
-- JWT  for authentication
+- JWT  
 - Error handling & basic security
 
 ### Database
@@ -327,7 +324,7 @@ npm install
 Start frontend
 # bash
 
-npm run dev ||' cd ..' :arrow_right: npm run frontend
+npm run dev ||' cd ..' : npm run frontend
 
 Frontend will run at: http://localhost:5173
 
@@ -367,15 +364,10 @@ Finish admin panel
 
 Role system (Admin / User)
 
-Image uploads (Cloudinary / S3)
-
 Post categories and tags
 
 Likes, reactions, or ratings
 
-Search engine for posts
-
-User profiles
 
 📄 License / Copyright
 
@@ -393,7 +385,7 @@ Created by: CodingBee
 Contact: codingBeeBee@gmail.com
 
 
-ENGLISH VERSION BELOW :arrow_down:
+ENGLISH VERSION BELOW :
 
 ---
 
@@ -450,7 +442,7 @@ Hosting backendu (Render, Railway lub własny serwer)
 
 Hosting frontendu (Twoja strona lub serwer)
 
-Połączenie z bazą danych (MongoDB / MySQL / PostgreSQL)
+Połączenie z bazą danych (MongoDB )
 
 Konto Cloudinary do wgrywania obrazków
 
@@ -515,7 +507,7 @@ A hosting platform for the backend (Render, Railway, or your own server)
 
 Hosting for the frontend (your website or server)
 
-Database connection (MongoDB / MySQL / PostgreSQL)
+Database connection (MongoDB)
 
 Cloudinary account for image uploads
 

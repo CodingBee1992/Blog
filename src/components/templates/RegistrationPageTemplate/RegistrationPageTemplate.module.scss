@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #ffffff;
+	background-color: #eaefff;
 	height: 100dvh;
 
 	.loginWrapper {
@@ -12,7 +12,7 @@
 		width: 100%;
 		max-width: 980px;
 		height: 600px;
-		background-color: #000000;
+		background-color: #ffffff;
 		border-radius: 12px;
 
 		.greetingText {
@@ -44,6 +44,7 @@
 				margin-bottom: var(--vspace-0_25);
 				font-size: var(--text-xl);
 				font-weight: 400;
+				color: var(--signFormTextColor);
 			}
 			p {
 				font-size: var(--text-xs);
@@ -91,12 +92,13 @@
 					line-height: calc(var(--btn-heightXs) - 1rem);
 					letter-spacing: 0.2em;
 					white-space: nowrap;
+					color: #ffffff;
+					background-color: var(--btn-color);
 					border: none;
 					cursor: pointer;
 					transition: all 0.3s;
-
+					
 					&:hover {
-						color: #ffffff;
 						background-color: var(--btn-color-hover);
 					}
 				}

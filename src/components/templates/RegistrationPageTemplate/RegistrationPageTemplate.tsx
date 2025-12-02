@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
+
 const registrationSchema = z.object({
 	name: z.string().trim().min(4),
 	email: z.email().trim(),
@@ -16,8 +17,8 @@ const registrationSchema = z.object({
 
 type registrationFields = z.infer<typeof registrationSchema>
 const RegistrationPageTemplate = () => {
-	const [createAccount, { isSuccess}] = useCreateAccountMutation()
-
+	const [createAccount, { isSuccess,data,}] = useCreateAccountMutation()
+	
 	const [success, setSuccess] = useState<boolean>(false)
 	
 	const navigate = useNavigate()
@@ -65,7 +66,7 @@ const RegistrationPageTemplate = () => {
 		<div className={styles.logInContainer}>
 			<div className={styles.loginWrapper}>
 				<div className={styles.greetingText}>
-					<p className={styles.logo}>codingBee</p>
+					<a href='/' className={styles.logo}>codingBee</a>
 				</div>
 				<div className={styles.formContainer}>
 					<h1>Create an account</h1>
@@ -86,7 +87,7 @@ const RegistrationPageTemplate = () => {
 						{errors.password && <span>{errors.password.message}</span>}
 						{errors.root && <span>{errors.root.message}</span>}
 
-						{success && <span className={styles.success}>Account Created</span>}
+						{success && <span className={styles.success}>{data?.message}</span>}
 						<button disabled={isSubmitting} type="submit" className={styles.signInButton}>
 							{isSubmitting ? 'Creating...' : 'Create account'}
 						</button>

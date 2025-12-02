@@ -26,13 +26,13 @@ const ArticleRightSide = ({ styles }: ArticleRightSideProps) => {
 			<div className={`${styles.prev} ${prevID === postId ? styles.disabled : ''} `}>
 				<span>Previous</span>
 				<AnchorLink href={`/blog/?id=${prevID}`} rel="prev">
-					{prevID !== postId ? prevPost?.mainTitle : '-----'}
+					{prevID !== postId ? prevPost?.title : '-----'}
 				</AnchorLink>
 			</div>
 			<div className={`${styles.next} ${nextID === postId ? styles.disabled : ''}`}>
 				<span>Next</span>
 				<AnchorLink href={`/blog/?id=${nextID}`} rel="next">
-					{nextID !== postId ? nextPost?.mainTitle : '-----'}
+					{nextID !== postId ? nextPost?.title : '-----'}
 				</AnchorLink>
 			</div>
 		</div>

@@ -14,7 +14,7 @@ const useWindowSize = () => {
 
 
     useEffect(()=>{
-        let timeOutId: NodeJS.Timeout | null = null;
+        let timeOutId: ReturnType<typeof setTimeout> | null = null;
         
 
         const handleResize = ()=>{

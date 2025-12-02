@@ -11,8 +11,8 @@ interface DesktopProps {
 const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 	const location = useLocation()
 	const menuRef = useRef<HTMLDivElement>(null)
-	const [timeOutListIn, setTimeOutListIn] = useState<NodeJS.Timeout[]>([])
-	const [timeOutListOut, setTimeOutListOut] = useState<NodeJS.Timeout[]>([])
+	const [timeOutListIn, setTimeOutListIn] = useState<ReturnType<typeof setTimeout>[]>([])
+	const [timeOutListOut, setTimeOutListOut] = useState<ReturnType<typeof setTimeout>[]>([])
 
 	useEffect(() => {
 		if (location.pathname !== '/') {
@@ -26,7 +26,7 @@ const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 
 	const handleMouseIn = (e: MouseEvent<HTMLElement>, index: number) => {
 		const target = e.target as HTMLElement
-		
+
 		if (target.dataset.element) {
 			timeOutListIn.forEach(item => {
 				clearInterval(item)

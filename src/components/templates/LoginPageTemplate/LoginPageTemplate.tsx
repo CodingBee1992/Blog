@@ -67,7 +67,7 @@ const LoginPageTemplate = () => {
 		<div className={styles.logInContainer}>
 			<div className={styles.loginWrapper}>
 				<div className={styles.greetingText}>
-					<p className={styles.logo}>codingBee</p>
+					<a href='/' className={styles.logo}>codingBee</a>
 				</div>
 				<div className={styles.formContainer}>
 					<h1>Sign In</h1>

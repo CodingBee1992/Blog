@@ -7,7 +7,7 @@ import {
 } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import { useFetchPostsByLimitQuery } from '../../../slices/api/apiSlice'
 import type { ExtendedArticleContentProps } from '../../../types/types'
-import styles from './ListOfPosts.module.scss'
+import styles from './Table.module.scss'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { useEffect, useRef, useState, type ChangeEvent, type MouseEvent } from 'react'
 
@@ -15,7 +15,7 @@ import useDebounce from '../../../hooks/useDebounce'
 import { SearchSvg } from '../../../assets/icons/nav/SearchSvg'
 import { allCategories, rowsNumbers, status, thead } from '../../../utils/data'
 
-const ListOfPosts = () => {
+const Table = () => {
 	const rowsRef = useRef<HTMLDivElement | null>(null)
 
 	const [rows, setRows] = useState<number>(10)
@@ -29,7 +29,7 @@ const ListOfPosts = () => {
 	const [end, setEnd] = useState<number>()
 	const [inputValue, setInputValue] = useState<string>('')
 	const search = useDebounce(inputValue, 500)
-	const { data,refetch } = useFetchPostsByLimitQuery({
+	const { data } = useFetchPostsByLimitQuery({
 		limit: rows,
 		page: currentPage,
 		search: search,
@@ -39,18 +39,11 @@ const ListOfPosts = () => {
 	})
 	const { posts = [], totalPages = 1, total = 1 } = data ?? {}
 
-	useEffect(() => {
-	  refetch()
-	}, [data, refetch])
-	
-
 	const handleSetInputValue = (e: ChangeEvent<HTMLInputElement>) => {
 		const target = e.target as HTMLInputElement
 		const value = target.value
 		setInputValue(value)
 	}
-
-
 
 	useEffect(() => {
 		if (inputValue === '') {
@@ -76,7 +69,7 @@ const ListOfPosts = () => {
 
 		if (!el || el === 'status' || el === 'categories') return
 		if (el === 'createdAt' || el === 'publishedAt' || el === 'comments') {
-			
+			console.log('ok')
 			setSort(prev => {
 				const newOrder = prev.sortBy === el ? (prev.order === 'asc' ? 'desc' : 'asc') : 'desc'
 
@@ -172,7 +165,7 @@ const ListOfPosts = () => {
 			<div className={styles.listContainer}>
 				<div className={styles.tableContainer}>
 					<div className={styles.thead}>
-						{ posts && (
+						{posts && posts && (
 							<div className={styles.tr}>
 								{thead.map((item, index) => {
 									if (item !== 'actions') {
@@ -238,7 +231,7 @@ const ListOfPosts = () => {
 										</AnchorLink>
 									</div>
 									<div className={styles.td}>{item.author.name}</div>
-									<div className={styles.td}>{item.categories.length > 1 ? item.categories.join(', ') : item.categories}</div>
+									<div className={styles.td}>{item.categories.length > 1 ? item.categories.join(', ') : ''}</div>
 									<div className={styles.td}>{new Date(item.createdAt).toLocaleDateString()}</div>
 									<div className={`${styles.td} ${item.publishedAt ? '' : styles.publish}`}>
 										{item.publishedAt ? item.publishedAt : 'Publish'}
@@ -294,4 +287,4 @@ const ListOfPosts = () => {
 	)
 }
 
-export default ListOfPosts
+export default Table

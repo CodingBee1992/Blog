@@ -11,9 +11,10 @@ interface AnchorLink {
 	count?: number
 	ariaLabel?: string
 	ref?:RefObject<HTMLAnchorElement | null>
+	handleOpenCloseMenu?:()=>void
 }
 
-const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,ref }: AnchorLink) => {
+const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,ref,handleOpenCloseMenu }: AnchorLink) => {
 	const navigate = useNavigate()
 	const location = useLocation()
 	
@@ -23,7 +24,7 @@ const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,r
 		e.preventDefault()
 		
 		removePaginationLinksTags()
-
+		handleOpenCloseMenu?.()
 		
 		const url = new URL(window.location.origin + href)
 		const path = url.pathname

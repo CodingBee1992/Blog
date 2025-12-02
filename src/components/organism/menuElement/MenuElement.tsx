@@ -28,7 +28,7 @@ const MenuElement = ({
 	
 	
 }: MenuElementProps) => {
-	const {handleOpenCloseDropdown} = useMenuContext()
+	const {handleOpenCloseDropdown,handleOpenCloseMenu} = useMenuContext()
 
 	if (data.href === '') {
 		return (
@@ -58,7 +58,7 @@ const MenuElement = ({
 		)
 	} else {
 		return (
-			<AnchorLink key={index} href={data.href} className={styles.link}>
+			<AnchorLink handleOpenCloseMenu={handleOpenCloseMenu} key={index} href={data.href} className={styles.link}>
 				{data.title}
 			</AnchorLink>
 		)

@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #ffffff;
+	background-color: #eaefff;
 	height: 100dvh;
 
 	.loginWrapper {
@@ -12,7 +12,7 @@
 		width: 100%;
 		max-width: 980px;
 		height: 600px;
-		background-color: #000000;
+		background-color: #ffffff;
 		border-radius: 12px;
 
 		.greetingText {
@@ -21,7 +21,7 @@
 
 			.logo {
 				max-width: 200px;
-                max-height: 100px;
+				max-height: 100px;
 				color: var(--logo-color);
 				font-size: var(--logo-Size);
 				font-weight: 600;
@@ -42,6 +42,7 @@
 
 			h1 {
 				margin-bottom: var(--vspace-0_25);
+				color: var(--signFormTextColor);
 				font-size: var(--text-xl);
 				font-weight: 400;
 			}
@@ -84,7 +85,8 @@
 					padding: 0 3.2rem;
 					height: var(--btn-heightXs);
 					font-size: 16px;
-
+					color: #ffffff;
+					background-color: var(--btn-color);
 					line-height: calc(var(--btn-heightXs) - 1rem);
 					letter-spacing: 0.2em;
 					white-space: nowrap;
@@ -93,7 +95,6 @@
 					transition: all 0.3s;
 
 					&:hover {
-						color: #ffffff;
 						background-color: var(--btn-color-hover);
 					}
 				}

@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-const BASE_URL = import.meta.env.VITE_BASE_URL
+const API_URL = import.meta.env.VITE_API_URL
 const POSTS_URL = import.meta.env.VITE_POSTS_URL
 
 export const commentSlice = createApi({
 	reducerPath: 'comment',
-	baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}`, credentials: 'include' }),
+	baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}`, credentials: 'include' }),
 	endpoints: builder => ({
 		fetchComments: builder.query({
 			query: postId => `${POSTS_URL}/${postId}/comments`,

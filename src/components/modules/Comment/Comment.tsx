@@ -5,7 +5,7 @@ import TextArea from '../../atoms/TextArea/TextArea'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
-import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+// import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useDeleteCommentMutation, useFetchCommentsQuery } from '../../../slices/api/commentSlice'
 
 const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }: CommentsDataProps) => {
@@ -15,7 +15,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 	const [showReply, setShowReply] = useState<boolean>(false)
 	const [isUpdating, setIsUpdating] = useState<boolean>(false)
 	const [updatingText, setUpdatingText] = useState<string | null | undefined>('')
-	const [resMessage, setResMessage] = useState<string>('')
+	// const [resMessage, setResMessage] = useState<string>('')
 	const { refetch } = useFetchCommentsQuery(postId!)
 	const [deleteComment] = useDeleteCommentMutation()
 	const aRef = useRef<HTMLAnchorElement | null>(null)
@@ -86,20 +86,20 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 	}, [])
 	const handleDeleteComment = async () => {
 		try {
-			const res = await deleteComment({ commentId: _id, postId }).unwrap()
+			 await deleteComment({ commentId: _id, postId }).unwrap()
 
-			setResMessage(res?.message)
+			// setResMessage(res?.message)
 
 			await refetch()
 		} catch (error: unknown) {
 			if (typeof error === 'object' && error !== null) {
-				const fetchError = error as FetchBaseQueryError
-				const errorMessage =
-					fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
-						? (fetchError.data.message as string)
-						: 'Something goes wrong'
+				// const fetchError = error as FetchBaseQueryError
+				// const errorMessage =
+				// 	fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
+				// 		? (fetchError.data.message as string)
+				// 		: 'Something goes wrong'
 
-				setResMessage(errorMessage)
+				// setResMessage(errorMessage)
 			}
 		}
 	}

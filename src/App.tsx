@@ -33,6 +33,7 @@ import ListPage from './components/pages/AdminPanel/Users/ListPage/ListPage'
 import AddUserPage from './components/pages/AdminPanel/Users/AddUserPage/AddUserPage'
 import RoleAndPermissionsPage from './components/pages/AdminPanel/Users/RoleAndPermissionsPage/RoleAndPermissionsPage'
 import EditPostPage from './components/pages/AdminPanel/Posts/EditPostPage/EditPostPage'
+import VerifyPage from './components/pages/VerifyPage/VerifyPage'
 const App = () => {
 	return (
 		<Router basename="/">
@@ -59,6 +60,7 @@ const App = () => {
 				<Route element={<UserRoute />}>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/registration" element={<RegistrationPage />} />
+					<Route path="/verify" element={<VerifyPage/>} />
 				</Route>
 				<Route
 					path="/admin"

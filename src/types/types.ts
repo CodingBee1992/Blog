@@ -40,9 +40,9 @@ export interface PostDataProps {
 }
 export interface ArticleContentProps {
 	_id: string
-	mainTitle: string
+	title: string
 	introduction: string
-	mainImage: { src: string; alt: string; caption: string }
+	mainImage: { src: string; alt: string; caption: string,public_id?:string }
 	author: { name: string; avatar: string }
 	articleContent?: [
 		{ type: 'title' | 'text' | 'completion' | 'callToAction' | 'add'; value: string },

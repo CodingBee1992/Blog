@@ -1,6 +1,6 @@
 import z from 'zod'
 export const postSchema = z.object({
-	mainTitle: z.string().trim().min(4, { message: 'Min 4 characters' }),
+	title: z.string().trim().min(4, { message: 'Min 4 characters' }),
 	introduction: z.string().trim().min(5, { message: 'Min 5 characters' }),
 
 	mainImage: z.object({
@@ -12,6 +12,7 @@ export const postSchema = z.object({
 			}),
 		alt: z.string().trim().min(1, { message: 'Please fill alt' }),
 		caption: z.string().trim().min(1, { message: 'Please fill caption' }),
+		public_id:z.string()
 	}),
 
 	articleContent: z.array(
@@ -41,6 +42,7 @@ export const postSchema = z.object({
 						.refine(v => v !== null, 'Please upload a file'),
 					alt: z.string().min(1, 'Please fill alt'),
 					caption: z.string().min(1, 'Please fill caption'),
+					public_id:z.string()
 				}),
 			}),
 		])
@@ -61,12 +63,13 @@ export const postSchema = z.object({
 export type postSchemaTypes = z.infer<typeof postSchema>
 
 export const defaultValues: postSchemaTypes = {
-	mainTitle: '',
+	title: '',
 	introduction: '',
 	mainImage: {
 		src: null,
 		alt: '',
 		caption: '',
+		public_id:''
 	},
 	articleContent: [
 		{ type: 'title', value: '' },
@@ -77,6 +80,7 @@ export const defaultValues: postSchemaTypes = {
 				src: null,
 				alt: '',
 				caption: '',
+				public_id:'',
 			},
 		},
 		{ type: 'completion', value: '' },

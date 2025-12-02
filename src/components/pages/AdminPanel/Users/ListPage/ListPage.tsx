@@ -1,9 +1,7 @@
-
+import ListOfUsersPageTemplate from '../../../../templates/AdminPanelTemplates/ListOfUsersPageTemplate/ListOfUsersPageTemplate'
 
 const ListPage = () => {
-  return (
-    <div>ListPage</div>
-  )
+	return <ListOfUsersPageTemplate />
 }
 
 export default ListPage

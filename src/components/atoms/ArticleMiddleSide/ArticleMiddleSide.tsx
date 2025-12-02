@@ -17,7 +17,7 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 	const firstPart = text?.slice(0, dotindex + 1)
 	const secondPart = text?.slice(dotindex + 1)
 
-	
+	if(!articleContent) return 
 	const articleWithAds = articleContent.flatMap((block, index) => {
 		const blocks = [block]
 		if ((index + 1) % 4 === 0) {

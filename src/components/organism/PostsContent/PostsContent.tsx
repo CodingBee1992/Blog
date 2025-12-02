@@ -186,7 +186,7 @@ const PostsContent = () => {
 
 					{styledPostData.map(
 						(
-							{ _id, mainTitle, mainImage, categories, author, introduction, left, top }: ArticleContentProps,
+							{ _id, title, mainImage, categories, author, introduction, left, top }: ArticleContentProps,
 							index: number
 						) => {
 							return (
@@ -198,7 +198,7 @@ const PostsContent = () => {
 									key={_id}
 									href="/blog"
 									mainImage={mainImage}
-									mainTitle={mainTitle}
+									title={title}
 									categories={categories}
 									author={author}
 									introduction={introduction}

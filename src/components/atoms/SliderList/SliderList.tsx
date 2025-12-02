@@ -36,7 +36,7 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 							</span>
 						</div>
 						<h1 className={styles.text}>
-							<AnchorLink href={`/blog/?id=${data.id}`}>{data.mainTitle}</AnchorLink>
+							<AnchorLink href={`/blog/?id=${data.id}`}>{data.title}</AnchorLink>
 						</h1>
 					</div>
 				</div>

@@ -17,7 +17,7 @@ const SearchButton = () => {
 
 	return (
 		<button className={styles.search} onClick={() => handleOpen()} title='Search'>
-			<SearchSvg styles={styles} />
+			<SearchSvg className={styles.icon} />
 		</button>
 	)
 }

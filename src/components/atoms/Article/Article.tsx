@@ -3,7 +3,7 @@ import type {  ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import styles from './Article.module.scss'
 
-const Article = ({ _id, href, mainImage, mainTitle, categories, author, introduction, left, top, articleRef }: ArticleContentProps) => {
+const Article = ({ _id, href, mainImage, title, categories, author, introduction, left, top, articleRef }: ArticleContentProps) => {
 	
 	return (
 		<article
@@ -18,7 +18,7 @@ const Article = ({ _id, href, mainImage, mainTitle, categories, author, introduc
 			</div>
 			<div className={styles.articleText}>
 				<div className={styles.articleHeaderText}>
-					<h1 className={styles.articleTitle}>{mainTitle}</h1>
+					<h1 className={styles.articleTitle}>{title}</h1>
 					<div className={styles.articleMeta}>
 						<span className={styles.byline}>
 							By:{' '}
