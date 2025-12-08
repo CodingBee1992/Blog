@@ -16,6 +16,7 @@ export interface SearchProps {
 export type SocialProps = {
 	path: string
 	icon: ReactNode
+	ariaLabel:string
 }
 
 export interface PostDataProps {
@@ -58,6 +59,7 @@ export interface ArticleContentProps {
 	top?: string
 	articleRef?: React.Ref<HTMLElement>
 	styles?: { [key: string]: string }
+	onImageLoad?:()=>void
 	
 }
 

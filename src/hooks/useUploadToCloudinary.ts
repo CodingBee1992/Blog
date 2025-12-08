@@ -37,8 +37,6 @@ const uploadToCloudinary = async ({file, dataSignature,publicId,uploadFolder}:cl
 
 	const data = await response.json()
 	
-	// better return data for public_Id
-	// return data.secure_url
 	return data
 }
 

@@ -7,31 +7,27 @@ export const apiSlice = createApi({
 	reducerPath: 'api',
 	baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}`, credentials: 'include' }),
 	endpoints: builder => ({
+		
 		fetchLimitPosts: builder.query({
-			query: limit => `${POSTS_URL}/limit/?limit=${limit}`,
+			query: ({limit,page })=> {
+				const params = new URLSearchParams()
+				if(limit !== undefined) params.set('limit',limit)
+				if(page !== undefined) params.set('page',page)
+				
+				return `${POSTS_URL}/limit/?${params.toString()}`
+			},
 		}),
 		fetchPostCreatedAt: builder.query({
 			query: postId => `${POSTS_URL}/createdAt/${postId}`,
 		}),
 		fetchPostsByLimit: builder.query({
 			query: params => {
-				// const params = new URLSearchParams()
-
-				// if(limit) params.append('limit',limit)
-				// if(page) params.append('page',page)
-				// if(search) params.append('search',search)
-				// if(sortBy) params.append('sortBy',sortBy)
-				// if(order) params.append('order',order)
-				// if(category) params.append('category',category)
-
-				//    return `${POSTS_URL}/paginated/?limit=${limit}&page=${page}&search=${search}&sortBy=${sortBy}&category=${category}&order=${order}`
-
-				// return `${POSTS_URL}/paginated/?${params.toString()}`
+				
 
 				const queryString = new URLSearchParams(
 					Object.fromEntries(Object.entries(params).map(([k, v]) => [k,String(v)]))
 				).toString()
-
+				
 				return `${POSTS_URL}/paginated/?${queryString}`
 			},
 		}),
@@ -47,8 +43,29 @@ export const apiSlice = createApi({
 				body: updatedData,
 			}),
 		}),
-		fetchCloudinary: builder.query({
-			query: () => `${SIGNATURE_URL}`,
+
+		deletePost:builder.mutation({
+			query:(postId)=>({
+				url:`${POSTS_URL}/delete/${postId}`,
+				method:'DELETE',
+				headers: { 'Content-type': 'application/json' },
+			})
+		}),
+
+		publishPost:builder.mutation({
+			query:(postId)=>({
+				url:`${POSTS_URL}/publish-post/${postId}`,
+				method:"PUT",
+				headers:{'Content-type':'application/json'}
+			})
+		}),
+
+		fetchCloudinary: builder.mutation({
+			query: ({uploadFolder}) => ({
+				url:`${SIGNATURE_URL}/?uploadFolder=${uploadFolder}`,
+				method:"POST",
+				headers:{'Content-type':'application/json'}
+			})
 		}),
 	}),
 })
@@ -59,5 +76,7 @@ export const {
 	useFetchPostByIdQuery,
 	useFetchPostsByLimitQuery,
 	useFetchPostCreatedAtQuery,
-	useFetchCloudinaryQuery,
+	useFetchCloudinaryMutation,
+	useDeletePostMutation,
+	usePublishPostMutation
 } = apiSlice

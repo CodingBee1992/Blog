@@ -4,11 +4,11 @@ export interface MenuTypes {
 	children?: { title: string; href: string }[] 
 }
 
-const dataMenu1: MenuTypes = {
+const home: MenuTypes = {
 	title: 'Home',
 	href: '/',
 }
-const dataMemu2: MenuTypes = {
+export const categories: MenuTypes = {
 	title: 'Categories',
 	href: '',
 	children: [
@@ -21,29 +21,29 @@ const dataMemu2: MenuTypes = {
         { title: 'Work', href: '/categories/work' },
         { title: 'Health', href: '/categories/health' },
         { title: 'Family', href: '/categories/family' },
-        { title: 'Relationship', href: '/categories/relationship' },
+        
     
     ],
 }
 
-const dataMenu4:MenuTypes ={
+const styles:MenuTypes ={
     title:'Styles',
     href:'/styles'
 }
-const dataMenu5:MenuTypes ={
+const about:MenuTypes ={
     title:'About',
     href:'/about'
 }
-const dataMenu6:MenuTypes ={
+const contact:MenuTypes ={
     title:'Contact',
     href:'/contact'
 }
 
 export const dataNavigation= [
-    dataMenu1,
-    dataMemu2,
+    home,
+    categories,
     
-    dataMenu4,
-    dataMenu5,
-    dataMenu6
+    styles,
+    about,
+    contact
 ]

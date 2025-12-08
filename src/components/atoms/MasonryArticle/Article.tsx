@@ -1,10 +1,43 @@
 
-import type {  ArticleContentProps } from '../../../types/types'
+import useResponsiveCloudinaryImage from '../../../hooks/useResponsiveCloudinaryImage'
+import type { ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import styles from './Article.module.scss'
+import useWindowSize from '../../../hooks/useWindowSize'
 
-const Article = ({ _id, href, mainImage, title, categories, author, introduction, left, top, articleRef }: ArticleContentProps) => {
+const Article = ({
+	_id,
+	href,
+	mainImage,
+	title,
+	categories,
+	author,
+	introduction,
+	left,
+	top,
+	articleRef,
+	seo,
+	onImageLoad,
+}: ArticleContentProps) => {
+	const { width } = useWindowSize()
+	const mainImageSrc = mainImage.src
 	
+	let defaultWidth
+	if (width > 1400) {
+		defaultWidth = 400
+	}
+
+	if (width <= 1400) {
+		defaultWidth = 500
+	}
+	if (width <= 1100) {
+		defaultWidth = 600
+	}
+	if (width <= 700) {
+		defaultWidth = 700
+	}
+	const responsiveImage = useResponsiveCloudinaryImage({ mainImageSrc, defaultWidth })
+
 	return (
 		<article
 			data-aos="fade-up"
@@ -12,8 +45,8 @@ const Article = ({ _id, href, mainImage, title, categories, author, introduction
 			className={`${styles.article} ${styles.brick}`}
 			style={{ position: 'absolute', left, top }}>
 			<div className={styles.articleImage}>
-				<AnchorLink href={`${href}/?id=${_id}`}>
-					<img src={mainImage.src} alt={mainImage.alt} />
+				<AnchorLink href={`${href}/${seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${_id}`}>
+					<img src={responsiveImage} alt={mainImage.alt} onLoad={onImageLoad} />
 				</AnchorLink>
 			</div>
 			<div className={styles.articleText}>
@@ -40,7 +73,10 @@ const Article = ({ _id, href, mainImage, title, categories, author, introduction
 				<div className={styles.articleTextContent}>
 					<p>{introduction}</p>
 				</div>
-				<AnchorLink href={`${href}/?id=${_id}`} className={styles.readMoreLink}>
+				<AnchorLink
+					ariaLabel={`Read more about ${title}`}
+					href={`${href}/${seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${_id}`}
+					className={styles.readMoreLink}>
 					Read More
 				</AnchorLink>
 			</div>

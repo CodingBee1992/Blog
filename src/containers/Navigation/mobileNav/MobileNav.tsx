@@ -22,30 +22,7 @@ const MobileNav = ({ dataMenu }: MobileRefProps) => {
 			navRef.current?.classList.remove(styles.secondNavBgColor)
 		}
 	}, [location.pathname, navRef])
-	// const handleOpenCloseDropdown = (e: MouseEvent<HTMLElement>, index: number) => {
-	// 	const target = e.currentTarget as HTMLElement
-	// 	let element
-
-	// 	if (Number(target.dataset.element) === index) {
-	// 		element = target
-
-	// 		if (!element.classList.contains(styles.active)) {
-	// 			const activeElements = document.querySelectorAll(`.${styles.active}`)
-
-	// 			if (activeElements) {
-	// 				activeElements.forEach(item => {
-	// 					item.classList.remove(styles.active)
-	// 				})
-	// 			}
-
-	// 			element.classList.add(styles.active)
-	// 			mobileRef.current?.classList.add(styles.overflowActive)
-	// 		} else {
-	// 			element.classList.remove(styles.active)
-	// 			mobileRef.current?.classList.remove(styles.overflowActive)
-	// 		}
-	// 	}
-	// }
+	
 
 	return (
 		<div ref={mobileRef} className={styles.mobileContainer}>
@@ -57,7 +34,7 @@ const MobileNav = ({ dataMenu }: MobileRefProps) => {
 				<ControlPanel
 					styles={styles}
 					index={0}
-					// handleOpenCloseDropdown={handleOpenCloseDropdown}
+					
 				/>
 				{dataMenu.map((item: MenuTypes, index: number) => {
 					return (
@@ -66,7 +43,7 @@ const MobileNav = ({ dataMenu }: MobileRefProps) => {
 							styles={styles}
 							data={item}
 							index={index}
-							// handleOpenCloseDropdown={handleOpenCloseDropdown}
+							
 						/>
 					)
 				})}

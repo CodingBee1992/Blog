@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react'
 import type { MenuTypes } from '../../../containers/Navigation/dataNavigation/dataNavigation'
 import useMenuContext from '../../../hooks/useMenuContext'
 import AnchorLink from '../AnchorLink/AnchorLink'
@@ -21,6 +22,15 @@ const DropdownMenu = ({
 }: DropdownMenuProps) => {
 	const { pathname } = useLocation()
 	const { handleOpenCloseMenu } = useMenuContext()
+
+	const handleCloseDropDown = (e: MouseEvent<HTMLLIElement>) => {
+		const target = e.currentTarget as HTMLLIElement
+		const el = target.parentElement
+		
+		if (el && el.classList.contains(styles.active)) {
+			el.classList.remove(styles.active)
+		}
+	}
 	return (
 		<ul
 			className={styles.subMenu}
@@ -29,7 +39,13 @@ const DropdownMenu = ({
 			{data.children?.map((item: { title: string; href: string }, index: number) => {
 				const active = pathname === item.href
 				return (
-					<li onClick={()=>handleOpenCloseMenu()} className={`${styles.subMenuLi} ${active ? styles.activeSubMenuLi : ''}`} key={index}>
+					<li
+						onClick={(e) => {
+							handleCloseDropDown(e)
+							handleOpenCloseMenu()
+						}}
+						className={`${styles.subMenuLi} ${active ? styles.activeSubMenuLi : ''}`}
+						key={index}>
 						{
 							<AnchorLink className={styles.subLink} href={item.href || '#'} count={index}>
 								{item.title}

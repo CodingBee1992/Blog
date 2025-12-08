@@ -1,4 +1,5 @@
 import { usePostContext } from '../../../hooks/usePostContext'
+import ResponsiveArticleImage from '../ResponsiveArticleImage/ResponsiveArticleImage'
 
 
 
@@ -12,7 +13,8 @@ const ArticleImage = ({ styles }: ArticleImageProps) => {
 
 	return (
 		<div className={styles.imageContainer}>
-			<img src={mainImage.src} alt={mainImage.alt} className={styles.image} />
+			<ResponsiveArticleImage mainImageSrc={mainImage.src} imageAlt={mainImage.alt} className={styles.image} />
+			{/* <img src={mainImage.src} alt={mainImage.alt} className={styles.image} /> */}
 		</div>
 	)
 }

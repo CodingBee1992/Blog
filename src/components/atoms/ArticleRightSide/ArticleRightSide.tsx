@@ -12,8 +12,8 @@ const ArticleRightSide = ({ styles }: ArticleRightSideProps) => {
 	const query = new URLSearchParams(search)
 	const postId = query.get('id')
 	const { data } = useFetchPostCreatedAtQuery(postId)
-
-	if (!data) return null
+	
+	// if (!data) return null
 
 	const { prevPost, nextPost } = { ...data }
 	
@@ -25,13 +25,13 @@ const ArticleRightSide = ({ styles }: ArticleRightSideProps) => {
 		<div className={styles.articleRightSideContainer}>
 			<div className={`${styles.prev} ${prevID === postId ? styles.disabled : ''} `}>
 				<span>Previous</span>
-				<AnchorLink href={`/blog/?id=${prevID}`} rel="prev">
+				<AnchorLink href={`/blog/${prevPost?.seo.slug.toLowerCase().replace(/\s+g/,'-')}?id=${prevID}`} rel="prev">
 					{prevID !== postId ? prevPost?.title : '-----'}
 				</AnchorLink>
 			</div>
 			<div className={`${styles.next} ${nextID === postId ? styles.disabled : ''}`}>
 				<span>Next</span>
-				<AnchorLink href={`/blog/?id=${nextID}`} rel="next">
+				<AnchorLink href={`/blog/${nextPost?.seo.slug.toLowerCase().replace(/\s+g/,'-')}?id=${nextID}`} rel="next">
 					{nextID !== postId ? nextPost?.title : '-----'}
 				</AnchorLink>
 			</div>

@@ -1,3 +1,4 @@
+import useResponsiveCloudinaryImage from '../../../hooks/useResponsiveCloudinaryImage'
 import type { ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 
@@ -11,14 +12,22 @@ interface SliderListProps {
 const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 	// const dynamicClass = styles[`sliderHero${index + 1}`]
 	// ${dynamicClass} ${number === index ? styles.sliderActive : ''}
+
+	const mainImageSrc = data.mainImage.src
+	const responsiveImage = useResponsiveCloudinaryImage({ mainImageSrc})
 	
+
+	const isActive = number === index
 	return (
 		<div className={styles.sliderList}>
 			<div
-				style={number === index ? { left: `${index * -100}%`, opacity: 1, zIndex: 999 } : { opacity: 0, zIndex: 998 }}
+				style={{ opacity: isActive ? 1 : 0, zIndex: isActive ? 999 : 998, left: `${index * -100}%` }}
 				data-slick-index={index}
 				className={`${styles.sliderHero}  `}>
-				<div className={styles.sliderHeroBg} style={{ backgroundImage: `url(${data.mainImage.src})` }}></div>
+				{/* <div className={styles.sliderHeroBg} style={{ backgroundImage: `url(${data.mainImage.src})` }}></div> */}
+				<div className={styles.sliderHeroBg}>
+					<img loading="lazy" src={responsiveImage} alt={data.mainImage.alt} />
+				</div>
 				<div className={`row ${styles.sliderContent} ${number === index ? styles.animated : ''}`}>
 					<div className={styles.column}>
 						<div className={styles.meta}>
@@ -36,7 +45,9 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 							</span>
 						</div>
 						<h1 className={styles.text}>
-							<AnchorLink href={`/blog/?id=${data.id}`}>{data.title}</AnchorLink>
+							<AnchorLink href={`/blog/${data.seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${data.id}`}>
+								{data.title}
+							</AnchorLink>
 						</h1>
 					</div>
 				</div>

@@ -6,22 +6,20 @@ import RHFTextArea from '../../atoms/RHFTextArea/RHFTextArea'
 import RHFAddFile from '../../atoms/RHFAddFile/RHFAddFile'
 import RHFCategorySelect from '../../atoms/RHFCategorySelect/RHFCategorySelect'
 import RHFSelect from '../../atoms/RHFSelect/RHFSelect'
-import { useCreatePostMutation, useFetchCloudinaryQuery } from '../../../slices/api/apiSlice'
+import { useCreatePostMutation, useFetchCloudinaryMutation } from '../../../slices/api/apiSlice'
 import styles from './PostForm.module.scss'
 import uploadToCloudinary from '../../../hooks/useUploadToCloudinary'
-import { useRef } from 'react'
-import { allCategories } from '../../../utils/data'
-
-
-const statusOptions = ['draft', 'published']
+import { useRef, type MouseEvent } from 'react'
+import { allCategories, statusOptions } from '../../../utils/data'
+import CloseSvg from '../../../assets/icons/nav/CloseSvg'
 
 const PostForm = () => {
 	const uploadFolder = import.meta.env.VITE_UPLOAD_PRESET
 	const buttons = ['title', 'text', 'image'] as const
 	const fileRef = useRef<(HTMLInputElement | null)[]>([])
 	const [createPost] = useCreatePostMutation()
-	const { data:dataSignature} = useFetchCloudinaryQuery({})
-	
+	const [createSignature] = useFetchCloudinaryMutation()
+
 	const methods = useForm<postSchemaTypes>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
@@ -33,36 +31,44 @@ const PostForm = () => {
 		setError,
 		control,
 		reset,
-		formState: { isSubmitting },
+		formState: { isSubmitting, isSubmitSuccessful },
 	} = methods
-	const { fields: articleContent, append } = useFieldArray({ control, name: 'articleContent' })
+	const { fields: articleContent, insert, remove } = useFieldArray({ control, name: 'articleContent' })
 
 	const handleResetFields = () => {
 		if (fileRef.current) fileRef.current.forEach(el => el && (el.value = ''))
 		reset()
 		window.scrollTo({ top: 0, behavior: 'smooth' })
 	}
+	
+	const handleDeleteField = (e: MouseEvent<HTMLDivElement>) => {
+		const target = e.currentTarget as HTMLDivElement
+		const fieldIndex = +target.dataset.index!
+		
+		remove(fieldIndex)
+	}
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
 		try {
-			await new Promise(resolve => setTimeout(resolve, 1000))
-			
+			// await new Promise(resolve => setTimeout(resolve, 1000))
+
+			const dataSignature = await createSignature({ uploadFolder }).unwrap()
+
 			let mainImage = data.mainImage
 
 			if (mainImage.src instanceof File) {
-				const data = await uploadToCloudinary({file:mainImage.src,uploadFolder,dataSignature})
-				console.log(data)
-				mainImage = { ...mainImage, src: data.secure_url }
+				const data = await uploadToCloudinary({ file: mainImage.src, uploadFolder, dataSignature })
+
+				mainImage = { ...mainImage, src: data.secure_url, public_id: data.public_id }
 			}
 
 			const articleContent = await Promise.all(
-				data.articleContent.map(async (item) => {
-					
+				data.articleContent.map(async item => {
 					if (item.type === 'image' && item.value.src instanceof File) {
 						const file = item.value.src
 
-						const data = await uploadToCloudinary({file,uploadFolder,dataSignature})
+						const data = await uploadToCloudinary({ file, uploadFolder, dataSignature })
 
-						return { ...item, value: { ...item.value, src: data.secure_url } }
+						return { ...item, value: { ...item.value, src: data.secure_url, public_id: data.public_id } }
 					}
 					return item
 				})
@@ -78,6 +84,7 @@ const PostForm = () => {
 			setError('root', { message: 'Please fill all fields' })
 		}
 	}
+	if (isSubmitSuccessful) window.scrollTo({ top: 0, behavior: 'smooth' })
 
 	return (
 		<FormProvider {...methods}>
@@ -90,9 +97,12 @@ const PostForm = () => {
 								key={index}
 								onClick={() => {
 									if (btn === 'image') {
-										append({ type: btn, value: { src: null, alt: '', caption: '',public_id:'' } })
+										insert(articleContent.length - 2, {
+											type: btn,
+											value: { src: null, alt: '', caption: '', public_id: '' },
+										})
 									} else {
-										append({ type: btn, value: '' })
+										insert(articleContent.length - 2, { type: btn, value: '' })
 									}
 								}}>
 								+ {btn}
@@ -123,37 +133,62 @@ const PostForm = () => {
 							{articleContent &&
 								articleContent?.length > 0 &&
 								articleContent.map((field, index) => (
-									<div key={index}>
+									<div key={field.id}>
 										{field.type === 'title' && (
-											<RHFInput<postSchemaTypes>
-												id={`title-${index}`}
-												name={`articleContent.${index}.value`}
-												label="Subtitle"
-												styles={styles}
-											/>
+											<>
+												<RHFInput<postSchemaTypes>
+													id={`title-${index}`}
+													name={`articleContent.${index}.value`}
+													label="Subtitle"
+													styles={styles}
+												/>
+												{index >= 3 && (
+													<div
+														data-index={index}
+														onClick={e => handleDeleteField(e)}
+														className={styles.deleteBtnWrapper}>
+														<CloseSvg styles={styles} />
+													</div>
+												)}
+											</>
 										)}
 										{field.type === 'text' && (
-											<RHFTextArea<postSchemaTypes>
-												name={`articleContent.${index}.value`}
-												label="Text"
-												styles={styles}
-												id={`text-${index}`}
-											/>
+											<>
+												<RHFTextArea<postSchemaTypes>
+													name={`articleContent.${index}.value`}
+													label="Text"
+													styles={styles}
+													id={`text-${index}`}
+												/>
+												{index >= 3 && (
+													<div
+														data-index={index}
+														onClick={e => handleDeleteField(e)}
+														className={styles.deleteBtnWrapper}>
+														<CloseSvg styles={styles} />
+													</div>
+												)}
+											</>
 										)}
 										{field.type === 'image' && (
-											<RHFAddFile<postSchemaTypes>
-												name={`articleContent.${index}.value`}
-												label="Content Image"
-												styles={styles}
-												fileRef={fileRef}
-												fileIndex={index}
-											/>
+											<>
+												<RHFAddFile<postSchemaTypes>
+													name={`articleContent.${index}.value`}
+													label="Content Image"
+													styles={styles}
+													fileRef={fileRef}
+													fileIndex={index}
+												/>
+												{index >= 3 && (
+													<div
+														data-index={index}
+														onClick={e => handleDeleteField(e)}
+														className={styles.deleteBtnWrapper}>
+														<CloseSvg styles={styles} />
+													</div>
+												)}
+											</>
 										)}
-									</div>
-								))}
-							{articleContent &&
-								articleContent.map((field, index) => (
-									<div key={index}>
 										{field.type === 'completion' && (
 											<RHFTextArea
 												name={`articleContent.${index}.value`}
@@ -173,6 +208,7 @@ const PostForm = () => {
 										)}
 									</div>
 								))}
+							
 						</div>
 						<div className={styles.formOptionsContainer}>
 							<div className={styles.formOptionsWrapper}>
@@ -199,7 +235,16 @@ const PostForm = () => {
 					</div>
 					<div className={styles.submitBtns}>
 						<button disabled={isSubmitting} type="submit" className={`${styles.submitBtn} ${styles.postFormBtn}`}>
-							{isSubmitting ? 'Creating' : 'Create Post'}
+							{isSubmitting ? (
+								<>
+									Creating
+									<span className={styles.animate1}>.</span>
+									<span className={styles.animate2}>.</span>
+									<span className={styles.animate3}>.</span>
+								</>
+							) : (
+								'Create Post'
+							)}
 						</button>
 						<button
 							disabled={isSubmitting}

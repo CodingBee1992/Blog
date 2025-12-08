@@ -13,9 +13,9 @@ const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [swipeStartX, setSwipeStartX] = useState<number>(0)
 	const limit = 3
-	const {data,isFetching} = useFetchLimitPostsQuery(limit)
+	const {data,isFetching} = useFetchLimitPostsQuery({limit})
 	
-	// if(!data) return null
+
 	
 	
 	const handleSliderNext = () => {
@@ -74,11 +74,11 @@ const HeroSection = () => {
 					onMouseUp={e => handleSwipeEnd(e)}
 					onTouchStart={e => handleSwipeStart(e)}
 					onTouchEnd={e => handleSwipeEnd(e)}>
-					{data.map((data: ArticleContentProps, index: number) => (
+					{data.posts.map((data: ArticleContentProps, index: number) => (
 						<SliderList key={index} styles={styles} data={data} index={index} number={number} />
 					))}
 				</div>
-				<ul className={styles.dots} role="tablist">
+				<ul className={styles.dots}>
 					{Array.from({ length: limit }, (_, index) => {
 						return (
 							<SliderDots
@@ -96,9 +96,9 @@ const HeroSection = () => {
 				<p className={styles.socialText}>Follow</p>
 				<span className={styles.lineThrough}></span>
 				<ul className={styles.socialIcons}>
-					{socialData.map(({ path, icon }, index) => {
+					{socialData.map(({ path, icon,ariaLabel }, index) => {
 						return (
-							<SocialIcon key={index} href={path} styles={styles}>
+							<SocialIcon key={index} href={path} ariaLabel={ariaLabel} styles={styles}>
 								{icon}
 							</SocialIcon>
 						)
@@ -106,10 +106,10 @@ const HeroSection = () => {
 				</ul>
 			</div>
 			<div className={styles.arrowsContainer}>
-				<button className={styles.arrowBtn} onClick={() => handleSliderPrev()}>
+				<button type='button' aria-label="Previous slide" className={styles.arrowBtn} onClick={() => handleSliderPrev()}>
 					<ArrowPrev />
 				</button>
-				<button className={styles.arrowBtn} onClick={() => handleSliderNext()}>
+				<button type='button' aria-label="Next slide" className={styles.arrowBtn} onClick={() => handleSliderNext()}>
 					<ArrowNext />
 				</button>
 			</div>

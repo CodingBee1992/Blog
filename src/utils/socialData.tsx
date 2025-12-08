@@ -9,21 +9,25 @@ import  Dribbble  from '../assets/icons/social/Dribbble'
 const faceBook: SocialProps = {
 	path: 'https://www.facebook.com/',
 	icon: <Facebook /> ,
+	ariaLabel:"Facebook"
 }
 
 const twitter:SocialProps  = {
 	path: 'https://x.com',
 	icon: <Twitter/>,
+	ariaLabel:"X(Twitter)"
 }
 
 const instagram:SocialProps = {
 	path: 'https://instagram.com',
 	icon: <Instagram/> ,
+	ariaLabel:"Instagram"
 }
 
 const dribbble:SocialProps = {
 	path: 'https://dribbble.com/',
 	icon: <Dribbble />,
+	ariaLabel:"Dribble"
 }
 
 export const socialData: SocialProps[] = [faceBook, twitter, instagram, dribbble]

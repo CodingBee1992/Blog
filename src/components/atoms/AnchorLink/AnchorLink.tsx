@@ -10,26 +10,36 @@ interface AnchorLink {
 	className?: string
 	count?: number
 	ariaLabel?: string
-	ref?:RefObject<HTMLAnchorElement | null>
-	handleOpenCloseMenu?:()=>void
+	ref?: RefObject<HTMLAnchorElement | null>
+	handleOpenCloseMenu?: () => void
 }
 
-const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,ref,handleOpenCloseMenu }: AnchorLink) => {
+const AnchorLink = ({
+	children,
+	href,
+	rel,
+	target,
+	count,
+	className,
+	ariaLabel,
+	ref,
+	handleOpenCloseMenu,
+}: AnchorLink) => {
 	const navigate = useNavigate()
 	const location = useLocation()
-	
+
 	// const isActive = location.pathname === href
-// ${isActive ? styles.isActive : ''}
+	// ${isActive ? styles.isActive : ''}
 	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault()
-		
+
 		removePaginationLinksTags()
 		handleOpenCloseMenu?.()
-		
+
 		const url = new URL(window.location.origin + href)
 		const path = url.pathname
 		const search = url.search
-		
+
 		const hash = url.hash.replace('#', '')
 
 		if (location.pathname !== path || location.search !== search) {
@@ -41,7 +51,6 @@ const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,r
 				window.scrollTo({ top: 0, behavior: 'smooth' })
 			}, 210)
 		}
-		
 	}
 
 	return (
@@ -50,6 +59,7 @@ const AnchorLink = ({ children, href, rel, target, count, className, ariaLabel,r
 			ref={ref}
 			onClick={e => handleClick(e)}
 			rel={rel}
+			draggable={false}
 			target={target}
 			aria-label={ariaLabel}
 			data-main={count}

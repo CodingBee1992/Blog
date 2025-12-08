@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState, type MouseEvent } from 'react'
-import Article from '../../atoms/Article/Article'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from 'react'
+import Article from '../../atoms/MasonryArticle/Article'
 import styles from './PostsContent.module.scss'
 import type { ArticleContentProps } from '../../../types/types'
 import Aos from 'aos'
-import { useFetchPostsByLimitQuery } from '../../../slices/api/apiSlice'
-
+import { useFetchLimitPostsQuery } from '../../../slices/api/apiSlice'
 
 const PostsContent = () => {
 	const [width, setWidth] = useState<number>(0)
@@ -19,7 +18,7 @@ const PostsContent = () => {
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [pagginationButtons, setPagginationButtons] = useState<number[]>([])
 
-	const { data } = useFetchPostsByLimitQuery({ limit: 30, page: currentPage })
+	const { data, refetch } = useFetchLimitPostsQuery({ limit: 30, page: currentPage })
 	const { posts, totalPages = 1 } = { ...data }
 
 	useEffect(() => {
@@ -63,6 +62,8 @@ const PostsContent = () => {
 		if (direction === 'next' && currentPage < totalPages) {
 			setCurrentPage(prev => prev + 1)
 		}
+
+		refetch()
 	}
 
 	const handleSetPage = (e: MouseEvent<HTMLButtonElement>) => {
@@ -91,7 +92,7 @@ const PostsContent = () => {
 		if (width <= 1400) {
 			setColumns(3)
 		}
-		if (width < 1100) {
+		if (width <= 1100) {
 			setColumns(2)
 		}
 		if (width <= 700) {
@@ -104,51 +105,56 @@ const PostsContent = () => {
 		window.addEventListener('resize', handleSize)
 	}, [width, columns, percent])
 
-	
-	useEffect(() => {
+	const recalcGrid = useCallback(() => {
 		if (!posts || posts.length === 0) return
 
-		const recalcGrid = () => {
-			const columnHeights = new Array(columns).fill(0)
-			const updated = posts.map((post: ArticleContentProps, index: number) => {
-				const col = index % columns
-				const height = heightsCache.current[index] 
+		const columnHeights = new Array(columns).fill(0)
+		const updated = posts.map((post: ArticleContentProps, index: number) => {
+			const col = index % columns
+			// const col = columnHeights.indexOf(Math.min(...columnHeights))
+			const height = heightsCache.current[index]
 
-				const top = columnHeights[col]
-				columnHeights[col] += height
+			const top = columnHeights[col]
+			columnHeights[col] += height
 
-				const left = `${col * percent}%`
+			const left = `${col * percent}%`
 
-				return { ...post, top: `${top}px`, left }
-			})
-
-			setStyledPostData(updated)
-
-			if (columnHeights.length > 0) {
-				const heightCol = Math.max(...columnHeights)
-
-				setWrapperHeight(heightCol)
-			}
-		}
-		requestAnimationFrame(() => {
-			const nodes = articleRef.current
-			
-			if (nodes.length !== posts.length) return
-
-			nodes.forEach((el, index) => {
-				if (!el) return
-				heightsCache.current[index] = el.offsetHeight
-			})
-
-			recalcGrid() 
+			return { ...post, top: `${top}px`, left }
 		})
+
+		setStyledPostData(updated)
+
+		if (columnHeights.length > 0) {
+			const heightCol = Math.max(...columnHeights)
+
+			setWrapperHeight(heightCol)
+		}
+	}, [columns, percent, posts])
+	useLayoutEffect(() => {
+		recalcGrid()
+
+		// requestAnimationFrame(() => {
+		// 	const nodes = articleRef.current
+
+		// 	if (!nodes.length) return
+
+		// 	nodes.forEach((el, index) => {
+		// 		if (!el) return
+
+		// 		heightsCache.current[index] = el.offsetHeight
+		// 	})
+
+		// 	recalcGrid()
+		// })
+
 		const observer = new ResizeObserver(elements => {
 			elements.forEach(el => {
-				const index = articleRef.current.indexOf(el.target as HTMLDivElement)
+				const target = el.target as HTMLElement
+				const index = articleRef.current.indexOf(target)
 
 				if (index === -1) return
 
-				heightsCache.current[index] = Math.floor(el.borderBoxSize[0].blockSize)
+				heightsCache.current[index] = Math.floor(el.borderBoxSize[0].blockSize) || target.offsetHeight
 			})
 			recalcGrid()
 		})
@@ -157,12 +163,18 @@ const PostsContent = () => {
 			if (el) observer.observe(el)
 		})
 
-		recalcGrid()
-
 		return () => {
 			observer.disconnect()
 		}
-	}, [columns, percent, width, posts])
+	}, [columns, percent, width, data, refetch, posts, recalcGrid])
+
+	const handleImageLoad = (index: number) => {
+		const el = articleRef.current[index]
+		if (!el) return
+
+		heightsCache.current[index] = el.offsetHeight
+		recalcGrid()
+	}
 
 	useEffect(() => {
 		Aos.init({
@@ -172,8 +184,7 @@ const PostsContent = () => {
 	}, [])
 	useEffect(() => {
 		Aos.refresh()
-	}, [columns, percent, width])
-	
+	}, [columns, percent, width,styledPostData])
 	return (
 		<section className={styles.postsContainer}>
 			<div className={styles.articleContainer}>
@@ -186,11 +197,12 @@ const PostsContent = () => {
 
 					{styledPostData.map(
 						(
-							{ _id, title, mainImage, categories, author, introduction, left, top }: ArticleContentProps,
+							{ _id, title, mainImage, categories, author, introduction, left, top, seo }: ArticleContentProps,
 							index: number
 						) => {
 							return (
 								<Article
+									onImageLoad={() => handleImageLoad(index)}
 									articleRef={el => {
 										articleRef.current[index] = el
 									}}
@@ -204,8 +216,8 @@ const PostsContent = () => {
 									introduction={introduction}
 									left={left}
 									top={top}
+									seo={seo}
 								/>
-
 							)
 						}
 					)}
