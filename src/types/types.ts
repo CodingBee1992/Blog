@@ -89,3 +89,17 @@ export interface adminLinksProps {
 	href: string
 	children?: adminLinksProps[]
 }
+
+
+export interface UsersProps{
+	_id:string
+	name:string,
+	email:string,
+	avatar:string,
+	role:string
+	isVerified:boolean
+	createdAt:string
+	updatedAt:string
+	commentsCount:number,
+	postCount?:number
+}

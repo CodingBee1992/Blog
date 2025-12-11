@@ -44,7 +44,7 @@ const LoginPageTemplate = () => {
 			// await new Promise(resolve => setTimeout(resolve, 2000))
 
 			const res = await logIn({ ...data }).unwrap()
-
+			
 			dispatch(setLogin(true))
 			dispatch(setData(res))
 

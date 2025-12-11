@@ -14,7 +14,7 @@ interface SideBarProps {
 }
 
 const SideBar = ({ children }: SideBarProps) => {
-	const { isLogged, isAdmin, avatar } = useSelector((state: RootState) => state.auth)
+	const { isLogged, role, avatar } = useSelector((state: RootState) => state.auth)
 
 	return (
 		<div className={styles.sideBarContainer}>
@@ -23,7 +23,7 @@ const SideBar = ({ children }: SideBarProps) => {
 				<div className={styles.sideBarLinks}>{children}</div>
 			</div>
 			<div className={styles.controlPanelUser}>
-				{(!isLogged || (isLogged && isAdmin)) && (
+				{(!isLogged || (isLogged && (role === 'Admin' || role === 'Moderator'))) && (
 					<AnchorLink className={styles.sideBarBtns} href="/settings">
 						<SettingsSvg styles={styles} />
 					</AnchorLink>

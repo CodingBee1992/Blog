@@ -6,6 +6,9 @@ const adminLinks: adminLinksProps[] = [
 		title: 'Admin',
 		href: '/admin',
 		icon: <AdminSVG />,
+		children:[
+			{title:'Admin Room',href:'/admin/room'}
+		]
 		
 	},
 	{

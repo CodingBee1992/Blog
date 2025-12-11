@@ -1,9 +1,16 @@
-import Table from '../../../modules/Table/Table'
+
+import ListOfUsers from '../../../organism/ListOfUsers/ListOfUsers'
 import styles from './ListOfPostPageTemplate.module.scss'
 const ListOfUsersPageTemplate = () => {
+
+
+	
+
+
+
 	return (
 		<div className={styles.listOfUsersContainer}>
-			<Table />
+			<ListOfUsers />
 		</div>
 	)
 }

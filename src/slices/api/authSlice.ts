@@ -6,12 +6,14 @@ interface SetDataType {
 	name: string
 	id: string
 	avatar: string
-	isAdmin:boolean
+	// isAdmin:boolean
+	role: string
 }
 let name = ''
 let id = ''
 let avatar = ''
-let isAdmin = false
+// let isAdmin = false
+let role =''
 const stored = localStorage.getItem('user')
 if (stored) {
 	try {
@@ -20,7 +22,8 @@ if (stored) {
 		name = decoded.name || ''
 		id = decoded.id || ''
 		avatar = decoded.avatar || ''
-		isAdmin = decoded.isAdmin || false
+		// isAdmin = decoded.isAdmin || false
+		role = decoded.role || ''
 	} catch (error) {
 		console.warn('Błąd podczas dekodowania usera z localStorage:', error)
 	}
@@ -31,7 +34,8 @@ const initialState: SetDataType = {
 	name,
 	id,
 	avatar,
-	isAdmin,
+	// isAdmin,
+	role
 }
 
 export const authSlice = createSlice({
@@ -43,14 +47,15 @@ export const authSlice = createSlice({
 			state.isLogged = action.payload
 		},
 		setData: (state, action: PayloadAction<SetDataType>) => {
-			const { name, id, avatar,isAdmin } = action.payload
+			const { name, id, avatar,role } = action.payload
 			state.name = name
 			state.id = id
 			state.avatar = avatar
-			state.isAdmin = isAdmin
+			// state.isAdmin = isAdmin
+			state.role = role
 
 			try {
-				const encoded = JSON.stringify({ name, id, avatar,isAdmin })
+				const encoded = JSON.stringify({ name, id, avatar,role })
 
 				localStorage.setItem('user', encoded)
 			} catch (error) {
@@ -65,7 +70,8 @@ export const authSlice = createSlice({
 			state.name = ''
 			state.id = ''
 			state.avatar = ''
-			state.isAdmin = false
+			// state.isAdmin = false
+			state.role = ''
 		},
 	},
 })

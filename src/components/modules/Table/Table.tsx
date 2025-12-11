@@ -5,7 +5,7 @@ import {
 	PencilSVG,
 	TrashSVG,
 } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
-import { useFetchPostsByLimitQuery } from '../../../slices/api/apiSlice'
+import { useDeletePostMutation, useFetchPostsByLimitQuery, usePublishPostMutation } from '../../../slices/api/apiSlice'
 import type { ExtendedArticleContentProps } from '../../../types/types'
 import styles from './Table.module.scss'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
@@ -13,9 +13,10 @@ import { useEffect, useRef, useState, type ChangeEvent, type MouseEvent } from '
 
 import useDebounce from '../../../hooks/useDebounce'
 import { SearchSvg } from '../../../assets/icons/nav/SearchSvg'
-import { allCategories, rowsNumbers, status, thead } from '../../../utils/data'
+import { rowsNumbers, status, thead } from '../../../utils/data'
+import { categories } from '../../../containers/Navigation/dataNavigation/dataNavigation'
 
-const Table = () => {
+const ListOfPosts = () => {
 	const rowsRef = useRef<HTMLDivElement | null>(null)
 
 	const [rows, setRows] = useState<number>(10)
@@ -29,7 +30,7 @@ const Table = () => {
 	const [end, setEnd] = useState<number>()
 	const [inputValue, setInputValue] = useState<string>('')
 	const search = useDebounce(inputValue, 500)
-	const { data } = useFetchPostsByLimitQuery({
+	const { data, refetch } = useFetchPostsByLimitQuery({
 		limit: rows,
 		page: currentPage,
 		search: search,
@@ -37,7 +38,13 @@ const Table = () => {
 		order: sort.order,
 		category: category,
 	})
+	const [deletePost] = useDeletePostMutation()
+	const [publishPost] = usePublishPostMutation()
 	const { posts = [], totalPages = 1, total = 1 } = data ?? {}
+
+	useEffect(() => {
+		refetch()
+	}, [data, refetch])
 
 	const handleSetInputValue = (e: ChangeEvent<HTMLInputElement>) => {
 		const target = e.target as HTMLInputElement
@@ -69,7 +76,6 @@ const Table = () => {
 
 		if (!el || el === 'status' || el === 'categories') return
 		if (el === 'createdAt' || el === 'publishedAt' || el === 'comments') {
-			console.log('ok')
 			setSort(prev => {
 				const newOrder = prev.sortBy === el ? (prev.order === 'asc' ? 'desc' : 'asc') : 'desc'
 
@@ -77,6 +83,7 @@ const Table = () => {
 			})
 			return
 		}
+
 		setSort(prev => {
 			const newOrder = prev.sortBy === el ? (prev.order === 'desc' ? 'asc' : 'desc') : 'asc'
 
@@ -131,6 +138,7 @@ const Table = () => {
 
 		return () => window.removeEventListener('click', handleCloseSelect)
 	}, [])
+
 	const handleChangePage = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
 
@@ -145,6 +153,30 @@ const Table = () => {
 		}
 	}
 
+	const handleDeletePost = async (e: MouseEvent<HTMLDivElement>) => {
+		const target = e.currentTarget as HTMLDivElement
+		const postId = target.dataset.id
+
+		try {
+			await deletePost(postId).unwrap()
+
+			refetch()
+		} catch (error) {
+			console.log(error)
+		}
+	}
+	const handlePublishPost = async (e: MouseEvent<HTMLParagraphElement>) => {
+		const target = e.currentTarget as HTMLParagraphElement
+		const postId = target.dataset.id
+
+		try {
+			await publishPost(postId).unwrap()
+
+			refetch()
+		} catch (error) {
+			console.log(error)
+		}
+	}
 	// if (isFetching) return <Loader />
 	return (
 		<div className={styles.listWrapper}>
@@ -165,7 +197,7 @@ const Table = () => {
 			<div className={styles.listContainer}>
 				<div className={styles.tableContainer}>
 					<div className={styles.thead}>
-						{posts && posts && (
+						{posts && (
 							<div className={styles.tr}>
 								{thead.map((item, index) => {
 									if (item !== 'actions') {
@@ -175,9 +207,9 @@ const Table = () => {
 													{item} <ArrowDownSVG />
 													{item === 'categories' && (
 														<div className={styles.theadDropDown}>
-															{allCategories.map((item, index) => (
-																<div onClick={() => handleSetCategory(item)} data-element={item} key={index}>
-																	{item}
+															{categories.children?.map((item, index) => (
+																<div onClick={() => handleSetCategory(item.title)} data-element={item} key={index}>
+																	{item.title}
 																</div>
 															))}
 														</div>
@@ -226,15 +258,25 @@ const Table = () => {
 							posts?.map((item: ExtendedArticleContentProps, index: number) => (
 								<div key={index} className={`${styles.tr} ${item.status === 'draft' ? styles.draft : ''}`}>
 									<div className={styles.td}>
-										<AnchorLink className={styles.tabelTitle} href={`/blog/?id=${item._id}`}>
+										<AnchorLink
+											className={styles.tabelTitle}
+											href={`/blog/${item.seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${item._id}`}>
 											{item.title}
 										</AnchorLink>
 									</div>
 									<div className={styles.td}>{item.author.name}</div>
-									<div className={styles.td}>{item.categories.length > 1 ? item.categories.join(', ') : ''}</div>
+									<div className={styles.td}>
+										{item.categories.length > 1 ? item.categories.join(', ') : item.categories}
+									</div>
 									<div className={styles.td}>{new Date(item.createdAt).toLocaleDateString()}</div>
 									<div className={`${styles.td} ${item.publishedAt ? '' : styles.publish}`}>
-										{item.publishedAt ? item.publishedAt : 'Publish'}
+										{item.publishedAt ? (
+											new Date(item.publishedAt).toLocaleDateString()
+										) : (
+											<p data-id={item._id} onClick={e => handlePublishPost(e)}>
+												Publish
+											</p>
+										)}
 									</div>
 									<div className={styles.td}>{item.comments.length}</div>
 									<div className={styles.td}>435</div>
@@ -243,7 +285,9 @@ const Table = () => {
 										<AnchorLink href={`/admin/posts/editpost/?id=${item._id}`}>
 											<PencilSVG />
 										</AnchorLink>
-										<TrashSVG />
+										<div data-id={item._id} onClick={e => handleDeletePost(e)}>
+											<TrashSVG />
+										</div>
 									</div>
 								</div>
 							))}
@@ -287,4 +331,4 @@ const Table = () => {
 	)
 }
 
-export default Table
+export default ListOfPosts

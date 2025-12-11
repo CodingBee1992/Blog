@@ -1,7 +1,6 @@
 import {
 	ArrowDownSVG,
-	ArrowNextSVG,
-	ArrowPrevSVG,
+	
 	PencilSVG,
 	TrashSVG,
 } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
@@ -12,9 +11,11 @@ import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { useEffect, useRef, useState, type ChangeEvent, type MouseEvent } from 'react'
 
 import useDebounce from '../../../hooks/useDebounce'
-import { SearchSvg } from '../../../assets/icons/nav/SearchSvg'
+
 import { rowsNumbers, status, thead } from '../../../utils/data'
 import { categories } from '../../../containers/Navigation/dataNavigation/dataNavigation'
+import TabelSearch from '../../modules/TabelSearch/TabelSearch'
+import TabelPagination from '../../modules/TabelPagination/TabelPagination'
 
 const ListOfPosts = () => {
 	const rowsRef = useRef<HTMLDivElement | null>(null)
@@ -26,8 +27,8 @@ const ListOfPosts = () => {
 		order: '',
 	})
 	const [category, setCategory] = useState<string>('')
-	const [start, setStart] = useState<number>()
-	const [end, setEnd] = useState<number>()
+	const [start, setStart] = useState<number>(0)
+	const [end, setEnd] = useState<number>(0)
 	const [inputValue, setInputValue] = useState<string>('')
 	const search = useDebounce(inputValue, 500)
 	const { data, refetch } = useFetchPostsByLimitQuery({
@@ -180,20 +181,9 @@ const ListOfPosts = () => {
 	// if (isFetching) return <Loader />
 	return (
 		<div className={styles.listWrapper}>
-			<h3 className={styles.listTitle}>List</h3>
-			<div className={styles.searchContainer}>
-				<label className={styles.searchBox}>
-					<input
-						className={styles.searchInput}
-						type="text"
-						placeholder="Search..."
-						onChange={e => handleSetInputValue(e)}
-					/>
-					<button className={styles.searchBtn}>
-						<SearchSvg className={styles.searchIcon} />
-					</button>
-				</label>
-			</div>
+			<h3 className={styles.listTitle}>List of Posts</h3>
+			<TabelSearch  styles={styles} handleSetInputValue={handleSetInputValue}/>
+			
 			<div className={styles.listContainer}>
 				<div className={styles.tableContainer}>
 					<div className={styles.thead}>
@@ -292,39 +282,7 @@ const ListOfPosts = () => {
 					</div>
 				</div>
 			</div>
-			<div className={styles.pagination}>
-				<div className={styles.paginationRows}>
-					<span>Rows per page:</span>
-					<div className={styles.selectRows}>
-						<div className={styles.inputBox} onClick={() => handleOpenRows()}>
-							<input className={styles.selectInput} value={rows} type="text" name="rows" readOnly />
-							<ArrowDownSVG className={styles.arrowRows} />
-						</div>
-						<div ref={rowsRef} className={styles.rows}>
-							{rowsNumbers.map((row, index) => (
-								<span
-									key={index}
-									data-value={row}
-									className={rows === row ? styles.activeRow : ''}
-									onClick={e => handleSelectRows(e)}>
-									{row}
-								</span>
-							))}
-						</div>
-					</div>
-				</div>
-				<span>
-					{start}-{end} of {total}
-				</span>
-				<div className={styles.arrowsControls}>
-					<button data-element="prev" className={styles.arrows} onClick={e => handleChangePage(e)}>
-						<ArrowPrevSVG className={styles.arrowPrev} />
-					</button>
-					<button data-element="next" className={styles.arrows} onClick={e => handleChangePage(e)}>
-						<ArrowNextSVG className={styles.arrowNext} />
-					</button>
-				</div>
-			</div>
+			<TabelPagination  styles={styles} rows={rows} rowsNumbers={rowsNumbers} start={start} end={end} rowsRef={rowsRef} total={total} handleOpenRows={handleOpenRows} handleSelectRows={handleSelectRows} handleChangePage={handleChangePage} />
 		</div>
 	)
 }

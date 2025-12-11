@@ -9,7 +9,7 @@ import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { useDeleteCommentMutation, useFetchCommentsQuery } from '../../../slices/api/commentSlice'
 
 const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }: CommentsDataProps) => {
-	const { isAdmin } = useSelector((state: RootState) => state.auth)
+	const { status } = useSelector((state: RootState) => state.auth)
 	const comRef = useRef<HTMLDivElement | null>(null)
 	const { isLogged, id } = useSelector((state: RootState) => state.auth)
 	const [showReply, setShowReply] = useState<boolean>(false)
@@ -131,7 +131,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 									Log In to Reply
 								</AnchorLink>
 							</div>
-							{isLogged && (authorPost || isAdmin) && !showReply && (
+							{isLogged && (authorPost || (status === 'Admin' || status === "Moderator")) && !showReply && (
 								<div className={styles.deleteUpdateContainer}>
 									<span
 										className={styles.deleteUpdateMenu}

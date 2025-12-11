@@ -5,14 +5,14 @@ export const postSchema = z.object({
 
 	mainImage: z.object({
 		src: z
-			.instanceof(File)
+			.instanceof(File).or(z.string())
 			.nullable()
 			.refine(v => v !== null, {
 				message: 'Please upload a file',
 			}),
 		alt: z.string().trim().min(1, { message: 'Please fill alt' }),
 		caption: z.string().trim().min(1, { message: 'Please fill caption' }),
-		public_id:z.string()
+		public_id: z.string(),
 	}),
 
 	articleContent: z.array(
@@ -38,15 +38,15 @@ export const postSchema = z.object({
 				value: z.object({
 					src: z
 						.instanceof(File)
+						.or(z.string())
 						.nullable()
 						.refine(v => v !== null, 'Please upload a file'),
 					alt: z.string().min(1, 'Please fill alt'),
 					caption: z.string().min(1, 'Please fill caption'),
-					public_id:z.string()
+					public_id: z.string(),
 				}),
 			}),
 		])
-		
 	),
 
 	categories: z.array(z.string()).min(1, { message: 'Min 1 Category' }).max(2, { message: 'Max 2 Categories' }),
@@ -56,8 +56,6 @@ export const postSchema = z.object({
 		metaDescription: z.string().min(1, { message: 'Please fill field' }),
 	}),
 	status: z.string(),
-	
-	
 })
 
 export type postSchemaTypes = z.infer<typeof postSchema>
@@ -69,7 +67,7 @@ export const defaultValues: postSchemaTypes = {
 		src: null,
 		alt: '',
 		caption: '',
-		public_id:''
+		public_id: '',
 	},
 	articleContent: [
 		{ type: 'title', value: '' },
@@ -80,7 +78,7 @@ export const defaultValues: postSchemaTypes = {
 				src: null,
 				alt: '',
 				caption: '',
-				public_id:'',
+				public_id: '',
 			},
 		},
 		{ type: 'completion', value: '' },
@@ -92,8 +90,6 @@ export const defaultValues: postSchemaTypes = {
 		slug: '',
 		metaTitle: '',
 		metaDescription: '',
-		
 	},
 	status: 'draft',
-	
 }

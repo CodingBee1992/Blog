@@ -11,7 +11,7 @@ interface ControlPanelUserProps {
 }
 
 const ControlPanelUser = ({ styles }: ControlPanelUserProps) => {
-	const { isAdmin, name, avatar } = useSelector((state: RootState) => state.auth)
+	const { role, name, avatar } = useSelector((state: RootState) => state.auth)
 	const { userRef, openCloseUserMenu } = useMenuContext()
 	return (
 		<div className={styles.controlPanelUser}>
@@ -20,7 +20,7 @@ const ControlPanelUser = ({ styles }: ControlPanelUserProps) => {
 				<span className={styles.author}>{name}</span>
 			</div>
 			<div ref={userRef} className={styles.controlSettings}>
-				{isAdmin && (
+				{(role === 'Admin' || role === 'Moderator')  && (
 					<AnchorLink className={styles.controlLinks} href="/admin">
 						Admin Panel
 					</AnchorLink>

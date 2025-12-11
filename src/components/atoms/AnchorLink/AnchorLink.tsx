@@ -12,6 +12,7 @@ interface AnchorLink {
 	ariaLabel?: string
 	ref?: RefObject<HTMLAnchorElement | null>
 	handleOpenCloseMenu?: () => void
+	handleClose?: () => void
 }
 
 const AnchorLink = ({
@@ -24,6 +25,7 @@ const AnchorLink = ({
 	ariaLabel,
 	ref,
 	handleOpenCloseMenu,
+	handleClose
 }: AnchorLink) => {
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -35,11 +37,11 @@ const AnchorLink = ({
 
 		removePaginationLinksTags()
 		handleOpenCloseMenu?.()
-
+		handleClose?.()
 		const url = new URL(window.location.origin + href)
 		const path = url.pathname
 		const search = url.search
-
+		
 		const hash = url.hash.replace('#', '')
 
 		if (location.pathname !== path || location.search !== search) {

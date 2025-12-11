@@ -22,7 +22,7 @@ const DropdownMenu = ({
 }: DropdownMenuProps) => {
 	const { pathname } = useLocation()
 	const { handleOpenCloseMenu } = useMenuContext()
-
+	
 	const handleCloseDropDown = (e: MouseEvent<HTMLLIElement>) => {
 		const target = e.currentTarget as HTMLLIElement
 		const el = target.parentElement

@@ -21,7 +21,11 @@ const RHFAddFile = <T extends FieldValues>({ name, label, styles, fileRef, fileI
 			render={({ field: { value, onChange }, fieldState: { error } }) => (
 				<div className={styles.fileContainer}>
 					<label htmlFor="file">{label}</label>
-					{value && (value as File) instanceof File && (
+					{typeof value === 'string' ?  (
+						<div className={styles.previewImage}>
+							<img src={value} />
+						</div>
+					) :  (value as File) instanceof File && (
 						<div className={styles.previewImage}>
 							<img src={URL.createObjectURL(value)} />
 						</div>
@@ -38,7 +42,8 @@ const RHFAddFile = <T extends FieldValues>({ name, label, styles, fileRef, fileI
 						className={styles.formInput}
 						onChange={e => {
 							const file = e.target.files?.[0]
-
+							
+							
 							onChange(file)
 						}}
 						type="file"

@@ -5,6 +5,18 @@ import CloseButton from '../../atoms/CloseButton/CloseButton'
 import { useDispatch } from 'react-redux'
 import { setIsOpen } from '../../../slices/themeSlice'
 import useDebounce from '../../../hooks/useDebounce'
+import { useSearchPostQuery } from '../../../slices/api/apiSlice'
+import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
+
+interface DataSearchProps {
+	_id: string
+	title: string
+	seo: {
+		slug: string
+		metaTitle: string
+		metaDescription: string
+	}
+}
 
 const SearchContainer = ({ isOpen }: SearchProps) => {
 	const searchContainerRef = useRef<HTMLDivElement>(null)
@@ -14,7 +26,8 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 	const dispatch = useDispatch()
 
 	const debouncedValue = useDebounce(value, 500)
-
+	const { data } = useSearchPostQuery(debouncedValue)
+	
 	useEffect(() => {
 		setTimeout(() => {
 			searchContainerRef.current?.classList.add(styles.fadeIn)
@@ -64,7 +77,7 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 	const searchFocus = (e: FormEvent<HTMLInputElement>) => {
 		const target = e.target as HTMLInputElement
 		const query = target.value.trim()
-		
+
 		if (query) {
 			searchListRef.current?.classList.add(styles.fadeOut)
 			setTimeout(() => {
@@ -92,27 +105,16 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 							/>
 						</form>
 						<div ref={searchListRef} className={`${styles.elementSearchList}`}>
-							<a href="" className={styles.elementSearchListLink}>
-								Zachody słońca w Afryce
-							</a>
-							<a href="" className={styles.elementSearchListLink}>
-								Pustynie w Namibii
-							</a>
-							<a href="" className={styles.elementSearchListLink}>
-								Peru - słońce Ameryki Południowej
-							</a>
-							<a href="" className={styles.elementSearchListLink}>
-								Peru - słońce Ameryki Południowej
-							</a>
-							<a href="" className={styles.elementSearchListLink}>
-								Peru - słońce Ameryki Południowej
-							</a>
-							<a href="" className={styles.elementSearchListLink}>
-								Peru - słońce Ameryki Południowej
-							</a>
-							<a href="" className={styles.elementSearchListLink}>
-								Peru - słońce Ameryki Południowej
-							</a>
+							{data &&
+								data.map((item: DataSearchProps) => (
+									<AnchorLink
+										handleClose={handleClose}
+										className={styles.elementSearchListLink}
+										href={`/blog/${item.seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${item._id}`}>
+										{item.title}
+									</AnchorLink>
+								))}
+							
 						</div>
 					</div>
 

@@ -1,3 +1,4 @@
+import { useRef, useState, type MouseEvent } from 'react'
 import { FormProvider, useFieldArray, useForm, type SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { postSchema, defaultValues, type postSchemaTypes } from '../../../types/formSchema'
@@ -6,86 +7,182 @@ import RHFTextArea from '../../atoms/RHFTextArea/RHFTextArea'
 import RHFAddFile from '../../atoms/RHFAddFile/RHFAddFile'
 import RHFCategorySelect from '../../atoms/RHFCategorySelect/RHFCategorySelect'
 import RHFSelect from '../../atoms/RHFSelect/RHFSelect'
-import { useCreatePostMutation, useFetchCloudinaryMutation } from '../../../slices/api/apiSlice'
+import {
+	useCreatePostMutation,
+	useDestroyCloudinaryImageMutation,
+	useFetchCloudinaryMutation,
+	useUpdatePostMutation,
+} from '../../../slices/api/apiSlice'
 import styles from './PostForm.module.scss'
 import uploadToCloudinary from '../../../hooks/useUploadToCloudinary'
-import { useRef, type MouseEvent } from 'react'
 import { allCategories, statusOptions } from '../../../utils/data'
 import CloseSvg from '../../../assets/icons/nav/CloseSvg'
 
-const PostForm = () => {
+interface PostFormProps {
+	editValues?: postSchemaTypes
+	postId?: string | null
+}
+
+const PostForm = ({ editValues, postId }: PostFormProps) => {
 	const uploadFolder = import.meta.env.VITE_UPLOAD_PRESET
 	const buttons = ['title', 'text', 'image'] as const
 	const fileRef = useRef<(HTMLInputElement | null)[]>([])
+	const [imagesToDestroy, setImagesToDestroy] = useState<string[]>([])
+	const [oldDefaultValues, setOldDefaultValues] = useState({})
 	const [createPost] = useCreatePostMutation()
 	const [createSignature] = useFetchCloudinaryMutation()
-
+	const [updatePost] = useUpdatePostMutation()
+	const [destroyCloudinaryImage] = useDestroyCloudinaryImageMutation()
 	const methods = useForm<postSchemaTypes>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
 		resolver: zodResolver(postSchema),
-		defaultValues,
+		defaultValues: editValues ? editValues : defaultValues,
 	})
 	const {
 		handleSubmit,
 		setError,
 		control,
 		reset,
+		getValues,
 		formState: { isSubmitting, isSubmitSuccessful },
 	} = methods
 	const { fields: articleContent, insert, remove } = useFieldArray({ control, name: 'articleContent' })
-
+	
 	const handleResetFields = () => {
-		if (fileRef.current) fileRef.current.forEach(el => el && (el.value = ''))
-		reset()
+		if (oldDefaultValues) {
+			console.log(oldDefaultValues)
+			reset(oldDefaultValues)
+			setOldDefaultValues({})
+		} else {
+			if (fileRef.current) fileRef.current.forEach(el => el && (el.value = ''))
+			reset()
+		}
+
 		window.scrollTo({ top: 0, behavior: 'smooth' })
 	}
-	
-	const handleDeleteField = (e: MouseEvent<HTMLDivElement>) => {
+
+	const handleClearFields = () => {
+		if (fileRef.current) fileRef.current.forEach(el => el && (el.value = ''))
+		setOldDefaultValues(getValues())
+		reset(defaultValues)
+
+		window.scrollTo({ top: 0, behavior: 'smooth' })
+	}
+
+	const handleDeleteField = (e: MouseEvent<HTMLDivElement>, index: number) => {
 		const target = e.currentTarget as HTMLDivElement
 		const fieldIndex = +target.dataset.index!
-		
+
+		if (articleContent[index].type === 'image') {
+			const imageToDestroy = articleContent[index].value.public_id
+
+			if (imageToDestroy) setImagesToDestroy(prev => [...prev, imageToDestroy])
+		}
+
 		remove(fieldIndex)
 	}
+
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
 		try {
-			// await new Promise(resolve => setTimeout(resolve, 1000))
+			if (!editValues) {
+				const dataSignature = await createSignature({ uploadFolder }).unwrap()
+				let mainImage = data.mainImage
 
-			const dataSignature = await createSignature({ uploadFolder }).unwrap()
+				if (mainImage.src instanceof File) {
+					const data = await uploadToCloudinary({ file: mainImage.src, uploadFolder, dataSignature })
 
-			let mainImage = data.mainImage
+					mainImage = { ...mainImage, src: data.secure_url, public_id: data.public_id }
+					console.log(data)
+				}
+				const articleContent = await Promise.all(
+					data.articleContent.map(async item => {
+						if (item.type === 'image' && item.value.src instanceof File) {
+							const file = item.value.src
 
-			if (mainImage.src instanceof File) {
-				const data = await uploadToCloudinary({ file: mainImage.src, uploadFolder, dataSignature })
+							const data = await uploadToCloudinary({ file, uploadFolder, dataSignature })
 
-				mainImage = { ...mainImage, src: data.secure_url, public_id: data.public_id }
+							return { ...item, value: { ...item.value, src: data.secure_url, public_id: data.public_id } }
+						}
+						return item
+					})
+				)
+
+				const updatedData = { ...data, articleContent, mainImage }
+
+				await createPost({ updatedData }).unwrap()
+
+				reset()
+			} else {
+				// Updating Post
+				let mainImage = data.mainImage
+				if (mainImage.src instanceof File) {
+					const file = mainImage.src
+					const publicId = mainImage.public_id
+
+					// Create cloudinary signature
+					const dataSignature = await createSignature({ publicId }).unwrap()
+					// Update new cloudinary image
+					const data = await uploadToCloudinary({
+						file,
+						publicId,
+						dataSignature,
+					})
+
+					mainImage = { ...mainImage, src: data.secure_url, public_id: data.public_id }
+				}
+
+				const articleContent = await Promise.all(
+					data.articleContent.map(async item => {
+						if (item.type === 'image' && item.value.src instanceof File) {
+							const file = item.value.src
+							const publicId = item.value.public_id
+							let dataSignature
+							let data
+							if (publicId) {
+								// Create cloudinary signature
+								dataSignature = await createSignature({ publicId }).unwrap()
+								// Update new cloudinary image
+								data = await uploadToCloudinary({ file, publicId, dataSignature })
+							} else {
+								// Create cloudinary signature
+								dataSignature = await createSignature({ uploadFolder }).unwrap()
+								// Uploading an another image
+								data = await uploadToCloudinary({ file, publicId, uploadFolder, dataSignature })
+							}
+
+							return { ...item, value: { ...item.value, src: data.secure_url, public_id: data.public_id } }
+						}
+						return item
+					})
+				)
+				if (imagesToDestroy.length > 0) {
+					imagesToDestroy.forEach(item => {
+						destroyCloudinaryImage(item).unwrap()
+					})
+				}
+
+				const updatedData = { ...data, mainImage, articleContent }
+
+				await updatePost({ postId, updatedData }).unwrap()
+
+				reset(defaultValues)
 			}
-
-			const articleContent = await Promise.all(
-				data.articleContent.map(async item => {
-					if (item.type === 'image' && item.value.src instanceof File) {
-						const file = item.value.src
-
-						const data = await uploadToCloudinary({ file, uploadFolder, dataSignature })
-
-						return { ...item, value: { ...item.value, src: data.secure_url, public_id: data.public_id } }
-					}
-					return item
-				})
-			)
-
-			const updatedData = { ...data, articleContent, mainImage }
-
-			await createPost({ updatedData }).unwrap()
-
-			reset()
 		} catch (error) {
 			console.log(error)
 			setError('root', { message: 'Please fill all fields' })
 		}
 	}
 	if (isSubmitSuccessful) window.scrollTo({ top: 0, behavior: 'smooth' })
+	if (editValues && isSubmitSuccessful)
+		return (
+			<div className={styles.updateContainer}>
+				<div className={styles.updateWrapper}>
 
+				<p>Post Updated Successfully</p>
+				</div>
+			</div>
+		)
 	return (
 		<FormProvider {...methods}>
 			<div className={styles.postFormContainer}>
@@ -145,7 +242,7 @@ const PostForm = () => {
 												{index >= 3 && (
 													<div
 														data-index={index}
-														onClick={e => handleDeleteField(e)}
+														onClick={e => handleDeleteField(e, index)}
 														className={styles.deleteBtnWrapper}>
 														<CloseSvg styles={styles} />
 													</div>
@@ -163,7 +260,7 @@ const PostForm = () => {
 												{index >= 3 && (
 													<div
 														data-index={index}
-														onClick={e => handleDeleteField(e)}
+														onClick={e => handleDeleteField(e, index)}
 														className={styles.deleteBtnWrapper}>
 														<CloseSvg styles={styles} />
 													</div>
@@ -182,7 +279,7 @@ const PostForm = () => {
 												{index >= 3 && (
 													<div
 														data-index={index}
-														onClick={e => handleDeleteField(e)}
+														onClick={e => handleDeleteField(e, index)}
 														className={styles.deleteBtnWrapper}>
 														<CloseSvg styles={styles} />
 													</div>
@@ -208,7 +305,6 @@ const PostForm = () => {
 										)}
 									</div>
 								))}
-							
 						</div>
 						<div className={styles.formOptionsContainer}>
 							<div className={styles.formOptionsWrapper}>
@@ -237,11 +333,13 @@ const PostForm = () => {
 						<button disabled={isSubmitting} type="submit" className={`${styles.submitBtn} ${styles.postFormBtn}`}>
 							{isSubmitting ? (
 								<>
-									Creating
+									{editValues ? 'Saving' : 'Creating'}
 									<span className={styles.animate1}>.</span>
 									<span className={styles.animate2}>.</span>
 									<span className={styles.animate3}>.</span>
 								</>
+							) : editValues ? (
+								'Save'
 							) : (
 								'Create Post'
 							)}
@@ -253,6 +351,15 @@ const PostForm = () => {
 							className={`${styles.resetBtn} ${styles.postFormBtn} `}>
 							Reset
 						</button>
+						{editValues && (
+							<button
+								disabled={isSubmitting}
+								type="button"
+								onClick={() => handleClearFields()}
+								className={`${styles.clearAllBtn} ${styles.postFormBtn} `}>
+								Clear All
+							</button>
+						)}
 					</div>
 				</form>
 			</div>

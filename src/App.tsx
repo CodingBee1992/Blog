@@ -22,6 +22,7 @@ const VerifyPage = lazy(() => import('./components/pages/VerifyPage/VerifyPage')
 
 // Admin pages
 const AdminPanelPage = lazy(() => import('./components/pages/AdminPanel/AdminPanelPage/AdminPanelPage'))
+const AdminRoomPage = lazy(() => import('./components/pages/AdminPanel/AdminPanelPage/AdminRoomPage/AdminRoomPage'))
 const ListOfPostPage = lazy(() => import('./components/pages/AdminPanel/Posts/ListOfPostPage/ListOfPostPage'))
 const AddPostPage = lazy(() => import('./components/pages/AdminPanel/Posts/AddPostPage/AddPostPage'))
 const EditPostPage = lazy(() => import('./components/pages/AdminPanel/Posts/EditPostPage/EditPostPage'))
@@ -35,35 +36,13 @@ const RoleAndPermissionsPage = lazy(
 
 // Settigns pages
 
-//  import AdminPanelLayout from './containers/StaticLayout/AdminPanelLayout'
-// import StaticLayout from './containers/StaticLayout/StaticLayout'
-// import SettingsLayout from './containers/StaticLayout/SettingsLayout'
-
-// import HomePage from './components/pages/HomePage/HomePage'
-// import ListOfPostPage from './components/pages/AdminPanel/Posts/ListOfPostPage/ListOfPostPage'
-// import StylesPage from './components/pages/StylesPage/StylesPage'
-// import SingleCategoryPage from './components/pages/CategoryPage/SingleCategoryPage'
-// import AboutPage from './components/pages/AboutPage/AboutPage'
-// import ContactPage from './components/pages/ContactPage/ContactPage'
-// import SinglePostPage from './components/pages/SinglePostPage/SinglePostPage'
-
-// import LoginPage from './components/pages/LoginPage/LoginPage'
-// import VerifyPage from './components/pages/VerifyPage/VerifyPage'
-// import RegistrationPage from './components/pages/RegistrationPage/RegistrationPage'
-
-// import AdminPanelPage from './components/pages/AdminPanel/AdminPanelPage/AdminPanelPage'
-// import CategoriesPage from './components/pages/AdminPanel/Posts/CategoriesPage/CategoriesPage'
-// import AddPostPage from './components/pages/AdminPanel/Posts/AddPostPage/AddPostPage'
-// import EditPostPage from './components/pages/AdminPanel/Posts/EditPostPage/EditPostPage'
-// import TagsPage from './components/pages/AdminPanel/Posts/TagsPage/TagsPage'
-// import ListPage from './components/pages/AdminPanel/Users/ListPage/ListPage'
-// import AddUserPage from './components/pages/AdminPanel/Users/AddUserPage/AddUserPage'
-// import RoleAndPermissionsPage from './components/pages/AdminPanel/Users/RoleAndPermissionsPage/RoleAndPermissionsPage'
 
 // Route Guards
 import AdminRoute from './containers/StaticLayout/AdminRoute'
 import UserRoute from './containers/StaticLayout/UserRoute'
-const Loader = lazy(()=> import ( './components/atoms/loader/Loader'))
+import ProfilePage from './components/pages/AdminPanel/Users/ProfilePage/ProfilePage'
+
+const Loader = lazy(() => import('./components/atoms/loader/Loader'))
 const App = () => {
 	return (
 		<Router basename="/">
@@ -112,6 +91,9 @@ const App = () => {
 						</AdminRoute>
 					}>
 					<Route index element={<AdminPanelPage />} />
+
+					<Route path="room" element={<AdminRoomPage />} />
+
 					<Route path="posts/">
 						<Route path="listofposts" element={<ListOfPostPage />} />
 						<Route path="addpost" element={<AddPostPage />} />
@@ -123,6 +105,7 @@ const App = () => {
 						<Route path="list" element={<ListPage />} />
 						<Route path="adduser" element={<AddUserPage />} />
 						<Route path="permissions" element={<RoleAndPermissionsPage />} />
+						<Route path="profile/:userId" element={<ProfilePage />} />
 					</Route>
 				</Route>
 				{/* Settings */}

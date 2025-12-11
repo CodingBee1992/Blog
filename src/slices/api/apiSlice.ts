@@ -35,6 +35,10 @@ export const apiSlice = createApi({
 			query: postId => `${POSTS_URL}/${postId}`,
 		}),
 
+		searchPost: builder.query({
+			query: (query)=> `${POSTS_URL}/search/?query=${query}`
+		}),
+
 		createPost: builder.mutation({
 			query: updatedData => ({
 				url: `${POSTS_URL}`,
@@ -42,6 +46,14 @@ export const apiSlice = createApi({
 				headers: { 'Content-type': 'application/json' },
 				body: updatedData,
 			}),
+		}),
+		updatePost: builder.mutation({
+			query: ({postId,updatedData})=>({
+				url: `${POSTS_URL}/update/${postId}`,
+				method:'PUT',
+				headers:{'Content-type':'application/json'},
+				body:{updatedData}
+			})
 		}),
 
 		deletePost:builder.mutation({
@@ -61,12 +73,19 @@ export const apiSlice = createApi({
 		}),
 
 		fetchCloudinary: builder.mutation({
-			query: ({uploadFolder}) => ({
-				url:`${SIGNATURE_URL}/?uploadFolder=${uploadFolder}`,
+			query: ({uploadFolder,publicId}) => ({
+				url:`${SIGNATURE_URL}/?uploadFolder=${uploadFolder}&publicId=${publicId}`,
 				method:"POST",
 				headers:{'Content-type':'application/json'}
 			})
 		}),
+		destroyCloudinaryImage: builder.mutation({
+			query: (publicId)=>({
+				url:`${SIGNATURE_URL}/destroy/?publicId=${publicId}`,
+				method:'DELETE',
+				headers:{'Content-type':'application/json'}
+			})
+		})
 	}),
 })
 
@@ -78,5 +97,8 @@ export const {
 	useFetchPostCreatedAtQuery,
 	useFetchCloudinaryMutation,
 	useDeletePostMutation,
-	usePublishPostMutation
+	usePublishPostMutation,
+	useSearchPostQuery,
+	useUpdatePostMutation,
+	useDestroyCloudinaryImageMutation
 } = apiSlice

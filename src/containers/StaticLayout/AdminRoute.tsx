@@ -8,10 +8,12 @@ interface AdminRouteProps {
 }
 
 const AdminRoute = ({ children }: AdminRouteProps) => {
-	const { isLogged, isAdmin } = useSelector((state: RootState) => state.auth)
+	const { isLogged,role } = useSelector((state: RootState) => state.auth)
 	const [showMessage, setShowMessage] = useState<boolean>(false)
 	const [redirect, setRedirect] = useState<boolean>(false)
 	const prevLogged = useRef<boolean | null>(null)
+	
+	
 	useEffect(() => {
 		if (prevLogged.current === true && isLogged === false) {
 			setShowMessage(false)
@@ -19,7 +21,7 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
 			return
 		}
 
-		if (!isLogged || !isAdmin) {
+		if (!isLogged || (role !== 'Admin' && role !== 'Moderator')) {
 			setShowMessage(true)
 
 			const timer = setTimeout(() => {
@@ -31,13 +33,13 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
 		setShowMessage(false)
 		setRedirect(false)
 		prevLogged.current = isLogged
-	}, [isAdmin, isLogged])
+	}, [role, isLogged])
 
 	if (!isLogged && redirect) {
 		return <Navigate to="/login" replace />
 	}
 
-	if (!isAdmin && redirect) {
+	if ((role !== 'Admin' && role !== 'Moderator') && redirect) {
 		return <Navigate to="/" replace />
 	}
 

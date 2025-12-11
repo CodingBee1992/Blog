@@ -45,8 +45,28 @@ export const loginSlice = createApi({
 				method:'POST',
 				headers:{'Content-type':'application/json'}
 			})
+		}),
+		fetchUserByLimit: builder.query({
+			query:(params)=> {
+
+				const queryString = new URLSearchParams(
+					Object.fromEntries(Object.entries(params).map(([k,v])=> [k,String(v)]))
+				)
+
+				return `${USERS_URL}/get-users-by-limit/?${queryString}`
+			}
+		}),
+		fetchAdminsAndModerators: builder.query({
+			query:(params)=> {
+
+				const queryString = new URLSearchParams(
+					Object.fromEntries(Object.entries(params).map(([k,v])=> [k,String(v)]))
+				)
+
+				return `${USERS_URL}/get-admins-moderators/?${queryString}`
+			}
 		})
 	}),
 })
 
-export const { useLoginMutation, useCreateAccountMutation,useLogOutMutation,useVerifyAccountQuery,useResendVerificationMutation } = loginSlice
+export const { useLoginMutation, useCreateAccountMutation,useLogOutMutation,useVerifyAccountQuery,useResendVerificationMutation,useFetchUserByLimitQuery,useFetchAdminsAndModeratorsQuery } = loginSlice

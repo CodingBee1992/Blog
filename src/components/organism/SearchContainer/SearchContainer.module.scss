@@ -56,7 +56,6 @@
 				opacity: 0;
 				transition: all 0.3s ease-in-out;
 				z-index: -1;
-
 				.elementSearchListLink {
 					display: block;
 					width: 100%;
@@ -66,11 +65,14 @@
 					color: var(--searchElementTextColor);
 					cursor: pointer;
 					transition: all .3s;
-
+					
 					&:hover {
 						
 						background-color: var(--menu-textColorHover);
 					}
+					// &:nth-child(odd){
+					// 	background-color: #d3d3d3d3;
+					// }
 
 					&:last-child{
 						border-bottom: none;
