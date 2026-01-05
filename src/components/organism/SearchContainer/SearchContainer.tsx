@@ -5,7 +5,7 @@ import CloseButton from '../../atoms/CloseButton/CloseButton'
 import { useDispatch } from 'react-redux'
 import { setIsOpen } from '../../../slices/themeSlice'
 import useDebounce from '../../../hooks/useDebounce'
-import { useSearchPostQuery } from '../../../slices/api/apiSlice'
+import { useSearchPostQuery } from '../../../slices/api/postApi'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 
 interface DataSearchProps {
@@ -27,7 +27,7 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 
 	const debouncedValue = useDebounce(value, 500)
 	const { data } = useSearchPostQuery(debouncedValue)
-	
+
 	useEffect(() => {
 		setTimeout(() => {
 			searchContainerRef.current?.classList.add(styles.fadeIn)
@@ -114,7 +114,6 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 										{item.title}
 									</AnchorLink>
 								))}
-							
 						</div>
 					</div>
 

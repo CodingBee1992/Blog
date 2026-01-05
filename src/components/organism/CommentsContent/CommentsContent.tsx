@@ -8,21 +8,20 @@ import TextArea from '../../atoms/TextArea/TextArea'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
-import { useFetchCommentsQuery } from '../../../slices/api/commentSlice'
+import { useFetchCommentsQuery } from '../../../slices/api/commentsApi'
 import { useEffect, useState } from 'react'
 
 const CommentsContent = () => {
 	const { search } = useLocation()
+	
 	const query = new URLSearchParams(search)
 	const postId = query.get('id')
 	const { data: postComments } = useFetchCommentsQuery(postId!, { skip: !postId })
-	
+
 	const { isLogged } = useSelector((state: RootState) => state.auth)
-	
-	
 
 	const [roots, setRoots] = useState<CommentsDataProps[]>([])
-
+	
 	useEffect(() => {
 		if (!postComments) return
 		try {
@@ -31,7 +30,6 @@ const CommentsContent = () => {
 
 			postComments?.forEach((c: CommentsDataProps) => {
 				map.set(c._id, { ...c, children: [] })
-				
 			})
 			postComments?.forEach((c: CommentsDataProps) => {
 				if (c.parentId) {
@@ -47,12 +45,12 @@ const CommentsContent = () => {
 			console.log('Something goes wrong:', error)
 		}
 	}, [postComments])
-	
+
 	return (
 		<div className={styles.commentsContainer}>
 			<div className={`${styles.commentsContent} row`}>
 				<div className={`column`}>
-					<h3>{postComments ? postComments.length : 0} Comments</h3>
+					<h3>Comments</h3>
 
 					<ol className={styles.commentList}>
 						{roots?.length > 0 &&
@@ -66,7 +64,6 @@ const CommentsContent = () => {
 									comment={comment}
 									createdAt={createdAt}
 									children={children}
-									
 								/>
 							))}
 					</ol>

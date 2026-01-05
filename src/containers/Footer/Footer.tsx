@@ -17,7 +17,7 @@ const Footer = () => {
 	})
 
 	return (
-		<div className={styles.footerContainer}>
+		<footer className={styles.footerContainer}>
 			<div className={styles.footerMain}>
 				<div className={`${styles.grid} row`}>
 					<div className={`${styles.footerInfo} ${styles.column}`}>
@@ -94,7 +94,7 @@ const Footer = () => {
 					</span>
 				</div>
 			</div>
-		</div>
+		</footer>
 	)
 }
 

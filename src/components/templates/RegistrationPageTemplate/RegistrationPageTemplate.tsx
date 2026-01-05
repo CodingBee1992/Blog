@@ -1,13 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { useNavigate } from 'react-router'
-import { useCreateAccountMutation } from '../../../slices/api/loginSlice'
+import { useCreateAccountMutation } from '../../../slices/api/userApi'
 import z from 'zod'
 import styles from './RegistrationPageTemplate.module.scss'
 import { useEffect, useState } from 'react'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
-
 
 const registrationSchema = z.object({
 	name: z.string().trim().min(4),
@@ -17,10 +16,10 @@ const registrationSchema = z.object({
 
 type registrationFields = z.infer<typeof registrationSchema>
 const RegistrationPageTemplate = () => {
-	const [createAccount, { isSuccess,data,}] = useCreateAccountMutation()
-	
+	const [createAccount, { isSuccess, data }] = useCreateAccountMutation()
+
 	const [success, setSuccess] = useState<boolean>(false)
-	
+
 	const navigate = useNavigate()
 	const {
 		register,
@@ -46,7 +45,7 @@ const RegistrationPageTemplate = () => {
 			await new Promise(resolve => setTimeout(resolve, 2000))
 
 			await createAccount({ ...data }).unwrap()
-			
+
 			clearErrors()
 		} catch (error) {
 			if (typeof error === 'object' && error !== null) {
@@ -54,10 +53,10 @@ const RegistrationPageTemplate = () => {
 				const messageError =
 					fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
 						? (fetchError.data.message as string)
-						: 'Wystąpił nieoczekiwany błąd'
+						: 'An unexpected error has occurred'
 				setError('root', { message: messageError })
 			} else {
-				setError('root', { message: 'Wystąpił nieoczekiwany bład' })
+				setError('root', { message: 'An unexpected error has occurred' })
 			}
 		}
 	}
@@ -66,7 +65,9 @@ const RegistrationPageTemplate = () => {
 		<div className={styles.logInContainer}>
 			<div className={styles.loginWrapper}>
 				<div className={styles.greetingText}>
-					<a href='/' className={styles.logo}>codingBee</a>
+					<a href="/" className={styles.logo}>
+						codingBee
+					</a>
 				</div>
 				<div className={styles.formContainer}>
 					<h1>Create an account</h1>

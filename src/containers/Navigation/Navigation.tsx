@@ -12,21 +12,37 @@ import { useEffect } from 'react'
 import MenuIcon from '../../components/atoms/MenuIcon/MenuIcon'
 import ControlPanel from '../../components/organism/ControlPanel/ControlPanel'
 import useMenuContext from '../../hooks/useMenuContext'
+import { useLocation } from 'react-router'
+import { useFetchAllCategoriesQuery } from '../../slices/api/categoriesApi'
 
 const Navigation = () => {
 	const size = useWindowSize()
+	const { pathname } = useLocation()
 
-	// const userRef = useRef<HTMLDivElement>(null)
 	const { navRef } = useMenuContext()
 
 	const { isOpen } = useSelector((state: RootState) => state.theme)
 
+	const { data } = useFetchAllCategoriesQuery()
+
+	const newDataMenu = dataNavigation.map(item => {
+		if (item.title === 'Categories') {
+			if (data && data?.length > 0) return { ...item, children: data }
+
+			return item
+		}
+
+		return item
+	})
+	
 	useEffect(() => {
 		const handleScroll = () => {
-			if (window.scrollY >= 200) {
-				navRef.current?.classList.add(styles.bgcNavBlack)
-			} else {
-				navRef.current?.classList.remove(styles.bgcNavBlack)
+			if (pathname === '/') {
+				if (window.scrollY >= 200) {
+					navRef.current?.classList.add(styles.bgcNavBlack)
+				} else {
+					navRef.current?.classList.remove(styles.bgcNavBlack)
+				}
 			}
 		}
 
@@ -35,18 +51,19 @@ const Navigation = () => {
 		return () => {
 			document.removeEventListener('scroll', handleScroll)
 		}
-	}, [navRef])
-	
+	}, [navRef, pathname])
 
-
+	useEffect(() => {
+		if (pathname !== '/') {
+			navRef.current?.classList.add(styles.bgcNavBlack)
+		} else {
+			navRef.current?.classList.remove(styles.bgcNavBlack)
+		}
+	}, [pathname, navRef])
 	return (
 		<nav ref={navRef} className={styles.container}>
 			<Logo styles={styles} />
-			{size.width > 900 ? (
-				<DesktopNav navRef={navRef} dataMenu={dataNavigation} />
-			) : (
-				<MobileNav dataMenu={dataNavigation} />
-			)}
+			{size.width > 900 ? <DesktopNav navRef={navRef} dataMenu={newDataMenu} /> : <MobileNav dataMenu={newDataMenu} />}
 			<div className={styles.panel}>
 				<SearchButton />
 				{size.width > 900 && <ControlPanel index={0} styles={styles} />}

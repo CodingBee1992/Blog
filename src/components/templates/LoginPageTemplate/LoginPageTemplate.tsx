@@ -1,12 +1,12 @@
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import { useLoginMutation } from '../../../slices/api/loginSlice'
+import { useLoginMutation } from '../../../slices/api/userApi'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router'
 import styles from './LoginPageTemplate.module.scss'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setData, setLogin } from '../../../slices/api/authSlice'
+import { setData, setLogin } from '../../../slices/authSlice'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
@@ -23,7 +23,7 @@ const LoginPageTemplate = () => {
 	const dispatch = useDispatch()
 
 	const navigate = useNavigate()
-	
+
 	const {
 		register,
 		handleSubmit,
@@ -44,7 +44,7 @@ const LoginPageTemplate = () => {
 			// await new Promise(resolve => setTimeout(resolve, 2000))
 
 			const res = await logIn({ ...data }).unwrap()
-			
+
 			dispatch(setLogin(true))
 			dispatch(setData(res))
 
@@ -67,7 +67,9 @@ const LoginPageTemplate = () => {
 		<div className={styles.logInContainer}>
 			<div className={styles.loginWrapper}>
 				<div className={styles.greetingText}>
-					<a href='/' className={styles.logo}>codingBee</a>
+					<a href="/" className={styles.logo}>
+						codingBee
+					</a>
 				</div>
 				<div className={styles.formContainer}>
 					<h1>Sign In</h1>

@@ -1,0 +1,122 @@
+import { FormProvider, useForm, type SubmitHandler } from 'react-hook-form'
+import styles from './AddUserForm.module.scss'
+import z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import RHFInput from '../../atoms/RHFInput/RHFInput'
+import RHFSelect from '../../atoms/RHFSelect/RHFSelect'
+import { role } from '../../../utils/data'
+import { useAdminCreateUserMutation } from '../../../slices/api/userApi'
+import FormBtn from '../../atoms/FormBtn/FormBtn'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import { useEffect, useState } from 'react'
+
+const userSchema = z.object({
+	name: z.string().trim().min(4, { message: 'Min 4 characters' }),
+	email: z.email().trim(),
+	password: z.string().trim().min(8, { message: 'Min 8 characters' }),
+	role: z.string().min(1, { message: 'Select Role' }),
+})
+type userSchemaTypes = z.infer<typeof userSchema>
+const AddUserForm = () => {
+	const [successMessage, setSuccessMessage] = useState<string>('')
+	const [adminCreateUser] = useAdminCreateUserMutation()
+
+	const methods = useForm<userSchemaTypes>({
+		mode: 'onSubmit',
+		reValidateMode: 'onChange',
+		resolver: zodResolver(userSchema),
+		defaultValues: {
+			name: '',
+			email: '',
+			password: '',
+			role: '',
+		},
+	})
+	const {
+		handleSubmit,
+		reset,
+		setError,
+		formState: { isSubmitting },
+	} = methods
+
+	const onSubmit: SubmitHandler<userSchemaTypes> = async (data: userSchemaTypes) => {
+		try {
+			const res = await adminCreateUser(data).unwrap()
+			console.log(res)
+			if (res) setSuccessMessage(res.message)
+
+			reset()
+		} catch (error) {
+			if (typeof error === 'object' && error !== null) {
+				const fetchError = error as FetchBaseQueryError
+				const message =
+					fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
+						? (fetchError.data.message as string)
+						: 'An unexpected error has occurred'
+				const type =
+					fetchError.data && typeof fetchError.data === 'object' && 'type' in fetchError.data
+						? (fetchError.data.type as string)
+						: 'An unexpected error has occurred'
+
+				if (type === 'name') {
+					setError('name', { message })
+				} else if (type === 'email') {
+					setError('email', { message })
+				}
+			} else {
+				setError('root', { message: 'An unexpected error has occurred' })
+			}
+		}
+	}
+
+	useEffect(() => {
+		if (successMessage)
+			setTimeout(() => {
+				setSuccessMessage('')
+			}, 10000)
+	}, [successMessage])
+
+	const handleResetFields = () => {
+		reset()
+	}
+	return (
+		<FormProvider {...methods}>
+			<div className={styles.addUserFormContainer}>
+				<p>Add new user</p>
+				<form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
+					<div className={styles.formWrapper}>
+						<RHFInput name="name" label="Name" styles={styles} id="name" />
+						<RHFInput name="email" label="Email" styles={styles} id="email" />
+						<RHFInput name="password" label="Password" styles={styles} id="password" />
+						<RHFSelect name="role" label="Role" options={role} styles={styles} />
+					</div>
+					{successMessage && <span className={styles.successMessage}>{successMessage}</span>}
+					<div className={styles.submitBtns}>
+						<FormBtn type="submit" isSubmitting={isSubmitting} className={styles.submitBtn}>
+							{isSubmitting ? (
+								<>
+									Creating
+									<span className={styles.animate1}>.</span>
+									<span className={styles.animate2}>.</span>
+									<span className={styles.animate3}>.</span>
+								</>
+							) : (
+								'Create'
+							)}
+						</FormBtn>
+
+						<FormBtn
+							type="button"
+							isSubmitting={isSubmitting}
+							className={styles.resetBtn}
+							handleResetFields={handleResetFields}>
+							Reset
+						</FormBtn>
+					</div>
+				</form>
+			</div>
+		</FormProvider>
+	)
+}
+
+export default AddUserForm

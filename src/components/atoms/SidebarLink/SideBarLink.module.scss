@@ -3,19 +3,20 @@
 	flex-direction: column;
 	width: 100%;
 
-	min-height: var(--SideBarLineHeight);
-	height: var(--SideBarLineHeight);
-	line-height: var(--SideBarLineHeight);
+	min-height: var(--sideBarLineHeight);
+	height: var(--sideBarLineHeight);
+	line-height: var(--sideBarLineHeight);
 	color: var(--sideBarColorIcon);
 	transition: height 0.3s ease-in-out;
 	overflow: hidden;
 	cursor: pointer;
+	
 
 	.sideBarLinkHelper {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding-left: 2rem;
+		padding-left: 4rem;
 
 		&:hover {
 			background-color: var(--sideBarBgcHoverLink);
@@ -26,6 +27,8 @@
 			align-items: center;
 			gap: 1rem;
 			pointer-events: none;
+			font-size: var(--sideBarLinks);
+			font-weight: 500;
 		}
 		.arrow {
 			margin-right: 2rem;
@@ -39,10 +42,9 @@
 	}
 	.activeSideBarLink {
 		background-color: var(--sideBarBgcHoverLink);
-		
+
 		&:hover {
 			background-color: var(--sideBarBgcHoverLink);
-			
 		}
 	}
 	.subMenu {
@@ -58,7 +60,7 @@
 		z-index: 1000;
 
 		.subMenuLi {
-			padding-left: 2rem;
+			padding-left: 4rem;
 			.subLink {
 				display: block;
 				width: 100%;
@@ -68,7 +70,7 @@
 				padding: 0.7rem 3rem;
 
 				color: var(--sideBarColorIcon);
-				font-size: var(--subMenu-TextSize);
+				font-size: var(--sideBarSubLinks);
 				font-weight: 400;
 				transition: all 0.3s ease-in-out;
 			}
@@ -81,14 +83,13 @@
 		}
 		.activeSubMenuLi {
 			background-color: var(--sideBarBgcHoverLink);
-			
+
 			&:hover {
 				background-color: var(--sideBarBgcHoverLink);
 				// background-color: rgb(152, 255, 152);
 			}
 		}
 	}
-	
 }
 .activeSubLinks {
 	height: 100%;

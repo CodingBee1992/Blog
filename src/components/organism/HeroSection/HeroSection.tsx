@@ -1,23 +1,20 @@
 import { useState, type MouseEvent, type TouchEvent } from 'react'
 import { ArrowNext, ArrowPrev } from '../../../assets/icons/arrows/Arrows'
-import type { ArticleContentProps} from '../../../types/types'
+import type { ArticleContentProps } from '../../../types/types'
 import { socialData } from '../../../utils/socialData'
 import SliderList from '../../atoms/SliderList/SliderList'
 import SocialIcon from '../../atoms/SocialIcon/SocialIcon'
 import styles from './HeroSection.module.scss'
 import SliderDots from '../../atoms/SliderDots/SliderDots'
-import { useFetchLimitPostsQuery } from '../../../slices/api/apiSlice'
+import { useFetchLimitPostsQuery } from '../../../slices/api/postApi'
 import Loader from '../../atoms/loader/Loader'
 
 const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [swipeStartX, setSwipeStartX] = useState<number>(0)
 	const limit = 3
-	const {data,isFetching} = useFetchLimitPostsQuery({limit})
-	
+	const { data, isFetching } = useFetchLimitPostsQuery({ limit })
 
-	
-	
 	const handleSliderNext = () => {
 		setNumber(prev => (prev >= limit - 1 ? 0 : prev + 1))
 	}
@@ -63,7 +60,7 @@ const HeroSection = () => {
 		}
 	}
 
-	if(isFetching) return <Loader />
+	if (isFetching) return <Loader />
 
 	return (
 		<section id="hero" className={styles.homeContainer}>
@@ -96,7 +93,7 @@ const HeroSection = () => {
 				<p className={styles.socialText}>Follow</p>
 				<span className={styles.lineThrough}></span>
 				<ul className={styles.socialIcons}>
-					{socialData.map(({ path, icon,ariaLabel }, index) => {
+					{socialData.map(({ path, icon, ariaLabel }, index) => {
 						return (
 							<SocialIcon key={index} href={path} ariaLabel={ariaLabel} styles={styles}>
 								{icon}
@@ -106,10 +103,14 @@ const HeroSection = () => {
 				</ul>
 			</div>
 			<div className={styles.arrowsContainer}>
-				<button type='button' aria-label="Previous slide" className={styles.arrowBtn} onClick={() => handleSliderPrev()}>
+				<button
+					type="button"
+					aria-label="Previous slide"
+					className={styles.arrowBtn}
+					onClick={() => handleSliderPrev()}>
 					<ArrowPrev />
 				</button>
-				<button type='button' aria-label="Next slide" className={styles.arrowBtn} onClick={() => handleSliderNext()}>
+				<button type="button" aria-label="Next slide" className={styles.arrowBtn} onClick={() => handleSliderNext()}>
 					<ArrowNext />
 				</button>
 			</div>

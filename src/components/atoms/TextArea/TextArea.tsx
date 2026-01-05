@@ -7,7 +7,7 @@ import {
 	useCreateCommentMutation,
 	useFetchCommentsQuery,
 	useUpdateCommentMutation,
-} from '../../../slices/api/commentSlice'
+} from '../../../slices/api/commentsApi'
 
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
@@ -45,6 +45,8 @@ const TextArea = ({
 	const { refetch } = useFetchCommentsQuery(postId!)
 	const [resMessage, setResMessage] = useState<string>('')
 	const [success, setSuccess] = useState<boolean | null>(null)
+	const commentsContent = document.querySelector(`.${styles.commentsContent}`)
+	
 	const {
 		register,
 		handleSubmit,
@@ -55,10 +57,7 @@ const TextArea = ({
 	} = useForm<commentFields>({
 		resolver: zodResolver(schemaComment),
 	})
-
 	const onSubmit: SubmitHandler<commentFields> = async data => {
-
-
 		try {
 			if (isUpdating) {
 				const comment = { ...data, commentId: parentId }
@@ -89,7 +88,14 @@ const TextArea = ({
 			await refetch()
 
 			setTimeout(() => {
-				comRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+				if (comRef?.current) {
+					comRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+				} else {
+					if (commentsContent instanceof HTMLElement) {
+						const top = commentsContent.offsetTop + commentsContent.offsetHeight - window.innerHeight 
+						window.scrollTo({ top, behavior: 'smooth' })
+					}
+				}
 			}, 300)
 
 			reset()

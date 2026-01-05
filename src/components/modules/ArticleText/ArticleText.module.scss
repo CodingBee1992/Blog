@@ -145,6 +145,63 @@
 				margin-bottom: var(--vspace-3);
 			}
 		}
+
+		.articleReactionsBox {
+			display: flex;
+			flex-direction: column;
+			margin-top: 5rem;
+			.articleReactionsInfo {
+				display: flex;
+				align-items: center;
+				margin-bottom: 1rem;
+				.articleLikes {
+					display: flex;
+					align-items: center;
+					margin-right: 1.5rem;
+
+					.articleLikeBox {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						margin-right: 0.5rem;
+						width: 25px;
+						height: 25px;
+						border-radius: 50%;
+						background-color: #ffeff0;
+						.articleLikeSVG {
+							width: 20px;
+							height: 20px;
+
+							path {
+								transition: all 0.5s;
+								fill: #ff4d6e;
+							}
+						}
+
+						&:hover .articleLikeSVG path {
+							fill: #7d061c;
+						}
+					}
+				}
+			}
+
+			.articleReactionButton {
+				display: flex;
+				align-self: start;
+				padding: 0.5rem 1.5rem;
+				font-size: var(--textSize_16);
+				border-radius: var(--borderRadius04);
+				background-color: #ff4d6e;
+				border: none;
+				cursor: pointer;
+				transition: all 0.3s;
+
+				&:hover {
+					background-color: #ff4d6e;
+					color: #ffffff;
+				}
+			}
+		}
 	}
 
 	.articleRightSideContainer {
@@ -154,7 +211,6 @@
 		max-width: 200px;
 		flex: 0 0 210px;
 		height: 100%;
-
 
 		.prev {
 			margin-bottom: var(--vspace-1_5);

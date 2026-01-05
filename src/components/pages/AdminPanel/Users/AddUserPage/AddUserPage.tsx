@@ -1,8 +1,9 @@
+import AddUserPageTemplate from "../../../../templates/AdminPanelTemplates/AddUserPageTemplate/AddUserPageTemplate"
 
 
 const AddUserPage = () => {
   return (
-    <div>AddUserPage</div>
+   <AddUserPageTemplate />
   )
 }
 

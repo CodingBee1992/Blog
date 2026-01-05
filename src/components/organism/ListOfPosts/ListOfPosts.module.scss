@@ -1,19 +1,15 @@
 .listWrapper {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	height: 100dvh;
-	// border: 1px solid black;
-
-	background-color: var(--bgcTabel);
-	background-color: #deb887;
-	// background-color: #eaefff;
 
 	.listTitle {
 		margin: 2rem 0 0 2rem;
-		// padding: 2rem;
-		font-size: 2.4rem;
+		font-size: var(--textSize_24);
 		font-family: var(--font-2);
+		color: var(--pagesColor);
 	}
 
 	// Search ----------
@@ -41,7 +37,8 @@
 			.searchInput {
 				padding: 0.5rem 1rem;
 				width: 100%;
-				font-size: 1.6rem;
+				font-size: var(--textSize_16);
+				color: var(--pagesColor);
 				font-family: var(--font-2);
 				outline: none;
 				border: none;
@@ -57,33 +54,28 @@
 				.searchIcon {
 					background: transparent;
 					color: #000000;
-					// path {
-					// 	transition: all 0.3s;
-					// }
 				}
-				// &:hover .searchIcon path {
-				// 	fill: #c29457;
-				// }
 			}
 		}
 	}
 
 	.listContainer {
 		width: 100%;
-		overflow-x: auto;
-		scrollbar-width: none;
+		height: 100%;
 		border-top: 1px solid black;
 		border-bottom: 1px solid black;
-		height: 100%;
+		background-color: #ffffff;
+		scrollbar-width: none;
+		overflow-x: auto;
 
 		.tableContainer {
 			display: inline-block;
 			min-width: 100%;
-			height: 100%;
+			// height: 100%;
 
 			.thead,
 			.tbody {
-				background-color: var(--bgcTabel);
+				background-color: var(--bgcTBody);
 
 				.tr {
 					display: flex;
@@ -160,7 +152,7 @@
 					transition: all 0.3s;
 
 					&:nth-child(odd) {
-						background-color: #fff;
+						background-color: #ffffff;
 					}
 					.td {
 						padding-right: 1rem;
@@ -168,7 +160,7 @@
 						&:first-child {
 							justify-content: start;
 						}
-						&:nth-child(2) {
+						&:nth-child(n + 2):nth-child(-n + 3) {
 							text-align: center;
 						}
 						&:last-child {
@@ -197,115 +189,34 @@
 		}
 	}
 
-	// Paggination-------------
-	.pagination {
+	.popupInfo {
 		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-		gap: 3rem;
-		margin-top: 1rem;
-		padding: 2rem 3rem;
-		.paginationRows {
-			display: flex;
-			flex-direction: row;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 0 2rem;
+		margin-bottom: 3rem;
 
-			span {
-				margin-right: 1rem;
-			}
-			.selectRows {
-				position: relative;
-
-				.inputBox {
-					display: flex;
-					align-items: center;
-					cursor: pointer;
-					.selectInput {
-						display: flex;
-						align-items: center;
-						max-width: 30px;
-						background: transparent;
-						font-size: 18px;
-						border: none;
-						outline: none;
-						pointer-events: none;
-						cursor: pointer;
-						z-index: 1;
-					}
-					.arrowRows {
-						height: 15px;
-						width: 15px;
-						pointer-events: none;
-					}
-					.rotate {
-						rotate: 180deg;
-					}
-				}
-				.rows {
-					position: absolute;
-					 top: -13rem;
-					display: flex;
-					flex-direction: column;
-					width: 50px;
-					background-color: #ffffff;
-					box-shadow: 0px 5px 20px #d3d3d3d3;
-					transform-origin: bottom;
-					opacity: 0;
-					transform: scaleY(0);
-					transition: all 0.3s;
-					span {
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						line-height: 40px;
-
-						width: 100%;
-						cursor: pointer;
-
-						&:hover {
-							background-color: var(--bgcTabelHover);
-						}
-					}
-					.activeRow {
-						background-color: var(--bgcTabelHover);
-					}
-				}
-				.scale {
-					transform: scaleY(1);
-					opacity: 1;
-				}
+		span {
+			font-size: var(--textSize_16);
+			span:first-child {
+				font-weight: 600;
 			}
 		}
-		.arrowsControls {
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			align-items: center;
-			gap: 2rem;
+	}
 
-			.arrows {
-				padding: 0.75rem;
-				cursor: pointer;
-
-				border: none;
-				background: none;
-
-				transition: all 0.3s;
-
-				.arrowPrev,
-				.arrowNext {
-					width: 15px;
-					height: 15px;
-
-					pointer-events: none;
-				}
-			}
-		}
+	.openPopup {
+		display: flex;
 	}
 }
 
 .tabelTitle {
 	color: #000000;
 	cursor: pointer;
+
+	span {
+		margin-left: 2rem;
+	}
+
 	&:hover {
 		color: #251c1c;
 	}

@@ -1,5 +1,5 @@
 import { use } from 'react'
-import { MenuContext } from '../slices/menuContext'
+import { MenuContext } from '../context/menuContext'
 
 const useMenuContext = () => {
 	const context = use(MenuContext)
@@ -8,7 +8,7 @@ const useMenuContext = () => {
 		throw new Error('Must be use with a ExampleProvider')
 	}
 
-    return context
+	return context
 }
 
 export default useMenuContext

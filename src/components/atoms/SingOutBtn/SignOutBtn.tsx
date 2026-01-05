@@ -11,9 +11,10 @@ import type { ReactNode } from 'react'
 interface SignOutBtnProps {
 	children: ReactNode
 	className: string
+	ariaLabel?:string
 }
 
-const SignOutBtn = ({ children, className }: SignOutBtnProps) => {
+const SignOutBtn = ({ children, className,ariaLabel }: SignOutBtnProps) => {
 	// const dispatch = useDispatch()
 	// const navigate = useNavigate()
 	// const [logOut, { isSuccess }] = useLogOutMutation()
@@ -47,6 +48,7 @@ const SignOutBtn = ({ children, className }: SignOutBtnProps) => {
 
 	return (
 		<button
+		aria-label={ariaLabel}
 			className={className}
 			onClick={() => {
 				signOut()

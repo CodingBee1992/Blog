@@ -4,7 +4,7 @@ import useMenuContext from '../../../hooks/useMenuContext'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import { useLocation } from 'react-router'
 
-// import styles from './DropdownMenu.module.scss'
+
 
 interface DropdownMenuProps {
 	data: MenuTypes
@@ -22,11 +22,13 @@ const DropdownMenu = ({
 }: DropdownMenuProps) => {
 	const { pathname } = useLocation()
 	const { handleOpenCloseMenu } = useMenuContext()
-	
+
+	const menuCategories = data.children
+
 	const handleCloseDropDown = (e: MouseEvent<HTMLLIElement>) => {
 		const target = e.currentTarget as HTMLLIElement
 		const el = target.parentElement
-		
+
 		if (el && el.classList.contains(styles.active)) {
 			el.classList.remove(styles.active)
 		}
@@ -36,19 +38,30 @@ const DropdownMenu = ({
 			className={styles.subMenu}
 			onMouseEnter={e => handleMouseInDropdown?.(e)}
 			onMouseLeave={e => handleMouseOutDropdown?.(e)}>
-			{data.children?.map((item: { title: string; href: string }, index: number) => {
-				const active = pathname === item.href
+			{menuCategories?.map((item, index: number) => {
+				const active = pathname === `/categories/${item.name?.split(' ').join('-').toLowerCase()}`
+				
+				const active2 = pathname === item.href
+				
+				const slug = item.name ? item.name.split(' ').join('-').toLowerCase() : item.slug
+				const url = item ? (item.name ? `/categories/${slug}` : item.href) : '#'
+
+				const menuName = item.name ? item.name : item.title
+
 				return (
 					<li
-						onClick={(e) => {
+						onClick={e => {
 							handleCloseDropDown(e)
 							handleOpenCloseMenu()
 						}}
-						className={`${styles.subMenuLi} ${active ? styles.activeSubMenuLi : ''}`}
+						className={`${styles.subMenuLi} ${active2 ? styles.activeSubMenuLi : ''}`}
 						key={index}>
 						{
-							<AnchorLink className={styles.subLink} href={item.href || '#'} count={index}>
-								{item.title}
+							<AnchorLink
+								className={`${styles.subLink} ${active ? styles.activeSubMenuLi : ''}`}
+								href={url!}
+								count={index}>
+								{menuName}
 							</AnchorLink>
 						}
 					</li>

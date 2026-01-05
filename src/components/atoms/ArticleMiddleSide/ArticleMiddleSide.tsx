@@ -1,6 +1,16 @@
+import { useLocation } from 'react-router'
+import { HeartSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import { usePostContext } from '../../../hooks/usePostContext'
-import ResponsiveArticleImage from '../ResponsiveArticleImage/ResponsiveArticleImage';
-
+import { useFetchCommentsQuery } from '../../../slices/api/commentsApi'
+import ResponsiveArticleImage from '../ResponsiveArticleImage/ResponsiveArticleImage'
+import {
+	useFetchPostLikesQuery,
+	useFetchUserLikedPostQuery,
+	useToogleLikePostMutation,
+} from '../../../slices/api/postLikeApi'
+import { useSelector } from 'react-redux'
+import type { RootState } from '../../../store'
+import { useMemo } from 'react'
 
 interface ArticleMiddleSideProps {
 	styles: { [key: string]: string }
@@ -12,23 +22,40 @@ type ArticleBlock =
 
 const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 	const { articleContent, introduction } = usePostContext()
+	const { search } = useLocation()
+	const params = new URLSearchParams(search)
+	const postId = params.get('id')
+	const { id, isLogged } = useSelector((state: RootState) => state.auth)
 
-	const text = introduction
-	const halfTextLength = Math.ceil(text?.length / 2)
-	const dotindex = text?.indexOf('.', halfTextLength)
-	const firstPart = text?.slice(0, dotindex + 1)
-	const secondPart = text?.slice(dotindex + 1)
+	const { data } = useFetchCommentsQuery(postId!, { skip: !postId })
+	const [likePost] = useToogleLikePostMutation()
+	const { data: likedPost } = useFetchUserLikedPostQuery({ postId, userId: id },{ skip: !isLogged || !postId || !id })
+	const { data: postLikes } = useFetchPostLikesQuery(postId, { skip: !postId })
 
-	if (!articleContent) return
-	const articleWithAds = articleContent.flatMap((block, index) => {
-		const blocks = [block]
-		if ((index + 1) % 4 === 0) {
-			blocks.push({ type: 'add', value: 'ad-slot-1' })
+	const { firstPart, secondPart } = useMemo(() => {
+		if (!introduction) return { firstPart: '', secondPart: '' }
+
+		const halfTextLength = Math.ceil(introduction.length / 2)
+		const dotindex = introduction?.indexOf('.', halfTextLength)
+
+		return {
+			firstPart: introduction?.slice(0, dotindex + 1),
+			secondPart: introduction?.slice(dotindex + 1),
 		}
-		return blocks
-	})
+	}, [introduction])
 
-	
+	const articleWithAds = useMemo<ArticleBlock[]>(() => {
+		if (!articleContent) return []
+
+		return articleContent.flatMap((block, index) => {
+			return (index + 1) % 4 === 0 ? [block, { type: 'add', value: 'ad-slot-1' }] : [block]
+		})
+	}, [articleContent])
+
+	const handleSetLike = async () => {
+		if (!postId) return
+		await likePost(postId)
+	}
 
 	return (
 		<div className={styles.articleMiddleSideContainer}>
@@ -39,8 +66,6 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 			<div className={styles.articleContentContainer}>
 				<div className={styles.articleContent}>
 					{articleWithAds.map((item: ArticleBlock, index: number) => {
-						
-
 						if (item.type === 'title') {
 							return (
 								<h3 key={index} className={styles.articleContentTitle}>
@@ -71,10 +96,6 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 								</div>
 							)
 						}
-
-						return null
-					})}
-					{articleContent.map((item: ArticleBlock, index: number) => {
 						if (item.type === 'completion') {
 							return (
 								<p key={index} className={styles.articleContentText}>
@@ -89,10 +110,37 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 								</p>
 							)
 						}
+						return null
 					})}
 				</div>
 			</div>
-			<div>Gallery Content</div>
+
+			<div className={styles.articleReactionsBox}>
+				<div className={styles.articleReactionsInfo}>
+					<span className={styles.articleLikes}>
+						<span className={styles.articleLikeBox}>
+							<HeartSVG className={styles.articleLikeSVG} />
+						</span>
+						{postLikes && postLikes > 0
+							? postLikes === 1
+								? `${postLikes} Like`
+								: `${postLikes} Likes`
+							: `${postLikes} Likes`}
+					</span>
+					<span className={styles.articleComments}>
+						{data && data.length > 0
+							? data?.length === 1
+								? `${data?.length} Comment`
+								: `${data?.length} Comments`
+							: `${data?.length} Comments`}
+					</span>
+				</div>
+				{isLogged && (
+					<button aria-label="Like button" className={styles.articleReactionButton} onClick={() => handleSetLike()}>
+						{likedPost?.userId === id ? 'Unlike' : 'Like'}
+					</button>
+				)}
+			</div>
 		</div>
 	)
 }

@@ -1,13 +1,14 @@
-
 import useResponsiveCloudinaryImage from '../../../hooks/useResponsiveCloudinaryImage'
 import type { ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import styles from './Article.module.scss'
 import useWindowSize from '../../../hooks/useWindowSize'
 
+import handleCreateUrl from '../../../hooks/handleCreateUrl'
+
 const Article = ({
 	_id,
-	href,
+
 	mainImage,
 	title,
 	categories,
@@ -21,7 +22,7 @@ const Article = ({
 }: ArticleContentProps) => {
 	const { width } = useWindowSize()
 	const mainImageSrc = mainImage.src
-	
+
 	let defaultWidth
 	if (width > 1400) {
 		defaultWidth = 400
@@ -38,6 +39,7 @@ const Article = ({
 	}
 	const responsiveImage = useResponsiveCloudinaryImage({ mainImageSrc, defaultWidth })
 
+
 	return (
 		<article
 			data-aos="fade-up"
@@ -45,7 +47,7 @@ const Article = ({
 			className={`${styles.article} ${styles.brick}`}
 			style={{ position: 'absolute', left, top }}>
 			<div className={styles.articleImage}>
-				<AnchorLink href={`${href}/${seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${_id}`}>
+				<AnchorLink href={handleCreateUrl({  categories, seo,  _id })}>
 					<img src={responsiveImage} alt={mainImage.alt} onLoad={onImageLoad} />
 				</AnchorLink>
 			</div>
@@ -75,7 +77,7 @@ const Article = ({
 				</div>
 				<AnchorLink
 					ariaLabel={`Read more about ${title}`}
-					href={`${href}/${seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${_id}`}
+					href={handleCreateUrl({ categories, seo, _id })}
 					className={styles.readMoreLink}>
 					Read More
 				</AnchorLink>

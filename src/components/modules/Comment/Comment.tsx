@@ -5,11 +5,11 @@ import TextArea from '../../atoms/TextArea/TextArea'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
-// import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
-import { useDeleteCommentMutation, useFetchCommentsQuery } from '../../../slices/api/commentSlice'
+
+import { useDeleteCommentMutation, useFetchCommentsQuery } from '../../../slices/api/commentsApi'
 
 const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }: CommentsDataProps) => {
-	const { status } = useSelector((state: RootState) => state.auth)
+	const { role } = useSelector((state: RootState) => state.auth)
 	const comRef = useRef<HTMLDivElement | null>(null)
 	const { isLogged, id } = useSelector((state: RootState) => state.auth)
 	const [showReply, setShowReply] = useState<boolean>(false)
@@ -22,7 +22,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 	const crudRef = useRef<HTMLDivElement | null>(null)
 	const textRef = useRef<HTMLDivElement | null>(null)
 	const authorPost = id === author._id
-
+	
 	const handleReply = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
 		const logIn = target.nextElementSibling
@@ -86,7 +86,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 	}, [])
 	const handleDeleteComment = async () => {
 		try {
-			 await deleteComment({ commentId: _id, postId }).unwrap()
+			await deleteComment({ commentId: _id }).unwrap()
 
 			// setResMessage(res?.message)
 
@@ -98,7 +98,6 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 				// 	fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
 				// 		? (fetchError.data.message as string)
 				// 		: 'Something goes wrong'
-
 				// setResMessage(errorMessage)
 			}
 		}
@@ -131,7 +130,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 									Log In to Reply
 								</AnchorLink>
 							</div>
-							{isLogged && (authorPost || (status === 'Admin' || status === "Moderator")) && !showReply && (
+							{isLogged && (authorPost || role === 'Admin' || role === 'Moderator') && !showReply && (
 								<div className={styles.deleteUpdateContainer}>
 									<span
 										className={styles.deleteUpdateMenu}

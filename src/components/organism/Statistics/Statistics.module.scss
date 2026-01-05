@@ -1,0 +1,222 @@
+.statisticContainer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	padding: 2rem;
+
+	.statisticWrapper {
+		display: flex;
+		flex-wrap: wrap;
+
+		// grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+
+		.statisticCardContainer {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			padding: 2rem;
+			min-width: 250px;
+			background-color: var(--statBgc);
+			border: none;
+			border-radius: var(--borderRadius16);
+
+			.statBox {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				width: 50%;
+				.statMain {
+					display: flex;
+					flex-direction: column;
+					gap: 0.5rem;
+					.statValue {
+						color: var(--statMainColor);
+						font-size: var(--textSize_20);
+						font-weight: 600;
+					}
+					.statTitle {
+						font-size: var(--textSize_10);
+						color: var(--statSecondColor);
+					}
+				}
+			}
+			.statGrowth {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				.statGrowthBox {
+					display: flex;
+					flex-direction: column;
+					.statGrowthPercent {
+						font-size: var(--textSize_16);
+						color: var(--statThirdColor);
+					}
+					.lastSpan {
+						font-size: var(--textSize_10);
+
+						color: var(--statSecondColor);
+					}
+				}
+			}
+			.iconBox {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 45px;
+				height: 45px;
+
+				border-radius: var(--borderRadius08);
+			}
+			.pageViews {
+				background-color: #ecf1fd;
+			}
+			.users {
+				background-color: #e7f6fa;
+
+				svg {
+					width: 30px;
+					height: 30px;
+					path {
+						fill: #0aa8c0;
+					}
+				}
+			}
+			.posts {
+				background-color: #fff4e8;
+
+				svg {
+					width: 25px;
+					height: 25px;
+					fill: #ff8300;
+					g {
+						path {
+							fill: #ff8300;
+						}
+					}
+				}
+			}
+			.likes {
+				background-color: #ffeff0;
+
+				svg {
+					width: 25px;
+					height: 25px;
+					path {
+						fill: #ff4d6e;
+					}
+				}
+			}
+			.comments {
+				background-color: #e8fded;
+
+				svg {
+					width: 25px;
+					height: 25px;
+					path {
+						fill: #37b44b;
+					}
+				}
+			}
+		}
+	}
+	.areaChartWrapper {
+		margin-top: 2rem;
+		width: 100%;
+		max-width: 800px;
+		height: 100%;
+		padding: 3rem;
+		color: #000000;
+		background-color: var(--statBgc);
+		border-radius: var(--borderRadius16);
+
+		.areaChartInfo {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 2rem;
+			.areaChartTitle {
+				margin-left: 4rem;
+				color: var(--statMainColor);
+				font-size: var(--textSize_22);
+				font-weight: 500;
+			}
+			.areaCurrentViews {
+				display: flex;
+				gap: 2rem;
+				padding: 2rem 0;
+				.areaCurrentInfo {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					padding: 0 2rem;
+					color: var(--statMainColor);
+
+					span:first-child {
+						display: flex;
+						font-size: var(--textSize_22);
+					}
+
+					span:last-child {
+						font-size: var(--textSize_10);
+						color: var(--statSecondColor);
+					}
+				}
+			}
+			.areaCurrentDropdown {
+				position: relative;
+				.areaCurrentViewsFromTo {
+					display: flex;
+					align-items: center;
+					padding: 0 1rem;
+					color: var(--statMainColor);
+					line-height: 30px;
+					font-size: var(--textSize_12);
+					font-weight: 600;
+					text-transform: uppercase;
+					cursor: pointer;
+
+					span {
+						margin-right: 0.5rem;
+					}
+				}
+				.areaCurrentViewsSelect {
+					position: absolute;
+					top: 39%;
+					left: 0;
+					width: 100%;
+					padding: 0 1rem;
+					line-height: 30px;
+					box-shadow: 0px 1px 2px 2px #eeeeee;
+					transform-origin: top;
+					transform: scaleY(0);
+					transition: all 0.3s;
+
+					span {
+						font-size: var(--textSize_12);
+						color: var(--statMainColor);
+						text-transform: uppercase;
+						cursor: pointer;
+					}
+				}
+
+				.scaleUp {
+					transform: scaleY(1);
+				}
+				.rotate {
+					rotate: 180deg;
+				}
+			}
+		}
+
+		.areaChart {
+			width: 100%;
+			height: 350px;
+		}
+	}
+	.arrowUpStat {
+		width: 25px;
+		height: 25px;
+		fill: var(--statThirdColor);
+	}
+}

@@ -24,12 +24,12 @@ const SideBar = ({ children }: SideBarProps) => {
 			</div>
 			<div className={styles.controlPanelUser}>
 				{(!isLogged || (isLogged && (role === 'Admin' || role === 'Moderator'))) && (
-					<AnchorLink className={styles.sideBarBtns} href="/settings">
+					<AnchorLink ariaLabel='Settings' className={styles.sideBarBtns} href="/settings">
 						<SettingsSvg styles={styles} />
 					</AnchorLink>
 				)}
 
-				<SignOutBtn className={styles.sideBarBtns}>
+				<SignOutBtn ariaLabel='Sign Out button' className={styles.sideBarBtns}>
 					<LogoutSvg styles={styles} />
 				</SignOutBtn>
 				<img src={`${avatar}`} alt="Avatar" className={styles.authorAvatar} />

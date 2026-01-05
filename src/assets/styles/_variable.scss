@@ -8,6 +8,25 @@ $tabletSmall: 600px;
 $mobile: 500px;
 $mobileSmall: 380px;
 
+// --color-brand-50: #cffbdd;
+//   --color-brand-100: #91f8b7;
+//   --color-brand-200: #6ddc98;
+//   --color-brand-300: #5dbe83;
+//   --color-brand-400: #4ea16e;
+//   --color-brand-500: #3f845a;
+//   --color-brand-600: #316947;
+//   --color-brand-700: #234f34;
+//   --color-brand-800: #163723;
+//   --color-brand-900: #0a2012;
+//   --color-brand-950: #05140a;
+
+.theme {
+	--pagesBgc: #0a2012;
+	//  add post / form colors
+	--mainFormColor: #ffffff;
+	--mainFormBgc: #ffffff;
+}
+
 :root {
 	--fontFamily: 'Inter', sans-serif;
 	--font-2: 'DM Serif Text', serif;
@@ -107,7 +126,7 @@ $mobileSmall: 380px;
 	--btn-heightXs: calc(1.5 * 3.2rem);
 	--btn-color: #282828;
 	--btn-color-hover: #000000;
-	--signFormTextColor:#282828;
+	--signFormTextColor: #282828;
 	// Brick Padding
 	--brick-padding: 3rem;
 	// Social links
@@ -116,23 +135,82 @@ $mobileSmall: 380px;
 
 	--header-height: 8.8rem;
 
-	// SIDEBAR -----------------------
-	--Bgc-sideBar: #eff0f0;
-	--sideBarColorIcon: #333333;
+	// Admin Panel -----------------------
 
-	// --sideBarBgcHoverLink: #d3d3d3d3;
-	--sideBarBgcHoverLink: #befad2;
-	--sideBarHoverLightGray: #eff0f0;
-	--SideBarLineHeight: calc(2 * 2.5rem);
+	// sidebar colors
+	--sideBarBgc: #ffffff;
+	--sideBarMainColor: #092013;
+	--sideBarColorIcon: #092013;
+	//  links hover
+	--sideBarBgcHoverLink: #efefef;
+
+	// PANEL & SETTINGS PAGES background color
+	--pagesBgc: #efefef;
+	--pagesColor: #092013;
+
+	//  add post / form colors
+	--mainFormColor: #092013;
+	--mainFormBgc: #ffffff;
+	--categoryOptionHover:#9f0000;
+	--buttonColor: #092013;
+	--buttonColorHover: #ffffff;
+	--createFormBgc: #ffffff;
+	--createFormBgcHover: #092013;
+	--resetFormBgc: #ffffff;
+	--resetFormHoverBgc: #ff7700;
+	--clearFormBgc: #ffffff;
+	--clearFormHoverBgc: #9f0000;
+	--errorFormColor: #8f0000;
+
+	// categories hover bgc
+	--categoriesHoverColor: #092013;
+
+	//  tabels colors
+	--bgcTabel: #ffffff;
+	--bgcTBody: #e9f5db;
+	--colorTabel: #000000;
+	--bgcTabelHover: #83bca9;
+	--bgcPublishHover: #85ffad;
+
+	// stats colors
+	--statBgc:#ffffff;
+	--statMainColor:#464D4D;
+	--statSecondColor:#ADADBA;
+	--statThirdColor:#03ff18;
+	--areaChartColor:#24DC00;
+	--areaChartHoverColor:#008E00;
+
+	//  fontSize
+
+	--sideBarLinks: 1.6rem;
+	--sideBarSubLinks: 1.4rem;
+	//  links lineheight
+	--sideBarLineHeight: calc(2 * 2.5rem);
+
 	
-	// PANEL / SETTINGS PAGES
-	--pageBgc:#ffffff;
+	--textSize_10: 1rem;
+	--textSize_12: 1.2rem;
+	--textSize_14: 1.4rem;
+	--textSize_16: 1.6rem;
+	--textSize_18: 1.8rem;
+	--textSize_20: 2rem;
+	--textSize_22: 2.2rem;
+	--textSize_24: 2.4rem;
+	--textSize_26: 2.6rem;
 
-	// TABEL ------
-	--bgcTabel:#eff0f0;
-	--colorTabel:#000000;
-	--bgcTabelHover:#befad2;
-	--bgcPublishHover:#85ffad;
+	// borders
+	--borderRadius02: 0.2rem;
+	--borderRadius04: 0.4rem;
+	--borderRadius06: 0.6rem;
+	--borderRadius08: 0.8rem;
+	--borderRadius10: 1rem;
+	--borderRadius12: 1.2rem;
+	--borderRadius14: 1.4rem;
+	--borderRadius16: 1.6rem;
+	--borderRadius18: 1.8rem;
+	--borderRadius20: 2rem;
+
+	// Admin Panel END
 }
 @media (max-width: 1600px) {
 	:root {

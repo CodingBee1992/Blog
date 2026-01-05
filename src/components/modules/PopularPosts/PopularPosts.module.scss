@@ -1,0 +1,97 @@
+.popularPostsContainer {
+	position: relative;
+	margin-top: 2rem;
+	
+	width: 100%;
+	max-width: 500px;
+	height: 100%;
+	padding: 3rem;
+	color: #000000;
+	background-color: var(--statBgc);
+	border-radius: var(--borderRadius16);
+	overflow: hidden;
+
+	.popularPostsContainerTitle {
+		margin-bottom: 2rem;
+		color: var(--statMainColor);
+		font-weight: 500;
+	}
+	.addNewPost {
+		position: absolute;
+		top: 5%;
+		right: 3rem;
+		padding: 0.5rem 1rem;
+		color: var(--areaChartColor);
+		border: 1px solid var(--areaChartColor);
+		border-radius: var(--borderRadius06);
+		transition: all .3s;
+		&:hover{
+			color: var(--areaChartHoverColor);
+			border: 1px solid var(--areaChartHoverColor);
+			
+		}
+	}
+	.popularPostWrapper {
+		display: flex;
+		padding: 1rem 0;
+		
+		.popularPostImageBox {
+			min-width: 90px;
+			width: 90px;
+
+			border-radius: var(--borderRadius06);
+			overflow: hidden;
+			img {
+				height: 100%;
+				width: 100%;
+			}
+		}
+		.popularPostInfo {
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
+			padding: 0.5rem 2rem;
+
+			.popularPostInfoTitle {
+				color: #464d4d;
+				font-size: var(--textSize_16);
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 1;
+				text-overflow: ellipsis;
+				line-clamp: 1;
+
+				&:hover {
+					color: #000000;
+				}
+			}
+
+			.popularPostStatsBox {
+				display: flex;
+				align-items: center;
+				gap: 1.2rem;
+				.popularPostStats {
+					display: flex;
+					align-items: center;
+
+					// &:first-child {
+					// 	margin-right: 2rem;
+					// }
+					span {
+						margin-left: 0.8rem;
+						color: var(--statSecondColor);
+						font-size: var(--textSize_12);
+					}
+
+					.popularViewsSVG {
+						width: 15px;
+						height: 15px;
+						fill: var(--statSecondColor);
+
+
+					}
+				}
+			}
+		}
+	}
+}

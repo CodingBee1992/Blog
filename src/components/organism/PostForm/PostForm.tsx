@@ -12,16 +12,20 @@ import {
 	useDestroyCloudinaryImageMutation,
 	useFetchCloudinaryMutation,
 	useUpdatePostMutation,
-} from '../../../slices/api/apiSlice'
+} from '../../../slices/api/postApi'
 import styles from './PostForm.module.scss'
 import uploadToCloudinary from '../../../hooks/useUploadToCloudinary'
-import { allCategories, statusOptions } from '../../../utils/data'
+import { defaultCategories, statusOptions } from '../../../utils/data'
 import CloseSvg from '../../../assets/icons/nav/CloseSvg'
+import FormBtn from '../../atoms/FormBtn/FormBtn'
+import { useFetchAllCategoriesQuery } from '../../../slices/api/categoriesApi'
 
 interface PostFormProps {
 	editValues?: postSchemaTypes
 	postId?: string | null
 }
+
+
 
 const PostForm = ({ editValues, postId }: PostFormProps) => {
 	const uploadFolder = import.meta.env.VITE_UPLOAD_PRESET
@@ -33,6 +37,11 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 	const [createSignature] = useFetchCloudinaryMutation()
 	const [updatePost] = useUpdatePostMutation()
 	const [destroyCloudinaryImage] = useDestroyCloudinaryImageMutation()
+	const {data} = useFetchAllCategoriesQuery()
+	
+
+	const allCategories = data && data?.length > 0 ? data : defaultCategories
+
 	const methods = useForm<postSchemaTypes>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
@@ -48,10 +57,10 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 		formState: { isSubmitting, isSubmitSuccessful },
 	} = methods
 	const { fields: articleContent, insert, remove } = useFieldArray({ control, name: 'articleContent' })
-	
+
 	const handleResetFields = () => {
 		if (oldDefaultValues) {
-			console.log(oldDefaultValues)
+			
 			reset(oldDefaultValues)
 			setOldDefaultValues({})
 		} else {
@@ -82,7 +91,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 
 		remove(fieldIndex)
 	}
-
+	
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
 		try {
 			if (!editValues) {
@@ -93,7 +102,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 					const data = await uploadToCloudinary({ file: mainImage.src, uploadFolder, dataSignature })
 
 					mainImage = { ...mainImage, src: data.secure_url, public_id: data.public_id }
-					console.log(data)
+					
 				}
 				const articleContent = await Promise.all(
 					data.articleContent.map(async item => {
@@ -178,8 +187,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 		return (
 			<div className={styles.updateContainer}>
 				<div className={styles.updateWrapper}>
-
-				<p>Post Updated Successfully</p>
+					<p>Post Updated Successfully</p>
 				</div>
 			</div>
 		)
@@ -330,7 +338,8 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 						</div>
 					</div>
 					<div className={styles.submitBtns}>
-						<button disabled={isSubmitting} type="submit" className={`${styles.submitBtn} ${styles.postFormBtn}`}>
+						
+						<FormBtn type="submit" isSubmitting={isSubmitting} className={styles.submitBtn}>
 							{isSubmitting ? (
 								<>
 									{editValues ? 'Saving' : 'Creating'}
@@ -343,22 +352,20 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 							) : (
 								'Create Post'
 							)}
-						</button>
-						<button
-							disabled={isSubmitting}
+						</FormBtn>
+
+						<FormBtn
 							type="button"
-							onClick={() => handleResetFields()}
-							className={`${styles.resetBtn} ${styles.postFormBtn} `}>
+							isSubmitting={isSubmitting}
+							className={styles.resetBtn}
+							handleResetFields={handleResetFields}>
 							Reset
-						</button>
+						</FormBtn>
 						{editValues && (
-							<button
-								disabled={isSubmitting}
-								type="button"
-								onClick={() => handleClearFields()}
-								className={`${styles.clearAllBtn} ${styles.postFormBtn} `}>
+							
+							<FormBtn type="button" handleResetFields={handleClearFields} className={styles.clearAllBtn}>
 								Clear All
-							</button>
+							</FormBtn>
 						)}
 					</div>
 				</form>

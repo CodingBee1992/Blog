@@ -1,10 +1,5 @@
-import {
-	ArrowDownSVG,
-	
-	PencilSVG,
-	TrashSVG,
-} from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
-import { useDeletePostMutation, useFetchPostsByLimitQuery, usePublishPostMutation } from '../../../slices/api/apiSlice'
+import { ArrowDownSVG, PencilSVG, TrashSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
+import { useDeletePostMutation, useFetchPostsByLimitQuery, usePublishPostMutation } from '../../../slices/api/postApi'
 import type { ExtendedArticleContentProps } from '../../../types/types'
 import styles from './ListOfPosts.module.scss'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
@@ -12,14 +7,26 @@ import { useEffect, useRef, useState, type ChangeEvent, type MouseEvent } from '
 
 import useDebounce from '../../../hooks/useDebounce'
 
-import { rowsNumbers, status, thead } from '../../../utils/data'
-import { categories } from '../../../containers/Navigation/dataNavigation/dataNavigation'
+import { defaultCategories, rowsNumbers, status, thead } from '../../../utils/data'
+// import { categories } from '../../../containers/Navigation/dataNavigation/dataNavigation'
 import TabelSearch from '../../modules/TabelSearch/TabelSearch'
 import TabelPagination from '../../modules/TabelPagination/TabelPagination'
+import Popup from '../../atoms/Popup/Popup'
+import timePass from '../../../hooks/timePass'
+import NotificationNew from '../../atoms/NotificationNew/NotificationNew'
+
+import { useFetchAllCategoriesQuery } from '../../../slices/api/categoriesApi'
+import handleCreateUrl from '../../../hooks/handleCreateUrl'
+
+import dateConverter from '../../../hooks/dateConverter'
 
 const ListOfPosts = () => {
-	const rowsRef = useRef<HTMLDivElement | null>(null)
-
+	const popupRef = useRef<HTMLDivElement | null>(null)
+	const [popUpMessage, setPopUpMessage] = useState<string>('')
+	const [postData, setPostData] = useState({
+		postId: '',
+		postTitle: '',
+	})
 	const [rows, setRows] = useState<number>(10)
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [sort, setSort] = useState({
@@ -40,8 +47,13 @@ const ListOfPosts = () => {
 		category: category,
 	})
 	const [deletePost] = useDeletePostMutation()
+
 	const [publishPost] = usePublishPostMutation()
 	const { posts = [], totalPages = 1, total = 1 } = data ?? {}
+
+	const { data: categories } = useFetchAllCategoriesQuery()
+
+	const allCategories = categories && categories?.length > 0 ? categories : defaultCategories
 
 	useEffect(() => {
 		refetch()
@@ -84,7 +96,7 @@ const ListOfPosts = () => {
 			})
 			return
 		}
-		
+
 		setSort(prev => {
 			const newOrder = prev.sortBy === el ? (prev.order === 'desc' ? 'asc' : 'desc') : 'asc'
 
@@ -105,41 +117,6 @@ const ListOfPosts = () => {
 		setEnd(end)
 	}, [currentPage, rows, total, totalPages])
 
-	const handleOpenRows = () => {
-		const arrow = document.querySelector(`.${styles.arrowRows}`)
-		if (rowsRef.current && !rowsRef.current.classList.contains(styles.scale)) {
-			rowsRef.current?.classList.add(styles.scale)
-			arrow?.classList.add(styles.rotate)
-		} else {
-			rowsRef.current?.classList.remove(styles.scale)
-			arrow?.classList.remove(styles.rotate)
-		}
-	}
-
-	const handleSelectRows = (e: MouseEvent<HTMLSpanElement>) => {
-		const target = e.currentTarget as HTMLSpanElement
-		setRows(Number(target.dataset.value))
-
-		handleOpenRows()
-	}
-
-	useEffect(() => {
-		const handleCloseSelect = (e: globalThis.MouseEvent) => {
-			const el = rowsRef.current
-			const target = e.target as HTMLElement
-			const arrow = document.querySelector(`.${styles.arrowRows}`)
-
-			if (!target.classList.contains(styles.inputBox) && el?.classList.contains(styles.scale)) {
-				el?.classList.remove(styles.scale)
-				arrow?.classList.remove(styles.rotate)
-			}
-		}
-
-		window.addEventListener('click', handleCloseSelect)
-
-		return () => window.removeEventListener('click', handleCloseSelect)
-	}, [])
-
 	const handleChangePage = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
 
@@ -154,18 +131,38 @@ const ListOfPosts = () => {
 		}
 	}
 
-	const handleDeletePost = async (e: MouseEvent<HTMLDivElement>) => {
-		const target = e.currentTarget as HTMLDivElement
-		const postId = target.dataset.id
-	
+	const handleDeletePost = async () => {
 		try {
-			await deletePost(postId).unwrap()
+			const res = await deletePost(postData.postId).unwrap()
 
+			setPopUpMessage(res.message)
 			refetch()
 		} catch (error) {
 			console.log(error)
 		}
 	}
+
+	const handleOpenPopup = (e: MouseEvent<HTMLDivElement>) => {
+		const target = e.currentTarget as HTMLDivElement
+		const postId = target.dataset.id
+		const postTitle = target.dataset.name
+		if (postId && postTitle)
+			setPostData({
+				postId,
+				postTitle,
+			})
+
+		if (!popupRef.current?.classList.contains(styles.openPopup)) {
+			popupRef.current?.classList.add(styles.openPopup)
+		}
+	}
+	const handleClosePopup = () => {
+		if (popupRef.current?.classList.contains(styles.openPopup)) {
+			popupRef.current?.classList.remove(styles.openPopup)
+		}
+		setPopUpMessage('')
+	}
+
 	const handlePublishPost = async (e: MouseEvent<HTMLParagraphElement>) => {
 		const target = e.currentTarget as HTMLParagraphElement
 		const postId = target.dataset.id
@@ -178,12 +175,13 @@ const ListOfPosts = () => {
 			console.log(error)
 		}
 	}
+
 	// if (isFetching) return <Loader />
 	return (
 		<div className={styles.listWrapper}>
 			<h3 className={styles.listTitle}>List of Posts</h3>
-			<TabelSearch  styles={styles} handleSetInputValue={handleSetInputValue}/>
-			
+			<TabelSearch styles={styles} handleSetInputValue={handleSetInputValue} />
+
 			<div className={styles.listContainer}>
 				<div className={styles.tableContainer}>
 					<div className={styles.thead}>
@@ -197,9 +195,9 @@ const ListOfPosts = () => {
 													{item} <ArrowDownSVG />
 													{item === 'categories' && (
 														<div className={styles.theadDropDown}>
-															{categories.children?.map((item, index) => (
-																<div onClick={() => handleSetCategory(item.title)} data-element={item} key={index}>
-																	{item.title}
+															{allCategories?.map((c, index) => (
+																<div onClick={() => handleSetCategory(c.name)} data-element={c} key={index}>
+																	{c.name}
 																</div>
 															))}
 														</div>
@@ -248,32 +246,35 @@ const ListOfPosts = () => {
 							posts?.map((item: ExtendedArticleContentProps, index: number) => (
 								<div key={index} className={`${styles.tr} ${item.status === 'draft' ? styles.draft : ''}`}>
 									<div className={styles.td}>
-										<AnchorLink className={styles.tabelTitle} href={`/blog/${item.seo?.slug.toLowerCase().replace(/\s+/g,'-')}?id=${item._id}`}>
+										<AnchorLink
+											className={styles.tabelTitle}
+											href={handleCreateUrl({ categories: item.categories, seo: item.seo, _id: item._id })}>
 											{item.title}
+											{timePass(item.createdAt, 3) && <NotificationNew />}
 										</AnchorLink>
 									</div>
 									<div className={styles.td}>{item.author.name}</div>
 									<div className={styles.td}>
 										{item.categories.length > 1 ? item.categories.join(', ') : item.categories}
 									</div>
-									<div className={styles.td}>{new Date(item.createdAt).toLocaleDateString()}</div>
+									<div className={styles.td}>{new Date(item.createdAt).toLocaleDateString(...dateConverter())}</div>
 									<div className={`${styles.td} ${item.publishedAt ? '' : styles.publish}`}>
 										{item.publishedAt ? (
-											new Date(item.publishedAt).toLocaleDateString()
+											new Date(item.publishedAt).toLocaleDateString(...dateConverter())
 										) : (
 											<p data-id={item._id} onClick={e => handlePublishPost(e)}>
 												Publish
 											</p>
 										)}
 									</div>
-									<div className={styles.td}>{item.comments.length}</div>
+									<div className={styles.td}>{item.commentsCount}</div>
 									<div className={styles.td}>435</div>
 									<div className={styles.td}>{item.status}</div>
 									<div className={styles.td}>
 										<AnchorLink href={`/admin/posts/editpost/?id=${item._id}`}>
 											<PencilSVG />
 										</AnchorLink>
-										<div data-id={item._id} onClick={e => handleDeletePost(e)}>
+										<div data-id={item._id} data-name={item.title} onClick={e => handleOpenPopup(e)}>
 											<TrashSVG />
 										</div>
 									</div>
@@ -282,7 +283,34 @@ const ListOfPosts = () => {
 					</div>
 				</div>
 			</div>
-			<TabelPagination  styles={styles} rows={rows} rowsNumbers={rowsNumbers} start={start} end={end} rowsRef={rowsRef} total={total} handleOpenRows={handleOpenRows} handleSelectRows={handleSelectRows} handleChangePage={handleChangePage} />
+			<TabelPagination
+				rows={rows}
+				rowsNumbers={rowsNumbers}
+				start={start}
+				end={end}
+				total={total}
+				setRows={setRows}
+				handleChangePage={handleChangePage}
+			/>
+
+			<Popup
+				popupRef={popupRef}
+				popupTitle="DELETE the post"
+				handleClosePopup={handleClosePopup}
+				handleDelete={handleDeletePost}
+				popUpMessage={popUpMessage}>
+				{!popUpMessage && (
+					<div className={styles.popupInfo}>
+						<span>
+							<span>Post Title: </span>
+							{postData.postTitle}
+						</span>
+						<span>
+							<span>Post Id:</span> {postData.postId}
+						</span>
+					</div>
+				)}
+			</Popup>
 		</div>
 	)
 }

@@ -3,7 +3,7 @@ import Article from '../../atoms/MasonryArticle/Article'
 import styles from './PostsContent.module.scss'
 import type { ArticleContentProps } from '../../../types/types'
 import Aos from 'aos'
-import { useFetchLimitPostsQuery } from '../../../slices/api/apiSlice'
+import { useFetchLimitPostsQuery } from '../../../slices/api/postApi'
 
 const PostsContent = () => {
 	const [width, setWidth] = useState<number>(0)
@@ -184,7 +184,7 @@ const PostsContent = () => {
 	}, [])
 	useEffect(() => {
 		Aos.refresh()
-	}, [columns, percent, width,styledPostData])
+	}, [columns, percent, width, styledPostData])
 	return (
 		<section className={styles.postsContainer}>
 			<div className={styles.articleContainer}>
@@ -208,7 +208,7 @@ const PostsContent = () => {
 									}}
 									_id={_id}
 									key={_id}
-									href="/blog"
+									
 									mainImage={mainImage}
 									title={title}
 									categories={categories}

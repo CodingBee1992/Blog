@@ -1,0 +1,86 @@
+.popupContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	min-height: 100dvh;
+	height: 100%;
+	width: 100%;
+	background-color: #0000003d;
+	z-index: 1000;
+
+	.popupWrapper {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		
+		width: 500px;
+		min-height: 350px;
+		
+		border-radius: 8px;
+		background-color: #ffffff;
+
+		.popupTitle{
+			margin-top: 3rem;
+			margin-bottom: 3rem;
+			text-align: center;
+		}
+		
+
+		.popupFooter{
+			text-align: center;
+			margin-top: auto;
+			
+			
+			
+			.deleteInfo {
+				text-align: center;
+			}
+			.popupBtn {
+				padding: 1rem 0;
+				width: 200px;
+				margin: 2rem auto;
+				border: none;
+				font-size: 20px;
+				color: #ffffff;
+				cursor: pointer;
+				transition: all 0.3s;
+			}
+			
+			.deleteBtn {
+				background-color: #ff0000;
+				
+				&:hover {
+					background-color: #840707;
+				}
+			}
+			.closePopupBtn {
+				background-color: #00ff1a;
+				
+				&:hover {
+					background-color: #1ca329;
+				}
+			}
+		}
+		.close {
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+			padding: 0.3rem 0.5rem;
+			border: none;
+			background-color: transparent;
+			cursor: pointer;
+
+			.icon {
+				stroke: red;
+				transition: all 0.3s;
+
+				&:hover {
+					scale: 1.1;
+				}
+			}
+		}
+	}
+}

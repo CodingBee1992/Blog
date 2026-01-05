@@ -38,3 +38,34 @@
 	cursor: pointer;
 	
 }
+
+.commentsSVG{
+	width: 20px;
+	height: 20px;
+	path {
+		fill: var(--sideBarColorIcon);
+	}
+}
+.heartSVG{
+	width: 20px;
+	height: 20px;
+	path {
+		fill: var(--sideBarColorIcon);
+	}
+}
+.viewsSVG{
+	width: 30px;
+	height: 20px;
+	path {
+		stroke-width: 1px;
+		stroke: #4A72FE;
+	}
+}
+.closeSVG{
+	width: 20px;
+	height: 20px;
+	path {
+		stroke-width: 1px;
+		stroke: #f90000;
+	}
+}

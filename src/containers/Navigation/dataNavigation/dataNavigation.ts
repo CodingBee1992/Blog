@@ -1,26 +1,29 @@
+
+
 export interface MenuTypes {
 	title: string
 	href: string
-	children?: { title: string; href: string }[] 
+    
+	children?: { name?: string; slug?: string,title?:string,href?:string }[]  
 }
 
 const home: MenuTypes = {
 	title: 'Home',
 	href: '/',
 }
-export const categories: MenuTypes = {
+export const defaultCategories: MenuTypes = {
 	title: 'Categories',
 	href: '',
 	children: [
-        { title: 'LifeStyle', href: '/categories/lifestyle' },
-        { title: 'Culture', href: '/categories/culture' },
-        { title: 'Travel', href: '/categories/travel' },
-        { title: 'Nature', href: '/categories/nature' },
-        { title: 'Photography', href: '/categories/photography' },
-        { title: 'Vacation', href: '/categories/vacation' },
-        { title: 'Work', href: '/categories/work' },
-        { title: 'Health', href: '/categories/health' },
-        { title: 'Family', href: '/categories/family' },
+        { name: 'LifeStyle', slug: '/categories/lifestyle' },
+        { name: 'Culture', slug: '/categories/culture' },
+        { name: 'Travel', slug: '/categories/travel' },
+        { name: 'Nature', slug: '/categories/nature' },
+        { name: 'Photography', slug: '/categories/photography' },
+        { name: 'Vacation', slug: '/categories/vacation' },
+        { name: 'Work', slug: '/categories/work' },
+        { name: 'Health', slug: '/categories/health' },
+        { name: 'Family', slug: '/categories/family' },
         
     
     ],
@@ -41,7 +44,7 @@ const contact:MenuTypes ={
 
 export const dataNavigation= [
     home,
-    categories,
+    defaultCategories,
     
     styles,
     about,

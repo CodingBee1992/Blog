@@ -46,9 +46,9 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
 	if (showMessage) {
 		return (
 			<>
-				<div style={{ padding: '10rem', textAlign: 'center', color: 'white' }}>
-					<h2>Nie masz dostępu do tej strony</h2>
-					<p>Za chwilę zostaniesz przekierowany na stronę {!isLogged ? 'logowania' : 'główną'}</p>
+				<div style={{ padding: '10rem', textAlign: 'center', color: 'black' }}>
+					<h2>You do not have acces to this page</h2>
+					<p>You will be redirected to the {!isLogged ? 'login page' : 'home page'} in a moment</p>
 				</div>
 			</>
 		)

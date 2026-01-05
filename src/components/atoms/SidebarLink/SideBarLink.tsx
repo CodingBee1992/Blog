@@ -5,7 +5,7 @@ import type { adminLinksProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import DropdownMenu from '../DropdownMenu/DropdownMenu'
 import styles from './SideBarLink.module.scss'
-import { useLocation, useNavigate } from 'react-router'
+import { useLocation } from 'react-router'
 
 interface SideBarLinkProps {
 	data: adminLinksProps
@@ -13,7 +13,7 @@ interface SideBarLinkProps {
 }
 
 const SideBarLink = ({ data, index }: SideBarLinkProps) => {
-	const navigate = useNavigate()
+	
 	const { width } = useWindowSize()
 	const arrowRef = useRef<SVGSVGElement | null>(null)
 	const sideBarLinkRef = useRef<HTMLDivElement | null>(null)
@@ -45,33 +45,9 @@ const SideBarLink = ({ data, index }: SideBarLinkProps) => {
 			}
 		}
 	}
-	const handleNavigate = (href: string) => {
-		navigate(`${href}`)
-	}
-	if (data.href === '' || data.href === '/admin') {
-		if (data.href === '/admin') {
-			return (
-				<div
-					onClick={() => handleNavigate(data.href)}
-					ref={sideBarLinkRef}
-					key={index}
-					data-element={index}
-					className={`${styles.sideBarLink} `}>
-					<div
-						className={`${styles.sideBarLinkHelper} ${active ? styles.activeSideBarLink : ''}`}
-						onClick={() => {
-							handleOpenCloseDropdown()
-						}}>
-						<div className={styles.sideBarLinkName}>
-							{data.icon} {width > 700 && <p>{data.title}</p>}
-						</div>
-						<MenuArrowSVG arrowRef={arrowRef} styles={styles} />
-					</div>
-
-					{data.children?.length ? <DropdownMenu styles={styles} data={data} /> : null}
-				</div>
-			)
-		} else {
+	
+	if (data.href === '') {
+		
 			return (
 				<div ref={sideBarLinkRef} key={index} data-element={index} className={`${styles.sideBarLink} `}>
 					<div
@@ -88,7 +64,7 @@ const SideBarLink = ({ data, index }: SideBarLinkProps) => {
 					{data.children?.length ? <DropdownMenu styles={styles} data={data} /> : null}
 				</div>
 			)
-		}
+		
 	} else {
 		return (
 			<AnchorLink className={styles.sideBarLink} href={data.href}>

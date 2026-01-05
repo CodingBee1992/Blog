@@ -1,7 +1,13 @@
-.adminPanelTemplate{
-    width: 100%;
-    min-height: 100dvh;
-    height: 100%;
-  
-    background-color: var(--pageBgc);
+.adminPanelTemplateContainer {
+	width: 100%;
+	min-height: 100dvh;
+	height: 100%;
+	background-color: var(--pagesBgc);
+
+	.statisticTitle {
+		margin: 2rem 0 0 2rem;
+		font-size: var(--textSize_24);
+		font-family: var(--font-2);
+		color: var(--pagesColor);
+	}
 }

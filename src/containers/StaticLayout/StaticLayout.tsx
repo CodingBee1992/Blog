@@ -6,9 +6,11 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
 import Footer from '../Footer/Footer'
 import useWindowSize from '../../hooks/useWindowSize'
-import { SinglePostProvider } from '../../slices/createPostContext'
-import { ToastContainer } from 'react-toastify'
-import { MenuProvider } from '../../slices/menuContext'
+import { SinglePostProvider } from '../../context/createPostContext'
+import { MenuProvider } from '../../context/menuContext'
+
+
+
 const Navigation = lazy(() => import('../Navigation/Navigation'))
 
 const StaticLayout = () => {
@@ -39,11 +41,10 @@ const StaticLayout = () => {
 		<MenuProvider>
 			<SinglePostProvider>
 				<div data-aos="fade-zoom-in">
-					<ToastContainer />
 					<Navigation />
-					<div >
+					<main>
 						<Outlet />
-					</div>
+					</main>
 					<Footer />
 				</div>
 			</SinglePostProvider>

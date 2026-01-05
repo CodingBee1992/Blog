@@ -1,12 +1,12 @@
-import type { JSX, ReactNode } from 'react'
-import type { MenuTypes } from '../containers/Navigation/dataNavigation/dataNavigation'
+import type { ReactNode } from 'react'
+
 
 export interface Size {
 	width: number
 	height: number
 }
 
-export type MenuElement = (data: MenuTypes, id: number, key: number) => JSX.Element
+// export type MenuElement = (data: MenuTypes, id: number, key: number) => JSX.Element
 
 export interface SearchProps {
 	isOpen?: boolean
@@ -16,34 +16,14 @@ export interface SearchProps {
 export type SocialProps = {
 	path: string
 	icon: ReactNode
-	ariaLabel:string
+	ariaLabel: string
 }
 
-export interface PostDataProps {
-	id: number
-	image: string
-	href: string
-	categories: { category: string; href: string }[]
-	author: { name: string; avatar: string; href: string }
-	title: string
-	mainText: string
-	articleContent: {
-		title?: string
-		text?: string
-		imgContent?: { img: string; alt: string; imgtext: string }[]
-		completion?: string
-		callToAction?: string
-	}[]
-	left?: string
-	top?: string
-	articleRef?: React.Ref<HTMLDivElement>
-	styles?: { [key: string]: string }
-}
 export interface ArticleContentProps {
 	_id: string
 	title: string
 	introduction: string
-	mainImage: { src: string; alt: string; caption: string,public_id?:string }
+	mainImage: { src: string; alt: string; caption: string; public_id?: string }
 	author: { name: string; avatar: string }
 	articleContent?: [
 		{ type: 'title' | 'text' | 'completion' | 'callToAction' | 'add'; value: string },
@@ -59,14 +39,14 @@ export interface ArticleContentProps {
 	top?: string
 	articleRef?: React.Ref<HTMLElement>
 	styles?: { [key: string]: string }
-	onImageLoad?:()=>void
-	
+	onImageLoad?: () => void
 }
 
 export type ExtendedArticleContentProps = {
 	createdAt: string
 	publishedAt: string
-	comments: CommentsDataProps[]
+	
+	commentsCount:string
 } & ArticleContentProps
 
 export interface CommentsDataProps {
@@ -83,23 +63,44 @@ export interface CommentsDataProps {
 	children?: CommentsDataProps[]
 }
 
-export interface adminLinksProps {
+export interface sideBarLinksProps {
 	title: string
 	icon?: ReactNode
 	href: string
-	children?: adminLinksProps[]
+	children?: sideBarLinksProps[]
 }
 
+export interface UsersProps {
+	_id: string
+	name: string
+	email: string
+	avatar: string
+	role: string
+	isVerified: boolean
+	createdAt: string
+	updatedAt: string
+	commentsCount: number
+	postCount?: number
+	lastLogin:string
+}
 
-export interface UsersProps{
-	_id:string
-	name:string,
-	email:string,
-	avatar:string,
-	role:string
-	isVerified:boolean
-	createdAt:string
-	updatedAt:string
-	commentsCount:number,
-	postCount?:number
+export interface CommentsProps {
+	_id: string
+	comment: string
+	createdAt: string
+	title: string
+	postId: string
+	categories: string[]
+	author: {
+		_id: string
+		name: string
+	}
+	seo?: { slug: string; metaTitle: string; metaDescription: string }
+}
+
+export interface CategoryProps {
+	name: string
+	slug: string
+	_id: string
+	id: string
 }

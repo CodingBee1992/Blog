@@ -1,0 +1,104 @@
+// Paggination-------------
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 3rem;
+	margin-top: 1rem;
+	padding: 2rem 3rem;
+	.paginationRows {
+		display: flex;
+		flex-direction: row;
+
+		span {
+			margin-right: 1rem;
+		}
+		.selectRows {
+			position: relative;
+
+			.inputBox {
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				.selectInput {
+					display: flex;
+					align-items: center;
+					max-width: 30px;
+					background: transparent;
+					font-size: 18px;
+					border: none;
+					outline: none;
+					pointer-events: none;
+					cursor: pointer;
+					z-index: 1;
+				}
+				.arrowRows {
+					height: 15px;
+					width: 15px;
+					pointer-events: none;
+				}
+				.rotate {
+					rotate: 180deg;
+				}
+			}
+			.rows {
+				position: absolute;
+				top: -13rem;
+				display: flex;
+				flex-direction: column;
+				width: 50px;
+				background-color: #ffffff;
+				box-shadow: 0px 5px 20px #d3d3d3d3;
+				transform-origin: bottom;
+				opacity: 0;
+				transform: scaleY(0);
+				transition: all 0.3s;
+				span {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					line-height: 40px;
+
+					width: 100%;
+					cursor: pointer;
+
+					&:hover {
+						background-color: var(--bgcTabelHover);
+					}
+				}
+				.activeRow {
+					background-color: var(--bgcTabelHover);
+				}
+			}
+			.scale {
+				transform: scaleY(1);
+				opacity: 1;
+			}
+		}
+	}
+	.arrowsControls {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: 2rem;
+
+		.arrows {
+			padding: 0.75rem;
+			cursor: pointer;
+
+			border: none;
+			background: none;
+
+			transition: all 0.3s;
+
+			.arrowPrev,
+			.arrowNext {
+				width: 15px;
+				height: 15px;
+
+				pointer-events: none;
+			}
+		}
+	}
+}

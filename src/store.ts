@@ -1,21 +1,33 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { themeSlice } from './slices/themeSlice'
-import { apiSlice } from './slices/api/apiSlice'
+import { postApi } from './slices/api/postApi'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { commentSlice } from './slices/api/commentSlice'
-import { loginSlice } from './slices/api/loginSlice'
-import { authSlice } from './slices/api/authSlice'
+import { commentsApi } from './slices/api/commentsApi'
+import { userApi } from './slices/api/userApi'
+import { authSlice } from './slices/authSlice'
+import { statisticApi } from './slices/api/statisticsApi'
+import { postLikeApi } from './slices/api/postLikeApi'
+import { categoryApi } from './slices/api/categoriesApi'
 
 export const store = configureStore({
 	reducer: {
 		theme: themeSlice.reducer,
-		auth:authSlice.reducer,
-		[apiSlice.reducerPath]: apiSlice.reducer,
-		[commentSlice.reducerPath]: commentSlice.reducer,
-		[loginSlice.reducerPath]: loginSlice.reducer,
+		auth: authSlice.reducer,
+		[postApi.reducerPath]: postApi.reducer,
+		[commentsApi.reducerPath]: commentsApi.reducer,
+		[userApi.reducerPath]: userApi.reducer,
+		[statisticApi.reducerPath]: statisticApi.reducer,
+		[postLikeApi.reducerPath]:postLikeApi.reducer,
+		[categoryApi.reducerPath]: categoryApi.reducer
 	},
 	middleware: getDefaultMiddleware =>
-		getDefaultMiddleware().concat(apiSlice.middleware).concat(commentSlice.middleware).concat(loginSlice.middleware),
+		getDefaultMiddleware()
+			.concat(postApi.middleware)
+			.concat(commentsApi.middleware)
+			.concat(userApi.middleware)
+			.concat(statisticApi.middleware)
+			.concat(postLikeApi.middleware)
+			.concat(categoryApi.middleware),
 })
 
 setupListeners(store.dispatch)

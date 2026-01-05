@@ -11,13 +11,22 @@ import { rowsNumbers, theadAdminsAndModerators } from '../../../utils/data'
 
 import TabelPagination from '../../modules/TabelPagination/TabelPagination'
 import TabelSearch from '../../modules/TabelSearch/TabelSearch'
-import { useFetchAdminsAndModeratorsQuery } from '../../../slices/api/loginSlice'
+import { useAdminDeleteUserMutation, useFetchAdminsAndModeratorsQuery } from '../../../slices/api/userApi'
+import Popup from '../../atoms/Popup/Popup'
+
+import dateConverter from '../../../hooks/dateConverter'
+import longDateConverter from '../../../hooks/longDateConverter'
 
 const AdminList = () => {
-	const rowsRef = useRef<HTMLDivElement | null>(null)
+	const popupRef = useRef<HTMLDivElement | null>(null)
+	const [popUpMessage, setPopUpMessage] = useState<string>('')
+	const [userData, setUserData] = useState({
+		userId: '',
+		userName: '',
+	})
 	const [rows, setRows] = useState<number>(10)
 	const [currentPage, setCurrentPage] = useState<number>(1)
-
+	const [adminDeleteUser] = useAdminDeleteUserMutation()
 	const [sort, setSort] = useState({
 		sortBy: '',
 		order: '',
@@ -53,7 +62,7 @@ const AdminList = () => {
 
 		if (!el) return
 
-		if (el === 'comments' || el === 'posts') {
+		if (el === 'comments' || el === 'posts' || el === 'createdAt' || el === 'lastLogin') {
 			setSort(prev => {
 				const newOrder = prev.sortBy === el ? (prev.order === 'asc' ? 'desc' : 'asc') : 'desc'
 
@@ -79,41 +88,6 @@ const AdminList = () => {
 		setEnd(end)
 	}, [currentPage, rows, total, totalPages])
 
-	const handleOpenRows = () => {
-		const arrow = document.querySelector(`.${styles.arrowRows}`)
-		if (rowsRef.current && !rowsRef.current.classList.contains(styles.scale)) {
-			rowsRef.current?.classList.add(styles.scale)
-			arrow?.classList.add(styles.rotate)
-		} else {
-			rowsRef.current?.classList.remove(styles.scale)
-			arrow?.classList.remove(styles.rotate)
-		}
-	}
-
-	const handleSelectRows = (e: MouseEvent<HTMLSpanElement>) => {
-		const target = e.currentTarget as HTMLSpanElement
-		setRows(Number(target.dataset.value))
-
-		handleOpenRows()
-	}
-
-	useEffect(() => {
-		const handleCloseSelect = (e: globalThis.MouseEvent) => {
-			const el = rowsRef.current
-			const target = e.target as HTMLElement
-			const arrow = document.querySelector(`.${styles.arrowRows}`)
-
-			if (!target.classList.contains(styles.inputBox) && el?.classList.contains(styles.scale)) {
-				el?.classList.remove(styles.scale)
-				arrow?.classList.remove(styles.rotate)
-			}
-		}
-
-		window.addEventListener('click', handleCloseSelect)
-
-		return () => window.removeEventListener('click', handleCloseSelect)
-	}, [])
-
 	const handleChangePage = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLButtonElement
 
@@ -128,11 +102,47 @@ const AdminList = () => {
 		}
 	}
 
-	const handleDeleteUser = async (e: MouseEvent<HTMLDivElement>) => {
+	// const handleDeleteUser = async (e: MouseEvent<HTMLDivElement>) => {
+	// 	const target = e.currentTarget as HTMLDivElement
+	// 	const userId = target.dataset.id
+
+	// 	try {
+	// 		await adminDeleteUser(userId)
+	// 		refetch()
+	// 	} catch (error) {
+	// 		console.log(error)
+	// 	}
+	// }
+
+	const handleOpenPopup = (e: MouseEvent<HTMLDivElement>) => {
 		const target = e.currentTarget as HTMLDivElement
 		const userId = target.dataset.id
-		console.log(userId)
+		const userName = target.dataset.name
+		if (userId && userName)
+			setUserData({
+				userId,
+				userName,
+			})
+
+		if (!popupRef.current?.classList.contains(styles.openPopup)) {
+			popupRef.current?.classList.add(styles.openPopup)
+		}
+	}
+	const handleClosePopup = () => {
+		if (popupRef.current?.classList.contains(styles.openPopup)) {
+			popupRef.current?.classList.remove(styles.openPopup)
+		}
+		setPopUpMessage('')
+	}
+
+	const handleDeleteUser = async () => {
 		try {
+			if (userData.userId) {
+				const res = await adminDeleteUser(userData.userId)
+
+				setPopUpMessage(res.data?.message)
+			}
+
 			refetch()
 		} catch (error) {
 			console.log(error)
@@ -141,7 +151,7 @@ const AdminList = () => {
 
 	return (
 		<div className={styles.listWrapper}>
-			<h3 className={styles.listTitle}>List</h3>
+			<h3 className={styles.listTitle}>Admins & Moderators</h3>
 			<TabelSearch styles={styles} handleSetInputValue={handleSetInputValue} />
 
 			<div className={styles.listContainer}>
@@ -180,19 +190,22 @@ const AdminList = () => {
 									</div>
 
 									<div className={styles.td}>{item.email}</div>
-									<div className={styles.td}>{new Date(item.createdAt).toLocaleDateString()}</div>
+									<div className={styles.td}>{new Date(item.createdAt).toLocaleDateString(...dateConverter())}</div>
 									<div className={styles.td}>{item.isVerified.toString()}</div>
 
 									<div className={styles.td}>{item.commentsCount}</div>
 									<div className={styles.td}>{item.postCount}</div>
 									<div className={styles.td}>{item.role}</div>
 									<div className={styles.td}>
+										{item.lastLogin ? new Date(item.lastLogin).toLocaleString(...longDateConverter()): '-'}
+									</div>
+									<div className={styles.td}>
 										{item.role !== 'Admin' && (
 											<>
 												<AnchorLink href={`/admin/users/profile/${item._id}`}>
 													<PencilSVG />
 												</AnchorLink>
-												<div data-id={item._id} onClick={e => handleDeleteUser(e)}>
+												<div data-id={item._id} data-name={item.name} onClick={e => handleOpenPopup(e)}>
 													<TrashSVG />
 												</div>
 											</>
@@ -204,17 +217,31 @@ const AdminList = () => {
 				</div>
 			</div>
 			<TabelPagination
-				styles={styles}
+				setRows={setRows}
 				rows={rows}
 				rowsNumbers={rowsNumbers}
 				start={start}
 				end={end}
-				rowsRef={rowsRef}
 				total={total}
-				handleOpenRows={handleOpenRows}
-				handleSelectRows={handleSelectRows}
 				handleChangePage={handleChangePage}
 			/>
+			<Popup
+				popupRef={popupRef}
+				popupTitle="DELETE User"
+				handleClosePopup={handleClosePopup}
+				handleDelete={handleDeleteUser}
+				popUpMessage={popUpMessage}>
+				{!popUpMessage && (
+					<div className={styles.popupInfo}>
+						<span>
+							<span>User Name:</span> {userData.userName}
+						</span>
+						<span>
+							<span>User Id:</span> {userData.userId}
+						</span>
+					</div>
+				)}
+			</Popup>
 		</div>
 	)
 }

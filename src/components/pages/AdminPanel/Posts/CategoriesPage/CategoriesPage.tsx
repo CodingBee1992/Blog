@@ -1,8 +1,7 @@
+import CategoryPageTemplate from '../../../../templates/AdminPanelTemplates/CategoryPageTemplate/CategoryPageTemplate'
 
 const CategoriesPage = () => {
-  return (
-    <div>CategoriesPage</div>
-  )
+	return <CategoryPageTemplate />
 }
 
 export default CategoriesPage

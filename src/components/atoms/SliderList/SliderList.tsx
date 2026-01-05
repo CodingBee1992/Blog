@@ -1,3 +1,4 @@
+import slugify from 'slugify'
 import useResponsiveCloudinaryImage from '../../../hooks/useResponsiveCloudinaryImage'
 import type { ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
@@ -14,8 +15,14 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 	// ${dynamicClass} ${number === index ? styles.sliderActive : ''}
 
 	const mainImageSrc = data.mainImage.src
-	const responsiveImage = useResponsiveCloudinaryImage({ mainImageSrc})
+	const responsiveImage = useResponsiveCloudinaryImage({ mainImageSrc })
+
+	const categorySlugs = data.categories
+		?.map(cat => cat)
+		.filter(Boolean) // usuwa undefined/null
+		.map(slug => slugify(slug, { lower: true, strict: true }))
 	
+	const url = `/${categorySlugs.join('/')}/${data.seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${data._id}`
 
 	const isActive = number === index
 	return (
@@ -45,9 +52,7 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 							</span>
 						</div>
 						<h1 className={styles.text}>
-							<AnchorLink href={`/blog/${data.seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${data.id}`}>
-								{data.title}
-							</AnchorLink>
+							<AnchorLink href={url}>{data.title}</AnchorLink>
 						</h1>
 					</div>
 				</div>

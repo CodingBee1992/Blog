@@ -9,14 +9,15 @@ interface TabelSearchProps {
 const TabelSearch = ({ styles, handleSetInputValue }:TabelSearchProps) => {
 	return (
 		<div className={styles.searchContainer}>
-			<label className={styles.searchBox}>
+			<label htmlFor='search' className={styles.searchBox}>
 				<input
+				id='search'
 					className={styles.searchInput}
 					type="text"
 					placeholder="Search..."
 					onChange={e => handleSetInputValue(e)}
 				/>
-				<button className={styles.searchBtn}>
+				<button aria-label='search button' className={styles.searchBtn}>
 					<SearchSvg className={styles.searchIcon} />
 				</button>
 			</label>

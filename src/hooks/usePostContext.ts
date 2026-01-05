@@ -1,5 +1,6 @@
 import { use } from "react"
-import { SinglePostContext } from "../slices/createPostContext"
+import { SinglePostContext } from "../context/createPostContext"
+
 
 
 

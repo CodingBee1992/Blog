@@ -1,10 +1,11 @@
 import type { MouseEvent } from 'react'
 import { Controller, useFormContext, type FieldValues, type Path } from 'react-hook-form'
+import type { CategoryProps } from '../../../types/types'
 
 interface RHFCategorySelectProps<T extends FieldValues> {
 	name: Path<T>
 
-	options: string[]
+	options: CategoryProps[] | {name:string}[]
 	label: string
 	max: number
 	styles: Record<string, string>
@@ -46,15 +47,16 @@ const RHFCategorySelect = <T extends FieldValues>({ name, options, label, max, s
 						</div>}
 						{error && <span className={styles.error}>{error.message}</span>}
 					</div>
-					<div className={styles.categoriesOptions}>
-						{options.map((option: string, index) => {
-							const disabled = value.length > 2 && !value.includes(option)
-							const checked = value.includes(option)
+					<div className={`${styles.categoriesOptions} ${value.length <= 0 ? styles.categoryMargin:''}`}>
+						{options.map((option, index) => {
+							
+							const disabled = value.length > 2 && !value.includes(option.name)
+							const checked = value.includes(option.name)
 
 							return (
-								<label data-element={option} key={index} onClick={e => handleSelectCategory(e, value, onChange)}>
-									<input value={option} type="checkbox" checked={checked} readOnly disabled={disabled} />
-									{option}
+								<label data-element={option.name} key={index} onClick={e => handleSelectCategory(e, value, onChange)}>
+									<input value={option.name} type="checkbox" checked={checked} readOnly disabled={disabled} />
+									{option.name}
 								</label>
 							)
 						})}

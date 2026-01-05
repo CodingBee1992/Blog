@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from 'react-router'
-import { useResendVerificationMutation, useVerifyAccountQuery } from '../../../slices/api/loginSlice'
+import { useResendVerificationMutation, useVerifyAccountQuery } from '../../../slices/api/userApi'
 import styles from './VerifyPageTemplate.module.scss'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useEffect, useState } from 'react'

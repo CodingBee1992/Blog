@@ -5,7 +5,7 @@ const timePass = (value:string,days:number) => {
     const time = new Date(value).getTime()
     const passedDays = days * 24 * 60 * 60 * 1000
     const elapsedTime = time + passedDays
-
+    
     return elapsedTime > currentTime
     
 }
