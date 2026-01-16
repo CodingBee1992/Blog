@@ -151,7 +151,7 @@ $mobileSmall: 380px;
 	//  add post / form colors
 	--mainFormColor: #092013;
 	--mainFormBgc: #ffffff;
-	--categoryOptionHover:#9f0000;
+	--categoryOptionHover: #9f0000;
 	--buttonColor: #092013;
 	--buttonColorHover: #ffffff;
 	--createFormBgc: #ffffff;
@@ -173,12 +173,12 @@ $mobileSmall: 380px;
 	--bgcPublishHover: #85ffad;
 
 	// stats colors
-	--statBgc:#ffffff;
-	--statMainColor:#464D4D;
-	--statSecondColor:#ADADBA;
-	--statThirdColor:#03ff18;
-	--areaChartColor:#24DC00;
-	--areaChartHoverColor:#008E00;
+	--statBgc: #ffffff;
+	--statMainColor: #464d4d;
+	--statSecondColor: #adadba;
+	--statThirdColor: #03ff18;
+	--areaChartColor: #24dc00;
+	--areaChartHoverColor: #008e00;
 
 	//  fontSize
 
@@ -187,7 +187,6 @@ $mobileSmall: 380px;
 	//  links lineheight
 	--sideBarLineHeight: calc(2 * 2.5rem);
 
-	
 	--textSize_10: 1rem;
 	--textSize_12: 1.2rem;
 	--textSize_14: 1.4rem;
@@ -197,6 +196,9 @@ $mobileSmall: 380px;
 	--textSize_22: 2.2rem;
 	--textSize_24: 2.4rem;
 	--textSize_26: 2.6rem;
+	--textSize_28: 2.8rem;
+	--textSize_30: 3rem;
+	--textSize_32: 3.2rem;
 
 	// borders
 	--borderRadius02: 0.2rem;
@@ -285,4 +287,19 @@ $mobileSmall: 380px;
 		--menu-TextSize: calc(calc(calc((1.7rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
 		--slideContent-width: 75dvw;
 	}
+}
+
+@mixin formBtn($padding:1rem,$bgc,$color:#000000,$cursor:pointer) {
+	display: flex;
+	align-self: flex-start;
+	padding: $padding;
+	font-size: var(--textSize_14);
+	color: $color;
+	background-color: $bgc;
+	border: none;
+	border-radius: var(--borderRadius06);
+	transition: all 0.3s;
+	cursor: $cursor;
+
+	
 }

@@ -40,3 +40,5 @@ export const role = ['Admin', 'Moderator', 'User']
 export const rowsNumbers = [10, 25, 50]
 
 export const statusOptions = ['draft', 'published']
+
+

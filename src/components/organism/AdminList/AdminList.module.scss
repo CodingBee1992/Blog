@@ -5,8 +5,10 @@
 	height: 100dvh;
 
 	.listTitle {
-		margin: 2rem 0 0 2rem;
-		font-size: var(--textSize_24);
+		padding: 2rem;
+		font-size: var(--textSize_26);
+		font-weight: 400;
+		line-height: 4rem;
 		font-family: var(--font-2);
 		color: var(--pagesColor);
 	}
@@ -97,9 +99,8 @@
 						&:nth-child(n + 3):nth-child(-n + 7) {
 							max-width: 150px;
 						}
-						&:last-child{
+						&:last-child {
 							max-width: 150px;
-
 						}
 					}
 				}

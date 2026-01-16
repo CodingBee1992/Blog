@@ -1,7 +1,7 @@
 .popularPostsContainer {
 	position: relative;
 	margin-top: 2rem;
-	
+
 	width: 100%;
 	max-width: 500px;
 	height: 100%;
@@ -24,17 +24,16 @@
 		color: var(--areaChartColor);
 		border: 1px solid var(--areaChartColor);
 		border-radius: var(--borderRadius06);
-		transition: all .3s;
-		&:hover{
+		transition: all 0.3s;
+		&:hover {
 			color: var(--areaChartHoverColor);
 			border: 1px solid var(--areaChartHoverColor);
-			
 		}
 	}
 	.popularPostWrapper {
 		display: flex;
 		padding: 1rem 0;
-		
+
 		.popularPostImageBox {
 			min-width: 90px;
 			width: 90px;
@@ -74,9 +73,6 @@
 					display: flex;
 					align-items: center;
 
-					// &:first-child {
-					// 	margin-right: 2rem;
-					// }
 					span {
 						margin-left: 0.8rem;
 						color: var(--statSecondColor);
@@ -86,9 +82,10 @@
 					.popularViewsSVG {
 						width: 15px;
 						height: 15px;
-						fill: var(--statSecondColor);
-
-
+						path {
+							fill: var(--statSecondColor);
+							stroke: var(--statSecondColor);
+						}
 					}
 				}
 			}

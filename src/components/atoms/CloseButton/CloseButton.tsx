@@ -1,22 +1,21 @@
-import CloseSvg from '../../../assets/icons/nav/CloseSvg'
-
-// import styles from './CloseButton.module.scss'
+import { CloseSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 
 interface HandleCloseProps {
 	styles: { [key: string]: string }
 	handleClose: () => void
-	ariaLabel?:string
+	ariaLabel?: string
 }
 
-const CloseButton = ({ styles, handleClose,ariaLabel }: HandleCloseProps) => {
+const CloseButton = ({ styles, handleClose, ariaLabel }: HandleCloseProps) => {
 	return (
 		<button
-		aria-label={ariaLabel}
+			type="button"
+			aria-label={ariaLabel}
 			className={styles.close}
 			onClick={() => {
 				handleClose()
 			}}>
-			<CloseSvg styles={styles} />
+			<CloseSVG className={styles.closeSVG}/>
 		</button>
 	)
 }

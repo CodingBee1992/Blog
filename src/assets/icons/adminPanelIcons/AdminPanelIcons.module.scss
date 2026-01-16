@@ -11,7 +11,6 @@
 	width: 20px;
 	height: 20px;
 	cursor: pointer;
-	
 }
 .trash {
 	width: 20px;
@@ -24,48 +23,77 @@
 		fill: #910000;
 	}
 }
-.sort{
+.sort {
 	width: 15px;
 	height: 15px;
-	
+
 	cursor: pointer;
-	
 }
-.arrowPrevSVG,.arrowNextSVG{
+.arrowPrevSVG,
+.arrowNextSVG {
 	width: 15px;
 	height: 15px;
-	
+
 	cursor: pointer;
-	
 }
 
-.commentsSVG{
+.commentsSVG {
 	width: 20px;
 	height: 20px;
 	path {
 		fill: var(--sideBarColorIcon);
 	}
 }
-.heartSVG{
+.heartSVG {
 	width: 20px;
 	height: 20px;
 	path {
 		fill: var(--sideBarColorIcon);
 	}
 }
-.viewsSVG{
+.viewsSVG {
 	width: 30px;
 	height: 20px;
 	path {
 		stroke-width: 1px;
-		stroke: #4A72FE;
+		stroke: #4a72fe;
 	}
 }
-.closeSVG{
+.closeSVG {
+	width: 16px;
+	height: 16px;
+	stroke: #5c6c75;
+	stroke-width: 4px;
+	transition: all 0.3s;
+}
+
+.profileSVG {
 	width: 20px;
 	height: 20px;
+}
+.checkSVG {
+	width: 20px;
+	height: 20px;
+}
+.warnSVG {
+	width: 20px;
+	height: 20px;
+
 	path {
-		stroke-width: 1px;
-		stroke: #f90000;
+		fill: #ff0000;
 	}
+}
+
+.cameraSVG {
+	width: 20px;
+	height: 20px;
+}
+.securitySVG {
+	width: 20px;
+	height: 20px;
+	
+	path:nth-child(2){
+		fill: var(--sideBarColorIcon);
+	}
+	
 }

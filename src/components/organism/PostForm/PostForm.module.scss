@@ -151,23 +151,29 @@
 							flex-direction: column;
 							gap: 1rem;
 
-							label {
+							.checkbox {
+								display: flex;
+								align-items: center;
+								gap: 1rem;
 								padding: 0.3rem 0;
 								border-right: 1px solid var(--mainFormBgc);
 								font-size: 1.6rem;
 								cursor: pointer;
-								transition: all .3s;
+								transition: all 0.3s;
 								&:hover {
 									color: var(--categoryOptionHover);
-									
 								}
 
 								input {
-									margin-right: 0.5rem;
+									display: none;
+									
 								}
+
+
+								
 							}
 						}
-						.categoryMargin{
+						.categoryMargin {
 							margin-top: 1rem;
 						}
 					}
@@ -199,7 +205,7 @@
 							font-size: var(--textSize_16);
 							border: none;
 							background-color: var(--mainFormBgc);
-							color:var(--sideBarMainColor);
+							color: var(--sideBarMainColor);
 							width: 100%;
 							appearance: none;
 							-moz-appearance: none;
@@ -212,7 +218,6 @@
 							border-radius: var(--borderRadius04);
 							option {
 								width: 80%;
-								
 							}
 						}
 					}
@@ -226,7 +231,6 @@
 		gap: 2rem;
 		margin-top: 3rem;
 
-		
 		.submitBtn {
 			background-color: var(--createFormBgc);
 
@@ -258,6 +262,15 @@
 				background-color: var(--clearFormHoverBgc);
 			}
 		}
+		.isSubmitting {
+			background-color: #d3d3d3d3;
+
+			cursor: not-allowed;
+			&:hover {
+				background-color: #d3d3d3d3;
+				color: #000000;
+			}
+		}
 	}
 }
 .textAreaContainer,
@@ -267,7 +280,7 @@
 	font-family: var(--font-2);
 	margin-bottom: 1rem;
 	width: 100%;
-	
+
 	label {
 		margin-bottom: 1rem;
 		font-size: var(--textSize_20);
@@ -278,7 +291,7 @@
 	input {
 		margin-bottom: 1rem;
 		padding: 1rem;
-		
+
 		font-size: var(--textSize_14);
 		background-color: var(--mainFormBgc);
 		border: none;
@@ -294,8 +307,7 @@
 		margin-bottom: 1rem;
 		padding: 1rem;
 		font-size: var(--textSize_14);
-		
-		
+
 		background-color: var(--mainFormBgc);
 		border: none;
 		border-radius: var(--borderRadius04);

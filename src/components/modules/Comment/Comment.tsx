@@ -105,7 +105,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 	return (
 		<div ref={comRef} className={styles.commentContainer} id={`${_id}`} data-postid={postId} data-parentid={parentId}>
 			<div className={styles.commentAvatar}>
-				<img src={author.avatar} alt="" className={styles.authorAvatar} />
+				<img src={author.avatar?.src} alt="" className={styles.authorAvatar} />
 			</div>
 			<div className={`${styles.commentContent} ${parentId ? styles.commentLeft : ''}`}>
 				<div className={styles.commentInfo}>
