@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 const API_URL = import.meta.env.VITE_API_URL
 const POSTS_URL = import.meta.env.VITE_POSTS_URL
-const SIGNATURE_URL = import.meta.env.VITE_SIGNATURE_URL
+// const SIGNATURE_URL = import.meta.env.VITE_SIGNATURE_URL
 
 export const postApi = createApi({
 	reducerPath: 'api',
@@ -72,20 +72,20 @@ export const postApi = createApi({
 			})
 		}),
 
-		fetchCloudinary: builder.mutation({
-			query: ({uploadFolder,publicId}) => ({
-				url:`${SIGNATURE_URL}/?uploadFolder=${uploadFolder}&publicId=${publicId}`,
-				method:"POST",
-				headers:{'Content-type':'application/json'}
-			})
-		}),
-		destroyCloudinaryImage: builder.mutation({
-			query: (publicId)=>({
-				url:`${SIGNATURE_URL}/destroy/?publicId=${publicId}`,
-				method:'DELETE',
-				headers:{'Content-type':'application/json'}
-			})
-		})
+		// fetchCloudinary: builder.mutation({
+		// 	query: ({uploadFolder,publicId}) => ({
+		// 		url:`${SIGNATURE_URL}/?uploadFolder=${uploadFolder}&publicId=${publicId}`,
+		// 		method:"POST",
+		// 		headers:{'Content-type':'application/json'}
+		// 	})
+		// }),
+		// destroyCloudinaryImage: builder.mutation({
+		// 	query: (publicId)=>({
+		// 		url:`${SIGNATURE_URL}/destroy/?publicId=${publicId}`,
+		// 		method:'DELETE',
+		// 		headers:{'Content-type':'application/json'}
+		// 	})
+		// })
 	}),
 })
 
@@ -95,10 +95,10 @@ export const {
 	useFetchPostByIdQuery,
 	useFetchPostsByLimitQuery,
 	useFetchPostCreatedAtQuery,
-	useFetchCloudinaryMutation,
+	// useFetchCloudinaryMutation,
 	useDeletePostMutation,
 	usePublishPostMutation,
 	useSearchPostQuery,
 	useUpdatePostMutation,
-	useDestroyCloudinaryImageMutation
+	// useDestroyCloudinaryImageMutation
 } = postApi

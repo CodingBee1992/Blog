@@ -6,8 +6,10 @@
 	height: 100dvh;
 
 	.listTitle {
-		margin: 2rem 0 0 2rem;
-		font-size: var(--textSize_24);
+		padding: 2rem;
+		font-size: var(--textSize_26);
+		font-weight: 400;
+		line-height: 4rem;
 		font-family: var(--font-2);
 		color: var(--pagesColor);
 	}
@@ -141,7 +143,7 @@
 						&:nth-child(-n + 2) {
 							justify-content: flex-start;
 
-							&:hover  {
+							&:hover {
 								color: #ffffff;
 							}
 						}
@@ -159,7 +161,6 @@
 							&:hover > .comment {
 								color: #ffffff;
 							}
-
 						}
 						&:last-child {
 							padding-right: 0;
@@ -187,13 +188,12 @@
 		gap: 1rem;
 		padding: 0 2rem;
 		margin-bottom: 3rem;
-		
 
 		span {
 			font-size: var(--textSize_16);
 			span:first-child {
 				display: inline;
-				
+
 				font-weight: 600;
 			}
 		}

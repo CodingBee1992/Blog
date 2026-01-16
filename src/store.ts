@@ -8,6 +8,7 @@ import { authSlice } from './slices/authSlice'
 import { statisticApi } from './slices/api/statisticsApi'
 import { postLikeApi } from './slices/api/postLikeApi'
 import { categoryApi } from './slices/api/categoriesApi'
+import { cloudinaryApi } from './slices/api/cloudinaryApi'
 
 export const store = configureStore({
 	reducer: {
@@ -18,7 +19,8 @@ export const store = configureStore({
 		[userApi.reducerPath]: userApi.reducer,
 		[statisticApi.reducerPath]: statisticApi.reducer,
 		[postLikeApi.reducerPath]:postLikeApi.reducer,
-		[categoryApi.reducerPath]: categoryApi.reducer
+		[categoryApi.reducerPath]: categoryApi.reducer,
+		[cloudinaryApi.reducerPath]:cloudinaryApi.reducer,
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware()
@@ -27,7 +29,9 @@ export const store = configureStore({
 			.concat(userApi.middleware)
 			.concat(statisticApi.middleware)
 			.concat(postLikeApi.middleware)
-			.concat(categoryApi.middleware),
+			.concat(categoryApi.middleware)
+			.concat(cloudinaryApi.middleware),
+			
 })
 
 setupListeners(store.dispatch)

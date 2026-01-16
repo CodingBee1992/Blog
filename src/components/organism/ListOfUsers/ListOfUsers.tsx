@@ -67,7 +67,7 @@ const ListOfUsers = () => {
 
 		if (!el) return
 
-		if (el === 'comments' || el === 'lastLogin') {
+		if (el === 'comments' || el === 'lastLogin' || el === 'status') {
 			setSort(prev => {
 				const newOrder = prev.sortBy === el ? (prev.order === 'asc' ? 'desc' : 'asc') : 'desc'
 

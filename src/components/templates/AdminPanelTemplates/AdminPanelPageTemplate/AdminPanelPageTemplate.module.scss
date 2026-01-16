@@ -3,10 +3,12 @@
 	min-height: 100dvh;
 	height: 100%;
 	background-color: var(--pagesBgc);
+	padding: 2rem;
 
 	.statisticTitle {
-		margin: 2rem 0 0 2rem;
-		font-size: var(--textSize_24);
+		font-size: var(--textSize_26);
+		font-weight: 400;
+		line-height: 4rem;
 		font-family: var(--font-2);
 		color: var(--pagesColor);
 	}

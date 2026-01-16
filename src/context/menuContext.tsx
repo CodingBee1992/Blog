@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, type MouseEvent, type ReactNode, type RefObject } from 'react'
+import { createContext, useEffect, useRef, type KeyboardEvent, type MouseEvent, type ReactNode, type RefObject } from 'react'
 import styles from './menuContext.module.scss'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
@@ -15,7 +15,7 @@ interface MenuContextProps {
 
 interface CreateContextProps {
 	handleOpenCloseMenu: () => void
-	openCloseUserMenu: (args: { e: MouseEvent<HTMLElement>; userRef: RefObject<HTMLDivElement | null> }) => void
+	openCloseUserMenu: (args: { e: MouseEvent<HTMLElement> | KeyboardEvent; userRef: RefObject<HTMLDivElement | null> }) => void
 	handleOpenCloseDropdown: (e: MouseEvent<HTMLElement>, index: number) => void
 	signOut: () => void
 	navRef: RefObject<HTMLDivElement | null>
@@ -80,7 +80,7 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 		e,
 		userRef,
 	}: {
-		e: MouseEvent<HTMLElement>
+		e: MouseEvent<HTMLElement> | KeyboardEvent
 		userRef: RefObject<HTMLDivElement | null>
 	}) => {
 		const el = userRef.current as HTMLDivElement
@@ -126,9 +126,11 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 
 	const signOut = async () => {
 		try {
+			dispatch(setLogout())
+			
+			
 			await logOut({}).unwrap()
 
-			dispatch(setLogout())
 
 			dispatch(postApi.util.resetApiState())
 			dispatch(commentsApi.util.resetApiState())
@@ -136,7 +138,7 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 			dispatch(statisticApi.util.resetApiState())
 			dispatch(postLikeApi.util.resetApiState())
 			dispatch(categoryApi.util.resetApiState())
-
+			
 			navigate('/')
 			window.scrollTo({ top: 0, behavior: 'instant' })
 		} catch (error) {

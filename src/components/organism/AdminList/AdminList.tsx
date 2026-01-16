@@ -138,9 +138,9 @@ const AdminList = () => {
 	const handleDeleteUser = async () => {
 		try {
 			if (userData.userId) {
-				const res = await adminDeleteUser(userData.userId)
+				const res = await adminDeleteUser(userData.userId).unwrap()
 
-				setPopUpMessage(res.data?.message)
+				setPopUpMessage(res.message)
 			}
 
 			refetch()

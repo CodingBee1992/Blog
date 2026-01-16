@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer'
 import useWindowSize from '../../hooks/useWindowSize'
 import { SinglePostProvider } from '../../context/createPostContext'
 import { MenuProvider } from '../../context/menuContext'
+import CookieBanner from '../CookieBanner/CookieBanner'
 
 
 
@@ -40,6 +41,7 @@ const StaticLayout = () => {
 	return (
 		<MenuProvider>
 			<SinglePostProvider>
+				<CookieBanner/>
 				<div data-aos="fade-zoom-in">
 					<Navigation />
 					<main>

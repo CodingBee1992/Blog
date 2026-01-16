@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router'
-import { HeartSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
+import { CommentsSVG, HeartSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import { usePostContext } from '../../../hooks/usePostContext'
 import { useFetchCommentsQuery } from '../../../slices/api/commentsApi'
 import ResponsiveArticleImage from '../ResponsiveArticleImage/ResponsiveArticleImage'
@@ -29,7 +29,7 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 
 	const { data } = useFetchCommentsQuery(postId!, { skip: !postId })
 	const [likePost] = useToogleLikePostMutation()
-	const { data: likedPost } = useFetchUserLikedPostQuery({ postId, userId: id },{ skip: !isLogged || !postId || !id })
+	const { data: likedPost } = useFetchUserLikedPostQuery({ postId, userId: id }, { skip: !isLogged || !postId || !id })
 	const { data: postLikes } = useFetchPostLikesQuery(postId, { skip: !postId })
 
 	const { firstPart, secondPart } = useMemo(() => {
@@ -118,7 +118,7 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 			<div className={styles.articleReactionsBox}>
 				<div className={styles.articleReactionsInfo}>
 					<span className={styles.articleLikes}>
-						<span className={styles.articleLikeBox}>
+						<span className={styles.articleSVG}>
 							<HeartSVG className={styles.articleLikeSVG} />
 						</span>
 						{postLikes && postLikes > 0
@@ -128,6 +128,9 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 							: `${postLikes} Likes`}
 					</span>
 					<span className={styles.articleComments}>
+						<span className={styles.articleSVG}>
+							<CommentsSVG className={styles.articleCommentSVG} />
+						</span>
 						{data && data.length > 0
 							? data?.length === 1
 								? `${data?.length} Comment`

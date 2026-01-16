@@ -1,0 +1,88 @@
+@use '../../../assets/styles/variable' as *;
+.popupContainer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100dvh;
+	height: 100%;
+	width: 100%;
+	background-color: #0000003d;
+	z-index: 1000;
+
+	.popupWrapper {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding: 4rem;
+		max-width: 560px;
+		width: 100%;
+		min-height: 350px;
+		border-radius: var(--borderRadius16);
+		background-color: #ffffff;
+
+		.popupTitle {
+			font-size: var(--textSize_22);
+			margin-bottom: 3rem;
+			padding-bottom: 2rem;
+			border-bottom: 1px solid #d3d3d3d3;
+		}
+		.sendInfo {
+			margin-top: auto;
+			font-size: var(--textSize_14);
+			span {
+				font-weight: bold;
+			}
+		}
+		.popupBtn {
+			@include formBtn($padding: 1rem, $bgc: transparent, $color: #000000);
+		}
+
+		.sendPopupBtn {
+			margin-top: auto;
+			color: #ffffff;
+			background-color: #00684a;
+
+			&:hover {
+				box-shadow: 0px 0px 3px 3px #3fa588;
+			}
+		}
+		.cancelPopupBtn {
+			border: 1px solid #000000;
+			&:hover {
+				box-shadow: 0px 0px 3px 3px #d3d3d3d3;
+			}
+		}
+
+		.popupMessage {
+			margin-top: 1rem;
+			.warnSVG {
+				margin-right: 0.5rem;
+			}
+		}
+
+		.footerLine {
+			margin-top: 1.8rem;
+			padding: 1.8rem 0 0 0;
+			border-top: 1px solid #d3d3d3d3;
+		}
+
+		.close {
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+			padding: 0.3rem 0.5rem;
+			border: none;
+			background-color: transparent;
+			cursor: pointer;
+
+			.closeSVG {
+				&:hover {
+					scale: 1.1;
+				}
+			}
+		}
+	}
+}

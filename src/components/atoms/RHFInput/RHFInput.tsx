@@ -5,9 +5,10 @@ interface RHFInputProps<T extends FieldValues> {
 	label?: string
 	styles: Record<string, string>
 	id:string
+	type:string
 }
 
-const RHFInput = <T extends FieldValues>({ name, label, styles,id }: RHFInputProps<T>) => {
+const RHFInput = <T extends FieldValues>({ name, label, styles,id,type='text' }: RHFInputProps<T>) => {
 	const { control } = useFormContext()
 	return (
 		<Controller
@@ -16,7 +17,7 @@ const RHFInput = <T extends FieldValues>({ name, label, styles,id }: RHFInputPro
 			render={({ field, fieldState: { error } }) => (
 				<div className={styles.formInput}>
 					<label htmlFor={id} >{label && `${label}`}</label>
-					<input id={id} {...field} type="text" />
+					<input id={id} {...field} type={type} />
 					{error && <span className={styles.error}>{error.message}</span>}
 				</div>
 			)}

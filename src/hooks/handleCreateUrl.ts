@@ -18,9 +18,9 @@ const handleCreateUrl = ({ categories, seo, _id }: handleCreateUrlProps) => {
    
     
 	if (categorySlugs && categorySlugs.length > 1) {
-		return `/${categorySlugs.join('/')}/${seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${_id}`
+		return `/post/${categorySlugs.join('/')}/${seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${_id}`
 	} else {
-		return `/${categorySlugs}/${seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${_id}`
+		return `/post/${categorySlugs}/${seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${_id}`
 	}
 }
 

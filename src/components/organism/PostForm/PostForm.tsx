@@ -7,25 +7,20 @@ import RHFTextArea from '../../atoms/RHFTextArea/RHFTextArea'
 import RHFAddFile from '../../atoms/RHFAddFile/RHFAddFile'
 import RHFCategorySelect from '../../atoms/RHFCategorySelect/RHFCategorySelect'
 import RHFSelect from '../../atoms/RHFSelect/RHFSelect'
-import {
-	useCreatePostMutation,
-	useDestroyCloudinaryImageMutation,
-	useFetchCloudinaryMutation,
-	useUpdatePostMutation,
-} from '../../../slices/api/postApi'
+import { useCreatePostMutation, useUpdatePostMutation } from '../../../slices/api/postApi'
 import styles from './PostForm.module.scss'
 import uploadToCloudinary from '../../../hooks/useUploadToCloudinary'
 import { defaultCategories, statusOptions } from '../../../utils/data'
 import CloseSvg from '../../../assets/icons/nav/CloseSvg'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
 import { useFetchAllCategoriesQuery } from '../../../slices/api/categoriesApi'
+import { useDestroyCloudinaryImageMutation, useFetchCloudinaryMutation } from '../../../slices/api/cloudinaryApi'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 interface PostFormProps {
 	editValues?: postSchemaTypes
 	postId?: string | null
 }
-
-
 
 const PostForm = ({ editValues, postId }: PostFormProps) => {
 	const uploadFolder = import.meta.env.VITE_UPLOAD_PRESET
@@ -37,9 +32,8 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 	const [createSignature] = useFetchCloudinaryMutation()
 	const [updatePost] = useUpdatePostMutation()
 	const [destroyCloudinaryImage] = useDestroyCloudinaryImageMutation()
-	const {data} = useFetchAllCategoriesQuery()
-	
-
+	const { data } = useFetchAllCategoriesQuery()
+	const [postMessage, setPostMessage] = useState<string>('')
 	const allCategories = data && data?.length > 0 ? data : defaultCategories
 
 	const methods = useForm<postSchemaTypes>({
@@ -60,7 +54,6 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 
 	const handleResetFields = () => {
 		if (oldDefaultValues) {
-			
 			reset(oldDefaultValues)
 			setOldDefaultValues({})
 		} else {
@@ -91,7 +84,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 
 		remove(fieldIndex)
 	}
-	
+
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
 		try {
 			if (!editValues) {
@@ -102,7 +95,6 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 					const data = await uploadToCloudinary({ file: mainImage.src, uploadFolder, dataSignature })
 
 					mainImage = { ...mainImage, src: data.secure_url, public_id: data.public_id }
-					
 				}
 				const articleContent = await Promise.all(
 					data.articleContent.map(async item => {
@@ -119,8 +111,8 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 
 				const updatedData = { ...data, articleContent, mainImage }
 
-				await createPost({ updatedData }).unwrap()
-
+				const res = await createPost({ updatedData }).unwrap()
+				if (res) setPostMessage(res.message)
 				reset()
 			} else {
 				// Updating Post
@@ -167,27 +159,32 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 				)
 				if (imagesToDestroy.length > 0) {
 					imagesToDestroy.forEach(item => {
-						destroyCloudinaryImage(item).unwrap()
+						destroyCloudinaryImage(item)
 					})
 				}
 
 				const updatedData = { ...data, mainImage, articleContent }
 
-				await updatePost({ postId, updatedData }).unwrap()
-
+				const res = await updatePost({ postId, updatedData }).unwrap()
+				if (res) setPostMessage(res.message)
 				reset(defaultValues)
 			}
 		} catch (error) {
-			console.log(error)
-			setError('root', { message: 'Please fill all fields' })
+			if(typeof error === 'object' && error !== null){
+				const fetchError = error as FetchBaseQueryError
+				const message = fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data ? (fetchError.data.message as string) : 'An unexpected error has occured'
+				setError('root', { message })
+			}
+			setError('root', { message: 'An unexpected error has occured' })
 		}
 	}
+	
 	if (isSubmitSuccessful) window.scrollTo({ top: 0, behavior: 'smooth' })
 	if (editValues && isSubmitSuccessful)
 		return (
 			<div className={styles.updateContainer}>
 				<div className={styles.updateWrapper}>
-					<p>Post Updated Successfully</p>
+					<p>{postMessage}</p>
 				</div>
 			</div>
 		)
@@ -219,7 +216,13 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 				<form onSubmit={handleSubmit(onSumbit)} className={styles.formContainer}>
 					<div className={styles.formWrapper}>
 						<div className={styles.formFlex}>
-							<RHFInput<postSchemaTypes> name="title" label="Main Title" styles={styles} id={`title-title`} />
+							<RHFInput<postSchemaTypes>
+								type="text"
+								name="title"
+								label="Main Title"
+								styles={styles}
+								id={`title-title`}
+							/>
 							<RHFTextArea<postSchemaTypes>
 								name="introduction"
 								label="Introduction"
@@ -233,6 +236,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 								styles={styles}
 								fileRef={fileRef}
 								fileIndex={-1}
+								id='mainImage'
 							/>
 
 							{articleContent &&
@@ -242,6 +246,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 										{field.type === 'title' && (
 											<>
 												<RHFInput<postSchemaTypes>
+													type="text"
 													id={`title-${index}`}
 													name={`articleContent.${index}.value`}
 													label="Subtitle"
@@ -283,6 +288,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 													styles={styles}
 													fileRef={fileRef}
 													fileIndex={index}
+													id={`file${index}`}
 												/>
 												{index >= 3 && (
 													<div
@@ -327,19 +333,30 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 								<div className={styles.seoContainer}>
 									<p className={styles.seoTitle}>SEO</p>
 
-									<RHFInput name="seo.slug" label="Slug" styles={styles} id={`title-slug`} />
+									<RHFInput type="text" name="seo.slug" label="Slug" styles={styles} id={`title-slug`} />
 
-									<RHFInput name="seo.metaTitle" label="Meta Title" styles={styles} id={`title-metaTitle`} />
+									<RHFInput
+										type="text"
+										name="seo.metaTitle"
+										label="Meta Title"
+										styles={styles}
+										id={`title-metaTitle`}
+									/>
 
-									<RHFInput name="seo.metaDescription" label="Meta Description" styles={styles} id={`title-metaDesc`} />
+									<RHFInput
+										type="text"
+										name="seo.metaDescription"
+										label="Meta Description"
+										styles={styles}
+										id={`title-metaDesc`}
+									/>
 								</div>
 								<RHFSelect name="status" label="Status" options={statusOptions} styles={styles} />
 							</div>
 						</div>
 					</div>
 					<div className={styles.submitBtns}>
-						
-						<FormBtn type="submit" isSubmitting={isSubmitting} className={styles.submitBtn}>
+						<FormBtn type="submit" isSubmitting={isSubmitting} className={`${styles.submitBtn} ${isSubmitting? styles.isSubmitting : ''}`}>
 							{isSubmitting ? (
 								<>
 									{editValues ? 'Saving' : 'Creating'}
@@ -357,13 +374,12 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 						<FormBtn
 							type="button"
 							isSubmitting={isSubmitting}
-							className={styles.resetBtn}
+							className={`${styles.resetBtn} ${isSubmitting? styles.isSubmitting : ''}`}
 							handleResetFields={handleResetFields}>
 							Reset
 						</FormBtn>
 						{editValues && (
-							
-							<FormBtn type="button" handleResetFields={handleClearFields} className={styles.clearAllBtn}>
+							<FormBtn type="button" isSubmitting={isSubmitting} handleResetFields={handleClearFields} className={`${styles.clearAllBtn} ${isSubmitting? styles.isSubmitting : ''}`}>
 								Clear All
 							</FormBtn>
 						)}

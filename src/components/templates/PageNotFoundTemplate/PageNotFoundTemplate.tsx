@@ -1,26 +1,24 @@
-import { useEffect, useState } from "react"
-import { Navigate } from "react-router"
 
+import styles from './PageNotFoundTemplate.module.scss'
+import AnchorLink from "../../atoms/AnchorLink/AnchorLink"
 
 const PageNotFoundTemplate = () => {
-    const [redirect,setRedirect]=useState<boolean>(false)
+    
 
-    useEffect(()=>{
-        setTimeout(() => {
-            setRedirect(true)
-        }, 2000);
-
-        if(redirect === true){
-            setRedirect(false)
-        }
-    },[redirect])
-
-    if(redirect){
-        return <Navigate to='/' replace/>
-    }
+    
 
   return (
-    <div>PageNotFoundTemplate</div>
+    <div className={styles.pageNotFoundContainer}>
+        <div className={styles.pageNotFoundWrapper}>
+            <h3 className={styles.errorTitle}>404</h3>
+
+            <div className={styles.bottom}>
+            <span className={styles.errorInfo}>Sorry, that page could not be found</span>
+            <AnchorLink aria-label="Home" title="Home Page" href="/" className={styles.homeBtn}>Go Back Home</AnchorLink>
+
+            </div>
+        </div>
+    </div>
   )
 }
 

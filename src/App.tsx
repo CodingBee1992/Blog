@@ -1,10 +1,11 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router'
-
+import { defaultCategories } from './containers/Navigation/dataNavigation/dataNavigation'
+import { useFetchAllCategoriesQuery } from './slices/api/categoriesApi'
 // Layouts
 const StaticLayout = lazy(() => import('./containers/StaticLayout/StaticLayout'))
 const AdminPanelLayout = lazy(() => import('./containers/StaticLayout/AdminPanelLayout'))
-const SettingsLayout = lazy(() => import('./containers/StaticLayout/SettingsLayout'))
+const AccountLayout = lazy(() => import('./containers/StaticLayout/AccountLayout'))
 
 // Publis Sites
 const HomePage = lazy(() => import('./components/pages/HomePage/HomePage'))
@@ -32,25 +33,45 @@ const AddUserPage = lazy(() => import('./components/pages/AdminPanel/Users/AddUs
 const RoleAndPermissionsPage = lazy(
 	() => import('./components/pages/AdminPanel/Users/RoleAndPermissionsPage/RoleAndPermissionsPage')
 )
+const ListOfCommentsPage = lazy(
+	() => import('./components/pages/AdminPanel/CommentsPage/ListOfComments/ListOfCommentsPage')
+)
+const CommentsSettingsPage = lazy(
+	() => import('./components/pages/AdminPanel/CommentsPage/CommentsSettingsPage/CommentsSettingsPage')
+)
 
-// Settigns pages
+// Account pages
+const ProfilePage = lazy(() => import('./components/pages/AccountPages/ProfilePage/ProfilePage'))
+const ResetPasswordPage = lazy(() => import('./components/pages/AccountPages/ResetPasswordPage/ResetPasswordPage'))
+const DeleteAccountPage = lazy(() => import('./components/pages/AccountPages/DeleteAccountPage/DeleteAccountPage'))
+const ChangeEmailPage = lazy(() => import('./components/pages/AccountPages/ChangeEmailPage/ChangeEmailPage'))
 
 // Route Guards
-import AdminRoute from './containers/StaticLayout/AdminRoute'
+import AuthGuard from './containers/StaticLayout/AuthGuard'
+import AdminGuard from './containers/StaticLayout/AdminGuard'
 import UserRoute from './containers/StaticLayout/UserRoute'
-import ProfilePage from './components/pages/AdminPanel/Users/ProfilePage/ProfilePage'
-import ListOfCommentsPage from './components/pages/AdminPanel/CommentsPage/ListOfComments/ListOfCommentsPage'
-import CommentsSettingsPage from './components/pages/AdminPanel/CommentsPage/CommentsSettingsPage/CommentsSettingsPage'
-import { defaultCategories } from './containers/Navigation/dataNavigation/dataNavigation'
-import { useFetchAllCategoriesQuery } from './slices/api/categoriesApi'
+
 import PageNotFound from './components/pages/PageNotFound/PageNotFound'
-import SettingsPage from './components/pages/SettingsPages/SettingsPage/SettingsPage'
 
 const Loader = lazy(() => import('./components/atoms/loader/Loader'))
 const App = () => {
 	const { data } = useFetchAllCategoriesQuery()
 
 	const menuCategories = data && data.length > 0 ? data : defaultCategories.children
+
+	// useEffect(() => {
+	// 	if (window.gtag) {
+	// 		window.gtag('consent', 'default', {
+	// 			ad_storage: 'denied',
+	// 			ad_personalization: 'denied',
+	// 			ad_user_data: 'denied',
+	// 			analytics_storage: 'denied',
+	// 			functionality_storage: 'granted',
+	// 			personalization_storage: 'denied',
+	// 			security_storage: 'granted',
+	// 		})
+	// 	}
+	// }, [])
 
 	return (
 		<Router basename="/">
@@ -73,7 +94,7 @@ const App = () => {
 							/>
 						))}
 					</Route>
-					<Route path=":categorySlug/:idSlug/*" element={<SinglePostPage />} />
+					<Route path="post/:category/:slug/*" element={<SinglePostPage />} />
 					<Route path="styles" element={<StylesPage />} />
 					<Route path="about" element={<AboutPage />} />
 					<Route path="contact" element={<ContactPage />} />
@@ -95,11 +116,11 @@ const App = () => {
 				<Route
 					path="/admin"
 					element={
-						<AdminRoute>
+						<AdminGuard>
 							<Suspense fallback={<Loader />}>
 								<AdminPanelLayout />
 							</Suspense>
-						</AdminRoute>
+						</AdminGuard>
 					}>
 					<Route index element={<AdminPanelPage />} />
 
@@ -110,7 +131,7 @@ const App = () => {
 						<Route path="addpost" element={<AddPostPage />} />
 						<Route path="editpost" element={<EditPostPage />} />
 						<Route path="categories" element={<CategoriesPage />} />
-						<Route path="change-history" element={<PostHistory />} />
+						<Route path="change/history" element={<PostHistory />} />
 					</Route>
 					<Route path="users/">
 						<Route path="list" element={<ListPage />} />
@@ -126,16 +147,18 @@ const App = () => {
 
 				{/* Settings */}
 				<Route
-					path="/settings"
+					path="/account"
 					element={
-						<Suspense fallback={<Loader />}>
-							<SettingsLayout />
-						</Suspense>
+						<AuthGuard>
+							<Suspense fallback={<Loader />}>
+								<AccountLayout />
+							</Suspense>
+						</AuthGuard>
 					}>
-						<Route index element={<SettingsPage/>}/>
-					<Route path="account/">
-						<Route path="profile/info" element={<ProfilePage />} />
-					</Route>
+					<Route index element={<ProfilePage />} />
+					<Route path="reset-password" element={<ResetPasswordPage />} />
+					<Route path="delete" element={<DeleteAccountPage />} />
+					<Route path="change-email" element={<ChangeEmailPage />} />
 				</Route>
 				{/* 404 */}
 				<Route path="*" element={<PageNotFound />} />
