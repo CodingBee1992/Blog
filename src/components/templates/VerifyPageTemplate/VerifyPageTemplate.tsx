@@ -64,7 +64,7 @@ const VerifyPageTemplate = () => {
 						{disabled ? `Wait ${countdown}` : 'Sent Again'}
 					</button>
 
-					<span>Click on the link in the email to activate your account</span>
+					{!errorMessage && <span>Click on the link in the email to activate your account</span>}
 				</div>
 			</div>
 		</div>

@@ -56,7 +56,10 @@ export interface CommentsDataProps {
 	author: {
 		_id: string
 		name: string
-		avatar: string
+		avatar: {
+			src:string,
+			public_id:string
+		}
 	}
 	comment: string
 	createdAt: string
@@ -74,7 +77,10 @@ export interface UsersProps {
 	_id: string
 	name: string
 	email: string
-	avatar: string
+	avatar: {
+		src:string,
+		public_id:string
+	}
 	role: string
 	isVerified: boolean
 	createdAt: string

@@ -1,0 +1,19 @@
+.responseMessage {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.6rem;
+	padding-left: 1rem;
+	font-size: 13px;
+	line-height: 50px;
+	border-radius: var(--borderRadius06);
+}
+.successMessage {
+	background-color: #f2fff0;
+	border: 1px solid #22ff00;
+}
+.errorMessage {
+	background-color: #ffeded;
+	border: 1px solid #ff0000;
+
+	
+}

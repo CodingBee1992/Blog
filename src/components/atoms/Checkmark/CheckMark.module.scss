@@ -1,0 +1,68 @@
+.checkmark {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 14px;
+	height: 14px;
+	width: 14px;
+	background-color: transparent;
+	border: 2px solid #3d4f58;
+	border-radius: 3px;
+
+	z-index: 1;
+	overflow: hidden;
+	transition: box-shadow 100ms ease-in-out, background-color linear 300ms border-color linear;
+
+	.checkmarkSVG {
+		width: 14px;
+		height: 14px;
+		z-index: 1;
+		transform-origin: center center;
+		transform: scale(0) rotate(-90deg);
+		transition: transform 0.1s ease-in-out 12.5ms;
+		path {
+			fill: #ffffff;
+		}
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		// z-index: 1;
+		border-radius: 100%;
+		inset: -42%;
+		transform: scale(0);
+		background-color: #016bf8;
+		transform-origin: center center;
+		transition: transform 0.1s ease-in-out 50ms;
+	}
+}
+.scaleCheckmark {
+	background-color: #016bf8;
+	border-color: #016bf8;
+
+	.checkmarkSVG {
+		transform: scale(1) rotate(0deg);
+	}
+	&::before {
+		transform: scale(1);
+	}
+}
+.animCheckmark {
+	position: absolute;
+
+	height: 14px;
+	width: 14px;
+	z-index: 0;
+	background-color: #016bf8;
+	transform-origin: center center;
+	transform: scale(0);
+	opacity: 1;
+	border-radius: 100%;
+	transition: transform 400ms ease-in-out -177ms, opacity 0.3s;
+}
+.animCheckmarkActive {
+	transform: scale(2.25);
+	opacity: 0;
+}

@@ -82,12 +82,12 @@ const AddUserForm = () => {
 	return (
 		<FormProvider {...methods}>
 			<div className={styles.addUserFormContainer}>
-				<p>Add new user</p>
+				<p>Add User</p>
 				<form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
 					<div className={styles.formWrapper}>
-						<RHFInput name="name" label="Name" styles={styles} id="name" />
-						<RHFInput name="email" label="Email" styles={styles} id="email" />
-						<RHFInput name="password" label="Password" styles={styles} id="password" />
+						<RHFInput type='text' name="name" label="Name" styles={styles} id="name" />
+						<RHFInput type='email' name="email" label="Email" styles={styles} id="email" />
+						<RHFInput type='password' name="password" label="Password" styles={styles} id="password" />
 						<RHFSelect name="role" label="Role" options={role} styles={styles} />
 					</div>
 					{successMessage && <span className={styles.successMessage}>{successMessage}</span>}

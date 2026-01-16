@@ -1,0 +1,54 @@
+.pageNotFoundContainer {
+	display: flex;
+	justify-content: center;
+	// align-items: center;
+	width: 100dvw;
+	height: 100dvh;
+	// background: #739e99;
+	background-image: radial-gradient(ellipse, #d1f0ec 20%, #ffffff 70%);
+
+	.pageNotFoundWrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		// justify-content: center;
+		height: 100%;
+		width: 100%;
+
+		// background-image: radial-gradient(ellipse, #739e99 0%, #ffffff 60%);
+
+		.errorTitle {
+			margin-top: auto;
+			font-size: 50rem;
+			font-weight: bold;
+			background: linear-gradient(to bottom, #155f58 0%, #ffffff00 70%);
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+		.bottom {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: auto;
+			margin-bottom: 5%;
+			.errorInfo {
+				letter-spacing: 1px;
+				font-size: 3rem;
+				font-weight: 500;
+			}
+
+			.homeBtn {
+				margin-top: 3rem;
+				padding: 1rem;
+				color: #ffffff;
+				background-color: #155f58;
+				border-radius: var(--borderRadius08);
+				outline: none;
+				&:hover {
+					box-shadow: 0px 0px 3px 3px #3fa588;
+				}
+			}
+		}
+	}
+}

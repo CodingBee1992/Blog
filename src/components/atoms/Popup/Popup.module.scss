@@ -15,50 +15,47 @@
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		
-		width: 500px;
+		padding: 4rem 2rem;
+		max-width: 560px;
+		width: 100%;
 		min-height: 350px;
-		
-		border-radius: 8px;
+		border-radius: var(--borderRadius16);
 		background-color: #ffffff;
 
-		.popupTitle{
-			margin-top: 3rem;
+		.popupTitle {
+			// margin-top: 2rem;
 			margin-bottom: 3rem;
 			text-align: center;
 		}
-		
 
-		.popupFooter{
+		.popupFooter {
 			text-align: center;
 			margin-top: auto;
-			
-			
-			
+
 			.deleteInfo {
 				text-align: center;
 			}
 			.popupBtn {
 				padding: 1rem 0;
 				width: 200px;
-				margin: 2rem auto;
+				margin: 2rem 0 auto;
 				border: none;
 				font-size: 20px;
 				color: #ffffff;
 				cursor: pointer;
 				transition: all 0.3s;
 			}
-			
+
 			.deleteBtn {
 				background-color: #ff0000;
-				
+
 				&:hover {
 					background-color: #840707;
 				}
 			}
 			.closePopupBtn {
 				background-color: #00ff1a;
-				
+
 				&:hover {
 					background-color: #1ca329;
 				}
@@ -73,10 +70,7 @@
 			background-color: transparent;
 			cursor: pointer;
 
-			.icon {
-				stroke: red;
-				transition: all 0.3s;
-
+			.closeSVG {
 				&:hover {
 					scale: 1.1;
 				}

@@ -40,15 +40,16 @@
 		border: unset;
 		cursor: pointer;
 
-		.icon {
+		.closeSVG {
 			width: 28px;
 			height: 28px;
+			stroke-width: 1px;
 			color: var(--closeBtn-Color);
 			transition: 0.3s all ease-in-out;
 		}
 
 		&:hover {
-			.icon {
+			.closeSVG {
 				color: var(--closeBtn-ColorHover);
 				scale: 1.1;
 			}

@@ -1,7 +1,8 @@
-import slugify from 'slugify'
+
 import useResponsiveCloudinaryImage from '../../../hooks/useResponsiveCloudinaryImage'
 import type { ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
+import handleCreateUrl from '../../../hooks/handleCreateUrl'
 
 interface SliderListProps {
 	styles: { [key: string]: string }
@@ -17,12 +18,9 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 	const mainImageSrc = data.mainImage.src
 	const responsiveImage = useResponsiveCloudinaryImage({ mainImageSrc })
 
-	const categorySlugs = data.categories
-		?.map(cat => cat)
-		.filter(Boolean) // usuwa undefined/null
-		.map(slug => slugify(slug, { lower: true, strict: true }))
 	
-	const url = `/${categorySlugs.join('/')}/${data.seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${data._id}`
+
+	const url = handleCreateUrl({categories:data.categories,seo:data.seo,_id:data._id})
 
 	const isActive = number === index
 	return (

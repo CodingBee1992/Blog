@@ -9,8 +9,6 @@ interface ArticleRightSideProps {
 	styles: { [key: string]: string }
 }
 
-
-
 const ArticleRightSide = ({ styles }: ArticleRightSideProps) => {
 	const { search } = useLocation()
 	const query = new URLSearchParams(search)
@@ -24,24 +22,20 @@ const ArticleRightSide = ({ styles }: ArticleRightSideProps) => {
 	const prevID = prevPost?._id || postId
 	const nextID = nextPost?._id || postId
 
-	
+	const urlPrev = handleCreateUrl({ categories: prevPost?.categories, seo: prevPost?.seo, _id: prevID })
+	const urlNext = handleCreateUrl({ categories: nextPost?.categories, seo: nextPost?.seo, _id: nextID })
 
 	return (
 		<div className={styles.articleRightSideContainer}>
 			<div className={`${styles.prev} ${prevID === postId ? styles.disabled : ''} `}>
 				<span>Previous</span>
-				<AnchorLink
-					href={handleCreateUrl({ categories: prevPost?.categories, seo: prevPost?.seo, _id: prevID })}
-					rel="prev">
+				<AnchorLink href={urlPrev} rel="prev">
 					{prevID !== postId ? prevPost?.title : '-----'}
 				</AnchorLink>
-				
 			</div>
 			<div className={`${styles.next} ${nextID === postId ? styles.disabled : ''}`}>
 				<span>Next</span>
-				<AnchorLink
-					href={handleCreateUrl({ categories: nextPost?.categories, seo: nextPost?.seo, _id: nextID })}
-					rel="next">
+				<AnchorLink href={urlNext} rel="next">
 					{nextID !== postId ? nextPost?.title : '-----'}
 				</AnchorLink>
 			</div>

@@ -1,4 +1,4 @@
-import type { ReactNode, RefObject } from 'react'
+import type { KeyboardEvent, ReactNode, RefObject } from 'react'
 import { removePaginationLinksTags } from '../../../utils/removePaginationLinksTag'
 import { useLocation, useNavigate } from 'react-router'
 
@@ -10,9 +10,11 @@ interface AnchorLink {
 	className?: string
 	count?: number
 	ariaLabel?: string
+	title?:string
 	ref?: RefObject<HTMLAnchorElement | null>
 	handleOpenCloseMenu?: () => void
-	handleClose?: () => void
+	handleClose?: () => void,
+	onKeyDown?:(e:KeyboardEvent)=>void
 }
 
 const AnchorLink = ({
@@ -24,8 +26,10 @@ const AnchorLink = ({
 	className,
 	ariaLabel,
 	ref,
+	title,
 	handleOpenCloseMenu,
-	handleClose
+	handleClose,
+	onKeyDown,
 }: AnchorLink) => {
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -57,8 +61,10 @@ const AnchorLink = ({
 
 	return (
 		<a
+			title={title}
 			href={href}
 			ref={ref}
+			onKeyDown={e=>onKeyDown?.(e)}
 			onClick={e => handleClick(e)}
 			rel={rel}
 			draggable={false}

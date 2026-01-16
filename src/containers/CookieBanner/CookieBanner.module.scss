@@ -1,0 +1,60 @@
+.cookieBannerContainer {
+	position: fixed;
+	display: none;
+    flex-direction: column;
+    align-items: center;
+    
+	bottom: 0;
+	width: 100%;
+	background: #222;
+	color: #fff;
+	padding: 3rem 0;
+    transform: translateY(100%);
+	transition: transform .5s, opacity 1s;
+	opacity: 0;
+	z-index: 9999;
+
+    .cookieBannerButtons{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        margin: 2rem 0;
+
+        button{
+            padding: 1rem;
+            border: none;
+            border-radius: var(--borderRadius06);
+            transition: all .3s;
+            cursor: pointer;
+
+            &:hover{
+                color: #ffffff;
+                background-color: #03c303;
+            }
+        }
+    }
+
+    .checkmarks{
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        .checkbox{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            input{
+                display: none;
+            }
+        }
+    }
+}
+.visibleBanner{
+    display: flex;
+}
+.animBanner{
+    
+    transform: translateY(0);
+    opacity: 1;
+}

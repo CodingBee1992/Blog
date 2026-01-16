@@ -1,0 +1,52 @@
+.switchVisibility {
+	position: absolute;
+
+	top: 50%;
+	right: 1%;
+	transform: translateY(-50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 30px;
+	background-color: transparent;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: all 0.3s;
+
+	svg {
+		width: 20px;
+		height: 15px;
+		path {
+			transition: all 0.3s;
+			stroke: #889397;
+		}
+	}
+	&:hover {
+		background-color: #ededed;
+		svg {
+			path {
+				stroke: #000000;
+			}
+		}
+		&::before {
+			background-color: #000000;
+		}
+	}
+}
+.displayVisibility {
+	&::before {
+		content: '';
+		position: absolute;
+		top: 15%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 3px;
+		height: 70%;
+		transform: rotate(45deg);
+		border-left: 1px solid #ffffff;
+		background-color: #889397;
+		transition: background-color 0.3s;
+	}
+}

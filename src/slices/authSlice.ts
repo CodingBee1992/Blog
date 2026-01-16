@@ -3,16 +3,25 @@ import Cookies from 'js-cookie'
 
 interface SetDataType {
 	isLogged: boolean
+	justLoggedOut:boolean
 	name: string
 	id: string
 	avatar: string
-	// isAdmin:boolean
+	
 	role: string
 }
+
+interface SetDataPayload {
+  name: string
+  id: string
+  avatar: {src:string}
+  role: string
+}
+
 let name = ''
 let id = ''
 let avatar = ''
-// let isAdmin = false
+
 let role =''
 const stored = localStorage.getItem('user')
 if (stored) {
@@ -21,8 +30,8 @@ if (stored) {
 		
 		name = decoded.name || ''
 		id = decoded.id || ''
-		avatar = decoded.avatar || ''
-		// isAdmin = decoded.isAdmin || false
+		avatar = decoded.avatar.src || ''
+		
 		role = decoded.role || ''
 	} catch (error) {
 		console.warn('Błąd podczas dekodowania usera z localStorage:', error)
@@ -31,10 +40,11 @@ if (stored) {
 
 const initialState: SetDataType = {
 	isLogged: Cookies.get('user') === 'ok',
+	justLoggedOut:false,
 	name,
 	id,
 	avatar,
-	// isAdmin,
+	
 	role
 }
 
@@ -44,14 +54,16 @@ export const authSlice = createSlice({
 	reducers: {
 		setLogin: (state, action: PayloadAction<boolean>) => {
 			Cookies.set('user', 'ok', { expires: 1 })
+			
 			state.isLogged = action.payload
+			state.justLoggedOut = !action.payload
 		},
-		setData: (state, action: PayloadAction<SetDataType>) => {
+		setData: (state, action: PayloadAction<SetDataPayload>) => {
 			const { name, id, avatar,role } = action.payload
 			state.name = name
 			state.id = id
-			state.avatar = avatar
-			// state.isAdmin = isAdmin
+			state.avatar = avatar.src
+			
 			state.role = role
 
 			try {
@@ -67,10 +79,11 @@ export const authSlice = createSlice({
 			Cookies.remove('user')
 			localStorage.removeItem('user')
 			state.isLogged = false
+			state.justLoggedOut=true
 			state.name = ''
 			state.id = ''
 			state.avatar = ''
-			// state.isAdmin = false
+			
 			state.role = ''
 		},
 	},
