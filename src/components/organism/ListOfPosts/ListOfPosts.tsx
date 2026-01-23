@@ -268,7 +268,7 @@ const ListOfPosts = () => {
 										)}
 									</div>
 									<div className={styles.td}>{item.commentsCount}</div>
-									<div className={styles.td}>435</div>
+									<div className={styles.td}>{item.postViews}</div>
 									<div className={styles.td}>{item.status}</div>
 									<div className={styles.td}>
 										<AnchorLink href={`/admin/posts/editpost/?id=${item._id}`}>

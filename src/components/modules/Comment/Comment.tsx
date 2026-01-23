@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 
-import { useDeleteCommentMutation, useFetchCommentsQuery } from '../../../slices/api/commentsApi'
+import { useDeleteCommentMutation } from '../../../slices/api/commentsApi'
 
 const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }: CommentsDataProps) => {
 	const { role } = useSelector((state: RootState) => state.auth)
@@ -16,7 +16,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 	const [isUpdating, setIsUpdating] = useState<boolean>(false)
 	const [updatingText, setUpdatingText] = useState<string | null | undefined>('')
 	// const [resMessage, setResMessage] = useState<string>('')
-	const { refetch } = useFetchCommentsQuery(postId!)
+	
 	const [deleteComment] = useDeleteCommentMutation()
 	const aRef = useRef<HTMLAnchorElement | null>(null)
 	const crudRef = useRef<HTMLDivElement | null>(null)
@@ -90,7 +90,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 
 			// setResMessage(res?.message)
 
-			await refetch()
+			
 		} catch (error: unknown) {
 			if (typeof error === 'object' && error !== null) {
 				// const fetchError = error as FetchBaseQueryError

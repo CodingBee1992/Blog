@@ -1,21 +1,19 @@
-
-import AnchorLink from "../AnchorLink/AnchorLink"
-import useMenuContext from "../../../hooks/useMenuContext"
+import AnchorLink from '../AnchorLink/AnchorLink'
+import useMenuContext from '../../../hooks/useMenuContext'
 
 interface ControlPanelSignInProps {
-    styles:Record<string,string>
-    
+	styles: Record<string, string>
 }
 
-const ControlPanelSignIn = ({styles}:ControlPanelSignInProps) => {
-	const {userRef,openCloseUserMenu} = useMenuContext()
+const ControlPanelSignIn = ({ styles }: ControlPanelSignInProps) => {
+	const { userRef, openCloseUserMenu, toggleMenu } = useMenuContext()
 	return (
-		<>
-			<button onClick={(e) => openCloseUserMenu({e,userRef})} className={styles.signInBtn}>
+		<div ref={userRef}>
+			<button onClick={() => openCloseUserMenu()} className={styles.signInBtn}>
 				Sign In
 			</button>
 
-			<div ref={userRef} className={styles.controlContainer}>
+			<div  className={`${styles.controlContainer} ${toggleMenu ? styles.displayVisibility : ''}`}>
 				<AnchorLink className={styles.anchorLink} href="/login">
 					Sign In
 				</AnchorLink>
@@ -26,7 +24,7 @@ const ControlPanelSignIn = ({styles}:ControlPanelSignInProps) => {
 					</AnchorLink>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

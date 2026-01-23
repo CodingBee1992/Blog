@@ -56,9 +56,8 @@ import PageNotFound from './components/pages/PageNotFound/PageNotFound'
 const Loader = lazy(() => import('./components/atoms/loader/Loader'))
 const App = () => {
 	const { data } = useFetchAllCategoriesQuery()
-
+	
 	const menuCategories = data && data.length > 0 ? data : defaultCategories.children
-
 	// useEffect(() => {
 	// 	if (window.gtag) {
 	// 		window.gtag('consent', 'default', {

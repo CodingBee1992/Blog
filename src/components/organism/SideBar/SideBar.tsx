@@ -22,9 +22,9 @@ const SideBar = ({ children }: SideBarProps) => {
 
 	const admin = adminLinks[0].href
 	const account = accountLinks[0].children![0].href
-
+	const index = 1
 	return (
-		<div className={styles.sideBarContainer}>
+		<div className={`${styles.sideBarContainer} ${index === 1 ? styles.activeSideBar : ''}`}>
 			<div className={styles.sideBarMenu}>
 				<Logo styles={styles} />
 				<div className={styles.sideBarLinks}>{children}</div>

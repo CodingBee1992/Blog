@@ -1,23 +1,26 @@
 .statisticContainer {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-	
+	// display: flex;
+	// flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: auto 1fr auto;
+	grid-template-areas:
+		'a a a a a a'
+		'c c c c b b'
+		'd d d e e e';
+	gap: 3rem;
 
 	.statisticWrapper {
-		display: flex;
-		flex-wrap: wrap;
-
-		// grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		grid-area: a;
 		gap: 2rem;
-		margin-top: 2rem;
 
 		.statisticCardContainer {
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
 			padding: 2rem;
-			min-width: 250px;
 			background-color: var(--statBgc);
 			border: none;
 			border-radius: var(--borderRadius16);
@@ -122,10 +125,12 @@
 		}
 	}
 	.areaChartWrapper {
-		margin-top: 2rem;
-		width: 100%;
-		max-width: 800px;
-		height: 100%;
+		display: grid;
+		grid-area: c;
+		// margin-top: 2rem;
+		// width: 100%;
+		// max-width: 800px;
+		// height: 100%;
 		padding: 3rem;
 		color: #000000;
 		background-color: var(--statBgc);
@@ -209,14 +214,72 @@
 			}
 		}
 
-		.areaChart {
-			width: 100%;
-			height: 350px;
+		.stackedAreaChart {
+			.areaChart {
+				width: 100%;
+				height: 350px;
+			}
 		}
 	}
 	.arrowUpStat {
 		width: 25px;
 		height: 25px;
 		fill: var(--statThirdColor);
+	}
+}
+
+@media (max-width: 1500px) {
+	.statisticContainer {
+		grid-template-rows: auto 1fr auto auto;
+		grid-template-areas:
+			'a a a a a a'
+			'c c c b b b'
+			'd d d e e e';
+
+		.areaChartWrapper {
+			grid-area: c;
+
+			width: 100%;
+
+			padding: 3rem 0 1rem;
+
+			.areaChartInfo {
+				.areaChartTitle {
+					margin-left: 3rem;
+				}
+			}
+			.stackedAreaChart {
+				.areaChart {
+					width: 100%;
+					height: 250px;
+				}
+			}
+		}
+	}
+}
+@media (max-width: 1300px) {
+	.statisticContainer {
+		grid-template-rows: 1fr;
+		grid-template-areas:
+			'a a a a a a'
+			'c c c c c c'
+			'b b b b b b'
+			'd d d d d d'
+			'e e e e e e';
+	}
+}
+
+@media (max-width: 600px) {
+	.areaChartWrapper {
+		overflow: hidden;
+		.stackedAreaChart {
+			overflow-x: scroll;
+			.areaChart {
+				min-width: 600px;
+			}
+		}
+		::-webkit-scrollbar{
+			display: none;
+		}
 	}
 }

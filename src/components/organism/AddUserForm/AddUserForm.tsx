@@ -42,7 +42,7 @@ const AddUserForm = () => {
 	const onSubmit: SubmitHandler<userSchemaTypes> = async (data: userSchemaTypes) => {
 		try {
 			const res = await adminCreateUser(data).unwrap()
-			console.log(res)
+			
 			if (res) setSuccessMessage(res.message)
 
 			reset()

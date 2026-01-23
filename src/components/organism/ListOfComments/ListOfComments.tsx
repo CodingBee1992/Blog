@@ -131,7 +131,7 @@ const ListOfComments = () => {
 		try {
 			if (userData.commentId && userData.postId) {
 				const res = await deleteComment({ commentId: userData.commentId, postId: userData.postId }).unwrap()
-				console.log(res)
+				
 				setPopUpMessage(res.message)
 			}
 

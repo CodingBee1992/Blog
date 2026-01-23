@@ -1,48 +1,43 @@
 import type { MouseEvent } from 'react'
 import type { MenuTypes } from '../../../containers/Navigation/dataNavigation/dataNavigation'
-import useMenuContext from '../../../hooks/useMenuContext'
+
 import AnchorLink from '../AnchorLink/AnchorLink'
 import { useLocation } from 'react-router'
 
-
-
 interface DropdownMenuProps {
 	data: MenuTypes
-	handleMouseInDropdown?: (e: React.MouseEvent<HTMLElement>) => void
-	handleMouseOutDropdown?: (e: React.MouseEvent<HTMLElement>) => void
+	handleMouseInDropdown?: (e: MouseEvent<HTMLElement>) => void
+	handleMouseOutDropdown?: (e: MouseEvent<HTMLElement>) => void
+	handleCloseDropDown?: (e: MouseEvent<HTMLLIElement>) => void
 	styles: { [key: string]: string }
+	toggle?: () => void
 }
 
 const DropdownMenu = ({
 	data,
 	styles,
-
 	handleMouseInDropdown,
 	handleMouseOutDropdown,
+	handleCloseDropDown,
+	toggle,
 }: DropdownMenuProps) => {
 	const { pathname } = useLocation()
-	const { handleOpenCloseMenu } = useMenuContext()
 
-	const menuCategories = data.children
-
-	const handleCloseDropDown = (e: MouseEvent<HTMLLIElement>) => {
-		const target = e.currentTarget as HTMLLIElement
-		const el = target.parentElement
-
-		if (el && el.classList.contains(styles.active)) {
-			el.classList.remove(styles.active)
-		}
+	const handleMenuItemClick = (e: MouseEvent<HTMLLIElement>) => {
+		handleCloseDropDown?.(e)
+		toggle?.()
 	}
+
 	return (
 		<ul
 			className={styles.subMenu}
 			onMouseEnter={e => handleMouseInDropdown?.(e)}
 			onMouseLeave={e => handleMouseOutDropdown?.(e)}>
-			{menuCategories?.map((item, index: number) => {
+			{data.children?.map((item, index: number) => {
 				const active = pathname === `/categories/${item.name?.split(' ').join('-').toLowerCase()}`
-				
+
 				const active2 = pathname === item.href
-				
+
 				const slug = item.name ? item.name.split(' ').join('-').toLowerCase() : item.slug
 				const url = item ? (item.name ? `/categories/${slug}` : item.href) : '#'
 
@@ -50,10 +45,7 @@ const DropdownMenu = ({
 
 				return (
 					<li
-						onClick={e => {
-							handleCloseDropDown(e)
-							handleOpenCloseMenu()
-						}}
+						onClick={e => handleMenuItemClick(e)}
 						className={`${styles.subMenuLi} ${active2 ? styles.activeSubMenuLi : ''}`}
 						key={index}>
 						{

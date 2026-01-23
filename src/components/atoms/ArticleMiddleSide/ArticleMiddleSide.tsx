@@ -1,10 +1,11 @@
 import { useLocation } from 'react-router'
 import { CommentsSVG, HeartSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import { usePostContext } from '../../../hooks/usePostContext'
-import { useFetchCommentsQuery } from '../../../slices/api/commentsApi'
+import { useFetchLiveCommentsQuery } from '../../../slices/api/commentsApi'
 import ResponsiveArticleImage from '../ResponsiveArticleImage/ResponsiveArticleImage'
 import {
-	useFetchPostLikesQuery,
+	useFetchLivePostLikesQuery,
+	
 	useFetchUserLikedPostQuery,
 	useToogleLikePostMutation,
 } from '../../../slices/api/postLikeApi'
@@ -27,11 +28,11 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 	const postId = params.get('id')
 	const { id, isLogged } = useSelector((state: RootState) => state.auth)
 
-	const { data } = useFetchCommentsQuery(postId!, { skip: !postId })
+	const { data } = useFetchLiveCommentsQuery(postId!, { skip: !postId })
 	const [likePost] = useToogleLikePostMutation()
 	const { data: likedPost } = useFetchUserLikedPostQuery({ postId, userId: id }, { skip: !isLogged || !postId || !id })
-	const { data: postLikes } = useFetchPostLikesQuery(postId, { skip: !postId })
-
+	const { data: postLikes } = useFetchLivePostLikesQuery(postId!, { skip: !postId })
+	
 	const { firstPart, secondPart } = useMemo(() => {
 		if (!introduction) return { firstPart: '', secondPart: '' }
 

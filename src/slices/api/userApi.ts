@@ -96,7 +96,7 @@ export const userApi = createApi({
 		}),
 		fetchUserProfile: builder.query({
 			query: () => `${USERS_URL}/get-user-profile`,
-			providesTags:()=>[{type:'UpdateProfile'}]
+			providesTags:(_result)=>[{type:'UpdateProfile',id:_result.id}]
 		}),
 		updateProfile:builder.mutation({
 			query:({name,updatedAvatar})=>({
@@ -105,7 +105,7 @@ export const userApi = createApi({
 				body:{name,updatedAvatar}
 				
 			}),
-			invalidatesTags:()=>[{type:'UpdateProfile'}]
+			invalidatesTags:(_result)=>[{type:'UpdateProfile',id:_result.id}]
 		}),
 		fetchUserByLimit: builder.query({
 			query: params => {

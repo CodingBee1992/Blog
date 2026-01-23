@@ -3,14 +3,13 @@ import styles from './MenuIcon.module.scss'
 import useWindowSize from '../../../hooks/useWindowSize'
 import useMenuContext from '../../../hooks/useMenuContext'
 
-// interface MenuIconProps {
-// 	handleOpenMenu: () => void
-// }
+
 
 const MenuIcon = () => {
 	const size = useWindowSize()
 	const refBtn = useRef<HTMLButtonElement>(null)
-	const {handleOpenCloseMenu } = useMenuContext()
+	const {mobileMenu } = useMenuContext()
+	const {toggle} = mobileMenu
 	useEffect(() => {
 		if (size.width <= 900) {
 			refBtn.current?.classList.add(styles.toggle)
@@ -20,7 +19,7 @@ const MenuIcon = () => {
 	}, [size])
 
 	return (
-		<button ref={refBtn} className={styles.btn} title="Menu" onClick={() => handleOpenCloseMenu()}>
+		<button ref={refBtn} className={styles.btn} title="Menu" onClick={() => toggle()}>
 			<span className={styles.span}></span>
 		</button>
 	)

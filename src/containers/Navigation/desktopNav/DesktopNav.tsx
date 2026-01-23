@@ -28,9 +28,7 @@ const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 		const target = e.target as HTMLElement
 
 		if (target.dataset.element) {
-			timeOutListIn.forEach(item => {
-				clearInterval(item)
-			})
+			timeOutListIn.forEach(item => clearInterval(item))
 			timeOutListOut.forEach(item => clearInterval(item))
 
 			let element
@@ -95,7 +93,13 @@ const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 			setTimeOutListOut(resetList)
 		}
 	}
-
+	const handleCloseDropDown = (e: MouseEvent<HTMLLIElement>) => {
+		const target = e.currentTarget
+		const parentElement = target.parentElement
+		if (parentElement?.classList.contains(styles.active)) {
+			parentElement.classList.remove(styles.active)
+		}
+	}
 	return (
 		<div ref={menuRef} className={`${styles.menu}`}>
 			{dataMenu.map((item: MenuTypes, index: number) => {
@@ -109,6 +113,7 @@ const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 						handleMouseOut={handleMouseOut}
 						handleMouseInDropdown={handleMouseInDropdown}
 						handleMouseOutDropdown={handleMouseOutDropdown}
+						handleCloseDropDown={handleCloseDropDown}
 					/>
 				)
 			})}

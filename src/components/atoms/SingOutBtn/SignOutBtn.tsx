@@ -1,4 +1,3 @@
-
 import useMenuContext from '../../../hooks/useMenuContext'
 
 import type { ReactNode } from 'react'
@@ -6,21 +5,21 @@ import type { ReactNode } from 'react'
 interface SignOutBtnProps {
 	children: ReactNode
 	className: string
-	ariaLabel?:string
+	ariaLabel?: string
 }
 
-const SignOutBtn = ({ children, className,ariaLabel }: SignOutBtnProps) => {
-	
-	
-	const { signOut } = useMenuContext()
-
+const SignOutBtn = ({ children, className, ariaLabel }: SignOutBtnProps) => {
+	const { signOut, mobileMenu,openCloseUserMenu } = useMenuContext()
+	const { toggle } = mobileMenu
 	return (
 		<button
-		title='Sign Out'
-		aria-label={ariaLabel}
+			title="Sign Out"
+			aria-label={ariaLabel}
 			className={className}
 			onClick={() => {
 				signOut()
+				toggle()
+				openCloseUserMenu()
 			}}>
 			{children}
 		</button>

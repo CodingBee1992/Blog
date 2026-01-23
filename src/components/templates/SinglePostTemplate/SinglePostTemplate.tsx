@@ -1,24 +1,21 @@
-// import { useEffect } from 'react'
-// import useTimeSpentOnPage from '../../../hooks/useTimeSpentOnPage'
-// import useScrollTracking from '../../../hooks/useScrollTracking'
+import { useLocation } from 'react-router'
 import ArticleContent from '../../organism/ArticleContent/ArticleContent'
 import CommentsContent from '../../organism/CommentsContent/CommentsContent'
 import styles from './SinglePostTemplate.module.scss'
-// import { trackTimeSpent } from '../../../utils/gtag'
-// import Cookies from 'js-cookie'
+import { useEffect } from 'react'
+import { useIncrementPostViewsMutation } from '../../../slices/api/statisticsApi'
+
+
 const SinglePostTemplate = () => {
-	// const timeSpent = useTimeSpentOnPage()
+	const { search } = useLocation()
+	const params = new URLSearchParams(search)
+	const postId = params.get('id')
 
-	// useEffect(() => {
-	// 	const consent = Cookies.get('isAnalyticCookieAccept') === 'true'
-
-	// 	if (consent && timeSpent > 0) {
-	// 		trackTimeSpent(timeSpent)
-	// 	}
-
-	// }, [timeSpent])
-
-	// useScrollTracking()
+	const [incrementPostViews] = useIncrementPostViewsMutation()
+	
+	useEffect(() => {
+		incrementPostViews({ postId })
+	}, [incrementPostViews, postId])
 
 	return (
 		<div className={styles.postContainer}>

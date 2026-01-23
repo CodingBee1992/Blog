@@ -5,7 +5,6 @@ import z from 'zod'
 
 import {
 	useCreateCommentMutation,
-	useFetchCommentsQuery,
 	useUpdateCommentMutation,
 } from '../../../slices/api/commentsApi'
 
@@ -42,7 +41,7 @@ const TextArea = ({
 }: TextAreaProps) => {
 	const [createComment] = useCreateCommentMutation()
 	const [updateComment] = useUpdateCommentMutation()
-	const { refetch } = useFetchCommentsQuery(postId!)
+	
 	const [resMessage, setResMessage] = useState<string>('')
 	const [success, setSuccess] = useState<boolean | null>(null)
 	const commentsContent = document.querySelector(`.${styles.commentsContent}`)
@@ -70,7 +69,7 @@ const TextArea = ({
 						setShowReply?.(false)
 					}, 1000)
 				}
-				await refetch()
+				
 
 				setIsUpdating?.(false)
 				reset()
@@ -85,7 +84,7 @@ const TextArea = ({
 					setShowReply?.(false)
 				}, 1000)
 			}
-			await refetch()
+			
 
 			setTimeout(() => {
 				if (comRef?.current) {

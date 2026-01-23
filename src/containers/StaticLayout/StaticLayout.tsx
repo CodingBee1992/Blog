@@ -9,15 +9,52 @@ import useWindowSize from '../../hooks/useWindowSize'
 import { SinglePostProvider } from '../../context/createPostContext'
 import { MenuProvider } from '../../context/menuContext'
 import CookieBanner from '../CookieBanner/CookieBanner'
-
-
-
+import { useIncrementPageViewsMutation } from '../../slices/api/statisticsApi'
+// import Cookies from 'js-cookie'
 const Navigation = lazy(() => import('../Navigation/Navigation'))
 
 const StaticLayout = () => {
 	const { isLoading } = useSelector((state: RootState) => state.theme)
 	const { width } = useWindowSize()
-	const location = useLocation()
+	const { pathname } = useLocation()
+	const [incrementPageViews] = useIncrementPageViewsMutation()
+
+	useEffect(() => {
+		incrementPageViews({})
+	}, [incrementPageViews, pathname])
+
+	// Unikalne wejscia na strone w ciągu danego dnia
+
+	// const today = new Date().toISOString().slice(0, 10)
+	// const path = encodeURIComponent(pathname)
+	// const handleIncrementPageViews = useCallback(async () => {
+	// 	try {
+	// 		localStorage.setItem(path, JSON.stringify({ day: today }))
+	// 		await incrementPageViews({})
+	// 	} catch (err) {
+	// 		console.error('Failed to count page view', err)
+	// 	}
+	// }, [incrementPageViews, today])
+
+	// useEffect(() => {
+	// 	const raw = localStorage.getItem(path)
+	// const consent = Cookies.get('consent-stat') === 'true'
+	// if(!consent) return
+	// 	if (raw) {
+	// 		try {
+	// 			const stored = JSON.parse(raw)
+
+	// 			if ( stored.day === today) return
+	// 		} catch {
+	// 			localStorage.removeItem(path)
+	// 		}
+	// 	}
+
+
+
+	// 	handleIncrementPageViews()
+	// }, [handleIncrementPageViews, pathname])
+
 	useEffect(() => {
 		if (!isLoading) {
 			Aos.init({
@@ -32,7 +69,7 @@ const StaticLayout = () => {
 		if (!isLoading) {
 			Aos.refresh()
 		}
-	}, [location.pathname, isLoading, width])
+	}, [pathname, isLoading, width])
 
 	// if (isLoading) {
 	// 	return <Loader />
@@ -41,7 +78,7 @@ const StaticLayout = () => {
 	return (
 		<MenuProvider>
 			<SinglePostProvider>
-				<CookieBanner/>
+				<CookieBanner />
 				<div data-aos="fade-zoom-in">
 					<Navigation />
 					<main>

@@ -5,8 +5,8 @@ interface StatisticCardProps {
 	styles: Record<string, string>
 	statTitle: string
 	statValue: number | string
-	statGrowthSeven: number
-	statGrowthThirty: number
+	statGrowthSeven: number | string
+	statGrowthThirty: number | string
 }
 
 const StatisticCard = ({

@@ -6,12 +6,12 @@ interface ArticleLefSideProps {
 
 const ArticleLeftSide = ({ styles }: ArticleLefSideProps) => {
 	const { author, categories } = usePostContext()
-
+	
 	return (
 		<div className={styles.articleLeftSideContainer}>
 			<div className={styles.authorContent}>
 				<div className={styles.authorAvatar}>
-					<img src={author.avatar} alt="" />
+					<img src={author.avatar.src} alt={`Author's photo`} />
 				</div>
 				<div className={styles.byline}>
 					<span>Posted By</span>

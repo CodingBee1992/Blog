@@ -139,6 +139,9 @@
 					transition: all 0.3s ease-in-out;
 					pointer-events: none;
 				}
+				.rotateArrow{
+					rotate: 180deg;
+				}
 			}
 
 			.subMenu {
@@ -186,7 +189,7 @@
 			line-height: var(--lineHeight);
 			transition: all 0.3s ease-in-out;
 			overflow: hidden;
-
+			
 			cursor: pointer;
 			&:hover .signInBtn,
 			&:hover .authorInfo .author {
@@ -292,15 +295,22 @@
 				}
 			}
 		}
-		// .active {
-		// 	height: 100%;
-		// }
+		.active {
+			height: 100%;
+		}
 	}
 }
-
-// .overflowActive {
-// 	overflow-y: scroll;
-// }
+.visibleMenu {
+	display: flex;
+}
+.displayAnim {
+	transform: translateX(0);
+	opacity: 1 ;
+	visibility: visible;
+}
+.scrollMenu {
+	overflow-y: scroll;
+}
 .secondNavBgColor {
 	background-image: var(--Bgc-navSecond);
 }
