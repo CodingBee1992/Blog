@@ -8,7 +8,7 @@ import TextArea from '../../atoms/TextArea/TextArea'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
-import { useFetchCommentsQuery } from '../../../slices/api/commentsApi'
+import { useFetchLiveCommentsQuery } from '../../../slices/api/commentsApi'
 import { useEffect, useState } from 'react'
 
 const CommentsContent = () => {
@@ -16,8 +16,9 @@ const CommentsContent = () => {
 	
 	const query = new URLSearchParams(search)
 	const postId = query.get('id')
-	const { data: postComments } = useFetchCommentsQuery(postId!, { skip: !postId })
-
+	
+	const {data: postComments} = useFetchLiveCommentsQuery(postId!,{skip:!postId})
+	
 	const { isLogged } = useSelector((state: RootState) => state.auth)
 
 	const [roots, setRoots] = useState<CommentsDataProps[]>([])

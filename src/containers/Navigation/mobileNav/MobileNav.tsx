@@ -12,40 +12,34 @@ interface MobileRefProps {
 }
 
 const MobileNav = ({ dataMenu }: MobileRefProps) => {
-	const {handleOpenCloseMenu, mobileRef, navRef } = useMenuContext()
-	const location = useLocation()
-	
+	const { navRef, scrollMenu, mobileMenu, handleOpenCloseDropdown, activeIndex } = useMenuContext()
+	const { pathname } = useLocation()
+	const { toggle, isOpen, isVisible } = mobileMenu
+
 	useEffect(() => {
-		if (location.pathname !== '/') {
+		if (pathname !== '/') {
 			navRef.current?.classList.add(styles.secondNavBgColor)
 		} else {
 			navRef.current?.classList.remove(styles.secondNavBgColor)
 		}
-	}, [location.pathname, navRef])
-	
+	}, [pathname, navRef])
 
 	return (
-		<div ref={mobileRef} className={styles.mobileContainer}>
+		<div
+			className={`${styles.mobileContainer} ${isVisible ? styles.visibleMenu : ''} ${isOpen ? styles.displayAnim : ''} ${scrollMenu ? styles.scrollMenu : ''}`}>
 			<div className={styles.mobileElement}>
-				<CloseButton styles={styles} handleClose={handleOpenCloseMenu}/>
+				<CloseButton styles={styles} handleClose={toggle} />
 				<h2 className={styles.title}>Navigate to</h2>
 			</div>
 			<div className={styles.mobileLink}>
 				<ControlPanel
+					handleOpenCloseDropdown={handleOpenCloseDropdown}
+					activeIndex={activeIndex}
 					styles={styles}
 					index={0}
-					
 				/>
 				{dataMenu.map((item: MenuTypes, index: number) => {
-					return (
-						<MenuElement
-							key={index}
-							styles={styles}
-							data={item}
-							index={index}
-							
-						/>
-					)
+					return <MenuElement key={index} styles={styles} data={item} index={index} />
 				})}
 			</div>
 		</div>

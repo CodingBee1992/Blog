@@ -14,6 +14,7 @@
 	background-color: var(--sideBarBgc);
 
 	transition: all 0.3s;
+	z-index: 1000;
 	.sideBarMenu {
 		display: flex;
 		flex-direction: column;
@@ -77,15 +78,15 @@
 			.dashboardIcon {
 				width: 20px;
 				height: 20px;
-				
-				path{
-					transition: all .3s;
+
+				path {
+					transition: all 0.3s;
 				}
 				&:hover path {
 					fill: #05e06b;
 				}
 			}
-			.profileIcon{
+			.profileIcon {
 				margin: auto;
 				width: 25px;
 				height: 25px;
@@ -106,20 +107,20 @@
 		// }
 	}
 }
-.activeSideBar {
-	transform: translateX(0);
-}
+
 // @media (max-width: 1600px) {
 // 	.sideBarContainer {
 // 		width: 13%;
 // 	}
 // }
-@media (max-width: 700px) {
+@media (max-width: 800px) {
 	.sideBarContainer {
-		position: absolute;
+		display: none;
+		// position: fixed;
 		transform: translateX(-101%);
 		min-width: 100px;
 		width: 25%;
+		transition: all 3s;
 
 		.sideBarMenu {
 			.logo {
@@ -135,5 +136,12 @@
 				}
 			}
 		}
+	}
+	.displaySideBar{
+		display: flex;
+	}
+	.activeSideBar {
+
+		transform: translateX(0);
 	}
 }

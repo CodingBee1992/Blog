@@ -3,13 +3,14 @@ import type { Ref } from "react"
 interface MenuArrowSVGProps {
 	styles: { [key: string]: string }
     arrowRef?:Ref<SVGSVGElement | null>
+	className?:string
 }
 
-export const MenuArrowSVG = ({ styles, arrowRef }: MenuArrowSVGProps) => {
+export const MenuArrowSVG = ({ styles, arrowRef,className }: MenuArrowSVGProps) => {
 	return (
 		<svg
 			ref={arrowRef}
-			className={styles.arrow}
+			className={`${styles.arrow} ${className ? className : ''}`}
 			width="9"
 			height="6"
 			viewBox="0 0 9 6"

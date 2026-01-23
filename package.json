@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.1.13",
     "@types/node": "^24.7.0",
     "aos": "^3.0.0-beta.6",
+    "event-source-polyfill": "^1.0.31",
     "js-cookie": "^3.0.5",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -28,11 +29,13 @@
     "sass-embedded": "^1.93.2",
     "slugify": "^1.6.6",
     "tailwindcss": "^4.1.13",
+    "ws": "^8.19.0",
     "zod": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@types/aos": "^3.0.7",
+    "@types/event-source-polyfill": "^1.0.5",
     "@types/js-cookie": "^3.0.6",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",

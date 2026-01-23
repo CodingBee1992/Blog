@@ -1,5 +1,4 @@
-import type { ReactNode } from 'react'
-
+import type { JSX, ReactNode } from 'react'
 
 export interface Size {
 	width: number
@@ -24,11 +23,11 @@ export interface ArticleContentProps {
 	title: string
 	introduction: string
 	mainImage: { src: string; alt: string; caption: string; public_id?: string }
-	author: { name: string; avatar: string }
+	author: { name: string; avatar: { src: string; public_id: string } }
 	articleContent?: [
 		{ type: 'title' | 'text' | 'completion' | 'callToAction' | 'add'; value: string },
 
-		{ type: 'image'; value: { src: string; alt: string; caption: string } }
+		{ type: 'image'; value: { src: string; alt: string; caption: string } },
 	]
 	categories: string[]
 	id?: string
@@ -45,8 +44,8 @@ export interface ArticleContentProps {
 export type ExtendedArticleContentProps = {
 	createdAt: string
 	publishedAt: string
-	
-	commentsCount:string
+	postViews: string
+	commentsCount: string
 } & ArticleContentProps
 
 export interface CommentsDataProps {
@@ -57,10 +56,12 @@ export interface CommentsDataProps {
 		_id: string
 		name: string
 		avatar: {
-			src:string,
-			public_id:string
+			src: string
+			public_id: string
 		}
 	}
+	status?: string
+	deletedAt?: null
 	comment: string
 	createdAt: string
 	children?: CommentsDataProps[]
@@ -78,8 +79,8 @@ export interface UsersProps {
 	name: string
 	email: string
 	avatar: {
-		src:string,
-		public_id:string
+		src: string
+		public_id: string
 	}
 	role: string
 	isVerified: boolean
@@ -87,7 +88,7 @@ export interface UsersProps {
 	updatedAt: string
 	commentsCount: number
 	postCount?: number
-	lastLogin:string
+	lastLogin: string
 }
 
 export interface CommentsProps {
@@ -110,3 +111,60 @@ export interface CategoryProps {
 	_id: string
 	id: string
 }
+export interface StatCardProps {
+	title: string
+	stats: Stat
+	icon:JSX.Element
+	style:string
+}
+export interface Stat {
+	total: number
+	lastSeven: number
+	lastThirty: number
+	growthSeven: number
+	growthThirty: number
+}
+
+export interface TopRatedStatsTypes {
+	categories: string[]
+	postId: string
+	title: string
+	totalViews: number
+	commentsCount: number
+	postlikes: number
+	image: string
+	seo: {
+		slug: string
+		metaDescription: string
+		metaTitle: string
+	}
+}
+
+export interface NotificationsTypes {
+	action: string
+	role: string
+	entityType: 'User' | 'Post' | 'Comment' | 'Like'
+	name: string
+	avatar: string | null
+	createdAt: string
+	changes: Record<string, string>
+}
+export interface FullStatsTypes {
+	commentsStats: Stat
+	postsStats: Stat
+	usersStats: Stat
+	likesStats: Stat
+	pageViews: Stat
+	todayPageViews: { today: number; increase: number }
+	dayStats: { date: string; views: number }[]
+	topRated: TopRatedStatsTypes[]
+	notifications: NotificationsTypes[]
+}
+
+export const MobileMenuState = {
+	CLOSED: 'CLOSED',
+	OPENING: 'OPENING',
+	OPEN: 'OPEN',
+	CLOSING: 'CLOSING',
+} as const
+export type MobileMenuTypes = (typeof MobileMenuState)[keyof typeof MobileMenuState]

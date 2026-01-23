@@ -1,0 +1,9 @@
+.latestCommentsContainer {
+	grid-area: e;
+	// height: 600px;
+	padding: 3rem;
+	color: #000000;
+	background-color: var(--statBgc);
+	border-radius: var(--borderRadius16);
+	overflow: hidden;
+}

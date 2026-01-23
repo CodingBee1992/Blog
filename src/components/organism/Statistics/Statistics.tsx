@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type MouseEvent } from 'react'
-import { useFetchBasicStatsQuery } from '../../../slices/api/statisticsApi'
+import { useState, type MouseEvent } from 'react'
+import { useFetchStatisticsLiveQuery } from '../../../slices/api/statisticsApi'
 import StatisticCard from '../../atoms/StatisticCard/StatisticCard'
 import styles from './Statistics.module.scss'
 import {
@@ -14,80 +14,48 @@ import {
 import valueConverter from '../../../hooks/valueConverter'
 import StackedAreaChart from '../../atoms/StackedAreaChart/StackedAreaChart'
 import PopularPosts from '../../modules/PopularPosts/PopularPosts'
+import Loader from '../../atoms/loader/Loader'
+
+import Notifications from '../../modules/Notification/Notifications'
+import LatestComments from '../../modules/LatestComments/LatestComments'
+
 
 const Statistics = () => {
 	const [viewsFromTo, setViewsFromTo] = useState<string>('this week')
-	const viewsRef = useRef<HTMLDivElement | null>(null)
-	const arrowRef = useRef<SVGSVGElement | null>(null)
-	const { data, refetch } = useFetchBasicStatsQuery({})
+	const [scaleUp, setScaleUp] = useState<boolean>(false)
+	const days = viewsFromTo === 'this week' ? 7 : 30
 
-	useEffect(() => {
-		refetch()
-	}, [refetch])
+	const { data } = useFetchStatisticsLiveQuery(days)
 
-	if (!data) return
-	const { postsStats, commentsStats, usersStats,likesStats } = data
+	if (!data) {
+		return <Loader />
+	}
+	const { postsStats, commentsStats, usersStats, likesStats, pageViews, todayPageViews, dayStats } = data
 
-	const statCard = [
-		{
-			statTitle: 'PageViews',
-			statValue: 134005,
-			statGrowthSeven: 55,
-			statGrowthThirty: 64,
-			icon: <ViewsSVG />,
-			style: styles.pageViews,
-		},
-
-		{
-			statTitle: 'Users',
-			statValue: usersStats.total,
-			statGrowthSeven: usersStats.growthSeven,
-			statGrowthThirty: usersStats.growthThirty,
-			icon: <UsersSVG />,
-			style: styles.users,
-		},
-
-		{
-			statTitle: 'Posts',
-			statValue: postsStats.total,
-			statGrowthSeven: postsStats.lastSeven,
-			statGrowthThirty: postsStats.lastThirty,
-			icon: <PostsSVG />,
-			style: styles.posts,
-		},
-
-		{
-			statTitle: 'Comments',
-			statValue: commentsStats.total,
-			statGrowthSeven: commentsStats.lastSeven,
-			statGrowthThirty: commentsStats.lastThirty,
-			icon: <CommentsSVG />,
-			style: styles.comments,
-		},
-		{
-			statTitle: 'Likes',
-			statValue: likesStats.total,
-			statGrowthSeven: likesStats.lastSeven,
-			statGrowthThirty: likesStats.lastThirty,
-			icon: <HeartSVG />,
-			style: styles.likes,
-		},
+	
+	const statConfig = [
+		{ title: 'PageViews', stats: pageViews, icon: <ViewsSVG />, style: styles.pageViews },
+		{ title: 'Users', stats: usersStats, icon: <UsersSVG />, style: styles.users },
+		{ title: 'Posts', stats: postsStats, icon: <PostsSVG />, style: styles.posts },
+		{ title: 'Comments', stats: commentsStats, icon: <CommentsSVG />, style: styles.comments },
+		{ title: 'Likes', stats: likesStats, icon: <HeartSVG />, style: styles.likes },
 	]
+	const statCard = statConfig.map(({ title, stats, icon, style }) => ({
+		statTitle: title,
+		statValue: stats.total,
+		statGrowthSeven: stats.growthSeven,
+		statGrowthThirty: stats.growthThirty,
+		icon: icon,
+		style,
+	}))
 
 	const handleOpenDropDown = () => {
-		if (!viewsRef.current?.classList.contains(styles.scaleUp)) {
-			viewsRef.current?.classList.add(styles.scaleUp)
-			arrowRef.current?.classList.add(styles.rotate)
-			
-		} else {
-			arrowRef.current?.classList.remove(styles.rotate)
-			viewsRef.current?.classList.remove(styles.scaleUp)
-		}
+		setScaleUp(prev => !prev)
 	}
 	const handleSetViewsFromTo = (e: MouseEvent<HTMLSpanElement>) => {
 		const target = e.currentTarget as HTMLSpanElement
 		const value = target.textContent
-		
+
 		if (value) setViewsFromTo(value)
 
 		handleOpenDropDown()
@@ -101,8 +69,8 @@ const Statistics = () => {
 						styles={styles}
 						statTitle={item.statTitle}
 						statValue={valueConverter(item.statValue)}
-						statGrowthSeven={item.statGrowthSeven}
-						statGrowthThirty={item.statGrowthThirty}>
+						statGrowthSeven={valueConverter(item.statGrowthSeven)}
+						statGrowthThirty={valueConverter(item.statGrowthThirty)}>
 						<div className={`${styles.iconBox} ${item.style}`}>{item.icon}</div>
 					</StatisticCard>
 				))}
@@ -112,32 +80,36 @@ const Statistics = () => {
 					<p className={styles.areaChartTitle}>Views</p>
 					<div className={styles.areaCurrentViews}>
 						<div className={styles.areaCurrentInfo}>
-							<span>{valueConverter(32334)}</span>
+							<span>{valueConverter(todayPageViews.today)}</span>
 							<span>today</span>
 						</div>
 						<div className={styles.areaCurrentInfo}>
 							<span>
-								5% <ArrowUpSVG className={styles.arrowUpStat} />
+								{todayPageViews.increase}% <ArrowUpSVG className={styles.arrowUpStat} />
 							</span>
 							<span>increase</span>
 						</div>
 					</div>
 					<div className={styles.areaCurrentDropdown}>
 						<div className={styles.areaCurrentViewsFromTo} onClick={() => handleOpenDropDown()}>
-							<span>{viewsFromTo}</span> <ArrowDownSVG arrowRef={arrowRef}/>
+							<span>{viewsFromTo}</span> <ArrowDownSVG className={`${scaleUp ? styles.rotate : ''}`} />
 						</div>
 
-						<div ref={viewsRef} className={styles.areaCurrentViewsSelect}>
+						<div className={`${styles.areaCurrentViewsSelect} ${scaleUp ? styles.scaleUp : ''}`}>
 							<span onClick={e => handleSetViewsFromTo(e)}>
 								{viewsFromTo === 'this week' ? 'last month' : 'this week'}
 							</span>
 						</div>
 					</div>
 				</div>
-				<StackedAreaChart styles={styles} />
+				<div className={styles.stackedAreaChart}>
+					<StackedAreaChart data={dayStats} styles={styles} />
+				</div>
 			</div>
 
 			<PopularPosts />
+			<Notifications />
+			<LatestComments />
 		</div>
 	)
 }

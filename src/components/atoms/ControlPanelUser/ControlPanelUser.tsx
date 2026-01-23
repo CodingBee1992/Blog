@@ -13,28 +13,24 @@ interface ControlPanelUserProps {
 
 const ControlPanelUser = ({ styles }: ControlPanelUserProps) => {
 	const { role, name, avatar } = useSelector((state: RootState) => state.auth)
-	const { userRef, openCloseUserMenu } = useMenuContext()
+	const { userRef, openCloseUserMenu, toggleMenu } = useMenuContext()
 
 	const admin = adminLinks[0].href
 	const account = accountLinks[0].children![0].href
 
 	const onKeyDown = (e: KeyboardEvent) => {
 		if (e.key === 'Enter') {
-			openCloseUserMenu({ e, userRef })
+			openCloseUserMenu()
 		}
 	}
 
 	return (
-		<div className={styles.controlPanelUser}>
-			<div
-				tabIndex={0}
-				className={styles.authorInfo}
-				onKeyDown={e => onKeyDown(e)}
-				onClick={e => openCloseUserMenu({ e, userRef })}>
+		<div ref={userRef} className={styles.controlPanelUser}>
+			<div tabIndex={0} className={styles.authorInfo} onKeyDown={e => onKeyDown(e)} onClick={() => openCloseUserMenu()}>
 				<img src={`${avatar}`} alt="Avatar" className={styles.authorAvatar} />
 				<span className={styles.author}>{name}</span>
 			</div>
-			<div ref={userRef} className={styles.controlSettings}>
+			<div className={`${styles.controlSettings} ${toggleMenu ? styles.displayVisibility : ''}`}>
 				{(role === 'Admin' || role === 'Moderator') && (
 					<AnchorLink className={styles.controlLinks} href={admin}>
 						Admin Panel

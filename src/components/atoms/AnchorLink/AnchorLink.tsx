@@ -1,4 +1,4 @@
-import type { KeyboardEvent, ReactNode, RefObject } from 'react'
+import type { KeyboardEvent, MouseEvent, ReactNode, RefObject } from 'react'
 import { removePaginationLinksTags } from '../../../utils/removePaginationLinksTag'
 import { useLocation, useNavigate } from 'react-router'
 
@@ -10,11 +10,12 @@ interface AnchorLink {
 	className?: string
 	count?: number
 	ariaLabel?: string
-	title?:string
+	title?: string
 	ref?: RefObject<HTMLAnchorElement | null>
 	handleOpenCloseMenu?: () => void
-	handleClose?: () => void,
-	onKeyDown?:(e:KeyboardEvent)=>void
+	handleClose?: () => void
+	onKeyDown?: (e: KeyboardEvent) => void
+	handleOpenCloseDropdown?: (e: MouseEvent<HTMLDivElement | HTMLAnchorElement>) => void
 }
 
 const AnchorLink = ({
@@ -28,6 +29,7 @@ const AnchorLink = ({
 	ref,
 	title,
 	handleOpenCloseMenu,
+	handleOpenCloseDropdown,
 	handleClose,
 	onKeyDown,
 }: AnchorLink) => {
@@ -36,16 +38,17 @@ const AnchorLink = ({
 
 	// const isActive = location.pathname === href
 	// ${isActive ? styles.isActive : ''}
-	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+	const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault()
 
 		removePaginationLinksTags()
 		handleOpenCloseMenu?.()
+		handleOpenCloseDropdown?.(e)
 		handleClose?.()
 		const url = new URL(window.location.origin + href)
 		const path = url.pathname
 		const search = url.search
-		
+
 		const hash = url.hash.replace('#', '')
 
 		if (location.pathname !== path || location.search !== search) {
@@ -64,13 +67,14 @@ const AnchorLink = ({
 			title={title}
 			href={href}
 			ref={ref}
-			onKeyDown={e=>onKeyDown?.(e)}
+			onKeyDown={e => onKeyDown?.(e)}
 			onClick={e => handleClick(e)}
 			rel={rel}
 			draggable={false}
 			target={target}
 			aria-label={ariaLabel}
 			data-main={count}
+			data-element={-1}
 			className={`${className ? className : ''}  `}>
 			{children}
 		</a>

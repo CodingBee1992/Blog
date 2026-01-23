@@ -77,7 +77,9 @@ $mobileSmall: 380px;
 	--text-h1: 8.8rem;
 
 	--text-display: calc(
-		calc(calc(calc(calc(calc(calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2) * 1.2) * 1.2) * 1.2) * 1.2) * 1.2) *
+		calc(
+				calc(calc(calc(calc(calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2) * 1.2) * 1.2) * 1.2) * 1.2) * 1.2
+			) *
 			1.2
 	);
 	--text-display-1: calc(
@@ -129,6 +131,7 @@ $mobileSmall: 380px;
 	--signFormTextColor: #282828;
 	// Brick Padding
 	--brick-padding: 3rem;
+	--brick-paddingLeftRight: 3rem;
 	// Social links
 	--margin-bottomSocialLinks: calc(1 * 3.2rem);
 	--socialPosition-right: 4rem;
@@ -146,6 +149,7 @@ $mobileSmall: 380px;
 
 	// PANEL & SETTINGS PAGES background color
 	--pagesBgc: #efefef;
+	// --pagesBgc: #effffa;
 	--pagesColor: #092013;
 
 	//  add post / form colors
@@ -227,6 +231,7 @@ $mobileSmall: 380px;
 		--line-left1: 33%;
 		--line-left2: 66%;
 		--brick-padding: 4rem;
+		--brick-paddingLeftRight: 4rem;
 	}
 }
 @media (max-width: 1200px) {
@@ -235,6 +240,7 @@ $mobileSmall: 380px;
 		--slideContent-width: 55dvw;
 		--gutter: 2rem;
 		--brick-padding: 3.2rem;
+		--brick-paddingLeftRight: 3.2rem;
 	}
 }
 @media (max-width: 1100px) {
@@ -266,6 +272,7 @@ $mobileSmall: 380px;
 	:root {
 		--width-post: 100%;
 		--brick-padding: 4rem;
+		--brick-paddingLeftRight: 4rem;
 		--text-display-1: calc(
 			calc(calc(calc(calc(calc(calc((1.7rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2) * 1.2) * 1.2) * 1.2) * 1.2
 		);
@@ -286,10 +293,12 @@ $mobileSmall: 380px;
 		--lineHeight: calc(2.5 * 2.8rem);
 		--menu-TextSize: calc(calc(calc((1.7rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
 		--slideContent-width: 75dvw;
+		--brick-padding: 4rem;
+		--brick-paddingLeftRight: 2rem;
 	}
 }
 
-@mixin formBtn($padding:1rem,$bgc,$color:#000000,$cursor:pointer) {
+@mixin formBtn($padding: 1rem, $bgc, $color: #000000, $cursor: pointer) {
 	display: flex;
 	align-self: flex-start;
 	padding: $padding;
@@ -300,6 +309,4 @@ $mobileSmall: 380px;
 	border-radius: var(--borderRadius06);
 	transition: all 0.3s;
 	cursor: $cursor;
-
-	
 }
