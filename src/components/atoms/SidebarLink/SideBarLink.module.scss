@@ -10,8 +10,6 @@
 	transition: height 0.3s ease-in-out;
 	overflow: hidden;
 	cursor: pointer;
-	
-	
 
 	.sideBarLinkHelper {
 		display: flex;
@@ -41,6 +39,7 @@
 			rotate: 180deg;
 		}
 	}
+
 	.activeSideBarLink {
 		background-color: var(--sideBarBgcHoverLink);
 
@@ -95,14 +94,41 @@
 .activeSubLinks {
 	height: 100%;
 
-	.subMenu{
+	.subMenu {
 		display: flex;
 	}
 }
-@media (max-width: 700px) {
+
+@media (width < 800px) {
 	.sideBarLink {
 		.sideBarLinkHelper {
+			padding-left: 3rem;
+		}
+
+		.subMenu {
+			.subMenuLi {
+				padding-left: 1rem;
+			}
+		}
+	}
+}
+@media (width < 700px) {
+	.sideBarLink {
+		.sideBarLinkHelper {
+			line-height: 50px;
+			min-height: 50px;
 			justify-content: center;
+			.arrow {
+				margin-left: 1rem;
+			}
+		}
+		.sideBarPadding {
+			padding-left: 0rem;
+		}
+		.subMenu {
+			.subMenuLi {
+				padding-left: 1rem;
+			}
 		}
 	}
 }

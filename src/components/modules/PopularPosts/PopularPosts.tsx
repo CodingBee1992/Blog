@@ -3,7 +3,7 @@ import styles from './PopularPosts.module.scss'
 import { CommentsSVG, HeartSVG, ViewsSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { useFetchStatisticsLiveQuery } from '../../../slices/api/statisticsApi'
-import handleCreateUrl from '../../../hooks/handleCreateUrl'
+import handleCreateUrl from '../../../hooks/createUrl'
 
 const PopularPosts = () => {
 	const { data } = useFetchStatisticsLiveQuery(7)
@@ -26,7 +26,7 @@ const PopularPosts = () => {
 						</div>
 						<div className={styles.popularPostInfo}>
 							<AnchorLink href={url} className={styles.popularPostInfoTitle}>
-								{post.title}
+								„{post.title}”
 							</AnchorLink>
 
 							<div className={styles.popularPostStatsBox}>

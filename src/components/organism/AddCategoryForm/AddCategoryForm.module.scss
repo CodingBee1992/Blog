@@ -3,11 +3,11 @@
 
 	p {
 		margin-bottom: 2rem;
-		 font-size: var(--textSize_26);
-        font-weight: 400;
-        line-height: 4rem;
-        font-family: var(--font-2);
-        color: var(--pagesColor);
+		font-size: var(--textSize_26);
+		font-weight: 400;
+		line-height: 4rem;
+		font-family: var(--font-2);
+		color: var(--pagesColor);
 	}
 
 	.formContainer {
@@ -104,5 +104,10 @@
 				}
 			}
 		}
+	}
+}
+@media (width < 800px) {
+	.addCategoryContainer {
+		margin-top: 5rem;
 	}
 }

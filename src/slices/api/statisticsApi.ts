@@ -35,8 +35,9 @@ const emptyFullStats: FullStatsTypes = {
 	pageViews: emptyStat,
 	todayPageViews: { today: 0, increase: 0 },
 	dayStats: [{ date: new Date().toISOString().slice(0, 10), views: 0 }],
-	notifications: [{ action: '', role: '', entityType: 'User', name: '', avatar: null, createdAt: '', changes: {} }],
+	notifications: [{ action: '', role: '', entityType: 'User', name: '', avatar:' ', createdAt: '', changes: {} }],
 	topRated: [emptyTopRated],
+	latestComments:[{comment:'',author:'',avatar:'',postTitle:'',postId:'',categories:[''],seo:{slug:'',metaTitle:'',metaDescription:''}}]
 }
 export const statisticApi = createApi({
 	reducerPath: 'statisticApi',

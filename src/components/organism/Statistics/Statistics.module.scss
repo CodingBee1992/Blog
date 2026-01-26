@@ -1,6 +1,4 @@
 .statisticContainer {
-	// display: flex;
-	// flex-wrap: wrap;
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 	grid-template-rows: auto 1fr auto;
@@ -18,18 +16,19 @@
 
 		.statisticCardContainer {
 			display: flex;
-			justify-content: space-around;
+			justify-content: center;
 			align-items: center;
-			padding: 2rem;
+			padding: 2rem 1rem;
+			gap: 2rem;
 			background-color: var(--statBgc);
 			border: none;
 			border-radius: var(--borderRadius16);
-
+			
 			.statBox {
 				display: flex;
 				align-items: center;
 				gap: 1rem;
-				width: 50%;
+				min-width: 40%;
 				.statMain {
 					display: flex;
 					flex-direction: column;
@@ -67,9 +66,10 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				width: 45px;
+				min-width: 45px;
 				height: 45px;
 
+				border: 2px solid #ececec;
 				border-radius: var(--borderRadius08);
 			}
 			.pageViews {
@@ -127,10 +127,7 @@
 	.areaChartWrapper {
 		display: grid;
 		grid-area: c;
-		// margin-top: 2rem;
-		// width: 100%;
-		// max-width: 800px;
-		// height: 100%;
+
 		padding: 3rem;
 		color: #000000;
 		background-color: var(--statBgc);
@@ -170,6 +167,7 @@
 			}
 			.areaCurrentDropdown {
 				position: relative;
+				margin-right: 2rem;
 				.areaCurrentViewsFromTo {
 					display: flex;
 					align-items: center;
@@ -182,12 +180,16 @@
 					cursor: pointer;
 
 					span {
+						flex-shrink: 0;
 						margin-right: 0.5rem;
+					}
+					svg {
+						flex-shrink: 0;
 					}
 				}
 				.areaCurrentViewsSelect {
 					position: absolute;
-					top: 39%;
+					top: 35%;
 					left: 0;
 					width: 100%;
 					padding: 0 1rem;
@@ -247,6 +249,12 @@
 				.areaChartTitle {
 					margin-left: 3rem;
 				}
+
+				.areaCurrentDropdown {
+					.areaCurrentViewsSelect {
+						top: 20%;
+					}
+				}
 			}
 			.stackedAreaChart {
 				.areaChart {
@@ -266,20 +274,79 @@
 			'b b b b b b'
 			'd d d d d d'
 			'e e e e e e';
+
+		.areaChartWrapper {
+			.areaChartInfo {
+				.areaCurrentDropdown {
+					.areaCurrentViewsSelect {
+						top: 35%;
+					}
+				}
+			}
+		}
+	}
+}
+@media (max-width: 800px) {
+	.statisticContainer {
+		.statisticWrapper{
+			margin-top: 5rem;
+		}
 	}
 }
 
 @media (max-width: 600px) {
-	.areaChartWrapper {
-		overflow: hidden;
-		.stackedAreaChart {
-			overflow-x: scroll;
-			.areaChart {
-				min-width: 600px;
+	.statisticContainer {
+		.areaChartWrapper {
+			position: relative;
+			overflow: hidden;
+
+			.areaChartInfo {
+				justify-content: center;
+				.areaChartTitle {
+					top: 3%;
+					left: 3%;
+					position: absolute;
+					margin-left: 1rem;
+
+					font-size: var(--textSize_18);
+				}
+				.areaCurrentViews {
+					display: flex;
+					justify-content: end;
+					gap: 1rem;
+					padding: 1rem 0;
+					min-width: 200px;
+					.areaCurrentInfo {
+						
+						padding: 0;
+
+						span:first-child {
+							display: flex;
+							font-size: var(--textSize_18);
+						}
+
+						span:last-child {
+							font-size: var(--textSize_10);
+							color: var(--statSecondColor);
+						}
+					}
+				}
+				.areaCurrentDropdown {
+					margin-right: 0rem;
+					.areaCurrentViewsSelect {
+						top: 40%;
+					}
+				}
 			}
-		}
-		::-webkit-scrollbar{
-			display: none;
+			.stackedAreaChart {
+				overflow-x: scroll;
+				.areaChart {
+					min-width: 600px;
+				}
+			}
+			::-webkit-scrollbar {
+				display: none;
+			}
 		}
 	}
 }

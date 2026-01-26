@@ -1,16 +1,19 @@
+import { useState } from 'react'
 import HeaderText from '../../atoms/HeaderText/HeaderText'
 import PostsContent from '../../organism/PostsContent/PostsContent'
 import styles from './SingleCategoryPageTemplate.module.scss'
+import { useFetchLimitPostsQuery } from '../../../slices/api/postApi'
 
+const SingleCategoryPageTemplate = ({ name }: { name: string }) => {
+	const [currentPage, setCurrentPage] = useState<number>(1)
+	const { data } = useFetchLimitPostsQuery({ limit: 30, page: currentPage })
 
-
-const SingleCategoryPageTemplate = ({name}:{name:string}) => {
 	return (
 		<section className={`${styles.categoryContainer} sectionPages`}>
 			<HeaderText>
 				<h1>{name}</h1>
 			</HeaderText>
-			<PostsContent />
+			<PostsContent data={data} currentPage={currentPage} setCurrentPage={setCurrentPage} />
 		</section>
 	)
 }

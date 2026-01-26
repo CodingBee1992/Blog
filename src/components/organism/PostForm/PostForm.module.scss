@@ -166,11 +166,7 @@
 
 								input {
 									display: none;
-									
 								}
-
-
-								
 							}
 						}
 						.categoryMargin {
@@ -390,6 +386,21 @@
 
 		.postFormControllersWrapper {
 			border-right: none;
+		}
+	}
+}
+@media (max-width: 800px) {
+	.postFormContainer {
+		padding-top: 5.5rem;
+
+		.postFormControllersWrapper {
+			
+			.postFormControllers {
+				
+				top: 6rem;
+				
+				
+			}
 		}
 	}
 }

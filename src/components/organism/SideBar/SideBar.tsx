@@ -12,20 +12,34 @@ import { useLocation } from 'react-router'
 import { DashboardSVG, ProfileSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import { accountLinks, adminLinks } from '../../../utils/sideBarLinks'
 
+import useWindowSize from '../../../hooks/useWindowSize'
+import CloseSvg from '../../../assets/icons/nav/CloseSvg'
+
+import useMenuContext from '../../../hooks/useMenuContext'
+
 interface SideBarProps {
 	children: ReactNode
 }
 
 const SideBar = ({ children }: SideBarProps) => {
+	const { sideBarMenu, sideBarRef } = useMenuContext()
+	const size = useWindowSize()
+	const isMobile = size.width < 800
 	const { pathname } = useLocation()
 	const { isLogged, role, avatar } = useSelector((state: RootState) => state.auth)
-
 	const admin = adminLinks[0].href
 	const account = accountLinks[0].children![0].href
-	const index = 1
+
+	const { close, active } = sideBarMenu
+
 	return (
-		<div className={`${styles.sideBarContainer} ${index === 1 ? styles.activeSideBar : ''}`}>
+		<div ref={sideBarRef} className={`${styles.sideBarContainer} ${active ? styles.activeSideBar : ''}`}>
 			<div className={styles.sideBarMenu}>
+				{isMobile && (
+					<button className={`${styles.btn} ${styles.close}`} title="Close" onClick={() => close()}>
+						<CloseSvg styles={styles} />
+					</button>
+				)}
 				<Logo styles={styles} />
 				<div className={styles.sideBarLinks}>{children}</div>
 			</div>
@@ -34,12 +48,22 @@ const SideBar = ({ children }: SideBarProps) => {
 					''
 				) : !pathname.startsWith('/account') ? (
 					(!isLogged || (isLogged && (role === 'Admin' || role === 'Moderator'))) && (
-						<AnchorLink title="Account" ariaLabel="Account" className={styles.sideBarBtns} href={account}>
+						<AnchorLink
+							handleClose={close}
+							title="Account"
+							ariaLabel="Account"
+							className={styles.sideBarBtns}
+							href={account}>
 							<ProfileSVG className={styles.profileIcon} />
 						</AnchorLink>
 					)
 				) : (
-					<AnchorLink ariaLabel="Admin Panel" href={admin} className={styles.sideBarBtns} title="Admin Panel">
+					<AnchorLink
+						handleClose={close}
+						ariaLabel="Admin Panel"
+						href={admin}
+						className={styles.sideBarBtns}
+						title="Admin Panel">
 						<DashboardSVG className={styles.dashboardIcon} />
 					</AnchorLink>
 				)}

@@ -1,5 +1,7 @@
 @use '../../../../assets/styles/variable' as *;
 .deleteAccountContainer {
+	display: flex;
+	flex-direction: column;
 	min-height: 100dvh;
 	height: 100%;
 	width: 100%;
@@ -90,23 +92,18 @@
 					gap: 1rem;
 					width: 100%;
 					cursor: pointer;
-					
+
 					input {
 						display: none;
 					}
 					&:hover {
-						.checkmark{
+						.checkmark {
 							box-shadow: 0px 0px 3px 3px #d3d3d3d3;
 						}
 						.scaleCheckmark {
 							box-shadow: none;
 						}
-
-
 					}
-					
-					
-					
 
 					.acknowledgementInfo {
 						display: flex;
@@ -128,13 +125,9 @@
 	}
 }
 
-
-// @keyframes animOpacity {
-// 	0% {
-// 		opacity: 1;
-// 	}
-// 	100% {
-// 		opacity: 0;
-// 	}
-	
-// }
+@media (max-width: 800px) {
+	.deleteAccountContainer {
+		align-items: center;
+		
+	}
+}

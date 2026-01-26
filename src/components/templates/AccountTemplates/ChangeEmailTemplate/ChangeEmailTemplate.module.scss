@@ -1,10 +1,17 @@
 .changeEmailTemplateContainer {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	
 	min-height: 100dvh;
 	height: 100%;
 	width: 100%;
 	background-color: var(--pagesBgc);
+	padding: 0 2rem;
+}
 
-	overflow: hidden;
+
+@media (max-width:800px) {
+	.changeEmailTemplateContainer{
+		align-items: center;
+	}
 }

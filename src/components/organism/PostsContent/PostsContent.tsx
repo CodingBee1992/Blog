@@ -1,11 +1,21 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type Dispatch, type MouseEvent, type SetStateAction } from 'react'
 import Article from '../../atoms/MasonryArticle/Article'
 import styles from './PostsContent.module.scss'
 import type { ArticleContentProps } from '../../../types/types'
 import Aos from 'aos'
-import { useFetchLimitPostsQuery } from '../../../slices/api/postApi'
+// import { useFetchLimitPostsQuery } from '../../../slices/api/postApi'
 
-const PostsContent = () => {
+interface PostsContentProps{
+	currentPage:number,
+	setCurrentPage:Dispatch<SetStateAction<number>>
+	data:{
+		posts:ArticleContentProps[],
+		totalPages:number
+	}
+}
+
+
+const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 	const [width, setWidth] = useState<number>(0)
 	const [columns, setColumns] = useState<number>(0)
 	const [percent, setPercent] = useState<number>(0)
@@ -15,11 +25,12 @@ const PostsContent = () => {
 
 	const [styledPostData, setStyledPostData] = useState<ArticleContentProps[]>([])
 
-	const [currentPage, setCurrentPage] = useState<number>(1)
+	// const [currentPage, setCurrentPage] = useState<number>(1)
 	const [pagginationButtons, setPagginationButtons] = useState<number[]>([])
 
-	const { data, refetch } = useFetchLimitPostsQuery({ limit: 30, page: currentPage })
-	const { posts, totalPages = 1 } = { ...data }
+	// const { data, refetch } = useFetchLimitPostsQuery({ limit: 30, page: currentPage })
+	console.log(data)
+	const { posts, totalPages = 1 } = {...data }
 
 	useEffect(() => {
 		const buttons: (number | string)[] = []
@@ -63,7 +74,7 @@ const PostsContent = () => {
 			setCurrentPage(prev => prev + 1)
 		}
 
-		refetch()
+		// refetch()
 	}
 
 	const handleSetPage = (e: MouseEvent<HTMLButtonElement>) => {
@@ -166,7 +177,7 @@ const PostsContent = () => {
 		return () => {
 			observer.disconnect()
 		}
-	}, [columns, percent, width, data, refetch, posts, recalcGrid])
+	}, [columns, percent, width, data,posts, recalcGrid])
 
 	const handleImageLoad = (index: number) => {
 		const el = articleRef.current[index]

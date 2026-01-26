@@ -16,7 +16,7 @@ import timePass from '../../../hooks/timePass'
 import NotificationNew from '../../atoms/NotificationNew/NotificationNew'
 
 import { useFetchAllCategoriesQuery } from '../../../slices/api/categoriesApi'
-import handleCreateUrl from '../../../hooks/handleCreateUrl'
+import handleCreateUrl from '../../../hooks/createUrl'
 
 import dateConverter from '../../../hooks/dateConverter'
 
@@ -50,7 +50,7 @@ const ListOfPosts = () => {
 
 	const [publishPost] = usePublishPostMutation()
 	const { posts = [], totalPages = 1, total = 1 } = data ?? {}
-	
+
 	const { data: categories } = useFetchAllCategoriesQuery()
 
 	const allCategories = categories && categories?.length > 0 ? categories : defaultCategories

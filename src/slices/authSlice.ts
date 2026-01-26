@@ -3,35 +3,35 @@ import Cookies from 'js-cookie'
 
 interface SetDataType {
 	isLogged: boolean
-	justLoggedOut:boolean
+	justLoggedOut: boolean
 	name: string
 	id: string
 	avatar: string
-	
+
 	role: string
 }
 
 interface SetDataPayload {
-  name: string
-  id: string
-  avatar: {src:string}
-  role: string
+	name: string
+	id: string
+	avatar: { src: string }
+	role: string
 }
 
 let name = ''
 let id = ''
 let avatar = ''
 
-let role =''
+let role = ''
 const stored = localStorage.getItem('user')
 if (stored) {
 	try {
 		const decoded = JSON.parse(stored)
-		
+
 		name = decoded.name || ''
 		id = decoded.id || ''
 		avatar = decoded.avatar.src || ''
-		
+
 		role = decoded.role || ''
 	} catch (error) {
 		console.warn('Błąd podczas dekodowania usera z localStorage:', error)
@@ -40,34 +40,37 @@ if (stored) {
 
 const initialState: SetDataType = {
 	isLogged: Cookies.get('user') === 'ok',
-	justLoggedOut:false,
+	justLoggedOut: false,
 	name,
 	id,
 	avatar,
-	
-	role
-}
 
+	role,
+}
+export const USER_COOKIE_OPTIONS = {
+	path: '/',
+	expires: 1, // 1 dzień
+}
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
 		setLogin: (state, action: PayloadAction<boolean>) => {
-			Cookies.set('user', 'ok', { expires: 1 })
-			
+			Cookies.set('user', 'ok', USER_COOKIE_OPTIONS)
+
 			state.isLogged = action.payload
 			state.justLoggedOut = !action.payload
 		},
 		setData: (state, action: PayloadAction<SetDataPayload>) => {
-			const { name, id, avatar,role } = action.payload
+			const { name, id, avatar, role } = action.payload
 			state.name = name
 			state.id = id
 			state.avatar = avatar.src
-			
+
 			state.role = role
 
 			try {
-				const encoded = JSON.stringify({ name, id, avatar,role })
+				const encoded = JSON.stringify({ name, id, avatar, role })
 
 				localStorage.setItem('user', encoded)
 			} catch (error) {
@@ -76,14 +79,14 @@ export const authSlice = createSlice({
 		},
 
 		setLogout: state => {
-			Cookies.remove('user')
+			Cookies.remove('user',USER_COOKIE_OPTIONS)
 			localStorage.removeItem('user')
 			state.isLogged = false
-			state.justLoggedOut=true
+			state.justLoggedOut = true
 			state.name = ''
 			state.id = ''
 			state.avatar = ''
-			
+
 			state.role = ''
 		},
 	},

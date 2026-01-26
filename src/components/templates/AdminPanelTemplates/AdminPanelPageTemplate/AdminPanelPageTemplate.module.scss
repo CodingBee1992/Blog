@@ -1,11 +1,12 @@
 .adminPanelTemplateContainer {
-	
+	position: relative;
 	width: 100%;
-	min-height: 100dvh;
 	height: 100%;
+	min-height: 100dvh;
 	
 	background-color: var(--pagesBgc);
 	padding: 2rem;
+	overflow: hidden;
 
 	.statisticTitle {
 		margin-bottom: 3rem;
@@ -16,3 +17,5 @@
 		color: var(--pagesColor);
 	}
 }
+
+

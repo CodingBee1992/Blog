@@ -16,7 +16,7 @@ import timePass from '../../../hooks/timePass'
 import Popup from '../../atoms/Popup/Popup'
 import { useDeleteCommentMutation, useFetchAllCommentsQuery } from '../../../slices/api/commentsApi'
 import NotificationNew from '../../atoms/NotificationNew/NotificationNew'
-import handleCreateUrl from '../../../hooks/handleCreateUrl'
+import handleCreateUrl from '../../../hooks/createUrl'
 import longDateConverter from '../../../hooks/longDateConverter'
 
 const ListOfComments = () => {
@@ -131,7 +131,7 @@ const ListOfComments = () => {
 		try {
 			if (userData.commentId && userData.postId) {
 				const res = await deleteComment({ commentId: userData.commentId, postId: userData.postId }).unwrap()
-				
+
 				setPopUpMessage(res.message)
 			}
 
@@ -140,7 +140,6 @@ const ListOfComments = () => {
 			console.log(error)
 		}
 	}
-	
 
 	// if (isFetching) return <Loader />
 	return (
@@ -179,7 +178,6 @@ const ListOfComments = () => {
 											className={styles.tabelTitle}
 											href={`admin/users/profile/${item.author._id}`}>
 											{item.author.name}
-											
 										</AnchorLink>
 									</div>
 
@@ -193,12 +191,9 @@ const ListOfComments = () => {
 											className={styles.tabelTitle}
 											href={handleCreateUrl({ categories: item.categories, seo: item.seo, _id: item.postId })}>
 											{item.title}
-											
 										</AnchorLink>
 									</div>
-									<div className={styles.td}>
-										{new Date(item.createdAt).toLocaleString(...longDateConverter())}
-									</div>
+									<div className={styles.td}>{new Date(item.createdAt).toLocaleString(...longDateConverter())}</div>
 
 									<div className={styles.td}>
 										<AnchorLink ariaLabel="Edit button" href={`/admin/users/profile/${item.author._id}`}>

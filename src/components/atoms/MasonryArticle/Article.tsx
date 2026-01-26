@@ -4,7 +4,7 @@ import AnchorLink from '../AnchorLink/AnchorLink'
 import styles from './Article.module.scss'
 import useWindowSize from '../../../hooks/useWindowSize'
 
-import handleCreateUrl from '../../../hooks/handleCreateUrl'
+import handleCreateUrl from '../../../hooks/createUrl'
 
 const Article = ({
 	_id,
@@ -39,7 +39,6 @@ const Article = ({
 	}
 	const responsiveImage = useResponsiveCloudinaryImage({ mainImageSrc, defaultWidth })
 
-
 	return (
 		<article
 			data-aos="fade-up"
@@ -47,7 +46,7 @@ const Article = ({
 			className={`${styles.article} ${styles.brick}`}
 			style={{ position: 'absolute', left, top }}>
 			<div className={styles.articleImage}>
-				<AnchorLink href={handleCreateUrl({  categories, seo,  _id })}>
+				<AnchorLink href={handleCreateUrl({ categories, seo, _id })}>
 					<img src={responsiveImage} alt={mainImage.alt} onLoad={onImageLoad} />
 				</AnchorLink>
 			</div>
