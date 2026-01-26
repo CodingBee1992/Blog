@@ -64,8 +64,8 @@ const Notifications = () => {
 							</div>
 						</div>
 						<div className={styles.notificationsInfo}>
-							<p className={styles.notificationsAction}>{notificationHelper({ notif })}</p>
 							<span className={styles.notificationAuthor}>{notif.name}</span>
+							<p className={styles.notificationsAction}>{notificationHelper({notif })}</p>
 						</div>
 						<div className={styles.notificationsDate}>
 							<CalendarSVG />

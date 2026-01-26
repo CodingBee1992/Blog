@@ -7,10 +7,12 @@ import { setIsOpen } from '../../../slices/themeSlice'
 import useDebounce from '../../../hooks/useDebounce'
 import { useSearchPostQuery } from '../../../slices/api/postApi'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
+import createUrl from '../../../hooks/createUrl'
 
 interface DataSearchProps {
 	_id: string
 	title: string
+	categories:string[]
 	seo: {
 		slug: string
 		metaTitle: string
@@ -106,14 +108,19 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 						</form>
 						<div ref={searchListRef} className={`${styles.elementSearchList}`}>
 							{data &&
-								data.map((item: DataSearchProps) => (
-									<AnchorLink
-										handleClose={handleClose}
-										className={styles.elementSearchListLink}
-										href={`/blog/${item.seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${item._id}`}>
-										{item.title}
-									</AnchorLink>
-								))}
+								data.map((item: DataSearchProps) => {
+
+									const url = createUrl({categories:item.categories,seo:item.seo,_id:item._id})
+
+									return (
+										<AnchorLink
+											handleClose={handleClose}
+											className={styles.elementSearchListLink}
+											href={url}>
+											{item.title}
+										</AnchorLink>
+									)
+								})}
 						</div>
 					</div>
 

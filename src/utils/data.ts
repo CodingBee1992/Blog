@@ -26,7 +26,7 @@ export const theadAdminsAndModerators = [
 	'name',
 	'email',
 	'createdAt',
-	'isVerified',
+	
 	'comments',
 	'posts',
 	'role',

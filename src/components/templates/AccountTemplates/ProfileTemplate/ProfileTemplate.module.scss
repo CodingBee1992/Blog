@@ -1,10 +1,14 @@
 @use '../../../../assets/styles/variable' as *;
 .profileTemplateContainer {
+	position: relative;
+	display: flex;
+	flex-direction: column;
 	min-height: 100dvh;
 	height: 100%;
 	width: 100%;
 	background-color: var(--pagesBgc);
 	padding: 0 2rem;
+	
 
 	.title {
 		margin-block: 2rem;
@@ -240,4 +244,12 @@
 			}
 		}
 	}
+}
+
+@media (max-width:800px) {
+	.profileTemplateContainer{
+		align-items: center;
+		
+	}
+	
 }

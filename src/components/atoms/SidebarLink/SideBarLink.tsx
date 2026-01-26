@@ -7,6 +7,7 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu'
 import styles from './SideBarLink.module.scss'
 import { useLocation } from 'react-router'
 import type { sideBarLinksProps } from '../../../types/types'
+import useMenuContext from '../../../hooks/useMenuContext'
 
 interface SideBarLinkProps {
 	data: sideBarLinksProps
@@ -14,6 +15,8 @@ interface SideBarLinkProps {
 }
 
 const SideBarLink = ({ data, index }: SideBarLinkProps) => {
+	const { sideBarMenu } = useMenuContext()
+	const { close } = sideBarMenu
 	const { width } = useWindowSize()
 	const arrowRef = useRef<SVGSVGElement | null>(null)
 	const sideBarLinkRef = useRef<HTMLDivElement | null>(null)
@@ -46,7 +49,6 @@ const SideBarLink = ({ data, index }: SideBarLinkProps) => {
 		}
 	}
 	const onKeyDown = (e: KeyboardEvent) => {
-		
 		if (e.key === 'Enter') {
 			handleOpenCloseDropdown()
 		}
@@ -67,22 +69,39 @@ const SideBarLink = ({ data, index }: SideBarLinkProps) => {
 						handleOpenCloseDropdown()
 					}}>
 					<div className={styles.sideBarLinkName}>
-						{data.icon} {width > 700 && <p>{data.title}</p>}
+						{data.icon} {width >= 700 && <p>{data.title}</p>}
 					</div>
 					<MenuArrowSVG arrowRef={arrowRef} styles={styles} />
 				</div>
 
-				{data.children?.length ? <DropdownMenu styles={styles} data={data} /> : null}
+				{data.children?.length ? (
+					<DropdownMenu
+						styles={styles}
+						data={data}
+						toggle={() => {
+							close()
+							
+						}}
+					/>
+				) : null}
 			</div>
 		)
 	} else {
 		return (
-			<AnchorLink onKeyDown={onKeyDown} className={styles.sideBarLink} href={data.href}>
+			<AnchorLink
+				onKeyDown={onKeyDown}
+				handleClose={() => {
+					handleOpenCloseDropdown()
+					close()
+				}}
+				className={styles.sideBarLink}
+				href={data.href}>
 				<div
-					className={`${styles.sideBarLinkHelper} ${active ? styles.activeSideBarLink : ''}`}
-					onClick={() => handleOpenCloseDropdown()}>
+					className={`${styles.sideBarLinkHelper} ${styles.sideBarPadding} ${active ? styles.activeSideBarLink : ''}`}
+					// onClick={() => handleOpenCloseDropdown()}
+				>
 					<div className={styles.sideBarLinkName}>
-						{data.icon} {width > 700 && <p>{data.title}</p>}
+						{data.icon} {width >= 700 && <p>{data.title}</p>}
 					</div>
 				</div>
 			</AnchorLink>

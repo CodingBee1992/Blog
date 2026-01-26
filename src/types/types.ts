@@ -145,7 +145,7 @@ export interface NotificationsTypes {
 	role: string
 	entityType: 'User' | 'Post' | 'Comment' | 'Like'
 	name: string
-	avatar: string | null
+	avatar: string 
 	createdAt: string
 	changes: Record<string, string>
 }
@@ -159,6 +159,7 @@ export interface FullStatsTypes {
 	dayStats: { date: string; views: number }[]
 	topRated: TopRatedStatsTypes[]
 	notifications: NotificationsTypes[]
+	latestComments:{comment:string,author:string,avatar:string,postTitle:string,postId:string,categories:string[],seo:{slug:string,metaTitle:string,metaDescription:string}}[]
 }
 
 export const MobileMenuState = {

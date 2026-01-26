@@ -1,5 +1,5 @@
 import slugify from 'slugify'
-interface handleCreateUrlProps {
+interface createURLProps {
 	categories: string[]
 	seo:
 		| {
@@ -10,7 +10,7 @@ interface handleCreateUrlProps {
 		| undefined
 	_id: string
 }
-const handleCreateUrl = ({ categories, seo, _id }: handleCreateUrlProps) => {
+const createUrl = ({ categories, seo, _id }: createURLProps) => {
 	const categorySlugs = categories
 		?.map(cat => cat)
 		.filter(Boolean) // usuwa undefined/null
@@ -24,4 +24,4 @@ const handleCreateUrl = ({ categories, seo, _id }: handleCreateUrlProps) => {
 	}
 }
 
-export default handleCreateUrl
+export default createUrl

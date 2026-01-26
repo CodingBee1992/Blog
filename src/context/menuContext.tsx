@@ -10,6 +10,7 @@ import { statisticApi } from '../slices/api/statisticsApi'
 import { postLikeApi } from '../slices/api/postLikeApi'
 import { categoryApi } from '../slices/api/categoriesApi'
 import { useMobileMenu } from '../hooks/useMobileMenu'
+import { useMobileSideBarMenu } from '../hooks/useMobileSideBarMenu'
 interface MenuContextProps {
 	children: ReactNode
 }
@@ -20,10 +21,12 @@ interface CreateContextProps {
 	signOut: () => void
 	navRef: RefObject<HTMLDivElement | null>
 	userRef: RefObject<HTMLDivElement | null>
+	sideBarRef: RefObject<HTMLDivElement | null>
 	scrollMenu: boolean
 	mobileMenu: ReturnType<typeof useMobileMenu>
 	activeIndex: number | null
 	toggleMenu: boolean
+	sideBarMenu: ReturnType<typeof useMobileSideBarMenu>
 }
 
 const MenuContext = createContext<CreateContextProps | null>(null)
@@ -34,11 +37,14 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 	const { pathname } = useLocation()
 	const dispatch = useDispatch()
 	const mobileMenu = useMobileMenu()
+	const sideBarMenu = useMobileSideBarMenu()
 	const navRef = useRef<HTMLDivElement>(null)
+	const sideBarRef = useRef<HTMLDivElement>(null)
 	const [activeIndex, setActiveIndex] = useState<number | null>(null)
 	const userRef = useRef<HTMLDivElement>(null)
 	const [scrollMenu, setScrollMenu] = useState<boolean>(false)
 	const [toggleMenu, setToggleMenu] = useState<boolean>(false)
+	const { close } = sideBarMenu
 
 	// Open close mobile dropdown
 	const handleOpenCloseDropdown = (e: MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
@@ -58,21 +64,27 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 	const openCloseUserMenu = () => {
 		setToggleMenu(prev => !prev)
 	}
-	
 
 	useEffect(() => {
 		const handleClickOutside = (e: globalThis.MouseEvent) => {
 			const el = userRef.current
-			if (!el) return
+			const el2 = sideBarRef.current
+			if (!el && !el2) return
 
-			if (!el.contains(e.target as Node)) {
+			if (!el?.contains(e.target as Node) && !el2) {
 				setToggleMenu(false)
+				
+			}
+
+			if (!el2?.contains(e.target as Node) && !el) {
+				close()
+				
 			}
 		}
 
 		window.addEventListener('mousedown', handleClickOutside)
 		return () => window.removeEventListener('mousedown', handleClickOutside)
-	}, [])
+	}, [close])
 
 	const signOut = async () => {
 		try {
@@ -87,7 +99,6 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 			dispatch(postLikeApi.util.resetApiState())
 			dispatch(categoryApi.util.resetApiState())
 			if (pathname !== '/') {
-				
 				navigate('/')
 			}
 			window.scrollTo({ top: 0, behavior: 'instant' })
@@ -106,6 +117,8 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 		mobileMenu,
 		activeIndex,
 		toggleMenu,
+		sideBarMenu,
+		sideBarRef,
 	}
 
 	return <MenuContext value={value}>{children}</MenuContext>

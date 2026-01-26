@@ -6,6 +6,7 @@ interface StackedAreaChartProps {
 		date: string
 		views: number
 	}[]
+	days:number
 }
 
 
@@ -14,7 +15,7 @@ const CustomDot = (props: DotItemDotProps) => {
 	return <Dot cx={cx} cy={cy} stroke="#FFFFFF" strokeWidth={2} fill="#00AB00" r={4} />
 }
 // #endregion
-const StackedAreaChart = ({ data, styles }: StackedAreaChartProps) => {
+const StackedAreaChart = ({ data, styles,days }: StackedAreaChartProps) => {
 	
 	return (
 		<AreaChart className={styles.areaChart} responsive data={data} margin={{ right: 30, bottom: 30 }}>
@@ -32,12 +33,13 @@ const StackedAreaChart = ({ data, styles }: StackedAreaChartProps) => {
 				tickFormatter={value => new Date(value).toLocaleDateString()}
 				fontSize={'12px'}
 				stroke="#ADADBA"
-				interval={0}
+				interval={days === 7 ? 0 : 6}
 				tickMargin={10}
 				
+				
 			/>
-			<YAxis width={50} fontSize={'12px'}  stroke="#ADADBA" tickMargin={5} />
-			<Tooltip labelFormatter={value => new Date(value).toLocaleDateString()}/>
+			<YAxis width={50} fontSize={'12px'}  stroke="#ADADBA" tickMargin={5}/>
+			<Tooltip labelFormatter={value => new Date(value).toLocaleDateString()} />
 
 			<Area
 				type="monotone"

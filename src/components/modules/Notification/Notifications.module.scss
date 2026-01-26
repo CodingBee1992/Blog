@@ -1,11 +1,7 @@
 .notificationsContainer {
 	position: relative;
 	grid-area: d;
-	// margin-top: 2rem;
-	// width: 100%;
-	// max-width: 600px;
-	// height: 100%;
-	// min-height: 505px;
+	
 	padding: 3rem;
 	color: #000000;
 	background-color: var(--statBgc);
@@ -31,7 +27,7 @@
 
 			.notificationsIcon {
 				position: absolute;
-				top: 0;
+				bottom: 0;
 				left: 0;
 				display: flex;
 				align-items: center;
@@ -72,13 +68,13 @@
 			.notificationsAvatar {
 				position: absolute;
 				right: 0;
-				bottom: 0;
+				top: 0;
 
 				width: 45px;
 				height: 45px;
 				border-radius: 50%;
-				background-color: #000000;
-				border: 3px solid #ffffff;
+				background-color: transparent;
+				border: 2px solid #d3d3d3;
 				overflow: hidden;
 
 				img {
@@ -150,6 +146,7 @@
 			flex-wrap: wrap;
 
 			.notificationsInfo {
+				gap: 1rem;
 				width: 70%;
 			}
 

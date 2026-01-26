@@ -19,7 +19,6 @@ import Loader from '../../atoms/loader/Loader'
 import Notifications from '../../modules/Notification/Notifications'
 import LatestComments from '../../modules/LatestComments/LatestComments'
 
-
 const Statistics = () => {
 	const [viewsFromTo, setViewsFromTo] = useState<string>('this week')
 	const [scaleUp, setScaleUp] = useState<boolean>(false)
@@ -32,7 +31,6 @@ const Statistics = () => {
 	}
 	const { postsStats, commentsStats, usersStats, likesStats, pageViews, todayPageViews, dayStats } = data
 
-	
 	const statConfig = [
 		{ title: 'PageViews', stats: pageViews, icon: <ViewsSVG />, style: styles.pageViews },
 		{ title: 'Users', stats: usersStats, icon: <UsersSVG />, style: styles.users },
@@ -92,7 +90,8 @@ const Statistics = () => {
 					</div>
 					<div className={styles.areaCurrentDropdown}>
 						<div className={styles.areaCurrentViewsFromTo} onClick={() => handleOpenDropDown()}>
-							<span>{viewsFromTo}</span> <ArrowDownSVG className={`${scaleUp ? styles.rotate : ''}`} />
+							<span>{viewsFromTo}</span>
+							 <ArrowDownSVG className={`${scaleUp ? styles.rotate : ''}`} />
 						</div>
 
 						<div className={`${styles.areaCurrentViewsSelect} ${scaleUp ? styles.scaleUp : ''}`}>
@@ -103,7 +102,7 @@ const Statistics = () => {
 					</div>
 				</div>
 				<div className={styles.stackedAreaChart}>
-					<StackedAreaChart data={dayStats} styles={styles} />
+					<StackedAreaChart data={dayStats} styles={styles} days={days} />
 				</div>
 			</div>
 

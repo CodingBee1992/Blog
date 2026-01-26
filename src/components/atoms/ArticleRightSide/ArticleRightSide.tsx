@@ -2,7 +2,7 @@ import { useLocation } from 'react-router'
 import { useFetchPostCreatedAtQuery } from '../../../slices/api/postApi'
 
 import AnchorLink from '../AnchorLink/AnchorLink'
-import handleCreateUrl from '../../../hooks/handleCreateUrl'
+import handleCreateUrl from '../../../hooks/createUrl'
 // import slugify from 'slugify'
 
 interface ArticleRightSideProps {

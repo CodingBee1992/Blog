@@ -87,8 +87,8 @@ const AddCategoryForm = () => {
 
 				<form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
 					<div className={styles.formWrapper}>
-						<RHFInput name="name" styles={styles} label="Category Name" id="name" />
-						<RHFInput name="slug" styles={styles} label="Category Slug" id="slug" />
+						<RHFInput name="name" type='text' styles={styles} label="Category Name" id="name" />
+						<RHFInput name="slug" type='text' styles={styles} label="Category Slug" id="slug" />
 					</div>
 					{successMessage && <span className={styles.successMessage}>{successMessage}</span>}
 					{errors.root && <span className={styles.errorMessage}>{errors.root.message}</span>}

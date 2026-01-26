@@ -191,7 +191,7 @@ const AdminList = () => {
 
 									<div className={styles.td}>{item.email}</div>
 									<div className={styles.td}>{new Date(item.createdAt).toLocaleDateString(...dateConverter())}</div>
-									<div className={styles.td}>{item.isVerified.toString()}</div>
+									
 
 									<div className={styles.td}>{item.commentsCount}</div>
 									<div className={styles.td}>{item.postCount}</div>

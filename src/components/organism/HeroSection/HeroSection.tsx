@@ -13,8 +13,8 @@ const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [swipeStartX, setSwipeStartX] = useState<number>(0)
 	const limit = 3
-	const { data, isFetching } = useFetchLimitPostsQuery({ limit })
-
+	const { data, isFetching } = useFetchLimitPostsQuery({ limit,page:1 })
+	
 	const handleSliderNext = () => {
 		setNumber(prev => (prev >= limit - 1 ? 0 : prev + 1))
 	}

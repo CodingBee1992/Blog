@@ -145,11 +145,13 @@ $mobileSmall: 380px;
 	--sideBarMainColor: #092013;
 	--sideBarColorIcon: #092013;
 	//  links hover
-	--sideBarBgcHoverLink: #efefef;
+	--sideBarBgcHoverLink: #FAF0E6;
 
 	// PANEL & SETTINGS PAGES background color
-	--pagesBgc: #efefef;
-	// --pagesBgc: #effffa;
+	// --pagesBgc: #efefef;
+	// --pagesBgc: #fff0e0;
+	--pagesBgc: #FAF0E6;
+	
 	--pagesColor: #092013;
 
 	//  add post / form colors
@@ -171,7 +173,8 @@ $mobileSmall: 380px;
 
 	//  tabels colors
 	--bgcTabel: #ffffff;
-	--bgcTBody: #e9f5db;
+	// --bgcTBody: #e9f5db;
+	--bgcTBody: #FAF0E6;
 	--colorTabel: #000000;
 	--bgcTabelHover: #83bca9;
 	--bgcPublishHover: #85ffad;
