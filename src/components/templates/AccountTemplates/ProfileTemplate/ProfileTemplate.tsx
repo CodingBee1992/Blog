@@ -2,6 +2,7 @@ import {
 	useChangeEmailAddressMutation,
 	useChangePasswordMutation,
 	useResetPasswordMutation,
+	useFetchUserProfileQuery
 } from '../../../../slices/api/userApi'
 import FormBtn from '../../../atoms/FormBtn/FormBtn'
 
@@ -23,8 +24,9 @@ const ProfileTemplate = () => {
 	const [changePassword] = useChangePasswordMutation()
 	const [resetPassword] = useResetPasswordMutation()
 	const [changeEmailAddress] = useChangeEmailAddressMutation()
-	const {data} = useFetchUserProfileQuery()
-	clg
+	const {data: profileData} = useFetchUserProfileQuery()
+	console.log(profileData)
+	const {email,name,avatar} = profileData
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [successMessage, setSuccessMessage] = useState<string>('')
 
@@ -32,7 +34,7 @@ const ProfileTemplate = () => {
 	const [popupSuccessMessage, setPopupSuccesMessage] = useState<string>('')
 	const [accountPopup, setAccountPopup] = useState<boolean>(false)
 	const [enabledButton, setEnabledButton] = useState<boolean>(false)
-
+	
 	const [isEmail, setIsEmail] = useState<string>('')
 
 	const [dataPass, setDataPass] = useState<Record<string, string>>({
