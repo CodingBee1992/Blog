@@ -36,7 +36,6 @@ const ProfileTemplate = () => {
 	const [enabledButton, setEnabledButton] = useState<boolean>(false)
 	
 	const [isEmail, setIsEmail] = useState<string>('')
-
 	const [dataPass, setDataPass] = useState<Record<string, string>>({
 		currentPassword: '',
 		newPassword: '',
