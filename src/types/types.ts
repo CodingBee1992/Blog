@@ -90,7 +90,6 @@ export interface UsersProps {
 	postCount?: number
 	lastLogin: string
 }
-
 export interface CommentsProps {
 	_id: string
 	comment: string
@@ -114,8 +113,8 @@ export interface CategoryProps {
 export interface StatCardProps {
 	title: string
 	stats: Stat
-	icon:JSX.Element
-	style:string
+	icon: JSX.Element
+	style: string
 }
 export interface Stat {
 	total: number
@@ -145,7 +144,7 @@ export interface NotificationsTypes {
 	role: string
 	entityType: 'User' | 'Post' | 'Comment' | 'Like'
 	name: string
-	avatar: string 
+	avatar: string
 	createdAt: string
 	changes: Record<string, string>
 }
@@ -159,7 +158,15 @@ export interface FullStatsTypes {
 	dayStats: { date: string; views: number }[]
 	topRated: TopRatedStatsTypes[]
 	notifications: NotificationsTypes[]
-	latestComments:{comment:string,author:string,avatar:string,postTitle:string,postId:string,categories:string[],seo:{slug:string,metaTitle:string,metaDescription:string}}[]
+	latestComments: {
+		comment: string
+		author: string
+		avatar: string
+		postTitle: string
+		postId: string
+		categories: string[]
+		seo: { slug: string; metaTitle: string; metaDescription: string }
+	}[]
 }
 
 export const MobileMenuState = {

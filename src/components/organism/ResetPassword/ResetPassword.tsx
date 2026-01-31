@@ -1,7 +1,7 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
-import ProfileInfoBox from '../../atoms/ProfileInfoBox/ProfileInfoBox'
+
 import styles from './ResetPassword.module.scss'
-import { CheckSVG, WarnSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
+import { CheckSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
 import { useConfirmResetPasswordMutation, useFetchUserProfileQuery } from '../../../slices/api/userApi'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
@@ -11,9 +11,13 @@ import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessag
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { Navigate, useLocation } from 'react-router'
 
+import useMenuContext from '../../../hooks/useMenuContext'
+import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
+
 const ResetPassword = () => {
 	const { data } = useFetchUserProfileQuery({})
-	const [confirmResetPassowrd] = useConfirmResetPasswordMutation()
+	const [confirmResetPassowrd, { isLoading }] = useConfirmResetPasswordMutation()
+	const { signOut } = useMenuContext()
 	const { email = '' } = data ?? {}
 	const [successMessage, setSuccessMessage] = useState<string>('')
 	const [errorMessage, setErrorMessage] = useState<string>('')
@@ -22,7 +26,6 @@ const ResetPassword = () => {
 	const { search } = useLocation()
 	const query = new URLSearchParams(search)
 	const token = query.get('token')
-	
 
 	const [dataPass, setDataPass] = useState({
 		newPassword: '',
@@ -60,7 +63,7 @@ const ResetPassword = () => {
 		try {
 			const { newPassword } = dataPass
 
-			const res = await confirmResetPassowrd(newPassword).unwrap()
+			const res = await confirmResetPassowrd({ newPassword, token }).unwrap()
 
 			if (res) {
 				setSuccessMessage(res.message)
@@ -68,6 +71,7 @@ const ResetPassword = () => {
 					newPassword: '',
 					confirmPassword: '',
 				})
+				signOut()
 			}
 			if (errorMessage) setErrorMessage('')
 		} catch (error) {
@@ -89,25 +93,23 @@ const ResetPassword = () => {
 	return (
 		<div className={styles.resetPasswordContainer}>
 			<h3 className={styles.title}>Reset password</h3>
-
-			<ProfileInfoBox>
+			
+			<WrapperBox>
 				<p className={styles.boxTitle}>Password</p>
-				{errorMessage && (
-					<APIResponseMessage responseMessage={errorMessage} meesageType="error">
-						<WarnSVG className={styles.warnSVG} />
+				{(successMessage || errorMessage) && (
+					<APIResponseMessage messageType={successMessage ? 'succes' : 'error'}>
+						{successMessage ? successMessage : <>{errorMessage}</>}
 					</APIResponseMessage>
 				)}
-				{successMessage && (
-					<APIResponseMessage responseMessage={successMessage} meesageType="succes"></APIResponseMessage>
-				)}
-				<form onSubmit={e => handleSubmit(e)} className={styles.formContainer}>
+				<form onSubmit={e => handleSubmit(e)} className={styles.formContainer} aria-busy={isLoading}>
 					<AccountInputBox
 						id="newPassword"
-						styles={styles}
+						
 						value={dataPass.newPassword}
 						label="New Password"
-						showPassword={true}
-						onChangeInput={onChangeInput}>
+						type="password"
+						onChangeInput={onChangeInput}
+						isSubmitting={isLoading}>
 						<ul className={styles.newPasswordInfo}>
 							<li className={`${isValidLength ? styles.highlightLi : isErrorLength ? styles.errorLi : ''}`}>
 								<CheckSVG className={styles.checkSVG} />
@@ -122,11 +124,12 @@ const ResetPassword = () => {
 
 					<AccountInputBox
 						id="confirmPassword"
-						styles={styles}
+						
 						value={dataPass.confirmPassword}
-						showPassword={true}
+						type="password"
 						label="Confirm Password"
-						onChangeInput={onChangeInput}></AccountInputBox>
+						onChangeInput={onChangeInput}
+						isSubmitting={isLoading}></AccountInputBox>
 					<div className={styles.formBtns}>
 						<FormBtn
 							type="submit"
@@ -139,7 +142,7 @@ const ResetPassword = () => {
 						</AnchorLink>
 					</div>
 				</form>
-			</ProfileInfoBox>
+			</WrapperBox>
 		</div>
 	)
 }

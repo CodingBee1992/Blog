@@ -11,8 +11,9 @@ interface FormBtnProps {
 const FormBtn = ({ children, isSubmitting, handleResetFields, className, type }: FormBtnProps) => {
 	return (
 		<button
-			disabled={isSubmitting}
 			type={type}
+			disabled={isSubmitting}
+			
 			onClick={() => handleResetFields?.()}
 			className={` ${styles.postFormBtn} ${className ? className : ''}`}>
 			{children}

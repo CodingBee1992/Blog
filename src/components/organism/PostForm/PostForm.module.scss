@@ -15,8 +15,8 @@
 
 			.postFormBtns {
 				padding: 1rem 0.5em;
-				color: var(--sideBarMainColor);
-				background-color: var(--mainFormBgc);
+				color: var(--buttonColorDark);
+				background-color: var(--buttonColorLight);
 				font-size: var(--textSize_12);
 				border-radius: var(--borderRadius04);
 				border: none;
@@ -25,8 +25,8 @@
 				cursor: pointer;
 
 				&:hover {
-					color: var(--mainFormBgc);
-					background-color: var(--sideBarMainColor);
+					color: var(--buttonColorBlue);
+					
 				}
 			}
 		}
@@ -93,8 +93,7 @@
 
 						.icon {
 							color: var(--errorFormColor);
-							border: 1px solid var(--errorFormColor);
-							border-radius: 50%;
+
 							cursor: pointer;
 							transition: all 0.3s;
 							&:hover {
@@ -139,7 +138,7 @@
 									margin-right: 1rem;
 									margin-bottom: 1rem;
 									padding: 0.5em;
-									color: var(--sideBarMainColor);
+									color: var(--mainFormColor);
 									background-color: var(--mainFormBgc);
 									font-size: var(--textSize_16);
 									border-radius: var(--borderRadius04);
@@ -186,32 +185,37 @@
 					}
 
 					// FORM STATUS
-					.statusContainer {
+					.selectContainer {
 						display: flex;
 						align-items: center;
-						.statusTitle {
+						.selectTitle {
 							font-family: var(--font-2);
 							font-size: 2rem;
 							font-weight: 500;
 							margin-right: 1rem;
 						}
-						.statusSelect {
+						.selectOption {
 							cursor: pointer;
 							padding: 0.5rem;
 							font-size: var(--textSize_16);
 							border: none;
 							background-color: var(--mainFormBgc);
-							color: var(--sideBarMainColor);
+							color: var(--mainFormColor);
 							width: 100%;
 							appearance: none;
 							-moz-appearance: none;
 							-webkit-appearance: none;
-
+							outline: none;
+							
 							background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
 							background-repeat: no-repeat;
 							background-position: right 10px center;
 							background-size: 16px;
 							border-radius: var(--borderRadius04);
+						
+							&:focus{
+								border: 2px solid var(--buttonColorBlue);
+							}
 							option {
 								width: 80%;
 							}
@@ -224,15 +228,16 @@
 
 	.submitBtns {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 2rem;
 		margin-top: 3rem;
 
 		.submitBtn {
-			background-color: var(--createFormBgc);
+			color: var(--buttonColorDark);
+			background-color: var(--buttonBgcLight);
 
 			&:hover {
-				color: var(--buttonColorHover);
-				background-color: var(--createFormBgcHover);
+				color: var(--saveColor);
 			}
 		}
 		.animate1 {
@@ -245,17 +250,34 @@
 			animation: animateDot 1.4s ease-in-out 0.6s infinite;
 		}
 		.resetBtn {
-			background-color: var(--resetFormBgc);
+			color: var(--buttonColorDark);
+			background-color: var(--buttonBgcLight);
 			&:hover {
-				color: var(--buttonColorHover);
-				background-color: var(--resetFormHoverBgc);
+				color: var(--resetColor);
 			}
 		}
 		.clearAllBtn {
-			background-color: var(--clearFormBgc);
+			color: var(--buttonColorDark);
+			background-color: var(--buttonBgcLight);
 			&:hover {
-				color: var(--buttonColorHover);
-				background-color: var(--clearFormHoverBgc);
+				color: var(--clearColor);
+			}
+		}
+		.cancelUpdate {
+			display: flex;
+			align-items: center;
+			padding: 1rem 2.5rem;
+			font-size: var(--textSize_18);
+			border: none;
+			color: var(--buttonColor);
+			background-color: var(--buttonBgcLight);
+			border-radius: var(--borderRadius04);
+			transition: all 0.3s;
+			cursor: pointer;
+
+			&:hover {
+				color: var(--cancelColor);
+				
 			}
 		}
 		.isSubmitting {
@@ -394,12 +416,8 @@
 		padding-top: 5.5rem;
 
 		.postFormControllersWrapper {
-			
 			.postFormControllers {
-				
 				top: 6rem;
-				
-				
 			}
 		}
 	}

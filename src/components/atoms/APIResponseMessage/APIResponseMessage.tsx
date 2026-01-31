@@ -1,18 +1,20 @@
 import type { ReactNode } from 'react'
 import styles from './APIResponseMessage.module.scss'
+import { WarnSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 
 interface APIResponseMessageProps{
     children?:ReactNode
     className?:string
-    responseMessage:string
-    meesageType?:string
+    
+    messageType?:string
 }
 
-const APIResponseMessage = ({children,responseMessage,className,meesageType}:APIResponseMessageProps) => {
+const APIResponseMessage = ({children,className,messageType}:APIResponseMessageProps) => {
 	return (
-		<span className={`${styles.responseMessage} ${meesageType === 'error' ? styles.errorMessage : styles.successMessage} ${className ? className:''}`}>
+		<span className={`${styles.responseMessage} ${messageType === 'error' ? styles.errorMessage : styles.successMessage} ${className ? className:''}`}>
+			{messageType === 'error' && <WarnSVG className={styles.warnSVG} />}
 			{children}
-			{responseMessage}
+			
 		</span>
 	)
 }

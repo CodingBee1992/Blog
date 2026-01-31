@@ -6,6 +6,9 @@
 	font-size: 13px;
 	line-height: 50px;
 	border-radius: var(--borderRadius06);
+	.warnSVG {
+		margin-right: 0.5rem;
+	}
 }
 .successMessage {
 	background-color: #f2fff0;
@@ -14,6 +17,4 @@
 .errorMessage {
 	background-color: #ffeded;
 	border: 1px solid #ff0000;
-
-	
 }

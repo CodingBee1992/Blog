@@ -1,0 +1,122 @@
+@use '../../../assets/styles/variable' as *;
+
+.boxTitle {
+	margin-bottom: 1.6rem;
+	font-size: var(--textSize_14);
+	font-weight: bold;
+}
+.formWrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	.formInput {
+		position: relative;
+		label {
+			display: block;
+			margin-bottom: 0.5rem;
+			font-weight: bold;
+			font-size: 13px;
+			line-height: 20px;
+		}
+
+		input {
+			width: 100%;
+			padding: var(--vspace-0_25);
+			color: #000000;
+			font-size: var(--textSize_16);
+			font-family: var(--font-2);
+			border: 1px solid var(--inputBorderColor);
+			border-radius: var(--borderRadius06);
+			outline: none;
+			transition: all 0.3s;
+
+			&:hover {
+				box-shadow: 0px 0px 0px 3px var(--inputBoxShadowColor);
+			}
+
+			&:focus {
+				box-shadow: 0px 0px 0px 3px var(--inputFocusColor);
+				border-color: #ffffff;
+			}
+		}
+	}
+
+	.profileBox {
+		// position: relative;
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+
+		span {
+			flex-basis: 80%;
+		}
+
+		.avatarBox {
+			position: absolute;
+			top: 7%;
+			right: 5%;
+			z-index: 1;
+			width: 70px;
+			height: 70px;
+			overflow: hidden;
+			border-radius: 50%;
+			cursor: pointer;
+			transition: all 0.3s;
+
+			input {
+				display: none;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				opacity: 1;
+
+				transition: all 0.3s;
+			}
+
+			&:hover {
+				box-shadow: 0px 0px 3px 3px #d3d3d3d3;
+
+				img {
+					opacity: 0.3;
+				}
+			}
+			.image {
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				height: 100%;
+
+				.cameraSVG {
+					width: 40px;
+					height: 40px;
+				}
+			}
+		}
+	}
+}
+.profileContainer {
+	margin-top: 2rem;
+}
+.saveChanges {
+	@include formBtn($bgc: #d3d3d3d3, $color: #979797, $padding: 1rem, $cursor: not-allowed);
+
+	align-self: flex-end;
+	margin-top: 3rem;
+}
+.enabledChanges {
+	color: #ffffff;
+
+	background-color: #00684a;
+	cursor: pointer;
+
+	&:hover {
+		box-shadow: 0px 0px 3px 3px #3fa588;
+	}
+}

@@ -36,7 +36,7 @@ $mobileSmall: 380px;
 	--logo-Size: 2.5rem;
 	--logo-color: #ff9900;
 	--logo-hover: #ff7700;
-
+	--blueColor: #338afb;
 	--white: #ffffff;
 	--black: #000000;
 
@@ -120,8 +120,8 @@ $mobileSmall: 380px;
 	//Color categories Header span
 	--color-text-light: #929393;
 	--color-text-dark: #000000;
-
 	--color-text: #282828;
+
 	// Color border posts
 	--color-border: #eeeeee;
 	--btn-height: calc(2 * 3.2rem);
@@ -129,6 +129,7 @@ $mobileSmall: 380px;
 	--btn-color: #282828;
 	--btn-color-hover: #000000;
 	--signFormTextColor: #282828;
+
 	// Brick Padding
 	--brick-padding: 3rem;
 	--brick-paddingLeftRight: 3rem;
@@ -145,36 +146,46 @@ $mobileSmall: 380px;
 	--sideBarMainColor: #092013;
 	--sideBarColorIcon: #092013;
 	//  links hover
-	--sideBarBgcHoverLink: #FAF0E6;
+	--sideBarBgcHoverLink: #faf0e6;
 
 	// PANEL & SETTINGS PAGES background color
-	// --pagesBgc: #efefef;
-	// --pagesBgc: #fff0e0;
-	--pagesBgc: #FAF0E6;
-	
+
+	--pagesBgc: #faf0e6;
+
 	--pagesColor: #092013;
 
-	//  add post / form colors
+	// form colors
+	--buttonColorLight: #ffffff;
+	--buttonColorDark: #092013;
+	--buttonColorBlue: #016bf8;
+	--buttonBgcLight: #ffffff;
+	--saveColor: #2ad42a;
+	--clearColor: #9f0000;
+	--resetColor: #ff7700;
+	--cancelColor: #564c4c;
+	--errorFormColor: #8f0000;
+
 	--mainFormColor: #092013;
 	--mainFormBgc: #ffffff;
-	--categoryOptionHover: #9f0000;
+	--categoryOptionHover: #016bf8;
+
 	--buttonColor: #092013;
 	--buttonColorHover: #ffffff;
-	--createFormBgc: #ffffff;
-	--createFormBgcHover: #092013;
-	--resetFormBgc: #ffffff;
-	--resetFormHoverBgc: #ff7700;
-	--clearFormBgc: #ffffff;
-	--clearFormHoverBgc: #9f0000;
-	--errorFormColor: #8f0000;
 
 	// categories hover bgc
 	--categoriesHoverColor: #092013;
 
+	// Inputs
+	--inputMainColor: #000000;
+	--inputFocusColor: #00a700;
+	--inputHoverColor: #d3d3d3d3;
+	--inputBorderColor: #889397;
+	--inputBoxShadowColor: #d3d3d3d3;
+
 	//  tabels colors
 	--bgcTabel: #ffffff;
 	// --bgcTBody: #e9f5db;
-	--bgcTBody: #FAF0E6;
+	--bgcTBody: #faf0e6;
 	--colorTabel: #000000;
 	--bgcTabelHover: #83bca9;
 	--bgcPublishHover: #85ffad;

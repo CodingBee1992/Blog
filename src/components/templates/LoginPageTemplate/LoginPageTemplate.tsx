@@ -1,4 +1,4 @@
-import { useForm, type SubmitHandler } from 'react-hook-form'
+import { useForm, useWatch, type SubmitHandler } from 'react-hook-form'
 import { useLoginMutation } from '../../../slices/api/userApi'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -12,7 +12,7 @@ import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 const loginSchema = z.object({
 	email: z.email(),
-	password: z.string().min(8),
+	password: z.string().min(8, { message: 'Min 8 characters' }),
 })
 
 type loginFields = z.infer<typeof loginSchema>
@@ -25,14 +25,31 @@ const LoginPageTemplate = () => {
 	const navigate = useNavigate()
 
 	const {
+		control,
 		register,
 		handleSubmit,
 		setError,
 		clearErrors,
 		formState: { isSubmitting, errors },
 	} = useForm<loginFields>({
+		mode: 'onSubmit',
+		reValidateMode: 'onChange',
 		resolver: zodResolver(loginSchema),
+		defaultValues: {
+			email: '',
+			password: '',
+		},
 	})
+	const [password, email] = useWatch({
+		control,
+		name: ['password', 'email'],
+	})
+
+	useEffect(() => {
+		if (password || email) {
+			setError('root', { message: '' })
+		}
+	}, [email, password, setError])
 
 	useEffect(() => {
 		if (isSuccess) {
@@ -76,15 +93,24 @@ const LoginPageTemplate = () => {
 					<p>
 						Dont have an account ? <AnchorLink href="/registration">Sign Up</AnchorLink>
 					</p>
-					<form
-						name="logInForm"
-						method="post"
-						autoComplete="off"
-						onSubmit={handleSubmit(onSubmit)}
-						className={styles.form}>
-						<input {...register('email')} type="email" placeholder="Enter your email" />
+					<form aria-busy={isSubmitting} onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+						<input
+							{...register('email')}
+							readOnly={isSubmitting}
+							aria-readonly={isSubmitting}
+							type="email"
+							placeholder="Enter your email"
+							autoComplete="email"
+						/>
 						{errors.email && <span>{errors.email.message}</span>}
-						<input {...register('password')} type="password" placeholder="Enter your Password" />
+						<input
+							{...register('password')}
+							readOnly={isSubmitting}
+							aria-readonly={isSubmitting}
+							type="password"
+							placeholder="Enter your Password"
+							autoComplete="current-password"
+						/>
 						{errors.password && <span>{errors.password.message}</span>}
 						{errors.root && <span>{errors.root.message}</span>}
 

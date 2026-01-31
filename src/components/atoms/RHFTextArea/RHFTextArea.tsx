@@ -4,10 +4,12 @@ interface RHFTextAreaProps<T extends FieldValues> {
 	name: Path<T>
 	label: string
 	styles: Record<string, string>
-	id:string
+	id: string
+	isSubmitting?: boolean,
+	placeholder?:string
 }
 
-const RHFTextArea = <T extends FieldValues>({ name, label, styles,id }: RHFTextAreaProps<T>) => {
+const RHFTextArea = <T extends FieldValues>({ name, label,placeholder, isSubmitting, styles, id }: RHFTextAreaProps<T>) => {
 	const { control } = useFormContext()
 	return (
 		<Controller
@@ -16,8 +18,20 @@ const RHFTextArea = <T extends FieldValues>({ name, label, styles,id }: RHFTextA
 			render={({ field, fieldState: { error } }) => (
 				<div className={styles.textAreaContainer}>
 					<label htmlFor={id}>{label}</label>
-					<textarea id={id} {...field} />
-					{error && <span className={styles.error}>{error.message}</span>}
+					<textarea
+						id={id}
+						{...field}
+						readOnly={isSubmitting}
+						aria-readonly={isSubmitting}
+						aria-invalid={!!error}
+						aria-describedby={error ? `${id}-error` : undefined}
+						placeholder={placeholder}
+					/>
+					{error && (
+						<span id={`${id}-error`} className={styles.error}>
+							{error.message}
+						</span>
+					)}
 				</div>
 			)}
 		/>

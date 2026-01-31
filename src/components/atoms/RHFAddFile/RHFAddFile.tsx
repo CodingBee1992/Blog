@@ -8,10 +8,19 @@ interface RHFAddFileProps<T extends FieldValues> {
 	styles: Record<string, string>
 	fileRef: RefObject<(HTMLInputElement | null)[]>
 	fileIndex: number
-	id:string
+	id: string
+	isSubmitting?: boolean
 }
 
-const RHFAddFile = <T extends FieldValues>({ name,id, label, styles, fileRef, fileIndex }: RHFAddFileProps<T>) => {
+const RHFAddFile = <T extends FieldValues>({
+	name,
+	id,
+	label,
+	styles,
+	isSubmitting,
+	fileRef,
+	fileIndex,
+}: RHFAddFileProps<T>) => {
 	const { control } = useFormContext()
 	const randomIndex = Math.floor(Math.random() * 999)
 
@@ -24,12 +33,12 @@ const RHFAddFile = <T extends FieldValues>({ name,id, label, styles, fileRef, fi
 					<label htmlFor={id}>{label}</label>
 					{typeof value === 'string' ? (
 						<div className={styles.previewImage}>
-							<img src={value} />
+							<img src={value} alt='Preview image'/>
 						</div>
 					) : (
 						(value as File) instanceof File && (
 							<div className={styles.previewImage}>
-								<img src={URL.createObjectURL(value)} />
+								<img src={URL.createObjectURL(value)} alt='Preview image'/>
 							</div>
 						)
 					)}
@@ -49,16 +58,30 @@ const RHFAddFile = <T extends FieldValues>({ name,id, label, styles, fileRef, fi
 							onChange(file)
 						}}
 						type="file"
+						disabled={isSubmitting}
+						aria-describedby={error ? `${id}-error` : undefined}
 					/>
-					{error && <span className={`${styles.error} ${error ? styles.marginError : ''}`}>{error.message}</span>}
+					{error && (
+						<span id={`${id}-error`} className={`${styles.error} ${error ? styles.marginError : ''}`}>
+							{error.message}
+						</span>
+					)}
 					<div className={styles.imageBox}>
-						<RHFInput name={`${name}.alt`} type="text" label="Alt" styles={styles} id={`title-${randomIndex}`} />
+						<RHFInput
+							name={`${name}.alt`}
+							type="text"
+							label="Alt"
+							styles={styles}
+							id={`title-${randomIndex}`}
+							isSubmitting={isSubmitting}
+						/>
 						<RHFInput
 							name={`${name}.caption`}
 							type="text"
 							label="Caption"
 							styles={styles}
 							id={`title-${randomIndex + 1}`}
+							isSubmitting={isSubmitting}
 						/>
 					</div>
 				</div>

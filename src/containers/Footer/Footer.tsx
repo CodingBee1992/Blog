@@ -1,21 +1,33 @@
 import styles from './Footer.module.scss'
-import { useForm } from 'react-hook-form'
+import { useForm, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import AnchorLink from '../../components/atoms/AnchorLink/AnchorLink'
+const newsLetterSchema = z.object({
+	email: z.email(),
+})
+type newsLetterTypes = z.infer<typeof newsLetterSchema>
 const Footer = () => {
 	const year = new Date().getFullYear()
 
-	const schema = z.object({
-		email: z.email(),
-	})
-	type FormFields = z.infer<typeof schema>
 	const {
 		register,
+		handleSubmit,
 		formState: { isSubmitting, errors },
-	} = useForm<FormFields>({
-		resolver: zodResolver(schema),
+	} = useForm<newsLetterTypes>({
+		mode: 'onSubmit',
+		resolver: zodResolver(newsLetterSchema),
+		defaultValues: {
+			email: '',
+		},
 	})
-
+	const onSubmit: SubmitHandler<newsLetterTypes> = async data => {
+		try {
+			console.log(data)
+		} catch (error) {
+			console.log(error)
+		}
+	}
 	return (
 		<footer className={styles.footerContainer}>
 			<div className={styles.footerMain}>
@@ -35,19 +47,17 @@ const Footer = () => {
 						<h5>Site Links</h5>
 						<ul>
 							<li>
-								<a href="#">About Us</a>
+								<AnchorLink href="/about">About us</AnchorLink>
+							</li>
+
+							<li>
+								<AnchorLink href="/faq">FAQ</AnchorLink>
 							</li>
 							<li>
-								<a href="#">Blog</a>
+								<AnchorLink href="/terms-and-conditions">Terms</AnchorLink>
 							</li>
 							<li>
-								<a href="#">FAQ</a>
-							</li>
-							<li>
-								<a href="#">Terms</a>
-							</li>
-							<li>
-								<a href="#">Privacy Police</a>
+								<AnchorLink href="/privacy-policy">Privacy Police</AnchorLink>
 							</li>
 						</ul>
 					</div>
@@ -75,7 +85,7 @@ const Footer = () => {
 						<h5>Sign Up For Newsletter</h5>
 						<p>Signup to get updates on articles, interviews and events.</p>
 						<div className={styles.subscribeForm}>
-							<form className={styles.form}>
+							<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 								<input {...register('email')} type="email" name="email" id="email" placeholder="Your email Address" />
 								{errors.email && <div>{errors.email.message}</div>}
 								<button disabled={isSubmitting} type="submit">
@@ -90,7 +100,10 @@ const Footer = () => {
 				<div className={`${styles.column} row`}>
 					<span className={styles.copyright}>&copy; Copyright CodingBee {year}</span>
 					<span className={styles.copyright}>
-						Design by <a href="https://www.styleshout.com/" target='_blank'>StyleShout</a>
+						Design by{' '}
+						<a href="https://www.styleshout.com/" target="_blank">
+							StyleShout
+						</a>
 					</span>
 				</div>
 			</div>

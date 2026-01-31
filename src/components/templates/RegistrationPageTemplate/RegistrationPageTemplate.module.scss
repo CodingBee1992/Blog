@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #eaefff;
+	background-color: var(--pagesBgc);
 	height: 100dvh;
 
 	.loginWrapper {
@@ -53,7 +53,7 @@
 				a {
 					font-weight: 600;
 					color: #00a700;
-					transition: all 0.3s;
+					transition: border-bottom 0.3s;
 
 					&:hover {
 						border-bottom: 1px solid #00a700;
@@ -67,17 +67,25 @@
 				flex-direction: column;
 
 				input {
-					outline: none;
-					padding: var(--vspace-0_25);
 					margin: var(--vspace-0_25) 0;
+					padding: var(--vspace-0_25);
+					width: 100%;
+					color: #000000;
+					border: 1px solid var(--inputBorderColor);
+					outline: none;
+					transition: all 0.3s;
+					&:hover {
+						box-shadow: 0px 0px 0px 3px var(--inputBoxShadowColor);
+					}
 
 					&:focus {
-						border: 2px solid #00a700;
+						box-shadow: 0px 0px 0px 3px var(--inputFocusColor);
+						border-color: #ffffff;
 					}
 				}
 				span {
 					font-size: var(--text-xs);
-					color: red;
+					color: var(--errorFormColor);
 				}
 				.success {
 					color: #00a700;
@@ -96,12 +104,24 @@
 					background-color: var(--btn-color);
 					border: none;
 					cursor: pointer;
-					transition: all 0.3s;
-					
+					transition: background-color 0.3s;
+
 					&:hover {
 						background-color: var(--btn-color-hover);
 					}
 				}
+			}
+		}
+	}
+}
+
+@media (width < 800px) {
+	.logInContainer {
+		.loginWrapper {
+			flex-direction: column;
+
+			.formContainer {
+				width: 100%;
 			}
 		}
 	}

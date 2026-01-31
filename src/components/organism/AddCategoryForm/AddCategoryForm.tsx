@@ -33,18 +33,18 @@ const AddCategoryForm = () => {
 		handleSubmit,
 		reset,
 		setError,
-		
-		
+
 		formState: { isSubmitting, errors },
 	} = methods
 
-	const watch = useWatch({control,name:'name'})
+	const watch = useWatch({ control, name: 'name' })
 	const onSubmit: SubmitHandler<schemaTypes> = async (data: schemaTypes) => {
 		try {
+			if (!data) return
+
 			const { name, slug } = data
 			const res = await addCategory({ name, slug }).unwrap()
 
-			console.log(res)
 			if (res) setSuccessMessage(res.message)
 
 			reset()
@@ -63,18 +63,17 @@ const AddCategoryForm = () => {
 		}
 	}
 	useEffect(() => {
-		if(watch){
+		if (watch) {
 			setSuccessMessage('')
 		}
 		if (successMessage) {
 			setTimeout(() => {
 				setSuccessMessage('')
-			}, 10000)
+			}, 5000)
 		}
 	}, [successMessage, watch])
 	useEffect(() => {
 		setError('root', { message: '' })
-		
 	}, [watch, setError])
 
 	const handleResetFields = () => {
@@ -87,8 +86,22 @@ const AddCategoryForm = () => {
 
 				<form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
 					<div className={styles.formWrapper}>
-						<RHFInput name="name" type='text' styles={styles} label="Category Name" id="name" />
-						<RHFInput name="slug" type='text' styles={styles} label="Category Slug" id="slug" />
+						<RHFInput
+							name="name"
+							type="text"
+							styles={styles}
+							label="Category Name"
+							id="name"
+							isSubmitting={isSubmitting}
+						/>
+						<RHFInput
+							name="slug"
+							type="text"
+							styles={styles}
+							label="Category Slug"
+							id="slug"
+							isSubmitting={isSubmitting}
+						/>
 					</div>
 					{successMessage && <span className={styles.successMessage}>{successMessage}</span>}
 					{errors.root && <span className={styles.errorMessage}>{errors.root.message}</span>}
@@ -96,13 +109,13 @@ const AddCategoryForm = () => {
 						<FormBtn type="submit" isSubmitting={isSubmitting} className={styles.submitBtn}>
 							{isSubmitting ? (
 								<>
-									Creating
+									Saving
 									<span className={styles.animate1}>.</span>
 									<span className={styles.animate2}>.</span>
 									<span className={styles.animate3}>.</span>
 								</>
 							) : (
-								'Create'
+								'Save'
 							)}
 						</FormBtn>
 

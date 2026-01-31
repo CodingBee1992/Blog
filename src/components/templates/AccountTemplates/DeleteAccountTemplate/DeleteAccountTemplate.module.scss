@@ -23,32 +23,7 @@
 		.deleteForm {
 			display: flex;
 			flex-direction: column;
-			.formBox {
-				display: flex;
-				flex-direction: column;
-				margin-bottom: 2rem;
-				width: 100%;
-				label {
-					display: block;
-					margin-bottom: 0.5rem;
-					font-weight: bold;
-					font-size: 13px;
-					line-height: 20px;
-				}
-				.formInput {
-					position: relative;
-
-					input {
-						display: flex;
-						width: 100%;
-						padding: 1rem;
-						color: #000000;
-						border: 1px solid #889397;
-						border-radius: var(--borderRadius06);
-						outline: none;
-					}
-				}
-			}
+			
 			.formBtns {
 				display: flex;
 				margin-top: 3rem;
@@ -73,61 +48,13 @@
 					}
 				}
 			}
-
-			.warnSVG {
-				margin-right: 0.5rem;
-			}
 		}
-		.acknowledgementsList {
-			margin-bottom: 2rem;
-			.acknowledgement {
-				margin-bottom: 1rem;
-				list-style: none;
-
-				.checkbox {
-					display: flex;
-					flex-direction: row;
-					align-items: start;
-					justify-content: start;
-					gap: 1rem;
-					width: 100%;
-					cursor: pointer;
-
-					input {
-						display: none;
-					}
-					&:hover {
-						.checkmark {
-							box-shadow: 0px 0px 3px 3px #d3d3d3d3;
-						}
-						.scaleCheckmark {
-							box-shadow: none;
-						}
-					}
-
-					.acknowledgementInfo {
-						display: flex;
-						flex-direction: column;
-
-						.spanInfo1 {
-							line-height: 20px;
-							font-size: 13px;
-							font-weight: 600;
-						}
-						.spanInfo2 {
-							line-height: 20px;
-							font-size: 13px;
-						}
-					}
-				}
-			}
-		}
+		
 	}
 }
 
 @media (max-width: 800px) {
 	.deleteAccountContainer {
 		align-items: center;
-		
 	}
 }

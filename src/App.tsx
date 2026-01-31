@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router'
-import { defaultCategories } from './containers/Navigation/dataNavigation/dataNavigation'
-import { useFetchAllCategoriesQuery } from './slices/api/categoriesApi'
+
 // Layouts
 const StaticLayout = lazy(() => import('./containers/StaticLayout/StaticLayout'))
 const AdminPanelLayout = lazy(() => import('./containers/StaticLayout/AdminPanelLayout'))
@@ -9,7 +8,7 @@ const AccountLayout = lazy(() => import('./containers/StaticLayout/AccountLayout
 
 // Publis Sites
 const HomePage = lazy(() => import('./components/pages/HomePage/HomePage'))
-const StylesPage = lazy(() => import('./components/pages/StylesPage/StylesPage'))
+
 const AboutPage = lazy(() => import('./components/pages/AboutPage/AboutPage'))
 const ContactPage = lazy(() => import('./components/pages/ContactPage/ContactPage'))
 const SinglePostPage = lazy(() => import('./components/pages/SinglePostPage/SinglePostPage'))
@@ -21,8 +20,8 @@ const RegistrationPage = lazy(() => import('./components/pages/RegistrationPage/
 const VerifyPage = lazy(() => import('./components/pages/VerifyPage/VerifyPage'))
 
 // Admin pages
-const AdminPanelPage = lazy(() => import('./components/pages/AdminPanel/AdminPanelPage/AdminPanelPage'))
-const AdminRoomPage = lazy(() => import('./components/pages/AdminPanel/AdminPanelPage/AdminRoomPage/AdminRoomPage'))
+const DashboardPage = lazy(() => import('./components/pages/AdminPanel/Dashboard/DashboardPage'))
+const AdminRoomPage = lazy(() => import('./components/pages/AdminPanel/AdminRoom/AdminRoomPage'))
 const ListOfPostPage = lazy(() => import('./components/pages/AdminPanel/Posts/ListOfPostPage/ListOfPostPage'))
 const AddPostPage = lazy(() => import('./components/pages/AdminPanel/Posts/AddPostPage/AddPostPage'))
 const EditPostPage = lazy(() => import('./components/pages/AdminPanel/Posts/EditPostPage/EditPostPage'))
@@ -31,15 +30,25 @@ const PostHistory = lazy(() => import('./components/pages/AdminPanel/Posts/PostH
 const ListPage = lazy(() => import('./components/pages/AdminPanel/Users/ListPage/ListPage'))
 const AddUserPage = lazy(() => import('./components/pages/AdminPanel/Users/AddUserPage/AddUserPage'))
 const RoleAndPermissionsPage = lazy(
-	() => import('./components/pages/AdminPanel/Users/RoleAndPermissionsPage/RoleAndPermissionsPage')
+	() => import('./components/pages/AdminPanel/Users/RoleAndPermissionsPage/RoleAndPermissionsPage'),
 )
 const ListOfCommentsPage = lazy(
-	() => import('./components/pages/AdminPanel/CommentsPage/ListOfComments/ListOfCommentsPage')
+	() => import('./components/pages/AdminPanel/Comments/ListOfComments/ListOfCommentsPage'),
 )
 const CommentsSettingsPage = lazy(
-	() => import('./components/pages/AdminPanel/CommentsPage/CommentsSettingsPage/CommentsSettingsPage')
+	() => import('./components/pages/AdminPanel/Comments/CommentsSettingsPage/CommentsSettingsPage'),
 )
+const CommentsHistory = lazy(() => import('./components/pages/AdminPanel/Comments/ChangeHistory/CommentsHistory'))
 
+const LoginAttempts = lazy(() => import('./components/pages/AdminPanel/Security/LoginAttempts/LoginAttempts'))
+const UnauthorizedAccess = lazy(
+	() => import('./components/pages/AdminPanel/Security/UnauthorizedAccess/UnauthorizedAccess'),
+)
+const PasswordEvents = lazy(() => import('./components/pages/AdminPanel/Security/PasswordEvents/PasswordEvents'))
+
+const General = lazy(() => import('./components/pages/AdminPanel/Settings/General/General'))
+const Email = lazy(() => import('./components/pages/AdminPanel/Settings/Email/Email'))
+const Integrations = lazy(() => import('./components/pages/AdminPanel/Settings/Integrations/Integrations'))
 // Account pages
 const ProfilePage = lazy(() => import('./components/pages/AccountPages/ProfilePage/ProfilePage'))
 const ResetPasswordPage = lazy(() => import('./components/pages/AccountPages/ResetPasswordPage/ResetPasswordPage'))
@@ -52,12 +61,13 @@ import AdminGuard from './containers/StaticLayout/AdminGuard'
 import UserRoute from './containers/StaticLayout/UserRoute'
 
 import PageNotFound from './components/pages/PageNotFound/PageNotFound'
+import UsersHistory from './components/pages/AdminPanel/Users/UsersHistory/UsersHistory'
+import PrivacyPolicy from './components/pages/PrivacyPolicy/PrivacyPolicy'
+import TermsAndConditions from './components/pages/TermsAndConditions/TermsAndConditions'
 
 const Loader = lazy(() => import('./components/atoms/loader/Loader'))
 const App = () => {
-	const { data } = useFetchAllCategoriesQuery()
 	
-	const menuCategories = data && data.length > 0 ? data : defaultCategories.children
 	// useEffect(() => {
 	// 	if (window.gtag) {
 	// 		window.gtag('consent', 'default', {
@@ -83,20 +93,14 @@ const App = () => {
 						</Suspense>
 					}>
 					<Route path="/" element={<HomePage />} />
+					<Route path="categories/:categorySlug" element={<SingleCategoryPage />} />
 
-					<Route path="categories/">
-						{menuCategories?.map((item, index) => (
-							<Route
-								key={index}
-								path={`${item.name!.split(' ').join('-').toLowerCase()}`}
-								element={<SingleCategoryPage name={item.name!} />}
-							/>
-						))}
-					</Route>
 					<Route path="post/:category/:slug/*" element={<SinglePostPage />} />
-					<Route path="styles" element={<StylesPage />} />
+
 					<Route path="about" element={<AboutPage />} />
 					<Route path="contact" element={<ContactPage />} />
+					<Route path="privacy-policy" element={<PrivacyPolicy />} />
+					<Route path="terms-and-conditions" element={<TermsAndConditions />} />
 				</Route>
 
 				{/* User Routes */}
@@ -121,7 +125,7 @@ const App = () => {
 							</Suspense>
 						</AdminGuard>
 					}>
-					<Route index element={<AdminPanelPage />} />
+					<Route index element={<DashboardPage />} />
 
 					<Route path="room" element={<AdminRoomPage />} />
 
@@ -130,17 +134,28 @@ const App = () => {
 						<Route path="addpost" element={<AddPostPage />} />
 						<Route path="editpost" element={<EditPostPage />} />
 						<Route path="categories" element={<CategoriesPage />} />
-						<Route path="change/history" element={<PostHistory />} />
+						<Route path="posts-history" element={<PostHistory />} />
 					</Route>
 					<Route path="users/">
 						<Route path="list" element={<ListPage />} />
 						<Route path="adduser" element={<AddUserPage />} />
 						<Route path="permissions" element={<RoleAndPermissionsPage />} />
-						{/* <Route path="profile/:userId" element={<ProfilePage />} /> */}
+						<Route path="users-history" element={<UsersHistory />} />
 					</Route>
 					<Route path="comments/">
 						<Route path="list" element={<ListOfCommentsPage />} />
 						<Route path="settings" element={<CommentsSettingsPage />} />
+						<Route path="comments-history" element={<CommentsHistory />} />
+					</Route>
+					<Route path="security">
+						<Route path="login" element={<LoginAttempts />} />
+						<Route path="access" element={<UnauthorizedAccess />} />
+						<Route path="passwords" element={<PasswordEvents />} />
+					</Route>
+					<Route path="settings">
+						<Route path="general" element={<General />} />
+						<Route path="email" element={<Email />} />
+						<Route path="integrations" element={<Integrations />} />
 					</Route>
 				</Route>
 

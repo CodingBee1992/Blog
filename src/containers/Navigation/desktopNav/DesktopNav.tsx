@@ -3,6 +3,8 @@ import { useEffect, useRef, useState, type MouseEvent, type RefObject } from 're
 import { useLocation } from 'react-router'
 import MenuElement from '../../../components/organism/menuElement/MenuElement'
 import type { MenuTypes } from '../dataNavigation/dataNavigation'
+import useWindowSize from '../../../hooks/useWindowSize'
+import useMenuContext from '../../../hooks/useMenuContext'
 interface DesktopProps {
 	dataMenu: MenuTypes[]
 	navRef: RefObject<HTMLDivElement | null>
@@ -13,6 +15,16 @@ const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 	const menuRef = useRef<HTMLDivElement>(null)
 	const [timeOutListIn, setTimeOutListIn] = useState<ReturnType<typeof setTimeout>[]>([])
 	const [timeOutListOut, setTimeOutListOut] = useState<ReturnType<typeof setTimeout>[]>([])
+	const { mobileMenu } = useMenuContext()
+	const { close, isVisible } = mobileMenu
+	const size = useWindowSize()
+	const width = size.width > 900
+
+	useEffect(() => {
+		if (isVisible && width) {
+			close()
+		}
+	}, [isVisible, close, width])
 
 	useEffect(() => {
 		if (location.pathname !== '/') {

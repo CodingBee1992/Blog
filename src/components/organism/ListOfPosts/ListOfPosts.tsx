@@ -16,7 +16,7 @@ import timePass from '../../../hooks/timePass'
 import NotificationNew from '../../atoms/NotificationNew/NotificationNew'
 
 import { useFetchAllCategoriesQuery } from '../../../slices/api/categoriesApi'
-import handleCreateUrl from '../../../hooks/createUrl'
+import createUrl from '../../../hooks/createUrl'
 
 import dateConverter from '../../../hooks/dateConverter'
 
@@ -243,12 +243,12 @@ const ListOfPosts = () => {
 					</div>
 					<div className={styles.tbody}>
 						{posts &&
-							posts?.map((item: ExtendedArticleContentProps, index: number) => (
+							posts?.map((item:ExtendedArticleContentProps, index: number) => (
 								<div key={index} className={`${styles.tr} ${item.status === 'draft' ? styles.draft : ''}`}>
 									<div className={styles.td}>
 										<AnchorLink
 											className={styles.tabelTitle}
-											href={handleCreateUrl({ categories: item.categories, seo: item.seo, _id: item._id })}>
+											href={createUrl({ categories: item.categories, seo: item.seo, _id: item._id })}>
 											{item.title}
 											{timePass(item.createdAt, 3) && <NotificationNew />}
 										</AnchorLink>

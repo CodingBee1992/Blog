@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { ArticleContentProps } from '../../types/types'
+import type { ExtendedArticleContentProps } from '../../types/types'
 const API_URL = import.meta.env.VITE_API_URL
 const POSTS_URL = import.meta.env.VITE_POSTS_URL
 // const SIGNATURE_URL = import.meta.env.VITE_SIGNATURE_URL
@@ -7,11 +7,16 @@ const POSTS_URL = import.meta.env.VITE_POSTS_URL
 type FetchPostsParams = {
 	page?: number
 	limit?: number
+	search?: string
+	sortBy?: string
+	order?: string
+	category?: string
 }
 
 type FetchPostsResponse = {
-	posts: ArticleContentProps[]
+	posts: ExtendedArticleContentProps[]
 	totalPages: number
+	total: number
 }
 
 export const postApi = createApi({
@@ -29,6 +34,16 @@ export const postApi = createApi({
 			},
 			providesTags: () => [{ type: 'POSTS' }],
 		}),
+		fetchPostsByCategory: builder.query({
+			query: params => {
+				const queryString = new URLSearchParams(
+					Object.fromEntries(Object.entries(params).map(([k, v]) => [k, String(v)])),
+				).toString()
+
+				return `${POSTS_URL}/category/?${queryString}`
+			},
+			providesTags: (_result, _error, arg) => [{ type: 'POSTS', id: `${arg.category}-${arg.page}` }],
+		}),
 		fetchPostCreatedAt: builder.query({
 			query: postId => `${POSTS_URL}/createdAt/${postId}`,
 			providesTags: () => [{ type: 'POSTS' }],
@@ -43,16 +58,7 @@ export const postApi = createApi({
 			},
 			providesTags: () => [{ type: 'POSTS' }],
 		}),
-		fetchPostsByCategory: builder.query({
-			query: params => {
-				const queryString = new URLSearchParams(
-					Object.fromEntries(Object.entries(params).map(([k, v]) => [k, String(v)])),
-				).toString()
 
-				return `${POSTS_URL}/paginated/?${queryString}`
-			},
-			providesTags: () => [{ type: 'POSTS' }],
-		}),
 		fetchPostById: builder.query({
 			query: postId => `${POSTS_URL}/${postId}`,
 			providesTags: () => [{ type: 'POSTS' }],

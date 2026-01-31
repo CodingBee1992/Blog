@@ -22,19 +22,6 @@ const Navigation = () => {
 	const { navRef } = useMenuContext()
 
 	const { isOpen } = useSelector((state: RootState) => state.theme)
-
-	const { data } = useFetchAllCategoriesQuery()
-
-	const newDataMenu = dataNavigation.map(item => {
-		if (item.title === 'Categories') {
-			if (data && data?.length > 0) return { ...item, children: data }
-
-			return item
-		}
-
-		return item
-	})
-	
 	useEffect(() => {
 		const handleScroll = () => {
 			if (pathname === '/') {
@@ -60,6 +47,20 @@ const Navigation = () => {
 			navRef.current?.classList.remove(styles.bgcNavBlack)
 		}
 	}, [pathname, navRef])
+
+	const { data } = useFetchAllCategoriesQuery()
+
+	if (!data) return
+	const newDataMenu = dataNavigation.map(item => {
+		if (item.title === 'Categories') {
+			if (data && data?.length > 0) return { ...item, children: data }
+
+			return item
+		}
+
+		return item
+	})
+
 	return (
 		<nav ref={navRef} className={styles.container}>
 			<Logo styles={styles} />

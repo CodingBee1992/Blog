@@ -13,21 +13,17 @@
 	.formContainer {
 		.formWrapper {
 			display: flex;
-
-			flex-wrap: wrap;
-			width: 100%;
-			gap: 3rem;
-			max-width: 1000px;
+			flex-direction: column;
+			width: 500px;
 			.formInput {
 				display: flex;
 				flex-direction: column;
 				font-family: var(--font-2);
-
-				width: 45%;
+				margin-bottom: 1rem;
 
 				label {
 					margin-bottom: 1rem;
-					font-size: 2rem;
+					font-size: var(--textSize_18);
 					font-weight: 500;
 					color: var(--mainFormColor);
 				}
@@ -43,7 +39,7 @@
 		}
 		.successMessage {
 			display: block;
-			margin-top: 1rem;
+			margin-bottom: 2rem;
 			font-size: var(--textSize_16);
 			color: #04dd00;
 		}
@@ -58,14 +54,13 @@
 	.submitBtns {
 		display: flex;
 		gap: 2rem;
-		margin-top: 3rem;
 
 		.submitBtn {
-			background-color: var(--createFormBgc);
+			background-color: var(--buttonBgcLight);
+			color: var(--buttonColorDark);
 
 			&:hover {
-				color: var(--buttonColorHover);
-				background-color: var(--createFormBgcHover);
+				color: var(--saveColor);
 			}
 		}
 		.animate1 {
@@ -78,10 +73,11 @@
 			animation: animateDot 1.4s ease-in-out 0.6s infinite;
 		}
 		.resetBtn {
-			background-color: var(--resetFormBgc);
+			background-color: var(--buttonBgcLight);
+			color: var(--buttonColorDark);
+
 			&:hover {
-				color: var(--buttonColorHover);
-				background-color: var(--resetFormHoverBgc);
+				color: var(--resetColor);
 			}
 		}
 	}
@@ -89,19 +85,26 @@
 
 .error {
 	color: var(--errorFormColor);
-	font-size: var(--textSize_12);
+	font-size: var(--textSize_14);
 }
 .marginError {
 	margin-bottom: 1rem;
 }
 
+@media (width < 1100px) {
+	.addCategoryContainer {
+		.formContainer {
+			.formWrapper {
+				width: 65%;
+			}
+		}
+	}
+}
 @media (width < 900px) {
 	.addCategoryContainer {
 		.formContainer {
 			.formWrapper {
-				.formInput {
-					width: 100%;
-				}
+				width: 100%;
 			}
 		}
 	}

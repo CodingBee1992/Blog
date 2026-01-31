@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #eaefff;
+	background-color: var(--pagesBgc);
 	height: 100dvh;
 
 	.loginWrapper {
@@ -67,17 +67,26 @@
 				flex-direction: column;
 
 				input {
-					outline: none;
-					padding: var(--vspace-0_25);
+					
 					margin: var(--vspace-0_25) 0;
+					padding: var(--vspace-0_25);
+					width: 100%;
+					color: #000000;
+					border: 1px solid var(--inputBorderColor);
+					outline: none;
+					transition: all 0.3s;
+					&:hover {
+						box-shadow: 0px 0px 0px 3px var(--inputBoxShadowColor);
+					}
 
 					&:focus {
-						border: 2px solid #00a700;
+						box-shadow: 0px 0px 0px 3px var(--inputFocusColor);
+						border-color: #ffffff;
 					}
 				}
 				span {
 					font-size: var(--text-xs);
-					color: red;
+					color: var(--errorFormColor);
 				}
 
 				.signInButton {
@@ -98,6 +107,17 @@
 						background-color: var(--btn-color-hover);
 					}
 				}
+			}
+		}
+	}
+}
+@media (width < 800px) {
+	.logInContainer {
+		.loginWrapper {
+			flex-direction: column;
+
+			.formContainer {
+				width: 100%;
 			}
 		}
 	}

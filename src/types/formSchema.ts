@@ -1,7 +1,7 @@
 import z from 'zod'
 export const postSchema = z.object({
-	title: z.string().trim().min(4, { message: 'Min 4 characters' }),
-	introduction: z.string().trim().min(5, { message: 'Min 5 characters' }),
+	title: z.string().trim().min(1, { message: 'Please fill title' }),
+	introduction: z.string().trim().min(1, { message: 'Please fill introduction' }),
 
 	mainImage: z.object({
 		src: z

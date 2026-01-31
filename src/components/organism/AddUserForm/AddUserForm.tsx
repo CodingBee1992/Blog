@@ -41,8 +41,10 @@ const AddUserForm = () => {
 
 	const onSubmit: SubmitHandler<userSchemaTypes> = async (data: userSchemaTypes) => {
 		try {
+			if (!data) return
+
 			const res = await adminCreateUser(data).unwrap()
-			
+
 			if (res) setSuccessMessage(res.message)
 
 			reset()
@@ -73,7 +75,7 @@ const AddUserForm = () => {
 		if (successMessage)
 			setTimeout(() => {
 				setSuccessMessage('')
-			}, 10000)
+			}, 5000)
 	}, [successMessage])
 
 	const handleResetFields = () => {
@@ -85,23 +87,30 @@ const AddUserForm = () => {
 				<p>Add User</p>
 				<form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
 					<div className={styles.formWrapper}>
-						<RHFInput type='text' name="name" label="Name" styles={styles} id="name" />
-						<RHFInput type='email' name="email" label="Email" styles={styles} id="email" />
-						<RHFInput type='password' name="password" label="Password" styles={styles} id="password" />
-						<RHFSelect name="role" label="Role" options={role} styles={styles} />
+						<RHFInput type="text" name="name" label="Name" styles={styles} id="name" isSubmitting={isSubmitting} />
+						<RHFInput type="email" name="email" label="Email" styles={styles} id="email" isSubmitting={isSubmitting} />
+						<RHFInput
+							type="password"
+							name="password"
+							label="Password"
+							styles={styles}
+							id="password"
+							isSubmitting={isSubmitting}
+						/>
+						<RHFSelect name="role" label="Role" options={role} styles={styles} isSubmitting={isSubmitting} />
 					</div>
 					{successMessage && <span className={styles.successMessage}>{successMessage}</span>}
 					<div className={styles.submitBtns}>
 						<FormBtn type="submit" isSubmitting={isSubmitting} className={styles.submitBtn}>
 							{isSubmitting ? (
 								<>
-									Creating
+									Saving
 									<span className={styles.animate1}>.</span>
 									<span className={styles.animate2}>.</span>
 									<span className={styles.animate3}>.</span>
 								</>
 							) : (
-								'Create'
+								'Save'
 							)}
 						</FormBtn>
 

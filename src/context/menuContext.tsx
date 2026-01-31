@@ -2,7 +2,7 @@ import { createContext, useEffect, useRef, useState, type MouseEvent, type React
 
 import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router'
-import { useLogOutMutation, userApi } from '../slices/api/userApi'
+import {  useLogOutMutation, userApi } from '../slices/api/userApi'
 import { setLogout } from '../slices/authSlice'
 import { postApi } from '../slices/api/postApi'
 import { commentsApi } from '../slices/api/commentsApi'
@@ -11,6 +11,7 @@ import { postLikeApi } from '../slices/api/postLikeApi'
 import { categoryApi } from '../slices/api/categoriesApi'
 import { useMobileMenu } from '../hooks/useMobileMenu'
 import { useMobileSideBarMenu } from '../hooks/useMobileSideBarMenu'
+
 interface MenuContextProps {
 	children: ReactNode
 }
@@ -27,6 +28,7 @@ interface CreateContextProps {
 	activeIndex: number | null
 	toggleMenu: boolean
 	sideBarMenu: ReturnType<typeof useMobileSideBarMenu>
+	
 }
 
 const MenuContext = createContext<CreateContextProps | null>(null)
@@ -45,7 +47,8 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 	const [scrollMenu, setScrollMenu] = useState<boolean>(false)
 	const [toggleMenu, setToggleMenu] = useState<boolean>(false)
 	const { close } = sideBarMenu
-
+	
+	
 	// Open close mobile dropdown
 	const handleOpenCloseDropdown = (e: MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
 		const target = e.currentTarget
@@ -73,12 +76,10 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 
 			if (!el?.contains(e.target as Node) && !el2) {
 				setToggleMenu(false)
-				
 			}
 
 			if (!el2?.contains(e.target as Node) && !el) {
 				close()
-				
 			}
 		}
 
@@ -106,7 +107,7 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 			console.log('Error during logout:', error)
 		}
 	}
-
+	
 	const value: CreateContextProps = {
 		openCloseUserMenu,
 		handleOpenCloseDropdown,
@@ -119,6 +120,7 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 		toggleMenu,
 		sideBarMenu,
 		sideBarRef,
+		
 	}
 
 	return <MenuContext value={value}>{children}</MenuContext>

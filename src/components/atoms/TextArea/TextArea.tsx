@@ -126,7 +126,7 @@ const TextArea = ({
 	}, [isSubmitSuccessful, reset])
 
 	return (
-		<form name="contactForm" method="post" autoComplete="off" id={styles.contactForm} onSubmit={handleSubmit(onSubmit)}>
+		<form name="contactForm" id={styles.contactForm} onSubmit={handleSubmit(onSubmit)} aria-busy={isSubmitting}>
 			<div>
 				<textarea
 					{...register('comment')}
@@ -135,6 +135,8 @@ const TextArea = ({
 					defaultValue={isUpdating ? updatingText : ''}
 					placeholder="Your message"
 					id=""
+					readOnly={isSubmitting}
+					aria-readonly={isSubmitting}
 					onKeyDown={e => {
 						if (e.key === 'Enter' && !e.shiftKey && !isSubmitting) {
 							e.preventDefault()
@@ -149,7 +151,7 @@ const TextArea = ({
 				{success && <span className={styles.resMessage}>{resMessage}</span>}
 			</div>
 			<button disabled={isSubmitting} type="submit" className={styles.addComment}>
-				{isSubmitting ? (isUpdating ? 'Updating' : 'Sending...') : isUpdating ? 'Update' : 'Add Comment'}
+				{isSubmitting ? (isUpdating ? 'Saving' : 'Sending...') : isUpdating ? 'Save' : 'Add Comment'}
 			</button>
 		</form>
 	)

@@ -35,6 +35,7 @@ export const useMobileMenu = () => {
 		
 		isOpen: state === MobileMenuState.OPEN,
 		isVisible: state !== MobileMenuState.CLOSED,
+		close,
 		toggle,
 	}
 }

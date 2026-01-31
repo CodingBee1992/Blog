@@ -66,7 +66,7 @@ const Seo = ({
 			<meta property="og:title" content={seoTitle} />
 			<meta property="og:description" content={seoDescription} />
 			<meta property="og:image" content={seoOgImage} />
-			<meta property="og:image" content={seoDefaultLogo} />
+			
 			<meta property="og:type" content={type} />
 			<meta property="og:url" content={currentUrl} />
 			<meta property="og:site_name" content={defaultSeo.siteName} />
@@ -80,13 +80,13 @@ const Seo = ({
 			<meta name="twitter:title" content={seoTitle} />
 			<meta name="twitter:description" content={seoDescription} />
 			<meta name="twitter:image" content={seoOgImage} />
-			<meta name="twitter:image" content={seoDefaultLogo} />
+			
 
 			{/* JSON-LD */}
 			<script type="application/ld+json">
 				{JSON.stringify({
 					'@context': 'https://schema.org',
-					'@type': type === 'article' ? 'Article' : 'WebPage',
+					'@type': type === 'article' ? 'Article' : 'WebSite',
 					name: seoTitle,
 					description: seoDescription,
 					url: currentUrl,

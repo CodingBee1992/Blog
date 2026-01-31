@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import type { UserProps } from '../../types/types'
 const API_URL = import.meta.env.VITE_API_URL
 const USERS_URL = import.meta.env.VITE_USERS_URL
 
 export const userApi = createApi({
 	reducerPath: 'login',
 	baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}`, credentials: 'include' }),
-	tagTypes:['UpdateProfile'],
+	tagTypes: ['UpdateProfile'],
 	endpoints: builder => ({
 		login: builder.mutation({
 			query: credentials => ({
@@ -24,13 +25,13 @@ export const userApi = createApi({
 				body: data,
 			}),
 		}),
-		deleteAccount:builder.mutation({
-			query:(confirmPassword)=>({
-				url:`${USERS_URL}/delete-account`,
-				method:"DELETE",
-				headers:{'Content-type':'application/json'},
-				body:{confirmPassword}
-			})
+		deleteAccount: builder.mutation({
+			query: confirmPassword => ({
+				url: `${USERS_URL}/delete-account`,
+				method: 'DELETE',
+				headers: { 'Content-type': 'application/json' },
+				body: { confirmPassword },
+			}),
 		}),
 		verifyAccount: builder.query({
 			query: token => `${USERS_URL}/verify?token=${token}`,
@@ -63,21 +64,20 @@ export const userApi = createApi({
 			}),
 		}),
 		confirmResetPassword: builder.mutation({
-			query: (newPassword) => ({
-				url: `${USERS_URL}/confirm-reset-password`,
+			query: ({ newPassword, token }) => ({
+				url: `${USERS_URL}/confirm-reset-password?token=${token}`,
 				method: 'PATCH',
 				headers: { 'Content-type': 'application/json' },
-				body: {newPassword},
+				body: { newPassword },
 			}),
 		}),
-		confirmNewEmail:builder.mutation({
-			query:(newEmail)=>({
-				url:`${USERS_URL}/confirm-new-email`,
-				method:'PATCH',
-				headers:{'Content-type':'application/json'},
-				body:{newEmail}
-
-			})
+		confirmNewEmail: builder.mutation({
+			query: ({ newEmail, token }) => ({
+				url: `${USERS_URL}/confirm-new-email?token=${token}`,
+				method: 'PATCH',
+				headers: { 'Content-type': 'application/json' },
+				body: { newEmail },
+			}),
 		}),
 		forgotPassword: builder.mutation({
 			query: email => ({
@@ -94,23 +94,24 @@ export const userApi = createApi({
 				headers: { 'Content-type': 'application/json' },
 			}),
 		}),
-		fetchUserProfile: builder.query({
+		fetchUserProfile: builder.query<UserProps, void>({
 			query: () => `${USERS_URL}/get-user-profile`,
-			providesTags:(_result)=>[{type:'UpdateProfile',id:_result.id}]
+			providesTags: () => [{ type: 'UpdateProfile' }],
+			// providesTags: _result => (_result ? [{ type: 'UpdateProfile', id: _result.id }] : []),
 		}),
-		updateProfile:builder.mutation({
-			query:({name,updatedAvatar})=>({
-				url:`${USERS_URL}/update-profile`,
-				method:'PUT',
-				body:{name,updatedAvatar}
-				
+		updateProfile: builder.mutation({
+			query: ({ name, updatedAvatar }) => ({
+				url: `${USERS_URL}/update-profile`,
+				method: 'PUT',
+				body: { name, updatedAvatar },
 			}),
-			invalidatesTags:(_result)=>[{type:'UpdateProfile',id:_result.id}]
+			invalidatesTags: () => [{ type: 'UpdateProfile' }],
+			// invalidatesTags: _result => (_result ? [{ type: 'UpdateProfile', id: _result.id }] : []),
 		}),
 		fetchUserByLimit: builder.query({
 			query: params => {
 				const queryString = new URLSearchParams(
-					Object.fromEntries(Object.entries(params).map(([k, v]) => [k, String(v)]))
+					Object.fromEntries(Object.entries(params).map(([k, v]) => [k, String(v)])),
 				)
 
 				return `${USERS_URL}/get-users-by-limit/?${queryString}`
@@ -119,7 +120,7 @@ export const userApi = createApi({
 		fetchAdminsAndModerators: builder.query({
 			query: params => {
 				const queryString = new URLSearchParams(
-					Object.fromEntries(Object.entries(params).map(([k, v]) => [k, String(v)]))
+					Object.fromEntries(Object.entries(params).map(([k, v]) => [k, String(v)])),
 				)
 
 				return `${USERS_URL}/get-admins-moderators/?${queryString}`
@@ -140,8 +141,6 @@ export const userApi = createApi({
 				headers: { 'Content-type': 'application/json' },
 			}),
 		}),
-
-		
 	}),
 })
 
@@ -163,5 +162,5 @@ export const {
 	useDeleteAccountMutation,
 	useChangeEmailAddressMutation,
 	useConfirmNewEmailMutation,
-	useUpdateProfileMutation
+	useUpdateProfileMutation,
 } = userApi

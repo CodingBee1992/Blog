@@ -1,0 +1,87 @@
+/* Kontener */
+.markdown {
+	max-width: 800px; /* ogranicza szerokość dla czytelności */
+	margin: 2rem auto; /* centrowanie i odstęp od góry */
+	padding: 1.5rem; /* wewnętrzne marginesy */
+	line-height: 1.7; /* poprawia czytelność akapitów */
+	font-family: var(--font-2);
+	font-size: 16px;
+	color: #333;
+	background-color: #fdfdfd; /* delikatne tło dla lepszego kontrastu */
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+	/* Nagłówki */
+	h1 {
+		font-size: 2rem;
+		margin-bottom: 1.5rem;
+		border-bottom: 2px solid #eee;
+		padding-bottom: 0.5rem;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+		color: #222;
+	}
+
+	h3 {
+		font-size: 1.2rem;
+		margin-top: 1.5rem;
+		margin-bottom: 0.75rem;
+		color: #222;
+	}
+
+	/* Akapity */
+	p {
+		margin-bottom: 1rem;
+	}
+
+	/* Listy punktowane i numerowane */
+	ul,
+	ol {
+		margin-bottom: 1rem;
+		padding-left: 1.5rem;
+	}
+
+	li {
+		margin-bottom: 0.5rem;
+	}
+
+	/* Linki */
+	a {
+		color: #1a73e8;
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+
+	/* Cytaty */
+	blockquote {
+		border-left: 4px solid #ddd;
+		padding-left: 1rem;
+		color: #555;
+		font-style: italic;
+		margin: 1rem 0;
+	}
+
+	/* Silne wyróżnienie */
+	strong {
+		font-weight: bold;
+	}
+
+	/* Kursywa */
+	em {
+		font-style: italic;
+	}
+}
+/* Responsywność */
+@media (max-width: 600px) {
+	.markdown {
+		padding: 1rem;
+		font-size: 15px;
+	}
+}

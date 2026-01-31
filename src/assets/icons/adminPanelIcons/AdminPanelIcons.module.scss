@@ -91,13 +91,17 @@
 .securitySVG {
 	width: 20px;
 	height: 20px;
-	
-	path:nth-child(2){
+
+	path:nth-child(2) {
 		fill: var(--sideBarColorIcon);
 	}
-	
 }
-.calendarSVG{
+.calendarSVG {
 	width: 20px;
 	height: 20px;
+}
+.settingSVG {
+	width: 20px;
+	height: 20px;
+	fill: var(--sideBarColorIcon);
 }

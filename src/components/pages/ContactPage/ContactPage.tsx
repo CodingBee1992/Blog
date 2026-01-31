@@ -1,4 +1,5 @@
 import Seo from '../../../utils/seo'
+import ContactPageTemplate from '../../templates/ContactPageTemplate/ContactPageTemplate'
 
 const ContactPage = () => {
 	return (
@@ -9,7 +10,7 @@ const ContactPage = () => {
 				canonicalUrl={`${import.meta.env.VITE_SITE_URL}/contact`}
         type='website'
 			/>
-			<div className="">ContactPage</div>
+			<ContactPageTemplate/>
 		</>
 	)
 }

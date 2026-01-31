@@ -11,9 +11,7 @@ interface SliderListProps {
 }
 
 const SliderList = ({ styles, data, index, number }: SliderListProps) => {
-	// const dynamicClass = styles[`sliderHero${index + 1}`]
-	// ${dynamicClass} ${number === index ? styles.sliderActive : ''}
-
+	
 	const mainImageSrc = data.mainImage.src
 	const responsiveImage = useResponsiveCloudinaryImage({ mainImageSrc })
 

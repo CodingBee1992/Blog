@@ -18,6 +18,10 @@ export const categoryApi = createApi({
 			}),
 			invalidatesTags: () => [{ type: 'CreateCategory' }],
 		}),
+		fetchSingleCategory: builder.query<CategoryProps,string>({
+			query: (categorySlug) => `${CATEGORY_URL}/${categorySlug}`,
+			providesTags: () => [{ type: 'CreateCategory' }, { type: 'DeleteCategory' }],
+		}),
 		fetchAllCategories: builder.query<CategoryProps[],void>({
 			query: () => `${CATEGORY_URL}`,
 			providesTags: () => [{ type: 'CreateCategory' }, { type: 'DeleteCategory' }],
@@ -33,4 +37,4 @@ export const categoryApi = createApi({
 	}),
 })
 
-export const { useCreateCategoryMutation, useFetchAllCategoriesQuery, useDeleteCategoryMutation } = categoryApi
+export const { useCreateCategoryMutation, useFetchAllCategoriesQuery, useDeleteCategoryMutation,useFetchSingleCategoryQuery } = categoryApi

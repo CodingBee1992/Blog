@@ -16,6 +16,8 @@ import FormBtn from '../../atoms/FormBtn/FormBtn'
 import { useFetchAllCategoriesQuery } from '../../../slices/api/categoriesApi'
 import { useDestroyCloudinaryImageMutation, useFetchCloudinaryMutation } from '../../../slices/api/cloudinaryApi'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
+import { adminLinks } from '../../../utils/sideBarLinks'
 
 interface PostFormProps {
 	editValues?: postSchemaTypes
@@ -106,7 +108,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 							return { ...item, value: { ...item.value, src: data.secure_url, public_id: data.public_id } }
 						}
 						return item
-					})
+					}),
 				)
 
 				const updatedData = { ...data, articleContent, mainImage }
@@ -155,7 +157,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 							return { ...item, value: { ...item.value, src: data.secure_url, public_id: data.public_id } }
 						}
 						return item
-					})
+					}),
 				)
 				if (imagesToDestroy.length > 0) {
 					imagesToDestroy.forEach(item => {
@@ -170,15 +172,18 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 				reset(defaultValues)
 			}
 		} catch (error) {
-			if(typeof error === 'object' && error !== null){
+			if (typeof error === 'object' && error !== null) {
 				const fetchError = error as FetchBaseQueryError
-				const message = fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data ? (fetchError.data.message as string) : 'An unexpected error has occured'
+				const message =
+					fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
+						? (fetchError.data.message as string)
+						: 'An unexpected error has occured'
 				setError('root', { message })
 			}
 			setError('root', { message: 'An unexpected error has occured' })
 		}
 	}
-	
+
 	if (isSubmitSuccessful) window.scrollTo({ top: 0, behavior: 'smooth' })
 	if (editValues && isSubmitSuccessful)
 		return (
@@ -195,6 +200,8 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 					<div className={styles.postFormControllers}>
 						{buttons.map((btn, index) => (
 							<button
+								type="button"
+								disabled={isSubmitting}
 								className={styles.postFormBtns}
 								key={index}
 								onClick={() => {
@@ -213,7 +220,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 					</div>
 				</div>
 
-				<form onSubmit={handleSubmit(onSumbit)} className={styles.formContainer}>
+				<form onSubmit={handleSubmit(onSumbit)} className={styles.formContainer} aria-busy={isSubmitting}>
 					<div className={styles.formWrapper}>
 						<div className={styles.formFlex}>
 							<RHFInput<postSchemaTypes>
@@ -222,12 +229,14 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 								label="Main Title"
 								styles={styles}
 								id={`title-title`}
+								isSubmitting={isSubmitting}
 							/>
 							<RHFTextArea<postSchemaTypes>
 								name="introduction"
 								label="Introduction"
 								styles={styles}
 								id={`text-Intro`}
+								isSubmitting={isSubmitting}
 							/>
 
 							<RHFAddFile<postSchemaTypes>
@@ -236,7 +245,8 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 								styles={styles}
 								fileRef={fileRef}
 								fileIndex={-1}
-								id='mainImage'
+								id="mainImage"
+								isSubmitting={isSubmitting}
 							/>
 
 							{articleContent &&
@@ -251,6 +261,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 													name={`articleContent.${index}.value`}
 													label="Subtitle"
 													styles={styles}
+													isSubmitting={isSubmitting}
 												/>
 												{index >= 3 && (
 													<div
@@ -269,6 +280,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 													label="Text"
 													styles={styles}
 													id={`text-${index}`}
+													isSubmitting={isSubmitting}
 												/>
 												{index >= 3 && (
 													<div
@@ -289,6 +301,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 													fileRef={fileRef}
 													fileIndex={index}
 													id={`file${index}`}
+													isSubmitting={isSubmitting}
 												/>
 												{index >= 3 && (
 													<div
@@ -306,6 +319,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 												label="Completion"
 												styles={styles}
 												id={`text-${index}`}
+												isSubmitting={isSubmitting}
 											/>
 										)}
 
@@ -315,6 +329,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 												label="Call to action"
 												styles={styles}
 												id={`text-${index}`}
+												isSubmitting={isSubmitting}
 											/>
 										)}
 									</div>
@@ -333,7 +348,14 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 								<div className={styles.seoContainer}>
 									<p className={styles.seoTitle}>SEO</p>
 
-									<RHFInput type="text" name="seo.slug" label="Slug" styles={styles} id={`title-slug`} />
+									<RHFInput
+										type="text"
+										name="seo.slug"
+										label="Slug"
+										styles={styles}
+										id={`title-slug`}
+										isSubmitting={isSubmitting}
+									/>
 
 									<RHFInput
 										type="text"
@@ -341,6 +363,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 										label="Meta Title"
 										styles={styles}
 										id={`title-metaTitle`}
+										isSubmitting={isSubmitting}
 									/>
 
 									<RHFInput
@@ -349,39 +372,60 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 										label="Meta Description"
 										styles={styles}
 										id={`title-metaDesc`}
+										isSubmitting={isSubmitting}
 									/>
 								</div>
-								<RHFSelect name="status" label="Status" options={statusOptions} styles={styles} />
+								<RHFSelect
+									name="status"
+									id="status"
+									label="Status"
+									isSubmitting={isSubmitting}
+									options={statusOptions}
+									styles={styles}
+								/>
 							</div>
 						</div>
 					</div>
 					<div className={styles.submitBtns}>
-						<FormBtn type="submit" isSubmitting={isSubmitting} className={`${styles.submitBtn} ${isSubmitting? styles.isSubmitting : ''}`}>
+						<FormBtn
+							type="submit"
+							isSubmitting={isSubmitting}
+							className={`${styles.submitBtn} ${isSubmitting ? styles.isSubmitting : ''}`}>
 							{isSubmitting ? (
 								<>
-									{editValues ? 'Saving' : 'Creating'}
+									Saving
 									<span className={styles.animate1}>.</span>
 									<span className={styles.animate2}>.</span>
 									<span className={styles.animate3}>.</span>
 								</>
-							) : editValues ? (
-								'Save'
 							) : (
-								'Create Post'
+								'Save'
 							)}
 						</FormBtn>
 
 						<FormBtn
 							type="button"
 							isSubmitting={isSubmitting}
-							className={`${styles.resetBtn} ${isSubmitting? styles.isSubmitting : ''}`}
+							className={`${styles.resetBtn} ${isSubmitting ? styles.isSubmitting : ''}`}
 							handleResetFields={handleResetFields}>
 							Reset
 						</FormBtn>
 						{editValues && (
-							<FormBtn type="button" isSubmitting={isSubmitting} handleResetFields={handleClearFields} className={`${styles.clearAllBtn} ${isSubmitting? styles.isSubmitting : ''}`}>
-								Clear All
-							</FormBtn>
+							<>
+								<FormBtn
+									type="button"
+									isSubmitting={isSubmitting}
+									handleResetFields={handleClearFields}
+									className={`${styles.clearAllBtn} ${isSubmitting ? styles.isSubmitting : ''}`}>
+									Clear All
+								</FormBtn>
+								<AnchorLink
+									href={adminLinks?.[2]?.children?.[0]?.href ?? '/'}
+									ariaLabel="Cancel"
+									className={`${styles.cancelUpdate} ${isSubmitting ? styles.isSubmitting : ''}`}>
+									Cancel
+								</AnchorLink>
+							</>
 						)}
 					</div>
 				</form>

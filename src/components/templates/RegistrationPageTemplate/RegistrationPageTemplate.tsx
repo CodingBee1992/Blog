@@ -9,9 +9,10 @@ import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 const registrationSchema = z.object({
-	name: z.string().trim().min(4),
+	name: z.string().trim().min(4, { message: 'Name must have 8 characters' }),
 	email: z.email().trim(),
-	password: z.string().trim().min(8),
+	password: z.string().trim().min(8, { message: 'Password must have 8 characters' }),
+	repeatPassowrd: z.string().trim().min(8, { message: 'Password must have 8 characters' }),
 })
 
 type registrationFields = z.infer<typeof registrationSchema>
@@ -28,7 +29,15 @@ const RegistrationPageTemplate = () => {
 		clearErrors,
 		formState: { isSubmitting, errors },
 	} = useForm<registrationFields>({
+		mode: 'onSubmit',
+		reValidateMode: 'onChange',
 		resolver: zodResolver(registrationSchema),
+		defaultValues: {
+			name: '',
+			email: '',
+			password: '',
+			repeatPassowrd: '',
+		},
 	})
 	useEffect(() => {
 		if (isSuccess) {
@@ -74,18 +83,43 @@ const RegistrationPageTemplate = () => {
 					<p>
 						Already have an account ? <AnchorLink href="/login">Sign In</AnchorLink>
 					</p>
-					<form
-						name="createAccountForm"
-						method="post"
-						autoComplete="off"
-						onSubmit={handleSubmit(onSubmit)}
-						className={styles.form}>
-						<input {...register('name')} type="text" placeholder="Enter your name" />
+					<form aria-busy={isSubmitting} onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+						<input
+							{...register('name')}
+							type="text"
+							placeholder="Enter your name"
+							readOnly={isSubmitting}
+							aria-readonly={isSubmitting}
+							autoComplete="name"
+						/>
 						{errors.name && <span>{errors.name.message}</span>}
-						<input {...register('email')} type="email" placeholder="Enter your email" />
+						<input
+							{...register('email')}
+							type="email"
+							placeholder="Enter a valid email adress"
+							readOnly={isSubmitting}
+							aria-readonly={isSubmitting}
+							autoComplete="email"
+						/>
 						{errors.email && <span>{errors.email.message}</span>}
-						<input {...register('password')} type="password" placeholder="Enter your Password" />
+						<input
+							{...register('password')}
+							type="password"
+							placeholder="Enter your Password"
+							readOnly={isSubmitting}
+							aria-readonly={isSubmitting}
+							autoComplete="password"
+						/>
 						{errors.password && <span>{errors.password.message}</span>}
+						<input
+							{...register('repeatPassowrd')}
+							type="password"
+							placeholder="Repeat your Password"
+							readOnly={isSubmitting}
+							aria-readonly={isSubmitting}
+							autoComplete="repeat-password"
+						/>
+						{errors.repeatPassowrd && <span>{errors.repeatPassowrd.message}</span>}
 						{errors.root && <span>{errors.root.message}</span>}
 
 						{success && <span className={styles.success}>{data?.message}</span>}

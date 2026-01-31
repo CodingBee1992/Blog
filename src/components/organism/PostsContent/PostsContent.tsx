@@ -3,7 +3,7 @@ import Article from '../../atoms/MasonryArticle/Article'
 import styles from './PostsContent.module.scss'
 import type { ArticleContentProps } from '../../../types/types'
 import Aos from 'aos'
-// import { useFetchLimitPostsQuery } from '../../../slices/api/postApi'
+
 
 interface PostsContentProps{
 	currentPage:number,
@@ -25,11 +25,12 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 
 	const [styledPostData, setStyledPostData] = useState<ArticleContentProps[]>([])
 
-	// const [currentPage, setCurrentPage] = useState<number>(1)
+	
 	const [pagginationButtons, setPagginationButtons] = useState<number[]>([])
 
-	// const { data, refetch } = useFetchLimitPostsQuery({ limit: 30, page: currentPage })
-	console.log(data)
+	
+	
+
 	const { posts, totalPages = 1 } = {...data }
 
 	useEffect(() => {
@@ -74,7 +75,7 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 			setCurrentPage(prev => prev + 1)
 		}
 
-		// refetch()
+		
 	}
 
 	const handleSetPage = (e: MouseEvent<HTMLButtonElement>) => {
@@ -117,7 +118,13 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 	}, [width, columns, percent])
 
 	const recalcGrid = useCallback(() => {
-		if (!posts || posts.length === 0) return
+		if (!posts ) return
+
+		if( posts.length === 0){
+			setStyledPostData([])
+			setWrapperHeight(0)
+			return
+		}
 
 		const columnHeights = new Array(columns).fill(0)
 		const updated = posts.map((post: ArticleContentProps, index: number) => {
@@ -237,6 +244,7 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 
 			<div className={styles.paginationContainer}>
 				<button
+				type='button'
 					data-direction="prev"
 					className={`${styles.controlBtn} ${styles.paginationBtn}`}
 					onClick={e => handlePageChange(e)}>
@@ -246,6 +254,7 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 					{pagginationButtons.map((btn, index) => {
 						return (
 							<button
+							type='button'
 								key={index}
 								onClick={e => handleSetPage(e)}
 								className={`${styles.paginationBtn} ${styles.paginationNumber} ${
@@ -257,6 +266,7 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 					})}
 				</div>
 				<button
+				type='button'
 					data-direction="next"
 					className={`${styles.controlBtn} ${styles.paginationBtn}`}
 					onClick={e => handlePageChange(e)}>
