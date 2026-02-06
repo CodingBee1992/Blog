@@ -12,7 +12,6 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@reduxjs/toolkit": "^2.9.0",
-    "@tailwindcss/vite": "^4.1.13",
     "@types/node": "^24.7.0",
     "aos": "^3.0.0-beta.6",
     "event-source-polyfill": "^1.0.31",
@@ -30,7 +29,6 @@
     "remark-gfm": "^4.0.1",
     "sass-embedded": "^1.93.2",
     "slugify": "^1.6.6",
-    "tailwindcss": "^4.1.13",
     "ws": "^8.19.0",
     "zod": "^4.1.11"
   },
