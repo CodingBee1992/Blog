@@ -3,10 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
 
-import {
-	useCreateCommentMutation,
-	useUpdateCommentMutation,
-} from '../../../slices/api/commentsApi'
+import { useCreateCommentMutation, useUpdateCommentMutation } from '../../../slices/api/commentsApi'
 
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
@@ -41,11 +38,11 @@ const TextArea = ({
 }: TextAreaProps) => {
 	const [createComment] = useCreateCommentMutation()
 	const [updateComment] = useUpdateCommentMutation()
-	
+
 	const [resMessage, setResMessage] = useState<string>('')
 	const [success, setSuccess] = useState<boolean | null>(null)
 	const commentsContent = document.querySelector(`.${styles.commentsContent}`)
-	
+
 	const {
 		register,
 		handleSubmit,
@@ -69,7 +66,6 @@ const TextArea = ({
 						setShowReply?.(false)
 					}, 1000)
 				}
-				
 
 				setIsUpdating?.(false)
 				reset()
@@ -84,14 +80,13 @@ const TextArea = ({
 					setShowReply?.(false)
 				}, 1000)
 			}
-			
 
 			setTimeout(() => {
 				if (comRef?.current) {
 					comRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
 				} else {
 					if (commentsContent instanceof HTMLElement) {
-						const top = commentsContent.offsetTop + commentsContent.offsetHeight - window.innerHeight 
+						const top = commentsContent.offsetTop + commentsContent.offsetHeight - window.innerHeight
 						window.scrollTo({ top, behavior: 'smooth' })
 					}
 				}
@@ -126,7 +121,7 @@ const TextArea = ({
 	}, [isSubmitSuccessful, reset])
 
 	return (
-		<form name="contactForm" id={styles.contactForm} onSubmit={handleSubmit(onSubmit)} aria-busy={isSubmitting}>
+		<form className={styles.commentWrapper} onSubmit={handleSubmit(onSubmit)} aria-busy={isSubmitting}>
 			<div>
 				<textarea
 					{...register('comment')}

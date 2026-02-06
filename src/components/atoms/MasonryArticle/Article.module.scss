@@ -100,7 +100,7 @@
 						transition: color 0.3s ease-in-out;
 
 						&:hover {
-							color: var(--black);
+							color: var(--blackColor);
 						}
 					}
 				}
@@ -110,7 +110,7 @@
 						color: var(--color-text-light);
 						transition: color 0.3s ease-in-out;
 						&:hover {
-							color: var(--black);
+							color: var(--blackColor);
 						}
 					}
 				}

@@ -3,33 +3,36 @@ import type { CommentsDataProps } from '../../types/types'
 const API_URL = import.meta.env.VITE_API_URL
 const COMMENTS_URL = import.meta.env.VITE_COMMENTS_URL
 
-
 export const commentsApi = createApi({
 	reducerPath: 'comment',
 	baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}`, credentials: 'include' }),
-	tagTypes: ['Create', 'Delete'],
+	tagTypes: ['Comments'],
 	endpoints: builder => ({
-		
 		fetchLiveComments: builder.query<CommentsDataProps[], string>({
-			queryFn: ()=>({data: []}),
+			query: postId => `${COMMENTS_URL}/${postId}`,
 
 			async onCacheEntryAdded(postId, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
 				await cacheDataLoaded
 
 				const es = new EventSource(`${API_URL}${COMMENTS_URL}/stream?postId=${postId}`)
 
-				es.onmessage = event => {
-					const comment = JSON.parse(event.data)
-
-					updateCachedData(() => {
-						return comment
+				es.addEventListener('comment', e => {
+					const { type, comment, id } = JSON.parse(e.data)
+					
+					updateCachedData(draft => {
+						if (type === 'insert') draft.push(comment)
+						if (type === 'update') {
+							const idx = draft.findIndex(c => c._id === comment._id)
+							if (idx !== -1) draft[idx] = comment
+						}
+						if (type === 'delete') {
+							return draft.filter(c => c._id !== id)
+						}
 					})
-				}
+				})
+
 				await cacheEntryRemoved
-				es.onerror = err => {
-					console.error('SSE error:', err)
-					es.close()
-				}
+				es.close()
 			},
 		}),
 		createComment: builder.mutation({
@@ -39,7 +42,7 @@ export const commentsApi = createApi({
 				headers: { 'Content-type': 'application/json' },
 				body: { comment, parentId },
 			}),
-			invalidatesTags: (_result, _error, { postId }) => [{ type: 'Create', id: postId }],
+			invalidatesTags: (_r, _e, { postId }) => [{ type: 'Comments', id: postId }],
 		}),
 		updateComment: builder.mutation({
 			query: ({ commentId, comment }) => ({
@@ -48,6 +51,7 @@ export const commentsApi = createApi({
 				headers: { 'Content-type': 'application/json' },
 				body: { comment },
 			}),
+			invalidatesTags: (_r, _e, { commentId }) => [{ type: 'Comments', id: commentId }],
 		}),
 		deleteComment: builder.mutation({
 			query: ({ commentId }) => ({
@@ -55,7 +59,7 @@ export const commentsApi = createApi({
 				method: 'DELETE',
 				headers: { 'Content-type': 'application/json' },
 			}),
-			invalidatesTags: (_result, _error, { commentId }) => [{ type: 'Delete', id: commentId }],
+			invalidatesTags: (_r, _e, { commentId }) => [{ type: 'Comments', id: commentId }],
 		}),
 
 		fetchAllComments: builder.query({
@@ -66,6 +70,7 @@ export const commentsApi = createApi({
 
 				return `${COMMENTS_URL}/?${queryString}`
 			},
+			providesTags: () => [{ type: 'Comments' }],
 		}),
 	}),
 })

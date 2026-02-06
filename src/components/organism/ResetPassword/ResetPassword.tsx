@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
+import { useEffect, useState } from 'react'
 
 import styles from './ResetPassword.module.scss'
 import { CheckSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
@@ -6,17 +6,26 @@ import FormBtn from '../../atoms/FormBtn/FormBtn'
 import { useConfirmResetPasswordMutation, useFetchUserProfileQuery } from '../../../slices/api/userApi'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
-import AccountInputBox from '../../modules/AccountInputBox/AccountInputBox'
 import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { Navigate, useLocation } from 'react-router'
 
 import useMenuContext from '../../../hooks/useMenuContext'
 import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
+import z from 'zod'
+import { FormProvider, useForm, useWatch, type SubmitHandler } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import RHFInput from '../../atoms/RHFInput/RHFInput'
 
+const schemaNewPassword = z.object({
+	newPassword: z.string().trim().min(1, { message: 'Min 8 characters' }),
+	confirmPassword: z.string().trim().min(1, { message: 'Min 8 characters' }),
+})
+
+type passwordTypes = z.infer<typeof schemaNewPassword>
 const ResetPassword = () => {
 	const { data } = useFetchUserProfileQuery({})
-	const [confirmResetPassowrd, { isLoading }] = useConfirmResetPasswordMutation()
+	const [confirmResetPassowrd] = useConfirmResetPasswordMutation()
 	const { signOut } = useMenuContext()
 	const { email = '' } = data ?? {}
 	const [successMessage, setSuccessMessage] = useState<string>('')
@@ -27,50 +36,42 @@ const ResetPassword = () => {
 	const query = new URLSearchParams(search)
 	const token = query.get('token')
 
-	const [dataPass, setDataPass] = useState({
-		newPassword: '',
-		confirmPassword: '',
+	const methods = useForm<passwordTypes>({
+		mode: 'onSubmit',
+		reValidateMode: 'onChange',
+		resolver: zodResolver(schemaNewPassword),
+		defaultValues: {
+			newPassword: '',
+			confirmPassword: '',
+		},
+	})
+
+	const {
+		control,
+		handleSubmit,
+		reset,
+		formState: { isSubmitting },
+	} = methods
+	const [newPassword, confirmPassword] = useWatch({
+		control,
+		name: ['newPassword', 'confirmPassword'],
 	})
 	const splitEmail = email?.split('@')
 	const emailPrefix = splitEmail[0]
-	const isEmpty = dataPass.newPassword.length < 1
-	const isEmailInPassword = emailPrefix && dataPass.newPassword.toLowerCase().includes(emailPrefix.toLowerCase())
-	const isValidLength = dataPass.newPassword.length >= 8
-	const isErrorLength = dataPass.newPassword.length > 0 && dataPass.newPassword.length < 8
+	const isEmpty = newPassword.length < 1
+	const isEmailInPassword = emailPrefix && newPassword.toLowerCase().includes(emailPrefix.toLowerCase())
+	const isValidLength = newPassword.length >= 8
+	const isErrorLength = newPassword.length > 0 && newPassword.length < 8
 
-	const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-		const target = e.currentTarget
-
-		const { value, name } = target
-
-		setDataPass(data => ({ ...data, [name]: value }))
-	}
-	useEffect(() => {
-		if (
-			dataPass.newPassword &&
-			dataPass.newPassword.length >= 8 &&
-			dataPass.newPassword === dataPass.confirmPassword &&
-			!isEmailInPassword
-		) {
-			setEnabledButton(true)
-		} else {
-			setEnabledButton(false)
-		}
-	}, [dataPass.confirmPassword, dataPass.newPassword, isEmailInPassword])
-
-	const handleSubmit = async (e: FormEvent) => {
-		e.preventDefault()
+	const onSubmit: SubmitHandler<passwordTypes> = async data => {
 		try {
-			const { newPassword } = dataPass
+			const { newPassword } = data
 
 			const res = await confirmResetPassowrd({ newPassword, token }).unwrap()
 
 			if (res) {
 				setSuccessMessage(res.message)
-				setDataPass({
-					newPassword: '',
-					confirmPassword: '',
-				})
+				reset()
 				signOut()
 			}
 			if (errorMessage) setErrorMessage('')
@@ -89,11 +90,16 @@ const ResetPassword = () => {
 			}
 		}
 	}
+	useEffect(() => {
+		if (newPassword && newPassword.length >= 8 && newPassword === confirmPassword && !isEmailInPassword) {
+			setEnabledButton(true)
+		} else {
+			setEnabledButton(false)
+		}
+	}, [confirmPassword, isEmailInPassword, newPassword])
 	if (!token) return <Navigate to="/" replace />
 	return (
-		<div className={styles.resetPasswordContainer}>
-			<h3 className={styles.title}>Reset password</h3>
-			
+		<FormProvider {...methods}>
 			<WrapperBox>
 				<p className={styles.boxTitle}>Password</p>
 				{(successMessage || errorMessage) && (
@@ -101,15 +107,15 @@ const ResetPassword = () => {
 						{successMessage ? successMessage : <>{errorMessage}</>}
 					</APIResponseMessage>
 				)}
-				<form onSubmit={e => handleSubmit(e)} className={styles.formContainer} aria-busy={isLoading}>
-					<AccountInputBox
-						id="newPassword"
-						
-						value={dataPass.newPassword}
-						label="New Password"
+				<form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper} aria-busy={isSubmitting}>
+					
+					<RHFInput
 						type="password"
-						onChangeInput={onChangeInput}
-						isSubmitting={isLoading}>
+						id="newPassword"
+						name="newPassword"
+						isSubmitting={isSubmitting}
+						label="New Password"
+						styles={styles}>
 						<ul className={styles.newPasswordInfo}>
 							<li className={`${isValidLength ? styles.highlightLi : isErrorLength ? styles.errorLi : ''}`}>
 								<CheckSVG className={styles.checkSVG} />
@@ -120,16 +126,16 @@ const ResetPassword = () => {
 								<span>Does not contain your email address</span>
 							</li>
 						</ul>
-					</AccountInputBox>
-
-					<AccountInputBox
-						id="confirmPassword"
-						
-						value={dataPass.confirmPassword}
+					</RHFInput>
+					<RHFInput
 						type="password"
-						label="Confirm Password"
-						onChangeInput={onChangeInput}
-						isSubmitting={isLoading}></AccountInputBox>
+						id="confirmPassword"
+						name="confirmPassword"
+						isSubmitting={isSubmitting}
+						label="Confirm New Password"
+						styles={styles}
+					/>
+					
 					<div className={styles.formBtns}>
 						<FormBtn
 							type="submit"
@@ -143,7 +149,7 @@ const ResetPassword = () => {
 					</div>
 				</form>
 			</WrapperBox>
-		</div>
+		</FormProvider>
 	)
 }
 

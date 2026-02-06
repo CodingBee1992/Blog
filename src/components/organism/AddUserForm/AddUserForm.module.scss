@@ -1,5 +1,7 @@
 .addUserFormContainer {
-	p {
+	display: flex;
+	flex-direction: column;
+	.addUserTitle {
 		margin-bottom: 2rem;
 		font-size: var(--textSize_26);
 		font-weight: 400;
@@ -7,87 +9,122 @@
 		font-family: var(--font-2);
 		color: var(--pagesColor);
 	}
-	.formContainer {
-		.formWrapper {
+
+	.formWrapper {
+		display: flex;
+		flex-direction: column;
+
+		.formInputBox {
 			display: flex;
 			flex-direction: column;
-
-			width: 500px;
-
-			.formInput {
-				display: flex;
-				flex-direction: column;
-				font-family: var(--font-2);
-				width: 100%;
-				margin-bottom: 2rem;
-				label {
-					margin-bottom: 1rem;
-					font-size: var(--textSize_18);
-					font-weight: 500;
-					color: var(--mainFormColor);
-				}
-				input {
-					margin-bottom: 1rem;
-					padding: 0.5rem;
-					font-size: var(--textSize_16);
-					background-color: var(--sideBarBgc);
-					border: none;
-					outline: none;
-				}
+			font-family: var(--font-2);
+			width: 100%;
+			margin-bottom: 2rem;
+			label {
+				margin-bottom: 1rem;
+				font-size: var(--textSize_18);
+				font-weight: 500;
+				color: var(--textColor);
 			}
-
-			.selectContainer {
-				display: flex;
-				flex-direction: column;
-				width: 100%;
-				margin-bottom: 2rem;
-				.selectTitle {
-					margin-bottom: 1rem;
-					color: var(--mainFormColor);
-					font-size: var(--textSize_18);
-					font-family: var(--font-2);
-					font-weight: 500;
-				}
-				.selectOption {
-					margin-bottom: 1rem;
-					padding: 0.5rem;
-					font-size: var(--textSize_16);
-					border: none;
+			.formInput {
+				position: relative;
+				margin-bottom: 1rem;
+				input {
 					width: 100%;
-					appearance: none;
-					-moz-appearance: none;
-					-webkit-appearance: none;
-					cursor: pointer;
-					background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-					background-repeat: no-repeat;
-					background-position: right 10px center;
-					background-size: 16px;
+					padding: var(--vspace-0_25);
+					color: #000000;
+					font-size: var(--textSize_16);
+					font-family: var(--font-2);
+					border: 1px solid var(--inputBorderColor);
+					border-radius: var(--borderRadius06);
+					outline: none;
+					transition: all 0.3s;
 
-					option {
-						background-color: #ffffff;
-						width: 100%;
+					&:hover {
+						box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+						border-color: #ffffff;
+					}
+
+					&:focus {
+						box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+						border-color: #ffffff;
 					}
 				}
 			}
 		}
-		.successMessage {
-			display: block;
+
+		.selectContainer {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
 			margin-bottom: 2rem;
-			font-size: var(--textSize_16);
-			color: #04dd00;
+			font-family: var(--font-2);
+			.selectTitle {
+				margin-bottom: 1rem;
+				color: var(--textColor);
+				font-size: var(--textSize_18);
+				font-family: var(--font-2);
+				font-weight: 500;
+			}
+			.selectOption {
+				appearance: none;
+				-moz-appearance: none;
+				-webkit-appearance: none;
+				width: 100%;
+				margin-bottom: 1rem;
+				padding: var(--vspace-0_25);
+				color: var(--textColor);
+				background-color: var(--mainFormBgc);
+				font-size: var(--textSize_16);
+				border: 1px solid var(--inputBorderColor);
+				border-radius: var(--borderRadius06);
+				background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+				background-repeat: no-repeat;
+				background-position: right 10px center;
+				background-size: 16px;
+				outline: none;
+				cursor: pointer;
+				transition: all 0.3s;
+				&:hover {
+					box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+					border-color: #ffffff;
+				}
+
+				&:focus {
+					box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+					border-color: #ffffff;
+				}
+				option {
+					background-color: #ffffff;
+					width: 100%;
+				}
+			}
 		}
 	}
+	.successMessage {
+		display: block;
+		margin-bottom: 2rem;
+		font-size: var(--textSize_16);
+		color: #04dd00;
+	}
+
 	.submitBtns {
 		display: flex;
 		gap: 2rem;
 		margin-top: 3rem;
 
 		.submitBtn {
-			background-color: var(--buttonBgcLight);
+			display: flex;
+			align-self: flex-start;
 			color: var(--buttonColorDark);
+			background-color: var(--buttonBgcLightGrey);
+		}
+		.save {
+			color: var(--buttonColorLight);
+			background-color: var(--buttonBgcGreen);
 
 			&:hover {
-				color: var(--saveColor);
+				background-color: var(--buttonBgcHoverGreen);
 			}
 		}
 		.animate1 {
@@ -99,12 +136,13 @@
 		.animate3 {
 			animation: animateDot 1.4s ease-in-out 0.6s infinite;
 		}
-		.resetBtn {
-			background-color: var(--buttonBgcLight);
+		.clearButton {
+			transition: all 0.3s;
 			color: var(--buttonColorDark);
-
+			background-color: var(--buttonBgcLightGrey);
 			&:hover {
-				color: var(--resetColor);
+				color: var(--buttonColorLight);
+				background-color: var(--clearButtonBgc);
 			}
 		}
 	}
@@ -117,27 +155,17 @@
 	margin-bottom: 1rem;
 }
 
-@media (width < 1100px) {
-	.addUserFormContainer {
-		.formContainer {
-			.formWrapper {
-				width: 65%;
-			}
-		}
-	}
-}
-
-@media (width < 900px) {
-	.addUserFormContainer {
-		.formContainer {
-			.formWrapper {
-				width: 100%;
-			}
-		}
-	}
-}
 @media (width < 800px) {
 	.addUserFormContainer {
 		margin-top: 5rem;
+		align-items: center;
+	}
+}
+@keyframes animateDot {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }

@@ -3,11 +3,14 @@ import { useResendVerificationMutation, useVerifyAccountQuery } from '../../../s
 import styles from './VerifyPageTemplate.module.scss'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useEffect, useState } from 'react'
+import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
+import FormBtn from '../../atoms/FormBtn/FormBtn'
+import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 const VerifyPageTemplate = () => {
 	const { search } = useLocation()
 
 	const [errorMessage, setErrorMessage] = useState<string | null>(null)
-	const [message, setMessage] = useState<string | null>(null)
+	const [successMessage, setSuccessMessage] = useState<string | null>(null)
 	const [disabled, setDisabled] = useState<boolean>(false)
 	const [countdown, setCountdown] = useState<number>(0)
 	const query = new URLSearchParams(search)
@@ -17,24 +20,38 @@ const VerifyPageTemplate = () => {
 	const { data, error, isLoading } = useVerifyAccountQuery(token)
 	const [resendVerificationToken] = useResendVerificationMutation()
 
-	useEffect(() => {
-		if (typeof error === 'object' && error !== null) {
-			const fetchError = error as FetchBaseQueryError
-			const message =
-				fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
-					? (fetchError.data.message as string)
-					: 'Something goes wrong'
 
-			setMessage(message)
-			setErrorMessage(message)
+	useEffect(() => {
+		// Jeśli mamy dane z API z sukcesem
+		if (data && typeof data === 'object') {
+			if ('message' in data) {
+				setSuccessMessage(data.message as string)
+			}
+			if ('error' in data) {
+				setErrorMessage(data.error as string)
+			}
 		}
-	}, [error])
+
+		// Jeśli mamy error z RTK Query / fetch
+		if (error && typeof error === 'object') {
+			const fetchError = error as FetchBaseQueryError
+
+			if (fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data) {
+				setErrorMessage(fetchError.data.message as string)
+			}
+
+			if (fetchError.data && typeof fetchError.data === 'object' && 'error' in fetchError.data) {
+				setErrorMessage(fetchError.data.error as string)
+			}
+		}
+	}, [data, error])
 
 	const handleResendVerificationToken = async () => {
 		const res = await resendVerificationToken(email)
-
+		console.log(res)
 		if (res.data?.message) {
-			setMessage(res.data.message)
+			setSuccessMessage(res.data.message)
+			setErrorMessage('')
 		}
 		setDisabled(true)
 		setCountdown(60)
@@ -49,22 +66,47 @@ const VerifyPageTemplate = () => {
 			})
 		}, 1000)
 	}
+
 	if (data?.isVerified) return <Navigate to={'/'} replace />
 	if (!token) return <Navigate to={'/'} replace />
 	if (isLoading) return null
 	return (
 		<div className={styles.verifyContainer}>
 			<div className={styles.verifyWrapper}>
-				<h2>Email Verification</h2>
 				<div className={styles.verifyBox}>
-					{errorMessage && <p>Upsss...</p>}
-					<p>{message}</p>
+					<h2 className={styles.verifyTitle}>Email Verification</h2>
 
-					<button disabled={disabled} onClick={() => handleResendVerificationToken()}>
+					{(errorMessage || successMessage) && (
+						<>
+							{errorMessage && <p className={styles.errorTitle}>Upsss...</p>}
+							<APIResponseMessage messageType={errorMessage ? 'error' : 'success'} className={styles.apiResponse}>
+								{errorMessage ? errorMessage : successMessage}
+							</APIResponseMessage>
+
+							{successMessage ? (
+								<div className={styles.homeNavigate}>
+									<span>Go to </span>
+									<AnchorLink href="/" className={styles.homePageLink}>
+										Home Page
+									</AnchorLink>
+								</div>
+							) : (
+								''
+							)}
+						</>
+					)}
+
+					<FormBtn
+						type="button"
+						isSubmitting={disabled}
+						handleResend={() => handleResendVerificationToken()}
+						className={`${styles.resendButton} ${disabled ? styles.disabledResend : ''}`}>
 						{disabled ? `Wait ${countdown}` : 'Sent Again'}
-					</button>
+					</FormBtn>
 
-					{!errorMessage && <span>Click on the link in the email to activate your account</span>}
+					{!errorMessage && (
+						<span className={styles.bottomInfo}>Click on the link in the email to activate your account</span>
+					)}
 				</div>
 			</div>
 		</div>

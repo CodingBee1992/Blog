@@ -3,7 +3,8 @@
 	align-items: center;
 	margin-bottom: 1.6rem;
 	padding-left: 1rem;
-	font-size: 13px;
+	font-size: var(--textSize_14);
+	color: var(--textColor);
 	line-height: 50px;
 	border-radius: var(--borderRadius06);
 	.warnSVG {

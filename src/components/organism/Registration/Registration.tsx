@@ -1,0 +1,172 @@
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
+import z from 'zod'
+import { useCreateAccountMutation } from '../../../slices/api/userApi'
+import { FormProvider, useForm, useWatch, type SubmitHandler } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import styles from './Registration.module.scss'
+import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
+import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
+import RHFInput from '../../atoms/RHFInput/RHFInput'
+import FormBtn from '../../atoms/FormBtn/FormBtn'
+import RHFCheckbox from '../../atoms/RHFCheckbox/RHFCheckbox'
+import CheckMark from '../../atoms/Checkmark/CheckMark'
+import GreetingWrapper from '../../modules/GreetingWrapper/GreetingWrapper'
+
+const registrationSchema = z
+	.object({
+		name: z.string().trim().min(4, { message: 'Name must have 8 characters' }),
+		email: z.email().trim(),
+		password: z.string().trim().min(8, { message: 'Password must have 8 characters' }),
+		repeatPassword: z.string().trim().min(8, { message: 'Repeat password must have 8 characters' }),
+		privacyPolicy: z.boolean().refine(v => v === true, { message: 'You must accept the Privacy Policy' }),
+	})
+	.refine(data => data.password === data.repeatPassword, {
+		message: 'Passwords do not match',
+		path: ['repeatPassword'],
+	})
+
+type registrationFields = z.infer<typeof registrationSchema>
+
+const Registration = () => {
+	const [createAccount, { isSuccess }] = useCreateAccountMutation()
+
+	const [successMessage, setSuccessMessage] = useState<string>('')
+
+	const navigate = useNavigate()
+	const methods = useForm<registrationFields>({
+		mode: 'onSubmit',
+		reValidateMode: 'onChange',
+		resolver: zodResolver(registrationSchema),
+		defaultValues: {
+			name: '',
+			email: '',
+			password: '',
+			repeatPassword: '',
+			privacyPolicy: false,
+		},
+	})
+	const {
+		control,
+		handleSubmit,
+		setError,
+
+		clearErrors,
+		formState: { isSubmitting, errors },
+	} = methods
+
+	const [name, email, password, repeatPassword, privacyPolicy] = useWatch({
+		control,
+		name: ['name', 'email', 'password', 'repeatPassword', 'privacyPolicy'],
+	})
+
+	const onSubmit: SubmitHandler<registrationFields> = async data => {
+		try {
+			if (!data) return
+
+			const res = await createAccount({
+				name: data.name,
+				email: data.email,
+				password: data.password,
+				privacyPolicy: data.privacyPolicy,
+			}).unwrap()
+			console.log(res)
+			if (res) setSuccessMessage(res.message)
+		} catch (error) {
+			if (typeof error === 'object' && error !== null) {
+				const fetchError = error as FetchBaseQueryError
+				const messageError =
+					fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
+						? (fetchError.data.message as string)
+						: 'An unexpected error has occurred'
+				setError('root', { message: messageError })
+			} else {
+				setError('root', { message: 'An unexpected error has occurred' })
+			}
+		}
+	}
+
+	useEffect(() => {
+		if (name || email || password || repeatPassword) {
+			clearErrors('root')
+		}
+	}, [clearErrors, email, name, password, repeatPassword])
+
+	useEffect(() => {
+		if (isSuccess) {
+			const timer = setTimeout(() => {
+				navigate('/')
+			}, 3000)
+
+			return () => clearTimeout(timer)
+		}
+	}, [isSuccess, navigate])
+	return (
+		<FormProvider {...methods}>
+			<div className={styles.registrationWrapper}>
+				<GreetingWrapper />
+				<div className={styles.formContainer}>
+					<h1>Create an account</h1>
+					<p>
+						Already have an account ? <AnchorLink href="/login">Sign In</AnchorLink>
+					</p>
+					<form aria-busy={isSubmitting} onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+						<RHFInput
+							type="text"
+							name="name"
+							id="name"
+							isSubmitting={isSubmitting}
+							styles={styles}
+							placeholder="Enter your name"
+						/>
+						<RHFInput
+							type="text"
+							name="email"
+							id="email"
+							isSubmitting={isSubmitting}
+							styles={styles}
+							placeholder="Enter your valid email address"
+						/>
+						<RHFInput
+							type="password"
+							name="password"
+							id="password"
+							isSubmitting={isSubmitting}
+							styles={styles}
+							placeholder="Enter your password"
+						/>
+						<RHFInput
+							type="password"
+							name="repeatPassword"
+							id="repeatPassword"
+							isSubmitting={isSubmitting}
+							styles={styles}
+							placeholder="Repeat your password"
+						/>
+						<div className={styles.checkbox}>
+							<RHFCheckbox name="privacyPolicy" id="privacyPolicy" isSubmitting={isSubmitting} styles={styles}>
+								<>
+									<CheckMark isChecked={privacyPolicy} className={styles.checkMark} />
+									<span>
+										I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy.</AnchorLink>
+									</span>
+								</>
+							</RHFCheckbox>
+						</div>
+						{(errors.root?.message || successMessage) && (
+							<APIResponseMessage messageType={successMessage ? 'success' : 'error'} className={styles.apiResponse}>
+								{errors.root?.message ? errors.root?.message : successMessage}
+							</APIResponseMessage>
+						)}
+						<FormBtn isSubmitting={isSubmitting} type="submit" className={styles.signInButton}>
+							{isSubmitting ? 'Creating...' : 'Create account'}
+						</FormBtn>
+					</form>
+				</div>
+			</div>
+		</FormProvider>
+	)
+}
+
+export default Registration

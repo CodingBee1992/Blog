@@ -24,16 +24,21 @@ export const postApi = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}`, credentials: 'include' }),
 	tagTypes: ['POSTS'],
 	endpoints: builder => ({
-		fetchLimitPosts: builder.query({
-			query: ({ limit, page }) => {
+		fetchHeroPostLimit: builder.query({
+			query: () => `${POSTS_URL}/hero-limit`,
+			providesTags: () => [{ type: 'POSTS' }],
+		}),
+		fetchPostPerPage: builder.query({
+			query: ({ page }) => {
 				const params = new URLSearchParams()
-				if (limit !== undefined) params.set('limit', limit)
+
 				if (page !== undefined) params.set('page', page)
 
 				return `${POSTS_URL}/limit/?${params.toString()}`
 			},
 			providesTags: () => [{ type: 'POSTS' }],
 		}),
+
 		fetchPostsByCategory: builder.query({
 			query: params => {
 				const queryString = new URLSearchParams(
@@ -123,7 +128,8 @@ export const postApi = createApi({
 })
 
 export const {
-	useFetchLimitPostsQuery,
+	useFetchPostPerPageQuery,
+	useFetchHeroPostLimitQuery,
 	useCreatePostMutation,
 	useFetchPostByIdQuery,
 	useFetchPostsByLimitQuery,

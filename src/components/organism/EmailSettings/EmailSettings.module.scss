@@ -1,142 +1,139 @@
-.emailSettingsContainer {
+.emailSettingsWrapper {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
 
-	.title,
-	.subtitle {
+	.boxTitle {
 		margin-bottom: 1rem;
-		font-weight: 400;
+		font-weight: 500;
 		line-height: 4rem;
 		font-family: var(--font-2);
-		color: var(--pagesColor);
-	}
-	.title {
-		font-size: var(--textSize_26);
-	}
-	.subtitle {
 		font-size: var(--textSize_20);
+		color: var(--textColor);
 	}
+
 	.smtpWrapper {
 		margin-bottom: 3rem;
-		.formContainer {
-			.formWrapper {
+
+		.formWrapper {
+			display: flex;
+			flex-direction: column;
+
+			.formInputBox {
 				display: flex;
 				flex-direction: column;
-
-				.formInput {
-					display: flex;
-					flex-direction: column;
-					font-family: var(--font-2);
-					width: 100%;
+				font-family: var(--font-2);
+				width: 100%;
+				margin-bottom: 1.5rem;
+				label {
 					margin-bottom: 1rem;
-					label {
-						margin-bottom: 1rem;
-						font-size: var(--textSize_18);
-						font-weight: 500;
-						color: var(--mainFormColor);
-					}
+					font-size: var(--textSize_18);
+					font-weight: 500;
+					color: var(--textColor);
+				}
+				.formInput {
+					position: relative;
+					margin-bottom: 1rem;
 					input {
 						width: 100%;
-						margin-bottom: 1rem;
-						padding: 0.75rem 1rem;
+						padding: var(--vspace-0_25);
+						color: var(--textColor);
 						font-size: var(--textSize_16);
-						border: 1px solid #889397;
+						font-family: var(--font-2);
+						border: 1px solid var(--inputBorderColor);
 						border-radius: var(--borderRadius06);
 						outline: none;
 						transition: all 0.3s;
 
 						&:hover {
-							box-shadow: 0px 0px 0px 3px #d3d3d3d3;
+							box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+							border-color: #ffffff;
 						}
 
 						&:focus {
-							box-shadow: 0px 0px 0px 3px var(--inputFocusColor);
+							box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
 							border-color: #ffffff;
 						}
 					}
 				}
-				.selectContainer {
-					display: flex;
-					flex-direction: column;
+			}
+			.selectContainer {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				margin-bottom: 1rem;
+				.selectTitle {
+					margin-bottom: 1rem;
+					color: var(--textColor);
+					font-size: var(--textSize_18);
+					font-family: var(--font-2);
+					font-weight: 500;
+				}
+				.selectOption {
+					appearance: none;
+					-moz-appearance: none;
+					-webkit-appearance: none;
 					width: 100%;
 					margin-bottom: 1rem;
-					.selectTitle {
-						margin-bottom: 1rem;
-						color: var(--mainFormColor);
-						font-size: var(--textSize_18);
-						font-family: var(--font-2);
-						font-weight: 500;
+					padding: var(--vspace-0_25);
+					font-size: var(--textSize_16);
+					border: 1px solid var(--inputBorderColor);
+					border-radius: var(--borderRadius06);
+					background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+					background-repeat: no-repeat;
+					background-position: right 10px center;
+					background-size: 16px;
+					outline: none;
+					transition: all 0.3s;
+					cursor: pointer;
+
+					&:hover {
+						box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+						border-color: #ffffff;
 					}
-					.selectOption {
+
+					&:focus {
+						box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+						border-color: #ffffff;
+					}
+					option {
+						background-color: #ffffff;
 						width: 100%;
-						margin-bottom: 1rem;
-						padding: 0.75rem 1rem;
-						font-size: var(--textSize_16);
-						border: 1px solid #889397;
-						border-radius: var(--borderRadius06);
-						appearance: none;
-						-moz-appearance: none;
-						-webkit-appearance: none;
-						cursor: pointer;
-						background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-						background-repeat: no-repeat;
-						background-position: right 10px center;
-						background-size: 16px;
-						outline: none;
-
-						&:focus {
-							box-shadow: 0px 0px 0px 2px var(--buttonColorBlue);
-						}
-						option {
-							background-color: #ffffff;
-							width: 100%;
-						}
 					}
 				}
 			}
-			.successMessage {
-				display: block;
-				margin-bottom: 2rem;
-				font-size: var(--textSize_16);
-				color: #04dd00;
-			}
-			.errorMessage {
-				display: block;
-				margin-top: 1rem;
-				font-size: var(--textSize_16);
-				color: #ff0000;
-			}
-			.submitBtns {
+		}
+
+		.submitBtns {
+			display: flex;
+			gap: 2rem;
+			margin-top: 3rem;
+
+			.submitBtn {
 				display: flex;
-				gap: 2rem;
-				margin-top: 3rem;
+				align-self: flex-start;
+				color: var(--buttonColorLight);
+				background-color: var(--buttonBgcGreen);
 
-				.submitBtn {
-					background-color: var(--buttonBgcLight);
-					color: var(--buttonColorDark);
-
-					&:hover {
-						color: var(--saveColor);
-					}
+				&:hover {
+					background-color: var(--buttonBgcHoverGreen);
 				}
-				.animate1 {
-					animation: animateDot 1.4s ease-in-out 0.2s infinite;
-				}
-				.animate2 {
-					animation: animateDot 1.4s ease-in-out 0.4s infinite;
-				}
-				.animate3 {
-					animation: animateDot 1.4s ease-in-out 0.6s infinite;
-				}
-				.resetBtn {
-					background-color: var(--buttonBgcLight);
-					color: var(--buttonColorDark);
-
-					&:hover {
-						color: var(--resetColor);
-					}
+			}
+			.animate1 {
+				animation: animateDot 1.4s ease-in-out 0.2s infinite;
+			}
+			.animate2 {
+				animation: animateDot 1.4s ease-in-out 0.4s infinite;
+			}
+			.animate3 {
+				animation: animateDot 1.4s ease-in-out 0.6s infinite;
+			}
+			.clearButton {
+				transition: all 0.3s;
+				&:hover {
+					color: var(--buttonColorLight);
+					background-color: var(--clearButtonBgc);
 				}
 			}
 		}
@@ -147,32 +144,34 @@
 		align-items: self-start;
 		.testEmail {
 			width: 100%;
-			margin-bottom: 1rem;
+			margin-bottom: 2rem;
 			padding: var(--vspace-0_25);
 			font-size: var(--textSize_16);
 			font-family: var(--font-2);
-			color: #000000;
+			color: var(--textColor);
 			border: 1px solid var(--inputBorderColor);
 			border-radius: var(--borderRadius06);
 			outline: none;
 			transition: all 0.3s;
 
 			&:hover {
-				box-shadow: 0px 0px 0px 3px var(--inputBoxShadowColor);
+				box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+				border-color: #ffffff;
 			}
 
 			&:focus {
-				box-shadow: 0px 0px 0px 3px var(--inputFocusColor);
+				box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
 				border-color: #ffffff;
 			}
 		}
 		.testBtn {
-			margin-top: 1rem;
-			background-color: var(--buttonBgcLight);
-			color: var(--buttonColorDark);
+			display: flex;
+			align-self: flex-start;
+			color: var(--buttonColorLight);
+			background-color: var(--buttonBgcGreen);
 
 			&:hover {
-				color: var(--saveColor);
+				background-color: var(--buttonBgcHoverGreen);
 			}
 		}
 		.testMessage {
@@ -184,35 +183,17 @@
 	color: var(--errorFormColor);
 	font-size: var(--textSize_14);
 }
-// @media (width < 1100px) {
-// 	.emailSettingsContainer {
-// 		.smtpWrapper {
-// 			.formContainer {
-// 				.formWrapper {
-// 					width: 65%;
-// 				}
-// 			}
-// 		}
-
-// 	}
-// }
-
-// @media (width < 900px) {
-// 	.emailSettingsContainer {
-// 		.smtpWrapper {
-// 			.formContainer {
-// 				.formWrapper {
-// 					width: 100%;
-// 				}
-// 			}
-// 		}
-
-// 	}
-// }
-
 @media (width < 800px) {
-	.emailSettingsContainer {
+	.emailSettingsWrapper {
 		align-items: center;
 		margin-top: 5rem;
+	}
+}
+@keyframes animateDot {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }

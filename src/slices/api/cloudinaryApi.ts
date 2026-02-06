@@ -7,7 +7,7 @@ export const cloudinaryApi = createApi({
 	reducerPath: 'cloudinary',
 	baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}` }),
 	endpoints: builder => ({
-		fetchCloudinary: builder.mutation({
+		createCloudinarySignature: builder.mutation({
 			query: ({ uploadFolder, publicId }) => ({
 				url: `${SIGNATURE_URL}/?uploadFolder=${uploadFolder}&publicId=${publicId}`,
 				method: 'POST',
@@ -23,4 +23,4 @@ export const cloudinaryApi = createApi({
 	}),
 })
 
-export const {useFetchCloudinaryMutation,useDestroyCloudinaryImageMutation}=cloudinaryApi 
+export const {useCreateCloudinarySignatureMutation,useDestroyCloudinaryImageMutation}=cloudinaryApi 

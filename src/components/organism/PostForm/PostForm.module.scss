@@ -2,10 +2,10 @@
 	display: flex;
 	width: 100%;
 	min-height: 100dvh;
-	color: var(--mainFormColor);
+	color: var(--textColor);
 	.postFormControllersWrapper {
 		padding: 2rem;
-		border-right: 1px solid var(--mainFormBgc);
+		border-right: 1px solid var(--inputBorderColor);
 		.postFormControllers {
 			position: sticky;
 			top: 1rem;
@@ -20,13 +20,14 @@
 				font-size: var(--textSize_12);
 				border-radius: var(--borderRadius04);
 				border: none;
+				// box-shadow: 0px 0px 0px 1px var(--inputBorderColor);
 				text-transform: uppercase;
 				transition: all 0.3s;
 				cursor: pointer;
 
 				&:hover {
-					color: var(--buttonColorBlue);
-					
+					color: var(--buttonColorGreen);
+					// box-shadow: 0px 0px 0px 1px var(--buttonColorGreen);
 				}
 			}
 		}
@@ -48,33 +49,70 @@
 				gap: 1rem;
 				width: 100%;
 
-				.fileContainer {
+				.fileWrapper {
 					display: flex;
 					flex-direction: column;
-					// width: 300px;
-
-					label {
+					.fileTitle {
 						font-family: var(--font-2);
 						font-size: 2rem;
 						font-weight: 500;
 						margin-bottom: 1rem;
 					}
-					.previewImage {
+
+					.uploadFile {
+						position: relative;
 						display: flex;
-						margin-bottom: 0.5rem;
-						padding: 2rem;
-						height: 20dvw;
 						width: 100%;
-						img {
+						height: 20dvw;
+						margin-bottom: 1.5rem;
+						border-radius: var(--borderRadius06);
+						overflow: hidden;
+						transition: all 0.3s;
+						background-color: var(--formBgcLight);
+						box-shadow: 0px 0px 0px 2px var(--inputBorderColor);
+
+						&:hover {
+							box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+						}
+						.previewImage {
 							width: 100%;
 							height: 100%;
 							object-fit: cover;
 						}
+						.uploadFileShadow {
+							position: absolute;
+							top: 0;
+							left: 0;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							width: 100%;
+							height: 100%;
+							cursor: pointer;
+							svg {
+								width: 80px;
+								height: 80px;
+								fill: var(--inputBorderColor);
+								transition: all 0.3s;
+							}
+							&:hover {
+								svg {
+									fill: var(--uploadHoverColor);
+								}
+							}
+						}
+					}
+					.uploadFilled {
+						box-shadow: none;
 					}
 					.imageBox {
-						max-width: 100%;
 						display: flex;
+						flex-direction: row;
 						gap: 2rem;
+						max-width: 100%;
+					}
+					.fileInput {
+						display: none;
 					}
 				}
 
@@ -137,11 +175,17 @@
 								span {
 									margin-right: 1rem;
 									margin-bottom: 1rem;
-									padding: 0.5em;
-									color: var(--mainFormColor);
-									background-color: var(--mainFormBgc);
+									padding: var(--vspace-0_25);
+									color: var(--textColor);
 									font-size: var(--textSize_16);
 									border-radius: var(--borderRadius04);
+									background-color: var(--formBgcLight);
+									// box-shadow: 0px 0px 0px 2px var(--inputBorderColor);
+									transition: all 0.3s;
+									cursor: pointer;
+									&:hover {
+										box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+									}
 								}
 							}
 						}
@@ -155,7 +199,7 @@
 								align-items: center;
 								gap: 1rem;
 								padding: 0.3rem 0;
-								border-right: 1px solid var(--mainFormBgc);
+								border-right: 1px solid var(--inputBorderColor);
 								font-size: 1.6rem;
 								cursor: pointer;
 								transition: all 0.3s;
@@ -195,26 +239,31 @@
 							margin-right: 1rem;
 						}
 						.selectOption {
-							cursor: pointer;
-							padding: 0.5rem;
-							font-size: var(--textSize_16);
-							border: none;
-							background-color: var(--mainFormBgc);
-							color: var(--mainFormColor);
-							width: 100%;
 							appearance: none;
 							-moz-appearance: none;
 							-webkit-appearance: none;
-							outline: none;
-							
+							width: 100%;
+							padding: var(--vspace-0_25);
+							color: var(--textColor);
+							background-color: var(--formBgcLight);
+							font-size: var(--textSize_16);
+							border: 1px solid var(--inputBorderColor);
+							border-radius: var(--borderRadius06);
 							background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
 							background-repeat: no-repeat;
 							background-position: right 10px center;
 							background-size: 16px;
-							border-radius: var(--borderRadius04);
-						
-							&:focus{
-								border: 2px solid var(--buttonColorBlue);
+							outline: none;
+							cursor: pointer;
+
+							&:hover {
+								box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+								border-color: #ffffff;
+							}
+
+							&:focus {
+								box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+								border-color: #ffffff;
 							}
 							option {
 								width: 80%;
@@ -228,16 +277,21 @@
 
 	.submitBtns {
 		display: flex;
-		flex-wrap: wrap;
 		gap: 2rem;
 		margin-top: 3rem;
 
 		.submitBtn {
+			display: flex;
+			align-self: flex-start;
 			color: var(--buttonColorDark);
-			background-color: var(--buttonBgcLight);
+			background-color: var(--buttonBgcLightGrey);
+		}
+		.save {
+			color: var(--buttonColorLight);
+			background-color: var(--buttonBgcGreen);
 
 			&:hover {
-				color: var(--saveColor);
+				background-color: var(--buttonBgcHoverGreen);
 			}
 		}
 		.animate1 {
@@ -249,18 +303,23 @@
 		.animate3 {
 			animation: animateDot 1.4s ease-in-out 0.6s infinite;
 		}
-		.resetBtn {
+
+		.clearButton {
+			transition: all 0.3s;
 			color: var(--buttonColorDark);
-			background-color: var(--buttonBgcLight);
+			background-color: var(--buttonBgcLightGrey);
 			&:hover {
-				color: var(--resetColor);
+				color: var(--buttonColorLight);
+				background-color: var(--clearButtonBgc);
 			}
 		}
 		.clearAllBtn {
 			color: var(--buttonColorDark);
-			background-color: var(--buttonBgcLight);
+			background-color: var(--buttonBgcLightGrey);
+
 			&:hover {
-				color: var(--clearColor);
+				color: var(--buttonColorLight);
+				background-color: var(--clearAllButtonBgc);
 			}
 		}
 		.cancelUpdate {
@@ -269,20 +328,21 @@
 			padding: 1rem 2.5rem;
 			font-size: var(--textSize_18);
 			border: none;
-			color: var(--buttonColor);
-			background-color: var(--buttonBgcLight);
+			color: var(--buttonColorDark);
+			background-color: var(--buttonBgcLightGrey);
+
 			border-radius: var(--borderRadius04);
 			transition: all 0.3s;
 			cursor: pointer;
 
 			&:hover {
-				color: var(--cancelColor);
-				
+				color: var(--buttonColorLight);
+				background-color: var(--cancelButtonBgc);
 			}
 		}
+
 		.isSubmitting {
 			background-color: #d3d3d3d3;
-
 			cursor: not-allowed;
 			&:hover {
 				background-color: #d3d3d3d3;
@@ -292,7 +352,7 @@
 	}
 }
 .textAreaContainer,
-.formInput {
+.formInputBox {
 	display: flex;
 	flex-direction: column;
 	font-family: var(--font-2);
@@ -305,16 +365,30 @@
 		font-weight: 500;
 	}
 }
-.formInput {
-	input {
+.formInputBox {
+	.formInput {
 		margin-bottom: 1rem;
-		padding: 1rem;
+		input {
+			width: 100%;
+			padding: var(--vspace-0_25);
+			color: var(--textColor);
+			font-size: var(--textSize_16);
+			font-family: var(--font-2);
+			border: 1px solid var(--inputBorderColor);
+			border-radius: var(--borderRadius06);
+			outline: none;
+			transition: all 0.3s;
 
-		font-size: var(--textSize_14);
-		background-color: var(--mainFormBgc);
-		border: none;
-		border-radius: var(--borderRadius04);
-		outline: none;
+			&:hover {
+				box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+				border-color: #ffffff;
+			}
+
+			&:focus {
+				box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+				border-color: #ffffff;
+			}
+		}
 	}
 }
 .textAreaContainer {
@@ -323,13 +397,25 @@
 		field-sizing: content;
 		min-height: 150px;
 		margin-bottom: 1rem;
-		padding: 1rem;
-		font-size: var(--textSize_14);
-
-		background-color: var(--mainFormBgc);
-		border: none;
-		border-radius: var(--borderRadius04);
+		padding: var(--vspace-0_25);
+		color: var(--textColor);
+		line-height: var(--textLineHeight);
+		font-size: var(--textSize_16);
+		font-family: var(--font-2);
+		border: 1px solid var(--inputBorderColor);
+		border-radius: var(--borderRadius06);
 		outline: none;
+		transition: all 0.3s;
+
+		&:hover {
+			box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+			border-color: #ffffff;
+		}
+
+		&:focus {
+			box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+			border-color: #ffffff;
+		}
 	}
 }
 
@@ -353,11 +439,10 @@
 		justify-content: center;
 		padding: var(--vspace-0_5);
 		margin-top: 10rem;
-
 		width: 100%;
 		max-width: 600px;
 		height: 600px;
-		background-color: var(--mainFormBgc);
+		background-color: var(--formBgcLight);
 		border-radius: 12px;
 	}
 }
@@ -365,16 +450,14 @@
 @media (width <= 1100px) {
 	.postFormContainer {
 		.formContainer {
-			padding: 2rem;
 			.formWrapper {
-				display: flex;
 				flex-direction: column;
 				.formFlex {
 					padding-right: 0;
 
-					.fileContainer {
-						.previewImage {
-							height: 30dvw;
+					.fileWrapper {
+						.uploadFile {
+							height: 25dvw;
 						}
 					}
 				}
@@ -387,7 +470,7 @@
 								flex-direction: row;
 								flex-wrap: wrap;
 
-								label {
+								.checkbox {
 									padding-right: 1rem;
 
 									&:last-child {
@@ -417,7 +500,7 @@
 
 		.postFormControllersWrapper {
 			.postFormControllers {
-				top: 6rem;
+				top: 7rem;
 			}
 		}
 	}
@@ -428,11 +511,10 @@
 
 		.postFormControllersWrapper {
 			padding: 2rem 1rem 1rem;
-			border-right: 1px solid var(--mainFormBgc);
+			border-right: 1px solid var(--inputBorderColor);
 			.postFormControllers {
 				.postFormBtns {
 					font-size: var(--textSize_10);
-
 					width: 40px;
 					height: 40px;
 				}
@@ -445,9 +527,9 @@
 
 			.formWrapper {
 				.formFlex {
-					.fileContainer {
-						.previewImage {
-							height: 40dvw;
+					.fileWrapper {
+						.uploadFile {
+							height: 30dvw;
 						}
 					}
 				}
@@ -469,7 +551,15 @@
 		.formContainer {
 			.formWrapper {
 				.formFlex {
-					.fileContainer {
+					.fileWrapper {
+						.uploadFile {
+							.uploadFileShadow {
+								svg {
+									height: 50px;
+									width: 50px;
+								}
+							}
+						}
 						.imageBox {
 							flex-direction: column;
 							gap: 0;

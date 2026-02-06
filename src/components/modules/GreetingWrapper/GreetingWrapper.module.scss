@@ -1,0 +1,40 @@
+.greetingWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 50%;
+
+	.logo {
+		width: 200px;
+		height: 80px;
+		z-index: 101;
+
+		img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+			transition: all 0.3s ease-in-out;
+			&:hover {
+				scale: 1.05;
+			}
+		}
+	}
+	.socialWrapper {
+		display: flex;
+		flex-direction: row;
+		gap: 2rem;
+	}
+}
+
+@media (width < 800px) {
+	.greetingWrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+
+		
+	}
+}

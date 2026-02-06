@@ -5,6 +5,7 @@
 	margin: 0 auto;
 	gap: 2rem;
 	padding: 0 2.4rem;
+	line-height: 20px;
 
 	.link {
 		font-size: var(--menu-TextSize);
@@ -46,10 +47,13 @@
 			position: absolute;
 			display: none;
 			flex-direction: column;
-			top: calc(240% + 2px);
+			
+			top:calc( 50% + (var(--headerHeight) / 2));
+			
 			left: 0;
 			padding: 1.8rem 0;
-			background: var(--subMenu-BgColor);
+
+			background: var(--subMenuBgc);
 			opacity: 0;
 			visibility: hidden;
 			z-index: 1000;
@@ -90,6 +94,6 @@
 @media (max-width: 1700px) {
 	.menu {
 		max-width: 1400px;
-		margin-left: calc(var(--logo-width) + 8rem);
+		margin-left: calc(var(--logo-width) * 2);
 	}
 }

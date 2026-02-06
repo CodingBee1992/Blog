@@ -3,7 +3,7 @@ ENGLISH VERSION BELOW
 ```bash
 # Fullstack Blog App – React + Node
 
-Nowoczesny projekt blogowy z własnym backendem, systemem użytkowników, komentarzy, postów oraz panelem administratora (50% ukończony).  
+Nowoczesny projekt blogowy z własnym backendem, systemem użytkowników, komentarzy, postów oraz panelem administratora (50% ukończony).
 Design inspirowany stylem Pinterest (masonry grid) – w pełni responsywny i estetyczny.
 
 
@@ -40,9 +40,9 @@ Design inspirowany stylem Pinterest (masonry grid) – w pełni responsywny i es
 
 ### 📊 Panel Administratora (50% ukończony)
 
-- Zarządzanie użytkownikami 
+- Zarządzanie użytkownikami
 - Podgląd i moderacja postów
-- Podgląd i moderacja komentarzy  
+- Podgląd i moderacja komentarzy
   _(Można łatwo rozbudować o dodatkowe moduły)_
 
 ### 🎨 UI / UX
@@ -181,14 +181,35 @@ Notatki prywatne użytkownika
 
 📄 Licencja / Prawa autorskie
 
-## Kod autora:  
-- Wszystkie elementy kodu frontend i backend zostały napisane wyłącznie przeze mnie.  
-- **Użycie komercyjne kodu jest zabronione** bez mojej wyraźnej zgody.  
+## Kod autora:
+- Wszystkie elementy kodu frontend i backend zostały napisane wyłącznie przeze mnie.
+- **Użycie komercyjne kodu jest zabronione** bez mojej wyraźnej zgody.
 - Kod można używać, modyfikować i wdrażać **do celów osobistych lub edukacyjnych**, ale **nie można go sprzedawać ani rozpowszechniać komercyjnie**.
 
-## Szablon graficzny (Styleshout):  
-- Projekt korzysta z szablonu Styleshout na licencji ich strony.  
-- Szablon można używać i modyfikować w projektach, również komercyjnych, **pod warunkiem podania odpowiedniego źródła**: 
+## Szablon graficzny (Styleshout):
+- Projekt korzysta z szablonu Styleshout na licencji ich strony.
+- Szablon można używać i modyfikować w projektach, również komercyjnych, **pod warunkiem podania odpowiedniego źródła**:
+
+## Licencje użytych ikon
+
+- **Calcite UI Icons**
+  Author: Esri
+  License: MIT
+  Repo: [https://github.com/Esri/calcite-ui-icons](https://github.com/Esri/calcite-ui-icons)
+*MIT pozwala na użycie, modyfikację i dystrybucję, pod warunkiem dołączenia pełnego tekstu licencji.*
+
+- **Nuiverse Icons**
+  Author: Nuiverse Design
+  License: BSD
+  Repo: [https://gitlab.com/nuinalp/open-source/nuiverse/icons](https://gitlab.com/nuinalp/open-source/nuiverse/icons)
+  *BSD pozwala na użycie, modyfikację i dystrybucję pod warunkiem dołączenia oryginalnej licencji.*
+
+- **Unicons**
+  Author: Iconscout
+  License: Apache License 2.0
+  Repo: https://github.com/Iconscout/unicons
+  *Apache 2.0 pozwala na użycie, modyfikację i dystrybucję (również komercyjną) pod warunkiem zachowania informacji o licencji i autorze.*
+
 
 👤 Autor
 
@@ -261,7 +282,7 @@ Features a Pinterest-style responsive layout (masonry / waterfall grid) for a cl
 - React Hook Form
 - ZOD
 - JS-Cookie
-- CSS / SCSS / Styled Components 
+- CSS / SCSS / Styled Components
 - Responsive design
 
 ### Backend
@@ -269,7 +290,7 @@ Features a Pinterest-style responsive layout (masonry / waterfall grid) for a cl
 - **Node.js + Express**
 - REST API architecture
 - Controllers, routes, middleware
-- JWT  
+- JWT
 - Error handling & basic security
 
 ### Database
@@ -379,6 +400,28 @@ Likes, reactions, or ratings
 ## Graphic Template (Styleshout):
 - This project uses a template from Styleshout under their license.
 - You may use and modify this template in your projects, including commercial ones, **as long as you give proper credit**:
+
+## Licenses for icons used
+
+- **Calcite UI Icons**
+  Author: Esri
+  License: MIT
+  Repo: https://github.com/Esri/calcite-ui-icons
+  *MIT allows use, modification, and distribution, provided that the full license text is included.*
+
+- **Nuiverse Icons**
+  Author: Nuiverse Design
+  License: BSD
+  Repo: https://gitlab.com/nuinalp/open-source/nuiverse/icons
+  *BSD allows use, modification, and distribution, provided that the original license is included.*
+
+- **Unicons**
+  Author: Iconscout
+  License: Apache License 2.0
+  Repo: https://github.com/Iconscout/unicons
+  *Apache 2.0 allows use, modification, and distribution (including commercial use), provided that the license and copyright notice are preserved.*
+
+
 
 👤 Author
 Created by: CodingBee
@@ -519,3 +562,4 @@ Yes — the admin panel is partially implemented and follows the same code struc
 
 Yes — the React + Node.js + database stack is scalable and suitable for high-traffic projects.
 
+```

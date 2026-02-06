@@ -88,7 +88,6 @@
 	.articleMiddleSideContainer {
 		display: flex;
 		flex-direction: column;
-
 		height: 100%;
 		padding: 0 4.8rem;
 		border-right: 1px solid var(--color-border);
@@ -99,7 +98,7 @@
 			flex-direction: column;
 			gap: 2rem;
 			margin-bottom: 6rem;
-			font-size: var(--text-md);
+			font-size: var(--textSize_20);
 			font-weight: 300;
 			font-family: var(--fontFamily);
 			line-height: calc(1.125 * var(--space));
@@ -114,10 +113,11 @@
 				flex-direction: column;
 				gap: 2rem;
 				.articleContentTitle {
-					font-size: var(--text-md);
+					font-size: var(--textSize_20);
 				}
 				.articleContentText {
 					line-height: calc(1.125 * var(--space));
+					font-size: var(--textSize_18);
 					font-weight: normal;
 				}
 				.articleImage {
@@ -160,7 +160,7 @@
 					display: flex;
 					align-items: center;
 					margin-right: 1.5rem;
-					
+
 					.articleSVG {
 						display: flex;
 						align-items: center;
@@ -169,8 +169,6 @@
 						width: 25px;
 						height: 25px;
 						border-radius: 50%;
-						
-
 
 						.articleLikeSVG {
 							width: 20px;
@@ -328,6 +326,36 @@
 @media (max-width: 1000px) {
 	.articleTextContainer {
 		padding: 0;
+	}
+}
+
+@media (max-width: 600px) {
+	.articleTextContainer {
+		.articleMiddleSideContainer {
+			.articleMainText {
+				
+				font-size: var(--textSize_18);
+				
+			}
+			.articleContentContainer {
+				
+				
+
+				.articleContent {
+					
+					.articleContentTitle {
+						font-size: var(--textSize_18);
+					}
+					.articleContentText {
+						line-height: calc(1.125 * var(--space));
+						font-size: var(--textSize_16);
+						
+					}
+					
+				}
+				
+			}
+		}
 	}
 }
 @media (max-width: 550px) {

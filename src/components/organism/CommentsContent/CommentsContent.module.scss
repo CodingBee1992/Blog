@@ -8,10 +8,10 @@
 		padding-bottom: var(--vspace-0_5);
 		max-width: 980px;
 
-		h3 {
+		.commentsTitle {
 			margin-top: 0;
 			text-align: center;
-			font-size: var(--text-xl);
+			font-size: var(--textSize_30);
 			font-weight: 600;
 			font-family: var(--font-2);
 			font-style: normal;
@@ -31,7 +31,7 @@
 		background: transparent;
 		max-width: 900px;
 
-		#contactForm {
+		.commentWrapper {
 			padding-top: var(--vspace-1_75);
 			padding-bottom: var(--vspace-1_75);
 
@@ -51,28 +51,34 @@
 				border: none;
 				border-bottom: 1px solid #828484;
 				border-top: 1px solid #828484;
-				// box-shadow: 0 0 45px #dddddd;
+
 				background: transparent;
 				&:focus {
 					outline: none;
 				}
 			}
 			.commentError {
-				font-size: var(--text-xs);
-				color: red;
+				font-size: var(--textSize_14);
+				color: var(--errorFormColor);
 			}
 			.resMessage {
-				font-size: var(--text-xs);
+				font-size: var(--textSize_14);
+
 				color: rgb(0, 255, 140);
 			}
 			.addComment {
+				display: flex;
+				flex-direction: column;
+				align-self: center;
+				margin-left: auto;
+				margin-right: auto;
 				margin-top: var(--vspace-1);
 				padding: 0 3.2rem;
-				width: 100%;
+				width: 90%;
 				height: var(--btn-height);
 				font-size: 18px;
 				line-height: calc(var(--btn-height) - 0.4rem);
-				background-color: #000000;
+				background-color: var(--bgcBlack);
 				color: #ffffff;
 				text-transform: uppercase;
 				letter-spacing: 0.4em;
@@ -82,7 +88,7 @@
 				transition: all 0.3s;
 
 				&:hover {
-					background-color: var(--btn-color-hover);
+					background-color: var(--bgcLightBlack);
 				}
 			}
 		}
@@ -97,11 +103,39 @@
 			max-width: 200px;
 			font-size: 18px;
 			color: #ffffff;
-			background-color: #000000;
+			background-color: var(--bgcBlack);
 			transition: all 0.3s;
 
 			&:hover {
-				background-color: var(--btn-color-hover);
+				background-color: var(--bgcLightBlack);
+			}
+		}
+	}
+}
+
+@media (width < 700px) {
+	.commentsContainer {
+		.commentFormContainer {
+			.commentsTitle {
+				font-size: var(--textSize_24);
+			}
+			.commentWrapper {
+				.commentTextArea {
+					min-height: 150px;
+				}
+
+				.addComment {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					margin-left: auto;
+					margin-right: auto;
+					margin-top: var(--vspace-1);
+					width: 90%;
+					height: 40px;
+					font-size: var(--textSize_14);
+					line-height: 40px;
+				}
 			}
 		}
 	}

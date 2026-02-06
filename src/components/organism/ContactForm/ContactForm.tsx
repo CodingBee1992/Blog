@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FormProvider, useForm, type SubmitHandler } from 'react-hook-form'
+import { FormProvider, useForm, useWatch, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
 import styles from './ContactForm.module.scss'
 import RHFInput from '../../atoms/RHFInput/RHFInput'
@@ -11,6 +11,9 @@ import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessag
 import { useEffect, useState } from 'react'
 import RHFCheckbox from '../../atoms/RHFCheckbox/RHFCheckbox'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
+import CheckMark from '../../atoms/Checkmark/CheckMark'
+import useMenuContext from '../../../hooks/useMenuContext'
+import SocialLinks from '../../modules/SocialLinks/SocialLinks'
 
 const contactSchema = z.object({
 	firstName: z.string().trim().min(1, { message: 'First name is required' }),
@@ -26,7 +29,8 @@ type contactTypes = z.infer<typeof contactSchema>
 const ContactForm = () => {
 	const [successMessage, setSuccessMessage] = useState<string>('')
 	const [sendEmail] = useContactEmailMutation()
-
+	const { general } = useMenuContext()
+	const faviconSrc = typeof general?.favicon?.src === 'string' ? general.favicon.src : undefined
 	const methods = useForm<contactTypes>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
@@ -42,11 +46,14 @@ const ContactForm = () => {
 	})
 
 	const {
+		control,
 		handleSubmit,
 		reset,
 		setError,
 		formState: { isSubmitting, errors },
 	} = methods
+
+	const policy = useWatch({ control, name: 'policy' })
 
 	const onSubmit: SubmitHandler<contactTypes> = async data => {
 		try {
@@ -92,13 +99,16 @@ const ContactForm = () => {
 		<FormProvider {...methods}>
 			<div className={styles.contactContainer}>
 				<div className={styles.contactInfo}>
-					<img src="" alt="" />
-					<p>
+					<img src={faviconSrc} className={styles.favIcon} alt="FavIcon" />
+					<p className={styles.companyInfo}>
 						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam sunt quos sed! Eaque porro libero debitis
 						architecto, cum quos suscipit!
 					</p>
-					<h3>Our Office</h3>
-					<span>00-000 Unknow St. Unknown, Unknow</span>
+					<h3 className={styles.subTitle}>Our Office</h3>
+					<span className={styles.companyAddress}>00-000 Unknow St. Unknown, Unknow</span>
+					<div className={styles.socialWrapper}>
+						<SocialLinks />
+					</div>
 				</div>
 				<form onSubmit={handleSubmit(onSubmit)} aria-busy={isSubmitting} className={styles.contactForm}>
 					<div className={styles.senderName}>
@@ -149,9 +159,12 @@ const ContactForm = () => {
 					/>
 					<div className={styles.checkbox}>
 						<RHFCheckbox name="policy" id="policy" styles={styles} isSubmitting={isSubmitting}>
-							<span>
-								I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy.</AnchorLink>
-							</span>
+							<>
+								<CheckMark isChecked={policy} className={styles.checkMark} />
+								<span>
+									I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy.</AnchorLink>
+								</span>
+							</>
 						</RHFCheckbox>
 					</div>
 

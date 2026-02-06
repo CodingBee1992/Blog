@@ -18,21 +18,20 @@
 			padding: var(--vspace-0_25);
 			color: #000000;
 			font-size: var(--textSize_14);
-			// font-family: var(--font-2);
 			border: 1px solid var(--inputBorderColor);
 			border-radius: var(--borderRadius06);
 			outline: none;
 			transition: all 0.3s;
 
 			&:hover {
-				box-shadow: 0px 0px 0px 3px var(--inputBoxShadowColor);
+				box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+				border-color: #ffffff;
 			}
 
 			&:focus {
-				box-shadow: 0px 0px 0px 3px var(--inputFocusColor);
+				box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
 				border-color: #ffffff;
 			}
 		}
-		
 	}
 }

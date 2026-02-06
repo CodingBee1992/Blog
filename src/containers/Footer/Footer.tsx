@@ -3,13 +3,17 @@ import { useForm, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AnchorLink from '../../components/atoms/AnchorLink/AnchorLink'
+import useSocialLinks from '../../hooks/useSocialLinks'
+import SocialIcon from '../../components/atoms/SocialIcon/SocialIcon'
+import useFooterSiteLinks from '../../hooks/useFooterSiteLinks'
 const newsLetterSchema = z.object({
 	email: z.email(),
 })
 type newsLetterTypes = z.infer<typeof newsLetterSchema>
 const Footer = () => {
 	const year = new Date().getFullYear()
-
+	const { socialLinks } = useSocialLinks()
+	const { siteLinks } = useFooterSiteLinks()
 	const {
 		register,
 		handleSubmit,
@@ -45,40 +49,26 @@ const Footer = () => {
 					</div>
 					<div className={`${styles.footerSiteLinks} ${styles.column}`}>
 						<h5>Site Links</h5>
-						<ul>
-							<li>
-								<AnchorLink href="/about">About us</AnchorLink>
-							</li>
-
-							<li>
-								<AnchorLink href="/faq">FAQ</AnchorLink>
-							</li>
-							<li>
-								<AnchorLink href="/terms-and-conditions">Terms</AnchorLink>
-							</li>
-							<li>
-								<AnchorLink href="/privacy-policy">Privacy Police</AnchorLink>
-							</li>
+						<ul className={styles.footerList}>
+							{siteLinks.map(link => {
+								return (
+									<li key={link.name}>
+										<AnchorLink href={link.url}>{link.name}</AnchorLink>
+									</li>
+								)
+							})}
 						</ul>
 					</div>
 					<div className={`${styles.footerSocialLinks} ${styles.column}`}>
 						<h5>Follow Us</h5>
-						<ul>
-							<li>
-								<a href="#">Twitter</a>
-							</li>
-							<li>
-								<a href="#">Facebook</a>
-							</li>
-							<li>
-								<a href="#">Dribbble</a>
-							</li>
-							<li>
-								<a href="#">Pinterest</a>
-							</li>
-							<li>
-								<a href="#">Instagram</a>
-							</li>
+						<ul className={styles.footerList}>
+							{socialLinks.map(social => {
+								return (
+									<SocialIcon key={social.name} social={social} styles={styles}>
+										{social.name}
+									</SocialIcon>
+								)
+							})}
 						</ul>
 					</div>
 					<div className={`${styles.footerSubscribe} ${styles.column}`}>

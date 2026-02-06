@@ -1,7 +1,7 @@
 /* Kontener */
-.markdown {
+.termsAndConditionsContainer {
 	max-width: 800px; /* ogranicza szerokość dla czytelności */
-	margin: 2rem auto; /* centrowanie i odstęp od góry */
+	margin: 15rem auto; /* centrowanie i odstęp od góry */
 	padding: 1.5rem; /* wewnętrzne marginesy */
 	line-height: 1.7; /* poprawia czytelność akapitów */
 	font-family: var(--font-2);
@@ -9,7 +9,7 @@
 	color: #333;
 	background-color: #fdfdfd; /* delikatne tło dla lepszego kontrastu */
 	border-radius: 8px;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	box-shadow: 0px 0px 6px 6px var(--bgcLightGrey);
 
 	/* Nagłówki */
 	h1 {
@@ -77,10 +77,30 @@
 	em {
 		font-style: italic;
 	}
+
+	.contactUs{
+		margin-top: 2rem;
+		text-align: center;
+
+		.contactUsInfo{
+			font-size: var(--textSize-14);
+		}
+
+		.contactUsButton{
+			text-decoration: none;
+			font-size: var(--textSize-16);
+			color: #1a73e8;
+			font-weight: 600;
+			
+			&:hover{
+				color: #00449e;
+			}
+		}
+	}
 }
 /* Responsywność */
 @media (max-width: 600px) {
-	.markdown {
+	.termsAndConditionsContainer {
 		padding: 1rem;
 		font-size: 15px;
 	}

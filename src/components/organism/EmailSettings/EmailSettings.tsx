@@ -1,49 +1,24 @@
-import { FormProvider, useForm, useWatch, type SubmitHandler } from 'react-hook-form'
+import { FormProvider, useForm, type SubmitHandler } from 'react-hook-form'
 import styles from './EmailSettings.module.scss'
 import RHFInput from '../../atoms/RHFInput/RHFInput'
-import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import RHFSelect from '../../atoms/RHFSelect/RHFSelect'
 import { useEffect, useState } from 'react'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
-import { useCreateSMTPMutation, useTestSMTPMutation } from '../../../slices/api/emailApi'
+import { useCreateSMTPMutation, useFetchSMTPQuery, useTestSMTPMutation } from '../../../slices/api/emailApi'
 import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
 
 import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
+import { smtpDefaults, smtpSchema, type smtpTypes } from '../../../types/emailSchema'
 
-const smtpSchema = z.object({
-	provider: z.string().trim().min(1, { message: 'SMTP provider is required' }),
-
-	host: z.string().trim().min(1, { message: 'Host is required' }),
-
-	port: z
-		.number({
-			message: 'Port is required',
-		})
-		.int('Port must be an integer')
-		.min(1, 'Port must be greater than 0')
-		.max(65535, 'Port must be less than 65536'),
-
-	secure: z.boolean({
-		message: 'Secure connection type is required',
-	}),
-
-	user: z.email('User must be a valid email'),
-
-	password: z.string().trim().min(1, { message: 'Password is required' }),
-
-	fromName: z.string().trim().min(1, { message: 'From name is required' }),
-	fromEmail: z.string().trim().min(1, { message: 'From email is required' }),
-	replyTo: z.string().trim().min(1, { message: 'Reply to is required' }),
-})
-type smtpTypes = z.infer<typeof smtpSchema>
 const EmailSettings = () => {
 	const options = ['true', 'false']
 	const [email, setEmail] = useState<string>('')
 	const [successMessage, setSuccessMessage] = useState<string>('')
 	const [testMessage, setTestMessage] = useState<string>('')
 	const [errorTestMessage, setErrorTestMessage] = useState<string>('')
+	const { data: smtp } = useFetchSMTPQuery({})
 
 	const [createSMTP] = useCreateSMTPMutation()
 	const [testSMTP, { isLoading }] = useTestSMTPMutation()
@@ -51,35 +26,28 @@ const EmailSettings = () => {
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
 		resolver: zodResolver(smtpSchema),
-		defaultValues: {
-			provider: '',
-			host: '',
-			port: 0,
-			secure: false,
-			user: '',
-			password: '',
-			fromName: '',
-			fromEmail: '',
-			replyTo: '',
-		},
+		defaultValues: smtpDefaults,
 	})
 
 	const {
-		control,
 		handleSubmit,
 		reset,
 		setError,
-		formState: { isSubmitting, errors },
+		clearErrors,
+		formState: { isSubmitting, errors, isDirty },
 	} = methods
-	const watch = useWatch({ control, name: 'provider' })
 
 	const onSubmit: SubmitHandler<smtpTypes> = async data => {
 		try {
 			if (!data) return
+			if (!isDirty) return
 			const res = await createSMTP(data).unwrap()
 
-			setSuccessMessage(res.message)
-			reset()
+			if (res) {
+				setSuccessMessage(res.message)
+				reset(data)
+			}
+			if (errors) clearErrors()
 		} catch (error) {
 			if (typeof error === 'object' && error !== null) {
 				const fetchError = error as FetchBaseQueryError
@@ -96,23 +64,24 @@ const EmailSettings = () => {
 	}
 
 	useEffect(() => {
-		if (watch) {
-			setSuccessMessage('')
-		}
+		if (smtp) reset(smtp)
+	}, [reset, smtp])
+
+	useEffect(() => {
 		if (successMessage) {
 			setTimeout(() => {
 				setSuccessMessage('')
 			}, 5000)
 		}
-	}, [successMessage, watch])
-	useEffect(() => {
-		setError('root', { message: '' })
-	}, [watch, setError])
+	}, [successMessage])
+
 	const handleResetFields = () => {
-		reset()
+		reset(smtpDefaults)
 	}
+
 	const handleTestSMTP = async () => {
 		try {
+			if (!email) return setErrorTestMessage('Enter valid email address')
 			const res = await testSMTP(email).unwrap()
 			if (res) setTestMessage(res.message)
 		} catch (error) {
@@ -146,75 +115,72 @@ const EmailSettings = () => {
 		}
 	}, [errorTestMessage, testMessage])
 	return (
-		<div className={styles.emailSettingsContainer}>
-			<h3 className={styles.title}>Email Settings</h3>
+		<div className={styles.emailSettingsWrapper}>
 			<WrapperBox>
 				<div className={styles.smtpWrapper}>
-					<h3 className={styles.subtitle}>SMTP</h3>
+					<h3 className={styles.boxTitle}>SMTP</h3>
 
 					<FormProvider {...methods}>
-						<form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer} aria-busy={isSubmitting}>
-							<div className={styles.formWrapper}>
-								<RHFInput
-									styles={styles}
-									type="text"
-									name="provider"
-									label="Provider"
-									id="provider"
-									placeholder="ex. Gmail"
-									isSubmitting={isSubmitting}
-								/>
-								<RHFInput styles={styles} type="text" name="host" label="Host" id="post" isSubmitting={isSubmitting} />
-								<RHFInput
-									styles={styles}
-									type="number"
-									name="port"
-									label="Port"
-									id="port"
-									isSubmitting={isSubmitting}
-								/>
-								<RHFSelect name="secure" label="Secure" options={options} styles={styles} isSubmitting={isSubmitting} />
-								<RHFInput styles={styles} type="text" name="user" label="User" id="user" isSubmitting={isSubmitting} />
-								<RHFInput
-									styles={styles}
-									type="password"
-									name="password"
-									label="Password"
-									id="password"
-									isSubmitting={isSubmitting}
-								/>
+						<form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper} aria-busy={isSubmitting}>
+							<RHFInput
+								styles={styles}
+								type="text"
+								name="provider"
+								label="Provider"
+								id="provider"
+								placeholder="ex. Gmail"
+								isSubmitting={isSubmitting}
+							/>
+							<RHFInput styles={styles} type="text" name="host" label="Host" id="post" isSubmitting={isSubmitting} />
+							<RHFInput styles={styles} type="number" name="port" label="Port" id="port" isSubmitting={isSubmitting} />
+							<RHFSelect name="secure" label="Secure" options={options} styles={styles} isSubmitting={isSubmitting} />
+							<RHFInput styles={styles} type="text" name="user" label="User" id="user" isSubmitting={isSubmitting} />
+							<RHFInput
+								styles={styles}
+								type="password"
+								name="password"
+								label="Password"
+								id="password"
+								isSubmitting={isSubmitting}
+							/>
 
-								<h3 className={styles.subtitle}>Email sending settings </h3>
-								<RHFInput
-									styles={styles}
-									type="text"
-									name="fromName"
-									label="Company Name"
-									id="fromName"
-									isSubmitting={isSubmitting}
-								/>
-								<RHFInput
-									styles={styles}
-									type="text"
-									name="fromEmail"
-									label="Company Email"
-									id="fromEmail"
-									isSubmitting={isSubmitting}
-								/>
-								<RHFInput
-									styles={styles}
-									type="text"
-									name="replyTo"
-									label="Reply to"
-									id="replyTo"
-									isSubmitting={isSubmitting}
-								/>
-							</div>
-							{successMessage && <span className={styles.successMessage}>{successMessage}</span>}
-							{errors.root && <span className={styles.errorMessage}>{errors.root.message}</span>}
+							<h3 className={styles.boxTitle}>Email sending settings </h3>
+							<RHFInput
+								styles={styles}
+								type="text"
+								name="fromName"
+								label="Company Name"
+								id="fromName"
+								placeholder="company name"
+								isSubmitting={isSubmitting}
+							/>
+							<RHFInput
+								styles={styles}
+								type="text"
+								name="fromEmail"
+								label="Company Email"
+								id="fromEmail"
+								placeholder="company@example.com"
+								isSubmitting={isSubmitting}
+							/>
+							<RHFInput
+								styles={styles}
+								type="text"
+								name="replyTo"
+								label="Reply to"
+								id="replyTo"
+								placeholder="support@example.com"
+								isSubmitting={isSubmitting}
+							/>
+
+							{(errors.root?.message || successMessage) && (
+								<APIResponseMessage messageType={successMessage ? 'success' : 'error'}>
+									{errors.root?.message ? errors.root.message : successMessage}
+								</APIResponseMessage>
+							)}
 
 							<div className={styles.submitBtns}>
-								<FormBtn type="submit" isSubmitting={isSubmitting} className={styles.submitBtn}>
+								<FormBtn type="submit" isSubmitting={isSubmitting} className={isDirty ? styles.submitBtn : ''}>
 									{isSubmitting ? (
 										<>
 											Saving
@@ -230,9 +196,9 @@ const EmailSettings = () => {
 								<FormBtn
 									type="button"
 									isSubmitting={isSubmitting}
-									className={styles.resetBtn}
+									className={styles.clearButton}
 									handleResetFields={handleResetFields}>
-									Reset
+									Clear
 								</FormBtn>
 							</div>
 						</form>
@@ -241,7 +207,7 @@ const EmailSettings = () => {
 			</WrapperBox>
 			<WrapperBox>
 				<div className={styles.testWrapper}>
-					<label htmlFor="email" className={styles.subtitle}>
+					<label htmlFor="email" className={styles.boxTitle}>
 						Email Test
 					</label>
 
@@ -265,7 +231,7 @@ const EmailSettings = () => {
 					<FormBtn
 						type="button"
 						isSubmitting={isLoading}
-						className={styles.testBtn}
+						className={`${email ? styles.testBtn : ''}`}
 						handleResetFields={() => handleTestSMTP()}>
 						Test
 					</FormBtn>

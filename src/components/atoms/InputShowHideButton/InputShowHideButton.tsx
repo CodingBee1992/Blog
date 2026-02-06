@@ -7,14 +7,16 @@ interface InputShowHideButtonProps {
 	className?: string
 	onToggle: ()=>void
     disabled?:boolean
+	isSubmitting?:boolean
 }
 
-const InputShowHideButton = ({ visible=false,disabled=false, onToggle, className }: InputShowHideButtonProps) => {
+const InputShowHideButton = ({ visible=false,disabled=false,isSubmitting, onToggle, className }: InputShowHideButtonProps) => {
 	return (
 		<button
 			className={`${styles.switchVisibility} ${visible ? '' : styles.displayVisibility} ${className ? className : ''}`}
 			type="button"
             disabled={disabled}
+			aria-busy={isSubmitting}
 			aria-label={visible ? 'Hide password' : 'Show password'}
 			onClick={() => onToggle()}>
 			<ViewsSVG />

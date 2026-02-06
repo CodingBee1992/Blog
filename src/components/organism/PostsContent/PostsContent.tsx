@@ -1,38 +1,54 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type Dispatch, type MouseEvent, type SetStateAction } from 'react'
+import {
+	useCallback,
+	useEffect,
+	useLayoutEffect,
+	useRef,
+	useState,
+	type Dispatch,
+	type MouseEvent,
+	type SetStateAction,
+} from 'react'
 import Article from '../../atoms/MasonryArticle/Article'
 import styles from './PostsContent.module.scss'
 import type { ArticleContentProps } from '../../../types/types'
 import Aos from 'aos'
+import { useLocation } from 'react-router'
 
-
-interface PostsContentProps{
-	currentPage:number,
-	setCurrentPage:Dispatch<SetStateAction<number>>
-	data:{
-		posts:ArticleContentProps[],
-		totalPages:number
+interface PostsContentProps {
+	currentPage: number
+	setCurrentPage: Dispatch<SetStateAction<number>>
+	data: {
+		posts: ArticleContentProps[]
+		totalPages: number
 	}
 }
 
-
-const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
+const PostsContent = ({ data, currentPage, setCurrentPage }: PostsContentProps) => {
 	const [width, setWidth] = useState<number>(0)
 	const [columns, setColumns] = useState<number>(0)
 	const [percent, setPercent] = useState<number>(0)
+	const sectionRef = useRef<HTMLElement>(null)
 	const articleRef = useRef<(HTMLElement | null)[]>([])
 	const [wrapperHeight, setWrapperHeight] = useState<number | null>(null)
 	const heightsCache = useRef<number[]>([])
-
 	const [styledPostData, setStyledPostData] = useState<ArticleContentProps[]>([])
-
-	
 	const [pagginationButtons, setPagginationButtons] = useState<number[]>([])
+	const { pathname } = useLocation()
+	const { posts, totalPages = 1 } = { ...data }
 
+	const scrollSection = () => {
+		if (pathname.startsWith('/categories')) {
+			window.scrollTo({ top: 0, behavior: 'smooth' })
+		} else {
+			if (!sectionRef.current) return
+			window.scrollTo({
+				behavior: 'smooth',
+				top:( sectionRef.current?.offsetTop - 80) || 0,
+			})
+			
+		}
+	}
 	
-	
-
-	const { posts, totalPages = 1 } = {...data }
-
 	useEffect(() => {
 		const buttons: (number | string)[] = []
 		const maxVisiblePages = 5
@@ -74,8 +90,7 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 		if (direction === 'next' && currentPage < totalPages) {
 			setCurrentPage(prev => prev + 1)
 		}
-
-		
+		scrollSection()
 	}
 
 	const handleSetPage = (e: MouseEvent<HTMLButtonElement>) => {
@@ -87,6 +102,8 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 		const page = +value!
 		if (currentPage === page) return
 		setCurrentPage(page)
+
+		scrollSection()
 	}
 
 	useEffect(() => {
@@ -118,9 +135,9 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 	}, [width, columns, percent])
 
 	const recalcGrid = useCallback(() => {
-		if (!posts ) return
+		if (!posts) return
 
-		if( posts.length === 0){
+		if (posts.length === 0) {
 			setStyledPostData([])
 			setWrapperHeight(0)
 			return
@@ -184,7 +201,7 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 		return () => {
 			observer.disconnect()
 		}
-	}, [columns, percent, width, data,posts, recalcGrid])
+	}, [columns, percent, width, data, posts, recalcGrid])
 
 	const handleImageLoad = (index: number) => {
 		const el = articleRef.current[index]
@@ -204,7 +221,7 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 		Aos.refresh()
 	}, [columns, percent, width, styledPostData])
 	return (
-		<section className={styles.postsContainer}>
+		<section ref={sectionRef} className={styles.postsContainer}>
 			<div className={styles.articleContainer}>
 				<div className={styles.articleWrapper} style={{ height: `${wrapperHeight}px` }}>
 					<div className={styles.lines}>
@@ -216,7 +233,7 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 					{styledPostData.map(
 						(
 							{ _id, title, mainImage, categories, author, introduction, left, top, seo }: ArticleContentProps,
-							index: number
+							index: number,
 						) => {
 							return (
 								<Article
@@ -226,7 +243,6 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 									}}
 									_id={_id}
 									key={_id}
-									
 									mainImage={mainImage}
 									title={title}
 									categories={categories}
@@ -237,14 +253,14 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 									seo={seo}
 								/>
 							)
-						}
+						},
 					)}
 				</div>
 			</div>
 
 			<div className={styles.paginationContainer}>
 				<button
-				type='button'
+					type="button"
 					data-direction="prev"
 					className={`${styles.controlBtn} ${styles.paginationBtn}`}
 					onClick={e => handlePageChange(e)}>
@@ -254,7 +270,7 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 					{pagginationButtons.map((btn, index) => {
 						return (
 							<button
-							type='button'
+								type="button"
 								key={index}
 								onClick={e => handleSetPage(e)}
 								className={`${styles.paginationBtn} ${styles.paginationNumber} ${
@@ -266,7 +282,7 @@ const PostsContent = ({data,currentPage,setCurrentPage}:PostsContentProps) => {
 					})}
 				</div>
 				<button
-				type='button'
+					type="button"
 					data-direction="next"
 					className={`${styles.controlBtn} ${styles.paginationBtn}`}
 					onClick={e => handlePageChange(e)}>

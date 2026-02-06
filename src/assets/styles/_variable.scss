@@ -32,15 +32,25 @@ $mobileSmall: 380px;
 	--font-2: 'DM Serif Text', serif;
 	--font-3: 'DM Serif Display', serif;
 	--loaderBgc: #000000;
-	--logo-width: 96px;
-	--logo-Size: 2.5rem;
-	--logo-color: #ff9900;
-	--logo-hover: #ff7700;
-	--blueColor: #338afb;
-	--white: #ffffff;
-	--black: #000000;
 
-	--Bgc-main: #eff0f0;
+	--headerHeight: 8.8rem;
+	--panelRight: 7rem;
+	--controllSettingsTop:160%;
+	--controllContainerTop:260%;
+	--logo-width: 96px;
+
+	--blueColor: #338afb;
+	--greenColor: #00a700;
+	--white: #ffffff;
+	--blackColor: #000000;
+	--lightBlackColor: #282828;
+
+	--pagesBgc: #00590010;
+
+	--bgcLightGrey: #eff0f0;
+	--bgcWhite: #ffffff;
+	--bgcBlack: #000000;
+	--bgcLightBlack: #282828;
 
 	--Bgc-desktopPanel: #eff0f0;
 	--Bgc-navTransparent: transparent;
@@ -54,7 +64,7 @@ $mobileSmall: 380px;
 
 	--borderBottom: #ffffff0d;
 
-	--subMenu-BgColor: #222222;
+	--subMenuBgc: #282828;
 	--subMenu-Color: #d3d3d3d3;
 	--subMenu-ColorHover: #ffffff;
 
@@ -69,12 +79,13 @@ $mobileSmall: 380px;
 	--menu-TextSize: 1.5rem;
 	--subMenu-TextSize: 1.4rem;
 
+	--text-h1: 8.8rem;
+	--textSpan: 1.6rem;
 	--text-Size: 1.8rem;
 	--text-SizeInput: calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
 	// text size
 	--text-md: calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
 	--text-meta: calc(calc((1.8rem / 1.2) / 1.2) * 1.2);
-	--text-h1: 8.8rem;
 
 	--text-display: calc(
 		calc(
@@ -86,7 +97,7 @@ $mobileSmall: 380px;
 		calc(calc(calc(calc(calc(calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2) * 1.2) * 1.2) * 1.2) * 1.2) * 1.2)
 	);
 
-	--arrows-BgcHover: #000000;
+	--arrows-BgcHover: #282828;
 	--arrows-ColorHover: #ffffff;
 	--padding-arrows: 2rem 2.5rem;
 
@@ -126,18 +137,13 @@ $mobileSmall: 380px;
 	--color-border: #eeeeee;
 	--btn-height: calc(2 * 3.2rem);
 	--btn-heightXs: calc(1.5 * 3.2rem);
-	--btn-color: #282828;
-	--btn-color-hover: #000000;
-	--signFormTextColor: #282828;
 
 	// Brick Padding
 	--brick-padding: 3rem;
 	--brick-paddingLeftRight: 3rem;
 	// Social links
 	--margin-bottomSocialLinks: calc(1 * 3.2rem);
-	--socialPosition-right: 4rem;
-
-	--header-height: 8.8rem;
+	--socialLinksRight: 4rem;
 
 	// Admin Panel -----------------------
 
@@ -146,46 +152,48 @@ $mobileSmall: 380px;
 	--sideBarMainColor: #092013;
 	--sideBarColorIcon: #092013;
 	//  links hover
-	--sideBarBgcHoverLink: #faf0e6;
+	--sideBarBgcHoverLink: #00590010;
 
 	// PANEL & SETTINGS PAGES background color
-
-	--pagesBgc: #faf0e6;
-
 	--pagesColor: #092013;
+	// form text
+	--textLineHeight: 3rem;
 
 	// form colors
+	--formBgcLight: #ffffff;
+
+	--textColor: #092013;
+
 	--buttonColorLight: #ffffff;
-	--buttonColorDark: #092013;
+	// --buttonColorDark: #092013;
+	--buttonColorDark: #1f2937;
 	--buttonColorBlue: #016bf8;
+	--buttonColorGreen: #00a700;
+
 	--buttonBgcLight: #ffffff;
-	--saveColor: #2ad42a;
-	--clearColor: #9f0000;
-	--resetColor: #ff7700;
+	--buttonBgcLightGrey: #d3d3d3d3;
+	--buttonBgcGreen: #00a700;
+	--buttonBgcHoverGreen: #2ad42a;
+	--clearButtonBgc: #564c4c;
+	--cancelButtonBgc: #564c4c;
+	--clearAllButtonBgc: #564c4c;
 	--cancelColor: #564c4c;
 	--errorFormColor: #8f0000;
 
-	--mainFormColor: #092013;
-	--mainFormBgc: #ffffff;
-	--categoryOptionHover: #016bf8;
-
-	--buttonColor: #092013;
-	--buttonColorHover: #ffffff;
-
-	// categories hover bgc
-	--categoriesHoverColor: #092013;
+	--categoryOptionHover: #00a700;
 
 	// Inputs
 	--inputMainColor: #000000;
 	--inputFocusColor: #00a700;
 	--inputHoverColor: #d3d3d3d3;
-	--inputBorderColor: #889397;
+	--inputBorderColor: #d3d3d3d3;
 	--inputBoxShadowColor: #d3d3d3d3;
+	--uploadHoverColor: #00a700;
 
 	//  tabels colors
 	--bgcTabel: #ffffff;
 	// --bgcTBody: #e9f5db;
-	--bgcTBody: #faf0e6;
+	--bgcTBody: #00590010;
 	--colorTabel: #000000;
 	--bgcTabelHover: #83bca9;
 	--bgcPublishHover: #85ffad;
@@ -196,7 +204,7 @@ $mobileSmall: 380px;
 	--statSecondColor: #adadba;
 	--statThirdColor: #03ff18;
 	--areaChartColor: #24dc00;
-	--areaChartHoverColor: #008e00;
+	--areaChartHoverColor: #00a700;
 
 	//  fontSize
 
@@ -217,6 +225,17 @@ $mobileSmall: 380px;
 	--textSize_28: 2.8rem;
 	--textSize_30: 3rem;
 	--textSize_32: 3.2rem;
+	--textSize_34: 3.4rem;
+	--textSize_36: 3.6rem;
+	--textSize_38: 3.8rem;
+	--textSize_40: 4rem;
+	--textSize_42: 4.2rem;
+	--textSize_44: 4.4rem;
+	--textSize_46: 4.6rem;
+	--textSize_48: 4.8rem;
+	--textSize_50: 5rem;
+	--textSize_60: 6rem;
+	--textSize_70: 7rem;
 
 	// borders
 	--borderRadius02: 0.2rem;
@@ -235,6 +254,7 @@ $mobileSmall: 380px;
 @media (max-width: 1600px) {
 	:root {
 		--text-h1: 8rem;
+		--textSpan: 1.5rem;
 		--slideContent-width: 50dvw;
 	}
 }
@@ -251,6 +271,7 @@ $mobileSmall: 380px;
 @media (max-width: 1200px) {
 	:root {
 		--text-h1: 7rem;
+		--textSpan: 1.4rem;
 		--slideContent-width: 55dvw;
 		--gutter: 2rem;
 		--brick-padding: 3.2rem;
@@ -266,6 +287,7 @@ $mobileSmall: 380px;
 @media (max-width: 1000px) {
 	:root {
 		--text-h1: 6.8rem;
+		--textSpan: 1.3rem;
 		--slideContent-width: 70dvw;
 		--margin-bottomSocialLinks: calc(0.5 * 3.2rem);
 	}
@@ -279,6 +301,7 @@ $mobileSmall: 380px;
 @media (max-width: 800px) {
 	:root {
 		--text-h1: 6rem;
+		--textSpan: 1.2rem;
 		--padding-arrows: 1.75rem 2.25rem;
 	}
 }
@@ -292,12 +315,12 @@ $mobileSmall: 380px;
 		);
 	}
 }
-@media (max-width: 600px) {
+@media (width < 600px) {
 	:root {
 		--text-meta: calc(calc((1.7rem / 1.2) / 1.2) * 1.2);
 		--text-h1: 5rem;
 		--padding-arrows: 1.5rem 2rem;
-		--socialPosition-right: 1.8rem;
+		--socialLinksRight: 1.8rem;
 		--gutter: 1rem;
 	}
 }
@@ -309,6 +332,17 @@ $mobileSmall: 380px;
 		--slideContent-width: 75dvw;
 		--brick-padding: 4rem;
 		--brick-paddingLeftRight: 2rem;
+	}
+}
+
+@media (height < 500px) {
+	:root {
+		--padding-arrows: 1.5rem 2rem;
+		--socialLinksRight: 2rem;
+		--headerHeight: 6rem;
+		--panelRight: 4rem;
+		--controllSettingsTop:120%;
+		--controllContainerTop:200%;
 	}
 }
 

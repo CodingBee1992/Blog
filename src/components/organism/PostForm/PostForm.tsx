@@ -14,7 +14,7 @@ import { defaultCategories, statusOptions } from '../../../utils/data'
 import CloseSvg from '../../../assets/icons/nav/CloseSvg'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
 import { useFetchAllCategoriesQuery } from '../../../slices/api/categoriesApi'
-import { useDestroyCloudinaryImageMutation, useFetchCloudinaryMutation } from '../../../slices/api/cloudinaryApi'
+import { useDestroyCloudinaryImageMutation, useCreateCloudinarySignatureMutation } from '../../../slices/api/cloudinaryApi'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { adminLinks } from '../../../utils/sideBarLinks'
@@ -31,7 +31,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 	const [imagesToDestroy, setImagesToDestroy] = useState<string[]>([])
 	const [oldDefaultValues, setOldDefaultValues] = useState({})
 	const [createPost] = useCreatePostMutation()
-	const [createSignature] = useFetchCloudinaryMutation()
+	const [createSignature] = useCreateCloudinarySignatureMutation()
 	const [updatePost] = useUpdatePostMutation()
 	const [destroyCloudinaryImage] = useDestroyCloudinaryImageMutation()
 	const { data } = useFetchAllCategoriesQuery()
@@ -50,7 +50,8 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 		control,
 		reset,
 		getValues,
-		formState: { isSubmitting, isSubmitSuccessful },
+		
+		formState: { isSubmitting, isSubmitSuccessful,isDirty },
 	} = methods
 	const { fields: articleContent, insert, remove } = useFieldArray({ control, name: 'articleContent' })
 
@@ -88,6 +89,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 	}
 
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
+		console.log(data)
 		try {
 			if (!editValues) {
 				const dataSignature = await createSignature({ uploadFolder }).unwrap()
@@ -205,14 +207,17 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 								className={styles.postFormBtns}
 								key={index}
 								onClick={() => {
+									const newIndex = articleContent.length - 2
 									if (btn === 'image') {
-										insert(articleContent.length - 2, {
+										insert(newIndex, {
 											type: btn,
 											value: { src: null, alt: '', caption: '', public_id: '' },
 										})
 									} else {
-										insert(articleContent.length - 2, { type: btn, value: '' })
+										insert(newIndex, { type: btn, value: '' })
 									}
+
+									
 								}}>
 								+ {btn}
 							</button>
@@ -240,14 +245,32 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 							/>
 
 							<RHFAddFile<postSchemaTypes>
-								name="mainImage"
+								name="mainImage.src"
 								label="Main Image"
 								styles={styles}
 								fileRef={fileRef}
 								fileIndex={-1}
 								id="mainImage"
-								isSubmitting={isSubmitting}
-							/>
+								isSubmitting={isSubmitting}>
+								<div className={styles.imageBox}>
+									<RHFInput<postSchemaTypes>
+										name={`mainImage.alt`}
+										type="text"
+										label="Alt"
+										styles={styles}
+										id={`mainImageAlt`}
+										isSubmitting={isSubmitting}
+									/>
+									<RHFInput<postSchemaTypes>
+										name={`mainImage.caption`}
+										type="text"
+										label="Caption"
+										styles={styles}
+										id={`mainImageCaption`}
+										isSubmitting={isSubmitting}
+									/>
+								</div>
+							</RHFAddFile>
 
 							{articleContent &&
 								articleContent?.length > 0 &&
@@ -295,14 +318,32 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 										{field.type === 'image' && (
 											<>
 												<RHFAddFile<postSchemaTypes>
-													name={`articleContent.${index}.value`}
+													name={`articleContent.${index}.value.src`}
 													label="Content Image"
 													styles={styles}
 													fileRef={fileRef}
 													fileIndex={index}
 													id={`file${index}`}
-													isSubmitting={isSubmitting}
-												/>
+													isSubmitting={isSubmitting}>
+													<div className={styles.imageBox}>
+														<RHFInput<postSchemaTypes>
+															name={`articleContent.${index}.value.alt`}
+															type="text"
+															label="Alt"
+															styles={styles}
+															id={`alt${index}`}
+															isSubmitting={isSubmitting}
+														/>
+														<RHFInput<postSchemaTypes>
+															name={`articleContent.${index}.value.caption`}
+															type="text"
+															label="Caption"
+															styles={styles}
+															id={`caption${index}`}
+															isSubmitting={isSubmitting}
+														/>
+													</div>
+												</RHFAddFile>
 												{index >= 3 && (
 													<div
 														data-index={index}
@@ -343,6 +384,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 									label="Categories"
 									max={3}
 									styles={styles}
+									isSubmitting={isSubmitting}
 								/>
 
 								<div className={styles.seoContainer}>
@@ -390,7 +432,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 						<FormBtn
 							type="submit"
 							isSubmitting={isSubmitting}
-							className={`${styles.submitBtn} ${isSubmitting ? styles.isSubmitting : ''}`}>
+							className={`${styles.submitBtn} ${isSubmitting ? styles.isSubmitting : ''} ${isDirty ? styles.save : ''}`}>
 							{isSubmitting ? (
 								<>
 									Saving
@@ -406,9 +448,9 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 						<FormBtn
 							type="button"
 							isSubmitting={isSubmitting}
-							className={`${styles.resetBtn} ${isSubmitting ? styles.isSubmitting : ''}`}
+							className={`${styles.clearButton} ${isSubmitting ? styles.isSubmitting : ''}`}
 							handleResetFields={handleResetFields}>
-							Reset
+							Clear
 						</FormBtn>
 						{editValues && (
 							<>

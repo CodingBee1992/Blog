@@ -1,20 +1,25 @@
 import { useState, type MouseEvent, type TouchEvent } from 'react'
 import { ArrowNext, ArrowPrev } from '../../../assets/icons/arrows/Arrows'
-import type { ArticleContentProps } from '../../../types/types'
-import { socialData } from '../../../utils/socialData'
+import type { ArticleContentProps, SocialProps } from '../../../types/types'
+
 import SliderList from '../../atoms/SliderList/SliderList'
 import SocialIcon from '../../atoms/SocialIcon/SocialIcon'
 import styles from './HeroSection.module.scss'
 import SliderDots from '../../atoms/SliderDots/SliderDots'
-import { useFetchLimitPostsQuery } from '../../../slices/api/postApi'
+
 import Loader from '../../atoms/loader/Loader'
+
+import useSocialLinks from '../../../hooks/useSocialLinks'
+import { useFetchHeroPostLimitQuery } from '../../../slices/api/postApi'
+import useMenuContext from '../../../hooks/useMenuContext'
 
 const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [swipeStartX, setSwipeStartX] = useState<number>(0)
-	const limit = 3
-	const { data, isFetching } = useFetchLimitPostsQuery({ limit,page:1 })
-	
+	const { data, isFetching } = useFetchHeroPostLimitQuery({})
+	const { blog } = useMenuContext()
+	const limit = blog.heroPostLimit || 3
+	const { socialLinks } = useSocialLinks()
 	const handleSliderNext = () => {
 		setNumber(prev => (prev >= limit - 1 ? 0 : prev + 1))
 	}
@@ -51,12 +56,11 @@ const HeroSection = () => {
 
 		setSwipeStartX(0)
 	}
-	const handleSwipeOnClickDots = (e: MouseEvent<HTMLElement>, index: number) => {
-		const target = e.target as HTMLElement
-		const tabIndex = target.tabIndex
+	const handleSwipeOnClickDots = (e: MouseEvent<HTMLLIElement>, index: number) => {
+		const target = e.currentTarget.tabIndex
 
-		if (tabIndex === index) {
-			setNumber(tabIndex)
+		if (target === index) {
+			setNumber(target)
 		}
 	}
 
@@ -64,9 +68,9 @@ const HeroSection = () => {
 
 	return (
 		<section id="hero" className={styles.homeContainer}>
-			<div className={styles.sliderContainer}>
+			<div className={styles.heroWrapper}>
 				<div
-					className={styles.sliderListContainer}
+					className={styles.heroSlider}
 					onMouseDown={e => handleSwipeStart(e)}
 					onMouseUp={e => handleSwipeEnd(e)}
 					onTouchStart={e => handleSwipeStart(e)}
@@ -89,20 +93,20 @@ const HeroSection = () => {
 					})}
 				</ul>
 			</div>
-			<div className={styles.socialContainer}>
+			<div className={styles.socialWrapper}>
 				<p className={styles.socialText}>Follow</p>
 				<span className={styles.lineThrough}></span>
-				<ul className={styles.socialIcons}>
-					{socialData.map(({ path, icon, ariaLabel }, index) => {
+				<ul className={styles.socialLinks}>
+					{socialLinks.map((social: SocialProps) => {
 						return (
-							<SocialIcon key={index} href={path} ariaLabel={ariaLabel} styles={styles}>
-								{icon}
+							<SocialIcon key={social.name} social={social} styles={styles}>
+								{social.icon}
 							</SocialIcon>
 						)
 					})}
 				</ul>
 			</div>
-			<div className={styles.arrowsContainer}>
+			<div className={styles.arrowsWrapper}>
 				<button
 					type="button"
 					aria-label="Previous slide"

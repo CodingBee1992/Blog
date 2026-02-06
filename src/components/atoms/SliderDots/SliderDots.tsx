@@ -4,13 +4,13 @@ interface SliderDotsProps {
     styles:{[key:string]:string}
     number:number,
     index:number
-	handleSwipeOnClickDots:(e:MouseEvent<HTMLElement>,index:number)=> void
+	handleSwipeOnClickDots:(e:MouseEvent<HTMLLIElement>,index:number)=> void
 	
 }
 
 const SliderDots = ({styles,number,index,handleSwipeOnClickDots}:SliderDotsProps) => {
 	return (
-		<li  className={`${styles.dot} ${number === index ? styles.slickActive : ''} `} onClick={(e)=>handleSwipeOnClickDots(e,index)}>
+		<li  className={`${styles.dot} ${number === index ? styles.slickActive : ''} `} tabIndex={index} onClick={(e)=>handleSwipeOnClickDots(e,index)}>
 			<button
 				type="button"
 				className={styles.dotBtn}

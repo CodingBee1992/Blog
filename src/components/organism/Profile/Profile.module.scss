@@ -10,8 +10,9 @@
 	flex-direction: column;
 	width: 100%;
 
-	.formInput {
+	.formInputBox {
 		position: relative;
+		margin-bottom: 1rem;
 		label {
 			display: block;
 			margin-bottom: 0.5rem;
@@ -19,25 +20,28 @@
 			font-size: 13px;
 			line-height: 20px;
 		}
+		.formInput {
+			position: relative;
+			input {
+				width: 100%;
+				padding: var(--vspace-0_25);
+				color: #000000;
+				font-size: var(--textSize_16);
+				font-family: var(--font-2);
+				border: 1px solid var(--inputBorderColor);
+				border-radius: var(--borderRadius06);
+				outline: none;
+				transition: all 0.3s;
 
-		input {
-			width: 100%;
-			padding: var(--vspace-0_25);
-			color: #000000;
-			font-size: var(--textSize_16);
-			font-family: var(--font-2);
-			border: 1px solid var(--inputBorderColor);
-			border-radius: var(--borderRadius06);
-			outline: none;
-			transition: all 0.3s;
+				&:hover {
+					box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+					border-color: #ffffff;
+				}
 
-			&:hover {
-				box-shadow: 0px 0px 0px 3px var(--inputBoxShadowColor);
-			}
-
-			&:focus {
-				box-shadow: 0px 0px 0px 3px var(--inputFocusColor);
-				border-color: #ffffff;
+				&:focus {
+					box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+					border-color: #ffffff;
+				}
 			}
 		}
 	}
@@ -54,8 +58,8 @@
 
 		.avatarBox {
 			position: absolute;
-			top: 7%;
-			right: 5%;
+			top: 2rem;
+			right: 2rem;
 			z-index: 1;
 			width: 70px;
 			height: 70px;
@@ -72,7 +76,7 @@
 				width: 100%;
 				height: 100%;
 				opacity: 1;
-
+				object-fit: cover;
 				transition: all 0.3s;
 			}
 
@@ -93,30 +97,32 @@
 				width: 100%;
 				height: 100%;
 
-				.cameraSVG {
-					width: 40px;
-					height: 40px;
+				.uploadSVG {
+					width: 35px;
+					height: 35px;
+					fill: var(--inputFocusColor);
 				}
 			}
 		}
 	}
-}
-.profileContainer {
-	margin-top: 2rem;
-}
-.saveChanges {
-	@include formBtn($bgc: #d3d3d3d3, $color: #979797, $padding: 1rem, $cursor: not-allowed);
 
-	align-self: flex-end;
-	margin-top: 3rem;
-}
-.enabledChanges {
-	color: #ffffff;
+	.saveChanges {
+		@include formBtn($bgc: #d3d3d3d3, $color: #979797, $padding: 1rem, $cursor: not-allowed);
 
-	background-color: #00684a;
-	cursor: pointer;
-
-	&:hover {
-		box-shadow: 0px 0px 3px 3px #3fa588;
+		align-self: flex-end;
+		margin-top: 3rem;
 	}
+	.enabledChanges {
+		color: #ffffff;
+
+		background-color: #00684a;
+		cursor: pointer;
+
+		&:hover {
+			box-shadow: 0px 0px 3px 3px #3fa588;
+		}
+	}
+}
+.topDistance {
+	margin-top: 3rem;
 }

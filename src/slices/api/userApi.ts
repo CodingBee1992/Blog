@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { UserProps } from '../../types/types'
+
 const API_URL = import.meta.env.VITE_API_URL
 const USERS_URL = import.meta.env.VITE_USERS_URL
 
@@ -9,20 +9,20 @@ export const userApi = createApi({
 	tagTypes: ['UpdateProfile'],
 	endpoints: builder => ({
 		login: builder.mutation({
-			query: credentials => ({
+			query: ({ email, password }) => ({
 				url: `${USERS_URL}/login`,
 				method: 'POST',
 				headers: { 'Content-type': 'application/json' },
-				body: credentials,
+				body: { email, password },
 			}),
 		}),
 
 		createAccount: builder.mutation({
-			query: data => ({
+			query: ({name,email,password,privacyPolicy}) => ({
 				url: `${USERS_URL}/registration`,
 				method: 'POST',
 				headers: { 'Content-type': 'application/json' },
-				body: data,
+				body: {name,email,password,privacyPolicy},
 			}),
 		}),
 		deleteAccount: builder.mutation({
@@ -94,7 +94,7 @@ export const userApi = createApi({
 				headers: { 'Content-type': 'application/json' },
 			}),
 		}),
-		fetchUserProfile: builder.query<UserProps, void>({
+		fetchUserProfile: builder.query({
 			query: () => `${USERS_URL}/get-user-profile`,
 			providesTags: () => [{ type: 'UpdateProfile' }],
 			// providesTags: _result => (_result ? [{ type: 'UpdateProfile', id: _result.id }] : []),

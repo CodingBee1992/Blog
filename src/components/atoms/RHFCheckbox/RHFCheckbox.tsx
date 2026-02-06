@@ -1,5 +1,5 @@
 import { Controller, useFormContext, type FieldValues, type Path } from 'react-hook-form'
-import CheckMark from '../Checkmark/CheckMark'
+// import CheckMark from '../Checkmark/CheckMark'
 import type { ReactNode } from 'react'
 
 interface RHFInputProps<T extends FieldValues> {
@@ -30,7 +30,7 @@ const RHFCheckbox = <T extends FieldValues>({
 			render={({ field: { onChange, value }, fieldState: { error } }) => (
 				<div className={styles.formCheckbox}>
 					<label htmlFor={id}>{label && `${label}`}
-                    <CheckMark isChecked={value} className={styles.checkMark}/>
+                    
 						{children}
                     </label>
 					<input

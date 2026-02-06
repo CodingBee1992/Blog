@@ -13,9 +13,10 @@ export interface SearchProps {
 }
 
 export type SocialProps = {
-	path: string
+	name?:string
+	url: string
 	icon: ReactNode
-	ariaLabel: string
+	ariaLabel?: string | undefined
 }
 
 export interface ArticleContentProps {
@@ -89,6 +90,15 @@ export interface UsersProps {
 	commentsCount: number
 	postCount?: number
 	lastLogin: string
+}
+export interface UserProps {
+	name: string
+	email: string
+	avatar: {
+		src: string
+		public_id: string
+	}
+	role: string
 }
 export interface CommentsProps {
 	_id: string

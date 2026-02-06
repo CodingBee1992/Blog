@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import HeaderText from '../../atoms/HeaderText/HeaderText'
 import PostsContent from '../../organism/PostsContent/PostsContent'
-import styles from './SingleCategoryPageTemplate.module.scss'
+
 import { useFetchPostsByCategoryQuery } from '../../../slices/api/postApi'
 import {  useParams } from 'react-router'
 import Loader from '../../atoms/loader/Loader'
@@ -11,15 +11,15 @@ const SingleCategoryPageTemplate = ({ name }: { name: string }) => {
 	const { categorySlug } = useParams()
 	
 	
-	const { currentData } = useFetchPostsByCategoryQuery({ limit: 30, page: currentPage, category:categorySlug })
-	console.log(currentData)
+	const { currentData } = useFetchPostsByCategoryQuery({ page: currentPage, category:categorySlug })
+	
 	useEffect(() => {
 		setCurrentPage(1)
 	}, [categorySlug])
 
 	if (!currentData) return <Loader />
 	return (
-		<section className={`${styles.categoryContainer} sectionPages`}>
+		<section className={` sectionPages`}>
 			<HeaderText>
 				<h1>{name}</h1>
 			</HeaderText>
