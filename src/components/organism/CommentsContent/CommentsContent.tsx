@@ -10,19 +10,21 @@ import type { RootState } from '../../../store'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { useFetchLiveCommentsQuery } from '../../../slices/api/commentsApi'
 import { useEffect, useState } from 'react'
+import useMenuContext from '../../../hooks/useMenuContext'
 
 const CommentsContent = () => {
 	const { search } = useLocation()
-	
+
 	const query = new URLSearchParams(search)
 	const postId = query.get('id')
-	
-	const {data: postComments} = useFetchLiveCommentsQuery(postId!,{skip:!postId})
-	
+
+	const { data: postComments, refetch } = useFetchLiveCommentsQuery(postId!, { skip: !postId })
+	const { comments } = useMenuContext()
+
 	const { isLogged } = useSelector((state: RootState) => state.auth)
 
 	const [roots, setRoots] = useState<CommentsDataProps[]>([])
-	
+
 	useEffect(() => {
 		if (!postComments) return
 		try {
@@ -47,46 +49,65 @@ const CommentsContent = () => {
 		}
 	}, [postComments])
 
+	useEffect(() => {
+		if (comments.commentsEnabled || !comments.commentsEnabled) refetch()
+	}, [refetch, comments.commentsEnabled])
+
+	if (!postComments) return null
 	return (
 		<div className={styles.commentsContainer}>
-			<div className={`${styles.commentsContent} row`}>
-				<div className={`column`}>
-					<h3>Comments</h3>
+			{comments.commentsEnabled ? (
+				postComments.length > 0 ? (
+					<div className={`${styles.commentsContent} row`}>
+						<div className={`column`}>
+							<h3 className={styles.commentsTitle}>Comments</h3>
 
-					<ol className={styles.commentList}>
-						{roots?.length > 0 &&
-							roots.map(({ _id, parentId, author, comment, createdAt, children }) => (
-								<Comment
-									key={_id}
-									_id={_id}
-									postId={postId}
-									parentId={parentId}
-									author={author}
-									comment={comment}
-									createdAt={createdAt}
-									children={children}
-								/>
-							))}
-					</ol>
+							<ol className={styles.commentList}>
+								{roots?.length > 0 &&
+									roots.map(({ _id, parentId, author, comment, createdAt, children }) => (
+										<Comment
+											key={_id}
+											_id={_id}
+											postId={postId}
+											parentId={parentId}
+											author={author}
+											comment={comment}
+											createdAt={createdAt}
+											children={children}
+										/>
+									))}
+							</ol>
+						</div>
+					</div>
+				) : (
+					''
+				)
+			) : (
+				<div className={`${styles.commentsContent} row`}>
+					<div className={'column'}>
+						<h3 className={styles.commentsTitle}>Comments are temporarily disabled</h3>
+					</div>
 				</div>
-			</div>
-			<div className={`${styles.commentFormContainer} row`}>
-				<div className={`column`}>
-					{isLogged ? (
-						<>
-							<h3>Add Comment</h3>
-							<TextArea styles={styles} postId={postId} />
-						</>
-					) : (
-						<>
-							<h3>Sign In to Add Comment</h3>
-							<AnchorLink className={styles.commentAnchorSignin} href="/login">
-								Sign In
-							</AnchorLink>
-						</>
-					)}
+			)}
+			{comments.commentsEnabled && (
+				<div className={`${styles.commentFormContainer} row`}>
+					<div className={`column`}>
+						{isLogged ? (
+							<>
+								<h3 className={styles.commentsTitle}>Add Comment</h3>
+								<TextArea styles={styles} postId={postId} />
+							</>
+						) : (
+							<>
+								<h3 className={styles.commentsTitle}>Sign In to Add Comment</h3>
+								<AnchorLink className={styles.commentAnchorSignin} href="/login">
+									Sign In
+								</AnchorLink>
+							</>
+						)}
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	)
 }

@@ -5,15 +5,19 @@ interface FormBtnProps {
 	type: 'submit' | 'button'
 	isSubmitting?: boolean
 	handleResetFields?: () => void
+	handleResend?: () => void
 	className: string
 }
 
-const FormBtn = ({ children, isSubmitting, handleResetFields, className, type }: FormBtnProps) => {
+const FormBtn = ({ children, isSubmitting, handleResetFields,handleResend, className, type }: FormBtnProps) => {
 	return (
 		<button
-			disabled={isSubmitting}
 			type={type}
-			onClick={() => handleResetFields?.()}
+			disabled={isSubmitting}
+			onClick={() => {
+				handleResetFields?.()
+				handleResend?.()
+			}}
 			className={` ${styles.postFormBtn} ${className ? className : ''}`}>
 			{children}
 		</button>

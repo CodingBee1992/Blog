@@ -13,6 +13,7 @@ const SignOutBtn = ({ children, className, ariaLabel }: SignOutBtnProps) => {
 	const { toggle } = mobileMenu
 	return (
 		<button
+		type='button'
 			title="Sign Out"
 			aria-label={ariaLabel}
 			className={className}

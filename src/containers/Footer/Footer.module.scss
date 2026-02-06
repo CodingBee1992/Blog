@@ -3,7 +3,7 @@
 	padding-bottom: 6rem;
 	color: #3b3d3d;
 	font-size: var(--text-meta);
-	background-color: var(--Bgc-main);
+	background-color: var(--bgcLightGrey);
 	line-height: calc(0.8125 * var(--space));
 
 	h5 {
@@ -11,7 +11,7 @@
 		font-weight: 400;
 		text-transform: uppercase;
 		letter-spacing: 0.2em;
-		color: var(--black);
+		color: var(--blackColor);
 		padding-bottom: var(--vspace-0_75);
 		margin-bottom: var(--vspace-0_75);
 		margin-top: 0;
@@ -22,11 +22,18 @@
 		margin-bottom: 4rem;
 		width: 100%;
 
-		ul {
+		.footerList {
 			list-style: none;
 
-			li > a {
-				color: #3b3d3d;
+			li {
+				a {
+					color: #3b3d3d;
+					transition: all 0.3s;
+
+					&:hover {
+						color: #000000;
+					}
+				}
 			}
 		}
 		.grid {
@@ -64,7 +71,7 @@
 						button {
 							padding: 0.8rem 2rem;
 							margin-bottom: 1.6rem;
-							background-color: black;
+							background-color: var(--bgcBlack);
 							color: #ffffff;
 							border: none;
 							font-size: var(--text-xs);

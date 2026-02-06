@@ -1,0 +1,74 @@
+.maintenanceWrapper {
+	display: flex;
+	justify-content: center;
+	margin-top: 4rem;
+	width: 100%;
+	height: 100%;
+	font-family: var(--font-2);
+	padding: 2rem;
+
+	.maintenanceCard {
+		background-color: var(--white);
+		padding: 3rem;
+		border-radius: var(--borderRadius06);
+		box-shadow: 0 10px 25px -5px #d3d3d3d3;
+		max-width: 500px;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		.maintenanceTitle {
+			font-size: var(--textSize_24);
+			font-weight: 800;
+			color: #1f2937;
+			margin-bottom: 1.5rem;
+		}
+		.maintenanceContent {
+			.maintenanceDescription {
+				color: #6b7280;
+				line-height: 1.6;
+				margin-bottom: 2rem;
+			}
+			.maintenanceTime {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				background-color: var(--greenColor);
+				padding: 1rem;
+				border-radius: var(--borderRadius06);
+				border: 1px solid var(--greenColor);
+
+				.maintenanceLabel {
+					font-size: var(--textSize_18);
+					color: var(--white);
+					font-weight: 600;
+					text-transform: uppercase;
+					letter-spacing: 0.05em;
+				}
+
+				.maintenanceDate {
+					font-size: var(--textSize_16);
+					color: var(--white);
+					font-weight: 700;
+				}
+			}
+		}
+		.maintenanceFooter {
+			margin-top: 2.5rem;
+			border-top: 1px solid #d3d3d3d3;
+			padding-top: 1.5rem;
+
+			.maintenanceFooterText {
+				font-size: var(--textSize_18);
+				color: #6b7280;
+				margin-bottom: 1rem;
+			}
+			.maintenanceSocials {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1rem;
+				
+			}
+		}
+	}
+}

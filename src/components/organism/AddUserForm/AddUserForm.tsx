@@ -9,6 +9,7 @@ import { useAdminCreateUserMutation } from '../../../slices/api/userApi'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useEffect, useState } from 'react'
+import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
 
 const userSchema = z.object({
 	name: z.string().trim().min(4, { message: 'Min 4 characters' }),
@@ -36,13 +37,15 @@ const AddUserForm = () => {
 		handleSubmit,
 		reset,
 		setError,
-		formState: { isSubmitting },
+		formState: { isSubmitting, isDirty },
 	} = methods
 
 	const onSubmit: SubmitHandler<userSchemaTypes> = async (data: userSchemaTypes) => {
 		try {
+			if (!data) return
+
 			const res = await adminCreateUser(data).unwrap()
-			
+
 			if (res) setSuccessMessage(res.message)
 
 			reset()
@@ -73,7 +76,7 @@ const AddUserForm = () => {
 		if (successMessage)
 			setTimeout(() => {
 				setSuccessMessage('')
-			}, 10000)
+			}, 5000)
 	}, [successMessage])
 
 	const handleResetFields = () => {
@@ -82,38 +85,49 @@ const AddUserForm = () => {
 	return (
 		<FormProvider {...methods}>
 			<div className={styles.addUserFormContainer}>
-				<p>Add User</p>
-				<form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
-					<div className={styles.formWrapper}>
-						<RHFInput type='text' name="name" label="Name" styles={styles} id="name" />
-						<RHFInput type='email' name="email" label="Email" styles={styles} id="email" />
-						<RHFInput type='password' name="password" label="Password" styles={styles} id="password" />
-						<RHFSelect name="role" label="Role" options={role} styles={styles} />
-					</div>
-					{successMessage && <span className={styles.successMessage}>{successMessage}</span>}
-					<div className={styles.submitBtns}>
-						<FormBtn type="submit" isSubmitting={isSubmitting} className={styles.submitBtn}>
-							{isSubmitting ? (
-								<>
-									Creating
-									<span className={styles.animate1}>.</span>
-									<span className={styles.animate2}>.</span>
-									<span className={styles.animate3}>.</span>
-								</>
-							) : (
-								'Create'
-							)}
-						</FormBtn>
-
-						<FormBtn
-							type="button"
+				<WrapperBox>
+					<p className={styles.addUserTitle}>Add User</p>
+					<form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+						<RHFInput type="text" name="name" label="Name" styles={styles} id="name" isSubmitting={isSubmitting} />
+						<RHFInput type="email" name="email" label="Email" styles={styles} id="email" isSubmitting={isSubmitting} />
+						<RHFInput
+							type="password"
+							name="password"
+							label="Password"
+							styles={styles}
+							id="password"
 							isSubmitting={isSubmitting}
-							className={styles.resetBtn}
-							handleResetFields={handleResetFields}>
-							Reset
-						</FormBtn>
-					</div>
-				</form>
+						/>
+						<RHFSelect name="role" label="Role" options={role} styles={styles} isSubmitting={isSubmitting} />
+
+						{successMessage && <span className={styles.successMessage}>{successMessage}</span>}
+						<div className={styles.submitBtns}>
+							<FormBtn
+								type="submit"
+								isSubmitting={isSubmitting}
+								className={`${styles.submitBtn} ${isDirty ? styles.save : ''}`}>
+								{isSubmitting ? (
+									<>
+										Saving
+										<span className={styles.animate1}>.</span>
+										<span className={styles.animate2}>.</span>
+										<span className={styles.animate3}>.</span>
+									</>
+								) : (
+									'Save'
+								)}
+							</FormBtn>
+
+							<FormBtn
+								type="button"
+								isSubmitting={isSubmitting}
+								className={styles.clearButton}
+								handleResetFields={handleResetFields}>
+								Clear
+							</FormBtn>
+						</div>
+					</form>
+				</WrapperBox>
 			</div>
 		</FormProvider>
 	)

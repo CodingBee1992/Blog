@@ -1,0 +1,46 @@
+.switchButton {
+	position: relative;
+	display: flex;
+	justify-content: space-around;
+	// width: 100px;
+	// margin-left: 2rem;
+	background-color: var(--buttonBgcLightGrey);
+
+	.off,
+	.on {
+		padding: 0.5rem 2rem;
+		font-size: var(--textSize_16);
+		background-color: transparent;
+		color: var(--buttonColorDark);
+		border: none;
+		transition: all 0.3s;
+		pointer-events: none;
+		z-index: 100;
+	}
+	.off {
+		color: var(--buttonColorLight);
+	}
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 50%;
+		height: 100%;
+		background-color: #000000;
+		transition: all 0.3s;
+	}
+}
+.switch {
+	.off {
+		color: var(--buttonColorDark);
+	}
+	.on {
+		color: var(--buttonColorLight);
+	}
+
+	&::after {
+		left: 50%;
+		background-color: var(--buttonBgcGreen);
+	}
+}

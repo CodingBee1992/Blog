@@ -9,6 +9,8 @@ import { statisticApi } from './slices/api/statisticsApi'
 import { postLikeApi } from './slices/api/postLikeApi'
 import { categoryApi } from './slices/api/categoriesApi'
 import { cloudinaryApi } from './slices/api/cloudinaryApi'
+import { emailApi } from './slices/api/emailApi'
+import { generalApi } from './slices/api/generalSettingsApi'
 
 export const store = configureStore({
 	reducer: {
@@ -21,6 +23,8 @@ export const store = configureStore({
 		[postLikeApi.reducerPath]:postLikeApi.reducer,
 		[categoryApi.reducerPath]: categoryApi.reducer,
 		[cloudinaryApi.reducerPath]:cloudinaryApi.reducer,
+		[emailApi.reducerPath]:emailApi.reducer,
+		[generalApi.reducerPath]:generalApi.reducer
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware()
@@ -30,7 +34,9 @@ export const store = configureStore({
 			.concat(statisticApi.middleware)
 			.concat(postLikeApi.middleware)
 			.concat(categoryApi.middleware)
-			.concat(cloudinaryApi.middleware),
+			.concat(cloudinaryApi.middleware)
+			.concat(emailApi.middleware)
+			.concat(generalApi.middleware)
 			
 })
 

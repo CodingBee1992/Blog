@@ -1,11 +1,10 @@
 .container {
-	--header-height: 8.8rem;
 	display: flex;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100dvw;
-	height: var(--header-height);
+	height: var(--headerHeight);
 	align-items: center;
 	background-color: var(--Bgc-navTransparent);
 	border-bottom: 1px solid var(--borderBottom);
@@ -14,35 +13,31 @@
 	.logo {
 		position: absolute;
 		margin: 0;
-		top: calc(50% - 3px);
+		top: 50%;
 		left: 2.5rem;
-
-		color: var(--logo-color);
-		font-size: var(--logo-Size);
-		font-weight: 600;
 		transform: translateY(-50%);
-		transition: all 0.3s ease-in-out;
+		height: 60px;
+		width: auto;
+		background-color: transparent;
 		z-index: 101;
 
-		&:hover {
-			color: var(--logo-hover);
-			scale: 1.05;
+		img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+			transition: all 0.3s ease-in-out;
+			&:hover {
+				scale: 1.05;
+			}
 		}
 	}
-	// .showHide {
-	// 	display: flex;
-	// }
-	// .fadeIn {
-	// 	transform: translateX(0);
-	// 	opacity: 1;
-	// 	visibility: visible;
-	// }
+
 	.panel {
 		position: absolute;
 		display: flex;
 		align-items: center;
 		gap: 2rem;
-		right: 7rem;
+		right: var(--panelRight);
 
 		.controlPanelContainer {
 			position: relative;
@@ -65,7 +60,7 @@
 
 			.controlContainer {
 				position: absolute;
-				top: 260%;
+				top: var(--controllContainerTop);
 				right: 0;
 				display: flex;
 				flex-direction: column;
@@ -90,12 +85,12 @@
 					height: 40px;
 					font-size: var(--menu-TextSize);
 					color: #ffffff;
-					background-color: #000000;
+					background-color: var(--bgcBlack);
 					transition: all 0.3s;
 
 					&:hover {
 						color: #ffffff;
-						background-color: var(--btn-color-hover);
+						background-color: var(--bgcLightBlack);
 					}
 				}
 				.signUpContainer {
@@ -132,7 +127,7 @@
 			}
 			.controlSettings {
 				position: absolute;
-				top: 160%;
+				top: var(--controllSettingsTop);
 				right: 0;
 				display: flex;
 				flex-direction: column;
@@ -156,17 +151,17 @@
 					text-align: center;
 					white-space: nowrap;
 					line-height: 40px;
-					color: var(--black);
+					color: var(--blackColor);
 					border-top: 1px solid black;
 					font-size: var(--subMenu-TextSize);
 					font-weight: 400;
 					transition: all 0.3s ease-in-out;
 					&:hover {
 						color: var(--white);
-						background-color: var(--black);
+						background-color: var(--bgcBlack);
 					}
 					&:last-of-type {
-						border-bottom: 1px solid black;
+						border-bottom: 1px solid var(--bgcBlack);
 					}
 				}
 
@@ -183,13 +178,13 @@
 					font-size: var(--menu-TextSize);
 					border: none;
 					color: #ffffff;
-					background-color: #000000;
+					background-color: var(--bgcBlack);
 					transition: all 0.3s;
 					cursor: pointer;
 
 					&:hover {
 						color: #ffffff;
-						background-color: var(--btn-color-hover);
+						background-color: var(--bgcLightBlack);
 					}
 				}
 			}

@@ -1,6 +1,6 @@
 import type { Ref } from 'react'
 import styles from './AdminPanelIcons.module.scss'
-// <!-- License: BSD. Made by Nuiverse Design: https://gitlab.com/nuinalp/open-source/nuiverse/icons -->
+
 
 interface IconsProps {
 	className?: string
@@ -396,7 +396,7 @@ const SecuritySVG = ({ className }: IconsProps) => (
 	</svg>
 )
 
-const CalendarSVG = ({ className }: IconsProps )=> (
+const CalendarSVG = ({ className }: IconsProps) => (
 	<svg
 		fill="#000000"
 		width="800px"
@@ -405,9 +405,7 @@ const CalendarSVG = ({ className }: IconsProps )=> (
 		preserveAspectRatio="xMidYMid meet"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlnsXlink="http://www.w3.org/1999/xlink"
-		className={`${styles.calendarSVG} ${className ? className : ''}`}
-		>
-		
+		className={`${styles.calendarSVG} ${className ? className : ''}`}>
 		<path
 			className="clr-i-outline clr-i-outline-path-1"
 			d="M32.25,6H29V8h3V30H4V8H7V6H3.75A1.78,1.78,0,0,0,2,7.81V30.19A1.78,1.78,0,0,0,3.75,32h28.5A1.78,1.78,0,0,0,34,30.19V7.81A1.78,1.78,0,0,0,32.25,6Z"
@@ -428,6 +426,30 @@ const CalendarSVG = ({ className }: IconsProps )=> (
 		<path className="clr-i-outline clr-i-outline-path-15" d="M26,10a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V9A1,1,0,0,0,26,10Z" />
 		<rect className="clr-i-outline clr-i-outline-path-16" x={13} y={6} width={10} height={2} />
 		<rect x={0} y={0} width={36} height={36} fillOpacity={0} />
+	</svg>
+)
+
+const SettingsSVG = ({ className }: IconsProps) => (
+	<svg
+		fill="#000000"
+		width="800px"
+		height="800px"
+		viewBox="0 0 24 24"
+		xmlns="http://www.w3.org/2000/svg"
+		className={`${styles.settingSVG} ${className ? className : ''}`}>
+		<path d="M19.9,12.66a1,1,0,0,1,0-1.32L21.18,9.9a1,1,0,0,0,.12-1.17l-2-3.46a1,1,0,0,0-1.07-.48l-1.88.38a1,1,0,0,1-1.15-.66l-.61-1.83A1,1,0,0,0,13.64,2h-4a1,1,0,0,0-1,.68L8.08,4.51a1,1,0,0,1-1.15.66L5,4.79A1,1,0,0,0,4,5.27L2,8.73A1,1,0,0,0,2.1,9.9l1.27,1.44a1,1,0,0,1,0,1.32L2.1,14.1A1,1,0,0,0,2,15.27l2,3.46a1,1,0,0,0,1.07.48l1.88-.38a1,1,0,0,1,1.15.66l.61,1.83a1,1,0,0,0,1,.68h4a1,1,0,0,0,.95-.68l.61-1.83a1,1,0,0,1,1.15-.66l1.88.38a1,1,0,0,0,1.07-.48l2-3.46a1,1,0,0,0-.12-1.17ZM18.41,14l.8.9-1.28,2.22-1.18-.24a3,3,0,0,0-3.45,2L12.92,20H10.36L10,18.86a3,3,0,0,0-3.45-2l-1.18.24L4.07,14.89l.8-.9a3,3,0,0,0,0-4l-.8-.9L5.35,6.89l1.18.24a3,3,0,0,0,3.45-2L10.36,4h2.56l.38,1.14a3,3,0,0,0,3.45,2l1.18-.24,1.28,2.22-.8.9A3,3,0,0,0,18.41,14ZM11.64,8a4,4,0,1,0,4,4A4,4,0,0,0,11.64,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,11.64,14Z" />
+	</svg>
+)
+
+const UploadSVG = ({ className }: IconsProps) => (
+	<svg
+		width="800px"
+		height="800px"
+		viewBox="0 0 24 24"
+		xmlns="http://www.w3.org/2000/svg"
+		className={`${styles.uploadSVG} ${className ? className : ''}`}>
+		<path d="M24 12a5 5 0 0 1-5 5h-2v-1h2a3.99 3.99 0 0 0 .623-7.934l-.79-.124-.052-.798a5.293 5.293 0 0 0-10.214-1.57L8.17 6.59l-.977-.483A2.277 2.277 0 0 0 6.19 5.87a2.18 2.18 0 0 0-1.167.339 2.205 2.205 0 0 0-.98 1.395l-.113.505-.476.2A4 4 0 0 0 5 16h3v1H5a5 5 0 0 1-1.934-9.611 3.21 3.21 0 0 1 1.422-2.025 3.17 3.17 0 0 1 1.702-.493 3.268 3.268 0 0 1 1.446.34 6.293 6.293 0 0 1 12.143 1.867A4.988 4.988 0 0 1 24 12zm-11-.293l2.646 2.646.707-.707L12.5 9.793l-3.854 3.853.707.707L12 11.707V22h1z" />
+		<path fill="none" d="M0 0h24v24H0z" />
 	</svg>
 )
 
@@ -453,4 +475,6 @@ export {
 	CameraSVG,
 	SecuritySVG,
 	CalendarSVG,
+	SettingsSVG,
+	UploadSVG,
 }

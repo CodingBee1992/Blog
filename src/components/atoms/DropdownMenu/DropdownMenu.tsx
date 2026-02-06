@@ -34,11 +34,11 @@ const DropdownMenu = ({
 			onMouseEnter={e => handleMouseInDropdown?.(e)}
 			onMouseLeave={e => handleMouseOutDropdown?.(e)}>
 			{data.children?.map((item, index: number) => {
-				const active = pathname === `/categories/${item.name?.split(' ').join('-').toLowerCase()}`
+				const active = pathname === `/categories/${item.slug?.split(' ').join('-').toLowerCase()}`
 
 				const active2 = pathname === item.href
 
-				const slug = item.name ? item.name.split(' ').join('-').toLowerCase() : item.slug
+				const slug = item.slug ? item.slug.split(' ').join('-').toLowerCase() : item.slug
 				const url = item ? (item.name ? `/categories/${slug}` : item.href) : '#'
 
 				const menuName = item.name ? item.name : item.title

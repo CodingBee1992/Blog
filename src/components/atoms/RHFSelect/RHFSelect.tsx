@@ -5,31 +5,60 @@ interface RHFSelectProps<T extends FieldValues> {
 	label: string
 	options: string[]
 	styles: Record<string, string>
+	isSubmitting?: boolean
+	id?: string
 }
 
-const RHFSelect = <T extends FieldValues>({ name, label, options, styles }: RHFSelectProps<T>) => {
+const RHFSelect = <T extends FieldValues>({
+	name,
+	label,
+	id,
+	options,
+	styles,
+	isSubmitting = false,
+}: RHFSelectProps<T>) => {
 	const { control } = useFormContext()
 	return (
 		<Controller
 			control={control}
 			name={name}
-            
-			render={({ field, fieldState: { error } }) => (
-				<div className={styles.statusContainer}>
-					<label className={styles.statusTitle}>{label}:</label>
-					<select {...field} className={styles.statusSelect} >
-						<option hidden  selected>---select---</option>
+			render={({ field: { onChange, value }, fieldState: { error } }) => {
+				return (
+					<div className={styles.selectContainer}>
+						<label htmlFor={id} className={styles.selectTitle}>
+							{label}
+						</label>
+						<select
+							onChange={e => {
+								const target = e.target.value
 
-						{options &&
-							options.map((option, index) => (
-								<option key={index} value={option}>
-									{option}
-								</option>
-							))}
-					</select>
-					{error && <span className={styles.error}>{error.message}</span>}
-				</div>
-			)}
+								if (target === 'true') {
+									onChange(true)
+									return
+								}
+								if (target === 'false') {
+									onChange(false)
+									return
+								}
+
+								onChange(target)
+							}}
+							className={styles.selectOption}
+							value={value ?? ''}
+							disabled={isSubmitting}
+							aria-disabled={isSubmitting}
+							id={id}>
+							{options &&
+								options.map((option, index) => (
+									<option key={index} value={option}>
+										{option}
+									</option>
+								))}
+						</select>
+						{error && <span className={styles.error}>{error.message}</span>}
+					</div>
+				)
+			}}
 		/>
 	)
 }

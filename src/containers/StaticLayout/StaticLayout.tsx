@@ -81,7 +81,7 @@ const StaticLayout = () => {
 				<CookieBanner />
 				<div data-aos="fade-zoom-in">
 					<Navigation />
-					<main>
+					<main style={{minHeight:'100dvh'}}>
 						<Outlet />
 					</main>
 					<Footer />

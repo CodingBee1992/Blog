@@ -93,7 +93,7 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 			<div ref={searchRef} className={`${styles.searchContainer} `}>
 				<div className="row">
 					<div className={styles.elementSearchContainer}>
-						<form action="" className={styles.elementSearchForm}>
+						<form  className={styles.elementSearchForm}>
 							<input
 								value={value}
 								name="search"

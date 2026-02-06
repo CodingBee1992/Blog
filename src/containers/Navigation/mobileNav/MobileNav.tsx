@@ -7,15 +7,17 @@ import { useEffect } from 'react'
 import ControlPanel from '../../../components/organism/ControlPanel/ControlPanel'
 import useMenuContext from '../../../hooks/useMenuContext'
 
+
 interface MobileRefProps {
 	dataMenu: MenuTypes[]
 }
 
 const MobileNav = ({ dataMenu }: MobileRefProps) => {
+	
 	const { navRef, scrollMenu, mobileMenu, handleOpenCloseDropdown, activeIndex } = useMenuContext()
 	const { pathname } = useLocation()
 	const { toggle, isOpen, isVisible } = mobileMenu
-
+	
 	useEffect(() => {
 		if (pathname !== '/') {
 			navRef.current?.classList.add(styles.secondNavBgColor)
@@ -23,6 +25,8 @@ const MobileNav = ({ dataMenu }: MobileRefProps) => {
 			navRef.current?.classList.remove(styles.secondNavBgColor)
 		}
 	}, [pathname, navRef])
+
+	
 
 	return (
 		<div
@@ -39,7 +43,7 @@ const MobileNav = ({ dataMenu }: MobileRefProps) => {
 					index={0}
 				/>
 				{dataMenu.map((item: MenuTypes, index: number) => {
-					return <MenuElement key={index} styles={styles} data={item} index={index} />
+					return <MenuElement key={index} styles={styles} data={item} index={index} toggle={toggle} />
 				})}
 			</div>
 		</div>

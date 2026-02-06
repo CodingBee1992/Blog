@@ -11,15 +11,23 @@ interface RHFCategorySelectProps<T extends FieldValues> {
 	label: string
 	max: number
 	styles: Record<string, string>
+	isSubmitting?: boolean
 }
 
-const RHFCategorySelect = <T extends FieldValues>({ name, options, label, max, styles }: RHFCategorySelectProps<T>) => {
+const RHFCategorySelect = <T extends FieldValues>({
+	name,
+	options,
+	label,
+	max,
+	styles,
+	isSubmitting,
+}: RHFCategorySelectProps<T>) => {
 	const { control } = useFormContext<T>()
 
 	const handleSelectCategory = (
 		e: MouseEvent<HTMLLabelElement> | ChangeEvent<HTMLInputElement>,
 		value: string[],
-		onChange: (value: string[]) => void
+		onChange: (value: string[]) => void,
 	) => {
 		const target = e.target as HTMLLabelElement
 		const el = target.id
@@ -62,10 +70,10 @@ const RHFCategorySelect = <T extends FieldValues>({ name, options, label, max, s
 										value={option.name}
 										type="checkbox"
 										checked={isChecked}
-										disabled={disabled}
+										disabled={isSubmitting ? isSubmitting : disabled}
 										onChange={e => handleSelectCategory(e, value, onChange)}
 									/>
-									
+
 									<CheckMark
 										className={`${styles.checkmark} ${isChecked ? styles.scaleCheckmark : ''}`}
 										isChecked={isChecked}

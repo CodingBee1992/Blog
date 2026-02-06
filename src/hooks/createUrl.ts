@@ -16,7 +16,7 @@ const createUrl = ({ categories, seo, _id }: createURLProps) => {
 		.filter(Boolean) // usuwa undefined/null
 		.map(slug => slugify(slug, { lower: true, strict: true }))
    
-    
+   
 	if (categorySlugs && categorySlugs.length > 1) {
 		return `/post/${categorySlugs.join('/')}/${seo?.slug.toLowerCase().replace(/\s+/g, '-')}?id=${_id}`
 	} else {

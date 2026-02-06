@@ -29,10 +29,7 @@ export const defaultCategories: MenuTypes = {
     ],
 }
 
-const styles:MenuTypes ={
-    title:'Styles',
-    href:'/styles'
-}
+
 const about:MenuTypes ={
     title:'About',
     href:'/about'
@@ -46,7 +43,7 @@ export const dataNavigation= [
     home,
     defaultCategories,
     
-    styles,
+    
     about,
     contact
 ]

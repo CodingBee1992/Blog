@@ -1,28 +1,29 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
-import { WarnSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
+
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
-import ProfileInfoBox from '../../atoms/ProfileInfoBox/ProfileInfoBox'
 
 import styles from './ChangeEmail.module.scss'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useConfirmNewEmailMutation } from '../../../slices/api/userApi'
 import useDebounce from '../../../hooks/useDebounce'
 import { Navigate, useLocation } from 'react-router'
+import useMenuContext from '../../../hooks/useMenuContext'
+import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
+import AccountInputBox from '../../modules/AccountInputBox/AccountInputBox'
 const ChangeEmail = () => {
 	const [newEmail, setNewEmail] = useState<string>('')
 	const [successMessage, setSuccessMessage] = useState<string>('')
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [enabledButton, setEnabledButton] = useState<boolean>(false)
-	const [confirmNewEmail] = useConfirmNewEmailMutation()
+	const [confirmNewEmail, { isLoading }] = useConfirmNewEmailMutation()
+	const { signOut } = useMenuContext()
 	const debounce = useDebounce(newEmail, 1000)
 
 	const { search } = useLocation()
 	const query = new URLSearchParams(search)
 	const token = query.get('token')
-
-
 
 	const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.currentTarget
@@ -50,25 +51,27 @@ const ChangeEmail = () => {
 		setEnabledButton(false)
 	}, [newEmail.length])
 
-	useEffect(()=>{
-		if(errorMessage){
-
+	useEffect(() => {
+		if (errorMessage) {
 			const timer = setTimeout(() => {
 				setErrorMessage('')
-				
-			}, 3000);
+			}, 3000)
 
-			return ()=> clearTimeout(timer)
+			return () => clearTimeout(timer)
 		}
-	},[errorMessage])
+	}, [errorMessage])
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault()
 		try {
-			const res = await confirmNewEmail({ newEmail }).unwrap()
+			if (!newEmail) return
+
+			const res = await confirmNewEmail({ newEmail, token }).unwrap()
 			if (res) {
 				setSuccessMessage(res.message)
 				setNewEmail('')
+
+				signOut()
 			}
 			if (errorMessage) setErrorMessage('')
 		} catch (error) {
@@ -87,33 +90,29 @@ const ChangeEmail = () => {
 		}
 	}
 
-	if(!token) return <Navigate to="/" replace/>
+	if (!token) return <Navigate to="/" replace />
 
 	return (
 		<div className={styles.changeEmailContainer}>
 			<h3 className={styles.title}>Change Email</h3>
 
-			<ProfileInfoBox>
-				{errorMessage && (
-					<APIResponseMessage responseMessage={errorMessage} meesageType="error">
-						<WarnSVG className={styles.warnSVG} />
+			<WrapperBox>
+				{(successMessage || errorMessage) && (
+					<APIResponseMessage messageType={successMessage ? 'succes' : 'error'}>
+						{successMessage ? successMessage : <>{errorMessage}</>}
 					</APIResponseMessage>
 				)}
-				{successMessage && (
-					<APIResponseMessage responseMessage={successMessage} meesageType="succes"></APIResponseMessage>
-				)}
-				<form onSubmit={e => handleSubmit(e)} className={styles.formContainer}>
-					<label htmlFor="newEmail">Confirm New Email</label>
-					<div className={styles.formInput}>
-						<input
-							onChange={e => onChangeInput(e)}
-							value={newEmail}
-							id="newEmail"
-							name="newEmail"
-							type="email"
-							placeholder="new@example.com"
-						/>
-					</div>
+				<form onSubmit={e => handleSubmit(e)} className={styles.formWrapper} aria-busy={isLoading}>
+					
+					<AccountInputBox
+						onChangeInput={e => onChangeInput(e)}
+						value={newEmail}
+						id="newEmail"
+						label='Confirm New Email'
+						type="email"
+						isSubmitting={isLoading}
+						placeholder='new@example.com'
+					/>
 					<div className={styles.formBtns}>
 						<FormBtn
 							type="submit"
@@ -126,7 +125,7 @@ const ChangeEmail = () => {
 						</AnchorLink>
 					</div>
 				</form>
-			</ProfileInfoBox>
+			</WrapperBox>
 		</div>
 	)
 }

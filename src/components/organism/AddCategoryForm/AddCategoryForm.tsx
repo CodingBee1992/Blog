@@ -7,6 +7,8 @@ import FormBtn from '../../atoms/FormBtn/FormBtn'
 import { useCreateCategoryMutation } from '../../../slices/api/categoriesApi'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useEffect, useState } from 'react'
+import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
+import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
 const categorySchema = z.object({
 	name: z.string().trim().min(4, { message: 'Min 4 characters' }),
 	slug: z.string().trim().min(4, { message: 'Min 4 characters' }),
@@ -33,18 +35,18 @@ const AddCategoryForm = () => {
 		handleSubmit,
 		reset,
 		setError,
-		
-		
-		formState: { isSubmitting, errors },
+
+		formState: { isSubmitting, errors, isDirty },
 	} = methods
 
-	const watch = useWatch({control,name:'name'})
+	const watch = useWatch({ control, name: 'name' })
 	const onSubmit: SubmitHandler<schemaTypes> = async (data: schemaTypes) => {
 		try {
+			if (!data) return
+
 			const { name, slug } = data
 			const res = await addCategory({ name, slug }).unwrap()
 
-			console.log(res)
 			if (res) setSuccessMessage(res.message)
 
 			reset()
@@ -63,18 +65,17 @@ const AddCategoryForm = () => {
 		}
 	}
 	useEffect(() => {
-		if(watch){
+		if (watch) {
 			setSuccessMessage('')
 		}
 		if (successMessage) {
 			setTimeout(() => {
 				setSuccessMessage('')
-			}, 10000)
+			}, 5000)
 		}
 	}, [successMessage, watch])
 	useEffect(() => {
 		setError('root', { message: '' })
-		
 	}, [watch, setError])
 
 	const handleResetFields = () => {
@@ -83,38 +84,62 @@ const AddCategoryForm = () => {
 	return (
 		<FormProvider {...methods}>
 			<div className={styles.addCategoryContainer}>
-				<p>Add Category</p>
+				<WrapperBox>
+					<p className={styles.addCategoryTitle}>Add Category</p>
 
-				<form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
-					<div className={styles.formWrapper}>
-						<RHFInput name="name" type='text' styles={styles} label="Category Name" id="name" />
-						<RHFInput name="slug" type='text' styles={styles} label="Category Slug" id="slug" />
-					</div>
-					{successMessage && <span className={styles.successMessage}>{successMessage}</span>}
-					{errors.root && <span className={styles.errorMessage}>{errors.root.message}</span>}
-					<div className={styles.submitBtns}>
-						<FormBtn type="submit" isSubmitting={isSubmitting} className={styles.submitBtn}>
-							{isSubmitting ? (
-								<>
-									Creating
-									<span className={styles.animate1}>.</span>
-									<span className={styles.animate2}>.</span>
-									<span className={styles.animate3}>.</span>
-								</>
-							) : (
-								'Create'
-							)}
-						</FormBtn>
+					<form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
+						<div className={styles.formWrapper}>
+							<RHFInput
+								name="name"
+								type="text"
+								styles={styles}
+								label="Category Name"
+								id="name"
+								isSubmitting={isSubmitting}
+							/>
+							<RHFInput
+								name="slug"
+								type="text"
+								styles={styles}
+								label="Category Slug"
+								id="slug"
+								isSubmitting={isSubmitting}
+							/>
+						</div>
+						
+						{(errors.root?.message || successMessage) && (
+							<APIResponseMessage messageType={successMessage ? 'success' : 'error'}>
+								{errors.root?.message ? errors.root.message : successMessage}
+							</APIResponseMessage>
+						)}
 
-						<FormBtn
-							type="button"
-							isSubmitting={isSubmitting}
-							className={styles.resetBtn}
-							handleResetFields={handleResetFields}>
-							Reset
-						</FormBtn>
-					</div>
-				</form>
+						<div className={styles.submitBtns}>
+							<FormBtn
+								type="submit"
+								isSubmitting={isSubmitting}
+								className={`${styles.submitBtn} ${isDirty ? styles.save : ''}`}>
+								{isSubmitting ? (
+									<>
+										Saving
+										<span className={styles.animate1}>.</span>
+										<span className={styles.animate2}>.</span>
+										<span className={styles.animate3}>.</span>
+									</>
+								) : (
+									'Save'
+								)}
+							</FormBtn>
+
+							<FormBtn
+								type="button"
+								isSubmitting={isSubmitting}
+								className={styles.clearButton}
+								handleResetFields={handleResetFields}>
+								Clear
+							</FormBtn>
+						</div>
+					</form>
+				</WrapperBox>
 			</div>
 		</FormProvider>
 	)

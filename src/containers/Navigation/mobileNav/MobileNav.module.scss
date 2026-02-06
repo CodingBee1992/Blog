@@ -221,13 +221,13 @@
 					max-width: 200px;
 					height: 40px;
 					font-size: var(--menu-TextSize);
-					color: #000000;
-					background-color: #ffffff;
+					color: var(--bgcBlack);
+					background-color: var(--bgcWhite);
 					transition: all 0.3s;
 
 					&:hover {
 						color: #ffffff;
-						background-color: var(--btn-color-hover);
+						background-color: var(--bgcLightBlack);
 					}
 				}
 				.signUpContainer {
@@ -283,14 +283,14 @@
 					height: 40px;
 					font-size: var(--menu-TextSize);
 					border: none;
-					color: #000000;
-					background-color: #ffffff;
+					color: var(--blackColor);
+					background-color: var(--bgcWhite);
 					transition: all 0.3s;
 					cursor: pointer;
 
 					&:hover {
 						color: #ffffff;
-						background-color: var(--btn-color-hover);
+						background-color: var(--bgcLightBlack);
 					}
 				}
 			}

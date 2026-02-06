@@ -1,66 +1,78 @@
 import { Controller, useFormContext, type FieldValues, type Path } from 'react-hook-form'
-import RHFInput from '../RHFInput/RHFInput'
-import type { RefObject } from 'react'
+
+import type { ReactNode, RefObject } from 'react'
+import { UploadSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 
 interface RHFAddFileProps<T extends FieldValues> {
+	children?: ReactNode
 	name: Path<T>
-	label: string
+	label?: string
 	styles: Record<string, string>
-	fileRef: RefObject<(HTMLInputElement | null)[]>
+	fileRef?: RefObject<(HTMLInputElement | null)[]>
 	fileIndex: number
-	id:string
+	id: string
+	isSubmitting?: boolean
+	className?: string
 }
 
-const RHFAddFile = <T extends FieldValues>({ name,id, label, styles, fileRef, fileIndex }: RHFAddFileProps<T>) => {
+const RHFAddFile = <T extends FieldValues>({
+	name,
+	id,
+	label,
+	styles,
+	isSubmitting,
+	fileRef,
+	fileIndex,
+	children,
+	className,
+}: RHFAddFileProps<T>) => {
 	const { control } = useFormContext()
-	const randomIndex = Math.floor(Math.random() * 999)
+	// const randomIndex = Math.floor(Math.random() * 999)
 
 	return (
 		<Controller
 			control={control}
-			name={`${name}.src`}
+			name={`${name}`}
 			render={({ field: { value, onChange }, fieldState: { error } }) => (
-				<div className={styles.fileContainer}>
-					<label htmlFor={id}>{label}</label>
-					{typeof value === 'string' ? (
-						<div className={styles.previewImage}>
-							<img src={value} />
+				<div className={`${styles.fileWrapper} ${className ? className : ''}`}>
+					<p className={styles.fileTitle}>{label}</p>
+					<label htmlFor={id} className={`${styles.uploadFile} ${value && styles.uploadFilled}`}>
+						<div className={`${styles.uploadFileShadow} `}>
+							<UploadSVG />
 						</div>
-					) : (
-						(value as File) instanceof File && (
-							<div className={styles.previewImage}>
-								<img src={URL.createObjectURL(value)} />
-							</div>
-						)
-					)}
+						{typeof value === 'string' ? (
+							<img src={value} alt="Preview image" className={styles.previewImage} />
+						) : (
+							(value as File) instanceof File && (
+								<img src={URL.createObjectURL(value)} alt="Preview image" className={styles.previewImage} />
+							)
+						)}
+					</label>
 					<input
 						ref={el => {
-							if (fileIndex === -1) {
+							if (fileRef && fileIndex === -1) {
 								fileRef.current[0] = el
-							} else {
+							} else if (fileRef) {
 								fileRef.current[fileIndex] = el
 							}
 						}}
 						id={id}
-						className={styles.formInput}
+						className={styles.fileInput}
 						onChange={e => {
 							const file = e.target.files?.[0]
 
 							onChange(file)
 						}}
 						type="file"
+						disabled={isSubmitting}
+						aria-describedby={error ? `${id}-error` : undefined}
 					/>
-					{error && <span className={`${styles.error} ${error ? styles.marginError : ''}`}>{error.message}</span>}
-					<div className={styles.imageBox}>
-						<RHFInput name={`${name}.alt`} type="text" label="Alt" styles={styles} id={`title-${randomIndex}`} />
-						<RHFInput
-							name={`${name}.caption`}
-							type="text"
-							label="Caption"
-							styles={styles}
-							id={`title-${randomIndex + 1}`}
-						/>
-					</div>
+					{error && (
+						<span id={`${id}-error`} className={`${styles.error} ${error ? styles.marginError : ''}`}>
+							{error.message}
+						</span>
+					)}
+					{children}
 				</div>
 			)}
 		/>

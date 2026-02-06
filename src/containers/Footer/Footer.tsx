@@ -1,21 +1,37 @@
 import styles from './Footer.module.scss'
-import { useForm } from 'react-hook-form'
+import { useForm, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import AnchorLink from '../../components/atoms/AnchorLink/AnchorLink'
+import useSocialLinks from '../../hooks/useSocialLinks'
+import SocialIcon from '../../components/atoms/SocialIcon/SocialIcon'
+import useFooterSiteLinks from '../../hooks/useFooterSiteLinks'
+const newsLetterSchema = z.object({
+	email: z.email(),
+})
+type newsLetterTypes = z.infer<typeof newsLetterSchema>
 const Footer = () => {
 	const year = new Date().getFullYear()
-
-	const schema = z.object({
-		email: z.email(),
-	})
-	type FormFields = z.infer<typeof schema>
+	const { socialLinks } = useSocialLinks()
+	const { siteLinks } = useFooterSiteLinks()
 	const {
 		register,
+		handleSubmit,
 		formState: { isSubmitting, errors },
-	} = useForm<FormFields>({
-		resolver: zodResolver(schema),
+	} = useForm<newsLetterTypes>({
+		mode: 'onSubmit',
+		resolver: zodResolver(newsLetterSchema),
+		defaultValues: {
+			email: '',
+		},
 	})
-
+	const onSubmit: SubmitHandler<newsLetterTypes> = async data => {
+		try {
+			console.log(data)
+		} catch (error) {
+			console.log(error)
+		}
+	}
 	return (
 		<footer className={styles.footerContainer}>
 			<div className={styles.footerMain}>
@@ -33,49 +49,33 @@ const Footer = () => {
 					</div>
 					<div className={`${styles.footerSiteLinks} ${styles.column}`}>
 						<h5>Site Links</h5>
-						<ul>
-							<li>
-								<a href="#">About Us</a>
-							</li>
-							<li>
-								<a href="#">Blog</a>
-							</li>
-							<li>
-								<a href="#">FAQ</a>
-							</li>
-							<li>
-								<a href="#">Terms</a>
-							</li>
-							<li>
-								<a href="#">Privacy Police</a>
-							</li>
+						<ul className={styles.footerList}>
+							{siteLinks.map(link => {
+								return (
+									<li key={link.name}>
+										<AnchorLink href={link.url}>{link.name}</AnchorLink>
+									</li>
+								)
+							})}
 						</ul>
 					</div>
 					<div className={`${styles.footerSocialLinks} ${styles.column}`}>
 						<h5>Follow Us</h5>
-						<ul>
-							<li>
-								<a href="#">Twitter</a>
-							</li>
-							<li>
-								<a href="#">Facebook</a>
-							</li>
-							<li>
-								<a href="#">Dribbble</a>
-							</li>
-							<li>
-								<a href="#">Pinterest</a>
-							</li>
-							<li>
-								<a href="#">Instagram</a>
-							</li>
+						<ul className={styles.footerList}>
+							{socialLinks.map(social => {
+								return (
+									<SocialIcon key={social.name} social={social} styles={styles}>
+										{social.name}
+									</SocialIcon>
+								)
+							})}
 						</ul>
 					</div>
 					<div className={`${styles.footerSubscribe} ${styles.column}`}>
 						<h5>Sign Up For Newsletter</h5>
 						<p>Signup to get updates on articles, interviews and events.</p>
 						<div className={styles.subscribeForm}>
-							<form className={styles.form}>
+							<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 								<input {...register('email')} type="email" name="email" id="email" placeholder="Your email Address" />
 								{errors.email && <div>{errors.email.message}</div>}
 								<button disabled={isSubmitting} type="submit">
@@ -90,7 +90,10 @@ const Footer = () => {
 				<div className={`${styles.column} row`}>
 					<span className={styles.copyright}>&copy; Copyright CodingBee {year}</span>
 					<span className={styles.copyright}>
-						Design by <a href="https://www.styleshout.com/" target='_blank'>StyleShout</a>
+						Design by{' '}
+						<a href="https://www.styleshout.com/" target="_blank">
+							StyleShout
+						</a>
 					</span>
 				</div>
 			</div>

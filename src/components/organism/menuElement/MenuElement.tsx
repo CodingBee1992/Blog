@@ -14,6 +14,7 @@ interface MenuElementProps {
 	handleMouseInDropdown?: (e: MouseEvent<HTMLElement>) => void
 	handleMouseOutDropdown?: (e: MouseEvent<HTMLElement>) => void
 	handleCloseDropDown?: (e: MouseEvent<HTMLLIElement>) => void
+	toggle?: () => void
 }
 
 const MenuElement = ({
@@ -25,9 +26,10 @@ const MenuElement = ({
 	handleMouseInDropdown,
 	handleMouseOutDropdown,
 	handleCloseDropDown,
+	toggle,
 }: MenuElementProps) => {
-	const { handleOpenCloseDropdown, mobileMenu, activeIndex } = useMenuContext()
-	const { toggle } = mobileMenu
+	const { handleOpenCloseDropdown, activeIndex } = useMenuContext()
+	// const { toggle } = mobileMenu
 	if (data.href === '') {
 		return (
 			<div
@@ -36,7 +38,8 @@ const MenuElement = ({
 				className={`${styles.menuElementContainer} ${activeIndex === index ? styles.active : ''}`}
 				onMouseEnter={e => handleMouseIn?.(e, index)}
 				onMouseLeave={e => handleMouseOut?.(e, index)}
-				onClick={e => handleOpenCloseDropdown(e)}>
+				onClick={e => handleOpenCloseDropdown(e)}
+				>
 				<div className={styles.menuElement}>
 					<span className={styles.title}>{data.title}</span>
 

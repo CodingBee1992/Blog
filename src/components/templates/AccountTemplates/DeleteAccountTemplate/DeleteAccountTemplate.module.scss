@@ -1,4 +1,4 @@
-@use '../../../../assets/styles/variable' as *;
+
 .deleteAccountContainer {
 	display: flex;
 	flex-direction: column;
@@ -8,126 +8,11 @@
 	background-color: var(--pagesBgc);
 	padding: 0 2rem;
 
-	.title {
-		margin-block: 2rem;
-		font-size: var(--textSize_26);
-		font-weight: 400;
-		line-height: 4rem;
-		font-family: var(--font-2);
-		color: var(--pagesColor);
-	}
-
-	.deleteAccountWrapper {
-		display: flex;
-		flex-direction: column;
-		.deleteForm {
-			display: flex;
-			flex-direction: column;
-			.formBox {
-				display: flex;
-				flex-direction: column;
-				margin-bottom: 2rem;
-				width: 100%;
-				label {
-					display: block;
-					margin-bottom: 0.5rem;
-					font-weight: bold;
-					font-size: 13px;
-					line-height: 20px;
-				}
-				.formInput {
-					position: relative;
-
-					input {
-						display: flex;
-						width: 100%;
-						padding: 1rem;
-						color: #000000;
-						border: 1px solid #889397;
-						border-radius: var(--borderRadius06);
-						outline: none;
-					}
-				}
-			}
-			.formBtns {
-				display: flex;
-				margin-top: 3rem;
-				.deleteAccount {
-					@include formBtn($bgc: #d3d3d3d3, $color: #979797, $padding: 1rem, $cursor: not-allowed);
-					margin-right: 1rem;
-				}
-				.confirmDeletion {
-					color: #ffffff;
-					background-color: #861a1a;
-					transition: all 0.3s;
-					cursor: pointer;
-					&:hover {
-						box-shadow: 0px 0px 3px 3px #ae3131;
-					}
-				}
-				.cancelDeletion {
-					@include formBtn($padding: 1rem, $bgc: transparent, $color: #000000);
-					border: 1px solid #000000;
-					&:hover {
-						box-shadow: 0px 0px 3px 3px #d3d3d3d3;
-					}
-				}
-			}
-
-			.warnSVG {
-				margin-right: 0.5rem;
-			}
-		}
-		.acknowledgementsList {
-			margin-bottom: 2rem;
-			.acknowledgement {
-				margin-bottom: 1rem;
-				list-style: none;
-
-				.checkbox {
-					display: flex;
-					flex-direction: row;
-					align-items: start;
-					justify-content: start;
-					gap: 1rem;
-					width: 100%;
-					cursor: pointer;
-
-					input {
-						display: none;
-					}
-					&:hover {
-						.checkmark {
-							box-shadow: 0px 0px 3px 3px #d3d3d3d3;
-						}
-						.scaleCheckmark {
-							box-shadow: none;
-						}
-					}
-
-					.acknowledgementInfo {
-						display: flex;
-						flex-direction: column;
-
-						.spanInfo1 {
-							line-height: 20px;
-							font-size: 13px;
-							font-weight: 600;
-						}
-						.spanInfo2 {
-							line-height: 20px;
-							font-size: 13px;
-						}
-					}
-				}
-			}
-		}
-	}
+	
 }
 
 @media (max-width: 800px) {
 	.deleteAccountContainer {
 		align-items: center;
-		
 	}
 }

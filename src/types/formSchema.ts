@@ -1,15 +1,22 @@
 import z from 'zod'
+import validateImageRHF from '../hooks/validateImageRHF'
+
+const imageSrcSchema = z.instanceof(File).or(z.string()).nullable()
+
 export const postSchema = z.object({
-	title: z.string().trim().min(4, { message: 'Min 4 characters' }),
-	introduction: z.string().trim().min(5, { message: 'Min 5 characters' }),
+	title: z.string().trim().min(1, { message: 'Please fill title' }),
+	introduction: z.string().trim().min(1, { message: 'Please fill introduction' }),
 
 	mainImage: z.object({
-		src: z
-			.instanceof(File).or(z.string())
-			.nullable()
-			.refine(v => v !== null, {
-				message: 'Please upload a file',
+		src: imageSrcSchema.superRefine(
+			validateImageRHF({
+				maxSizeMB: 5,
+				minWidth: 1600,
+				minHeight: 900,
+				maxWidth: 2800,
+				maxHeight: 1575,
 			}),
+		),
 		alt: z.string().trim().min(1, { message: 'Please fill alt' }),
 		caption: z.string().trim().min(1, { message: 'Please fill caption' }),
 		public_id: z.string(),
@@ -36,17 +43,21 @@ export const postSchema = z.object({
 			z.object({
 				type: z.literal('image'),
 				value: z.object({
-					src: z
-						.instanceof(File)
-						.or(z.string())
-						.nullable()
-						.refine(v => v !== null, 'Please upload a file'),
+					src: imageSrcSchema.superRefine(
+						validateImageRHF({
+							maxSizeMB: 5,
+							minWidth: 1600,
+							minHeight: 900,
+							maxWidth: 2800,
+							maxHeight: 1575,
+						}),
+					),
 					alt: z.string().min(1, 'Please fill alt'),
 					caption: z.string().min(1, 'Please fill caption'),
 					public_id: z.string(),
 				}),
 			}),
-		])
+		]),
 	),
 
 	categories: z.array(z.string()).min(1, { message: 'Min 1 Category' }).max(2, { message: 'Max 2 Categories' }),
