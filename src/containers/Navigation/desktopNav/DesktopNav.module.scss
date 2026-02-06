@@ -1,4 +1,4 @@
-.menu {
+.desktopNavWrapper {
 	display: flex;
 	width: 92%;
 	max-width: 1400px;
@@ -87,12 +87,12 @@
 	}
 }
 
-.secondNavBgColor {
+.navBgcDark {
 	background-color: var(--Bgc-navSecond);
 }
 
 @media (max-width: 1700px) {
-	.menu {
+	.desktopNavWrapper {
 		max-width: 1400px;
 		margin-left: calc(var(--logo-width) * 2);
 	}

@@ -42,8 +42,6 @@ const contact:MenuTypes ={
 export const dataNavigation= [
     home,
     defaultCategories,
-    
-    
     about,
     contact
 ]
