@@ -25,7 +25,7 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 				className={`${styles.heroSlideBox}  `}>
 				
 				<div className={styles.heroImageWrapper}>
-					<img loading="lazy" src={responsiveImage} alt={data.mainImage.alt} />
+					<img  loading="lazy" src={responsiveImage} alt={data.mainImage.alt} />
 				</div>
 				<div className={`row ${styles.heroContent} ${number === index ? styles.animated : ''}`}>
 					<div className={styles.heroText}>

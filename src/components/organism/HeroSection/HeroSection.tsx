@@ -48,9 +48,9 @@ const HeroSection = () => {
 
 		const diff = +swipeEndX.toFixed(0) - +swipeStartX.toFixed(0)
 
-		if (diff > 150) {
+		if (diff > 100) {
 			handleSliderPrev()
-		} else if (diff < -150) {
+		} else if (diff < -100) {
 			handleSliderNext()
 		}
 
@@ -68,7 +68,7 @@ const HeroSection = () => {
 
 	return (
 		<section id="hero" className={styles.homeContainer}>
-			<div className={styles.heroWrapper}>
+			<div className={styles.heroWrapper} >
 				<div
 					className={styles.heroSlider}
 					onMouseDown={e => handleSwipeStart(e)}

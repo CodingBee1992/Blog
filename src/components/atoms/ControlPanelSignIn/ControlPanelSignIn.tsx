@@ -8,16 +8,16 @@ interface ControlPanelSignInProps {
 const ControlPanelSignIn = ({ styles }: ControlPanelSignInProps) => {
 	const { userRef, openCloseUserMenu, toggleMenu } = useMenuContext()
 	return (
-		<div ref={userRef}>
+		<div ref={userRef} className={styles.signInWrapper}>
 			<button type='button' onClick={() => openCloseUserMenu()} className={styles.signInBtn}>
 				Sign In
 			</button>
 
-			<div  className={`${styles.controlContainer} ${toggleMenu ? styles.displayVisibility : ''}`}>
+			<div  className={`${styles.linksWrapper} ${toggleMenu ? styles.displayVisibility : ''}`}>
 				<AnchorLink className={styles.anchorLink} href="/login">
 					Sign In
 				</AnchorLink>
-				<div className={styles.signUpContainer}>
+				<div className={styles.signUpWrapper}>
 					<span className={styles.signUpSpan}>Don't have an Account?</span>
 					<AnchorLink className={styles.anchorLink} href="/registration">
 						Sign Up
