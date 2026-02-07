@@ -12,7 +12,7 @@ interface DesktopProps {
 
 const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 	const location = useLocation()
-	const menuRef = useRef<HTMLDivElement>(null)
+	const desktopRef = useRef<HTMLDivElement>(null)
 	const [timeOutListIn, setTimeOutListIn] = useState<ReturnType<typeof setTimeout>[]>([])
 	const [timeOutListOut, setTimeOutListOut] = useState<ReturnType<typeof setTimeout>[]>([])
 	const { mobileMenu } = useMenuContext()
@@ -28,11 +28,11 @@ const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 
 	useEffect(() => {
 		if (location.pathname !== '/') {
-			navRef.current?.classList.add(styles.secondNavBgColor)
-			menuRef.current?.classList.add(styles.navWrapper)
+			navRef.current?.classList.add(styles.navBgcDark)
+			desktopRef.current?.classList.add(styles.navWrapper)
 		} else {
-			navRef.current?.classList.remove(styles.secondNavBgColor)
-			menuRef.current?.classList.remove(styles.navWrapper)
+			navRef.current?.classList.remove(styles.navBgcDark)
+			desktopRef.current?.classList.remove(styles.navWrapper)
 		}
 	}, [location.pathname, navRef])
 
@@ -113,7 +113,7 @@ const DesktopNav = ({ navRef, dataMenu }: DesktopProps) => {
 		}
 	}
 	return (
-		<div ref={menuRef} className={`${styles.menu}`}>
+		<div ref={desktopRef} className={`${styles.desktopNavWrapper}`}>
 			{dataMenu.map((item: MenuTypes, index: number) => {
 				return (
 					<MenuElement

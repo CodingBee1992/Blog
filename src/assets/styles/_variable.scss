@@ -34,7 +34,7 @@ $mobileSmall: 380px;
 	--loaderBgc: #000000;
 
 	--headerHeight: 8.8rem;
-	--panelRight: 7rem;
+	--panelRight: 6rem;
 	--controllSettingsTop:160%;
 	--controllContainerTop:260%;
 	--logo-width: 96px;
@@ -59,13 +59,18 @@ $mobileSmall: 380px;
 	--Bgc-navSearch: #000000;
 	--Bgc-navSecond: #000000;
 
+	--mobileIconBgc: #ffffff;
+	--mobileIconBgcHover: #d3d3d3d3;
+	--searchIconBgc: #ffffff;
+	--searchIconBgcHover: #d3d3d3d3;
+	
 	--menu-textColor: #ffffff;
 	--menu-textColorHover: #d3d3d3d3;
 
 	--borderBottom: #ffffff0d;
 
 	--subMenuBgc: #282828;
-	--subMenu-Color: #d3d3d3d3;
+	--subMenu-Color: #e5e5e5d3;
 	--subMenu-ColorHover: #ffffff;
 
 	--closeBtn-Color: #ffffff;
@@ -73,8 +78,6 @@ $mobileSmall: 380px;
 
 	--searchElementTextColor: #000000;
 
-	--menuIcon-Color: #ffffff;
-	--menuIcon-ColorHover: #d3d3d3d3;
 
 	--menu-TextSize: 1.5rem;
 	--subMenu-TextSize: 1.4rem;
@@ -296,6 +299,7 @@ $mobileSmall: 380px;
 	:root {
 		--lineHeight: calc(2.5 * 3.2rem);
 		--menu-TextSize: calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
+		--panelRight: 5rem;
 	}
 }
 @media (max-width: 800px) {
@@ -322,6 +326,7 @@ $mobileSmall: 380px;
 		--padding-arrows: 1.5rem 2rem;
 		--socialLinksRight: 1.8rem;
 		--gutter: 1rem;
+		--panelRight: 4rem;
 	}
 }
 
@@ -332,6 +337,13 @@ $mobileSmall: 380px;
 		--slideContent-width: 75dvw;
 		--brick-padding: 4rem;
 		--brick-paddingLeftRight: 2rem;
+		--panelRight: 3rem;
+	}
+}
+@media (max-width: 400px) {
+	:root {
+		
+		--panelRight: 1.8rem;
 	}
 }
 

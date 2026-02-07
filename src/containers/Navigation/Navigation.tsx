@@ -62,14 +62,14 @@ const Navigation = () => {
 	})
 
 	return (
-		<nav ref={navRef} className={styles.container}>
+		<nav ref={navRef} className={styles.navContainer}>
 			<Logo styles={styles} />
 			{size.width > 900 ? <DesktopNav navRef={navRef} dataMenu={newDataMenu} /> : <MobileNav dataMenu={newDataMenu} />}
-			<div className={styles.panel}>
+			<div className={styles.navPanel}>
 				<SearchButton />
-				{size.width > 900 && <ControlPanel index={0} styles={styles} />}
+				{size.width > 900 ? <ControlPanel index={0} styles={styles} /> : <MenuIcon />}
 			</div>
-			{size.width <= 900 && <MenuIcon />}
+			
 
 			{isOpen && <SearchContainer isOpen={isOpen} />}
 		</nav>

@@ -1,55 +1,53 @@
 .btn {
-	position: absolute;
-	right: 4rem;
+	// position: absolute;
+	// right: 4rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 48px;
 	height: 48px;
-    background-color: transparent;
-    border: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 1s ease-in-out;
-    cursor: pointer;
-    z-index: 1000;
+	background-color: transparent;
+	border: none;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 1s ease-in-out;
+	cursor: pointer;
+	z-index: 1000;
 	.span {
-        display: block;
-        position: relative;
+		display: block;
+		position: relative;
 		width: 28px;
 		height: 2px;
-		background-color: var(--menuIcon-Color);
-        transition: all .3s;
+		background-color: var(--mobileIconBgc);
+		transition: all 0.3s;
 
-		&::after, &::before {
-            content: '';
-            position: absolute;
-            left: 0;
+		&::after,
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
 			width: 100%;
 			height: 2px;
 			background-color: inherit;
 		}
-        &::after {
-            top: -10px;
-        }
-        &::before{
-            top: 10px;
-        }
-
+		&::after {
+			top: -10px;
+		}
+		&::before {
+			top: 10px;
+		}
 	}
-    &:hover .span{
-        background-color: var(--menuIcon-ColorHover);
-    }
-
-
+	&:hover .span {
+		background-color: var(--mobileIconBgcHover);
+	}
 }
-.toggle{
-    opacity: 1;
-    visibility: visible;
+.toggle {
+	opacity: 1;
+	visibility: visible;
 }
 
 @media (max-width: 600px) {
-	.btn{
+	.btn {
 		right: 2.8rem;
 	}
 }

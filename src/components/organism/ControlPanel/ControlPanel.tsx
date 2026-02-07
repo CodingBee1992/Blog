@@ -18,7 +18,7 @@ const ControlPanel = ({ styles, index, activeIndex, handleOpenCloseDropdown }: C
 	
 	return (
 		<div
-			className={`${styles.controlPanelContainer} ${activeIndex === index ? styles.active : ''}`}
+			className={`${styles.navPanelWrapper} ${activeIndex === index ? styles.active : ''}`}
 			data-element={index}
 			onClick={e => {
 				handleOpenCloseDropdown?.(e)

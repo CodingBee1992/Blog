@@ -1,5 +1,4 @@
 .search {
-	
 	padding: 8px;
 	top: 0;
 	display: flex;
@@ -12,13 +11,13 @@
 	.icon {
 		width: 24px;
 		height: 24px;
-		color: var(--menu-textColor);
+		color: var(--searchIconBgc);
 		transition: 0.3s all ease-in-out;
 	}
 
 	&:hover {
 		.icon {
-			color: var(--menu-textColorHover);
+			color: var(--searchIconBgcHover);
 		}
 	}
 }

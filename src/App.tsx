@@ -68,7 +68,7 @@ import PrivacyPolicy from './components/pages/PrivacyPolicy/PrivacyPolicy'
 import TermsAndConditions from './components/pages/TermsAndConditions/TermsAndConditions'
 import MaintenanceGuard from './containers/StaticLayout/MaintenanceGuard'
 
-const Loader = lazy(() => import('./components/atoms/loader/Loader'))
+import Loader from './components/atoms/loader/Loader'
 const App = () => {
 	// useEffect(() => {
 	// 	if (window.gtag) {
