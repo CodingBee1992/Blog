@@ -5,13 +5,13 @@ import { useFetchLiveCommentsQuery } from '../../../slices/api/commentsApi'
 import ResponsiveArticleImage from '../ResponsiveArticleImage/ResponsiveArticleImage'
 import {
 	useFetchLivePostLikesQuery,
-	
 	useFetchUserLikedPostQuery,
 	useToogleLikePostMutation,
 } from '../../../slices/api/postLikeApi'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 interface ArticleMiddleSideProps {
 	styles: { [key: string]: string }
@@ -23,16 +23,18 @@ type ArticleBlock =
 
 const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 	const { articleContent, introduction } = usePostContext()
+	const [likeMessage, setLikeMessage] = useState<string>('')
 	const { search } = useLocation()
 	const params = new URLSearchParams(search)
 	const postId = params.get('id')
 	const { id, isLogged } = useSelector((state: RootState) => state.auth)
 
 	const { data } = useFetchLiveCommentsQuery(postId!, { skip: !postId })
-	const [likePost] = useToogleLikePostMutation()
+	const [likePost, { error }] = useToogleLikePostMutation()
 	const { data: likedPost } = useFetchUserLikedPostQuery({ postId, userId: id }, { skip: !isLogged || !postId || !id })
+
 	const { data: postLikes } = useFetchLivePostLikesQuery(postId!, { skip: !postId })
-	
+
 	const { firstPart, secondPart } = useMemo(() => {
 		if (!introduction) return { firstPart: '', secondPart: '' }
 
@@ -55,8 +57,35 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 
 	const handleSetLike = async () => {
 		if (!postId) return
+
+		if (!isLogged) {
+			setLikeMessage('You must log in')
+			return
+		}
+
 		await likePost(postId)
 	}
+
+	useEffect(() => {
+		if (error && typeof error === 'object' && error !== null) {
+			const fetchError = error as FetchBaseQueryError
+			const errorMessage =
+				fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
+					? (fetchError.data.message as string)
+					: 'An unexpected error has occured'
+			setLikeMessage(errorMessage)
+		}
+	}, [error])
+
+	useEffect(() => {
+		if (likeMessage) {
+			const timer = setTimeout(() => {
+				setLikeMessage('')
+			}, 3000)
+
+			return () => clearTimeout(timer)
+		}
+	}, [likeMessage])
 
 	return (
 		<div className={styles.articleMiddleSideContainer}>
@@ -119,31 +148,31 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 			<div className={styles.articleReactionsBox}>
 				<div className={styles.articleReactionsInfo}>
 					<span className={styles.articleLikes}>
-						<span className={styles.articleSVG}>
-							<HeartSVG className={styles.articleLikeSVG} />
+						<button aria-label="Like button" onClick={() => handleSetLike()} className={styles.articleSVG}>
+							<HeartSVG className={`${styles.articleLikeSVG} ${likedPost?.userId === id ? styles.liked : ''}`} />
+						</button>
+						<span className={styles.reactionText}>
+							{postLikes && postLikes > 0
+								? postLikes === 1
+									? `${postLikes} Like`
+									: `${postLikes} Likes`
+								: `${postLikes} Likes`}
 						</span>
-						{postLikes && postLikes > 0
-							? postLikes === 1
-								? `${postLikes} Like`
-								: `${postLikes} Likes`
-							: `${postLikes} Likes`}
 					</span>
 					<span className={styles.articleComments}>
 						<span className={styles.articleSVG}>
 							<CommentsSVG className={styles.articleCommentSVG} />
 						</span>
-						{data && data.length > 0
-							? data?.length === 1
-								? `${data?.length} Comment`
-								: `${data?.length} Comments`
-							: `${data?.length} Comments`}
+						<span className={styles.reactionText}>
+							{data && data.length > 0
+								? data?.length === 1
+									? `${data?.length} Comment`
+									: `${data?.length} Comments`
+								: `${data?.length} Comments`}
+						</span>
 					</span>
 				</div>
-				{isLogged && (
-					<button aria-label="Like button" className={styles.articleReactionButton} onClick={() => handleSetLike()}>
-						{likedPost?.userId === id ? 'Unlike' : 'Like'}
-					</button>
-				)}
+				{likeMessage && <span className={styles.articleLikeMessage}>{likeMessage}</span>}
 			</div>
 		</div>
 	)

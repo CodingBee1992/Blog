@@ -17,9 +17,10 @@ const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [swipeStartX, setSwipeStartX] = useState<number>(0)
 	const { data, isFetching } = useFetchHeroPostLimitQuery({})
-	const { blog } = useMenuContext()
-	const limit = blog.heroPostLimit || 3
+	const { posts } = useMenuContext()
+	const limit = posts.heroPostLimit || 3
 	const { socialLinks } = useSocialLinks()
+	
 	const handleSliderNext = () => {
 		setNumber(prev => (prev >= limit - 1 ? 0 : prev + 1))
 	}
@@ -79,6 +80,7 @@ const HeroSection = () => {
 						<SliderList key={index} styles={styles} data={data} index={index} number={number} />
 					))}
 				</div>
+				
 				<ul className={styles.dots}>
 					{Array.from({ length: limit }, (_, index) => {
 						return (

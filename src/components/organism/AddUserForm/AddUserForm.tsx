@@ -10,6 +10,7 @@ import FormBtn from '../../atoms/FormBtn/FormBtn'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useEffect, useState } from 'react'
 import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
+import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
 
 const userSchema = z.object({
 	name: z.string().trim().min(4, { message: 'Min 4 characters' }),
@@ -37,7 +38,7 @@ const AddUserForm = () => {
 		handleSubmit,
 		reset,
 		setError,
-		formState: { isSubmitting, isDirty },
+		formState: { isSubmitting, isDirty, errors },
 	} = methods
 
 	const onSubmit: SubmitHandler<userSchemaTypes> = async (data: userSchemaTypes) => {
@@ -46,9 +47,11 @@ const AddUserForm = () => {
 
 			const res = await adminCreateUser(data).unwrap()
 
-			if (res) setSuccessMessage(res.message)
+			if (res) {
+				setSuccessMessage(res.message)
 
-			reset()
+				reset()
+			}
 		} catch (error) {
 			if (typeof error === 'object' && error !== null) {
 				const fetchError = error as FetchBaseQueryError
@@ -60,11 +63,16 @@ const AddUserForm = () => {
 					fetchError.data && typeof fetchError.data === 'object' && 'type' in fetchError.data
 						? (fetchError.data.type as string)
 						: 'An unexpected error has occurred'
-
+				const errorMessage =
+					fetchError.data && typeof fetchError.data === 'object' && 'error' in fetchError.data
+						? (fetchError.data.error as string)
+						: 'An unexpected error has occurred'
 				if (type === 'name') {
 					setError('name', { message })
 				} else if (type === 'email') {
 					setError('email', { message })
+				} else {
+					setError('root', { message: errorMessage })
 				}
 			} else {
 				setError('root', { message: 'An unexpected error has occurred' })
@@ -98,9 +106,14 @@ const AddUserForm = () => {
 							id="password"
 							isSubmitting={isSubmitting}
 						/>
-						<RHFSelect name="role" label="Role" options={role} styles={styles} isSubmitting={isSubmitting} />
+						<RHFSelect name="role" id="role" label="Role" options={role} styles={styles} isSubmitting={isSubmitting} />
 
-						{successMessage && <span className={styles.successMessage}>{successMessage}</span>}
+						{(errors.root?.message || successMessage) && (
+							<APIResponseMessage messageType={successMessage ? 'success' : 'error'}>
+								{errors.root?.message ? errors.root.message : successMessage}
+							</APIResponseMessage>
+						)}
+
 						<div className={styles.submitBtns}>
 							<FormBtn
 								type="submit"

@@ -1,12 +1,11 @@
-
-import { useFetchSettingsQuery } from '../../../slices/api/generalSettingsApi'
+import { useFetchSettingsQuery } from '../../../slices/api/settingsApi'
 import SocialLinks from '../SocialLinks/SocialLinks'
 
 import styles from './MaintenanceWrapper.module.scss'
 
 const MaintenanceWrapper = () => {
 	const { data, isLoading } = useFetchSettingsQuery({})
-   
+
 	const breakUntil = data.security.maintenanceMode.breakUntil
 
 	if (isLoading) return null
@@ -28,7 +27,9 @@ const MaintenanceWrapper = () => {
 
 					<div className={styles.maintenanceTime}>
 						<span className={styles.maintenanceLabel}>Planned return</span>
-						<span className={styles.maintenanceDate}>{formattedDate ? formattedDate : 'Until further notice'}</span>
+						<span className={styles.maintenanceDate}>
+							{breakUntil !== null ? formattedDate : 'Until further notice'}
+						</span>
 					</div>
 				</div>
 

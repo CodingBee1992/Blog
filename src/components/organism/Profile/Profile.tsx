@@ -16,7 +16,6 @@ import uploadToCloudinary from '../../../hooks/useUploadToCloudinary'
 
 import RHFInput from '../../atoms/RHFInput/RHFInput'
 
-
 const profileSchema = z.object({
 	name: z.string().trim().min(1, { message: 'Field is required' }),
 	avatar: z
@@ -108,10 +107,10 @@ const Profile = () => {
 			setEnabledButtonProfile(false)
 		}
 	}
-	
+
 	const onSubmit: SubmitHandler<profileTypes> = async data => {
 		let updatedAvatar = {}
-		
+
 		try {
 			if (data.avatar instanceof File) {
 				const file = data.avatar
@@ -127,7 +126,7 @@ const Profile = () => {
 			} else {
 				updatedAvatar = profileData.avatar
 			}
-			
+
 			const res = await updateProfile({ name: data.name, updatedAvatar }).unwrap()
 
 			if (res) setProfileSuccessMessage(res.message)
@@ -157,14 +156,14 @@ const Profile = () => {
 			})
 		}
 	}, [profileData, reset])
-	
+
 	useEffect(() => {
 		if (isSubmitting) {
 			setEnabledButtonProfile(false)
-		} 
+		}
 		if (name.length < 1) {
 			setEnabledButtonProfile(false)
-		} 
+		}
 	}, [isSubmitting, name.length])
 
 	useEffect(() => {
@@ -193,9 +192,7 @@ const Profile = () => {
 				<form
 					aria-busy={isSubmitting}
 					onSubmit={handleSubmit(onSubmit)}
-					className={`${styles.formWrapper} ${
-						profileSuccessMessage || profileErrorMessage ? '' : styles.topDistance
-					}`}>
+					className={`${styles.formWrapper} ${profileSuccessMessage || profileErrorMessage ? '' : styles.topDistance}`}>
 					<div className={styles.profileBox}>
 						{(profileSuccessMessage || profileErrorMessage) && (
 							<APIResponseMessage messageType={profileSuccessMessage ? 'succes' : 'error'}>
@@ -204,7 +201,7 @@ const Profile = () => {
 						)}
 						<label
 							htmlFor="avatar"
-							className={styles.avatarBox}
+							className={`${styles.avatarBox} ${!avatar ? styles.avatarShadow : ''}`}
 							onMouseEnter={() => setShowImage(true)}
 							onMouseLeave={() => setShowImage(false)}>
 							<input
@@ -225,7 +222,7 @@ const Profile = () => {
 								avatar instanceof File && <img src={URL.createObjectURL(avatar)} alt="User Avatar" />
 							)}
 
-							{showImage && (
+							{(!avatar || showImage) && (
 								<div className={`${styles.image} `}>
 									<UploadSVG className={styles.uploadSVG} />
 								</div>
@@ -241,8 +238,7 @@ const Profile = () => {
 						isSubmitting={isSubmitting}
 						setEnabledButtonProfile={setEnabledButtonProfile}
 					/>
-					
-					
+
 					<FormBtn
 						type="submit"
 						isSubmitting={!enabledButtonProfile}

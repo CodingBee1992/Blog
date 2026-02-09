@@ -93,17 +93,17 @@ const TextArea = ({
 			}, 300)
 
 			reset()
-		} catch (error: unknown) {
+		} catch (error) {
 			if (typeof error === 'object' && error !== null) {
 				const fetchError = error as FetchBaseQueryError
 				const messageError =
 					fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
 						? (fetchError.data.message as string)
-						: 'Wystąpił nieoczekiwany błąd'
+						: 'An unexpected error has occured'
 
 				setError('root', { message: messageError })
 			} else {
-				setError('root', { message: 'Wystąpił nieoczekiwany bład' })
+				setError('root', { message: 'An unexpected error has occured' })
 			}
 		}
 	}

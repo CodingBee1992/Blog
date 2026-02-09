@@ -1,11 +1,9 @@
-import AdminTemplate from "../../../../templates/AdminTemplate/AdminTemplate"
+
 
 
 const RoleAndPermissionsPage = () => {
   return (
-    <AdminTemplate>
-      Role & Permisions
-    </AdminTemplate>
+    <div>Role && Permisions</div>
   )
 }
 

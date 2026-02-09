@@ -10,7 +10,7 @@ import { postLikeApi } from './slices/api/postLikeApi'
 import { categoryApi } from './slices/api/categoriesApi'
 import { cloudinaryApi } from './slices/api/cloudinaryApi'
 import { emailApi } from './slices/api/emailApi'
-import { generalApi } from './slices/api/generalSettingsApi'
+import { generalApi } from './slices/api/settingsApi'
 
 export const store = configureStore({
 	reducer: {
@@ -20,11 +20,11 @@ export const store = configureStore({
 		[commentsApi.reducerPath]: commentsApi.reducer,
 		[userApi.reducerPath]: userApi.reducer,
 		[statisticApi.reducerPath]: statisticApi.reducer,
-		[postLikeApi.reducerPath]:postLikeApi.reducer,
+		[postLikeApi.reducerPath]: postLikeApi.reducer,
 		[categoryApi.reducerPath]: categoryApi.reducer,
-		[cloudinaryApi.reducerPath]:cloudinaryApi.reducer,
-		[emailApi.reducerPath]:emailApi.reducer,
-		[generalApi.reducerPath]:generalApi.reducer
+		[cloudinaryApi.reducerPath]: cloudinaryApi.reducer,
+		[emailApi.reducerPath]: emailApi.reducer,
+		[generalApi.reducerPath]: generalApi.reducer,
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware()
@@ -36,8 +36,7 @@ export const store = configureStore({
 			.concat(categoryApi.middleware)
 			.concat(cloudinaryApi.middleware)
 			.concat(emailApi.middleware)
-			.concat(generalApi.middleware)
-			
+			.concat(generalApi.middleware),
 })
 
 setupListeners(store.dispatch)

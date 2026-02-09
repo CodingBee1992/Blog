@@ -1,4 +1,5 @@
-import PostCategoryTemplate from '../../../../templates/AdminPanelTemplates/PostCategoryTemplate/PostCategoryTemplate'
+import PostCategoryTemplate from "../../../../templates/AdminPanelTemplates/Posts/PostCategoryTemplate/PostCategoryTemplate"
+
 
 
 const PostCategoryPage = () => {

@@ -1,4 +1,5 @@
-import ListOfCommentsPageTemplate from "../../../../templates/AdminPanelTemplates/ListOfCommentsPageTemplate/ListOfCommentsPageTemplate"
+import ListOfCommentsPageTemplate from "../../../../templates/AdminPanelTemplates/Comments/ListOfCommentsPageTemplate/ListOfCommentsPageTemplate"
+
 
 
 const ListOfCommentsPage = () => {

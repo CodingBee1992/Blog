@@ -159,49 +159,51 @@
 				.articleComments {
 					display: flex;
 					align-items: center;
-					margin-right: 1.5rem;
-
+					
+					margin-right: 2rem;
+					
 					.articleSVG {
 						display: flex;
 						align-items: center;
 						justify-content: center;
 						margin-right: 0.5rem;
-						width: 25px;
-						height: 25px;
+						background-color: transparent;
+						border: none;
+						width: 30px;
+						height: 30px;
 						border-radius: 50%;
+						cursor: pointer;
 
 						.articleLikeSVG {
 							width: 20px;
 							height: 20px;
+							transition: all 0.3s;
+							transform-origin: center;
 
 							path {
 								transition: all 0.5s;
+								fill: #d3d3d3d3;
+							}
+						}
+						.liked {
+							path {
 								fill: #ff4d6e;
 							}
 						}
+						&:hover .articleLikeSVG {
+							transform: scale(1.05);
 
-						&:hover .articleLikeSVG path {
-							fill: #7d061c;
+							path {
+								fill: #ff4d6e;
+							}
 						}
 					}
+					
 				}
 			}
 
-			.articleReactionButton {
-				display: flex;
-				align-self: start;
-				padding: 0.5rem 1.5rem;
-				font-size: var(--textSize_16);
-				border-radius: var(--borderRadius04);
-				background-color: #ff4d6e;
-				border: none;
-				cursor: pointer;
-				transition: all 0.3s;
-
-				&:hover {
-					background-color: #ff4d6e;
-					color: #ffffff;
-				}
+			.articleLikeMessage {
+				font-size: var(--textSize_12);
 			}
 		}
 	}
@@ -333,27 +335,18 @@
 	.articleTextContainer {
 		.articleMiddleSideContainer {
 			.articleMainText {
-				
 				font-size: var(--textSize_18);
-				
 			}
 			.articleContentContainer {
-				
-				
-
 				.articleContent {
-					
 					.articleContentTitle {
 						font-size: var(--textSize_18);
 					}
 					.articleContentText {
 						line-height: calc(1.125 * var(--space));
 						font-size: var(--textSize_16);
-						
 					}
-					
 				}
-				
 			}
 		}
 	}

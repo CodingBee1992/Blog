@@ -1,7 +1,7 @@
-import AdminTemplate from '../../../../templates/AdminTemplate/AdminTemplate'
+
 
 const PostHistory = () => {
-	return <AdminTemplate>PostHistory</AdminTemplate>
+	return <div>Posts History</div>
 }
 
 export default PostHistory

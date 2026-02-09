@@ -60,7 +60,7 @@ const ContactForm = () => {
 			if (!data) return
 
 			const { firstName, lastName, email, subject, message, policy } = data
-			console.log(policy)
+			
 
 			if (!policy) return
 			const res = await sendEmail({ firstName, lastName, email, subject, message }).unwrap()

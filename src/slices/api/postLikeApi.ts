@@ -25,7 +25,7 @@ export const postLikeApi = createApi({
 		}),
 
 		fetchLivePostLikes: builder.query<number, string>({
-			queryFn: () => ({ data:  0  }),
+			query: postId => `${POSTLIKE_URL}/postLikes?postId=${postId}`,
 
 			async onCacheEntryAdded(postId, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
 				await cacheDataLoaded
@@ -36,8 +36,8 @@ export const postLikeApi = createApi({
 
 				es.onmessage = event => {
 					const incoming = JSON.parse(event.data)
-					
-					updateCachedData(()=>incoming)
+
+					updateCachedData(() => incoming)
 				}
 
 				es.onerror = err => {
@@ -48,11 +48,6 @@ export const postLikeApi = createApi({
 				es.close()
 			},
 		}),
-
-		// fetchPostLikes: builder.query({
-		// 	query: postId => `${POSTLIKE_URL}/${postId}`,
-		// 	providesTags: (_result, _error, postId) => [{ type: 'PostLikes', id: postId }],
-		// }),
 	}),
 })
 

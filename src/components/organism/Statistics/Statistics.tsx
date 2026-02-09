@@ -29,7 +29,7 @@ const Statistics = () => {
 	if (!data) {
 		return <Loader />
 	}
-	const { postsStats, commentsStats, usersStats, likesStats, pageViews, todayPageViews, dayStats } = data
+	const { postsStats, commentsStats, usersStats, likesStats, pageViews, chartStats, dayStats } = data
 
 	const statConfig = [
 		{ title: 'PageViews', stats: pageViews, icon: <ViewsSVG />, style: styles.pageViews },
@@ -78,12 +78,12 @@ const Statistics = () => {
 					<p className={styles.areaChartTitle}>Views</p>
 					<div className={styles.areaCurrentViews}>
 						<div className={styles.areaCurrentInfo}>
-							<span>{valueConverter(todayPageViews.today)}</span>
+							<span>{valueConverter(chartStats.today)}</span>
 							<span>today</span>
 						</div>
 						<div className={styles.areaCurrentInfo}>
 							<span>
-								{todayPageViews.increase}% <ArrowUpSVG className={styles.arrowUpStat} />
+								{chartStats.increase}% <ArrowUpSVG className={styles.arrowUpStat} />
 							</span>
 							<span>increase</span>
 						</div>
@@ -91,7 +91,7 @@ const Statistics = () => {
 					<div className={styles.areaCurrentDropdown}>
 						<div className={styles.areaCurrentViewsFromTo} onClick={() => handleOpenDropDown()}>
 							<span>{viewsFromTo}</span>
-							 <ArrowDownSVG className={`${scaleUp ? styles.rotate : ''}`} />
+							<ArrowDownSVG className={`${scaleUp ? styles.rotate : ''}`} />
 						</div>
 
 						<div className={`${styles.areaCurrentViewsSelect} ${scaleUp ? styles.scaleUp : ''}`}>

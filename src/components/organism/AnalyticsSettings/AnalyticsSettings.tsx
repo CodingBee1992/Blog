@@ -1,5 +1,5 @@
 import { FormProvider, useForm, useWatch, type SubmitHandler } from 'react-hook-form'
-import { analyticsDefaults, analyticsSchema, type analyticsTypes } from '../../../types/generalSchema'
+import { analyticsDefaults, analyticsSchema, type analyticsTypes } from '../../../types/settingsSchema'
 import { useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
@@ -9,7 +9,7 @@ import RHFCheckbox from '../../atoms/RHFCheckbox/RHFCheckbox'
 import SwitchButton from '../../atoms/SwitchButton/SwitchButton'
 import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
-import { useUpdateAnalyticsSettingsMutation } from '../../../slices/api/generalSettingsApi'
+import { useUpdateAnalyticsSettingsMutation } from '../../../slices/api/settingsApi'
 import useMenuContext from '../../../hooks/useMenuContext'
 const AnalyticsSettings = () => {
 	const [successMessage, setSuccessMessage] = useState<string>('')

@@ -83,7 +83,9 @@ const EmailSettings = () => {
 		try {
 			if (!email) return setErrorTestMessage('Enter valid email address')
 			const res = await testSMTP(email).unwrap()
-			if (res) setTestMessage(res.message)
+			if (res) {setTestMessage(res.message)
+				setEmail('')
+			}
 		} catch (error) {
 			if (typeof error === 'object' && error !== null) {
 				const fetchError = error as FetchBaseQueryError

@@ -1,4 +1,5 @@
-import ListOfUsersPageTemplate from '../../../../templates/AdminPanelTemplates/ListOfUsersPageTemplate/ListOfUsersPageTemplate'
+import ListOfUsersPageTemplate from "../../../../templates/AdminPanelTemplates/Users/ListOfUsersPageTemplate/ListOfUsersPageTemplate"
+
 
 const ListPage = () => {
 	return <ListOfUsersPageTemplate />

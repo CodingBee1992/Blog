@@ -1,12 +1,7 @@
 
-import AdminTemplate from '../../../../templates/AdminTemplate/AdminTemplate'
 
 const CommentsHistory = () => {
-  return (
-    <AdminTemplate>
-        Change History
-    </AdminTemplate>
-  )
+	return <div>Change History</div>
 }
 
 export default CommentsHistory
