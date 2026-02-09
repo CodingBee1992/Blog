@@ -8,9 +8,12 @@ import RHFInput from '../../atoms/RHFInput/RHFInput'
 import styles from './IntegrationsSocialLinks.module.scss'
 import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
+import { useUpdateIntegrationsSettingsMutation } from '../../../slices/api/settingsApi'
+import useMenuContext from '../../../hooks/useMenuContext'
 const IntegrationsSocialLinks = () => {
 	const [successMessage, setSuccessMessage] = useState<string>('')
-
+	const [updateIntegrations] = useUpdateIntegrationsSettingsMutation()
+	const { integrations } = useMenuContext()
 	const methods = useForm<socialTypes>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
@@ -20,7 +23,7 @@ const IntegrationsSocialLinks = () => {
 
 	const {
 		handleSubmit,
-		// reset,
+		reset,
 		setError,
 		clearErrors,
 		formState: { isSubmitting, errors, isDirty },
@@ -30,11 +33,13 @@ const IntegrationsSocialLinks = () => {
 		try {
 			if (!data) return
 			if (!isDirty) return
+			console.log(data)
+			const res = await updateIntegrations({ integrations: data })
 
-			// if (res) {
-			// 	setSuccessMessage(res.message)
-			// 	reset(data)
-			// }
+			if (res) {
+				setSuccessMessage(res.data.message)
+				reset(data)
+			}
 			if (errors) clearErrors()
 		} catch (error) {
 			if (typeof error === 'object' && error !== null) {
@@ -51,9 +56,9 @@ const IntegrationsSocialLinks = () => {
 		}
 	}
 
-	// useEffect(() => {
-	// 	if (smtp) reset(smtp)
-	// }, [reset, smtp])
+	useEffect(() => {
+		if (integrations) reset(integrations)
+	}, [reset, integrations])
 
 	useEffect(() => {
 		if (successMessage) {
@@ -64,7 +69,7 @@ const IntegrationsSocialLinks = () => {
 	}, [successMessage])
 
 	const handleResetFields = () => {
-		// reset(smtpDefaults)
+		reset(socialLinksDefaults)
 	}
 
 	return (
@@ -89,7 +94,6 @@ const IntegrationsSocialLinks = () => {
 							name="twitter"
 							label="Twitter"
 							id="twitter"
-							
 							isSubmitting={isSubmitting}
 						/>
 						<RHFInput
@@ -98,16 +102,14 @@ const IntegrationsSocialLinks = () => {
 							name="instagram"
 							label="Instagram"
 							id="instagram"
-							
 							isSubmitting={isSubmitting}
 						/>
 						<RHFInput
 							styles={styles}
 							type="text"
-							name="youtube"
+							name="youTube"
 							label="Youtube"
 							id="youtube"
-							
 							isSubmitting={isSubmitting}
 						/>
 

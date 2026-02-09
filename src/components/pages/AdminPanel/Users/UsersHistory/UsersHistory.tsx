@@ -1,11 +1,9 @@
-import AdminTemplate from "../../../../templates/AdminTemplate/AdminTemplate"
+
 
 
 const UsersHistory = () => {
   return (
-    <AdminTemplate>
-        Users History
-    </AdminTemplate>
+    <div>Users History</div>
   )
 }
 

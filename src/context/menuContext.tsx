@@ -11,15 +11,16 @@ import { postLikeApi } from '../slices/api/postLikeApi'
 import { categoryApi } from '../slices/api/categoriesApi'
 import { useMobileMenu } from '../hooks/useMobileMenu'
 import { useMobileSideBarMenu } from '../hooks/useMobileSideBarMenu'
-import { useFetchSettingsQuery } from '../slices/api/generalSettingsApi'
+import { useFetchSettingsQuery } from '../slices/api/settingsApi'
 import type {
 	analyticsTypes,
-	blogTypes,
+	postsTypes,
 	interactionTypes,
 	differentTypes,
 	generalTypes,
 	securityTypes,
-} from '../types/generalSchema'
+} from '../types/settingsSchema'
+import type { socialTypes } from '../types/integrationsSchema'
 
 interface MenuContextProps {
 	children: ReactNode
@@ -39,10 +40,11 @@ interface CreateContextProps {
 	sideBarMenu: ReturnType<typeof useMobileSideBarMenu>
 	general: generalTypes
 	security: securityTypes
-	blog: blogTypes
+	posts: postsTypes
 	interactions: interactionTypes
 	analytics: analyticsTypes
 	different: differentTypes
+	integrations: socialTypes
 }
 
 const MenuContext = createContext<CreateContextProps | null>(null)
@@ -62,7 +64,7 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 	const [toggleMenu, setToggleMenu] = useState<boolean>(false)
 	const { close } = sideBarMenu
 	const { data: settings, isLoading } = useFetchSettingsQuery({})
-	const { general, security, blog, interactions, analytics, different } = settings ?? {}
+	const { general, security, posts, interactions, analytics, different, integrations } = settings ?? {}
 
 	// Open close mobile dropdown
 	const handleOpenCloseDropdown = (e: MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
@@ -137,10 +139,11 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 		sideBarRef,
 		general,
 		security,
-		blog,
+		posts,
 		interactions,
 		analytics,
 		different,
+		integrations,
 	}
 	if (isLoading) {
 		return null

@@ -17,8 +17,8 @@ const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [swipeStartX, setSwipeStartX] = useState<number>(0)
 	const { data, isFetching } = useFetchHeroPostLimitQuery({})
-	const { blog } = useMenuContext()
-	const limit = blog.heroPostLimit || 3
+	const { posts } = useMenuContext()
+	const limit = posts.heroPostLimit || 3
 	const { socialLinks } = useSocialLinks()
 	
 	const handleSliderNext = () => {

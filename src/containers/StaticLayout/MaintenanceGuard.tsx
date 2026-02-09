@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router'
 import MaintenancePage from '../../components/pages/MaintenancePage/MaintenancePage'
 import Loader from '../../components/atoms/loader/Loader'
-import { useFetchSettingsQuery } from '../../slices/api/generalSettingsApi'
+import { useFetchSettingsQuery } from '../../slices/api/settingsApi'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
 

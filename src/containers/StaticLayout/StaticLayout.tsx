@@ -11,7 +11,7 @@ import { MenuProvider } from '../../context/menuContext'
 import CookieBanner from '../CookieBanner/CookieBanner'
 import { useIncrementPageViewsMutation } from '../../slices/api/statisticsApi'
 
-import { useFetchSettingsQuery } from '../../slices/api/generalSettingsApi'
+import { useFetchSettingsQuery } from '../../slices/api/settingsApi'
 import useIncrementViews from '../../hooks/useIncrementViews'
 const Navigation = lazy(() => import('../Navigation/Navigation'))
 
@@ -29,7 +29,6 @@ const StaticLayout = () => {
 	// 	const tick = () => {
 	// 		incrementPageViews({})
 
-			
 	// 		timeout = setTimeout(tick, 50)
 	// 	}
 

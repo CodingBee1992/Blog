@@ -35,9 +35,7 @@ const RoleAndPermissionsPage = lazy(
 const ListOfCommentsPage = lazy(
 	() => import('./components/pages/AdminPanel/Comments/ListOfComments/ListOfCommentsPage'),
 )
-const CommentsSettingsPage = lazy(
-	() => import('./components/pages/AdminPanel/Comments/CommentsSettingsPage/CommentsSettingsPage'),
-)
+
 const CommentsHistory = lazy(() => import('./components/pages/AdminPanel/Comments/ChangeHistory/CommentsHistory'))
 
 const LoginAttempts = lazy(() => import('./components/pages/AdminPanel/Security/LoginAttempts/LoginAttempts'))
@@ -152,7 +150,7 @@ const App = () => {
 					</Route>
 					<Route path="comments/">
 						<Route path="list" element={<ListOfCommentsPage />} />
-						<Route path="settings" element={<CommentsSettingsPage />} />
+						
 						<Route path="comments-history" element={<CommentsHistory />} />
 					</Route>
 					<Route path="security">

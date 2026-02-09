@@ -45,7 +45,7 @@ export const securitySchema = z.object({
 	}),
 })
 
-export const blogSchema = z.object({
+export const postsSchema = z.object({
 	heroPostLimit: z
 		.number({
 			message: 'Field is required',
@@ -79,7 +79,7 @@ export const differentSchema = z.object({
 
 export type generalTypes = z.infer<typeof generalSchema>
 export type securityTypes = z.infer<typeof securitySchema>
-export type blogTypes = z.infer<typeof blogSchema>
+export type postsTypes = z.infer<typeof postsSchema>
 export type interactionTypes = z.infer<typeof interactionSchema>
 export type analyticsTypes = z.infer<typeof analyticsSchema>
 export type differentTypes = z.infer<typeof differentSchema>
@@ -103,7 +103,7 @@ export const differentDefaults: differentTypes = {
 	searchEngine: false,
 	contactForm: false,
 }
-export const blogDefaults: blogTypes = {
+export const postsDefaults: postsTypes = {
 	heroPostLimit: 0,
 	postPerPage: 0,
 }

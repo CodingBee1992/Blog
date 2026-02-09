@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm, useWatch, type SubmitHandler } from 'react-hook-form'
-import { differentDefaults, differentSchema, type differentTypes } from '../../../types/generalSchema'
+import { differentDefaults, differentSchema, type differentTypes } from '../../../types/settingsSchema'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
 import RHFCheckbox from '../../atoms/RHFCheckbox/RHFCheckbox'
@@ -9,7 +9,7 @@ import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessag
 import SwitchButton from '../../atoms/SwitchButton/SwitchButton'
 import styles from './DifferentSettings.module.scss'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
-import { useUpdateDifferentSettingsMutation } from '../../../slices/api/generalSettingsApi'
+import { useUpdateDifferentSettingsMutation } from '../../../slices/api/settingsApi'
 import useMenuContext from '../../../hooks/useMenuContext'
 const DifferentSettings = () => {
 	const [successMessage, setSuccessMessage] = useState<string>('')

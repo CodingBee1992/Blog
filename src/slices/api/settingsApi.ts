@@ -33,12 +33,12 @@ export const generalApi = createApi({
 			}),
 			invalidatesTags: () => [{ type: 'SAVE' }],
 		}),
-		updateBlogSettings: builder.mutation({
-			query: ({ blog }) => ({
-				url: `${GENERAL_URL}/update/blog`,
+		updatePostsSettings: builder.mutation({
+			query: ({ posts }) => ({
+				url: `${GENERAL_URL}/update/posts`,
 				method: 'PATCH',
 				headers: { 'Content-type': 'application/json' },
-				body: { blog },
+				body: { posts },
 			}),
 			invalidatesTags: () => [{ type: 'SAVE' }],
 		}),
@@ -60,6 +60,15 @@ export const generalApi = createApi({
 			}),
 			invalidatesTags: () => [{ type: 'SAVE' }],
 		}),
+		updateIntegrationsSettings: builder.mutation({
+			query: ({ integrations }) => ({
+				url: `${GENERAL_URL}/update/integrations`,
+				method: 'PATCH',
+				headers: { 'Content-type': 'application/json' },
+				body: { integrations },
+			}),
+			invalidatesTags: () => [{ type: 'SAVE' }],
+		}),
 		fetchSettings: builder.query({
 			query: () => `${GENERAL_URL}`,
 			providesTags: () => [{ type: 'SAVE' }],
@@ -72,7 +81,8 @@ export const {
 	useFetchSettingsQuery,
 	useUpdateSecuritySettingsMutation,
 	useUpdateInteractionSettingsMutation,
-	useUpdateBlogSettingsMutation,
+	useUpdatePostsSettingsMutation,
 	useUpdateAnalyticsSettingsMutation,
-	useUpdateDifferentSettingsMutation
+	useUpdateDifferentSettingsMutation,
+	useUpdateIntegrationsSettingsMutation
 } = generalApi

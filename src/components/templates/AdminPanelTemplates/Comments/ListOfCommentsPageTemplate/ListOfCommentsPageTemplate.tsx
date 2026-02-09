@@ -1,4 +1,5 @@
-import ListOfComments from '../../../organism/ListOfComments/ListOfComments'
+
+import ListOfComments from '../../../../organism/ListOfComments/ListOfComments'
 import styles from './ListOfCommentsPageTemplate.module.scss'
 
 const ListOfCommentsPageTemplate = () => {

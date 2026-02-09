@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react'
 import styles from './PostsSettings.module.scss'
 import { FormProvider, useForm, type SubmitHandler } from 'react-hook-form'
-import { blogDefaults, blogSchema, type blogTypes } from '../../../types/generalSchema'
+import { postsDefaults, postsSchema, type postsTypes } from '../../../types/settingsSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
 import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
 import RHFInput from '../../atoms/RHFInput/RHFInput'
-import { useUpdateBlogSettingsMutation } from '../../../slices/api/generalSettingsApi'
+import { useUpdatePostsSettingsMutation } from '../../../slices/api/settingsApi'
 import useMenuContext from '../../../hooks/useMenuContext'
 
 const PostsSettings = () => {
 	const [successMessage, setSuccessMessage] = useState<string>('')
 
-	const [updateSettings] = useUpdateBlogSettingsMutation()
-	const { blog } = useMenuContext()
-	const methods = useForm<blogTypes>({
+	const [updateSettings] = useUpdatePostsSettingsMutation()
+	const { posts } = useMenuContext()
+	const methods = useForm<postsTypes>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
-		resolver: zodResolver(blogSchema),
-		defaultValues: blog ? blog : blogDefaults,
+		resolver: zodResolver(postsSchema),
+		defaultValues: posts ? posts : postsDefaults,
 	})
 
 	const {
@@ -31,11 +31,11 @@ const PostsSettings = () => {
 		formState: { isSubmitting, errors, isDirty },
 	} = methods
 
-	const onSubmit: SubmitHandler<blogTypes> = async data => {
+	const onSubmit: SubmitHandler<postsTypes> = async data => {
 		try {
 			if (!data) return
 			if (!isDirty) return
-			const res = await updateSettings({ blog: data }).unwrap()
+			const res = await updateSettings({ posts: data }).unwrap()
 
 			if (res) {
 				setSuccessMessage(res.message)
@@ -57,16 +57,16 @@ const PostsSettings = () => {
 	}
 
 	const handleResetFields = () => {
-		reset(blogDefaults)
+		reset(postsDefaults)
 	}
 	useEffect(() => {
-		if (blog) reset(blog)
-	}, [blog, reset])
+		if (posts) reset(posts)
+	}, [posts, reset])
 	useEffect(() => {
 		if (errors.root?.message) {
 			const timer = setTimeout(() => {
 				clearErrors('root')
-				reset(blog)
+				reset(posts)
 			}, 5000)
 
 			return () => clearTimeout(timer)
@@ -78,7 +78,7 @@ const PostsSettings = () => {
 
 			return () => clearTimeout(timer)
 		}
-	}, [blog, clearErrors, errors.root?.message, reset, successMessage])
+	}, [posts, clearErrors, errors.root?.message, reset, successMessage])
 
 	return (
 		<FormProvider {...methods}>

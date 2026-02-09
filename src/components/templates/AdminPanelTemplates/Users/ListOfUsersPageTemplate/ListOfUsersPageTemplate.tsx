@@ -1,5 +1,6 @@
 
-import ListOfUsers from '../../../organism/ListOfUsers/ListOfUsers'
+
+import ListOfUsers from '../../../../organism/ListOfUsers/ListOfUsers'
 import styles from './ListOfPostPageTemplate.module.scss'
 const ListOfUsersPageTemplate = () => {
 

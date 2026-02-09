@@ -1,17 +1,19 @@
 import { FacebookSVG, InstagramSVG, TwitterSVG, YouTubeSVG } from '../assets/icons/social/SocialIcons'
+import { useFetchSettingsQuery } from '../slices/api/settingsApi'
 import type { SocialProps } from '../types/types'
 
 const useSocialLinks = () => {
+	const { data } = useFetchSettingsQuery({})
 
-
-	const socialLinks:SocialProps[] = [
-		{ name: 'Facebook', url: 'https://facebook.com', icon: <FacebookSVG />, ariaLabel: 'Facebook' },
-		{ name: 'Twitter', url: 'https://twitter.com', icon: <TwitterSVG />, ariaLabel: 'X(Twitter)' },
-		{ name: 'Instagram', url: 'https://instagram.com', icon: <InstagramSVG />, ariaLabel: 'Instagram' },
-		{ name: 'YoutTube', url: 'https://youtube.com', icon: <YouTubeSVG />, ariaLabel: 'Youtube' },
+	const { facebook, instagram, twitter, youTube } = data.integrations
+	const socialLinks: SocialProps[] = [
+		{ name: 'YoutTube', url: youTube, icon: <YouTubeSVG />, ariaLabel: 'Youtube' },
+		{ name: 'Instagram', url: instagram, icon: <InstagramSVG />, ariaLabel: 'Instagram' },
+		{ name: 'Twitter', url: twitter, icon: <TwitterSVG />, ariaLabel: 'X(Twitter)' },
+		{ name: 'Facebook', url: facebook, icon: <FacebookSVG />, ariaLabel: 'Facebook' },
 	]
 
-	return {socialLinks}
+	return { socialLinks }
 }
 
 export default useSocialLinks

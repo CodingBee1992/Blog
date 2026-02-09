@@ -1,4 +1,5 @@
-import AddUserForm from '../../../organism/AddUserForm/AddUserForm'
+
+import AddUserForm from '../../../../organism/AddUserForm/AddUserForm'
 import styles from './AddUserPageTemplate.module.scss'
 
 const AddUserPageTemplate = () => {
