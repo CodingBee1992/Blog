@@ -8,11 +8,12 @@ import useDebounce from '../../../hooks/useDebounce'
 import { useSearchPostQuery } from '../../../slices/api/postApi'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import createUrl from '../../../hooks/createUrl'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 interface DataSearchProps {
 	_id: string
 	title: string
-	categories:string[]
+	categories: string[]
 	seo: {
 		slug: string
 		metaTitle: string
@@ -25,10 +26,23 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 	const searchRef = useRef<HTMLDivElement>(null)
 	const searchListRef = useRef<HTMLDivElement>(null)
 	const [value, setValue] = useState<string>('')
+	const [errorMessage, setErrorMessage] = useState<string>('')
 	const dispatch = useDispatch()
 
 	const debouncedValue = useDebounce(value, 500)
-	const { data } = useSearchPostQuery(debouncedValue)
+	const { data, error } = useSearchPostQuery(debouncedValue)
+
+	useEffect(() => {
+		if (typeof error === 'object' && error !== null) {
+			const fetchError = error as FetchBaseQueryError
+			const errorMessage =
+				fetchError.data && typeof fetchError.data === 'object' && 'message' in fetchError.data
+					? (fetchError.data.message as string)
+					: 'An unexpected error has occured'
+
+			setErrorMessage(errorMessage)
+		}
+	}, [error, setErrorMessage])
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -55,7 +69,8 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 
 	const searchInput = (e: FormEvent<HTMLInputElement>) => {
 		const target = e.target as HTMLInputElement
-		setValue(target.value)
+
+		setValue(target.value.trim())
 	}
 
 	useEffect(() => {
@@ -79,7 +94,7 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 	const searchFocus = (e: FormEvent<HTMLInputElement>) => {
 		const target = e.target as HTMLInputElement
 		const query = target.value.trim()
-
+		if (query === ' ') return
 		if (query) {
 			searchListRef.current?.classList.add(styles.fadeOut)
 			setTimeout(() => {
@@ -93,7 +108,7 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 			<div ref={searchRef} className={`${styles.searchContainer} `}>
 				<div className="row">
 					<div className={styles.elementSearchContainer}>
-						<form  className={styles.elementSearchForm}>
+						<form className={styles.elementSearchForm}>
 							<input
 								value={value}
 								name="search"
@@ -109,18 +124,16 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 						<div ref={searchListRef} className={`${styles.elementSearchList}`}>
 							{data &&
 								data.map((item: DataSearchProps) => {
-
-									const url = createUrl({categories:item.categories,seo:item.seo,_id:item._id})
+									const url = createUrl({ categories: item.categories, seo: item.seo, _id: item._id })
 
 									return (
-										<AnchorLink
-											handleClose={handleClose}
-											className={styles.elementSearchListLink}
-											href={url}>
+										<AnchorLink handleClose={handleClose} className={styles.elementSearchListLink} href={url}>
 											{item.title}
 										</AnchorLink>
 									)
 								})}
+
+							{errorMessage && <span className={styles.elementSearchListLink}>{errorMessage}</span>}
 						</div>
 					</div>
 

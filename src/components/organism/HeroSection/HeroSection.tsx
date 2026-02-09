@@ -20,6 +20,7 @@ const HeroSection = () => {
 	const { blog } = useMenuContext()
 	const limit = blog.heroPostLimit || 3
 	const { socialLinks } = useSocialLinks()
+	
 	const handleSliderNext = () => {
 		setNumber(prev => (prev >= limit - 1 ? 0 : prev + 1))
 	}
@@ -79,6 +80,7 @@ const HeroSection = () => {
 						<SliderList key={index} styles={styles} data={data} index={index} number={number} />
 					))}
 				</div>
+				
 				<ul className={styles.dots}>
 					{Array.from({ length: limit }, (_, index) => {
 						return (

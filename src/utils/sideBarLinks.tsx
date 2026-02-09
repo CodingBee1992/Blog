@@ -50,7 +50,7 @@ const adminLinks: sideBarLinksProps[] = [
 		icon: <CommentsSVG />,
 		children: [
 			{ title: 'List', href: '/admin/comments/list' },
-			{ title: 'Settigns', href: '/admin/comments/settings' },
+			
 			{ title: 'Change History', href: '/admin/comments/comments-history' },
 		],
 	},
@@ -69,8 +69,12 @@ const adminLinks: sideBarLinksProps[] = [
 		href: '',
 		icon: <SettingsSVG />,
 		children: [
-			{ title: 'General Settings', href: '/admin/settings/general' },
-			{ title: 'Email Settings', href: '/admin/settings/email' },
+			{ title: 'General ', href: '/admin/settings/general' },
+			{ title: 'Security ', href: '/admin/settings/security' },
+			{ title: 'Posts ', href: '/admin/settings/posts' },
+			{ title: 'Interactions ', href: '/admin/settings/interactions' },
+			{ title: 'Analytics ', href: '/admin/settings/analytics' },
+			{ title: 'Email ', href: '/admin/settings/email' },
 			{ title: 'Integrations', href: '/admin/settings/integrations' },
 		],
 	},

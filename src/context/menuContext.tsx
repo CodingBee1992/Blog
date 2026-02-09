@@ -15,7 +15,7 @@ import { useFetchSettingsQuery } from '../slices/api/generalSettingsApi'
 import type {
 	analyticsTypes,
 	blogTypes,
-	commentsTypes,
+	interactionTypes,
 	differentTypes,
 	generalTypes,
 	securityTypes,
@@ -40,7 +40,7 @@ interface CreateContextProps {
 	general: generalTypes
 	security: securityTypes
 	blog: blogTypes
-	comments: commentsTypes
+	interactions: interactionTypes
 	analytics: analyticsTypes
 	different: differentTypes
 }
@@ -62,7 +62,7 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 	const [toggleMenu, setToggleMenu] = useState<boolean>(false)
 	const { close } = sideBarMenu
 	const { data: settings, isLoading } = useFetchSettingsQuery({})
-	const { general, security, blog, comments, analytics, different } = settings ?? {}
+	const { general, security, blog, interactions, analytics, different } = settings ?? {}
 
 	// Open close mobile dropdown
 	const handleOpenCloseDropdown = (e: MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
@@ -138,7 +138,7 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 		general,
 		security,
 		blog,
-		comments,
+		interactions,
 		analytics,
 		different,
 	}

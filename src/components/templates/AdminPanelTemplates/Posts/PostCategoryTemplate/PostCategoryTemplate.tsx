@@ -1,6 +1,7 @@
-import AddCategoryForm from '../../../organism/AddCategoryForm/AddCategoryForm'
-import PostCategories from '../../../organism/PostCategories/PostCategories'
 
+
+import AddCategoryForm from '../../../../organism/AddCategoryForm/AddCategoryForm'
+import PostCategories from '../../../../organism/PostCategories/PostCategories'
 import styles from './PostCategoryTemplate.module.scss'
 
 const PostCategoryTemplate = () => {

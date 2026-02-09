@@ -24,12 +24,12 @@ export const generalApi = createApi({
 			}),
 			invalidatesTags: () => [{ type: 'SAVE' }],
 		}),
-		updateCommentsSettings: builder.mutation({
-			query: ({ comments }) => ({
-				url: `${GENERAL_URL}/update/comments`,
+		updateInteractionSettings: builder.mutation({
+			query: ({ interactions }) => ({
+				url: `${GENERAL_URL}/update/interactions`,
 				method: 'PATCH',
 				headers: { 'Content-type': 'application/json' },
-				body: { comments },
+				body: { interactions },
 			}),
 			invalidatesTags: () => [{ type: 'SAVE' }],
 		}),
@@ -71,7 +71,7 @@ export const {
 	useSaveGeneralSettingsMutation,
 	useFetchSettingsQuery,
 	useUpdateSecuritySettingsMutation,
-	useUpdateCommentsSettingsMutation,
+	useUpdateInteractionSettingsMutation,
 	useUpdateBlogSettingsMutation,
 	useUpdateAnalyticsSettingsMutation,
 	useUpdateDifferentSettingsMutation

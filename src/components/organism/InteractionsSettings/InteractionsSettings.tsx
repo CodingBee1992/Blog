@@ -1,29 +1,29 @@
-import styles from './CommentsSettings.module.scss'
+import styles from './InteractionsSettings.module.scss'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm, useWatch, type SubmitHandler } from 'react-hook-form'
-import { commentsDefaults, commentsSchema, type commentsTypes } from '../../../types/generalSchema'
+import { interactionsDefaults, interactionSchema, type interactionTypes } from '../../../types/generalSchema'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
 import SwitchButton from '../../atoms/SwitchButton/SwitchButton'
 import RHFCheckbox from '../../atoms/RHFCheckbox/RHFCheckbox'
 import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
-import { useUpdateCommentsSettingsMutation } from '../../../slices/api/generalSettingsApi'
+import { useUpdateInteractionSettingsMutation } from '../../../slices/api/generalSettingsApi'
 import useMenuContext from '../../../hooks/useMenuContext'
 
-const CommentsSettings = () => {
+const InteractionsSettings = () => {
 	const [successMessage, setSuccessMessage] = useState<string>('')
 
-	const [updateSettings] = useUpdateCommentsSettingsMutation()
+	const [updateSettings] = useUpdateInteractionSettingsMutation()
 
-	const { comments } = useMenuContext()
+	const { interactions } = useMenuContext()
 
-	const methods = useForm<commentsTypes>({
+	const methods = useForm<interactionTypes>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
-		resolver: zodResolver(commentsSchema),
-		defaultValues: commentsDefaults,
+		resolver: zodResolver(interactionSchema),
+		defaultValues: interactionsDefaults,
 	})
 
 	const {
@@ -36,22 +36,22 @@ const CommentsSettings = () => {
 		formState: { isSubmitting, errors, isDirty },
 	} = methods
 
-	const [commentsEnabled, moderation] = useWatch({
+	const [commentsEnabled, moderation, likesEnabled] = useWatch({
 		control,
-		name: ['commentsEnabled', 'moderation'],
+		name: ['commentsEnabled', 'moderation', 'likesEnabled'],
 	})
 
-	const onSubmit: SubmitHandler<commentsTypes> = async data => {
+	const onSubmit: SubmitHandler<interactionTypes> = async data => {
 		try {
 			if (!data) return
 			if (!isDirty) return
-			const res = await updateSettings({ comments: data }).unwrap()
+			const res = await updateSettings({ interactions: data }).unwrap()
 
 			if (res) {
 				setSuccessMessage(res.message)
 				reset(data)
 			}
-			if(errors.root?.message) clearErrors('root')
+			if (errors.root?.message) clearErrors('root')
 		} catch (error) {
 			if (typeof error === 'object' && error !== null) {
 				const fetchError = error as FetchBaseQueryError
@@ -68,22 +68,22 @@ const CommentsSettings = () => {
 	}
 
 	const handleResetFields = () => {
-		Object.entries(commentsDefaults).forEach(([key, value]) => {
-			setValue(key as keyof commentsTypes, value, {
+		Object.entries(interactionsDefaults).forEach(([key, value]) => {
+			setValue(key as keyof interactionTypes, value, {
 				shouldDirty: true,
 			})
 		})
 	}
 
 	useEffect(() => {
-		if (comments) reset(comments)
-	}, [comments, reset])
+		if (interactions) reset(interactions)
+	}, [interactions, reset])
 
 	useEffect(() => {
 		if (errors.root?.message) {
 			const timer = setTimeout(() => {
 				clearErrors('root')
-				reset(comments)
+				reset(interactions)
 			}, 5000)
 
 			return () => clearTimeout(timer)
@@ -95,12 +95,12 @@ const CommentsSettings = () => {
 
 			return () => clearTimeout(timer)
 		}
-	}, [clearErrors, comments, errors.root?.message, reset, successMessage])
+	}, [clearErrors, interactions, errors.root?.message, reset, successMessage])
 
 	return (
 		<FormProvider {...methods}>
 			<WrapperBox>
-				<p className={styles.boxTitle}>Comments Settings</p>
+				<p className={styles.boxTitle}>Interaction Settings</p>
 				<form onSubmit={handleSubmit(onSubmit)} aria-busy={isSubmitting} className={styles.formWrapper}>
 					<RHFCheckbox
 						name="commentsEnabled"
@@ -110,7 +110,7 @@ const CommentsSettings = () => {
 						isSubmitting={isSubmitting}>
 						<SwitchButton switchButton={commentsEnabled} isSubmitting={isSubmitting} />
 					</RHFCheckbox>
-					
+
 					<RHFCheckbox
 						name="moderation"
 						id="moderation"
@@ -118,6 +118,9 @@ const CommentsSettings = () => {
 						styles={styles}
 						isSubmitting={isSubmitting}>
 						<SwitchButton switchButton={moderation} isSubmitting={isSubmitting} />
+					</RHFCheckbox>
+					<RHFCheckbox name="likesEnabled" id="likes" label="Likes" styles={styles} isSubmitting={isSubmitting}>
+						<SwitchButton switchButton={likesEnabled} isSubmitting={isSubmitting} />
 					</RHFCheckbox>
 
 					{(errors.root?.message || successMessage) && (
@@ -153,4 +156,4 @@ const CommentsSettings = () => {
 	)
 }
 
-export default CommentsSettings
+export default InteractionsSettings

@@ -32,9 +32,9 @@ const DifferentSettings = () => {
 		formState: { isSubmitting, errors, isDirty },
 	} = methods
 
-	const [searchEngine] = useWatch({
+	const [searchEngine, contactForm] = useWatch({
 		control,
-		name: ['searchEngine'],
+		name: ['searchEngine', 'contactForm'],
 	})
 
 	const onSubmit: SubmitHandler<differentTypes> = async data => {
@@ -106,6 +106,14 @@ const DifferentSettings = () => {
 						styles={styles}
 						isSubmitting={isSubmitting}>
 						<SwitchButton switchButton={searchEngine} isSubmitting={isSubmitting} />
+					</RHFCheckbox>
+					<RHFCheckbox
+						name="contactForm"
+						id="contactForm"
+						label="Contact Form"
+						styles={styles}
+						isSubmitting={isSubmitting}>
+						<SwitchButton switchButton={contactForm} isSubmitting={isSubmitting} />
 					</RHFCheckbox>
 
 					{(errors.root?.message || successMessage) && (

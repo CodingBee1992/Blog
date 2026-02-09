@@ -1,4 +1,5 @@
-import ListofPostPageTemplate from '../../../../templates/AdminPanelTemplates/ListofPostsPageTemplate/ListofPostPageTemplate'
+import ListofPostPageTemplate from "../../../../templates/AdminPanelTemplates/Posts/ListofPostsPageTemplate/ListofPostPageTemplate"
+
 
 const ListOfPostPage = () => {
 	return <ListofPostPageTemplate />

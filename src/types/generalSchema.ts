@@ -37,7 +37,6 @@ export const securitySchema = z.object({
 	loginEnabled: z.boolean(),
 	maintenanceMode: z.object({
 		maintenance: z.boolean(),
-		
 
 		breakUntil: z
 			.date()
@@ -63,10 +62,10 @@ export const blogSchema = z.object({
 		.max(30, 'Limit must be less than 30'),
 })
 
-export const commentsSchema = z.object({
+export const interactionSchema = z.object({
 	commentsEnabled: z.boolean(),
-	
 	moderation: z.boolean(),
+	likesEnabled: z.boolean(),
 })
 
 export const analyticsSchema = z.object({
@@ -75,12 +74,13 @@ export const analyticsSchema = z.object({
 
 export const differentSchema = z.object({
 	searchEngine: z.boolean(),
+	contactForm: z.boolean(),
 })
 
 export type generalTypes = z.infer<typeof generalSchema>
 export type securityTypes = z.infer<typeof securitySchema>
 export type blogTypes = z.infer<typeof blogSchema>
-export type commentsTypes = z.infer<typeof commentsSchema>
+export type interactionTypes = z.infer<typeof interactionSchema>
 export type analyticsTypes = z.infer<typeof analyticsSchema>
 export type differentTypes = z.infer<typeof differentSchema>
 
@@ -101,15 +101,16 @@ export const analyticsDefaults: analyticsTypes = {
 }
 export const differentDefaults: differentTypes = {
 	searchEngine: false,
+	contactForm: false,
 }
 export const blogDefaults: blogTypes = {
 	heroPostLimit: 0,
 	postPerPage: 0,
 }
-export const commentsDefaults: commentsTypes = {
+export const interactionsDefaults: interactionTypes = {
 	commentsEnabled: false,
-	
 	moderation: false,
+	likesEnabled: false,
 }
 export const securityDefaults: securityTypes = {
 	registrationEnabled: false,

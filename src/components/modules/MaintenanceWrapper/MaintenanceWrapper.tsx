@@ -28,7 +28,7 @@ const MaintenanceWrapper = () => {
 
 					<div className={styles.maintenanceTime}>
 						<span className={styles.maintenanceLabel}>Planned return</span>
-						<span className={styles.maintenanceDate}>{formattedDate ? formattedDate : 'Until further notice'}</span>
+						<span className={styles.maintenanceDate}>{breakUntil !== null ? formattedDate : 'Until further notice'}</span>
 					</div>
 				</div>
 

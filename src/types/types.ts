@@ -13,7 +13,7 @@ export interface SearchProps {
 }
 
 export type SocialProps = {
-	name?:string
+	name?: string
 	url: string
 	icon: ReactNode
 	ariaLabel?: string | undefined
@@ -164,7 +164,7 @@ export interface FullStatsTypes {
 	usersStats: Stat
 	likesStats: Stat
 	pageViews: Stat
-	todayPageViews: { today: number; increase: number }
+	chartStats: { today: number; increase: number }
 	dayStats: { date: string; views: number }[]
 	topRated: TopRatedStatsTypes[]
 	notifications: NotificationsTypes[]

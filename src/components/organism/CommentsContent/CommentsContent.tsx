@@ -19,7 +19,7 @@ const CommentsContent = () => {
 	const postId = query.get('id')
 
 	const { data: postComments, refetch } = useFetchLiveCommentsQuery(postId!, { skip: !postId })
-	const { comments } = useMenuContext()
+	const { interactions } = useMenuContext()
 
 	const { isLogged } = useSelector((state: RootState) => state.auth)
 
@@ -50,13 +50,13 @@ const CommentsContent = () => {
 	}, [postComments])
 
 	useEffect(() => {
-		if (comments.commentsEnabled || !comments.commentsEnabled) refetch()
-	}, [refetch, comments.commentsEnabled])
+		if (interactions.commentsEnabled || !interactions.commentsEnabled) refetch()
+	}, [refetch, interactions.commentsEnabled])
 
 	if (!postComments) return null
 	return (
 		<div className={styles.commentsContainer}>
-			{comments.commentsEnabled ? (
+			{interactions.commentsEnabled ? (
 				postComments.length > 0 ? (
 					<div className={`${styles.commentsContent} row`}>
 						<div className={`column`}>
@@ -89,7 +89,7 @@ const CommentsContent = () => {
 					</div>
 				</div>
 			)}
-			{comments.commentsEnabled && (
+			{interactions.commentsEnabled && (
 				<div className={`${styles.commentFormContainer} row`}>
 					<div className={`column`}>
 						{isLogged ? (

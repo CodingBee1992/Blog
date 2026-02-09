@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import styles from './BlogSettings.module.scss'
+import styles from './PostsSettings.module.scss'
 import { FormProvider, useForm, type SubmitHandler } from 'react-hook-form'
 import { blogDefaults, blogSchema, type blogTypes } from '../../../types/generalSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -11,7 +11,7 @@ import RHFInput from '../../atoms/RHFInput/RHFInput'
 import { useUpdateBlogSettingsMutation } from '../../../slices/api/generalSettingsApi'
 import useMenuContext from '../../../hooks/useMenuContext'
 
-const BlogSettings = () => {
+const PostsSettings = () => {
 	const [successMessage, setSuccessMessage] = useState<string>('')
 
 	const [updateSettings] = useUpdateBlogSettingsMutation()
@@ -83,7 +83,7 @@ const BlogSettings = () => {
 	return (
 		<FormProvider {...methods}>
 			<WrapperBox>
-				<p className={styles.boxTitle}>Blog Settings</p>
+				<p className={styles.boxTitle}>Posts Settings</p>
 				<form onSubmit={handleSubmit(onSubmit)} aria-busy={isSubmitting} className={styles.formWrapper}>
 					<RHFInput
 						type="number"
@@ -135,4 +135,4 @@ const BlogSettings = () => {
 	)
 }
 
-export default BlogSettings
+export default PostsSettings

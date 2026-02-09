@@ -1,4 +1,5 @@
-import ListOfPosts from '../../../organism/ListOfPosts/ListOfPosts'
+
+import ListOfPosts from '../../../../organism/ListOfPosts/ListOfPosts'
 import styles from './ListofPostPageTemplate.module.scss'
 
 const ListofPostPageTemplate = () => {

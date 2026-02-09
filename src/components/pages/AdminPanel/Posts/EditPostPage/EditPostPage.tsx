@@ -1,4 +1,5 @@
-import EditPostPageTemplate from "../../../../templates/AdminPanelTemplates/EditPostPageTemplate/EditPostPageTemplate"
+import EditPostPageTemplate from "../../../../templates/AdminPanelTemplates/Posts/EditPostPageTemplate/EditPostPageTemplate"
+
 
 
 const EditPostPage = () => {

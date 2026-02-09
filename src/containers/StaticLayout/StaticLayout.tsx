@@ -10,7 +10,9 @@ import { SinglePostProvider } from '../../context/createPostContext'
 import { MenuProvider } from '../../context/menuContext'
 import CookieBanner from '../CookieBanner/CookieBanner'
 import { useIncrementPageViewsMutation } from '../../slices/api/statisticsApi'
-// import Cookies from 'js-cookie'
+
+import { useFetchSettingsQuery } from '../../slices/api/generalSettingsApi'
+import useIncrementViews from '../../hooks/useIncrementViews'
 const Navigation = lazy(() => import('../Navigation/Navigation'))
 
 const StaticLayout = () => {
@@ -18,42 +20,33 @@ const StaticLayout = () => {
 	const { width } = useWindowSize()
 	const { pathname } = useLocation()
 	const [incrementPageViews] = useIncrementPageViewsMutation()
-
-	useEffect(() => {
-		incrementPageViews({})
-	}, [incrementPageViews, pathname])
-
-	// Unikalne wejscia na strone w ciągu danego dnia
-
-	// const today = new Date().toISOString().slice(0, 10)
-	// const path = encodeURIComponent(pathname)
-	// const handleIncrementPageViews = useCallback(async () => {
-	// 	try {
-	// 		localStorage.setItem(path, JSON.stringify({ day: today }))
-	// 		await incrementPageViews({})
-	// 	} catch (err) {
-	// 		console.error('Failed to count page view', err)
-	// 	}
-	// }, [incrementPageViews, today])
+	const { handleIncrementPageViews } = useIncrementViews()
+	const { data } = useFetchSettingsQuery({})
 
 	// useEffect(() => {
-	// 	const raw = localStorage.getItem(path)
-	// const consent = Cookies.get('consent-stat') === 'true'
-	// if(!consent) return
-	// 	if (raw) {
-	// 		try {
-	// 			const stored = JSON.parse(raw)
+	// 	let timeout: ReturnType<typeof setTimeout>
 
-	// 			if ( stored.day === today) return
-	// 		} catch {
-	// 			localStorage.removeItem(path)
-	// 		}
+	// 	const tick = () => {
+	// 		incrementPageViews({})
+
+			
+	// 		timeout = setTimeout(tick, 50)
 	// 	}
 
+	// 	tick()
 
+	// 	return () => clearTimeout(timeout)
+	// }, [incrementPageViews])
 
-	// 	handleIncrementPageViews()
-	// }, [handleIncrementPageViews, pathname])
+	const path = encodeURIComponent(pathname)
+
+	useEffect(() => {
+		if (data && !data.analytics.analyticsEnabled) {
+			incrementPageViews({})
+		} else {
+			handleIncrementPageViews({ path })
+		}
+	}, [data, handleIncrementPageViews, incrementPageViews, path])
 
 	useEffect(() => {
 		if (!isLoading) {
@@ -81,7 +74,7 @@ const StaticLayout = () => {
 				<CookieBanner />
 				<div data-aos="fade-zoom-in">
 					<Navigation />
-					<main style={{minHeight:'100dvh'}}>
+					<main style={{ minHeight: '100dvh' }}>
 						<Outlet />
 					</main>
 					<Footer />

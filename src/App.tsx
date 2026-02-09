@@ -47,10 +47,10 @@ const UnauthorizedAccess = lazy(
 const PasswordEvents = lazy(() => import('./components/pages/AdminPanel/Security/PasswordEvents/PasswordEvents'))
 
 const GeneralSettingsPage = lazy(
-	() => import('./components/pages/AdminPanel/Settings/GeneralSettingsPage/GeneralSettingsPage'),
+	() => import('./components/pages/AdminPanel/Settings/General/GeneralSettingsPage'),
 )
-const Email = lazy(() => import('./components/pages/AdminPanel/Settings/Email/Email'))
-const Integrations = lazy(() => import('./components/pages/AdminPanel/Settings/Integrations/Integrations'))
+const EmailSettingsPage = lazy(() => import('./components/pages/AdminPanel/Settings/Email/EmailSettingsPage'))
+const IntegrationsSettingsPage = lazy(() => import('./components/pages/AdminPanel/Settings/Integrations/IntegrationsSettingsPage'))
 // Account pages
 const ProfilePage = lazy(() => import('./components/pages/AccountPages/ProfilePage/ProfilePage'))
 const ResetPasswordPage = lazy(() => import('./components/pages/AccountPages/ResetPasswordPage/ResetPasswordPage'))
@@ -69,6 +69,10 @@ import TermsAndConditions from './components/pages/TermsAndConditions/TermsAndCo
 import MaintenanceGuard from './containers/StaticLayout/MaintenanceGuard'
 
 import Loader from './components/atoms/loader/Loader'
+import AnalyticsSettingsPage from './components/pages/AdminPanel/Settings/Analytics/AnalyticsSettingsPage'
+import SecuritySettingsPage from './components/pages/AdminPanel/Settings/Security/SecuritySettingsPage'
+import PostSettingsPage from './components/pages/AdminPanel/Settings/Post/PostSettingsPage'
+import InteractionsSettingsPage from './components/pages/AdminPanel/Settings/Interactions/InteractionsSettingsPage'
 const App = () => {
 	// useEffect(() => {
 	// 	if (window.gtag) {
@@ -158,8 +162,12 @@ const App = () => {
 					</Route>
 					<Route path="settings">
 						<Route path="general" element={<GeneralSettingsPage />} />
-						<Route path="email" element={<Email />} />
-						<Route path="integrations" element={<Integrations />} />
+						<Route path="security" element={<SecuritySettingsPage />} />
+						<Route path="posts" element={<PostSettingsPage />} />
+						<Route path="interactions" element={<InteractionsSettingsPage/>} />
+						<Route path="analytics" element={<AnalyticsSettingsPage />} />
+						<Route path="email" element={<EmailSettingsPage />} />
+						<Route path="integrations" element={<IntegrationsSettingsPage />} />
 					</Route>
 				</Route>
 

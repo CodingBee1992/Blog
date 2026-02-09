@@ -1,7 +1,9 @@
 import { useLocation } from 'react-router'
-import PostForm from '../../../organism/PostForm/PostForm'
+
 import styles from './EditPostPageTemplate.module.scss'
-import { useFetchPostByIdQuery } from '../../../../slices/api/postApi'
+import PostForm from '../../../../organism/PostForm/PostForm'
+import { useFetchPostByIdQuery } from '../../../../../slices/api/postApi'
+
 
 const EditPostPageTemplate = () => {
 	const { search } = useLocation()
