@@ -30,13 +30,7 @@ const ArticleLeftSide = ({ styles }: ArticleLefSideProps) => {
 					</div>
 					<span>On</span> 22/10/2025
 				</div>
-				<div className={styles.tags}>
-					<span className={styles.tagtext}>Tags</span>
-					<a href="#">dsfdf</a>
-					<a href="#">dsfdf</a>
-					<a href="#">dsfdf</a>
-					<a href="#">dsfdf</a>
-				</div>
+				
 			</div>
 		</div>
 	)

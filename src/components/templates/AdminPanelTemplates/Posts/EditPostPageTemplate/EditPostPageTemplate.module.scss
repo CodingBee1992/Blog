@@ -1,6 +1,10 @@
 .editPostContainer {
-	min-height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	height: 100%;
 	width: 100%;
+	min-height: 100dvh;
 	 background-color: var(--pagesBgc);
 }

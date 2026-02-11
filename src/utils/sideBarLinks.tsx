@@ -2,6 +2,7 @@ import {
 	AdminSVG,
 	CommentsSVG,
 	DashboardSVG,
+	LawSVG,
 	PostsSVG,
 	ProfileSVG,
 	SecuritySVG,
@@ -62,6 +63,17 @@ const adminLinks: sideBarLinksProps[] = [
 			{ title: 'Login Attempts', href: '/admin/security/login' },
 			{ title: 'Unauthorized Access', href: '/admin/security/access' },
 			{ title: 'Password Events', href: '/admin/security/passwords' },
+		],
+	},
+	{
+		title: 'Legal Documents',
+		href: '',
+		icon: <LawSVG />,
+		children: [
+			{ title: 'Privacy Policy ', href: '/admin/legal-documents/privacy-policy' },
+			{ title: 'Terms and Conditions ', href: '/admin/legal-documents/terms-and-conditions' },
+			{ title: 'Acknowledgments ', href: '/admin/legal-documents/acknowledgments' },
+			
 		],
 	},
 	{

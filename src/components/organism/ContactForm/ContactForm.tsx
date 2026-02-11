@@ -154,6 +154,7 @@ const ContactForm = () => {
 						id="message"
 						label="Message"
 						styles={styles}
+						className={styles.disableMiniMarkdown}
 						isSubmitting={isSubmitting}
 						placeholder="Enter your message"
 					/>
@@ -162,7 +163,7 @@ const ContactForm = () => {
 							<>
 								<CheckMark isChecked={policy} className={styles.checkMark} />
 								<span>
-									I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy.</AnchorLink>
+									I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy</AnchorLink> and <AnchorLink href='/terms-and-conditions'>Terms and Conditions</AnchorLink>
 								</span>
 							</>
 						</RHFCheckbox>

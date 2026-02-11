@@ -210,6 +210,11 @@ Notatki prywatne użytkownika
   Repo: https://github.com/Iconscout/unicons
   *Apache 2.0 pozwala na użycie, modyfikację i dystrybucję (również komercyjną) pod warunkiem zachowania informacji o licencji i autorze.*
 
+- **Neuicons**
+  Author: Neuicons
+  License: MIT
+  Repo: [https://github.com/neuicons/neu](https://github.com/neuicons/neu)
+  *MIT pozwala na użycie, modyfikację i dystrybucję (również komercyjną) pod warunkiem zachowania informacji o licencji i autorze.*
 
 👤 Autor
 
@@ -421,7 +426,11 @@ Likes, reactions, or ratings
   Repo: https://github.com/Iconscout/unicons
   *Apache 2.0 allows use, modification, and distribution (including commercial use), provided that the license and copyright notice are preserved.*
 
-
+- **Neuicons**
+  Author: Neuicons
+  License: MIT
+  Repo: [https://github.com/neuicons/neu](https://github.com/neuicons/neu)
+  *MIT allows use, modification, and redistribution (including commercial) as long as the license and copyright notice are preserved.*
 
 👤 Author
 Created by: CodingBee

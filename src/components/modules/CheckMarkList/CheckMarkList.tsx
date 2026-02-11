@@ -1,13 +1,10 @@
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
 import CheckMark from '../../atoms/Checkmark/CheckMark'
 import styles from './CheckMarkList.module.scss'
-
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 interface CheckMarkListProps {
-	data: {
-		id: number
-		info: string
-		info2: string
-	}[]
+	data: string[]
 	setEnabledButton: Dispatch<SetStateAction<boolean>>
 	confirmPassword: string
 }
@@ -24,12 +21,7 @@ const CheckMarkList = ({ data, setEnabledButton, confirmPassword }: CheckMarkLis
 	}, [checked.size, confirmPassword, data.length, setEnabledButton])
 
 	const handleCheckMark = (id: number) => {
-		// if (!checked.includes(id)) {
-		// 	setChecked(prev => [...prev, id])
-
-		// }else{
-		// 	setChecked(prev => prev.filter(v => v !== id))
-		// }
+		
 		setChecked(prev => {
 			const next = new Set(prev)
 
@@ -57,8 +49,8 @@ const CheckMarkList = ({ data, setEnabledButton, confirmPassword }: CheckMarkLis
 								isChecked={isChecked}
 							/>
 							<span className={styles.acknowledgementInfo}>
-								<span className={styles.spanInfo1}>{item.info}</span>
-								<span className={styles.spanInfo2}>{item.info2}</span>
+							<ReactMarkdown remarkPlugins={[remarkGfm]}>{item}</ReactMarkdown>
+								
 							</span>
 						</label>
 					</li>

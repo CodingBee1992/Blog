@@ -11,6 +11,7 @@ import { categoryApi } from './slices/api/categoriesApi'
 import { cloudinaryApi } from './slices/api/cloudinaryApi'
 import { emailApi } from './slices/api/emailApi'
 import { generalApi } from './slices/api/settingsApi'
+import { legalApi } from './slices/api/legalDocumentsApi'
 
 export const store = configureStore({
 	reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
 		[cloudinaryApi.reducerPath]: cloudinaryApi.reducer,
 		[emailApi.reducerPath]: emailApi.reducer,
 		[generalApi.reducerPath]: generalApi.reducer,
+		[legalApi.reducerPath]:legalApi.reducer
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware()
@@ -36,7 +38,8 @@ export const store = configureStore({
 			.concat(categoryApi.middleware)
 			.concat(cloudinaryApi.middleware)
 			.concat(emailApi.middleware)
-			.concat(generalApi.middleware),
+			.concat(generalApi.middleware)
+			.concat(legalApi.middleware)
 })
 
 setupListeners(store.dispatch)

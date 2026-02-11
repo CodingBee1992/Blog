@@ -4,17 +4,27 @@ import { useDeleteAccountMutation } from '../../../slices/api/userApi'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import WrapperBox from '../../atoms/WrapperBox/WrapperBox'
 import CheckMarkList from '../../modules/CheckMarkList/CheckMarkList'
-import { acknowledgements } from '../../../utils/legalFormsData'
+
 import AccountInputBox from '../../modules/AccountInputBox/AccountInputBox'
 import APIResponseMessage from '../../atoms/APIResponseMessage/APIResponseMessage'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import useMenuContext from '../../../hooks/useMenuContext'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
+import { useFetchLegalDocumentsQuery } from '../../../slices/api/legalDocumentsApi'
 const DeleteAccount = () => {
 	const [confirmPassword, setConfirmPassword] = useState<string>('')
 	const [enabledButton, setEnabledButton] = useState<boolean>(false)
 	const [errorMessage, setErrorMessage] = useState<string>('')
+	const { data } = useFetchLegalDocumentsQuery({ type: 'acknowledgments' })
 
+	const acknowledgements = data
+		? data.content
+				.split(/\d+\.\s*/)
+				.map((item: string) => item.trim())
+				.filter((item: string) => item.length > 0)
+		: []
+	
+	
 	const [deleteAccount] = useDeleteAccountMutation()
 	const { signOut } = useMenuContext()
 

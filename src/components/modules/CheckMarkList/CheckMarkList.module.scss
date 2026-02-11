@@ -28,15 +28,51 @@
 			.acknowledgementInfo {
 				display: flex;
 				flex-direction: column;
+				color: var(--pagesColor);
 
-				.spanInfo1 {
+				p {
+					font-size: var(--textSize_14);
+					margin-bottom: 0.5rem;
 					line-height: 20px;
-					font-size: 13px;
-					font-weight: 600;
 				}
-				.spanInfo2 {
-					line-height: 20px;
-					font-size: 13px;
+
+				
+				ul,
+				ol {
+					margin-bottom: 1rem;
+					padding-left: 1.5rem;
+				}
+
+				li {
+					margin-bottom: 0.5rem;
+				}
+
+				a {
+					color: #1a73e8;
+					text-decoration: none;
+				}
+
+				a:hover {
+					text-decoration: underline;
+				}
+
+				
+				blockquote {
+					border-left: 4px solid #ddd;
+					padding-left: 1rem;
+					color: #555;
+					font-style: italic;
+					margin: 1rem 0;
+				}
+
+				
+				strong {
+					font-weight: bold;
+				}
+
+			
+				em {
+					font-style: italic;
 				}
 			}
 		}
