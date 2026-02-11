@@ -28,6 +28,15 @@
 			pointer-events: none;
 			font-size: var(--sideBarLinks);
 			font-weight: 500;
+
+			p {
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 1;
+				text-overflow: ellipsis;
+				line-clamp: 1;
+				overflow: hidden;
+			}
 		}
 		.arrow {
 			margin-right: 2rem;
@@ -62,7 +71,13 @@
 		.subMenuLi {
 			padding-left: 4rem;
 			.subLink {
-				display: block;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 1;
+				text-overflow: ellipsis;
+				line-clamp: 1;
+				overflow: hidden;
+				// display: block;
 				width: 100%;
 				height: 100%;
 				white-space: nowrap;
@@ -76,8 +91,7 @@
 			}
 
 			&:hover {
-				// background-color: #d3d3d3d3;
-				// background-color: rgb(152, 255, 152);
+				
 				background-color: var(--sideBarBgcHoverLink);
 			}
 		}
@@ -86,7 +100,7 @@
 
 			&:hover {
 				background-color: var(--sideBarBgcHoverLink);
-				// background-color: rgb(152, 255, 152);
+				
 			}
 		}
 	}

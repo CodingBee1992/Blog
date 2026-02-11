@@ -1,32 +1,101 @@
 import { Controller, useFormContext, type FieldValues, type Path } from 'react-hook-form'
+import { mergeRefs } from 'react-merge-refs'
+import { useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react'
+import MiniMarkdownToolbar from '../../modules/MiniMarkdownToolbar/MiniMarkdownToolbar'
 
 interface RHFTextAreaProps<T extends FieldValues> {
 	name: Path<T>
 	label: string
 	styles: Record<string, string>
+	className?: string
 	id: string
-	isSubmitting?: boolean,
-	placeholder?:string
+	isSubmitting?: boolean
+	placeholder?: string
 }
 
-const RHFTextArea = <T extends FieldValues>({ name, label,placeholder, isSubmitting, styles, id }: RHFTextAreaProps<T>) => {
+const RHFTextArea = <T extends FieldValues>({
+	name,
+	label,
+	styles,
+	placeholder,
+	isSubmitting,
+	className,
+	id,
+}: RHFTextAreaProps<T>) => {
+	const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+	const [isFocused, setIsFocused] = useState<boolean>(false)
 	const { control } = useFormContext()
+	const handleKeyDown =
+		(onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void) => (e: KeyboardEvent<HTMLTextAreaElement>) => {
+			if (e.key !== 'Enter') return
+
+			const textarea = e.currentTarget
+			const { selectionStart, selectionEnd, value } = textarea
+
+			const lineStart = value.lastIndexOf('\n', selectionStart - 1) + 1
+			const line = value.slice(lineStart, selectionStart)
+
+			const match = line.match(/^(\d+)\.\s(.*)$/)
+			if (!match) return
+
+			e.preventDefault()
+
+			const currentNumber = Number(match[1])
+			const contentAfter = match[2]
+
+			let newValue = value
+			let newCursorPos = selectionStart
+
+			// pusta linia → zakończ listę
+			if (contentAfter.trim() === '') {
+				newValue = value.slice(0, lineStart) + '\n' + value.slice(selectionEnd)
+
+				newCursorPos = lineStart + 1
+			} else {
+				const nextLine = `\n${currentNumber + 1}. `
+				newValue = value.slice(0, selectionStart) + nextLine + value.slice(selectionEnd)
+
+				newCursorPos = selectionStart + nextLine.length
+			}
+
+			// 🔥 RHF potrzebuje event
+			const changeEvent = {
+				target: { value: newValue },
+			} as unknown as React.ChangeEvent<HTMLTextAreaElement>
+
+			onChange(changeEvent)
+
+			requestAnimationFrame(() => {
+				textarea.setSelectionRange(newCursorPos, newCursorPos)
+			})
+		}
 	return (
 		<Controller
 			name={name}
 			control={control}
-			render={({ field, fieldState: { error } }) => (
-				<div className={styles.textAreaContainer}>
+			render={({ field: { onChange, ref, value }, fieldState: { error } }) => (
+				<div className={`${styles.textAreaContainer} `}>
 					<label htmlFor={id}>{label}</label>
-					<textarea
-						id={id}
-						{...field}
-						readOnly={isSubmitting}
-						aria-readonly={isSubmitting}
-						aria-invalid={!!error}
-						aria-describedby={error ? `${id}-error` : undefined}
-						placeholder={placeholder}
-					/>
+					<div className={`${styles.textareaWrapper} ${isFocused ? styles.focusArea : ''}`}>
+						<textarea
+							id={id}
+							onChange={e => {
+								const target = e.target.value
+								onChange(target)
+							}}
+							value={value}
+							onFocus={() => setIsFocused(true)}
+							onBlur={() => setIsFocused(false)}
+							onKeyDown={handleKeyDown(onChange)}
+							ref={mergeRefs([ref, textareaRef])}
+							readOnly={isSubmitting}
+							aria-readonly={isSubmitting}
+							aria-invalid={!!error}
+							aria-describedby={error ? `${id}-error` : undefined}
+							placeholder={placeholder}
+						/>
+						<MiniMarkdownToolbar className={className} textareaRef={textareaRef} value={value} onChange={onChange} />
+					</div>
 					{error && (
 						<span id={`${id}-error`} className={styles.error}>
 							{error.message}

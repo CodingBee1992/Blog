@@ -71,6 +71,9 @@ import AnalyticsSettingsPage from './components/pages/AdminPanel/Settings/Analyt
 import SecuritySettingsPage from './components/pages/AdminPanel/Settings/Security/SecuritySettingsPage'
 import PostSettingsPage from './components/pages/AdminPanel/Settings/Post/PostSettingsPage'
 import InteractionsSettingsPage from './components/pages/AdminPanel/Settings/Interactions/InteractionsSettingsPage'
+import LegalPrivacyPage from './components/pages/AdminPanel/LegalDocuments/LegalPrivacyPage/LegalPrivacyPage'
+import LegalTermsPage from './components/pages/AdminPanel/LegalDocuments/LegalTermsPage/LegalTermsPage'
+import LegalAcknowledgmentsPage from './components/pages/AdminPanel/LegalDocuments/LegalAcknowledgmentsPage/LegalAcknowledgmentsPage'
 const App = () => {
 	// useEffect(() => {
 	// 	if (window.gtag) {
@@ -166,6 +169,12 @@ const App = () => {
 						<Route path="analytics" element={<AnalyticsSettingsPage />} />
 						<Route path="email" element={<EmailSettingsPage />} />
 						<Route path="integrations" element={<IntegrationsSettingsPage />} />
+					</Route>
+					<Route path="legal-documents">
+						<Route path="privacy-policy" element={<LegalPrivacyPage/>} />
+						<Route path="terms-and-conditions" element={<LegalTermsPage />} />
+						<Route path="acknowledgments" element={<LegalAcknowledgmentsPage />} />
+						
 					</Route>
 				</Route>
 

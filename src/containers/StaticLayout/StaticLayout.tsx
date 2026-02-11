@@ -24,17 +24,11 @@ const StaticLayout = () => {
 	const { data } = useFetchSettingsQuery({})
 
 	// useEffect(() => {
-	// 	let timeout: ReturnType<typeof setTimeout>
-
-	// 	const tick = () => {
+	// 	const interval = setInterval(() => {
 	// 		incrementPageViews({})
+	// 	}, 100)
 
-	// 		timeout = setTimeout(tick, 50)
-	// 	}
-
-	// 	tick()
-
-	// 	return () => clearTimeout(timeout)
+	// 	return () => clearInterval(interval) // czyszczenie przy unmount
 	// }, [incrementPageViews])
 
 	const path = encodeURIComponent(pathname)

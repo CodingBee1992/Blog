@@ -82,7 +82,7 @@ $mobileSmall: 380px;
 	--menu-TextSize: 1.5rem;
 	--subMenu-TextSize: 1.4rem;
 
-	--text-h1: 8.8rem;
+	--text-h1: 8rem;
 	--textSpan: 1.6rem;
 	--text-Size: 1.8rem;
 	--text-SizeInput: calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
@@ -256,14 +256,14 @@ $mobileSmall: 380px;
 }
 @media (max-width: 1600px) {
 	:root {
-		--text-h1: 8rem;
+		--text-h1: 7.4rem;
 		--textSpan: 1.5rem;
 		--slideContent-width: 50dvw;
 	}
 }
 @media (max-width: 1400px) {
 	:root {
-		--text-h1: 7.6rem;
+		--text-h1: 7.2rem;
 		--width-post: 33%;
 		--line-left1: 33%;
 		--line-left2: 66%;
@@ -273,7 +273,7 @@ $mobileSmall: 380px;
 }
 @media (max-width: 1200px) {
 	:root {
-		--text-h1: 7rem;
+		--text-h1: 6.8rem;
 		--textSpan: 1.4rem;
 		--slideContent-width: 55dvw;
 		--gutter: 2rem;
@@ -289,7 +289,7 @@ $mobileSmall: 380px;
 }
 @media (max-width: 1000px) {
 	:root {
-		--text-h1: 6.8rem;
+		--text-h1: 6.4rem;
 		--textSpan: 1.3rem;
 		--slideContent-width: 70dvw;
 		--margin-bottomSocialLinks: calc(0.5 * 3.2rem);
@@ -304,7 +304,7 @@ $mobileSmall: 380px;
 }
 @media (max-width: 800px) {
 	:root {
-		--text-h1: 6rem;
+		--text-h1: 5.6rem;
 		--textSpan: 1.2rem;
 		--padding-arrows: 1.75rem 2.25rem;
 	}
@@ -322,7 +322,7 @@ $mobileSmall: 380px;
 @media (width < 600px) {
 	:root {
 		--text-meta: calc(calc((1.7rem / 1.2) / 1.2) * 1.2);
-		--text-h1: 5rem;
+		--text-h1: 4rem;
 		--padding-arrows: 1.5rem 2rem;
 		--socialLinksRight: 1.8rem;
 		--gutter: 1rem;

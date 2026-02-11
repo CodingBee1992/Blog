@@ -18,11 +18,11 @@ export const userApi = createApi({
 		}),
 
 		createAccount: builder.mutation({
-			query: ({name,email,password,privacyPolicy}) => ({
+			query: ({name,email,password,consents}) => ({
 				url: `${USERS_URL}/registration`,
 				method: 'POST',
 				headers: { 'Content-type': 'application/json' },
-				body: {name,email,password,privacyPolicy},
+				body: {name,email,password,consents},
 			}),
 		}),
 		deleteAccount: builder.mutation({

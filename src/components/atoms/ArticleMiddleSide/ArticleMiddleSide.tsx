@@ -12,7 +12,8 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '../../../store'
 import { useEffect, useMemo, useState } from 'react'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
-
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 interface ArticleMiddleSideProps {
 	styles: { [key: string]: string }
 }
@@ -35,17 +36,17 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 
 	const { data: postLikes } = useFetchLivePostLikesQuery(postId!, { skip: !postId })
 
-	const { firstPart, secondPart } = useMemo(() => {
-		if (!introduction) return { firstPart: '', secondPart: '' }
+	// const { firstPart, secondPart } = useMemo(() => {
+	// 	if (!introduction) return { firstPart: '', secondPart: '' }
 
-		const halfTextLength = Math.ceil(introduction.length / 2)
-		const dotindex = introduction?.indexOf('.', halfTextLength)
+	// 	const halfTextLength = Math.ceil(introduction.length / 2)
+	// 	const dotindex = introduction?.indexOf('.', halfTextLength)
 
-		return {
-			firstPart: introduction?.slice(0, dotindex + 1),
-			secondPart: introduction?.slice(dotindex + 1),
-		}
-	}, [introduction])
+	// 	return {
+	// 		firstPart: introduction?.slice(0, dotindex + 1),
+	// 		secondPart: introduction?.slice(dotindex + 1),
+	// 	}
+	// }, [introduction])
 
 	const articleWithAds = useMemo<ArticleBlock[]>(() => {
 		if (!articleContent) return []
@@ -89,55 +90,68 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 
 	return (
 		<div className={styles.articleMiddleSideContainer}>
-			<div className={styles.articleMainText}>
+			{/* <div className={styles.articleMainText}>
 				<p>{firstPart}</p>
 				<p>{secondPart}</p>
-			</div>
+			</div> */}
+			<ReactMarkdown remarkPlugins={[remarkGfm]}>{introduction}</ReactMarkdown>
 			<div className={styles.articleContentContainer}>
 				<div className={styles.articleContent}>
 					{articleWithAds.map((item: ArticleBlock, index: number) => {
 						if (item.type === 'title') {
 							return (
-								<h3 key={index} className={styles.articleContentTitle}>
+								<h2 key={index} className={styles.articleContentTitle}>
 									{item.value}
-								</h3>
+								</h2>
 							)
 						}
 						if (item.type === 'text') {
 							return (
-								<p key={index} className={styles.articleContentText}>
+								// <p key={index} className={styles.articleContentText}>
+								// 	{item.value}
+								// </p>
+								<ReactMarkdown key={index} remarkPlugins={[remarkGfm]}>
 									{item.value}
-								</p>
+								</ReactMarkdown>
 							)
 						}
 						if (item.type === 'add') {
 							return (
-								<p key={index} className={styles.articleContentText}>
-									To jest miejsce na reklame
-								</p>
+								<img
+									src="https://placehold.co/800x150/EEE/D3D3D3D3?font=open-sans&text=Google%20Adds"
+									alt="Google Adds"
+									key={index}
+									className={styles.articleAdd}
+								/>
 							)
 						}
 						if (item.type === 'image') {
 							return (
 								<div key={index} className={styles.articleImage}>
 									<ResponsiveArticleImage mainImageSrc={item.value.src} imageAlt={item.value.alt} />
-									{/* <img src={item.value.src} alt={item.value.alt} /> */}
+
 									<span className={styles.articleImageText}>{item.value.caption}</span>
 								</div>
 							)
 						}
 						if (item.type === 'completion') {
 							return (
-								<p key={index} className={styles.articleContentText}>
+								// <p key={index} className={styles.articleContentText}>
+								// 	{item.value}
+								// </p>
+								<ReactMarkdown key={index} remarkPlugins={[remarkGfm]}>
 									{item.value}
-								</p>
+								</ReactMarkdown>
 							)
 						}
 						if (item.type === 'callToAction') {
 							return (
-								<p key={index} className={styles.articleContentText}>
+								// <p key={index} className={styles.articleContentText}>
+								// 	{item.value}
+								// </p>
+								<ReactMarkdown key={index} remarkPlugins={[remarkGfm]}>
 									{item.value}
-								</p>
+								</ReactMarkdown>
 							)
 						}
 						return null
@@ -148,7 +162,12 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 			<div className={styles.articleReactionsBox}>
 				<div className={styles.articleReactionsInfo}>
 					<span className={styles.articleLikes}>
-						<button aria-label="Like button" onClick={() => handleSetLike()} className={styles.articleSVG}>
+						<button
+							type="button"
+							aria-label="Like button"
+							title="Like Button"
+							onClick={() => handleSetLike()}
+							className={styles.articleSVG}>
 							<HeartSVG className={`${styles.articleLikeSVG} ${likedPost?.userId === id ? styles.liked : ''}`} />
 						</button>
 						<span className={styles.reactionText}>

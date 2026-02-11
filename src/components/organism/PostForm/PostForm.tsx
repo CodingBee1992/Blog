@@ -14,7 +14,10 @@ import { defaultCategories, statusOptions } from '../../../utils/data'
 import CloseSvg from '../../../assets/icons/nav/CloseSvg'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
 import { useFetchAllCategoriesQuery } from '../../../slices/api/categoriesApi'
-import { useDestroyCloudinaryImageMutation, useCreateCloudinarySignatureMutation } from '../../../slices/api/cloudinaryApi'
+import {
+	useDestroyCloudinaryImageMutation,
+	useCreateCloudinarySignatureMutation,
+} from '../../../slices/api/cloudinaryApi'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { adminLinks } from '../../../utils/sideBarLinks'
@@ -50,8 +53,8 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 		control,
 		reset,
 		getValues,
-		
-		formState: { isSubmitting, isSubmitSuccessful,isDirty },
+
+		formState: { isSubmitting, isSubmitSuccessful, isDirty },
 	} = methods
 	const { fields: articleContent, insert, remove } = useFieldArray({ control, name: 'articleContent' })
 
@@ -185,7 +188,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 			setError('root', { message: 'An unexpected error has occured' })
 		}
 	}
-
+	
 	if (isSubmitSuccessful) window.scrollTo({ top: 0, behavior: 'smooth' })
 	if (editValues && isSubmitSuccessful)
 		return (
@@ -216,8 +219,6 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 									} else {
 										insert(newIndex, { type: btn, value: '' })
 									}
-
-									
 								}}>
 								+ {btn}
 							</button>
@@ -275,9 +276,9 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 							{articleContent &&
 								articleContent?.length > 0 &&
 								articleContent.map((field, index) => (
-									<div key={field.id}>
+									<>
 										{field.type === 'title' && (
-											<>
+											<div key={field.id} className={styles.fieldBox}>
 												<RHFInput<postSchemaTypes>
 													type="text"
 													id={`title-${index}`}
@@ -294,10 +295,10 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 														<CloseSvg styles={styles} />
 													</div>
 												)}
-											</>
+											</div>
 										)}
 										{field.type === 'text' && (
-											<>
+											<div key={field.id}  className={styles.fieldBox}>
 												<RHFTextArea<postSchemaTypes>
 													name={`articleContent.${index}.value`}
 													label="Text"
@@ -313,10 +314,10 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 														<CloseSvg styles={styles} />
 													</div>
 												)}
-											</>
+											</div>
 										)}
 										{field.type === 'image' && (
-											<>
+											<div key={field.id}  className={styles.fieldBox}>
 												<RHFAddFile<postSchemaTypes>
 													name={`articleContent.${index}.value.src`}
 													label="Content Image"
@@ -352,7 +353,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 														<CloseSvg styles={styles} />
 													</div>
 												)}
-											</>
+											</div>
 										)}
 										{field.type === 'completion' && (
 											<RHFTextArea
@@ -373,7 +374,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 												isSubmitting={isSubmitting}
 											/>
 										)}
-									</div>
+									</>
 								))}
 						</div>
 						<div className={styles.formOptionsContainer}>

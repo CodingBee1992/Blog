@@ -20,7 +20,7 @@ const registrationSchema = z
 		email: z.email().trim(),
 		password: z.string().trim().min(8, { message: 'Password must have 8 characters' }),
 		repeatPassword: z.string().trim().min(8, { message: 'Repeat password must have 8 characters' }),
-		privacyPolicy: z.boolean().refine(v => v === true, { message: 'You must accept the Privacy Policy' }),
+		consents: z.boolean().refine(v => v === true, { message: 'You must accept the Privacy Policy and Terms and Conditions' }),
 	})
 	.refine(data => data.password === data.repeatPassword, {
 		message: 'Passwords do not match',
@@ -44,7 +44,7 @@ const Registration = () => {
 			email: '',
 			password: '',
 			repeatPassword: '',
-			privacyPolicy: false,
+			consents: false,
 		},
 	})
 	const {
@@ -56,20 +56,20 @@ const Registration = () => {
 		formState: { isSubmitting, errors },
 	} = methods
 
-	const [name, email, password, repeatPassword, privacyPolicy] = useWatch({
+	const [name, email, password, repeatPassword, consents] = useWatch({
 		control,
-		name: ['name', 'email', 'password', 'repeatPassword', 'privacyPolicy'],
+		name: ['name', 'email', 'password', 'repeatPassword', 'consents'],
 	})
 
 	const onSubmit: SubmitHandler<registrationFields> = async data => {
 		try {
 			if (!data) return
-
+			console.log(data)
 			const res = await createAccount({
 				name: data.name,
 				email: data.email,
 				password: data.password,
-				privacyPolicy: data.privacyPolicy,
+				consents: data.consents,
 			}).unwrap()
 			console.log(res)
 			if (res) setSuccessMessage(res.message)
@@ -145,11 +145,11 @@ const Registration = () => {
 							placeholder="Repeat your password"
 						/>
 						<div className={styles.checkbox}>
-							<RHFCheckbox name="privacyPolicy" id="privacyPolicy" isSubmitting={isSubmitting} styles={styles}>
+							<RHFCheckbox name="consents" id="consents" isSubmitting={isSubmitting} styles={styles}>
 								<>
-									<CheckMark isChecked={privacyPolicy} className={styles.checkMark} />
+									<CheckMark isChecked={consents} className={styles.checkMark} />
 									<span>
-										I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy.</AnchorLink>
+										I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy</AnchorLink> and <AnchorLink href='/terms-and-conditions'>Terms and Conditions</AnchorLink>
 									</span>
 								</>
 							</RHFCheckbox>
