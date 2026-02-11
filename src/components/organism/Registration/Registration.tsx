@@ -13,6 +13,7 @@ import FormBtn from '../../atoms/FormBtn/FormBtn'
 import RHFCheckbox from '../../atoms/RHFCheckbox/RHFCheckbox'
 import CheckMark from '../../atoms/Checkmark/CheckMark'
 import GreetingWrapper from '../../modules/GreetingWrapper/GreetingWrapper'
+import { useRecaptchaToken } from '../../../hooks/useRecaptchaToken'
 
 const registrationSchema = z
 	.object({
@@ -20,7 +21,9 @@ const registrationSchema = z
 		email: z.email().trim(),
 		password: z.string().trim().min(8, { message: 'Password must have 8 characters' }),
 		repeatPassword: z.string().trim().min(8, { message: 'Repeat password must have 8 characters' }),
-		consents: z.boolean().refine(v => v === true, { message: 'You must accept the Privacy Policy and Terms and Conditions' }),
+		consents: z
+			.boolean()
+			.refine(v => v === true, { message: 'You must accept the Privacy Policy and Terms and Conditions' }),
 	})
 	.refine(data => data.password === data.repeatPassword, {
 		message: 'Passwords do not match',
@@ -31,7 +34,7 @@ type registrationFields = z.infer<typeof registrationSchema>
 
 const Registration = () => {
 	const [createAccount, { isSuccess }] = useCreateAccountMutation()
-
+	const { getToken } = useRecaptchaToken()
 	const [successMessage, setSuccessMessage] = useState<string>('')
 
 	const navigate = useNavigate()
@@ -63,6 +66,13 @@ const Registration = () => {
 
 	const onSubmit: SubmitHandler<registrationFields> = async data => {
 		try {
+			const token = await getToken('register') // każda akcja może być inna
+
+			if (!token) {
+				alert('Błąd reCAPTCHA')
+				return
+			}
+
 			if (!data) return
 			console.log(data)
 			const res = await createAccount({
@@ -70,8 +80,9 @@ const Registration = () => {
 				email: data.email,
 				password: data.password,
 				consents: data.consents,
+				recaptcha:token
 			}).unwrap()
-			console.log(res)
+			
 			if (res) setSuccessMessage(res.message)
 		} catch (error) {
 			if (typeof error === 'object' && error !== null) {
@@ -149,7 +160,8 @@ const Registration = () => {
 								<>
 									<CheckMark isChecked={consents} className={styles.checkMark} />
 									<span>
-										I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy</AnchorLink> and <AnchorLink href='/terms-and-conditions'>Terms and Conditions</AnchorLink>
+										I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy</AnchorLink> and{' '}
+										<AnchorLink href="/terms-and-conditions">Terms and Conditions</AnchorLink>
 									</span>
 								</>
 							</RHFCheckbox>
