@@ -158,6 +158,16 @@ export interface NotificationsTypes {
 	createdAt: string
 	changes: Record<string, string>
 }
+
+export interface latestCommentsTypes {
+	comment: string
+	author: string
+	avatar: string
+	postTitle: string
+	postId: string
+	categories: string[]
+	seo: { slug: string; metaTitle: string; metaDescription: string }
+}
 export interface FullStatsTypes {
 	commentsStats: Stat
 	postsStats: Stat
@@ -168,15 +178,7 @@ export interface FullStatsTypes {
 	dayStats: { date: string; views: number }[]
 	topRated: TopRatedStatsTypes[]
 	notifications: NotificationsTypes[]
-	latestComments: {
-		comment: string
-		author: string
-		avatar: string
-		postTitle: string
-		postId: string
-		categories: string[]
-		seo: { slug: string; metaTitle: string; metaDescription: string }
-	}[]
+	latestComments: latestCommentsTypes[]
 }
 
 export const MobileMenuState = {

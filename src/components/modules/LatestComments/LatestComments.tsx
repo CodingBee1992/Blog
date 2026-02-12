@@ -1,14 +1,13 @@
 import createUrl from '../../../hooks/createUrl'
-import { useFetchStatisticsLiveQuery } from '../../../slices/api/statisticsApi'
+import type { latestCommentsTypes } from '../../../types/types'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import styles from './LatestComments.module.scss'
 
-const LatestComments = () => {
-	const { data } = useFetchStatisticsLiveQuery()
+interface LatestCommentsProps {
+	latestComments: latestCommentsTypes[]
+}
 
-	if (!data) return
-
-	const { latestComments } = data
+const LatestComments = ({ latestComments }: LatestCommentsProps) => {
 	
 
 	return (

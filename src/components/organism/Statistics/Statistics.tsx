@@ -29,7 +29,7 @@ const Statistics = () => {
 	if (!data) {
 		return <Loader />
 	}
-	const { postsStats, commentsStats, usersStats, likesStats, pageViews, chartStats, dayStats } = data
+	const { postsStats, commentsStats, usersStats, likesStats, pageViews, chartStats, dayStats,latestComments,notifications,topRated } = data
 
 	const statConfig = [
 		{ title: 'PageViews', stats: pageViews, icon: <ViewsSVG />, style: styles.pageViews },
@@ -107,9 +107,9 @@ const Statistics = () => {
 				</div>
 			</div>
 
-			<PopularPosts />
-			<Notifications />
-			<LatestComments />
+			<PopularPosts topRated={topRated}/>
+			<Notifications notifications={notifications}/>
+			<LatestComments latestComments={latestComments}/>
 		</div>
 	)
 }

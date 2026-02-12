@@ -95,7 +95,7 @@ const TabelPagination = ({
 					onClick={e => handleChangePage(e)}>
 					<ChevronPrevSVG className={styles.chevronPrev} />
 				</button>
-				<button data-element="next" aria-label="next page" className={styles.arrows} onClick={e => handleChangePage(e)}>
+				<button data-element="next" aria-label="next page" className={styles.chevron} onClick={e => handleChangePage(e)}>
 					<ChevronNextSVG className={styles.chevronNext} />
 				</button>
 			</div>
