@@ -15,20 +15,18 @@
 	cursor: pointer;
 	transition: all 0.3s;
 
-	svg {
-		width: 20px;
-		height: 15px;
-		path {
-			transition: all 0.3s;
-			stroke: #889397;
-		}
+	.showViews {
+		width: 25px;
+		height: 20px;
+		color: #889397;
+		transition: all 0.3s;
+		
 	}
 	&:hover {
 		background-color: #ededed;
-		svg {
-			path {
-				stroke: #000000;
-			}
+		.showViews {
+			color: #000000;
+			
 		}
 		&::before {
 			background-color: #000000;

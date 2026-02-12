@@ -3,7 +3,6 @@ import { useFetchStatisticsLiveQuery } from '../../../slices/api/statisticsApi'
 import StatisticCard from '../../atoms/StatisticCard/StatisticCard'
 import styles from './Statistics.module.scss'
 import {
-	ArrowDownSVG,
 	ArrowUpSVG,
 	CommentsSVG,
 	HeartSVG,
@@ -18,6 +17,7 @@ import Loader from '../../atoms/loader/Loader'
 
 import Notifications from '../../modules/Notification/Notifications'
 import LatestComments from '../../modules/LatestComments/LatestComments'
+import { ChevronDownSVG } from '../../../assets/icons/Icons'
 
 const Statistics = () => {
 	const [viewsFromTo, setViewsFromTo] = useState<string>('this week')
@@ -91,7 +91,8 @@ const Statistics = () => {
 					<div className={styles.areaCurrentDropdown}>
 						<div className={styles.areaCurrentViewsFromTo} onClick={() => handleOpenDropDown()}>
 							<span>{viewsFromTo}</span>
-							<ArrowDownSVG className={`${scaleUp ? styles.rotate : ''}`} />
+							
+							<ChevronDownSVG className={` ${scaleUp ? styles.rotate : ''}`} />
 						</div>
 
 						<div className={`${styles.areaCurrentViewsSelect} ${scaleUp ? styles.scaleUp : ''}`}>

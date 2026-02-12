@@ -11,7 +11,6 @@ import { useCreatePostMutation, useUpdatePostMutation } from '../../../slices/ap
 import styles from './PostForm.module.scss'
 import uploadToCloudinary from '../../../hooks/useUploadToCloudinary'
 import { defaultCategories, statusOptions } from '../../../utils/data'
-import CloseSvg from '../../../assets/icons/nav/CloseSvg'
 import FormBtn from '../../atoms/FormBtn/FormBtn'
 import { useFetchAllCategoriesQuery } from '../../../slices/api/categoriesApi'
 import {
@@ -21,6 +20,7 @@ import {
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import { adminLinks } from '../../../utils/sideBarLinks'
+import { CloseSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 
 interface PostFormProps {
 	editValues?: postSchemaTypes
@@ -292,7 +292,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 														data-index={index}
 														onClick={e => handleDeleteField(e, index)}
 														className={styles.deleteBtnWrapper}>
-														<CloseSvg styles={styles} />
+														<CloseSVG className={styles.icon} />
 													</div>
 												)}
 											</div>
@@ -311,7 +311,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 														data-index={index}
 														onClick={e => handleDeleteField(e, index)}
 														className={styles.deleteBtnWrapper}>
-														<CloseSvg styles={styles} />
+														<CloseSVG className={styles.icon} />
 													</div>
 												)}
 											</div>
@@ -350,7 +350,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 														data-index={index}
 														onClick={e => handleDeleteField(e, index)}
 														className={styles.deleteBtnWrapper}>
-														<CloseSvg styles={styles} />
+														<CloseSVG className={styles.icon} />
 													</div>
 												)}
 											</div>

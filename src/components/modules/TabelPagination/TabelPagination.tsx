@@ -1,16 +1,16 @@
-import { useEffect, useRef, type Dispatch, type MouseEvent, type SetStateAction } from 'react'
-import { ArrowDownSVG, ArrowNextSVG, ArrowPrevSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
+import { useCallback, useEffect, useRef, useState, type Dispatch, type MouseEvent, type SetStateAction } from 'react'
+import { ChevronNextSVG, ChevronPrevSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import styles from './TabelPagination.module.scss'
+import { ChevronDownSVG } from '../../../assets/icons/Icons'
 interface TabelPaginationProps {
 	rows: number
-	
-	
+
 	rowsNumbers: number[]
-	
+
 	start: number
 	end: number
 	total: number
-	setRows:Dispatch<SetStateAction<number>>
+	setRows: Dispatch<SetStateAction<number>>
 	handleChangePage: (e: MouseEvent<HTMLButtonElement>) => void
 }
 
@@ -25,17 +25,19 @@ const TabelPagination = ({
 	handleChangePage,
 }: TabelPaginationProps) => {
 	const rowsRef = useRef<HTMLDivElement | null>(null)
-	const handleOpenRows = () => {
-		const arrow = document.querySelector(`.${styles.arrowRows}`)
-		
-		if (rowsRef.current && !rowsRef.current.classList.contains(styles.scale)) {
-			rowsRef.current?.classList.add(styles.scale)
-			arrow?.classList.add(styles.rotate)
+	const [rotateArrow, setRotateArrow] = useState<boolean>(false)
+	const [toggleRows, setToggleRows] = useState<boolean>(false)
+	
+	const handleOpenRows = useCallback(() => {
+		if (!toggleRows) {
+			setToggleRows(true)
+			setRotateArrow(true)
 		} else {
-			rowsRef.current?.classList.remove(styles.scale)
-			arrow?.classList.remove(styles.rotate)
+			setToggleRows(false)
+
+			setRotateArrow(false)
 		}
-	}
+	}, [toggleRows])
 
 	const handleSelectRows = (e: MouseEvent<HTMLSpanElement>) => {
 		const target = e.currentTarget as HTMLSpanElement
@@ -48,18 +50,16 @@ const TabelPagination = ({
 		const handleCloseSelect = (e: globalThis.MouseEvent) => {
 			const el = rowsRef.current
 			const target = e.target as HTMLElement
-			const arrow = document.querySelector(`.${styles.arrowRows}`)
 
-			if (!target.classList.contains(styles.inputBox) && el?.classList.contains(styles.scale)) {
-				el?.classList.remove(styles.scale)
-				arrow?.classList.remove(styles.rotate)
+			if (!target.classList.contains(styles.inputBox) && el?.classList.contains(styles.scaleRows)) {
+				handleOpenRows()
 			}
 		}
 
 		window.addEventListener('click', handleCloseSelect)
 
 		return () => window.removeEventListener('click', handleCloseSelect)
-	}, [])
+	}, [handleOpenRows])
 
 	return (
 		<div className={styles.pagination}>
@@ -68,9 +68,10 @@ const TabelPagination = ({
 				<div className={styles.selectRows}>
 					<div className={styles.inputBox} onClick={() => handleOpenRows()}>
 						<input className={styles.selectInput} value={rows} type="text" name="rows" readOnly />
-						<ArrowDownSVG className={styles.arrowRows} />
+
+						<ChevronDownSVG className={`${styles.chevron} ${rotateArrow ? styles.chevronRotate : ''}`} />
 					</div>
-					<div ref={rowsRef} className={styles.rows}>
+					<div ref={rowsRef} className={`${styles.rows} ${toggleRows ? styles.scaleRows : ''}`}>
 						{rowsNumbers.map((row, index) => (
 							<span
 								key={index}
@@ -90,12 +91,12 @@ const TabelPagination = ({
 				<button
 					data-element="prev"
 					aria-label="previous page"
-					className={styles.arrows}
+					className={styles.chevron}
 					onClick={e => handleChangePage(e)}>
-					<ArrowPrevSVG className={styles.arrowPrev} />
+					<ChevronPrevSVG className={styles.chevronPrev} />
 				</button>
 				<button data-element="next" aria-label="next page" className={styles.arrows} onClick={e => handleChangePage(e)}>
-					<ArrowNextSVG className={styles.arrowNext} />
+					<ChevronNextSVG className={styles.chevronNext} />
 				</button>
 			</div>
 		</div>

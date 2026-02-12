@@ -38,12 +38,9 @@
 				.closeSVG {
 					width: 100%;
 					height: 100%;
-
+					color: var(--errorFormColor);
 					transition: transform 0.3s ease-in;
-					path {
-						stroke: red;
-						stroke-width: 2px;
-					}
+					
 
 					&:hover {
 						transform: scale(1.15);

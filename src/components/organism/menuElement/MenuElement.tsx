@@ -1,10 +1,10 @@
 import { type MouseEvent } from 'react'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
-import { MenuArrowSVG } from '../../../assets/icons/nav/MenuArrowSVG'
 import type { MenuTypes } from '../../../containers/Navigation/dataNavigation/dataNavigation'
 
 import DropdownMenu from '../../atoms/DropdownMenu/DropdownMenu'
 import useMenuContext from '../../../hooks/useMenuContext'
+import { ChevronDownSVG } from '../../../assets/icons/Icons'
 interface MenuElementProps {
 	data: MenuTypes
 	index: number
@@ -29,7 +29,7 @@ const MenuElement = ({
 	toggle,
 }: MenuElementProps) => {
 	const { handleOpenCloseDropdown, activeIndex } = useMenuContext()
-	// const { toggle } = mobileMenu
+	
 	if (data.href === '') {
 		return (
 			<div
@@ -38,12 +38,11 @@ const MenuElement = ({
 				className={`${styles.menuElementContainer} ${activeIndex === index ? styles.active : ''}`}
 				onMouseEnter={e => handleMouseIn?.(e, index)}
 				onMouseLeave={e => handleMouseOut?.(e, index)}
-				onClick={e => handleOpenCloseDropdown(e)}
-				>
+				onClick={e => handleOpenCloseDropdown(e)}>
 				<div className={styles.menuElement}>
 					<span className={styles.title}>{data.title}</span>
 
-					<MenuArrowSVG styles={styles} className={activeIndex === index ? styles.rotateArrow : ''} />
+					<ChevronDownSVG className={`${styles.chevron} ${activeIndex === index ? styles.rotateArrow : ''}`} />
 				</div>
 
 				{data.children?.length ? (

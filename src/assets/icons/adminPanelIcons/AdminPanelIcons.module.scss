@@ -29,11 +29,10 @@
 
 	cursor: pointer;
 }
-.arrowPrevSVG,
-.arrowNextSVG {
+.chevronPrevSVG,
+.chevronNextSVG {
 	width: 15px;
 	height: 15px;
-
 	cursor: pointer;
 }
 
@@ -53,17 +52,13 @@
 }
 .viewsSVG {
 	width: 30px;
-	height: 20px;
-	path {
-		stroke-width: 1px;
-		stroke: #4a72fe;
-	}
+	height: 25px;
+	color: #4a72fe;
 }
 .closeSVG {
-	width: 16px;
-	height: 16px;
-	stroke: #5c6c75;
-	stroke-width: 4px;
+	width: 20px;
+	height: 20px;
+	color: #5c6c75;
 	transition: all 0.3s;
 }
 

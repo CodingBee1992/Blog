@@ -19,7 +19,7 @@ const InputShowHideButton = ({ visible=false,disabled=false,isSubmitting, onTogg
 			aria-busy={isSubmitting}
 			aria-label={visible ? 'Hide password' : 'Show password'}
 			onClick={() => onToggle()}>
-			<ViewsSVG />
+			<ViewsSVG  className={styles.showViews}/>
 		</button>
 	)
 }

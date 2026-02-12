@@ -7,15 +7,14 @@ import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import type { RootState } from '../../../store'
 import SignOutBtn from '../../atoms/SingOutBtn/SignOutBtn'
 
-import LogoutSvg from '../../../assets/icons/logout/LogoutSvg'
 import { useLocation } from 'react-router'
-import { DashboardSVG, ProfileSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
+import { DashboardSVG, LogoutSVG, ProfileSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import { accountLinks, adminLinks } from '../../../utils/sideBarLinks'
 
 import useWindowSize from '../../../hooks/useWindowSize'
-import CloseSvg from '../../../assets/icons/nav/CloseSvg'
 
 import useMenuContext from '../../../hooks/useMenuContext'
+import { CloseSvg } from '../../../assets/icons/Icons'
 
 interface SideBarProps {
 	children: ReactNode
@@ -37,10 +36,10 @@ const SideBar = ({ children }: SideBarProps) => {
 			<div className={styles.sideBarMenu}>
 				{isMobile && (
 					<button className={`${styles.btn} ${styles.close}`} title="Close" onClick={() => close()}>
-						<CloseSvg styles={styles} />
+						<CloseSvg className={styles.icon} />
 					</button>
 				)}
-				<Logo styles={styles} />
+				{!isMobile && <Logo styles={styles} />}
 				<div className={styles.sideBarLinks}>{children}</div>
 			</div>
 			<div className={styles.controlPanelUser}>
@@ -69,7 +68,7 @@ const SideBar = ({ children }: SideBarProps) => {
 				)}
 
 				<SignOutBtn ariaLabel="Sign Out button" className={styles.sideBarBtns}>
-					<LogoutSvg styles={styles} />
+					<LogoutSVG className={styles.logoutSvg} />
 				</SignOutBtn>
 				<img title="Avatar" src={`${avatar}`} alt="Avatar" className={styles.authorAvatar} />
 			</div>

@@ -114,6 +114,9 @@
 						&:hover {
 							background-color: var(--bgcTabelHover);
 						}
+						.chevronRotate {
+							rotate: 180deg;
+						}
 					}
 				}
 			}

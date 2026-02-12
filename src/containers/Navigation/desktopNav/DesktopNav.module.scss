@@ -27,17 +27,20 @@
 		&:hover {
 			color: var(--menu-textColorHover);
 		}
-		&:hover .arrow {
+		&:hover .chevron {
 			rotate: 180deg;
 		}
 		.menuElement {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
 			pointer-events: none;
 			.title {
 				padding-right: 1rem;
 				pointer-events: none;
 			}
 
-			.arrow {
+			.chevron {
 				transition: all 0.3s ease-in-out;
 				pointer-events: none;
 			}
@@ -47,9 +50,9 @@
 			position: absolute;
 			display: none;
 			flex-direction: column;
-			
-			top:calc( 50% + (var(--headerHeight) / 2));
-			
+
+			top: calc(50% + (var(--headerHeight) / 2));
+
 			left: 0;
 			padding: 1.8rem 0;
 

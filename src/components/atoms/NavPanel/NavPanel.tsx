@@ -1,4 +1,5 @@
 import useMenuContext from '../../../hooks/useMenuContext'
+import Logo from '../logo/Logo'
 
 import styles from './NavPanel.module.scss'
 
@@ -16,6 +17,7 @@ const NavPanel = () => {
 				}}>
 				<span className={styles.span}></span>
 			</button>
+			<Logo styles={styles} />
 		</div>
 	)
 }
