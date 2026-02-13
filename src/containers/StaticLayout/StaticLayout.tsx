@@ -13,6 +13,7 @@ import { useIncrementPageViewsMutation } from '../../slices/api/statisticsApi'
 
 import { useFetchSettingsQuery } from '../../slices/api/settingsApi'
 import useIncrementViews from '../../hooks/useIncrementViews'
+
 const Navigation = lazy(() => import('../Navigation/Navigation'))
 
 const StaticLayout = () => {
@@ -67,6 +68,7 @@ const StaticLayout = () => {
 				<CookieBanner />
 				<div data-aos="fade-zoom-in">
 					<Navigation />
+					
 					<main style={{ minHeight: '100dvh' }}>
 						<Outlet />
 					</main>

@@ -1,4 +1,4 @@
-import { type MouseEvent } from 'react'
+import { useState, type MouseEvent } from 'react'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import type { MenuTypes } from '../../../containers/Navigation/dataNavigation/dataNavigation'
 
@@ -29,32 +29,43 @@ const MenuElement = ({
 	toggle,
 }: MenuElementProps) => {
 	const { handleOpenCloseDropdown, activeIndex } = useMenuContext()
-	
+	const [onkeyToogle, setOnKeyToggle] = useState<number | null>(null)
 	if (data.href === '') {
 		return (
 			<div
 				key={index}
 				data-element={index}
+				tabIndex={0}
 				className={`${styles.menuElementContainer} ${activeIndex === index ? styles.active : ''}`}
 				onMouseEnter={e => handleMouseIn?.(e, index)}
 				onMouseLeave={e => handleMouseOut?.(e, index)}
-				onClick={e => handleOpenCloseDropdown(e)}>
+				onClick={e => handleOpenCloseDropdown(e)}
+				onKeyDown={e => {
+					if ('key' in e && e.key !== 'Enter') return
+					if (onkeyToogle === index) {
+						setOnKeyToggle(null)
+					} else {
+						setOnKeyToggle(index)
+					}
+				}}>
 				<div className={styles.menuElement}>
 					<span className={styles.title}>{data.title}</span>
 
 					<ChevronDownSVG className={`${styles.chevron} ${activeIndex === index ? styles.rotateArrow : ''}`} />
 				</div>
 
-				{data.children?.length ? (
+				{data.children?.length && (
 					<DropdownMenu
 						styles={styles}
+						onkeyToogle={onkeyToogle}
 						data={data}
+						index={index}
 						toggle={toggle}
 						handleMouseInDropdown={handleMouseInDropdown}
 						handleMouseOutDropdown={handleMouseOutDropdown}
 						handleCloseDropDown={handleCloseDropDown}
 					/>
-				) : null}
+				)}
 			</div>
 		)
 	} else {

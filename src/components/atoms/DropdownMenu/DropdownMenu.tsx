@@ -11,6 +11,8 @@ interface DropdownMenuProps {
 	handleCloseDropDown?: (e: MouseEvent<HTMLLIElement>) => void
 	styles: { [key: string]: string }
 	toggle?: () => void
+	onkeyToogle?: number | null
+	index?: number
 }
 
 const DropdownMenu = ({
@@ -20,6 +22,8 @@ const DropdownMenu = ({
 	handleMouseOutDropdown,
 	handleCloseDropDown,
 	toggle,
+	onkeyToogle,
+	index,
 }: DropdownMenuProps) => {
 	const { pathname } = useLocation()
 
@@ -30,7 +34,7 @@ const DropdownMenu = ({
 
 	return (
 		<ul
-			className={styles.subMenu}
+			className={`${styles.subMenu} ${onkeyToogle === index ? styles.active : ''}`}
 			onMouseEnter={e => handleMouseInDropdown?.(e)}
 			onMouseLeave={e => handleMouseOutDropdown?.(e)}>
 			{data.children?.map((item, index: number) => {

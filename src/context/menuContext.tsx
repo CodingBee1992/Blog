@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState, type MouseEvent, type ReactNode, type RefObject } from 'react'
+import { createContext, useEffect, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactNode, type RefObject } from 'react'
 
 import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router'
@@ -28,7 +28,7 @@ interface MenuContextProps {
 
 interface CreateContextProps {
 	openCloseUserMenu: () => void
-	handleOpenCloseDropdown: (e: MouseEvent<HTMLDivElement | HTMLAnchorElement>) => void
+	handleOpenCloseDropdown: (e: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void
 	signOut: () => void
 	navRef: RefObject<HTMLDivElement | null>
 	userRef: RefObject<HTMLDivElement | null>
@@ -67,10 +67,10 @@ const MenuProvider = ({ children }: MenuContextProps) => {
 	const { general, security, posts, interactions, analytics, different, integrations } = settings ?? {}
 
 	// Open close mobile dropdown
-	const handleOpenCloseDropdown = (e: MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
+	const handleOpenCloseDropdown = (e: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => {
 		const target = e.currentTarget
 		const element = Number(target.dataset.element)
-
+		
 		if (Number.isNaN(element)) return
 		if (activeIndex === element) {
 			setActiveIndex(null)

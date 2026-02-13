@@ -60,7 +60,7 @@ const Navigation = () => {
 
 		return item
 	})
-
+	
 	return (
 		<nav ref={navRef} className={styles.navContainer}>
 			<Logo styles={styles} />

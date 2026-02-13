@@ -1,30 +1,21 @@
-
 import styles from './Loader.module.scss'
 
-
 const Loader = () => {
-	
-
 	return (
-		
-		
-			
-				<div className={`${styles.loader}`} >
-					<div className={`${styles.wrapperMain} ${styles.in}`}>
-						<div className={styles.ldsRoller}>
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-						</div>
-					</div>
+		<div className={`${styles.loaderContainer}`}>
+			<div className={`${styles.loaderWrapper} ${styles.show} `}>
+				<div className={styles.roller}>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
 				</div>
-			
-		
+			</div>
+		</div>
 	)
 }
 
