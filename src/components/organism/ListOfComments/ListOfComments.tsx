@@ -1,4 +1,4 @@
-import { ArrowDownSVG, PencilSVG, TrashSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
+import { PencilSVG, TrashSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 
 import type { CommentsProps } from '../../../types/types'
 import styles from './ListOfComments.module.scss'
@@ -18,10 +18,12 @@ import { useDeleteCommentMutation, useFetchAllCommentsQuery } from '../../../sli
 import NotificationNew from '../../atoms/NotificationNew/NotificationNew'
 import handleCreateUrl from '../../../hooks/createUrl'
 import longDateConverter from '../../../hooks/longDateConverter'
+import { ChevronDownSVG } from '../../../assets/icons/Icons'
 
 const ListOfComments = () => {
 	const popupRef = useRef<HTMLDivElement | null>(null)
 	const [popUpMessage, setPopUpMessage] = useState<string>('')
+	const [focusedChevron, setFocusedChevron] = useState<string>('')
 	const [userData, setUserData] = useState({
 		commentId: '',
 		commentContent: '',
@@ -68,7 +70,20 @@ const ListOfComments = () => {
 		const el = target.dataset.element
 
 		if (!el) return
+		if (el !== focusedChevron) {
+			setFocusedChevron(el)
+		} else {
+			setFocusedChevron('')
+		}
 
+		if (el === 'createdAt') {
+			setSort(prev => {
+				const newOrder = prev.sortBy === el ? (prev.order === 'asc' ? 'desc' : 'asc') : 'desc'
+
+				return { sortBy: el, order: newOrder }
+			})
+			return
+		}
 		setSort(prev => {
 			const newOrder = prev.sortBy === el ? (prev.order === 'desc' ? 'asc' : 'desc') : 'asc'
 
@@ -155,7 +170,7 @@ const ListOfComments = () => {
 								if (item !== 'actions' && item !== 'content') {
 									return (
 										<div data-element={item} className={styles.th} key={index} onClick={e => handleSetSort(e)}>
-											{item} <ArrowDownSVG />
+											{item} <ChevronDownSVG className={`${item === focusedChevron ? styles.chevronRotate : ''}`} />
 										</div>
 									)
 								} else {

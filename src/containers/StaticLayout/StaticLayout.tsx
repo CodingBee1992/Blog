@@ -4,16 +4,15 @@ import { lazy, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../store'
-import Footer from '../Footer/Footer'
 import useWindowSize from '../../hooks/useWindowSize'
 import { SinglePostProvider } from '../../context/createPostContext'
 import { MenuProvider } from '../../context/menuContext'
 import CookieBanner from '../CookieBanner/CookieBanner'
 import { useIncrementPageViewsMutation } from '../../slices/api/statisticsApi'
-
 import { useFetchSettingsQuery } from '../../slices/api/settingsApi'
 import useIncrementViews from '../../hooks/useIncrementViews'
 const Navigation = lazy(() => import('../Navigation/Navigation'))
+import Footer from '../Footer/Footer'
 
 const StaticLayout = () => {
 	const { isLoading } = useSelector((state: RootState) => state.theme)
@@ -57,9 +56,6 @@ const StaticLayout = () => {
 		}
 	}, [pathname, isLoading, width])
 
-	// if (isLoading) {
-	// 	return <Loader />
-	// }
 
 	return (
 		<MenuProvider>
@@ -67,6 +63,7 @@ const StaticLayout = () => {
 				<CookieBanner />
 				<div data-aos="fade-zoom-in">
 					<Navigation />
+					
 					<main style={{ minHeight: '100dvh' }}>
 						<Outlet />
 					</main>

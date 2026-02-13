@@ -13,6 +13,7 @@
 
 	.sideBarLinkHelper {
 		display: flex;
+		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
 		padding-left: 4rem;
@@ -38,7 +39,7 @@
 				overflow: hidden;
 			}
 		}
-		.arrow {
+		.chevron {
 			margin-right: 2rem;
 			transition: all 0.3s;
 			pointer-events: none;
@@ -91,7 +92,6 @@
 			}
 
 			&:hover {
-				
 				background-color: var(--sideBarBgcHoverLink);
 			}
 		}
@@ -100,7 +100,6 @@
 
 			&:hover {
 				background-color: var(--sideBarBgcHoverLink);
-				
 			}
 		}
 	}

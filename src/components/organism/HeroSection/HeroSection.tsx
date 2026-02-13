@@ -1,5 +1,5 @@
 import { useState, type MouseEvent, type TouchEvent } from 'react'
-import { ArrowNext, ArrowPrev } from '../../../assets/icons/arrows/Arrows'
+
 import type { ArticleContentProps, SocialProps } from '../../../types/types'
 
 import SliderList from '../../atoms/SliderList/SliderList'
@@ -12,6 +12,7 @@ import Loader from '../../atoms/loader/Loader'
 import useSocialLinks from '../../../hooks/useSocialLinks'
 import { useFetchHeroPostLimitQuery } from '../../../slices/api/postApi'
 import useMenuContext from '../../../hooks/useMenuContext'
+import { ArrowNext, ArrowPrev } from '../../../assets/icons/Icons'
 
 const HeroSection = () => {
 	const [number, setNumber] = useState<number>(0)
@@ -20,7 +21,7 @@ const HeroSection = () => {
 	const { posts } = useMenuContext()
 	const limit = posts.heroPostLimit || 3
 	const { socialLinks } = useSocialLinks()
-	
+
 	const handleSliderNext = () => {
 		setNumber(prev => (prev >= limit - 1 ? 0 : prev + 1))
 	}
@@ -69,7 +70,7 @@ const HeroSection = () => {
 
 	return (
 		<section id="hero" className={styles.homeContainer}>
-			<div className={styles.heroWrapper} >
+			<div className={styles.heroWrapper}>
 				<div
 					className={styles.heroSlider}
 					onMouseDown={e => handleSwipeStart(e)}
@@ -80,7 +81,7 @@ const HeroSection = () => {
 						<SliderList key={index} styles={styles} data={data} index={index} number={number} />
 					))}
 				</div>
-				
+
 				<ul className={styles.dots}>
 					{Array.from({ length: limit }, (_, index) => {
 						return (

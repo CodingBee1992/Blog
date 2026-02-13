@@ -2,14 +2,15 @@ import styles from './PopularPosts.module.scss'
 
 import { CommentsSVG, HeartSVG, ViewsSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
-import { useFetchStatisticsLiveQuery } from '../../../slices/api/statisticsApi'
+
 import handleCreateUrl from '../../../hooks/createUrl'
+import type { TopRatedStatsTypes } from '../../../types/types'
 
-const PopularPosts = () => {
-	const { data } = useFetchStatisticsLiveQuery(7)
-	if (!data) return
-	const { topRated } = data
+interface PopularPostsProps {
+	topRated: TopRatedStatsTypes[]
+}
 
+const PopularPosts = ({ topRated }: PopularPostsProps) => {
 	return (
 		<div className={styles.popularPostsContainer}>
 			<h3 className={styles.popularPostsContainerTitle}>Popular Posts</h3>
@@ -31,15 +32,21 @@ const PopularPosts = () => {
 
 							<div className={styles.popularPostStatsBox}>
 								<div className={styles.popularPostStats}>
-									<ViewsSVG className={styles.popularViewsSVG} />
+									<div className={styles.popularViewsSVG}>
+										<ViewsSVG className={styles.showViews} />
+									</div>
 									<span>{post.totalViews} Views</span>
 								</div>
 								<div className={styles.popularPostStats}>
-									<HeartSVG className={styles.popularViewsSVG} />
+									<div className={styles.popularViewsSVG}>
+										<HeartSVG className={styles.heartSVG} />
+									</div>
 									<span>{post.postlikes} Likes</span>
 								</div>
 								<div className={styles.popularPostStats}>
-									<CommentsSVG className={styles.popularViewsSVG} />
+									<div className={styles.popularViewsSVG}>
+										<CommentsSVG className={styles.commentsSvg} />
+									</div>
 									<span>{post.commentsCount} Comments</span>
 								</div>
 							</div>

@@ -9,7 +9,7 @@ declare global {
 	}
 }
 
-// główna funkcja inicjalizująca GA4 i Consent Mode
+// główna funkcja inicjalizująca GA4 i Consent Mode, w main.tsx
 export const initGA = () => {
 	if (window.gaLoaded) return
 	window.gaLoaded = true
@@ -17,7 +17,7 @@ export const initGA = () => {
 	// dodanie skryptu GA4
 	const script = document.createElement('script')
 	script.async = true
-	script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX'
+	script.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GTM_ID}`
 	document.head.appendChild(script)
 
 	// inicjalizacja dataLayer i gtag
@@ -42,7 +42,7 @@ export const initGA = () => {
 
 	// inicjalizacja gtag
 	window.gtag('js', undefined, { date: new Date() })
-	window.gtag('config', 'G-XXXXXXXXXX', {
+	window.gtag('config', `${import.meta.env.VITE_GTM_ID}`, {
 		send_page_view: false,
 		anonymize_ip: true,
 	})

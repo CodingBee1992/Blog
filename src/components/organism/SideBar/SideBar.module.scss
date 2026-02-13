@@ -75,7 +75,7 @@
 				transition: all 0.3s;
 
 				&:hover {
-					fill: #05e06b;
+					fill: var(--greenColor);
 				}
 			}
 			.dashboardIcon {
@@ -86,7 +86,7 @@
 					transition: all 0.3s;
 				}
 				&:hover path {
-					fill: #05e06b;
+					fill: var(--greenColor);
 				}
 			}
 			.profileIcon {
@@ -112,16 +112,13 @@
 		overflow-y: auto;
 
 		.sideBarMenu {
-			position: relative;
-			.logo {
-				font-size: 16px;
-			}
 			.btn {
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				width: 48px;
-				height: 48px;
+				// margin-bottom: 1rem;
+				width: 55px;
+				height: 55px;
 				background-color: transparent;
 				border: none;
 				transition: all 1s ease-in-out;

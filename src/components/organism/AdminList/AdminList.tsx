@@ -1,4 +1,4 @@
-import { ArrowDownSVG, PencilSVG, TrashSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
+import { PencilSVG, TrashSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 
 import type { UsersProps } from '../../../types/types'
 import styles from './AdminList.module.scss'
@@ -16,10 +16,12 @@ import Popup from '../../atoms/Popup/Popup'
 
 import dateConverter from '../../../hooks/dateConverter'
 import longDateConverter from '../../../hooks/longDateConverter'
+import { ChevronDownSVG } from '../../../assets/icons/Icons'
 
 const AdminList = () => {
 	const popupRef = useRef<HTMLDivElement | null>(null)
 	const [popUpMessage, setPopUpMessage] = useState<string>('')
+	const [focusedChevron, setFocusedChevron] = useState<string>('')
 	const [userData, setUserData] = useState({
 		userId: '',
 		userName: '',
@@ -61,7 +63,11 @@ const AdminList = () => {
 		const el = target.dataset.element
 
 		if (!el) return
-
+		if (el !== focusedChevron) {
+			setFocusedChevron(el)
+		} else {
+			setFocusedChevron('')
+		}
 		if (el === 'comments' || el === 'posts' || el === 'createdAt' || el === 'lastLogin') {
 			setSort(prev => {
 				const newOrder = prev.sortBy === el ? (prev.order === 'asc' ? 'desc' : 'asc') : 'desc'
@@ -101,18 +107,6 @@ const AdminList = () => {
 			}
 		}
 	}
-
-	// const handleDeleteUser = async (e: MouseEvent<HTMLDivElement>) => {
-	// 	const target = e.currentTarget as HTMLDivElement
-	// 	const userId = target.dataset.id
-
-	// 	try {
-	// 		await adminDeleteUser(userId)
-	// 		refetch()
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 	}
-	// }
 
 	const handleOpenPopup = (e: MouseEvent<HTMLDivElement>) => {
 		const target = e.currentTarget as HTMLDivElement
@@ -162,7 +156,7 @@ const AdminList = () => {
 								if (item !== 'actions') {
 									return (
 										<div data-element={item} className={styles.th} key={index} onClick={e => handleSetSort(e)}>
-											{item} <ArrowDownSVG />
+											{item} <ChevronDownSVG className={`${item === focusedChevron ? styles.chevronRotate : ''}`} />
 										</div>
 									)
 								} else {
@@ -191,13 +185,12 @@ const AdminList = () => {
 
 									<div className={styles.td}>{item.email}</div>
 									<div className={styles.td}>{new Date(item.createdAt).toLocaleDateString(...dateConverter())}</div>
-									
 
 									<div className={styles.td}>{item.commentsCount}</div>
 									<div className={styles.td}>{item.postCount}</div>
 									<div className={styles.td}>{item.role}</div>
 									<div className={styles.td}>
-										{item.lastLogin ? new Date(item.lastLogin).toLocaleString(...longDateConverter()): '-'}
+										{item.lastLogin ? new Date(item.lastLogin).toLocaleString(...longDateConverter()) : '-'}
 									</div>
 									<div className={styles.td}>
 										{item.role !== 'Admin' && (

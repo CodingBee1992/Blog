@@ -196,7 +196,7 @@ Notatki prywatne użytkownika
   Author: Esri
   License: MIT
   Repo: [https://github.com/Esri/calcite-ui-icons](https://github.com/Esri/calcite-ui-icons)
-*MIT pozwala na użycie, modyfikację i dystrybucję, pod warunkiem dołączenia pełnego tekstu licencji.*
+  *MIT pozwala na użycie, modyfikację i dystrybucję (również komercyjną) pod warunkiem zachowania informacji o licencji i autorze.*
 
 - **Nuiverse Icons**
   Author: Nuiverse Design
@@ -207,7 +207,7 @@ Notatki prywatne użytkownika
 - **Unicons**
   Author: Iconscout
   License: Apache License 2.0
-  Repo: https://github.com/Iconscout/unicons
+  Repo: [https://github.com/Iconscout/unicons](https://github.com/Iconscout/unicons)
   *Apache 2.0 pozwala na użycie, modyfikację i dystrybucję (również komercyjną) pod warunkiem zachowania informacji o licencji i autorze.*
 
 - **Neuicons**
@@ -215,6 +215,81 @@ Notatki prywatne użytkownika
   License: MIT
   Repo: [https://github.com/neuicons/neu](https://github.com/neuicons/neu)
   *MIT pozwala na użycie, modyfikację i dystrybucję (również komercyjną) pod warunkiem zachowania informacji o licencji i autorze.*
+
+- **Fontisto**
+  Autor: Kenan Gündoğan
+  Licencja: MIT
+  Repo: [https://github.com/kenangundogan/fontisto](https://github.com/kenangundogan/fontisto)
+  *MIT pozwala na użycie, modyfikację i dystrybucję (również komercyjną) pod warunkiem zachowania informacji o licencji i autorze.*
+
+- **Ant Design Icons**
+  Autor: Ant Design
+  Licencja: MIT
+  Repozytorium: [https://github.com/ant-design/ant-design-icons](https://github.com/ant-design/ant-design-icons )
+  *MIT pozwala na użycie, modyfikację i dystrybucję (również komercyjną) pod warunkiem zachowania informacji o licencji i autorze.*
+
+- **Radix UI Icons**
+  Autor: Radix UI
+  Licencja: MIT
+  Repozytorium: [https://github.com/radix-ui/icons](https://github.com/radix-ui/icons)
+  *MIT pozwala na użycie, modyfikację i dystrybucję (również komercyjną) pod warunkiem zachowania informacji o licencji i autorze.*
+
+- **Flat UI**
+  Autor: Designmodo
+  Licencja: MIT
+  Repozytorium: [https://github.com/designmodo/Flat-UI](https://github.com/designmodo/Flat-UI)
+  *MIT pozwala na używanie, modyfikowanie oraz rozpowszechnianie (również komercyjne), pod warunkiem zachowania informacji o autorze i treści licencji.*
+
+- **Education Icooon Mono Vectors**
+  Autor: Icooon Mono
+  Licencja: Domena publiczna (PD)
+  *Ten zasób znajduje się w domenie publicznej. Możesz go używać, modyfikować i rozpowszechniać dowolnie, także w celach komercyjnych, bez konieczności podawania autora.*
+
+- **JoyPixels Emojione**
+  Autor: JoyPixels
+  Licencja: MIT
+  Repozytorium: [https://github.com/joypixels/emojione](https://github.com/joypixels/emojione )
+  *MIT pozwala na używanie, modyfikowanie oraz rozpowszechnianie (również komercyjne), pod warunkiem zachowania informacji o autorze i treści licencji.*
+
+- **Clarity Assets (VMware)**
+  Autor: VMware
+  Licencja: MIT
+  Repozytorium: [https://github.com/vmware/clarity-assets](https://github.com/vmware/clarity-assets )
+  *MIT pozwala na używanie, modyfikowanie oraz rozpowszechnianie (również komercyjne), pod warunkiem zachowania informacji o autorze i treści licencji.*
+
+- **Solar Outline Icons**
+  Autor: Solar Icons
+  Licencja: Creative Commons Uznanie autorstwa 4.0 Międzynarodowa (CC BY 4.0)
+  *Licencja CC BY 4.0 pozwala na używanie, modyfikację oraz rozpowszechnianie (w tym w celach komercyjnych), pod warunkiem podania informacji o autorze oraz dołączenia informacji o licencji.*
+
+- **Wolf Kit Rounded Line Icons**
+  Autor: thewolfkit
+  Licencja: Creative Commons Uznanie autorstwa 4.0 Międzynarodowa (CC BY 4.0)
+  Licencja: [https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
+
+  *Licencja CC BY 4.0 pozwala na używanie, modyfikację oraz rozpowszechnianie (w tym w celach komercyjnych), pod warunkiem podania informacji o autorze oraz dołączenia informacji o licencji.*
+
+- **Jtb Variety Oval Icons**
+  Autor: jtblabs
+  Licencja: MIT
+  *Licencja MIT pozwala na użycie, modyfikację i dystrybucję (w tym w zastosowaniach komercyjnych), pod warunkiem dołączenia informacji o prawach autorskich oraz tekstu licencji.*
+
+- **Teenyicons**
+  Autor: teenyicons
+  Licencja: MIT
+  Repozytorium: [https://github.com/teenyicons/teenyicons](https://github.com/teenyicons/teenyicons)
+  *Licencja MIT pozwala na użycie, modyfikację i dystrybucję (w tym w zastosowaniach komercyjnych), pod warunkiem dołączenia informacji o prawach autorskich oraz tekstu licencji.*
+
+- **GitLab SVG Icons**
+  Autor: GitLab
+  Licencja: MIT
+  Repozytorium: [https://gitlab.com/gitlab-org/gitlab-svgs](https://gitlab.com/gitlab-org/gitlab-svgs)
+  *Licencja MIT pozwala na użycie, modyfikację i dystrybucję (w tym w zastosowaniach komercyjnych), pod warunkiem dołączenia informacji o prawach autorskich oraz tekstu licencji.*
+
+
+
+
+
 
 👤 Autor
 
@@ -411,26 +486,105 @@ Likes, reactions, or ratings
 - **Calcite UI Icons**
   Author: Esri
   License: MIT
-  Repo: https://github.com/Esri/calcite-ui-icons
+  Repo: [https://github.com/Esri/calcite-ui-icons](https://github.com/Esri/calcite-ui-icons)
   *MIT allows use, modification, and distribution, provided that the full license text is included.*
 
 - **Nuiverse Icons**
   Author: Nuiverse Design
   License: BSD
-  Repo: https://gitlab.com/nuinalp/open-source/nuiverse/icons
+  Repo: [https://gitlab.com/nuinalp/open-source/nuiverse/icons](https://gitlab.com/nuinalp/open-source/nuiverse/icons)
   *BSD allows use, modification, and distribution, provided that the original license is included.*
 
 - **Unicons**
   Author: Iconscout
   License: Apache License 2.0
-  Repo: https://github.com/Iconscout/unicons
-  *Apache 2.0 allows use, modification, and distribution (including commercial use), provided that the license and copyright notice are preserved.*
+  Repo: [https://github.com/Iconscout/unicons](https://github.com/Iconscout/unicons)
+  *Apache 2.0 allows use, modification, and distribution (including commercial), provided that the license and copyright notice are preserved.*
 
 - **Neuicons**
   Author: Neuicons
   License: MIT
   Repo: [https://github.com/neuicons/neu](https://github.com/neuicons/neu)
   *MIT allows use, modification, and redistribution (including commercial) as long as the license and copyright notice are preserved.*
+
+- **Fontisto**
+  Author: Kenan Gündoğan
+  License: MIT
+  Repo: [https://github.com/kenangundogan/fontisto](https://github.com/kenangundogan/fontisto)
+  *MIT allows use, modification, and redistribution (including commercial) as long as the license and copyright notice are preserved.*
+
+- **Shopify Polaris**
+  Author: Shopify
+  License: MIT
+  Repo: [https://github.com/Shopify/polaris](https://github.com/Shopify/polaris)
+  *MIT allows use, modification, and redistribution (including commercial) as long as the license and copyright notice are preserved.*
+
+- **Ant Design Icons**
+  Author: Ant Design
+  License: MIT
+  Repo: [https://github.com/ant-design/ant-design-icons](https://github.com/ant-design/ant-design-icons )
+  *MIT allows use, modification, and redistribution (including commercial) as long as the license and copyright notice are preserved.*
+
+- **Radix UI Icons**
+  Author: Radix UI
+  License: MIT
+  Repo: [https://github.com/radix-ui/icons](https://github.com/radix-ui/icons)
+  *MIT allows use, modification, and redistribution (including commercial) as long as the license and copyright notice are preserved.*
+
+- **Flat UI**
+  Author: Designmodo
+  License: MIT
+  Repo: [https://github.com/designmodo/Flat-UI](https://github.com/designmodo/Flat-UI)
+  *MIT allows use, modification, and redistribution (including commercial) as long as the license and copyright notice are preserved.*
+
+- **Education Icooon Mono Vectors**
+  Author: Icooon Mono
+  License: Public Domain (PD)
+  *This resource is in the public domain. You can use, modify, and redistribute it freely, including for commercial purposes, without attribution.*
+
+- **JoyPixels Emojione**
+  Author: JoyPixels
+  License: MIT
+  Repo: [https://github.com/joypixels/emojione](https://github.com/joypixels/emojione )
+  *MIT allows use, modification, and redistribution (including commercial) as long as the license and copyright notice are preserved.*
+
+- **Clarity Assets (VMware)**
+  Author: VMware
+  License: MIT
+  Repository: [https://github.com/vmware/clarity-assets](https://github.com/vmware/clarity-assets )
+  *MIT License allows use, modification, and distribution (including commercial use), provided that the copyright notice and license text are included.*
+
+- **Solar Outline Icons**
+  Author: Solar Icons
+  License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+  *The CC BY 4.0 License allows use, modification, and distribution (including commercial use), provided that appropriate credit is given to the author and a reference to the license is included.*
+
+- **Wolf Kit Rounded Line Icons**
+  Author: thewolfkit
+  License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+  License: [https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
+  *The CC BY 4.0 License allows use, modification, and distribution (including commercial use), provided that appropriate credit is given to the author and a reference to the license is included.*
+
+- **Jtb Variety Oval Icons**
+  Author: jtblabs
+  License: MIT
+  *The MIT License allows use, modification, and distribution (including commercial use), provided that the copyright notice and license text are included.*
+
+- **Teenyicons**
+  Author: teenyicons
+  License: MIT
+  Repository: [https://github.com/teenyicons/teenyicons](https://github.com/teenyicons/teenyicons)
+  *The MIT License allows use, modification, and distribution (including commercial use), provided that the copyright notice and license text are included.*
+
+- **GitLab SVG Icons**
+  Author: GitLab
+  License: MIT
+  Repository: [https://gitlab.com/gitlab-org/gitlab-svgs](https://gitlab.com/gitlab-org/gitlab-svgs)
+  *The MIT License allows use, modification, and distribution (including commercial use), provided that the copyright notice and license text are included.*
+
+
+
+
 
 👤 Author
 Created by: CodingBee

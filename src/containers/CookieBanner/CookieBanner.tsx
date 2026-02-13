@@ -1,4 +1,3 @@
-// Montujemy w App.tsx zeby sie odpaliła funkcja initGA do śledzenia wyświetleń stron a także do dalszych analiz
 import styles from './CookieBanner.module.scss'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'

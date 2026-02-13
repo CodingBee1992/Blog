@@ -1,5 +1,5 @@
 import { useRef, type KeyboardEvent } from 'react'
-import { MenuArrowSVG } from '../../../assets/icons/nav/MenuArrowSVG'
+
 import useWindowSize from '../../../hooks/useWindowSize'
 
 import AnchorLink from '../AnchorLink/AnchorLink'
@@ -8,6 +8,7 @@ import styles from './SideBarLink.module.scss'
 import { useLocation } from 'react-router'
 import type { sideBarLinksProps } from '../../../types/types'
 import useMenuContext from '../../../hooks/useMenuContext'
+import { ChevronDownSVG } from '../../../assets/icons/Icons'
 
 interface SideBarLinkProps {
 	data: sideBarLinksProps
@@ -71,7 +72,7 @@ const SideBarLink = ({ data, index }: SideBarLinkProps) => {
 					<div className={styles.sideBarLinkName}>
 						{data.icon} {width >= 700 && <p>{data.title}</p>}
 					</div>
-					<MenuArrowSVG arrowRef={arrowRef} styles={styles} />
+					<ChevronDownSVG arrowRef={arrowRef} className={`${styles.chevron}`}/>
 				</div>
 
 				{data.children?.length ? (
@@ -80,7 +81,6 @@ const SideBarLink = ({ data, index }: SideBarLinkProps) => {
 						data={data}
 						toggle={() => {
 							close()
-							
 						}}
 					/>
 				) : null}
@@ -97,9 +97,7 @@ const SideBarLink = ({ data, index }: SideBarLinkProps) => {
 				className={styles.sideBarLink}
 				href={data.href}>
 				<div
-					className={`${styles.sideBarLinkHelper} ${styles.sideBarPadding} ${active ? styles.activeSideBarLink : ''}`}
-					// onClick={() => handleOpenCloseDropdown()}
-				>
+					className={`${styles.sideBarLinkHelper} ${styles.sideBarPadding} ${active ? styles.activeSideBarLink : ''}`}>
 					<div className={styles.sideBarLinkName}>
 						{data.icon} {width >= 700 && <p>{data.title}</p>}
 					</div>

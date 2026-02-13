@@ -1,4 +1,4 @@
-import { ArrowDownSVG, PencilSVG, TrashSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
+import { PencilSVG, TrashSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 import { useDeletePostMutation, useFetchPostsByLimitQuery, usePublishPostMutation } from '../../../slices/api/postApi'
 import type { ExtendedArticleContentProps } from '../../../types/types'
 import styles from './ListOfPosts.module.scss'
@@ -19,10 +19,12 @@ import { useFetchAllCategoriesQuery } from '../../../slices/api/categoriesApi'
 import createUrl from '../../../hooks/createUrl'
 
 import dateConverter from '../../../hooks/dateConverter'
+import { ChevronDownSVG } from '../../../assets/icons/Icons'
 
 const ListOfPosts = () => {
 	const popupRef = useRef<HTMLDivElement | null>(null)
 	const [popUpMessage, setPopUpMessage] = useState<string>('')
+	const [focusedChevron, setFocusedChevron] = useState<string>('')
 	const [postData, setPostData] = useState({
 		postId: '',
 		postTitle: '',
@@ -86,9 +88,14 @@ const ListOfPosts = () => {
 		} else {
 			lastChild?.classList.remove(styles.scaleUp)
 		}
-
-		if (!el || el === 'status' || el === 'categories') return
-		if (el === 'createdAt' || el === 'publishedAt' || el === 'comments') {
+		if(!el) return
+		if (el !== focusedChevron) {
+			setFocusedChevron(el)
+		} else {
+			setFocusedChevron('')
+		}
+		if ( el === 'status' || el === 'categories') return
+		if (el === 'createdAt' || el === 'publishedAt' || el === 'comments' || el === 'views') {
 			setSort(prev => {
 				const newOrder = prev.sortBy === el ? (prev.order === 'asc' ? 'desc' : 'asc') : 'desc'
 
@@ -192,7 +199,7 @@ const ListOfPosts = () => {
 										if (item === 'categories' || item === 'status') {
 											return (
 												<div data-element={item} className={styles.th} key={index} onClick={e => handleSetSort(e)}>
-													{item} <ArrowDownSVG />
+													{item} <ChevronDownSVG className={`${item === focusedChevron ? styles.chevronRotate : ''}`} />
 													{item === 'categories' && (
 														<div className={styles.theadDropDown}>
 															{allCategories?.map((c, index) => (
@@ -226,7 +233,7 @@ const ListOfPosts = () => {
 										} else {
 											return (
 												<div data-element={item} className={styles.th} key={index} onClick={e => handleSetSort(e)}>
-													{item} <ArrowDownSVG />
+													{item} <ChevronDownSVG className={`${item === focusedChevron ? styles.chevronRotate : ''}`} />
 												</div>
 											)
 										}
@@ -243,7 +250,7 @@ const ListOfPosts = () => {
 					</div>
 					<div className={styles.tbody}>
 						{posts &&
-							posts?.map((item:ExtendedArticleContentProps, index: number) => (
+							posts?.map((item: ExtendedArticleContentProps, index: number) => (
 								<div key={index} className={`${styles.tr} ${item.status === 'draft' ? styles.draft : ''}`}>
 									<div className={styles.td}>
 										<AnchorLink

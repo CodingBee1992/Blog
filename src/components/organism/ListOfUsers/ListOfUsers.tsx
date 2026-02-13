@@ -1,4 +1,4 @@
-import { ArrowDownSVG, PencilSVG, TrashSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
+import { PencilSVG, TrashSVG } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 
 import type { UsersProps } from '../../../types/types'
 import styles from './ListOfUsers.module.scss'
@@ -17,10 +17,12 @@ import Popup from '../../atoms/Popup/Popup'
 import NotificationNew from '../../atoms/NotificationNew/NotificationNew'
 import longDateConverter from '../../../hooks/longDateConverter'
 import dateConverter from '../../../hooks/dateConverter'
+import { ChevronDownSVG } from '../../../assets/icons/Icons'
 
 const ListOfUsers = () => {
 	const popupRef = useRef<HTMLDivElement | null>(null)
 	const [popUpMessage, setPopUpMessage] = useState<string>('')
+	const [focusedChevron, setFocusedChevron] = useState<string>('')
 	const [userData, setUserData] = useState({
 		userId: '',
 		userName: '',
@@ -66,6 +68,13 @@ const ListOfUsers = () => {
 		const el = target.dataset.element
 
 		if (!el) return
+		if(el !== focusedChevron){
+			setFocusedChevron(el)
+			
+		}else{
+			setFocusedChevron('')
+			
+		}
 
 		if (el === 'comments' || el === 'lastLogin' || el === 'status') {
 			setSort(prev => {
@@ -81,6 +90,8 @@ const ListOfUsers = () => {
 
 			return { sortBy: el, order: newOrder }
 		})
+
+
 	}
 
 	useEffect(() => {
@@ -159,7 +170,7 @@ const ListOfUsers = () => {
 								if (item !== 'actions' && item !== 'role') {
 									return (
 										<div data-element={item} className={styles.th} key={index} onClick={e => handleSetSort(e)}>
-											{item} <ArrowDownSVG />
+											{item} <ChevronDownSVG className={`${item === focusedChevron ? styles.chevronRotate : ''}`}/>
 										</div>
 									)
 								} else {

@@ -3,7 +3,6 @@ import { useFetchStatisticsLiveQuery } from '../../../slices/api/statisticsApi'
 import StatisticCard from '../../atoms/StatisticCard/StatisticCard'
 import styles from './Statistics.module.scss'
 import {
-	ArrowDownSVG,
 	ArrowUpSVG,
 	CommentsSVG,
 	HeartSVG,
@@ -18,6 +17,7 @@ import Loader from '../../atoms/loader/Loader'
 
 import Notifications from '../../modules/Notification/Notifications'
 import LatestComments from '../../modules/LatestComments/LatestComments'
+import { ChevronDownSVG } from '../../../assets/icons/Icons'
 
 const Statistics = () => {
 	const [viewsFromTo, setViewsFromTo] = useState<string>('this week')
@@ -29,7 +29,7 @@ const Statistics = () => {
 	if (!data) {
 		return <Loader />
 	}
-	const { postsStats, commentsStats, usersStats, likesStats, pageViews, chartStats, dayStats } = data
+	const { postsStats, commentsStats, usersStats, likesStats, pageViews, chartStats, dayStats,latestComments,notifications,topRated } = data
 
 	const statConfig = [
 		{ title: 'PageViews', stats: pageViews, icon: <ViewsSVG />, style: styles.pageViews },
@@ -91,7 +91,8 @@ const Statistics = () => {
 					<div className={styles.areaCurrentDropdown}>
 						<div className={styles.areaCurrentViewsFromTo} onClick={() => handleOpenDropDown()}>
 							<span>{viewsFromTo}</span>
-							<ArrowDownSVG className={`${scaleUp ? styles.rotate : ''}`} />
+							
+							<ChevronDownSVG className={` ${scaleUp ? styles.rotate : ''}`} />
 						</div>
 
 						<div className={`${styles.areaCurrentViewsSelect} ${scaleUp ? styles.scaleUp : ''}`}>
@@ -106,9 +107,9 @@ const Statistics = () => {
 				</div>
 			</div>
 
-			<PopularPosts />
-			<Notifications />
-			<LatestComments />
+			<PopularPosts topRated={topRated}/>
+			<Notifications notifications={notifications}/>
+			<LatestComments latestComments={latestComments}/>
 		</div>
 	)
 }

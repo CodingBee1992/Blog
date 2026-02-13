@@ -133,12 +133,16 @@
 
 						.icon {
 							color: var(--errorFormColor);
-
+							width: 20px;
+							height: 20px;
 							cursor: pointer;
 							transition: all 0.3s;
+							
 							&:hover {
 								scale: 1.1;
 							}
+
+							
 						}
 					}
 				}
