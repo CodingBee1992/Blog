@@ -75,19 +75,7 @@ import LegalPrivacyPage from './components/pages/AdminPanel/LegalDocuments/Legal
 import LegalTermsPage from './components/pages/AdminPanel/LegalDocuments/LegalTermsPage/LegalTermsPage'
 import LegalAcknowledgmentsPage from './components/pages/AdminPanel/LegalDocuments/LegalAcknowledgmentsPage/LegalAcknowledgmentsPage'
 const App = () => {
-	// useEffect(() => {
-	// 	if (window.gtag) {
-	// 		window.gtag('consent', 'default', {
-	// 			ad_storage: 'denied',
-	// 			ad_personalization: 'denied',
-	// 			ad_user_data: 'denied',
-	// 			analytics_storage: 'denied',
-	// 			functionality_storage: 'granted',
-	// 			personalization_storage: 'denied',
-	// 			security_storage: 'granted',
-	// 		})
-	// 	}
-	// }, [])
+	
 
 	return (
 		<Router basename="/">
