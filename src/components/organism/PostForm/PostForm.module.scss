@@ -21,14 +21,13 @@
 				font-size: var(--textSize_12);
 				border-radius: var(--borderRadius04);
 				border: none;
-				
+
 				text-transform: uppercase;
 				transition: all 0.3s;
 				cursor: pointer;
 
 				&:hover {
 					color: var(--buttonColorGreen);
-					
 				}
 			}
 		}
@@ -137,12 +136,10 @@
 							height: 20px;
 							cursor: pointer;
 							transition: all 0.3s;
-							
+
 							&:hover {
 								scale: 1.1;
 							}
-
-							
 						}
 					}
 				}
@@ -350,9 +347,9 @@
 		.isSubmitting {
 			background-color: #d3d3d3d3;
 			cursor: not-allowed;
+			color: #000000;
 			&:hover {
 				background-color: #d3d3d3d3;
-				color: #000000;
 			}
 		}
 	}
@@ -430,12 +427,10 @@
 			line-height: var(--textLineHeight);
 			font-size: var(--textSize_16);
 			font-family: var(--font-2);
-			
+
 			border: none;
 			outline: none;
 			transition: all 0.3s;
-
-			
 		}
 		&:hover {
 			box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
@@ -473,6 +468,23 @@
 		height: 600px;
 		background-color: var(--formBgcLight);
 		border-radius: 12px;
+	}
+}
+
+.progressWrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 16px;
+	width: 100%;
+	background-color: #00a73826;
+	z-index: 2000;
+	transition: width 0.3s ease;
+	.progress {
+		height: 100%;
+		background-image: linear-gradient(to right, #89ffad, #6bd082, #4da259, #307734, #104f10);
+		border-top-right-radius: 20px;
+		border-bottom-right-radius: 20px;
 	}
 }
 

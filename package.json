@@ -14,6 +14,7 @@
     "@reduxjs/toolkit": "^2.9.0",
     "@types/node": "^24.7.0",
     "aos": "^3.0.0-beta.6",
+    "axios": "^1.13.5",
     "event-source-polyfill": "^1.0.31",
     "js-cookie": "^3.0.5",
     "react": "^19.1.1",

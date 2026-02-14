@@ -1,3 +1,4 @@
+import axios from 'axios'
 interface cloudinaryProps {
 	file: File | null
 	uploadFolder?: string
@@ -7,19 +8,20 @@ interface cloudinaryProps {
 		timestamp: string
 		api_key: string
 	}
+	onProgress?: (progress: number) => void
 }
 
-const uploadToCloudinary = async ({ file, dataSignature, publicId, uploadFolder }: cloudinaryProps) => {
+const uploadToCloudinary = async ({ file, dataSignature, publicId, uploadFolder, onProgress }: cloudinaryProps) => {
 	const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
 	const { timestamp, api_key, signature } = dataSignature
-	
+
 	if (!file) return
 	const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`
 	const formData = new FormData()
 	formData.append('file', file)
 	formData.append('signature', signature)
 	formData.append('timestamp', timestamp.toString())
-	
+
 	formData.append('api_key', api_key)
 
 	if (!publicId) {
@@ -32,14 +34,16 @@ const uploadToCloudinary = async ({ file, dataSignature, publicId, uploadFolder 
 		formData.append('invalidate', 'true')
 	}
 
-	
-
-	const response = await fetch(url, {
-		method: 'POST',
-		body: formData,
+	const response = await axios.post(url, formData, {
+		onUploadProgress: e => {
+			if (onProgress) {
+				const percent = Math.round((e.loaded * 100) / (e.total ?? 1))
+				onProgress(percent)
+			}
+		},
 	})
 
-	const data = await response.json()
+	const data = response.data
 
 	return data
 }

@@ -1,7 +1,7 @@
 import styles from './CookieBanner.module.scss'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
-import useMenuContext from '../../hooks/useMenuContext'
+
 
 declare global {
 	interface Window {
@@ -13,7 +13,7 @@ declare global {
 export default function CookieBanner() {
 	const [visible, setVisible] = useState(false)
 	const [showAnim, setShowAnim] = useState(false)
-	const {analytics} = useMenuContext()
+
 	useEffect(() => {
 		const consent = Cookies.get('consent-stat') === 'true'
 		if (!consent) {
@@ -33,7 +33,7 @@ export default function CookieBanner() {
 		setTimeout(() => setVisible(false), 500)
 	}
 
-	if(analytics && !analytics.analyticsEnabled) return null
+	
 	if (!showAnim && !visible) return null
 	return (
 		<div
