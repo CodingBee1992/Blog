@@ -121,7 +121,7 @@ const Registration = () => {
 							placeholder="Enter your name"
 						/>
 						<RHFInput
-							type="text"
+							type="email"
 							name="email"
 							id="email"
 							isSubmitting={isSubmitting}

@@ -30,7 +30,7 @@ if (stored) {
 
 		name = decoded.name || ''
 		id = decoded.id || ''
-		avatar = decoded.avatar.src || ''
+		avatar = decoded.avatar?.src || ''
 
 		role = decoded.role || ''
 	} catch (error) {
@@ -47,7 +47,10 @@ const initialState: SetDataType = {
 
 	role,
 }
+const sameSiteValue: 'none' | 'strict' = import.meta.env.VITE_NODE_ENV === 'production' ? 'none' : 'strict'
 export const USER_COOKIE_OPTIONS = {
+	secure: import.meta.env.VITE_NODE_ENV === 'production' ? true : false,
+	sameSite: sameSiteValue,
 	path: '/',
 	expires: 1, // 1 dzień
 }
@@ -79,7 +82,7 @@ export const authSlice = createSlice({
 		},
 
 		setLogout: state => {
-			Cookies.remove('user',USER_COOKIE_OPTIONS)
+			Cookies.remove('user', USER_COOKIE_OPTIONS)
 			localStorage.removeItem('user')
 			state.isLogged = false
 			state.justLoggedOut = true
