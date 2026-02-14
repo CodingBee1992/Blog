@@ -47,7 +47,7 @@ const initialState: SetDataType = {
 
 	role,
 }
-const sameSiteValue: 'none' | 'strict' = import.meta.env.VITE_NODE_ENV === 'production' ? 'none' : 'strict'
+const sameSiteValue: 'lax' | 'strict' = import.meta.env.VITE_NODE_ENV === 'production' ? 'lax' : 'strict'
 export const USER_COOKIE_OPTIONS = {
 	secure: import.meta.env.VITE_NODE_ENV === 'production' ? true : false,
 	sameSite: sameSiteValue,
