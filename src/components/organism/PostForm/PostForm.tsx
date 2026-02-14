@@ -1,4 +1,4 @@
-import { useRef, useState, type MouseEvent } from 'react'
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import { FormProvider, useFieldArray, useForm, type SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { postSchema, defaultValues, type postSchemaTypes } from '../../../types/formSchema'
@@ -40,6 +40,9 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 	const { data } = useFetchAllCategoriesQuery()
 	const [postMessage, setPostMessage] = useState<string>('')
 	const allCategories = data && data?.length > 0 ? data : defaultCategories
+	const [progress, setProgress] = useState<number>(0)
+
+	const [animatedProgress, setAnimatedProgress] = useState<number>(0)
 
 	const methods = useForm<postSchemaTypes>({
 		mode: 'onSubmit',
@@ -92,34 +95,76 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 	}
 
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
-		console.log(data)
 		try {
 			if (!editValues) {
-				const dataSignature = await createSignature({ uploadFolder }).unwrap()
-				let mainImage = data.mainImage
+				const filesToUpload: { file: File; type: 'main' | 'content'; index?: number }[] = []
 
-				if (mainImage.src instanceof File) {
-					const data = await uploadToCloudinary({ file: mainImage.src, uploadFolder, dataSignature })
-
-					mainImage = { ...mainImage, src: data.secure_url, public_id: data.public_id }
+				// Zliczamy wszystkie uploadowane pliki
+				if (data.mainImage.src instanceof File) {
+					filesToUpload.push({ file: data.mainImage.src, type: 'main' })
 				}
-				const articleContent = await Promise.all(
-					data.articleContent.map(async item => {
-						if (item.type === 'image' && item.value.src instanceof File) {
-							const file = item.value.src
 
-							const data = await uploadToCloudinary({ file, uploadFolder, dataSignature })
+				data.articleContent.forEach((item, index) => {
+					if (item.type === 'image' && item.value.src instanceof File) {
+						filesToUpload.push({ file: item.value.src, type: 'content', index })
+					}
+				})
 
-							return { ...item, value: { ...item.value, src: data.secure_url, public_id: data.public_id } }
+				let uploaded = 0
+				const total = filesToUpload.length
+
+				const updateGlobalProgress = (localProgress: number) => {
+					// global progress = średnia ważona
+					const progressPerFile = 100 / total
+					const globalProgress = uploaded * progressPerFile + (localProgress / 100) * progressPerFile
+					setProgress(Math.round(globalProgress * 10) / 10)
+				}
+
+				const dataSignature = await createSignature({ uploadFolder }).unwrap()
+				
+				let mainImage = data.mainImage
+				const articleContent = [...data.articleContent]
+
+				for (const fileObj of filesToUpload) {
+					const uploadedData = await uploadToCloudinary({
+						file: fileObj.file,
+						uploadFolder,
+						dataSignature,
+						onProgress: updateGlobalProgress,
+					})
+
+					uploaded++ // kończenie pliku
+
+					if (fileObj.type === 'main') {
+						mainImage = {
+							...mainImage,
+							src: uploadedData.secure_url,
+							public_id: uploadedData.public_id,
 						}
-						return item
-					}),
-				)
+					} else if (fileObj.type === 'content' && fileObj.index !== undefined) {
+						const idx = fileObj.index
+						const item = articleContent[idx]
+
+						if (item.type === 'image') {
+							articleContent[idx] = {
+								...item,
+								value: {
+									...item.value,
+									src: uploadedData.secure_url,
+									public_id: uploadedData.public_id,
+								},
+							}
+						}
+					}
+				}
 
 				const updatedData = { ...data, articleContent, mainImage }
 
 				const res = await createPost({ updatedData }).unwrap()
-				if (res) setPostMessage(res.message)
+				if (res) {
+					setPostMessage(res.message)
+					setProgress(0)
+				}
 				reset()
 			} else {
 				// Updating Post
@@ -188,7 +233,29 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 			setError('root', { message: 'An unexpected error has occured' })
 		}
 	}
-	
+
+	useEffect(() => {
+		let frame: number
+
+		const animate = () => {
+			setAnimatedProgress(prev => {
+				const diff = progress - prev
+
+				if (Math.abs(diff) < 0.1) return progress
+
+				return prev + diff * 0.1 // im mniejsze, tym wolniej i płynniej
+			})
+
+			frame = requestAnimationFrame(animate)
+		}
+
+		frame = requestAnimationFrame(animate)
+
+		return () => cancelAnimationFrame(frame)
+	}, [progress])
+
+
+
 	if (isSubmitSuccessful) window.scrollTo({ top: 0, behavior: 'smooth' })
 	if (editValues && isSubmitSuccessful)
 		return (
@@ -201,6 +268,12 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 	return (
 		<FormProvider {...methods}>
 			<div className={styles.postFormContainer}>
+				{progress > 0 && (
+					<div className={styles.progressWrapper}>
+						<div style={{ width: `${animatedProgress}%` }} className={styles.progress}></div>
+					</div>
+				)}
+
 				<div className={styles.postFormControllersWrapper}>
 					<div className={styles.postFormControllers}>
 						{buttons.map((btn, index) => (
@@ -298,7 +371,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 											</div>
 										)}
 										{field.type === 'text' && (
-											<div key={field.id}  className={styles.fieldBox}>
+											<div key={field.id} className={styles.fieldBox}>
 												<RHFTextArea<postSchemaTypes>
 													name={`articleContent.${index}.value`}
 													label="Text"
@@ -317,7 +390,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 											</div>
 										)}
 										{field.type === 'image' && (
-											<div key={field.id}  className={styles.fieldBox}>
+											<div key={field.id} className={styles.fieldBox}>
 												<RHFAddFile<postSchemaTypes>
 													name={`articleContent.${index}.value.src`}
 													label="Content Image"

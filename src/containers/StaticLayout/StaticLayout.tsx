@@ -18,6 +18,9 @@ const StaticLayout = () => {
 	const { isLoading } = useSelector((state: RootState) => state.theme)
 	const { width } = useWindowSize()
 	const { pathname } = useLocation()
+	const {
+		data: { analytics },
+	} = useFetchSettingsQuery({})
 	const [incrementPageViews] = useIncrementPageViewsMutation()
 	const { handleIncrementPageViews } = useIncrementViews()
 	const { data } = useFetchSettingsQuery({})
@@ -55,15 +58,14 @@ const StaticLayout = () => {
 			Aos.refresh()
 		}
 	}, [pathname, isLoading, width])
-
-
+	
 	return (
 		<MenuProvider>
 			<SinglePostProvider>
-				<CookieBanner />
+				{analytics && analytics.analyticsEnabled && <CookieBanner />}
 				<div data-aos="fade-zoom-in">
 					<Navigation />
-					
+
 					<main style={{ minHeight: '100dvh' }}>
 						<Outlet />
 					</main>
