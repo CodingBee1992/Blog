@@ -43,12 +43,11 @@ const PostsContent = ({ data, currentPage, setCurrentPage }: PostsContentProps) 
 			if (!sectionRef.current) return
 			window.scrollTo({
 				behavior: 'smooth',
-				top:( sectionRef.current?.offsetTop - 80) || 0,
+				top: sectionRef.current?.offsetTop - 80 || 0,
 			})
-			
 		}
 	}
-	
+
 	useEffect(() => {
 		const buttons: (number | string)[] = []
 		const maxVisiblePages = 5
@@ -168,19 +167,6 @@ const PostsContent = ({ data, currentPage, setCurrentPage }: PostsContentProps) 
 	useLayoutEffect(() => {
 		recalcGrid()
 
-		// requestAnimationFrame(() => {
-		// 	const nodes = articleRef.current
-
-		// 	if (!nodes.length) return
-
-		// 	nodes.forEach((el, index) => {
-		// 		if (!el) return
-
-		// 		heightsCache.current[index] = el.offsetHeight
-		// 	})
-
-		// 	recalcGrid()
-		// })
 
 		const observer = new ResizeObserver(elements => {
 			elements.forEach(el => {
@@ -214,7 +200,7 @@ const PostsContent = ({ data, currentPage, setCurrentPage }: PostsContentProps) 
 	useEffect(() => {
 		Aos.init({
 			duration: 600,
-			once: false, // lub true, jeśli chcesz tylko raz animować
+			once: false,
 		})
 	}, [])
 	useEffect(() => {
@@ -262,6 +248,7 @@ const PostsContent = ({ data, currentPage, setCurrentPage }: PostsContentProps) 
 				<button
 					type="button"
 					data-direction="prev"
+					aria-label="Previous Page"
 					className={`${styles.controlBtn} ${styles.paginationBtn}`}
 					onClick={e => handlePageChange(e)}>
 					Prev
@@ -272,6 +259,7 @@ const PostsContent = ({ data, currentPage, setCurrentPage }: PostsContentProps) 
 							<button
 								type="button"
 								key={index}
+								aria-label={`Page ${btn}`}
 								onClick={e => handleSetPage(e)}
 								className={`${styles.paginationBtn} ${styles.paginationNumber} ${
 									currentPage === btn ? styles.btnActive : ''
@@ -284,6 +272,7 @@ const PostsContent = ({ data, currentPage, setCurrentPage }: PostsContentProps) 
 				<button
 					type="button"
 					data-direction="next"
+					aria-label="Next Page"
 					className={`${styles.controlBtn} ${styles.paginationBtn}`}
 					onClick={e => handlePageChange(e)}>
 					Next
