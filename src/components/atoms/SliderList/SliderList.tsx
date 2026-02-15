@@ -15,8 +15,10 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 	const responsiveImage = useResponsiveCloudinaryImage({ mainImageSrc })
 
 	const url = createUrl({ categories: data.categories, seo: data.seo, _id: data._id })
-
+	
+	
 	const isActive = number === index
+
 	return (
 		<div className={styles.heroSlide}>
 			<div

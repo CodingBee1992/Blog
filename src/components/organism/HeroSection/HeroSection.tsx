@@ -61,12 +61,12 @@ const HeroSection = () => {
 	const handleSwipeOnClickDots = (e: MouseEvent<HTMLLIElement>, index: number) => {
 		const target = e.currentTarget
 		const el = Number(target.dataset.element)
-		
+
 		if (el === index) {
 			setNumber(el)
 		}
 	}
-	
+
 	if (isFetching) return <Loader />
 
 	return (
@@ -78,7 +78,7 @@ const HeroSection = () => {
 					onMouseUp={e => handleSwipeEnd(e)}
 					onTouchStart={e => handleSwipeStart(e)}
 					onTouchEnd={e => handleSwipeEnd(e)}>
-					{data.posts.map((data: ArticleContentProps, index: number) => (
+					{data.heroPosts.map((data: ArticleContentProps, index: number) => (
 						<SliderList key={index} styles={styles} data={data} index={index} number={number} />
 					))}
 				</div>
