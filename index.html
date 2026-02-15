@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    // window.dataLayer = window.dataLayer || [];
-    // function gtag() { dataLayer.push(arguments); }
+  <!-- Preconnect to speed up font fetch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    // gtag('consent', 'default', {
-    //   ad_storage: 'denied',
-    //   ad_user_data: 'denied',
-    //   ad_personalization: 'denied',
-    //   analytics_storage: 'denied',
-    //   functionality_storage: 'granted',
-    //   security_storage: 'granted'
-    // });
-  </script>
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+  <!-- Preload and load font stylesheet asynchronously -->
+  <link rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet">
+  </noscript>
+
 
   <!-- Podstawowe SEO -->
   <title>Moja Strona Główna – Blog o podróżach i lifestyle</title>

@@ -76,14 +76,17 @@
 						height: 100%;
 
 						.heroText {
+							display: flex;
+							flex-direction: column;
 							align-self: flex-end;
 							max-width: var(--slideContent-width);
 							padding: 0 var(--gutter);
+							gap: 1rem;
 							.heroMeta {
 								display: flex;
-								// flex-direction: column;
-								gap: 1rem;
-								// line-height: 3rem;
+								
+								gap: 1.5rem;
+								
 								font-size: var(--textSpan);
 
 								.heroCategories {

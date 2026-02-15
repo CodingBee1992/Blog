@@ -6,7 +6,7 @@
 	background-color: var(--bgcLightGrey);
 	line-height: calc(0.8125 * var(--space));
 
-	h5 {
+	h2 {
 		font-size: var(--text-xs);
 		font-weight: 400;
 		text-transform: uppercase;
@@ -93,13 +93,12 @@
 	}
 	.footerBottom {
 		.copyright {
-			color: #828484;
+			color: var(--lightBlackColor);
 			font-size: calc(1.8rem * 0.7222);
 
 			&:first-child::after {
 				content: '|';
 				padding: 0 1rem 0 1.2rem;
-				color: #828484;
 			}
 
 			a {
@@ -157,6 +156,27 @@
 				.footerSubscribe {
 					grid-column: 1/13;
 					grid-row: 3/4;
+				}
+			}
+		}
+	}
+}
+
+@media (width < 500px) {
+	.footerContainer {
+		.footerBottom {
+			.column {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				.copyright {
+					
+
+					&:first-child::after {
+						display: none;
+					}
+
+					
 				}
 			}
 		}
