@@ -91,7 +91,7 @@ const Footer = () => {
 					<span className={styles.copyright}>&copy; Copyright CodingBee {year}</span>
 					<span className={styles.copyright}>
 						Design by{' '}
-						<a href="https://www.styleshout.com/" target="_blank">
+						<a href="https://www.styleshout.com/" target="_blank" rel="noopener noreferrer">
 							StyleShout
 						</a>
 					</span>
