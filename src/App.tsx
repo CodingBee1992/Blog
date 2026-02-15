@@ -2,13 +2,17 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router'
 
 // Layouts
-const StaticLayout = lazy(() => import('./containers/StaticLayout/StaticLayout'))
+
+import StaticLayout from './containers/StaticLayout/StaticLayout'
 const AdminPanelLayout = lazy(() => import('./containers/StaticLayout/AdminPanelLayout'))
 const AccountLayout = lazy(() => import('./containers/StaticLayout/AccountLayout'))
-
+// Route Guards
+import AuthGuard from './containers/StaticLayout/AuthGuard'
+import AdminGuard from './containers/StaticLayout/AdminGuard'
+import UserRoute from './containers/StaticLayout/UserRoute'
+import MaintenanceGuard from './containers/StaticLayout/MaintenanceGuard'
 // Publis Sites
-const HomePage = lazy(() => import('./components/pages/HomePage/HomePage'))
-
+import HomePage from './components/pages/HomePage/HomePage'
 const AboutPage = lazy(() => import('./components/pages/AboutPage/AboutPage'))
 const ContactPage = lazy(() => import('./components/pages/ContactPage/ContactPage'))
 const SinglePostPage = lazy(() => import('./components/pages/SinglePostPage/SinglePostPage'))
@@ -44,39 +48,41 @@ const UnauthorizedAccess = lazy(
 )
 const PasswordEvents = lazy(() => import('./components/pages/AdminPanel/Security/PasswordEvents/PasswordEvents'))
 
-const GeneralSettingsPage = lazy(
-	() => import('./components/pages/AdminPanel/Settings/General/GeneralSettingsPage'),
-)
+const GeneralSettingsPage = lazy(() => import('./components/pages/AdminPanel/Settings/General/GeneralSettingsPage'))
 const EmailSettingsPage = lazy(() => import('./components/pages/AdminPanel/Settings/Email/EmailSettingsPage'))
-const IntegrationsSettingsPage = lazy(() => import('./components/pages/AdminPanel/Settings/Integrations/IntegrationsSettingsPage'))
+const IntegrationsSettingsPage = lazy(
+	() => import('./components/pages/AdminPanel/Settings/Integrations/IntegrationsSettingsPage'),
+)
 // Account pages
 const ProfilePage = lazy(() => import('./components/pages/AccountPages/ProfilePage/ProfilePage'))
 const ResetPasswordPage = lazy(() => import('./components/pages/AccountPages/ResetPasswordPage/ResetPasswordPage'))
 const DeleteAccountPage = lazy(() => import('./components/pages/AccountPages/DeleteAccountPage/DeleteAccountPage'))
 const ChangeEmailPage = lazy(() => import('./components/pages/AccountPages/ChangeEmailPage/ChangeEmailPage'))
 
-// Route Guards
-import AuthGuard from './containers/StaticLayout/AuthGuard'
-import AdminGuard from './containers/StaticLayout/AdminGuard'
-import UserRoute from './containers/StaticLayout/UserRoute'
+const UsersHistory = lazy(() => import('./components/pages/AdminPanel/Users/UsersHistory/UsersHistory'))
+const PrivacyPolicy = lazy(() => import('./components/pages/PrivacyPolicy/PrivacyPolicy'))
+const TermsAndConditions = lazy(() => import('./components/pages/TermsAndConditions/TermsAndConditions'))
 
-import PageNotFound from './components/pages/PageNotFound/PageNotFound'
-import UsersHistory from './components/pages/AdminPanel/Users/UsersHistory/UsersHistory'
-import PrivacyPolicy from './components/pages/PrivacyPolicy/PrivacyPolicy'
-import TermsAndConditions from './components/pages/TermsAndConditions/TermsAndConditions'
-import MaintenanceGuard from './containers/StaticLayout/MaintenanceGuard'
+const AnalyticsSettingsPage = lazy(
+	() => import('./components/pages/AdminPanel/Settings/Analytics/AnalyticsSettingsPage'),
+)
+const SecuritySettingsPage = lazy(() => import('./components/pages/AdminPanel/Settings/Security/SecuritySettingsPage'))
+const PostSettingsPage = lazy(() => import('./components/pages/AdminPanel/Settings/Post/PostSettingsPage'))
+const InteractionsSettingsPage = lazy(
+	() => import('./components/pages/AdminPanel/Settings/Interactions/InteractionsSettingsPage'),
+)
+const LegalPrivacyPage = lazy(
+	() => import('./components/pages/AdminPanel/LegalDocuments/LegalPrivacyPage/LegalPrivacyPage'),
+)
+const LegalTermsPage = lazy(() => import('./components/pages/AdminPanel/LegalDocuments/LegalTermsPage/LegalTermsPage'))
+const LegalAcknowledgmentsPage = lazy(
+	() => import('./components/pages/AdminPanel/LegalDocuments/LegalAcknowledgmentsPage/LegalAcknowledgmentsPage'),
+)
 
 import Loader from './components/atoms/loader/Loader'
-import AnalyticsSettingsPage from './components/pages/AdminPanel/Settings/Analytics/AnalyticsSettingsPage'
-import SecuritySettingsPage from './components/pages/AdminPanel/Settings/Security/SecuritySettingsPage'
-import PostSettingsPage from './components/pages/AdminPanel/Settings/Post/PostSettingsPage'
-import InteractionsSettingsPage from './components/pages/AdminPanel/Settings/Interactions/InteractionsSettingsPage'
-import LegalPrivacyPage from './components/pages/AdminPanel/LegalDocuments/LegalPrivacyPage/LegalPrivacyPage'
-import LegalTermsPage from './components/pages/AdminPanel/LegalDocuments/LegalTermsPage/LegalTermsPage'
-import LegalAcknowledgmentsPage from './components/pages/AdminPanel/LegalDocuments/LegalAcknowledgmentsPage/LegalAcknowledgmentsPage'
-const App = () => {
-	
+import PageNotFound from './components/pages/PageNotFound/PageNotFound'
 
+const App = () => {
 	return (
 		<Router basename="/">
 			<Routes>
@@ -141,7 +147,7 @@ const App = () => {
 					</Route>
 					<Route path="comments/">
 						<Route path="list" element={<ListOfCommentsPage />} />
-						
+
 						<Route path="comments-history" element={<CommentsHistory />} />
 					</Route>
 					<Route path="security">
@@ -153,16 +159,15 @@ const App = () => {
 						<Route path="general" element={<GeneralSettingsPage />} />
 						<Route path="security" element={<SecuritySettingsPage />} />
 						<Route path="posts" element={<PostSettingsPage />} />
-						<Route path="interactions" element={<InteractionsSettingsPage/>} />
+						<Route path="interactions" element={<InteractionsSettingsPage />} />
 						<Route path="analytics" element={<AnalyticsSettingsPage />} />
 						<Route path="email" element={<EmailSettingsPage />} />
 						<Route path="integrations" element={<IntegrationsSettingsPage />} />
 					</Route>
 					<Route path="legal-documents">
-						<Route path="privacy-policy" element={<LegalPrivacyPage/>} />
+						<Route path="privacy-policy" element={<LegalPrivacyPage />} />
 						<Route path="terms-and-conditions" element={<LegalTermsPage />} />
 						<Route path="acknowledgments" element={<LegalAcknowledgmentsPage />} />
-						
 					</Route>
 				</Route>
 
