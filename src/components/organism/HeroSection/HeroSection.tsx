@@ -59,13 +59,14 @@ const HeroSection = () => {
 		setSwipeStartX(0)
 	}
 	const handleSwipeOnClickDots = (e: MouseEvent<HTMLLIElement>, index: number) => {
-		const target = e.currentTarget.tabIndex
-
-		if (target === index) {
-			setNumber(target)
+		const target = e.currentTarget
+		const el = Number(target.dataset.element)
+		
+		if (el === index) {
+			setNumber(el)
 		}
 	}
-
+	
 	if (isFetching) return <Loader />
 
 	return (

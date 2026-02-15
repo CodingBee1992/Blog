@@ -97,7 +97,7 @@ const Login = () => {
 					</p>
 					<form aria-busy={isSubmitting} onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
 						<RHFInput
-							type="text"
+							type="email"
 							name="email"
 							id="email"
 							styles={styles}

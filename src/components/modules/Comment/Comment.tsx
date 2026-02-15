@@ -56,7 +56,7 @@ const Comment = ({ _id, postId, parentId, author, comment, createdAt, children }
 		}
 	}
 
-	const dataMessage = new Date(createdAt).toLocaleDateString('en-EN', {
+	const dataMessage = new Date(createdAt).toLocaleDateString('en-GB', {
 		day: '2-digit',
 		month: 'long',
 		year: 'numeric',

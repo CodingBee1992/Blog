@@ -37,18 +37,15 @@ const Footer = () => {
 			<div className={styles.footerMain}>
 				<div className={`${styles.grid} row`}>
 					<div className={`${styles.footerInfo} ${styles.column}`}>
-						<h5>About our Site</h5>
+						<h2>About our Site</h2>
 						<p className={styles.footerText}>
-							Every day with Rico and Jumbo is an adventure. Rico, faster than a shadow and always first at the bowl, is
-							a dog with the energy of a rocket and a heart as big as a barn. Jumbo, on the other hand, is bigger,
-							calmer, but with the expression of a philosopher—he prefers to observe the world from a distance... unless
-							{/* someone is scraping food off their plate 😄 Together, they make the perfect pair: Rico gets the action
-							going, Jumbo takes care of it. One bark from Rico, one look from Jumbo – and you know something's up. And
-							the worst thing you can do? Try to eat something around them. Good luck.  */}
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi et quisquam, rerum provident facilis
+							asperiores nesciunt nihil nemo, ea, minus totam accusantium quaerat quam hic. Voluptatibus laborum
+							quibusdam amet vel!
 						</p>
 					</div>
 					<div className={`${styles.footerSiteLinks} ${styles.column}`}>
-						<h5>Site Links</h5>
+						<h2>Site Links</h2>
 						<ul className={styles.footerList}>
 							{siteLinks.map(link => {
 								return (
@@ -60,7 +57,7 @@ const Footer = () => {
 						</ul>
 					</div>
 					<div className={`${styles.footerSocialLinks} ${styles.column}`}>
-						<h5>Follow Us</h5>
+						<h2>Follow Us</h2>
 						<ul className={styles.footerList}>
 							{socialLinks.map(social => {
 								return (
@@ -72,7 +69,7 @@ const Footer = () => {
 						</ul>
 					</div>
 					<div className={`${styles.footerSubscribe} ${styles.column}`}>
-						<h5>Sign Up For Newsletter</h5>
+						<h2>Sign Up For Newsletter</h2>
 						<p>Signup to get updates on articles, interviews and events.</p>
 						<div className={styles.subscribeForm}>
 							<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -91,7 +88,7 @@ const Footer = () => {
 					<span className={styles.copyright}>&copy; Copyright CodingBee {year}</span>
 					<span className={styles.copyright}>
 						Design by{' '}
-						<a href="https://www.styleshout.com/" target="_blank">
+						<a href="https://www.styleshout.com/" target="_blank" rel="noopener noreferrer">
 							StyleShout
 						</a>
 					</span>

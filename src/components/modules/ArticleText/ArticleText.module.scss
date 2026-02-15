@@ -71,8 +71,6 @@
 				letter-spacing: 0.05em;
 				color: #000000;
 			}
-
-			
 		}
 	}
 
@@ -85,7 +83,6 @@
 		border-left: 1px solid var(--color-border);
 		font-family: var(--fontFamily);
 
-		
 		.articleContentContainer {
 			display: flex;
 			flex-direction: column;
@@ -153,6 +150,7 @@
 		ol {
 			margin-bottom: 1rem;
 			padding-left: 1.5rem;
+			font-size: var(--textSize_18);
 		}
 
 		li {
@@ -163,6 +161,7 @@
 		a {
 			color: #1a73e8;
 			line-height: calc(1.125 * var(--space));
+			font-size: var(--textSize_18);
 
 			text-decoration: none;
 		}
@@ -385,6 +384,20 @@
 			p {
 				line-height: calc(1.12 * var(--space));
 				font-size: var(--textSize_16);
+			}
+			ul,
+			ol {
+				
+				font-size: var(--textSize_16);
+			}
+
+			
+
+			a {
+				
+				font-size: var(--textSize_16);
+
+				
 			}
 		}
 	}
