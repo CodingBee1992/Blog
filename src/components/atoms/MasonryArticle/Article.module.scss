@@ -2,8 +2,6 @@
 	width: var(--width-post);
 	// height: 100%;
 	padding: var(--brick-padding) var(--brick-paddingLeftRight) 0;
-	
-
 
 	.articleImage {
 		width: 100%;
@@ -125,10 +123,30 @@
 
 			text-overflow: ellipsis;
 			line-clamp: 10;
-			font-size: 1.5rem;
-			line-height: 1.7;
+
 			color: var(--color-text);
 			margin-bottom: var(--vspace-1);
+
+			p {
+				font-size: 1.5rem;
+				line-height: 24px;
+			}
+
+			blockquote {
+				border-left: 4px solid #ddd;
+				padding-left: 1rem;
+				color: #555;
+				font-style: italic;
+				margin: 1rem 0;
+			}
+
+			strong {
+				font-weight: bold;
+			}
+
+			em {
+				font-style: italic;
+			}
 		}
 		.readMoreLink {
 			padding-bottom: 1rem;
