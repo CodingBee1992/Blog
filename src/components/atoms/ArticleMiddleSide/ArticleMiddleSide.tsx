@@ -36,17 +36,7 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 
 	const { data: postLikes } = useFetchLivePostLikesQuery(postId!, { skip: !postId })
 
-	// const { firstPart, secondPart } = useMemo(() => {
-	// 	if (!introduction) return { firstPart: '', secondPart: '' }
 
-	// 	const halfTextLength = Math.ceil(introduction.length / 2)
-	// 	const dotindex = introduction?.indexOf('.', halfTextLength)
-
-	// 	return {
-	// 		firstPart: introduction?.slice(0, dotindex + 1),
-	// 		secondPart: introduction?.slice(dotindex + 1),
-	// 	}
-	// }, [introduction])
 
 	const articleWithAds = useMemo<ArticleBlock[]>(() => {
 		if (!articleContent) return []
@@ -90,10 +80,7 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 
 	return (
 		<div className={styles.articleMiddleSideContainer}>
-			{/* <div className={styles.articleMainText}>
-				<p>{firstPart}</p>
-				<p>{secondPart}</p>
-			</div> */}
+			
 			<ReactMarkdown remarkPlugins={[remarkGfm]}>{introduction}</ReactMarkdown>
 			<div className={styles.articleContentContainer}>
 				<div className={styles.articleContent}>
@@ -107,9 +94,7 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 						}
 						if (item.type === 'text') {
 							return (
-								// <p key={index} className={styles.articleContentText}>
-								// 	{item.value}
-								// </p>
+								
 								<ReactMarkdown key={index} remarkPlugins={[remarkGfm]}>
 									{item.value}
 								</ReactMarkdown>
@@ -136,9 +121,7 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 						}
 						if (item.type === 'completion') {
 							return (
-								// <p key={index} className={styles.articleContentText}>
-								// 	{item.value}
-								// </p>
+								
 								<ReactMarkdown key={index} remarkPlugins={[remarkGfm]}>
 									{item.value}
 								</ReactMarkdown>
@@ -146,9 +129,7 @@ const ArticleMiddleSide = ({ styles }: ArticleMiddleSideProps) => {
 						}
 						if (item.type === 'callToAction') {
 							return (
-								// <p key={index} className={styles.articleContentText}>
-								// 	{item.value}
-								// </p>
+								
 								<ReactMarkdown key={index} remarkPlugins={[remarkGfm]}>
 									{item.value}
 								</ReactMarkdown>
