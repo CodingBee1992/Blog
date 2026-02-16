@@ -8,17 +8,13 @@ interface ImageProps {
 const useResponsiveCloudinaryImage = ({ mainImageSrc, defaultWidth }: ImageProps) => {
 	const { width} = useWindowSize()
 
-	let imageWidth
-	if (width < 800) imageWidth = 800
-	else imageWidth = width
-
-	imageWidth = defaultWidth ? defaultWidth : width
+	const imageWidth = defaultWidth || (width < 800 ? 800 : width)
 	
 	try {
 		const urlImage = new URL(mainImageSrc)
 		const parts = urlImage.pathname.split('/upload/')
 
-		return `${urlImage.origin}${parts[0]}/upload/f_auto,w_${imageWidth},c_limit/${parts[1]}`
+		return `${urlImage.origin}${parts[0]}/upload/f_webp,w_${imageWidth},c_limit/${parts[1]}`
 	} catch {
 		return mainImageSrc
 	}
