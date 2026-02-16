@@ -14,7 +14,7 @@ const ArticleImage = ({ styles }: ArticleImageProps) => {
 	return (
 		<div className={styles.imageContainer}>
 			<ResponsiveArticleImage mainImageSrc={mainImage.src} imageAlt={mainImage.alt} className={styles.image} />
-			{/* <img src={mainImage.src} alt={mainImage.alt} className={styles.image} /> */}
+			
 		</div>
 	)
 }

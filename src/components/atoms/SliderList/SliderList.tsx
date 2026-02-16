@@ -3,6 +3,7 @@ import type { ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import createUrl from '../../../hooks/createUrl'
 
+
 interface SliderListProps {
 	styles: { [key: string]: string }
 	data: ArticleContentProps
@@ -16,7 +17,6 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 
 	const url = createUrl({ categories: data.categories, seo: data.seo, _id: data._id })
 	
-	
 	const isActive = number === index
 
 	return (
@@ -25,9 +25,15 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 				style={{ opacity: isActive ? 1 : 0, zIndex: isActive ? 999 : 998, left: `${index * -100}%` }}
 				data-slick-index={index}
 				className={`${styles.heroSlideBox}  `}>
-				
 				<div className={styles.heroImageWrapper}>
-					<img  loading="lazy" src={responsiveImage} alt={data.mainImage.alt} />
+					<img
+						loading={index === 0 ? 'eager' : 'lazy'}
+						src={responsiveImage}
+						
+						
+						fetchPriority={index === 0 ? 'high' : 'auto'}
+						alt={data.mainImage.alt}
+					/>
 				</div>
 				<div className={`row ${styles.heroContent} ${number === index ? styles.animated : ''}`}>
 					<div className={styles.heroText}>
@@ -39,7 +45,7 @@ const SliderList = ({ styles, data, index, number }: SliderListProps) => {
 								{data.categories.map((item, index) => {
 									const slug = item.split(' ').join('-').toLowerCase()
 									const url = `/categories/${slug}`
-									
+
 									return (
 										<AnchorLink key={index} href={`${url}`}>
 											{item}
