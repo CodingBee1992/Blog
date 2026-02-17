@@ -3,8 +3,9 @@ import type { ArticleContentProps } from '../../../types/types'
 import AnchorLink from '../AnchorLink/AnchorLink'
 import styles from './Article.module.scss'
 import useWindowSize from '../../../hooks/useWindowSize'
-
+import ReactMarkdown from 'react-markdown'
 import handleCreateUrl from '../../../hooks/createUrl'
+import remarkGfm from 'remark-gfm'
 
 const Article = ({
 	_id,
@@ -72,7 +73,7 @@ const Article = ({
 					</div>
 				</div>
 				<div className={styles.articleTextContent}>
-					<p>{introduction}</p>
+					<ReactMarkdown remarkPlugins={[remarkGfm]}>{introduction}</ReactMarkdown>
 				</div>
 				<AnchorLink
 					ariaLabel={`Read more about ${title}`}

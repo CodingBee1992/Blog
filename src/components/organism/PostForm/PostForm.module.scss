@@ -481,10 +481,20 @@
 	z-index: 2000;
 	transition: width 0.3s ease;
 	.progress {
+		position: relative;
 		height: 100%;
 		background-image: linear-gradient(to right, #89ffad, #6bd082, #4da259, #307734, #104f10);
 		border-top-right-radius: 20px;
 		border-bottom-right-radius: 20px;
+
+		.progressInfo {
+			position: absolute;
+			top: 0%;
+			right: 1rem;
+			height: 100%;
+			color: var(--white);
+			font-size: var(--textSize_14);
+		}
 	}
 }
 

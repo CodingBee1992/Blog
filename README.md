@@ -293,8 +293,8 @@ Notatki prywatne użytkownika
 
 👤 Autor
 
-Projekt wykonany przez: CoodingBee
-Kontakt: codingBeeBee@gmail.com
+Projekt wykonany przez: CoderBee
+Kontakt: coderBee@proton.me
 
 
 
@@ -587,8 +587,8 @@ Likes, reactions, or ratings
 
 
 👤 Author
-Created by: CodingBee
-Contact: codingBeeBee@gmail.com
+Created by: CoderBee
+Contact: coderBee@proton.me
 
 
 ENGLISH VERSION BELOW :

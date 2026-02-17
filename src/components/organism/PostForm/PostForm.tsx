@@ -96,131 +96,100 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
 		try {
-			if (!editValues) {
-				const filesToUpload: { file: File; type: 'main' | 'content'; index?: number }[] = []
+			
 
-				// Zliczamy wszystkie uploadowane pliki
-				if (data.mainImage.src instanceof File) {
-					filesToUpload.push({ file: data.mainImage.src, type: 'main' })
+			const filesToUpload: { file: File; type: 'main' | 'content'; index?: number; publicId?: string }[] = []
+
+			// Main image
+			if (data.mainImage.src instanceof File) {
+				filesToUpload.push({ file: data.mainImage.src, type: 'main', publicId: data.mainImage.public_id })
+			}
+
+			// Article content images
+			data.articleContent.forEach((item, index) => {
+				if (item.type === 'image' && item.value.src instanceof File) {
+					filesToUpload.push({ file: item.value.src, type: 'content', index, publicId: item.value.public_id })
 				}
+			})
 
-				data.articleContent.forEach((item, index) => {
-					if (item.type === 'image' && item.value.src instanceof File) {
-						filesToUpload.push({ file: item.value.src, type: 'content', index })
-					}
+			const total = filesToUpload.length
+			let uploaded = 0
+
+			const updateGlobalProgress = (localProgress: number) => {
+				const progressPerFile = 100 / total
+				const globalProgress = uploaded * progressPerFile + (localProgress / 100) * progressPerFile
+				setProgress(Math.round(globalProgress * 10) / 10)
+			}
+
+			// Upload each file
+			const uploadedFiles: { mainImage?: typeof data.mainImage; articleContent?: typeof data.articleContent } = {
+				articleContent: [...data.articleContent],
+				mainImage: data.mainImage,
+			}
+
+			for (const fileObj of filesToUpload) {
+				// Create signature depending on new or existing image
+				const dataSignature = fileObj.publicId
+					? await createSignature({ publicId: fileObj.publicId }).unwrap()
+					: await createSignature({ uploadFolder }).unwrap()
+
+				const uploadedData = await uploadToCloudinary({
+					file: fileObj.file,
+					publicId: fileObj.publicId,
+					uploadFolder: !fileObj.publicId ? uploadFolder : undefined,
+					dataSignature,
+					onProgress: updateGlobalProgress,
 				})
 
-				let uploaded = 0
-				const total = filesToUpload.length
+				uploaded++ 
 
-				const updateGlobalProgress = (localProgress: number) => {
-					// global progress = średnia ważona
-					const progressPerFile = 100 / total
-					const globalProgress = uploaded * progressPerFile + (localProgress / 100) * progressPerFile
-					setProgress(Math.round(globalProgress * 10) / 10)
-				}
-
-				const dataSignature = await createSignature({ uploadFolder }).unwrap()
-				
-				let mainImage = data.mainImage
-				const articleContent = [...data.articleContent]
-
-				for (const fileObj of filesToUpload) {
-					const uploadedData = await uploadToCloudinary({
-						file: fileObj.file,
-						uploadFolder,
-						dataSignature,
-						onProgress: updateGlobalProgress,
-					})
-
-					uploaded++ // kończenie pliku
-
-					if (fileObj.type === 'main') {
-						mainImage = {
-							...mainImage,
-							src: uploadedData.secure_url,
-							public_id: uploadedData.public_id,
-						}
-					} else if (fileObj.type === 'content' && fileObj.index !== undefined) {
-						const idx = fileObj.index
-						const item = articleContent[idx]
-
-						if (item.type === 'image') {
-							articleContent[idx] = {
-								...item,
-								value: {
-									...item.value,
-									src: uploadedData.secure_url,
-									public_id: uploadedData.public_id,
-								},
-							}
+				if (fileObj.type === 'main') {
+					uploadedFiles.mainImage = {
+						...uploadedFiles.mainImage,
+						src: uploadedData.secure_url,
+						public_id: uploadedData.public_id,
+						alt: uploadedFiles.mainImage?.alt || '',
+						caption: uploadedFiles.mainImage?.caption || '',
+					}
+				} else if (fileObj.type === 'content' && fileObj.index !== undefined) {
+					const idx = fileObj.index
+					const item = uploadedFiles.articleContent![idx]
+					if (item.type === 'image') {
+						uploadedFiles.articleContent![idx] = {
+							...item,
+							value: {
+								src: uploadedData.secure_url,
+								public_id: uploadedData.public_id,
+								alt: item.value.alt || '',
+								caption: item.value.caption || '',
+							},
 						}
 					}
 				}
-
-				const updatedData = { ...data, articleContent, mainImage }
-
-				const res = await createPost({ updatedData }).unwrap()
-				if (res) {
-					setPostMessage(res.message)
-					setProgress(0)
-				}
-				reset()
-			} else {
-				// Updating Post
-				let mainImage = data.mainImage
-				if (mainImage.src instanceof File) {
-					const file = mainImage.src
-					const publicId = mainImage.public_id
-
-					// Create cloudinary signature
-					const dataSignature = await createSignature({ publicId }).unwrap()
-					// Update new cloudinary image
-					const data = await uploadToCloudinary({
-						file,
-						publicId,
-						dataSignature,
-					})
-
-					mainImage = { ...mainImage, src: data.secure_url, public_id: data.public_id }
-				}
-
-				const articleContent = await Promise.all(
-					data.articleContent.map(async item => {
-						if (item.type === 'image' && item.value.src instanceof File) {
-							const file = item.value.src
-							const publicId = item.value.public_id
-							let dataSignature
-							let data
-							if (publicId) {
-								// Create cloudinary signature
-								dataSignature = await createSignature({ publicId }).unwrap()
-								// Update new cloudinary image
-								data = await uploadToCloudinary({ file, publicId, dataSignature })
-							} else {
-								// Create cloudinary signature
-								dataSignature = await createSignature({ uploadFolder }).unwrap()
-								// Uploading an another image
-								data = await uploadToCloudinary({ file, publicId, uploadFolder, dataSignature })
-							}
-
-							return { ...item, value: { ...item.value, src: data.secure_url, public_id: data.public_id } }
-						}
-						return item
-					}),
-				)
-				if (imagesToDestroy.length > 0) {
-					imagesToDestroy.forEach(item => {
-						destroyCloudinaryImage(item)
-					})
-				}
-
-				const updatedData = { ...data, mainImage, articleContent }
-
-				const res = await updatePost({ postId, updatedData }).unwrap()
-				if (res) setPostMessage(res.message)
-				reset(defaultValues)
 			}
+
+			
+			if (imagesToDestroy.length > 0) {
+				imagesToDestroy.forEach(item => destroyCloudinaryImage(item))
+			}
+
+			const updatedData = {
+				...data,
+				mainImage: uploadedFiles.mainImage!,
+				articleContent: uploadedFiles.articleContent!,
+			}
+
+			
+			let res
+			if (!editValues) {
+				res = await createPost({ updatedData }).unwrap()
+			} else {
+				res = await updatePost({ postId, updatedData }).unwrap()
+			}
+
+			if (res) setPostMessage(res.message)
+			setProgress(0)
+			reset(editValues ? defaultValues : undefined)
 		} catch (error) {
 			if (typeof error === 'object' && error !== null) {
 				const fetchError = error as FetchBaseQueryError
@@ -243,7 +212,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 
 				if (Math.abs(diff) < 0.1) return progress
 
-				return prev + diff * 0.1 // im mniejsze, tym wolniej i płynniej
+				return prev + diff * 0.1 
 			})
 
 			frame = requestAnimationFrame(animate)
@@ -253,8 +222,6 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 
 		return () => cancelAnimationFrame(frame)
 	}, [progress])
-
-
 
 	if (isSubmitSuccessful) window.scrollTo({ top: 0, behavior: 'smooth' })
 	if (editValues && isSubmitSuccessful)
@@ -270,7 +237,9 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 			<div className={styles.postFormContainer}>
 				{progress > 0 && (
 					<div className={styles.progressWrapper}>
-						<div style={{ width: `${animatedProgress}%` }} className={styles.progress}></div>
+						<div style={{ width: `${Math.ceil(animatedProgress)}%` }} className={styles.progress}>
+							<span className={styles.progressInfo}>{Math.ceil(animatedProgress)}%</span>
+						</div>
 					</div>
 				)}
 
