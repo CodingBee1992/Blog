@@ -293,7 +293,7 @@ Notatki prywatne użytkownika
 
 👤 Autor
 
-Projekt wykonany przez: CoodingBee
+Projekt wykonany przez: CoderBee
 Kontakt: coderBee@proton.me
 
 
