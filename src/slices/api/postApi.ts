@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { ExtendedArticleContentProps } from '../../types/types'
 const API_URL = import.meta.env.VITE_API_URL
 const POSTS_URL = import.meta.env.VITE_POSTS_URL
-// const SIGNATURE_URL = import.meta.env.VITE_SIGNATURE_URL
 
 type FetchPostsParams = {
 	page?: number
@@ -71,6 +70,7 @@ export const postApi = createApi({
 
 		searchPost: builder.query({
 			query: query => `${POSTS_URL}/search/?query=${query}`,
+			
 		}),
 
 		createPost: builder.mutation({
@@ -109,21 +109,6 @@ export const postApi = createApi({
 			}),
 			invalidatesTags: () => [{ type: 'POSTS' }],
 		}),
-
-		// fetchCloudinary: builder.mutation({
-		// 	query: ({uploadFolder,publicId}) => ({
-		// 		url:`${SIGNATURE_URL}/?uploadFolder=${uploadFolder}&publicId=${publicId}`,
-		// 		method:"POST",
-		// 		headers:{'Content-type':'application/json'}
-		// 	})
-		// }),
-		// destroyCloudinaryImage: builder.mutation({
-		// 	query: (publicId)=>({
-		// 		url:`${SIGNATURE_URL}/destroy/?publicId=${publicId}`,
-		// 		method:'DELETE',
-		// 		headers:{'Content-type':'application/json'}
-		// 	})
-		// })
 	}),
 })
 
@@ -134,11 +119,11 @@ export const {
 	useFetchPostByIdQuery,
 	useFetchPostsByLimitQuery,
 	useFetchPostCreatedAtQuery,
-	// useFetchCloudinaryMutation,
+
 	useDeletePostMutation,
 	usePublishPostMutation,
-	useSearchPostQuery,
+	
+	useLazySearchPostQuery,
 	useUpdatePostMutation,
 	useFetchPostsByCategoryQuery,
-	// useDestroyCloudinaryImageMutation
 } = postApi

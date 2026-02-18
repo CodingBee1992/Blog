@@ -5,7 +5,7 @@
 	background-color: var(--statBgc);
 	border-radius: var(--borderRadius16);
 	overflow: hidden;
-
+	
 	.latestCommentsTitle {
 		margin-bottom: 2rem;
 		color: var(--statMainColor);
@@ -22,13 +22,12 @@
 			min-width: 55px;
 			height: 55px;
 			background-color: transparent;
-			img{
+			img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
 				border-radius: 50%;
 				border: 2px solid #d3d3d3;
-				
 			}
 		}
 		.latestCommentsInfo {
@@ -46,6 +45,7 @@
 				display: flex;
 				flex-direction: row;
 				gap: 0.5rem;
+				font-size: var(--textSize_14);
 				span {
 					flex: 0 0 auto;
 				}
@@ -71,6 +71,8 @@
 				-webkit-line-clamp: 3;
 				text-overflow: ellipsis;
 				line-clamp: 3;
+				line-height: 2.4rem;
+				color: #000000;
 				overflow: hidden;
 			}
 		}
@@ -79,12 +81,8 @@
 
 @media (max-width: 500px) {
 	.latestCommentsContainer {
-		
-
 		.latestCommentsWrapper {
-			
 			.latestCommentsInfo {
-				
 				.latestCommentsComment {
 					display: -webkit-box;
 					-webkit-box-orient: vertical;

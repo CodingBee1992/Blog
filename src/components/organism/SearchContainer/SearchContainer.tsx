@@ -5,7 +5,7 @@ import CloseButton from '../../atoms/CloseButton/CloseButton'
 import { useDispatch } from 'react-redux'
 import { setIsOpen } from '../../../slices/themeSlice'
 import useDebounce from '../../../hooks/useDebounce'
-import { useSearchPostQuery } from '../../../slices/api/postApi'
+import { useLazySearchPostQuery } from '../../../slices/api/postApi'
 import AnchorLink from '../../atoms/AnchorLink/AnchorLink'
 import createUrl from '../../../hooks/createUrl'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
@@ -30,8 +30,7 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 	const dispatch = useDispatch()
 
 	const debouncedValue = useDebounce(value, 500)
-	const { data, error } = useSearchPostQuery(debouncedValue)
-
+	const [searchPost, { data, error, reset }] = useLazySearchPostQuery()
 	useEffect(() => {
 		if (typeof error === 'object' && error !== null) {
 			const fetchError = error as FetchBaseQueryError
@@ -41,9 +40,23 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 					: 'An unexpected error has occured'
 
 			setErrorMessage(errorMessage)
-		}
-	}, [error, setErrorMessage])
+			reset()
+		} 
+	}, [error, reset, setErrorMessage])
 
+	useEffect(() => {
+		if (data) {
+			setErrorMessage('')
+		}
+	}, [data])
+
+	useEffect(() => {
+		if (debouncedValue) {
+			searchPost(debouncedValue)
+		} else {
+			reset()
+		}
+	}, [debouncedValue, searchPost, reset])
 	useEffect(() => {
 		setTimeout(() => {
 			searchContainerRef.current?.classList.add(styles.fadeIn)
@@ -127,7 +140,11 @@ const SearchContainer = ({ isOpen }: SearchProps) => {
 									const url = createUrl({ categories: item.categories, seo: item.seo, _id: item._id })
 
 									return (
-										<AnchorLink handleClose={handleClose} className={styles.elementSearchListLink} href={url}>
+										<AnchorLink
+											key={item._id}
+											handleClose={handleClose}
+											className={styles.elementSearchListLink}
+											href={url}>
 											{item.title}
 										</AnchorLink>
 									)
