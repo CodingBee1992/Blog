@@ -99,7 +99,7 @@
 					// border: 1px solid var(--inputBorderColor);
 					border: none;
 					outline: none;
-					transition: all 0.3s;
+					transition: border-color 0.3s, box-shadow 0.3s;
 				}
 				&:hover {
 					box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);

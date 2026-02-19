@@ -2,7 +2,7 @@
 	display: flex;
 	width: 100%;
 	min-height: 100dvh;
-	max-width: 1200px;
+	max-width: 1300px;
 	color: var(--textColor);
 	.postFormControllersWrapper {
 		padding: 2rem;
@@ -148,7 +148,7 @@
 			// FORM OPTIONS
 
 			.formOptionsContainer {
-				width: 30%;
+				width: 40%;
 
 				.formOptionsWrapper {
 					position: sticky;
@@ -282,16 +282,19 @@
 		display: flex;
 		gap: 2rem;
 		margin-top: 3rem;
+		flex-wrap: wrap;
 
 		.submitBtn {
 			display: flex;
 			align-self: flex-start;
 			color: var(--buttonColorDark);
 			background-color: var(--buttonBgcLightGrey);
+			cursor: not-allowed;
 		}
 		.save {
 			color: var(--buttonColorLight);
 			background-color: var(--buttonBgcGreen);
+			cursor: pointer;
 
 			&:hover {
 				background-color: var(--buttonBgcHoverGreen);
@@ -346,10 +349,55 @@
 
 		.isSubmitting {
 			background-color: #d3d3d3d3;
+			color: var(--buttonColorDark);
 			cursor: not-allowed;
-			color: #000000;
+
 			&:hover {
+				color: var(--buttonColorDark);
 				background-color: #d3d3d3d3;
+			}
+		}
+	}
+
+	.updateWrapper {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		padding: 2rem;
+		z-index: 2000;
+		background-color: #104f1027;
+
+		.updateBox {
+			position: sticky;
+			top: 30%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: var(--vspace-0_75);
+			width: 100%;
+			max-width: 400px;
+			height: 100%;
+			max-height: 200px;
+			background-color: var(--formBgcLight);
+			border-radius: var(--borderRadius06);
+
+			.updateInfo {
+				margin-top: 4rem;
+				color: var(--greenColor);
+			}
+			.updatePostLink{
+				margin-top: 4rem;
+				margin-bottom: 2rem;
+				color: var(--lightBlackColor);
+				transition: all .3s;
+
+				&:hover{
+					color:var(--blackColor)
+				}
 			}
 		}
 	}
@@ -394,8 +442,6 @@
 }
 
 .textAreaContainer {
-	// height: 100%;
-	// width: 100%;
 	display: flex;
 	flex-direction: column;
 	font-family: var(--font-2);
@@ -415,22 +461,24 @@
 		background-color: #ffffff;
 		transition: all 0.3s;
 		overflow: hidden;
+
 		textarea {
 			field-sizing: content;
 			resize: vertical;
 			min-height: 150px;
 			width: 100%;
-			height: 100%;
 			max-width: 1150px;
 			padding: var(--vspace-0_25) var(--vspace-0_25) 3rem;
 			color: var(--textColor);
 			line-height: var(--textLineHeight);
 			font-size: var(--textSize_16);
 			font-family: var(--font-2);
-
 			border: none;
 			outline: none;
-			transition: all 0.3s;
+			overflow: auto;
+			transition:
+				border-color 0.3s,
+				box-shadow 0.3s;
 		}
 		&:hover {
 			box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
@@ -449,26 +497,6 @@
 }
 .marginError {
 	margin-bottom: 1rem;
-}
-
-.updateContainer {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	height: 100dvh;
-	background-color: var(--pagesBgc);
-
-	.updateWrapper {
-		display: flex;
-		justify-content: center;
-		padding: var(--vspace-0_5);
-		margin-top: 10rem;
-		width: 100%;
-		max-width: 600px;
-		height: 600px;
-		background-color: var(--formBgcLight);
-		border-radius: 12px;
-	}
 }
 
 .progressWrapper {
@@ -498,7 +526,7 @@
 	}
 }
 
-@media (width <= 1200px) {
+@media (width <= 1300px) {
 	.postFormContainer {
 		.formContainer {
 			.formWrapper {
@@ -536,6 +564,7 @@
 		}
 	}
 }
+
 @media (width <= 900px) {
 	.postFormContainer {
 		flex-direction: column;

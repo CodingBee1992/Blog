@@ -47,17 +47,17 @@
 			}
 
 			.deleteBtn {
-				background-color: #ff0000;
+				background-color: var(--errorFormColor);
 
 				&:hover {
 					background-color: #840707;
 				}
 			}
 			.closePopupBtn {
-				background-color: #00ff1a;
+				background-color: var(--buttonBgcGreen);
 
 				&:hover {
-					background-color: #1ca329;
+					background-color: var(--buttonBgcHoverGreen);
 				}
 			}
 		}

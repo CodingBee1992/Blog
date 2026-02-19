@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type MouseEvent } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FormProvider, useFieldArray, useForm, type SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { postSchema, defaultValues, type postSchemaTypes } from '../../../types/formSchema'
@@ -62,14 +62,14 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 	const { fields: articleContent, insert, remove } = useFieldArray({ control, name: 'articleContent' })
 
 	const handleResetFields = () => {
-		if (oldDefaultValues) {
+		if (oldDefaultValues && Object.keys(oldDefaultValues).length > 0) {
 			reset(oldDefaultValues)
 			setOldDefaultValues({})
 		} else {
 			if (fileRef.current) fileRef.current.forEach(el => el && (el.value = ''))
 			reset()
 		}
-
+		console.log(oldDefaultValues)
 		window.scrollTo({ top: 0, behavior: 'smooth' })
 	}
 
@@ -81,22 +81,19 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 		window.scrollTo({ top: 0, behavior: 'smooth' })
 	}
 
-	const handleDeleteField = (e: MouseEvent<HTMLDivElement>, index: number) => {
-		const target = e.currentTarget as HTMLDivElement
-		const fieldIndex = +target.dataset.index!
-
+	const handleDeleteField = (index: number) => {
 		if (articleContent[index].type === 'image') {
 			const imageToDestroy = articleContent[index].value.public_id
 
 			if (imageToDestroy) setImagesToDestroy(prev => [...prev, imageToDestroy])
 		}
 
-		remove(fieldIndex)
+		remove(index)
 	}
 
 	const onSumbit: SubmitHandler<postSchemaTypes> = async (data: postSchemaTypes) => {
 		try {
-			
+			if (!isDirty) return
 
 			const filesToUpload: { file: File; type: 'main' | 'content'; index?: number; publicId?: string }[] = []
 
@@ -141,7 +138,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 					onProgress: updateGlobalProgress,
 				})
 
-				uploaded++ 
+				uploaded++
 
 				if (fileObj.type === 'main') {
 					uploadedFiles.mainImage = {
@@ -168,7 +165,6 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 				}
 			}
 
-			
 			if (imagesToDestroy.length > 0) {
 				imagesToDestroy.forEach(item => destroyCloudinaryImage(item))
 			}
@@ -179,7 +175,6 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 				articleContent: uploadedFiles.articleContent!,
 			}
 
-			
 			let res
 			if (!editValues) {
 				res = await createPost({ updatedData }).unwrap()
@@ -212,7 +207,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 
 				if (Math.abs(diff) < 0.1) return progress
 
-				return prev + diff * 0.1 
+				return prev + diff * 0.1
 			})
 
 			frame = requestAnimationFrame(animate)
@@ -224,14 +219,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 	}, [progress])
 
 	if (isSubmitSuccessful) window.scrollTo({ top: 0, behavior: 'smooth' })
-	if (editValues && isSubmitSuccessful)
-		return (
-			<div className={styles.updateContainer}>
-				<div className={styles.updateWrapper}>
-					<p>{postMessage}</p>
-				</div>
-			</div>
-		)
+
 	return (
 		<FormProvider {...methods}>
 			<div className={styles.postFormContainer}>
@@ -242,7 +230,6 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 						</div>
 					</div>
 				)}
-
 				<div className={styles.postFormControllersWrapper}>
 					<div className={styles.postFormControllers}>
 						{buttons.map((btn, index) => (
@@ -267,7 +254,6 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 						))}
 					</div>
 				</div>
-
 				<form onSubmit={handleSubmit(onSumbit)} className={styles.formContainer} aria-busy={isSubmitting}>
 					<div className={styles.formWrapper}>
 						<div className={styles.formFlex}>
@@ -318,7 +304,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 							{articleContent &&
 								articleContent?.length > 0 &&
 								articleContent.map((field, index) => (
-									<>
+									<div key={field.id}>
 										{field.type === 'title' && (
 											<div key={field.id} className={styles.fieldBox}>
 												<RHFInput<postSchemaTypes>
@@ -332,7 +318,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 												{index >= 3 && (
 													<div
 														data-index={index}
-														onClick={e => handleDeleteField(e, index)}
+														onClick={() => handleDeleteField(index)}
 														className={styles.deleteBtnWrapper}>
 														<CloseSVG className={styles.icon} />
 													</div>
@@ -351,7 +337,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 												{index >= 3 && (
 													<div
 														data-index={index}
-														onClick={e => handleDeleteField(e, index)}
+														onClick={() => handleDeleteField(index)}
 														className={styles.deleteBtnWrapper}>
 														<CloseSVG className={styles.icon} />
 													</div>
@@ -390,7 +376,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 												{index >= 3 && (
 													<div
 														data-index={index}
-														onClick={e => handleDeleteField(e, index)}
+														onClick={() => handleDeleteField(index)}
 														className={styles.deleteBtnWrapper}>
 														<CloseSVG className={styles.icon} />
 													</div>
@@ -416,7 +402,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 												isSubmitting={isSubmitting}
 											/>
 										)}
-									</>
+									</div>
 								))}
 						</div>
 						<div className={styles.formOptionsContainer}>
@@ -493,7 +479,7 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 							isSubmitting={isSubmitting}
 							className={`${styles.clearButton} ${isSubmitting ? styles.isSubmitting : ''}`}
 							handleResetFields={handleResetFields}>
-							Clear
+							Reset
 						</FormBtn>
 						{editValues && (
 							<>
@@ -514,6 +500,14 @@ const PostForm = ({ editValues, postId }: PostFormProps) => {
 						)}
 					</div>
 				</form>
+				{editValues && isSubmitSuccessful && (
+					<div className={styles.updateWrapper}>
+						<div className={styles.updateBox}>
+							<p className={styles.updateInfo}>{postMessage}</p>
+							<AnchorLink href='/admin/posts/listofposts' className={styles.updatePostLink}>List of Posts</AnchorLink>
+						</div>
+					</div>
+				)}
 			</div>
 		</FormProvider>
 	)
