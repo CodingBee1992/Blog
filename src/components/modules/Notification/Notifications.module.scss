@@ -1,13 +1,12 @@
 .notificationsContainer {
 	position: relative;
 	grid-area: d;
-	
 	padding: 3rem;
 	color: #000000;
 	background-color: var(--statBgc);
 	border-radius: var(--borderRadius16);
 	overflow: hidden;
-
+	
 	.notificationsTitle {
 		margin-bottom: 2rem;
 		color: var(--statMainColor);
@@ -92,12 +91,18 @@
 
 			.notificationsAction {
 				font-size: var(--textSize_16);
+				line-height: 2.4rem;
 
-				// display: -webkit-box;
-				// -webkit-box-orient: vertical;
-				// -webkit-line-clamp: 1;
-				// text-overflow: ellipsis;
-				// line-clamp: 1;
+				.notifActionURL {
+					font-weight: 500;
+					text-decoration: none;
+					color: #464d4d;
+					transition: all 0.3s;
+
+					&:hover {
+						color: #000000;
+					}
+				}
 			}
 			.notificationAuthor {
 				font-size: var(--textSize_14);
@@ -128,8 +133,8 @@
 	}
 }
 
-@media (max-width:1200px) {
-	.notificationsContainer{
+@media (max-width: 1200px) {
+	.notificationsContainer {
 		max-width: none;
 	}
 }
@@ -158,8 +163,6 @@
 				margin-top: 1rem;
 				margin-left: auto;
 				min-width: 100px;
-
-				
 			}
 		}
 	}

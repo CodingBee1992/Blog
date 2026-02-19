@@ -8,8 +8,9 @@ import {
 } from '../../../assets/icons/adminPanelIcons/AdminPanelIcons'
 
 import styles from './Notifications.module.scss'
-import { notificationHelper, timeAgo } from '../../../hooks/notificationHelper'
+
 import type { NotificationsTypes } from '../../../types/types'
+import { notificationHelper, timeAgo } from '../../../hooks/notificationHelper'
 
 type EntityType = 'User' | 'Post' | 'Comment' | 'Like'
 
@@ -40,9 +41,12 @@ const Notifications = ({ notifications }: NotificationsProps) => {
 								<img src={notif.avatar} alt="User" />
 							</div>
 						</div>
+
 						<div className={styles.notificationsInfo}>
 							<span className={styles.notificationAuthor}>{notif.name}</span>
-							<p className={styles.notificationsAction}>{notificationHelper({ notif })}</p>
+							<p className={styles.notificationsAction}>
+								{notificationHelper({ notif, className: styles.notifActionURL })}
+							</p>
 						</div>
 						<div className={styles.notificationsDate}>
 							<CalendarSVG />
