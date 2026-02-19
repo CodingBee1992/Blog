@@ -48,7 +48,7 @@ const VerifyPageTemplate = () => {
 
 	const handleResendVerificationToken = async () => {
 		const res = await resendVerificationToken(email)
-		console.log(res)
+		
 		if (res.data?.message) {
 			setSuccessMessage(res.data.message)
 			setErrorMessage('')

@@ -25,13 +25,6 @@ const StaticLayout = () => {
 	const { handleIncrementPageViews } = useIncrementViews()
 	const { data } = useFetchSettingsQuery({})
 
-	// useEffect(() => {
-	// 	const interval = setInterval(() => {
-	// 		incrementPageViews({})
-	// 	}, 100)
-
-	// 	return () => clearInterval(interval) // czyszczenie przy unmount
-	// }, [incrementPageViews])
 
 	const path = encodeURIComponent(pathname)
 
