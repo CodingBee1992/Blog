@@ -101,7 +101,7 @@ const VerifyPageTemplate = () => {
 						isSubmitting={disabled}
 						handleResend={() => handleResendVerificationToken()}
 						className={`${styles.resendButton} ${disabled ? styles.disabledResend : ''}`}>
-						{disabled ? `Wait ${countdown}` : 'Sent Again'}
+						{disabled ? `Wait ${countdown}` : 'Send Again'}
 					</FormBtn>
 
 					{!errorMessage && (
