@@ -3,14 +3,14 @@
 	grid-area: b;
 
 	padding: 3rem;
-	color: #000000;
-	background-color: var(--statBgc);
+	color: var(--blackColor);
+	background-color: var(--whiteColor);
 	border-radius: var(--borderRadius16);
 	overflow: hidden;
 
 	.popularPostsContainerTitle {
 		margin-bottom: 2rem;
-		color: var(--statMainColor);
+		color: var(--lighterBlackColor);
 		font-weight: 500;
 	}
 	.addNewPost {
@@ -18,13 +18,13 @@
 		top: 5%;
 		right: 3rem;
 		padding: 0.5rem 1rem;
-		color: var(--areaChartColor);
-		border: 1px solid var(--areaChartColor);
+		color: var(--mainColor);
+		border: 1px solid var(--mainColor);
 		border-radius: var(--borderRadius06);
 		transition: all 0.3s;
 		&:hover {
-			color: var(--areaChartHoverColor);
-			border: 1px solid var(--areaChartHoverColor);
+			color: var(--mainColorHover);
+			border: 1px solid var(--mainColorHover);
 		}
 	}
 	.popularPostWrapper {
@@ -45,7 +45,7 @@
 			height: 55px;
 			max-height: 55px;
 			overflow: hidden;
-			border: 2px solid #d3d3d3;
+			border: 2px solid var(--lightGrayColor);
 			border-radius: var(--borderRadius06);
 			img {
 				height: 100%;
@@ -61,7 +61,7 @@
 			padding: 0.5rem 2rem;
 
 			.popularPostInfoTitle {
-				color: #464d4d;
+				color: var(--lighterBlackColor);
 				font-size: var(--textSize_16);
 				display: -webkit-box;
 				-webkit-box-orient: vertical;
@@ -86,7 +86,7 @@
 
 					span {
 						margin-left: 0.8rem;
-						color: var(--statSecondColor);
+						color: var(--darkerGrayColor);
 						font-size: var(--textSize_12);
 					}
 
@@ -107,7 +107,7 @@
 							color: #889397;
 
 							path {
-								fill: var(--statSecondColor);
+								fill: var(--darkerGrayColor);
 							}
 						}
 					}

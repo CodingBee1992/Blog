@@ -9,10 +9,10 @@
 
 	.link {
 		font-size: var(--menu-TextSize);
-		color: var(--menu-textColor);
+		color: var(--whiteColor);
 		font-weight: 600;
 		&:hover {
-			color: var(--menu-textColorHover);
+			color: var(--lightGrayColor);
 		}
 	}
 	.menuElementContainer {
@@ -21,11 +21,11 @@
 		align-items: center;
 		font-size: var(--menu-TextSize);
 		font-weight: 600;
-		color: var(--menu-textColor);
+		color: var(--whiteColor);
 		cursor: pointer;
 		transition: color 0.3s ease-in-out;
 		&:hover {
-			color: var(--menu-textColorHover);
+			color: var(--lightGrayColor);
 		}
 		&:hover .chevron {
 			rotate: 180deg;
@@ -50,13 +50,10 @@
 			position: absolute;
 			display: none;
 			flex-direction: column;
-
 			top: calc(50% + (var(--headerHeight) / 2));
-
 			left: 0;
 			padding: 1.8rem 0;
-
-			background: var(--subMenuBgc);
+			background: var(--blackColorHover);
 			opacity: 0;
 			visibility: hidden;
 			z-index: 1000;
@@ -68,17 +65,17 @@
 				white-space: nowrap;
 				line-height: 1.8rem;
 				padding: 0.7rem 3rem 0.7rem 2rem;
-				color: var(--subMenu-Color);
+				color: var(--lightGrayColor);
 				font-size: var(--subMenu-TextSize);
 				font-weight: 400;
 				transition: all 0.3s;
 
 				&:hover {
-					color: var(--subMenu-ColorHover);
+					color: var(--whiteColor);
 				}
 			}
 			.activeSubMenuLi {
-				color: white;
+				color: var(--whiteColor);
 			}
 		}
 
@@ -91,7 +88,7 @@
 }
 
 .navBgcDark {
-	background-color: var(--Bgc-navSecond);
+	background-color: var(--blackColor);
 }
 
 @media (max-width: 1700px) {

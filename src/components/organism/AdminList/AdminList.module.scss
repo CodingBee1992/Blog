@@ -10,7 +10,7 @@
 		font-weight: 400;
 		line-height: 4rem;
 		font-family: var(--font-2);
-		color: var(--pagesColor);
+		color: var(--sideBarColor);
 	}
 
 	// Search ----------
@@ -33,14 +33,14 @@
 
 			max-width: 400px;
 			width: 100%;
-			box-shadow: 3px -2px 10px black;
+			box-shadow: 3px -2px 10px var(--blackColor);
 			border-radius: 20px;
 			.searchInput {
 				padding: 0.5rem 1rem;
 				width: 100%;
 				font-size: var(--textSize_16);
 				font-family: var(--font-2);
-				color: var(--pagesColor);
+				color: var(--sideBarColor);
 				background: none;
 				outline: none;
 				border: none;
@@ -53,7 +53,7 @@
 				transition: all 0.3s;
 				.searchIcon {
 					background: transparent;
-					color: #000000;
+					color: var(--blackColor);
 				}
 			}
 		}
@@ -63,10 +63,10 @@
 		width: 100%;
 		overflow-x: auto;
 		scrollbar-width: none;
-		border-top: 1px solid black;
-		border-bottom: 1px solid black;
+		border-top: 1px solid var(--blackColor);
+		border-bottom: 1px solid var(--blackColor);
 		height: 100%;
-		background-color: #fff;
+		background-color: var(--whiteColor);
 
 		.tableContainer {
 			display: inline-block;
@@ -74,7 +74,7 @@
 
 			.thead,
 			.tbody {
-				background-color: var(--bgcTBody);
+				background-color: var(--pagesBgc);
 
 				.tr {
 					display: flex;
@@ -90,8 +90,8 @@
 						min-width: 120px;
 						width: 100%;
 						font-family: var(--font-2);
-						color: var(--colorTabel);
-						cursor: pointer;
+						color: var(--blackColor);
+
 						&:first-child {
 							padding-left: 2rem;
 							min-width: 250px;
@@ -106,6 +106,8 @@
 				}
 			}
 			.thead {
+				font-size: var(--textSize_18);
+				cursor: pointer;
 				.tr {
 					.th {
 						position: relative;
@@ -122,19 +124,23 @@
 			}
 			.tbody {
 				height: 100%;
-
+				font-size: var(--textSize_16);
 				.tr {
 					padding: 1rem 0;
 					transition: all 0.3s;
 
 					&:nth-child(odd) {
-						background-color: #fff;
+						background-color: var(--whiteColor);
 					}
 					.td {
 						padding-right: 1rem;
 
 						&:first-child {
 							justify-content: start;
+
+							&:hover > a {
+								color: var(--whiteColor);
+							}
 						}
 						&:nth-child(2) {
 							text-align: center;
@@ -150,7 +156,7 @@
 						&:nth-child(n + 4):nth-child(-n + 5) {
 							justify-content: flex-end;
 						}
-						&:nth-child(n + 8):nth-child(-n + 8) {
+						&:nth-child(n + 7):nth-child(-n + 7) {
 							text-align: center;
 						}
 					}
@@ -208,7 +214,7 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	color: #000000;
+	color: var(--blackColor);
 	cursor: pointer;
 	&:hover {
 		color: #251c1c;

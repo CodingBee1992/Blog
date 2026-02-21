@@ -1,6 +1,6 @@
 .commentsContainer {
 	padding-bottom: var(--vspace-4);
-	// background-color: #ffffff;
+	
 
 	.commentsContent,
 	.commentFormContainer {
@@ -15,7 +15,7 @@
 			font-weight: 600;
 			font-family: var(--font-2);
 			font-style: normal;
-			color: var(--color-text-dark);
+			color: var(--blackColor);
 		}
 	}
 	.commentsContent {
@@ -59,12 +59,12 @@
 			}
 			.commentError {
 				font-size: var(--textSize_14);
-				color: var(--errorFormColor);
+				color: var(--errorColor);
 			}
 			.resMessage {
 				font-size: var(--textSize_14);
 
-				color: var(--greenColor);
+				color: var(--mainColor);
 			}
 			.addComment {
 				display: flex;
@@ -78,8 +78,8 @@
 				height: var(--btn-height);
 				font-size: 18px;
 				line-height: calc(var(--btn-height) - 0.4rem);
-				background-color: var(--bgcBlack);
-				color: #ffffff;
+				background-color: var(--blackColor);
+				color: var(--whiteColor);
 				text-transform: uppercase;
 				letter-spacing: 0.4em;
 				white-space: nowrap;
@@ -88,7 +88,7 @@
 				transition: all 0.3s;
 
 				&:hover {
-					background-color: var(--bgcLightBlack);
+					background-color: var(--blackColorHover);
 				}
 			}
 		}
@@ -102,12 +102,12 @@
 			height: 40px;
 			max-width: 200px;
 			font-size: 18px;
-			color: #ffffff;
-			background-color: var(--bgcBlack);
+			color: var(--whiteColor);
+			background-color: var(--blackColor);
 			transition: all 0.3s;
 
 			&:hover {
-				background-color: var(--bgcLightBlack);
+				background-color: var(--blackColorHover);
 			}
 		}
 	}

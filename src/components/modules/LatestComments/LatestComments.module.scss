@@ -1,14 +1,14 @@
 .latestCommentsContainer {
 	grid-area: e;
 	padding: 3rem;
-	color: #000000;
-	background-color: var(--statBgc);
+	color: var(--blackColor);
+	background-color: var(--whiteColor);
 	border-radius: var(--borderRadius16);
 	overflow: hidden;
-	
+
 	.latestCommentsTitle {
 		margin-bottom: 2rem;
-		color: var(--statMainColor);
+		color: var(--lighterBlackColor);
 		font-weight: 500;
 	}
 
@@ -27,7 +27,7 @@
 				height: 100%;
 				object-fit: cover;
 				border-radius: 50%;
-				border: 2px solid #d3d3d3;
+				border: 2px solid var(--lightGrayColor);
 			}
 		}
 		.latestCommentsInfo {
@@ -35,7 +35,7 @@
 			gap: 0.5rem;
 			flex-direction: column;
 			justify-content: space-evenly;
-			color: #464d4d;
+			color: var(--lighterBlackColor);
 			font-size: var(--textSize_16);
 
 			.latestCommentsAuthor {
@@ -51,7 +51,7 @@
 				}
 				.latestCommentsPostTitle {
 					font-weight: 500;
-					color: #464d4d;
+					color: var(--lighterBlackColor);
 					display: -webkit-box;
 					-webkit-box-orient: vertical;
 					-webkit-line-clamp: 1;
@@ -61,7 +61,7 @@
 					transition: all 0.3s;
 
 					&:hover {
-						color: #000000;
+						color: var(--blackColor);
 					}
 				}
 			}
@@ -72,7 +72,7 @@
 				text-overflow: ellipsis;
 				line-clamp: 3;
 				line-height: 2.4rem;
-				color: #000000;
+				color: var(--blackColor);
 				overflow: hidden;
 			}
 		}

@@ -18,7 +18,7 @@
 			}
 			&:hover {
 				.checkmark {
-					box-shadow: 0px 0px 3px 3px #d3d3d3d3;
+					box-shadow: 0px 0px 3px 3px var(--lightGrayColor);
 				}
 				.scaleCheckmark {
 					box-shadow: none;
@@ -28,7 +28,7 @@
 			.acknowledgementInfo {
 				display: flex;
 				flex-direction: column;
-				color: var(--pagesColor);
+				color: var(--sideBarColor);
 
 				p {
 					font-size: var(--textSize_14);

@@ -60,7 +60,6 @@ const ContactForm = () => {
 			if (!data) return
 
 			const { firstName, lastName, email, subject, message, policy } = data
-			
 
 			if (!policy) return
 			const res = await sendEmail({ firstName, lastName, email, subject, message }).unwrap()
@@ -107,7 +106,10 @@ const ContactForm = () => {
 					<h3 className={styles.subTitle}>Our Office</h3>
 					<span className={styles.companyAddress}>00-000 Unknow St. Unknown, Unknow</span>
 					<div className={styles.socialWrapper}>
-						<SocialLinks />
+						<p className={styles.followUs}>Follow us:</p>
+						<div className={styles.linksBox}>
+							<SocialLinks />
+						</div>
 					</div>
 				</div>
 				<form onSubmit={handleSubmit(onSubmit)} aria-busy={isSubmitting} className={styles.contactForm}>
@@ -163,7 +165,8 @@ const ContactForm = () => {
 							<>
 								<CheckMark isChecked={policy} className={styles.checkMark} />
 								<span>
-									I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy</AnchorLink> and <AnchorLink href='/terms-and-conditions'>Terms and Conditions</AnchorLink>
+									I have read and understood the <AnchorLink href="/privacy-policy">Privacy Policy</AnchorLink> and{' '}
+									<AnchorLink href="/terms-and-conditions">Terms and Conditions</AnchorLink>
 								</span>
 							</>
 						</RHFCheckbox>

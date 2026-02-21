@@ -1,7 +1,7 @@
 .miniMarkdownWrapper {
 	width: 100%;
 	padding: 1rem;
-	box-shadow: 0px 0px 8px 2px #d3d3d3d3;
+	box-shadow: 0px 0px 8px 2px var(--lightGrayColor);
 
 	.markdownToolbar {
 		display: flex;
@@ -18,13 +18,13 @@
 				cursor: pointer;
 				outline: none;
 				&:hover {
-					color: var(--greenColor);
-					box-shadow: 0px 0px 2px 1px var(--greenColor);
+					color: var(--mainColor);
+					box-shadow: 0px 0px 2px 1px var(--mainColor);
 				}
 				&:focus {
-					color: var(--greenColor);
+					color: var(--mainColor);
 
-					box-shadow: 0px 0px 2px 1px var(--greenColor);
+					box-shadow: 0px 0px 2px 1px var(--mainColor);
 				}
 			}
 		}
@@ -32,7 +32,7 @@
 
 	.markdownToolbar [role='separator'] {
 		width: 1px;
-		background-color: #d3d3d3d3;
+		background-color: var(--lightGrayColor);
 
 		margin-right: 1rem;
 	}

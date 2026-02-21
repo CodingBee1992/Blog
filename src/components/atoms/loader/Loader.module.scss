@@ -35,7 +35,7 @@
 				position: absolute;
 				animation: spin 2s cubic-bezier(0.1, 0, 0.5, 1) infinite;
 				transform-origin: 40px 40px;
-				color: red;
+				
 				// opacity: 0;
 
 				&::after {
@@ -45,7 +45,7 @@
 					width: 7px;
 					height: 7px;
 					border-radius: 50%;
-					background: var(--greenColor);
+					background: var(--mainColor);
 					margin: -4px 0 0 -4px;
 				}
 

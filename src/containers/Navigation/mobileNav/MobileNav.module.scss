@@ -13,7 +13,7 @@
 	opacity: 0;
 	visibility: hidden;
 	transform: translateX(-100%);
-	background-color: var(--Bgc-navMobile);
+	background-color: var(--blackColor);
 	transition: all 0.5s ease-in-out;
 	z-index: 1002;
 	overflow: hidden;
@@ -29,7 +29,7 @@
 			margin-top: 3rem;
 			font-size: var(--subMenu-TextSize);
 			font-weight: 300;
-			color: var(--menu-textColorHover);
+			color: var(--lightGrayColor);
 			letter-spacing: 0.4em;
 			text-transform: uppercase;
 		}
@@ -44,13 +44,13 @@
 			width: 28px;
 			height: 28px;
 			stroke-width: 1px;
-			color: var(--closeBtn-Color);
+			color: var(--whiteColor);
 			transition: 0.3s all ease-in-out;
 		}
 
 		&:hover {
 			.closeSVG {
-				color: var(--closeBtn-ColorHover);
+				color: var(--lightGrayColor);
 				scale: 1.1;
 			}
 		}
@@ -67,7 +67,7 @@
 			position: relative;
 			width: 100%;
 			padding-left: 2.6rem;
-			color: var(--menu-textColor);
+			color: var(--whiteColor);
 			font-weight: 600;
 			font-size: var(--menu-TextSize);
 			border-top: 1px dotted rgba(255, 255, 255, 0.1);
@@ -100,7 +100,7 @@
 			cursor: pointer;
 
 			&:hover .menuElement .title {
-				color: var(--menu-textColorHover);
+				color: var(--lightGrayColor);
 			}
 			&:hover .arrow {
 				rotate: 180deg;
@@ -114,11 +114,11 @@
 				width: 100%;
 				font-size: var(--menu-TextSize);
 				font-weight: 600;
-				color: var(--menu-textColor);
+				color: var(--whiteColor);
 				pointer-events: none;
 
 				.title {
-					color: var(--menu-textColor);
+					color: var(--whiteColor);
 					padding-left: 2.6rem;
 					pointer-events: none;
 					transition: all 0.3s ease-in-out;
@@ -150,7 +150,7 @@
 				flex-direction: column;
 				height: 100%;
 				padding: 1.8rem 0;
-				background: black;
+				background: var(--blackColor);
 				opacity: 1;
 				visibility: visible;
 				list-style: none;
@@ -164,18 +164,18 @@
 						white-space: nowrap;
 						line-height: 1.8rem;
 						padding: 0.7rem 3rem 0.7rem 2rem;
-						color: var(--subMenu-Color);
+						color: var(--lightGrayColor);
 						font-size: var(--subMenu-TextSize);
 						font-weight: 400;
 						transition: all 0.3s ease-in-out;
 
 						&:hover {
-							color: var(--subMenu-ColorHover);
+							color: var(--whiteColor);
 							background-color: #7b7b7bd3;
 						}
 					}
 					.activeSubMenuLi {
-						color: white;
+						color: var(--whiteColor);
 					}
 				}
 			}
@@ -193,7 +193,7 @@
 			cursor: pointer;
 			&:hover .signInBtn,
 			&:hover .authorInfo .author {
-				color: var(--menu-textColorHover);
+				color: var(--lightGrayColor);
 			}
 
 			.signInWrapper {
@@ -201,7 +201,7 @@
 					padding-left: 2.6rem;
 					font-size: var(--menu-TextSize);
 					font-weight: 600;
-					color: var(--menu-textColor);
+					color: var(--whiteColor);
 					background-color: transparent;
 					border: none;
 					cursor: pointer;
@@ -224,13 +224,13 @@
 						max-width: 200px;
 						height: 40px;
 						font-size: var(--menu-TextSize);
-						color: var(--bgcBlack);
-						background-color: var(--bgcWhite);
+						color: var(--blackColor);
+						background-color: var(--whiteColor);
 						transition: all 0.3s;
 
 						&:hover {
-							color: #ffffff;
-							background-color: var(--bgcLightBlack);
+							color: var(--whiteColor);
+							background-color: var(--blackColorHover);
 						}
 					}
 					.signUpWrapper {
@@ -254,7 +254,7 @@
 					.author {
 						font-size: var(--menu-TextSize);
 						font-weight: 600;
-						color: var(--menu-textColor);
+						color: var(--whiteColor);
 						background-color: transparent;
 						cursor: pointer;
 					}
@@ -269,12 +269,12 @@
 						white-space: nowrap;
 						line-height: 1.8rem;
 						padding: 0.7rem 3rem 0.7rem 2rem;
-						color: var(--subMenu-Color);
+						color: var(--lightGrayColor);
 						font-size: var(--subMenu-TextSize);
 						font-weight: 400;
 						transition: all 0.3s ease-in-out;
 						&:hover {
-							color: var(--subMenu-ColorHover);
+							color: var(--whiteColor);
 							background-color: #7b7b7bd3;
 						}
 					}
@@ -291,13 +291,13 @@
 						font-size: var(--menu-TextSize);
 						border: none;
 						color: var(--blackColor);
-						background-color: var(--bgcWhite);
+						background-color: var(--whiteColor);
 						transition: all 0.3s;
 						cursor: pointer;
 
 						&:hover {
-							color: #ffffff;
-							background-color: var(--bgcLightBlack);
+							color: var(--whiteColor);
+							background-color: var(--blackColorHover);
 						}
 					}
 				}
@@ -325,7 +325,7 @@
 }
 
 .navBgcDark {
-	background-color: var(--Bgc-navSecond);
+	background-color: var(--blackColor);
 }
 @media (max-width: 500px) {
 	.mobileContainer {

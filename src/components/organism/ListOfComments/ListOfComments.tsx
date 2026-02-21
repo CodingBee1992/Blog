@@ -185,40 +185,40 @@ const ListOfComments = () => {
 					</div>
 					<div className={styles.tbody}>
 						{allcomments &&
-							allcomments?.map((item: CommentsProps, index: number) => (
+							allcomments?.map((com: CommentsProps, index: number) => (
 								<div key={index} className={`${styles.tr} `}>
 									<div className={styles.td}>
 										<AnchorLink
 											ariaLabel="Username"
 											className={styles.tabelTitle}
-											href={`admin/users/profile/${item.author._id}`}>
-											{item.author.name}
+											href={`/admin/users/profile/${com.author._id}`}>
+											{com.author.name}
 										</AnchorLink>
 									</div>
 
 									<div className={styles.td}>
-										<span className={styles.comment}>{item.comment}</span>{' '}
-										{timePass(item.createdAt, 1) && <NotificationNew />}
+										<span className={styles.comment}>{com.comment}</span>{' '}
+										{timePass(com.createdAt, 1) && <NotificationNew />}
 									</div>
 
 									<div className={styles.td}>
 										<AnchorLink
 											className={styles.tabelTitle}
-											href={handleCreateUrl({ categories: item.categories, seo: item.seo, _id: item.postId })}>
-											{item.title}
+											href={handleCreateUrl({ categories: com.categories, seo: com.seo, _id: com.postId })}>
+											{com.title}
 										</AnchorLink>
 									</div>
-									<div className={styles.td}>{new Date(item.createdAt).toLocaleString(...longDateConverter())}</div>
+									<div className={styles.td}>{new Date(com.createdAt).toLocaleString(...longDateConverter())}</div>
 
 									<div className={styles.td}>
-										<AnchorLink ariaLabel="Edit button" href={`/admin/users/profile/${item.author._id}`}>
+										<AnchorLink ariaLabel="Edit button" href={`/admin/users/profile/${com.author._id}`}>
 											<PencilSVG />
 										</AnchorLink>
 										<div
-											data-postid={item.postId}
-											data-id={item._id}
-											data-content={item.comment}
-											data-author={item.author.name}
+											data-postid={com.postId}
+											data-id={com._id}
+											data-content={com.comment}
+											data-author={com.author.name}
 											onClick={e => handleOpenPopup(e)}>
 											<TrashSVG />
 										</div>

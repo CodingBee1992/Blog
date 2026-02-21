@@ -8,8 +8,9 @@
 	min-height: 100dvh;
 	height: 100%;
 	width: 100%;
-	background-color: #0000003d;
-	z-index: 1000;
+	background-color: var(--popupBgcOpacity);
+	z-index: 3000;
+	padding: 0 2rem;
 
 	.popupWrapper {
 		position: relative;
@@ -20,44 +21,45 @@
 		width: 100%;
 		min-height: 350px;
 		border-radius: var(--borderRadius16);
-		background-color: #ffffff;
+		background-color: var(--whiteColor);
 
 		.popupTitle {
-			// margin-top: 2rem;
+			font-size: var(--textSize_18);
 			margin-bottom: 3rem;
 			text-align: center;
 		}
-
+		
 		.popupFooter {
 			text-align: center;
 			margin-top: auto;
-
+			
 			.deleteInfo {
 				text-align: center;
+				font-size: var(--textSize_18);
 			}
 			.popupBtn {
 				padding: 1rem 0;
 				width: 200px;
 				margin: 2rem 0 auto;
 				border: none;
-				font-size: 20px;
-				color: #ffffff;
+				font-size: var(--textSize_18);
+				color: var(--whiteColor);
 				cursor: pointer;
 				transition: all 0.3s;
 			}
 
 			.deleteBtn {
-				background-color: var(--errorFormColor);
+				background-color: var(--errorColor);
 
 				&:hover {
-					background-color: #840707;
+					background-color: var(--errorColorHover);
 				}
 			}
 			.closePopupBtn {
-				background-color: var(--buttonBgcGreen);
+				background-color: var(--mainColor);
 
 				&:hover {
-					background-color: var(--buttonBgcHoverGreen);
+					background-color: var(--mainColorHover);
 				}
 			}
 		}
@@ -73,6 +75,33 @@
 			.closeSVG {
 				&:hover {
 					scale: 1.1;
+				}
+			}
+		}
+	}
+}
+
+@media (width < 600px) {
+	.popupContainer {
+		display: none;
+
+		padding: 0 1rem;
+
+		.popupWrapper {
+			.popupTitle {
+				
+				font-size: var(--textSize_16);
+			}
+
+			.popupFooter {
+				.deleteInfo {
+				
+				font-size: var(--textSize_16);
+			}
+				.popupBtn {
+					width: 150px;
+
+					font-size: var(--textSize_16);
 				}
 			}
 		}

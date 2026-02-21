@@ -1,4 +1,4 @@
-import { useState, type Dispatch, type ReactNode, type SetStateAction } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Controller, useFormContext, type FieldValues, type Path } from 'react-hook-form'
 import InputShowHideButton from '../InputShowHideButton/InputShowHideButton'
 import useDateToDateTimeLocal from '../../../hooks/useDateTimeLocal'
@@ -11,7 +11,7 @@ interface RHFInputProps<T extends FieldValues> {
 	id: string
 	type: 'text' | 'number' | 'password' | 'email' | 'date' | 'datetime-local'
 	placeholder?: string
-	setEnabledButtonProfile?: Dispatch<SetStateAction<boolean>>
+	
 	isSubmitting?: boolean
 }
 
@@ -22,7 +22,7 @@ const RHFInput = <T extends FieldValues>({
 	styles,
 	id,
 	type = 'text',
-	setEnabledButtonProfile,
+	
 	isSubmitting = false,
 	children,
 }: RHFInputProps<T>) => {
@@ -50,7 +50,7 @@ const RHFInput = <T extends FieldValues>({
 									onChange(value ? new Date(value) : null)
 								} else {
 									onChange(value)
-									setEnabledButtonProfile?.(true)
+									
 								}
 							}}
 							type={type === 'password' ? (visible === false ? type : 'text') : type}

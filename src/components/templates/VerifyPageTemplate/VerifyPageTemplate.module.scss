@@ -21,8 +21,8 @@
 			min-height: 350px;
 			padding: 2rem;
 			border-radius: var(--borderRadius08);
-			box-shadow: 0px 0px 4px 4px #d3d3d3d3;
-			background-color: #ffffff;
+			box-shadow: 0px 0px 4px 4px var(--lightGrayColor);
+			background-color: var(--whiteColor);
 
 			.verifyTitle {
 				margin: 2rem 0;
@@ -37,7 +37,7 @@
 
 			.apiResponse {
 				
-				// justify-content: center;
+				
 				align-self: self-start;
 				width: 100%;
 				margin-bottom: 0;
@@ -47,21 +47,21 @@
 				padding: 1rem 3.5rem;
 				font-size: var(--textSize_20);
 				border: none;
-				color: var(--buttonColorLight);
+				color: var(--whiteColor);
 				font-family: var(--font-2);
-				background-color: var(--buttonBgcGreen);
+				background-color: var(--mainColor);
 				cursor: pointer;
 				transition: all 0.3s;
 
 				&:hover {
-					background-color: var(--buttonBgcHoverGreen);
+					background-color: var(--mainColorHover);
 				}
 			}
 			.disabledResend {
 				cursor: not-allowed;
-				background-color: var(--buttonBgcLightGrey);
+				background-color: var(--lightGrayColor);
 				&:hover {
-					background-color: var(--buttonBgcLightGrey);
+					background-color: var(--lightGrayColor);
 				}
 			}
 			.homeNavigate {
@@ -73,7 +73,7 @@
 					font-weight: 600;
 
 					&:hover {
-						color: var(--buttonColorGreen);
+						color: var(--mainColor);
 					}
 				}
 			}

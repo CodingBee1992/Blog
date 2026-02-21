@@ -171,34 +171,34 @@ const AdminList = () => {
 					</div>
 					<div className={styles.tbody}>
 						{users &&
-							users?.map((item: UsersProps, index: number) => (
+							users?.map((user: UsersProps, index: number) => (
 								<div
 									key={index}
-									className={`${styles.tr} ${item.role === 'Admin' ? styles.admin : ''} ${
-										item.role === 'Moderator' ? styles.moderator : ''
+									className={`${styles.tr} ${user.role === 'Admin' ? styles.admin : ''} ${
+										user.role === 'Moderator' ? styles.moderator : ''
 									} `}>
 									<div className={`${styles.td}`}>
-										<AnchorLink className={styles.tabelTitle} href={`admin/users/profile/${item._id}`}>
-											{item.name}
+										<AnchorLink className={styles.tabelTitle} href={`/admin/users/profile/${user._id}`}>
+											{user.name}
 										</AnchorLink>
 									</div>
 
-									<div className={styles.td}>{item.email}</div>
-									<div className={styles.td}>{new Date(item.createdAt).toLocaleDateString(...dateConverter())}</div>
+									<div className={styles.td}>{user.email}</div>
+									<div className={styles.td}>{new Date(user.createdAt).toLocaleDateString(...dateConverter())}</div>
 
-									<div className={styles.td}>{item.commentsCount}</div>
-									<div className={styles.td}>{item.postCount}</div>
-									<div className={styles.td}>{item.role}</div>
+									<div className={styles.td}>{user.commentsCount}</div>
+									<div className={styles.td}>{user.postCount}</div>
+									<div className={styles.td}>{user.role}</div>
 									<div className={styles.td}>
-										{item.lastLogin ? new Date(item.lastLogin).toLocaleString(...longDateConverter()) : '-'}
+										{user.lastLogin ? new Date(user.lastLogin).toLocaleString(...longDateConverter()) : '-'}
 									</div>
 									<div className={styles.td}>
-										{item.role !== 'Admin' && (
+										{user.role !== 'Admin' && (
 											<>
-												<AnchorLink href={`/admin/users/profile/${item._id}`}>
+												<AnchorLink href={`/admin/users/profile/${user._id}`}>
 													<PencilSVG />
 												</AnchorLink>
-												<div data-id={item._id} data-name={item.name} onClick={e => handleOpenPopup(e)}>
+												<div data-id={user._id} data-name={user.name} onClick={e => handleOpenPopup(e)}>
 													<TrashSVG />
 												</div>
 											</>

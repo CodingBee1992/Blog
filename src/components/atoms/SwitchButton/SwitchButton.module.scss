@@ -2,23 +2,21 @@
 	position: relative;
 	display: flex;
 	justify-content: space-around;
-	// width: 100px;
-	// margin-left: 2rem;
-	background-color: var(--buttonBgcLightGrey);
+	background-color: var(--lightGrayColor);
 
 	.off,
 	.on {
 		padding: 0.5rem 2rem;
 		font-size: var(--textSize_16);
 		background-color: transparent;
-		color: var(--buttonColorDark);
+		color: var(--darkColor);
 		border: none;
 		transition: all 0.3s;
 		pointer-events: none;
 		z-index: 100;
 	}
 	.off {
-		color: var(--buttonColorLight);
+		color: var(--whiteColor);
 	}
 	&::after {
 		content: '';
@@ -27,20 +25,20 @@
 		top: 0;
 		width: 50%;
 		height: 100%;
-		background-color: #000000;
+		background-color: var(--blackColor);
 		transition: all 0.3s;
 	}
 }
 .switch {
 	.off {
-		color: var(--buttonColorDark);
+		color: var(--darkColor);
 	}
 	.on {
-		color: var(--buttonColorLight);
+		color: var(--whiteColor);
 	}
 
 	&::after {
 		left: 50%;
-		background-color: var(--buttonBgcGreen);
+		background-color: var(--mainColor);
 	}
 }

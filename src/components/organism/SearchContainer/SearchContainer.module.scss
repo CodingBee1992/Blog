@@ -18,10 +18,10 @@
 		padding: 1rem;
 		width: 100%;
 		height: var(--headerHeight);
-		background-color: var(--Bgc-navSearch);
-		// --webkit-transorm: translateY(-200%);
+		background-color: var(--blackColor);
+		
 		transform: translateY(-200%);
-		// transition: transform 0.3s ease-in-out;
+	
 		transition: transform 0.5s 0.3s cubic-bezier(0, 0.55, 0.45, 1);
 
 		.elementSearchContainer {
@@ -32,13 +32,13 @@
 				.input {
 					width: 100%;
 					font-size: var(--text-SizeInput);
-					color: var(--menu-textColor);
+					color: var(--whiteColor);
 					background-color: transparent;
 					border: none;
 					outline: none;
 
 					&::placeholder {
-						color: var(--menu-textColor);
+						color: var(--whiteColor);
 					}
 				}
 			}
@@ -51,7 +51,7 @@
 				max-height: 0;
 				height: auto;
 				width: 100%;
-				background-color: var(--bgcLightGrey);
+				background-color: var(--whiteColor);
 				visibility: hidden;
 				opacity: 0;
 				transition: all 0.3s ease-in-out;
@@ -61,18 +61,16 @@
 					width: 100%;
 					height: 100%;
 					padding: 5px;
-					border-bottom: 1px solid var(--borderBottom);
-					color: var(--searchElementTextColor);
+					border-bottom: 1px solid var(--borderBottomColor);
+					color: var(--blackColor);
 					cursor: pointer;
 					transition: all .3s;
 					
 					&:hover {
 						
-						background-color: var(--menu-textColorHover);
+						background-color: var(--lightGrayColor);
 					}
-					// &:nth-child(odd){
-					// 	background-color: #d3d3d3d3;
-					// }
+					
 
 					&:last-child{
 						border-bottom: none;
@@ -89,7 +87,7 @@
 			}
 		}
 		.close {
-			// padding: 8px;
+			
 			background-color: transparent;
 			border: unset;
 			cursor: pointer;
@@ -97,13 +95,13 @@
 			.icon {
 				width: 28px;
 				height: 28px;
-				color: var(--closeBtn-Color);
+				color: var(--whiteColor);
 				transition: 0.3s all ease-in-out;
 			}
 
 			&:hover {
 				.icon {
-					color: var(--closeBtn-ColorHover);
+					color: var(--lightGrayColor);
 				}
 			}
 		}

@@ -37,19 +37,19 @@
 					color: var(--textColor);
 					font-size: var(--textSize_16);
 					font-family: var(--font-2);
-					border: 1px solid var(--inputBorderColor);
+					border: 1px solid var(--lightGrayColor);
 					border-radius: var(--borderRadius06);
 					outline: none;
 					transition: all 0.3s;
 
 					&:hover {
-						box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-						border-color: #ffffff;
+						box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+						border-color: var(--whiteColor);
 					}
 
 					&:focus {
-						box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
-						border-color: #ffffff;
+						box-shadow: 0px 0px 0px 2px var(--mainColor);
+						border-color: var(--whiteColor);
 					}
 				}
 			}
@@ -64,11 +64,11 @@
 		.submitBtn {
 			display: flex;
 			align-self: flex-start;
-			color: var(--buttonColorLight);
-			background-color: var(--buttonBgcGreen);
+			color: var(--whiteColor);
+			background-color: var(--mainColor);
 
 			&:hover {
-				background-color: var(--buttonBgcHoverGreen);
+				background-color: var(--mainColorHover);
 			}
 		}
 		.animate1 {
@@ -83,7 +83,7 @@
 		.clearButton {
 			transition: all 0.3s;
 			&:hover {
-				color: var(--buttonColorLight);
+				color: var(--whiteColor);
 				background-color: var(--clearButtonBgc);
 			}
 		}
@@ -91,7 +91,7 @@
 }
 
 .error {
-	color: var(--errorFormColor);
+	color: var(--errorColor);
 	font-size: var(--textSize_14);
 }
 @media (width < 800px) {

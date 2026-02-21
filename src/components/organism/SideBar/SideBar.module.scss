@@ -10,7 +10,7 @@
 	width: 10%;
 	height: 100dvh;
 	padding: 2rem 0;
-	background-color: var(--sideBarBgc);
+	background-color: var(--whiteColor);
 	transition: all 0.3s;
 	z-index: 1001;
 
@@ -32,7 +32,7 @@
 				object-fit: cover;
 				transition: all 0.3s ease-in-out;
 				&:hover {
-					color: var(--logo-hover);
+					
 					scale: 1.05;
 				}
 			}
@@ -55,7 +55,7 @@
 		transition: all 0.3s ease-in-out;
 
 		.authorAvatar {
-			background-color: #fff;
+			background-color: var(--whiteColor);
 			width: 40px;
 			height: 40px;
 			border-radius: 50%;
@@ -67,7 +67,7 @@
 			background: transparent;
 			border: none;
 			cursor: pointer;
-			fill: var(--sideBarColorIcon);
+			fill: var(--sideBarColor);
 
 			.logoutSvg {
 				height: 25px;
@@ -75,7 +75,7 @@
 				transition: all 0.3s;
 
 				&:hover {
-					fill: var(--greenColor);
+					fill: var(--mainColor);
 				}
 			}
 			.dashboardIcon {
@@ -86,7 +86,7 @@
 					transition: all 0.3s;
 				}
 				&:hover path {
-					fill: var(--greenColor);
+					fill: var(--mainColor);
 				}
 			}
 			.profileIcon {

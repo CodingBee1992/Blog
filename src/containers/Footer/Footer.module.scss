@@ -3,7 +3,7 @@
 	padding-bottom: 6rem;
 	color: #3b3d3d;
 	font-size: var(--text-meta);
-	background-color: var(--bgcLightGrey);
+	background-color: var(--footerBgc);
 	line-height: calc(0.8125 * var(--space));
 
 	h2 {
@@ -31,7 +31,7 @@
 					transition: all 0.3s;
 
 					&:hover {
-						color: #000000;
+						color: var(--blackColor);
 					}
 				}
 			}
@@ -62,7 +62,7 @@
 							padding: 0.8rem 2rem;
 							margin-bottom: 1.6rem;
 							background-color: transparent;
-							border: 1px solid #282828;
+							border: 1px solid var(--blackColorHover);
 							font-size: calc(var(--text-Size) * 0.7778);
 							line-height: 3.2rem;
 							text-align: center;
@@ -71,8 +71,8 @@
 						button {
 							padding: 0.8rem 2rem;
 							margin-bottom: 1.6rem;
-							background-color: var(--bgcBlack);
-							color: #ffffff;
+							background-color: var(--blackColor);
+							color: var(--whiteColor);
 							border: none;
 							font-size: var(--text-xs);
 							text-transform: uppercase;
@@ -83,7 +83,7 @@
 							cursor: pointer;
 
 							&:hover {
-								background-color: #282828;
+								background-color: var(--blackColorHover);
 							}
 						}
 					}
@@ -93,7 +93,7 @@
 	}
 	.footerBottom {
 		.copyright {
-			color: var(--lightBlackColor);
+			color: var(--darkColor);
 			font-size: calc(1.8rem * 0.7222);
 
 			&:first-child::after {
@@ -102,7 +102,7 @@
 			}
 
 			a {
-				color: #000000;
+				color: var(--blackColor);
 			}
 		}
 	}

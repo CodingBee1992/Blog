@@ -21,7 +21,7 @@ const Popup = ({ children, popupTitle, popupRef, popUpMessage, handleClosePopup,
 						aria-label={popUpMessage ? 'Close button' : 'Delete button'}
 						className={`${styles.popupBtn} ${popUpMessage ? styles.closePopupBtn : styles.deleteBtn}`}
 						onClick={popUpMessage ? handleClosePopup : handleDelete}>
-						{popUpMessage ? 'Close ' : 'Delete'}
+						{popUpMessage ? 'Close ' : 'DELETE'}
 					</button>
 				</div>
 				<CloseButton ariaLabel="Close popup button" styles={styles} handleClose={handleClosePopup} />
