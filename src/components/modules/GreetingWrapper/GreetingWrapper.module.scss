@@ -21,8 +21,16 @@
 	}
 	.socialWrapper {
 		display: flex;
-		flex-direction: row;
-		gap: 2rem;
+		flex-direction: column;
+		gap: 1.5rem;
+		color: var(--darkColor);
+		font-size: var(--textSize_16);
+		font-family: var(--font-2);
+		.linksBox{
+				display: flex;
+				flex-direction: row;
+				gap: 2rem;
+			}
 	}
 }
 
@@ -30,11 +38,14 @@
 	.greetingWrapper {
 		display: flex;
 		flex-direction: column;
-		justify-content: start;
+		justify-content: center;
 		align-items: center;
 		height: 100%;
 		width: 100%;
 
-		
+		.socialWrapper{
+			margin-top: 2rem;
+			align-items: center;
+		}
 	}
 }

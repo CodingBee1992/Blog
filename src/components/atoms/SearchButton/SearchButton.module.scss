@@ -11,13 +11,13 @@
 	.icon {
 		width: 24px;
 		height: 24px;
-		color: var(--searchIconBgc);
+		color: var(--whiteColor);
 		transition: 0.3s all ease-in-out;
 	}
 
 	&:hover {
 		.icon {
-			color: var(--searchIconBgcHover);
+			color: var(--lightGrayColor);
 		}
 	}
 }

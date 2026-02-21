@@ -18,7 +18,7 @@
 		position: relative;
 		width: 28px;
 		height: 2px;
-		background-color: var(--mobileIconBgc);
+		background-color: var(--whiteColor);
 		transition: all 0.3s;
 
 		&::after,
@@ -38,7 +38,7 @@
 		}
 	}
 	&:hover .span {
-		background-color: var(--mobileIconBgcHover);
+		background-color: var(--lightGrayColor);
 	}
 }
 .toggle {

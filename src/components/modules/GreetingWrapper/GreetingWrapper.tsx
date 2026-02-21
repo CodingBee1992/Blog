@@ -1,5 +1,5 @@
-import Logo from "../../atoms/logo/Logo"
-import SocialLinks from "../SocialLinks/SocialLinks"
+import Logo from '../../atoms/logo/Logo'
+import SocialLinks from '../SocialLinks/SocialLinks'
 import styles from './GreetingWrapper.module.scss'
 
 const GreetingWrapper = () => {
@@ -7,7 +7,10 @@ const GreetingWrapper = () => {
 		<div className={styles.greetingWrapper}>
 			<Logo styles={styles} />
 			<div className={styles.socialWrapper}>
-				<SocialLinks />
+				<p className={styles.followUs}>Follow us:</p>
+				<div className={styles.linksBox}>
+					<SocialLinks />
+				</div>
 			</div>
 		</div>
 	)

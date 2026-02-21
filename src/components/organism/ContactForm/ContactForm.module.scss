@@ -1,54 +1,48 @@
 .contactContainer {
 	display: flex;
 	justify-content: center;
-	margin-top: 10rem;
 	height: 100%;
 	width: 95%;
 	max-width: 1400px;
-	box-shadow: 0px 0px 4px 4px #d3d3d3;
+	box-shadow: 0px 0px 4px 4px var(--lightGrayColor);
 	.contactInfo {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		// height: 100%;
 		max-width: 40%;
 		padding: 4rem;
-
+		font-size: var(--textSize_18);
+		color: var(--darkColor);
+		font-family: var(--font-2);
 		.favIcon {
 			height: 200px;
 			width: 200px;
 			margin-bottom: 3rem;
 			background-color: transparent;
-
 			object-fit: cover;
 			transition: all 0.3s ease-in-out;
 
-			&:hover {
-				color: var(--logo-hover);
-				scale: 1.05;
-			}
 		}
 		.companyInfo {
 			margin-bottom: 3rem;
-			// font-size: var(--textSize_16);
-			font-family: var(--font-2);
 			padding-bottom: 3rem;
-			border-bottom: 1px solid #d3d3d3d3;
+			border-bottom: 1px solid var(--lightGrayColor);
 		}
 		.subTitle {
-			font-family: var(--font-2);
 			margin-bottom: 1rem;
 		}
-		.companyAddress {
-			// font-size: var(--textSize_16);
-			font-family: var(--font-2);
-		}
+		
 		.socialWrapper {
 			display: flex;
-			flex-direction: row;
-			gap: 2rem;
-
+			flex-direction: column;
+			gap: 1.5rem;
 			margin-top: 4rem;
+			
+			.linksBox{
+				display: flex;
+				flex-direction: row;
+				gap: 2rem;
+			}
 		}
 	}
 	.contactForm {
@@ -82,19 +76,19 @@
 					font-size: var(--textSize_16);
 					font-family: var(--font-2);
 					color: var(--textColor);
-					border: 1px solid var(--inputBorderColor);
+					border: 1px solid var(--lightGrayColor);
 					border-radius: var(--borderRadius06);
 					outline: none;
 					transition: all 0.3s;
 
 					&:hover {
-						box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-						border-color: #ffffff;
+						box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+						border-color: var(--whiteColor);
 					}
 
 					&:focus {
-						box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
-						border-color: #ffffff;
+						box-shadow: 0px 0px 0px 2px var(--mainColor);
+						border-color: var(--whiteColor);
 					}
 				}
 			}
@@ -119,19 +113,21 @@
 					height: 100%;
 					padding: 1rem;
 					color: var(--textColor);
-					border: 1px solid var(--inputBorderColor);
+					border: 1px solid var(--lightGrayColor);
 					border-radius: var(--borderRadius06);
 					outline: none;
-					transition: all 0.3s;
+					transition:
+						border-color 0.3s,
+						box-shadow 0.3s;
 
 					&:hover {
-						box-shadow: 0px 0px 0px 2px var(--inputHoverColor);
-						border-color: #ffffff;
+						box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+						border-color: var(--whiteColor);
 					}
 
 					&:focus {
-						box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
-						border-color: #ffffff;
+						box-shadow: 0px 0px 0px 2px var(--mainColor);
+						border-color: var(--whiteColor);
 					}
 				}
 			}
@@ -162,7 +158,7 @@
 					font-family: var(--font-2);
 
 					a {
-						color: #000000;
+						color: var(--blackColor);
 						font-weight: bold;
 
 						&:hover {
@@ -174,15 +170,15 @@
 		}
 		.sendMessage {
 			width: 200px;
-			background-color: var(--buttonBgcGreen);
-			color: var(--buttonColorLight);
+			background-color: var(--mainColor);
+			color: var(--whiteColor);
 			transition: all 0.3s ease;
 			&:hover {
-				background-color: var(--buttonBgcHoverGreen);
+				background-color: var(--mainColorHover);
 			}
 		}
 		.error {
-			color: var(--errorFormColor);
+			color: var(--errorColor);
 			font-size: var(--textSize_14);
 		}
 	}
@@ -191,13 +187,11 @@
 @media (width < 900px) {
 	.contactContainer {
 		flex-direction: column;
-		margin-top: 10rem;
-		margin-bottom: 15rem;
 		box-shadow: none;
 		.contactInfo {
 			max-width: 100%;
 			padding: 2rem;
-			border-top: 2px solid #d3d3d3d3;
+			border-top: 2px solid var(--lightGrayColor);
 		}
 		.contactForm {
 			padding: 2rem;

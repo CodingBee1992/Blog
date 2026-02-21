@@ -21,13 +21,13 @@
 		width: 100%;
 		min-height: 350px;
 		border-radius: var(--borderRadius16);
-		background-color: #ffffff;
+		background-color: var(--whiteColor);
 
 		.popupTitle {
 			font-size: var(--textSize_22);
 			margin-bottom: 3rem;
 			padding-bottom: 2rem;
-			border-bottom: 1px solid #d3d3d3d3;
+			border-bottom: 1px solid var(--lightGrayColor);
 		}
 		.sendInfo {
 			margin-top: auto;
@@ -41,30 +41,29 @@
 		}
 
 		.sendPopupBtn {
+			@include formBtn($padding: 1rem 2rem, $bgc: var(--mainColor), $color: var(--whiteColor));
 			margin-top: auto;
-			color: #ffffff;
-			background-color: #00684a;
 
 			&:hover {
-				box-shadow: 0px 0px 3px 3px #3fa588;
+				background-color: var(--mainColorHover);
 			}
 		}
 		.cancelPopupBtn {
-			border: 1px solid #000000;
+			@include formBtn($padding: 1rem 2rem, $bgc: var(--mainColor), $color: var(--whiteColor));
+
 			&:hover {
-				box-shadow: 0px 0px 3px 3px #d3d3d3d3;
+				background-color: var(--mainColorHover);
 			}
 		}
 
 		.popupMessage {
 			margin-top: 1rem;
-			
 		}
 
 		.footerLine {
 			margin-top: 1.8rem;
 			padding: 1.8rem 0 0 0;
-			border-top: 1px solid #d3d3d3d3;
+			border-top: 1px solid var(--lightGrayColor);
 		}
 
 		.close {

@@ -7,7 +7,7 @@
 		font-weight: 400;
 		line-height: 4rem;
 		font-family: var(--font-2);
-		color: var(--pagesColor);
+		color: var(--sideBarColor);
 	}
 
 	.formWrapper {
@@ -32,22 +32,22 @@
 				input {
 					width: 100%;
 					padding: var(--vspace-0_25);
-					color: #000000;
+					color: var(--blackColor);
 					font-size: var(--textSize_16);
 					font-family: var(--font-2);
-					border: 1px solid var(--inputBorderColor);
+					border: 1px solid var(--lightGrayColor);
 					border-radius: var(--borderRadius06);
 					outline: none;
 					transition: all 0.3s;
 
 					&:hover {
-						box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-						border-color: #ffffff;
+						box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+						border-color: var(--whiteColor);
 					}
 
 					&:focus {
-						box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
-						border-color: #ffffff;
+						box-shadow: 0px 0px 0px 2px var(--mainColor);
+						border-color: var(--whiteColor);
 					}
 				}
 			}
@@ -76,7 +76,7 @@
 				color: var(--textColor);
 				background-color: var(--mainFormBgc);
 				font-size: var(--textSize_16);
-				border: 1px solid var(--inputBorderColor);
+				border: 1px solid var(--lightGrayColor);
 				border-radius: var(--borderRadius06);
 				background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
 				background-repeat: no-repeat;
@@ -86,26 +86,20 @@
 				cursor: pointer;
 				transition: all 0.3s;
 				&:hover {
-					box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-					border-color: #ffffff;
+					box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+					border-color: var(--whiteColor);
 				}
 
 				&:focus {
-					box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
-					border-color: #ffffff;
+					box-shadow: 0px 0px 0px 2px var(--mainColor);
+					border-color: var(--whiteColor);
 				}
 				option {
-					background-color: #ffffff;
+					background-color: var(--whiteColor);
 					width: 100%;
 				}
 			}
 		}
-	}
-	.successMessage {
-		display: block;
-		margin-bottom: 2rem;
-		font-size: var(--textSize_16);
-		color: #04dd00;
 	}
 
 	.submitBtns {
@@ -116,15 +110,15 @@
 		.submitBtn {
 			display: flex;
 			align-self: flex-start;
-			color: var(--buttonColorDark);
-			background-color: var(--buttonBgcLightGrey);
+			color: var(--darkColor);
+			background-color: var(--lightGrayColor);
 		}
 		.save {
-			color: var(--buttonColorLight);
-			background-color: var(--buttonBgcGreen);
+			color: var(--whiteColor);
+			background-color: var(--mainColor);
 
 			&:hover {
-				background-color: var(--buttonBgcHoverGreen);
+				background-color: var(--mainColorHover);
 			}
 		}
 		.animate1 {
@@ -138,17 +132,17 @@
 		}
 		.clearButton {
 			transition: all 0.3s;
-			color: var(--buttonColorDark);
-			background-color: var(--buttonBgcLightGrey);
+			color: var(--darkColor);
+			background-color: var(--lightGrayColor);
 			&:hover {
-				color: var(--buttonColorLight);
+				color: var(--whiteColor);
 				background-color: var(--clearButtonBgc);
 			}
 		}
 	}
 }
 .error {
-	color: var(--errorFormColor);
+	color: var(--errorColor);
 	font-size: var(--textSize_14);
 }
 .marginError {

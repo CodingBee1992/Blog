@@ -183,7 +183,7 @@ const ListOfPosts = () => {
 		}
 	}
 
-	// if (isFetching) return <Loader />
+	
 	return (
 		<div className={styles.listWrapper}>
 			<h3 className={styles.listTitle}>List of Posts</h3>
@@ -250,38 +250,38 @@ const ListOfPosts = () => {
 					</div>
 					<div className={styles.tbody}>
 						{posts &&
-							posts?.map((item: ExtendedArticleContentProps, index: number) => (
-								<div key={index} className={`${styles.tr} ${item.status === 'draft' ? styles.draft : ''}`}>
+							posts?.map((post: ExtendedArticleContentProps, index: number) => (
+								<div key={index} className={`${styles.tr} ${post.status === 'draft' ? styles.draft : ''}`}>
 									<div className={styles.td}>
 										<AnchorLink
 											className={styles.tabelTitle}
-											href={createUrl({ categories: item.categories, seo: item.seo, _id: item._id })}>
-											{item.title}
-											{timePass(item.createdAt, 3) && <NotificationNew />}
+											href={createUrl({ categories: post.categories, seo: post.seo, _id: post._id })}>
+											{post.title}
+											{timePass(post.createdAt, 3) && <NotificationNew />}
 										</AnchorLink>
 									</div>
-									<div className={styles.td}>{item.author.name}</div>
+									<div className={styles.td}>{post.author.name}</div>
 									<div className={styles.td}>
-										{item.categories.length > 1 ? item.categories.join(', ') : item.categories}
+										{post.categories.length > 1 ? post.categories.join(', ') : post.categories}
 									</div>
-									<div className={styles.td}>{new Date(item.createdAt).toLocaleDateString(...dateConverter())}</div>
-									<div className={`${styles.td} ${item.publishedAt ? '' : styles.publish}`}>
-										{item.publishedAt ? (
-											new Date(item.publishedAt).toLocaleDateString(...dateConverter())
+									<div className={styles.td}>{new Date(post.createdAt).toLocaleDateString(...dateConverter())}</div>
+									<div className={`${styles.td} ${post.publishedAt ? '' : styles.publish}`}>
+										{post.publishedAt ? (
+											new Date(post.publishedAt).toLocaleDateString(...dateConverter())
 										) : (
-											<p data-id={item._id} onClick={e => handlePublishPost(e)}>
+											<p data-id={post._id} onClick={e => handlePublishPost(e)}>
 												Publish
 											</p>
 										)}
 									</div>
-									<div className={styles.td}>{item.commentsCount}</div>
-									<div className={styles.td}>{item.postViews}</div>
-									<div className={styles.td}>{item.status}</div>
+									<div className={styles.td}>{post.commentsCount}</div>
+									<div className={styles.td}>{post.postViews}</div>
+									<div className={styles.td}>{post.status}</div>
 									<div className={styles.td}>
-										<AnchorLink href={`/admin/posts/editpost/?id=${item._id}`}>
+										<AnchorLink href={`/admin/posts/editpost/?id=${post._id}`}>
 											<PencilSVG />
 										</AnchorLink>
-										<div data-id={item._id} data-name={item.title} onClick={e => handleOpenPopup(e)}>
+										<div data-id={post._id} data-name={post.title} onClick={e => handleOpenPopup(e)}>
 											<TrashSVG />
 										</div>
 									</div>

@@ -5,10 +5,9 @@
 	width: 100%;
 	max-width: 980px;
 	min-height: 600px;
-	// height: auto;
-	// background-color: var(--bgcWhite);
+	
 	border-radius: 12px;
-	box-shadow: 0px 0px 4px 4px #d3d3d3d3;
+	box-shadow: 0px 0px 4px 4px var(--lightGrayColor);
 
 	.formContainer {
 		margin-top: var(--vspace-1);
@@ -20,7 +19,7 @@
 			margin-bottom: var(--vspace-0_25);
 			font-size: var(--text-xl);
 			font-weight: 400;
-			color: var(--lightBlackColor);
+			color: var(--darkColor);
 		}
 		p {
 			font-size: var(--text-xs);
@@ -28,11 +27,12 @@
 
 			a {
 				font-weight: 600;
-				color: #00a700;
+				color: var(--mainColor);
 				transition: border-bottom 0.3s;
-
+				
 				&:hover {
-					border-bottom: 1px solid #00a700;
+					color: var(--mainColorHover);
+					
 				}
 			}
 		}
@@ -53,25 +53,25 @@
 						font-size: var(--textSize_16);
 						font-family: var(--font-2);
 						color: var(--textColor);
-						border: 1px solid var(--inputBorderColor);
+						border: 1px solid var(--lightGrayColor);
 						outline: none;
 						transition: all 0.3s;
 
 						&:hover {
-							box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-							border-color: #ffffff;
+							box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+							border-color: var(--whiteColor);
 						}
 
 						&:focus {
-							box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
-							border-color: #ffffff;
+							box-shadow: 0px 0px 0px 2px var(--mainColor);
+							border-color: var(--whiteColor);
 						}
 					}
 				}
 
 				.error {
 					font-size: var(--textSize_12);
-					color: var(--errorFormColor);
+					color: var(--errorColor);
 				}
 			}
 			.apiResponse {
@@ -112,7 +112,7 @@
 					.error {
 						margin-left: 2.5rem;
 						font-size: var(--textSize_12);
-						color: var(--errorFormColor);
+						color: var(--errorColor);
 					}
 				}
 			}
@@ -121,8 +121,8 @@
 				padding: 0 3.2rem;
 				height: var(--btn-heightXs);
 				font-size: 16px;
-				color: #ffffff;
-				background-color: var(--bgcBlack);
+				color: var(--whiteColor);
+				background-color: var(--blackColor);
 				line-height: calc(var(--btn-heightXs) - 1rem);
 				letter-spacing: 0.2em;
 				white-space: nowrap;
@@ -132,7 +132,7 @@
 				transition: all 0.3s;
 
 				&:hover {
-					background-color: var(--bgcLightBlack);
+					background-color: var(--blackColorHover);
 				}
 			}
 		}

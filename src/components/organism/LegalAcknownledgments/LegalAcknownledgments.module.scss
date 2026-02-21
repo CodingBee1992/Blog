@@ -5,7 +5,7 @@
 	width: 100%;
 	max-width: 1000px;
 	height: 100%;
-	background-color: #ffffff;
+	background-color: var(--whiteColor);
 	border-radius: var(--borderRadius06);
 	padding: 2rem;
 
@@ -44,19 +44,19 @@
 					color: var(--textColor);
 					font-size: var(--textSize_16);
 					font-family: var(--font-2);
-					border: 1px solid var(--inputBorderColor);
+					border: 1px solid var(--lightGrayColor);
 					border-radius: var(--borderRadius06);
 					outline: none;
 					transition: all 0.3s;
 
 					&:hover {
-						box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-						border-color: #ffffff;
+						box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+						border-color: var(--whiteColor);
 					}
 
 					&:focus {
-						box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
-						border-color: #ffffff;
+						box-shadow: 0px 0px 0px 2px var(--mainColor);
+						border-color: var(--whiteColor);
 					}
 				}
 			}
@@ -80,8 +80,8 @@
 				width: 100%;
 				margin-bottom: 1rem;
 				border-radius: var(--borderRadius06);
-				border: 1px solid var(--inputBorderColor);
-				background-color: #ffffff;
+				border: 1px solid var(--lightGrayColor);
+				background-color: var(--whiteColor);
 				transition: all 0.3s;
 				overflow: hidden;
 				textarea {
@@ -96,19 +96,19 @@
 					line-height: var(--textLineHeight);
 					font-size: var(--textSize_16);
 					font-family: var(--font-2);
-					// border: 1px solid var(--inputBorderColor);
+					
 					border: none;
 					outline: none;
-					transition: all 0.3s;
+					transition: border-color 0.3s, box-shadow 0.3s;
 				}
 				&:hover {
-					box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-					border-color: #ffffff;
+					box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+					border-color: var(--whiteColor);
 				}
 			}
 			.focusArea {
 				&:hover {
-					box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+					box-shadow: 0px 0px 0px 2px var(--mainColor);
 				}
 			}
 		}
@@ -122,11 +122,11 @@
 		.submitBtn {
 			display: flex;
 			align-self: flex-start;
-			color: var(--buttonColorLight);
-			background-color: var(--buttonBgcGreen);
+			color: var(--whiteColor);
+			background-color: var(--mainColor);
 
 			&:hover {
-				background-color: var(--buttonBgcHoverGreen);
+				background-color: var(--mainColorHover);
 			}
 		}
 		.animate1 {
@@ -141,14 +141,14 @@
 		.clearButton {
 			transition: all 0.3s;
 			&:hover {
-				color: var(--buttonColorLight);
+				color: var(--whiteColor);
 				background-color: var(--clearButtonBgc);
 			}
 		}
 	}
 }
 .error {
-	color: var(--errorFormColor);
+	color: var(--errorColor);
 	font-size: var(--textSize_14);
 }
 @media (width < 800px) {

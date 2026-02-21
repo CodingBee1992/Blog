@@ -39,11 +39,11 @@
 		.saveSettings {
 			display: flex;
 			align-self: flex-start;
-			color: var(--buttonColorLight);
-			background-color: var(--buttonBgcGreen);
+			color: var(--whiteColor);
+			background-color: var(--mainColor);
 
 			&:hover {
-				background-color: var(--buttonBgcHoverGreen);
+				background-color: var(--mainColorHover);
 			}
 		}
 		.animate1 {
@@ -58,13 +58,13 @@
 		.clearButton {
 			transition: all 0.3s;
 			&:hover {
-				color: var(--buttonColorLight);
+				color: var(--whiteColor);
 				background-color: var(--clearButtonBgc);
 			}
 		}
 	}
 	.error {
-		color: var(--errorFormColor);
+		color: var(--errorColor);
 		font-size: var(--textSize_14);
 	}
 }

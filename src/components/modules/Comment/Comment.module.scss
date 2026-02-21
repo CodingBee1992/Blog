@@ -14,7 +14,7 @@
 				font-size: var(--text-Size);
 				font-weight: 600;
 				line-height: var(--vspace-1);
-				color: #000000;
+				color: var(--blackColor);
 			}
 			.commentMeta {
 				position: relative;
@@ -32,12 +32,11 @@
 					display: flex;
 					flex-direction: column;
 					align-items: flex-end;
-					// gap: .4rem;
-					// min-height: 30px;
+					
 
 					.commentReply {
 						position: relative;
-						// top: 10px;
+						
 						display: flex;
 						flex-direction: column;
 
@@ -49,7 +48,7 @@
 							font-weight: 600;
 							text-transform: uppercase;
 							letter-spacing: 0.2em;
-							color: #000000;
+							color: var(--blackColor);
 							cursor: pointer;
 							animation: animateReplyBtn 0.5s ease-in-out;
 						}
@@ -67,7 +66,7 @@
 								position: absolute;
 								height: 100%;
 								width: 2px;
-								background-color: #000000;
+								background-color: var(--blackColor);
 							}
 							&::before {
 								left: 50%;
@@ -87,7 +86,7 @@
 							display: none;
 							top: 20px;
 							font-size: var(--text-xs);
-							color: var(--color-text);
+							color: var(--blackColorHover);
 						}
 						.commentLogInShow {
 							display: flex;
@@ -108,7 +107,7 @@
 							cursor: pointer;
 
 							&:hover {
-								background-color: #d3d3d3;
+								background-color: var(--lightGrayColor);
 							}
 						}
 						.deleteUpdateBtns {
@@ -144,7 +143,7 @@
 			p {
 				margin-bottom: var(--vspace-1);
 				line-height: var(--vspace-1);
-				color: var(--color-text);
+				color: var(--blackColorHover);
 			}
 		}
 		.commentWrapper {
@@ -175,7 +174,7 @@
 			}
 			.commentError {
 				font-size: var(--textSize_14);
-				color: var(--errorFormColor);
+				color: var(--errorColor);
 			}
 			.resMessage {
 				font-size: var(--textSize_14);
@@ -196,8 +195,8 @@
 				height: var(--btn-heightXs);
 				font-size: var(--textSize_14);
 				line-height: calc(var(--btn-heightXs) - 1rem);
-				background-color: var(--bgcBlack);
-				color: #ffffff;
+				background-color: var(--blackColor);
+				color: var(--whiteColor);
 				text-transform: uppercase;
 				letter-spacing: 0.4em;
 				white-space: nowrap;
@@ -206,7 +205,7 @@
 				transition: all 0.3s;
 
 				&:hover {
-					background-color: var(--bgcLightBlack);
+					background-color: var(--blackColorHover);
 				}
 			}
 		}
@@ -224,7 +223,7 @@
 			width: 100%;
 			min-height: 100%;
 			border-radius: 100%;
-			border: 2px solid #d3d3d3;
+			border: 2px solid var(--lightGrayColor);
 			object-fit: cover;
 		}
 	}
@@ -311,7 +310,7 @@
 							.deleteUpdateBtns {
 								gap: 1rem;
 								padding: 1rem;
-								background-color: #ffffff;
+								background-color: var(--whiteColor);
 							}
 						}
 					}

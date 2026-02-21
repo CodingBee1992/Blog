@@ -25,29 +25,29 @@
 			input {
 				width: 100%;
 				padding: var(--vspace-0_25);
-				color: #000000;
+				color: var(--blackColor);
 				font-size: var(--textSize_16);
 				font-family: var(--font-2);
-				border: 1px solid var(--inputBorderColor);
+				border: 1px solid var(--lightGrayColor);
 				border-radius: var(--borderRadius06);
 				outline: none;
 				transition: all 0.3s;
 
 				&:hover {
-					box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-					border-color: #ffffff;
+					box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+					border-color: var(--whiteColor);
 				}
 
 				&:focus {
-					box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
-					border-color: #ffffff;
+					box-shadow: 0px 0px 0px 2px var(--mainColor);
+					border-color: var(--whiteColor);
 				}
 			}
 		}
 	}
 
 	.profileBox {
-		// position: relative;
+		
 		display: flex;
 		flex-direction: row;
 		width: 100%;
@@ -65,7 +65,7 @@
 			height: 70px;
 			overflow: hidden;
 			border-radius: 50%;
-			box-shadow: 0px 0px 3px 3px #d3d3d3d3;
+			box-shadow: 0px 0px 3px 3px var(--lightGrayColor);
 			cursor: pointer;
 			transition: all 0.3s;
 
@@ -90,7 +90,7 @@
 
 				.image {
 					.uploadSVG {
-						fill: var(--inputFocusColor);
+						fill: var(--mainColor);
 					}
 				}
 			}
@@ -112,11 +112,11 @@
 			}
 		}
 		.avatarShadow {
-			box-shadow: 0px 0px 3px 3px #d3d3d3d3;
+			box-shadow: 0px 0px 3px 3px var(--lightGrayColor);
 			.image {
 
 				.uploadSVG {
-					fill: #d3d3d3d3;
+					fill: var(--lightGrayColor);
 					transition: all .3s;
 				}
 			}
@@ -124,7 +124,7 @@
 			&:hover {
 				.image {
 					.uploadSVG {
-						fill: var(--inputFocusColor);
+						fill: var(--mainColor);
 					}
 				}
 			}
@@ -132,19 +132,20 @@
 	}
 
 	.saveChanges {
-		@include formBtn($bgc: #d3d3d3d3, $color: #979797, $padding: 1rem, $cursor: not-allowed);
+		@include formBtn($bgc: var(--lightGrayColor), $color: #979797, $padding: 1rem, $cursor: not-allowed);
 
 		align-self: flex-end;
 		margin-top: 3rem;
 	}
 	.enabledChanges {
-		color: #ffffff;
+		color: var(--whiteColor);
 
-		background-color: #00684a;
+		background-color: var(--mainColor);
 		cursor: pointer;
-
+		
 		&:hover {
-			box-shadow: 0px 0px 3px 3px #3fa588;
+			background-color: var(--mainColorHover);
+			
 		}
 	}
 }

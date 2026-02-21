@@ -2,11 +2,11 @@
 	display: flex;
 	width: 100%;
 	min-height: 100dvh;
-	max-width: 1200px;
+	max-width: 1300px;
 	color: var(--textColor);
 	.postFormControllersWrapper {
 		padding: 2rem;
-		border-right: 1px solid var(--inputBorderColor);
+		border-right: 1px solid var(--lightGrayColor);
 		.postFormControllers {
 			position: sticky;
 			top: 1rem;
@@ -16,8 +16,8 @@
 
 			.postFormBtns {
 				padding: 1rem 0.5em;
-				color: var(--buttonColorDark);
-				background-color: var(--buttonColorLight);
+				color: var(--darkColor);
+				background-color: var(--whiteColor);
 				font-size: var(--textSize_12);
 				border-radius: var(--borderRadius04);
 				border: none;
@@ -27,7 +27,7 @@
 				cursor: pointer;
 
 				&:hover {
-					color: var(--buttonColorGreen);
+					color: var(--mainColor);
 				}
 			}
 		}
@@ -68,11 +68,11 @@
 						border-radius: var(--borderRadius06);
 						overflow: hidden;
 						transition: all 0.3s;
-						background-color: var(--formBgcLight);
-						box-shadow: 0px 0px 0px 2px var(--inputBorderColor);
+						background-color: var(--whiteColor);
+						box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
 
 						&:hover {
-							box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+							box-shadow: 0px 0px 0px 2px var(--mainColor);
 						}
 						.previewImage {
 							width: 100%;
@@ -92,12 +92,12 @@
 							svg {
 								width: 80px;
 								height: 80px;
-								fill: var(--inputBorderColor);
+								fill: var(--lightGrayColor);
 								transition: all 0.3s;
 							}
 							&:hover {
 								svg {
-									fill: var(--uploadHoverColor);
+									fill: var(--mainColor);
 								}
 							}
 						}
@@ -131,7 +131,7 @@
 						height: 30px;
 
 						.icon {
-							color: var(--errorFormColor);
+							color: var(--errorColor);
 							width: 20px;
 							height: 20px;
 							cursor: pointer;
@@ -148,7 +148,7 @@
 			// FORM OPTIONS
 
 			.formOptionsContainer {
-				width: 30%;
+				width: 40%;
 
 				.formOptionsWrapper {
 					position: sticky;
@@ -182,12 +182,12 @@
 									color: var(--textColor);
 									font-size: var(--textSize_16);
 									border-radius: var(--borderRadius04);
-									background-color: var(--formBgcLight);
-									// box-shadow: 0px 0px 0px 2px var(--inputBorderColor);
+									background-color: var(--whiteColor);
+									// box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
 									transition: all 0.3s;
 									cursor: pointer;
 									&:hover {
-										box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+										box-shadow: 0px 0px 0px 2px var(--mainColor);
 									}
 								}
 							}
@@ -202,12 +202,12 @@
 								align-items: center;
 								gap: 1rem;
 								padding: 0.3rem 0;
-								border-right: 1px solid var(--inputBorderColor);
+								border-right: 1px solid var(--lightGrayColor);
 								font-size: 1.6rem;
 								cursor: pointer;
 								transition: all 0.3s;
 								&:hover {
-									color: var(--categoryOptionHover);
+									color: var(--mainColor);
 								}
 
 								input {
@@ -248,9 +248,9 @@
 							width: 100%;
 							padding: var(--vspace-0_25);
 							color: var(--textColor);
-							background-color: var(--formBgcLight);
+							background-color: var(--whiteColor);
 							font-size: var(--textSize_16);
-							border: 1px solid var(--inputBorderColor);
+							border: 1px solid var(--lightGrayColor);
 							border-radius: var(--borderRadius06);
 							background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
 							background-repeat: no-repeat;
@@ -260,13 +260,13 @@
 							cursor: pointer;
 
 							&:hover {
-								box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-								border-color: #ffffff;
+								box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+								border-color: var(--whiteColor);
 							}
 
 							&:focus {
-								box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
-								border-color: #ffffff;
+								box-shadow: 0px 0px 0px 2px var(--mainColor);
+								border-color: var(--whiteColor);
 							}
 							option {
 								width: 80%;
@@ -282,19 +282,22 @@
 		display: flex;
 		gap: 2rem;
 		margin-top: 3rem;
+		flex-wrap: wrap;
 
 		.submitBtn {
 			display: flex;
 			align-self: flex-start;
-			color: var(--buttonColorDark);
-			background-color: var(--buttonBgcLightGrey);
+			color: var(--darkColor);
+			background-color: var(--lightGrayColor);
+			cursor: not-allowed;
 		}
 		.save {
-			color: var(--buttonColorLight);
-			background-color: var(--buttonBgcGreen);
+			color: var(--whiteColor);
+			background-color: var(--mainColor);
+			cursor: pointer;
 
 			&:hover {
-				background-color: var(--buttonBgcHoverGreen);
+				background-color: var(--mainColorHover);
 			}
 		}
 		.animate1 {
@@ -309,19 +312,19 @@
 
 		.clearButton {
 			transition: all 0.3s;
-			color: var(--buttonColorDark);
-			background-color: var(--buttonBgcLightGrey);
+			color: var(--darkColor);
+			background-color: var(--lightGrayColor);
 			&:hover {
-				color: var(--buttonColorLight);
+				color: var(--whiteColor);
 				background-color: var(--clearButtonBgc);
 			}
 		}
 		.clearAllBtn {
-			color: var(--buttonColorDark);
-			background-color: var(--buttonBgcLightGrey);
+			color: var(--darkColor);
+			background-color: var(--lightGrayColor);
 
 			&:hover {
-				color: var(--buttonColorLight);
+				color: var(--whiteColor);
 				background-color: var(--clearAllButtonBgc);
 			}
 		}
@@ -331,25 +334,75 @@
 			padding: 1rem 2.5rem;
 			font-size: var(--textSize_18);
 			border: none;
-			color: var(--buttonColorDark);
-			background-color: var(--buttonBgcLightGrey);
+			color: var(--darkColor);
+			background-color: var(--lightGrayColor);
 
 			border-radius: var(--borderRadius04);
 			transition: all 0.3s;
 			cursor: pointer;
 
 			&:hover {
-				color: var(--buttonColorLight);
+				color: var(--whiteColor);
 				background-color: var(--cancelButtonBgc);
 			}
 		}
 
 		.isSubmitting {
-			background-color: #d3d3d3d3;
+			background-color: var(--lightGrayColor);
+			color: var(--darkColor);
 			cursor: not-allowed;
-			color: #000000;
+
 			&:hover {
-				background-color: #d3d3d3d3;
+				color: var(--darkColor);
+				background-color: var(--lightGrayColor);
+			}
+		}
+	}
+
+	.updateWrapper {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		padding: 2rem;
+		z-index: 2000;
+		
+		background-color: var(--popupBgcOpacity);
+
+		.updateBox {
+			position: sticky;
+			top: 30%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: var(--vspace-0_75);
+			width: 100%;
+			max-width: 500px;
+			height: 100%;
+			max-height: 200px;
+			background-color: var(--whiteColor);
+			border-radius: var(--borderRadius06);
+
+			.updateInfo {
+				margin-top: 4rem;
+				color: var(--mainColor);
+			}
+			.updatePostLink {
+				margin-top: 4rem;
+				margin-bottom: 2rem;
+				padding: 1rem 2rem;
+				transition: all 0.3s;
+				border-radius: var(--borderRadius06);
+
+				color: var(--whiteColor);
+				background-color: var(--mainColor);
+
+				&:hover {
+					background-color: var(--mainColorHover);
+				}
 			}
 		}
 	}
@@ -375,27 +428,25 @@
 			color: var(--textColor);
 			font-size: var(--textSize_16);
 			font-family: var(--font-2);
-			border: 1px solid var(--inputBorderColor);
+			border: 1px solid var(--lightGrayColor);
 			border-radius: var(--borderRadius06);
 			outline: none;
 			transition: all 0.3s;
 
 			&:hover {
-				box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-				border-color: #ffffff;
+				box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+				border-color: var(--whiteColor);
 			}
 
 			&:focus {
-				box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
-				border-color: #ffffff;
+				box-shadow: 0px 0px 0px 2px var(--mainColor);
+				border-color: var(--whiteColor);
 			}
 		}
 	}
 }
 
 .textAreaContainer {
-	// height: 100%;
-	// width: 100%;
 	display: flex;
 	flex-direction: column;
 	font-family: var(--font-2);
@@ -411,64 +462,46 @@
 		flex-direction: column;
 		width: 100%;
 		border-radius: var(--borderRadius06);
-		border: 1px solid var(--inputBorderColor);
-		background-color: #ffffff;
+		border: 1px solid var(--lightGrayColor);
+		background-color: var(--whiteColor);
 		transition: all 0.3s;
 		overflow: hidden;
+
 		textarea {
 			field-sizing: content;
 			resize: vertical;
 			min-height: 150px;
 			width: 100%;
-			height: 100%;
 			max-width: 1150px;
 			padding: var(--vspace-0_25) var(--vspace-0_25) 3rem;
 			color: var(--textColor);
 			line-height: var(--textLineHeight);
 			font-size: var(--textSize_16);
 			font-family: var(--font-2);
-
 			border: none;
 			outline: none;
-			transition: all 0.3s;
+			overflow: auto;
+			transition:
+				border-color 0.3s,
+				box-shadow 0.3s;
 		}
 		&:hover {
-			box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
-			border-color: #ffffff;
+			box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
+			border-color: var(--whiteColor);
 		}
 	}
 	.focusArea {
 		&:hover {
-			box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+			box-shadow: 0px 0px 0px 2px var(--mainColor);
 		}
 	}
 }
 .error {
-	color: var(--errorFormColor);
+	color: var(--errorColor);
 	font-size: var(--textSize_12);
 }
 .marginError {
 	margin-bottom: 1rem;
-}
-
-.updateContainer {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	height: 100dvh;
-	background-color: var(--pagesBgc);
-
-	.updateWrapper {
-		display: flex;
-		justify-content: center;
-		padding: var(--vspace-0_5);
-		margin-top: 10rem;
-		width: 100%;
-		max-width: 600px;
-		height: 600px;
-		background-color: var(--formBgcLight);
-		border-radius: 12px;
-	}
 }
 
 .progressWrapper {
@@ -492,13 +525,13 @@
 			top: 0%;
 			right: 1rem;
 			height: 100%;
-			color: var(--white);
+			color: var(--whiteColor);
 			font-size: var(--textSize_14);
 		}
 	}
 }
 
-@media (width <= 1200px) {
+@media (width <= 1300px) {
 	.postFormContainer {
 		.formContainer {
 			.formWrapper {
@@ -536,6 +569,7 @@
 		}
 	}
 }
+
 @media (width <= 900px) {
 	.postFormContainer {
 		flex-direction: column;
@@ -562,7 +596,7 @@
 
 		.postFormControllersWrapper {
 			padding: 2rem 1rem 1rem;
-			border-right: 1px solid var(--inputBorderColor);
+			border-right: 1px solid var(--lightGrayColor);
 			.postFormControllers {
 				.postFormBtns {
 					font-size: var(--textSize_10);

@@ -23,7 +23,7 @@ const StackedAreaChart = ({ data, styles,days }: StackedAreaChartProps) => {
 				<linearGradient id="gradient1" x1="100%" y1="100%" x2="100%" y2="0%">
 					<stop offset="0%" stopColor="#FFFFFF" stopOpacity={1} />
 
-					<stop offset="100%" stopColor="#008e00bb" stopOpacity={1} />
+					<stop offset="100%" stopColor="#009062" stopOpacity={1} />
 				</linearGradient>
 			</defs>
 
@@ -45,7 +45,7 @@ const StackedAreaChart = ({ data, styles,days }: StackedAreaChartProps) => {
 				type="monotone"
 				dataKey="views"
 				stackId="1"
-				stroke="#24DC00"
+				stroke="#009062"
 				strokeWidth={2}
 				fill="url(#gradient1)"
 				dot={CustomDot}

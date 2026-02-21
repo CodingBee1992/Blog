@@ -32,7 +32,7 @@ const Profile = () => {
 	const [createSignature] = useCreateCloudinarySignatureMutation()
 	const dispatch = useDispatch()
 	const [showImage, setShowImage] = useState<boolean>(false)
-	const [enabledButtonProfile, setEnabledButtonProfile] = useState<boolean>(false)
+	
 	const fileInputRef = useRef<HTMLInputElement>(null)
 	const [profileErrorMessage, setProfileErrorMessage] = useState<string>('')
 	const [profileSuccessMessage, setProfileSuccessMessage] = useState<string>('')
@@ -52,13 +52,13 @@ const Profile = () => {
 		control,
 		handleSubmit,
 		register,
-		// setError,
+		
 		setValue,
 		reset,
-		formState: { isSubmitting },
+		formState: { isSubmitting, isDirty },
 	} = methods
 
-	const [name, avatar] = useWatch({ control, name: ['name', 'avatar'] })
+	const [ avatar] = useWatch({ control, name: [ 'avatar'] })
 
 	const onChangeInputProfile = (e: ChangeEvent<HTMLInputElement>) => {
 		const target = e.currentTarget
@@ -101,17 +101,14 @@ const Profile = () => {
 			}
 			setValue('avatar', file, { shouldValidate: true })
 		}
-		if (name.length > 1) {
-			setEnabledButtonProfile(true)
-		} else {
-			setEnabledButtonProfile(false)
-		}
+		
 	}
 
 	const onSubmit: SubmitHandler<profileTypes> = async data => {
 		let updatedAvatar = {}
 
 		try {
+			if (!isDirty) return
 			if (data.avatar instanceof File) {
 				const file = data.avatar
 
@@ -132,7 +129,7 @@ const Profile = () => {
 			if (res) setProfileSuccessMessage(res.message)
 
 			dispatch(setData(res))
-			setEnabledButtonProfile(false)
+			
 		} catch (error) {
 			if (typeof error === 'object' && error !== null) {
 				const fetchError = error as FetchBaseQueryError
@@ -157,14 +154,6 @@ const Profile = () => {
 		}
 	}, [profileData, reset])
 
-	useEffect(() => {
-		if (isSubmitting) {
-			setEnabledButtonProfile(false)
-		}
-		if (name.length < 1) {
-			setEnabledButtonProfile(false)
-		}
-	}, [isSubmitting, name.length])
 
 	useEffect(() => {
 		if (profileSuccessMessage) {
@@ -236,13 +225,13 @@ const Profile = () => {
 						type="text"
 						styles={styles}
 						isSubmitting={isSubmitting}
-						setEnabledButtonProfile={setEnabledButtonProfile}
+						
 					/>
 
 					<FormBtn
 						type="submit"
-						isSubmitting={!enabledButtonProfile}
-						className={`${styles.saveChanges} ${enabledButtonProfile ? styles.enabledChanges : ''}`}>
+						isSubmitting={!isSubmitting}
+						className={`${styles.saveChanges} ${isDirty ? styles.enabledChanges : ''}`}>
 						Save Changes
 					</FormBtn>
 				</form>

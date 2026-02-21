@@ -94,7 +94,7 @@ const RHFTextArea = <T extends FieldValues>({
 							aria-describedby={error ? `${id}-error` : undefined}
 							placeholder={placeholder}
 						/>
-						<MiniMarkdownToolbar className={className} textareaRef={textareaRef} value={value} onChange={onChange} />
+						<MiniMarkdownToolbar isSubmitting={isSubmitting} className={className} textareaRef={textareaRef} value={value} onChange={onChange} />
 					</div>
 					{error && (
 						<span id={`${id}-error`} className={styles.error}>

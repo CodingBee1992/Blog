@@ -6,7 +6,7 @@
 	min-height: var(--sideBarLineHeight);
 	height: var(--sideBarLineHeight);
 	line-height: var(--sideBarLineHeight);
-	color: var(--sideBarColorIcon);
+	color: var(--sideBarColor);
 	transition: height 0.3s ease-in-out;
 	overflow: hidden;
 	cursor: pointer;
@@ -19,7 +19,7 @@
 		padding-left: 4rem;
 
 		&:hover {
-			background-color: var(--sideBarBgcHoverLink);
+			background-color: var(--pagesBgc);
 		}
 		.sideBarLinkName {
 			display: flex;
@@ -51,10 +51,10 @@
 	}
 
 	.activeSideBarLink {
-		background-color: var(--sideBarBgcHoverLink);
+		background-color: var(--pagesBgc);
 
 		&:hover {
-			background-color: var(--sideBarBgcHoverLink);
+			background-color: var(--pagesBgc);
 		}
 	}
 	.subMenu {
@@ -85,21 +85,21 @@
 				line-height: 1.8rem;
 				padding: 0.7rem 3rem;
 
-				color: var(--sideBarColorIcon);
+				color: var(--sideBarColor);
 				font-size: var(--sideBarSubLinks);
 				font-weight: 400;
 				transition: all 0.3s ease-in-out;
 			}
 
 			&:hover {
-				background-color: var(--sideBarBgcHoverLink);
+				background-color: var(--pagesBgc);
 			}
 		}
 		.activeSubMenuLi {
-			background-color: var(--sideBarBgcHoverLink);
+			background-color: var(--pagesBgc);
 
 			&:hover {
-				background-color: var(--sideBarBgcHoverLink);
+				background-color: var(--pagesBgc);
 			}
 		}
 	}

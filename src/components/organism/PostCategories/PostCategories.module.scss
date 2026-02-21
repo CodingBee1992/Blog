@@ -5,7 +5,7 @@
 		font-weight: 400;
 		line-height: 4rem;
 		font-family: var(--font-2);
-		color: var(--pagesColor);
+		color: var(--sideBarColor);
 	}
 	
 	.postCategoriesWrapper {
@@ -16,16 +16,15 @@
 
 		.postCategory {
 			position: relative;
-			// padding: 0.75rem 2rem;
 			padding: 1rem 2.5rem;
-			background-color: #ffffff;
+			background-color: var(--whiteColor);
 			font-size: var(--textSize_14);
-			box-shadow: 0px 0px 0px 2px var(--inputBoxShadowColor);
+			box-shadow: 0px 0px 0px 2px var(--lightGrayColor);
 			border-radius: var(--borderRadius06);
 			transition: all 0.3s;
 			cursor: pointer;
 			&:hover{
-				box-shadow: 0px 0px 0px 2px var(--inputFocusColor);
+				box-shadow: 0px 0px 0px 2px var(--mainColor);
 
 			}
 			.deletePostCategory {
@@ -38,7 +37,7 @@
 				.closeSVG {
 					width: 100%;
 					height: 100%;
-					color: var(--errorFormColor);
+					color: var(--errorColor);
 					transition: transform 0.3s ease-in;
 					
 

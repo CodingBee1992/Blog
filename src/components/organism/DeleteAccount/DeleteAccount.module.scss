@@ -1,12 +1,12 @@
 @use '../../../assets/styles/variable' as *;
 .title {
-	// margin-block: 2rem;
-    margin-top: 2rem;
+	
+	margin-top: 2rem;
 	font-size: var(--textSize_26);
 	font-weight: 400;
 	line-height: 4rem;
 	font-family: var(--font-2);
-	color: var(--pagesColor);
+	color: var(--sideBarColor);
 }
 
 .deleteAccountWrapper {
@@ -24,19 +24,19 @@
 				margin-right: 1rem;
 			}
 			.confirmDeletion {
-				color: #ffffff;
-				background-color: #861a1a;
+				color: var(--whiteColor);
+				background-color: var(--errorColor);
 				transition: all 0.3s;
 				cursor: pointer;
 				&:hover {
-					box-shadow: 0px 0px 3px 3px #ae3131;
+					background-color: var(--errorColorHover);
 				}
 			}
 			.cancelDeletion {
-				@include formBtn($padding: 1rem, $bgc: transparent, $color: #000000);
-				border: 1px solid #000000;
+				@include formBtn($padding: 1rem 2rem, $bgc: var(--mainColor), $color: var(--whiteColor));
+
 				&:hover {
-					box-shadow: 0px 0px 3px 3px #d3d3d3d3;
+					background-color: var(--mainColorHover);
 				}
 			}
 		}
@@ -44,7 +44,7 @@
 }
 
 @media (width < 800px) {
-    .title{
-        margin-top: 7rem;
-    }
+	.title {
+		margin-top: 7rem;
+	}
 }

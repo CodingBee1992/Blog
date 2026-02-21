@@ -6,7 +6,7 @@
 		font-weight: 400;
 		line-height: 4rem;
 		font-family: var(--font-2);
-		color: var(--pagesColor);
+		color: var(--sideBarColor);
 	}
 
 	.formWrapper {
@@ -35,23 +35,24 @@
 			gap: 1rem;
 
 			.saveChanges {
-				@include formBtn($padding: 1rem, $bgc: #d3d3d3d3, $color: #979797, $cursor: not-allowed);
+				@include formBtn($padding: 1rem, $bgc: var(--lightGrayColor), $color: #979797, $cursor: not-allowed);
 			}
 			.enabledChanges {
-				color: #ffffff;
+				color: var(--whiteColor);
 				cursor: pointer;
-				background-color: #00684a;
-
+				background-color: var(--mainColor);
+				
 				&:hover {
-					box-shadow: 0px 0px 3px 3px #3fa588;
+					background-color: var(--mainColorHover);
+					
 				}
 			}
 			.cancelReset {
-				@include formBtn($padding: 1rem, $bgc: transparent, $color: #000000);
-				border: 1px solid #000000;
+				@include formBtn($padding: 1rem, $bgc: transparent, $color: var(--blackColor));
+				border: 1px solid var(--blackColor);
 
 				&:hover {
-					box-shadow: 0px 0px 3px 3px #d3d3d3d3;
+					box-shadow: 0px 0px 3px 3px var(--lightGrayColor);
 				}
 			}
 		}

@@ -97,7 +97,7 @@
 									}
 								}
 								.heroPostedBy {
-									color: #ffffff;
+									color: var(--whiteColor);
 									font-weight: 500;
 
 									.heroAuthor {
@@ -120,7 +120,7 @@
 								text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 								a {
-									color: #ffffff;
+									color: var(--whiteColor);
 								}
 							}
 						}
@@ -149,7 +149,7 @@
 					display: inline-block;
 					width: 0;
 					height: 1px;
-					background-color: #ffffff;
+					background-color: var(--whiteColor);
 					transform: translateY(-4px);
 					transition: width 0.3s cubic-bezier(0.21, 0.97, 0.75, 0.85);
 				}
@@ -159,7 +159,7 @@
 					padding: 0.4rem;
 					line-height: 3.2rem;
 					height: auto;
-					color: white;
+					color: var(--whiteColor);
 					letter-spacing: 4px;
 					border: none;
 					background-color: transparent;
@@ -181,7 +181,7 @@
 		right: var(--socialLinksRight);
 		bottom: 15dvh;
 		text-align: right;
-		color: white;
+		color: var(--whiteColor);
 		font-weight: 400;
 		z-index: 1000;
 
@@ -193,7 +193,7 @@
 			display: block;
 			width: 1px;
 			height: 3.6rem;
-			background-color: #ffffff;
+			background-color: var(--whiteColor);
 			margin: 3.6rem auto 4.8rem;
 		}
 		.socialLinks {
@@ -215,13 +215,13 @@
 					padding: 0.25rem;
 					border-radius: var(--borderRadius06);
 					background-color: #f3f4f6;
-					color: #1f2937;
+					color: var(--darkColor);
 					transition: all 0.3s ease;
 					text-decoration: none;
 
 					&:hover {
-						background: var(--greenColor);
-						color: var(--white);
+						background: var(--mainColor);
+						color: var(--whiteColor);
 						transform: translateY(-2px);
 					}
 				}
@@ -243,15 +243,15 @@
 			align-items: center;
 			padding: var(--padding-arrows);
 			border: none;
-			background-color: var(--white);
+			background-color: var(--whiteColor);
 			color: var(--blackColor);
 
 			cursor: pointer;
 			transition: all 0.3s ease-in-out;
 
 			&:hover {
-				color: var(--arrows-ColorHover);
-				background-color: var(--arrows-BgcHover);
+				color: var(--whiteColor);
+				background-color: var(--blackColorHover);
 			}
 		}
 	}

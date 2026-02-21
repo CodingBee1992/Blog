@@ -15,7 +15,7 @@
 		font-weight: 400;
 		line-height: 4rem;
 		font-family: var(--font-2);
-		color: var(--pagesColor);
+		color: var(--sideBarColor);
 	}
 
 	.profileWrapper {
@@ -38,8 +38,8 @@
 				font-size: var(--textSize_16);
 				font-family: var(--font-2);
 				border: none;
-				color: #000000;
-				border: 1px solid #000000;
+				color: var(--blackColor);
+				border: 1px solid var(--blackColor);
 				border-radius: var(--borderRadius06);
 				outline: none;
 			}
@@ -55,20 +55,25 @@
 		.changeEmail {
 			display: flex;
 			align-self: start;
-			color: var(--blueColor);
+			color: var(--mainColor);
 			border: none;
 			background-color: transparent;
 			cursor: pointer;
+			
+			&:hover{
+				color: var(--mainColorHover);
+
+			}
 		}
 
 		.deleteAccount {
-			@include formBtn($bgc: #861a1a, $color: #ffffff, $padding: 1rem);
+			@include formBtn($bgc: var(--errorColor), $color: #ffffff, $padding: 1rem);
 
 			align-self: flex-end;
 			margin-top: 3rem;
 
 			&:hover {
-				box-shadow: 0px 0px 3px 3px #ae3131;
+				background-color: var(--errorColorHover);
 			}
 		}
 	}

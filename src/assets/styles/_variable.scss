@@ -1,62 +1,57 @@
-
 .theme {
 	--pagesBgc: #0a2012;
-	//  add post / form colors
-	--mainFormColor: #ffffff;
-	--mainFormBgc: #ffffff;
+	
 }
 
 :root {
 	--fontFamily: 'Inter', sans-serif;
 	--font-2: 'DM Serif Text', serif;
 	--font-3: 'DM Serif Display', serif;
-	--loaderBgc: #000000;
 
 	--headerHeight: 8.8rem;
 	--panelRight: 6rem;
-	--controllSettingsTop:160%;
-	--controllContainerTop:260%;
+	--controllSettingsTop: 160%;
+	--controllContainerTop: 260%;
 	--logo-width: 96px;
 
-	--blueColor: #338afb;
-	--greenColor: #00a700;
-	--white: #ffffff;
+	--loaderBgc: #000000;
+	--pagesBgc: #007e561d;
+	// --pagesBgc: #1f614d31;
+	--mainColor: #009062;
+	--mainColorHover: #065f43;
+	--whiteColor: #ffffff;
 	--blackColor: #000000;
-	--lightBlackColor: #282828;
+	--blackColorHover: #282828;
+	--lighterBlackColor: #464d4d;
+	--darkColor: #1f2937;
+	--textColor: #092013;
+	--errorColor: #8f0000;
+	--errorColorHover: #460101;
+	--successColor: #009062;
+	--color-text-light: #929393;
+	--color-border: #eeeeee;
 
-	--pagesBgc: #00590010;
+	--blueColor: #338afb;
+	--lightGrayColor: #d3d3d3d3;
+	--darkerGrayColor: #adadba;
+	--popupBgcOpacity: #0090621f;
 
-	--bgcLightGrey: #eff0f0;
-	--bgcWhite: #ffffff;
-	--bgcBlack: #000000;
-	--bgcLightBlack: #282828;
-
-	--Bgc-desktopPanel: #eff0f0;
-	--Bgc-navTransparent: transparent;
-	--Bgc-navBlack: #000000;
-	--Bgc-navMobile: #000000;
-	--Bgc-navSearch: #000000;
-	--Bgc-navSecond: #000000;
-
-	--mobileIconBgc: #ffffff;
-	--mobileIconBgcHover: #d3d3d3d3;
-	--searchIconBgc: #ffffff;
-	--searchIconBgcHover: #d3d3d3d3;
+	--clearButtonBgc: #564c4c;
+	--cancelButtonBgc: #564c4c;
+	--clearAllButtonBgc: #564c4c;
+	--cancelColor: #564c4c;
 	
-	--menu-textColor: #ffffff;
-	--menu-textColorHover: #d3d3d3d3;
+	--Bgc-navTransparent: transparent;
+	--desktopPanelColor: #eff0f0;
+	// footer
+	--footerBgc: #eff0f0;
+	// sidebar colors
+	--sideBarColor: #092013;
+	//  tabels colors
+	--bgcTabelHover: #83bca9;
+	--notifColor: #77d781;
 
-	--borderBottom: #ffffff0d;
-
-	--subMenuBgc: #282828;
-	--subMenu-Color: #e5e5e5d3;
-	--subMenu-ColorHover: #ffffff;
-
-	--closeBtn-Color: #ffffff;
-	--closeBtn-ColorHover: #d3d3d3d3;
-
-	--searchElementTextColor: #000000;
-
+	--borderBottomColor: #ffffff0d;
 
 	--menu-TextSize: 1.5rem;
 	--subMenu-TextSize: 1.4rem;
@@ -78,10 +73,6 @@
 	--text-display-1: calc(
 		calc(calc(calc(calc(calc(calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2) * 1.2) * 1.2) * 1.2) * 1.2) * 1.2)
 	);
-
-	--arrows-BgcHover: #282828;
-	--arrows-ColorHover: #ffffff;
-	--padding-arrows: 2rem 2.5rem;
 
 	--text-xs: calc((1.8rem / 1.2) / 1.2);
 	--text-xl: calc(calc(calc(calc(calc((1.8rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2) * 1.2) * 1.2);
@@ -109,14 +100,8 @@
 	--vspace-3: calc(3 * 3.2rem);
 	--vspace-4: calc(4 * 3.2rem);
 	--vspace-5: calc(5 * 3.2rem);
+	--padding-arrows: 2rem 2.5rem;
 
-	//Color categories Header span
-	--color-text-light: #929393;
-	--color-text-dark: #000000;
-	--color-text: #282828;
-
-	// Color border posts
-	--color-border: #eeeeee;
 	--btn-height: calc(2 * 3.2rem);
 	--btn-heightXs: calc(1.5 * 3.2rem);
 
@@ -127,66 +112,8 @@
 	--margin-bottomSocialLinks: calc(1 * 3.2rem);
 	--socialLinksRight: 4rem;
 
-	// Admin Panel -----------------------
-
-	// sidebar colors
-	--sideBarBgc: #ffffff;
-	--sideBarMainColor: #092013;
-	--sideBarColorIcon: #092013;
-	//  links hover
-	--sideBarBgcHoverLink: #00590010;
-
-	// PANEL & SETTINGS PAGES background color
-	--pagesColor: #092013;
 	// form text
 	--textLineHeight: 3rem;
-
-	// form colors
-	--formBgcLight: #ffffff;
-
-	--textColor: #092013;
-
-	--buttonColorLight: #ffffff;
-	// --buttonColorDark: #092013;
-	--buttonColorDark: #1f2937;
-	--buttonColorBlue: #016bf8;
-	--buttonColorGreen: #00a700;
-
-	--buttonBgcLight: #ffffff;
-	--buttonBgcLightGrey: #d3d3d3d3;
-	--buttonBgcGreen: #00a700;
-	--buttonBgcHoverGreen: #2ad42a;
-	--clearButtonBgc: #564c4c;
-	--cancelButtonBgc: #564c4c;
-	--clearAllButtonBgc: #564c4c;
-	--cancelColor: #564c4c;
-	--errorFormColor: #8f0000;
-
-	--categoryOptionHover: #00a700;
-
-	// Inputs
-	--inputMainColor: #000000;
-	--inputFocusColor: #00a700;
-	--inputHoverColor: #d3d3d3d3;
-	--inputBorderColor: #d3d3d3d3;
-	--inputBoxShadowColor: #d3d3d3d3;
-	--uploadHoverColor: #00a700;
-
-	//  tabels colors
-	--bgcTabel: #ffffff;
-	// --bgcTBody: #e9f5db;
-	--bgcTBody: #00590010;
-	--colorTabel: #000000;
-	--bgcTabelHover: #83bca9;
-	--bgcPublishHover: #85ffad;
-
-	// stats colors
-	--statBgc: #ffffff;
-	--statMainColor: #464d4d;
-	--statSecondColor: #adadba;
-	--statThirdColor: #03ff18;
-	--areaChartColor: #24dc00;
-	--areaChartHoverColor: #00a700;
 
 	//  fontSize
 
@@ -312,7 +239,7 @@
 @media (max-width: 500px) {
 	:root {
 		--lineHeight: calc(2.5 * 2.8rem);
-		--menu-TextSize: calc(calc(calc((1.7rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
+		// --menu-TextSize: calc(calc(calc((1.7rem / 1.2) / 1.2) * 1.2) * 1.2 * 1.2);
 		--slideContent-width: 75dvw;
 		--brick-padding: 4rem;
 		--brick-paddingLeftRight: 2rem;
@@ -321,7 +248,6 @@
 }
 @media (max-width: 400px) {
 	:root {
-		
 		--panelRight: 1.8rem;
 	}
 }
@@ -332,8 +258,8 @@
 		--socialLinksRight: 2rem;
 		--headerHeight: 6rem;
 		--panelRight: 4rem;
-		--controllSettingsTop:120%;
-		--controllContainerTop:200%;
+		--controllSettingsTop: 120%;
+		--controllContainerTop: 200%;
 	}
 }
 

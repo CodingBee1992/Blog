@@ -16,7 +16,7 @@ html {
 
 body {
 	height: 100%;
-	background: var(--white);
+	background: var(--whiteColor);
 	font-size: var(--text-Size);
 	font-style: normal;
 }
@@ -39,7 +39,7 @@ a {
 }
 .sectionPages {
 	min-height: 100dvh;
-	background-color: var(--white);
+	background-color: var(--whiteColor);
 	padding-top: calc(5.5 * var(--space));
 }
 
