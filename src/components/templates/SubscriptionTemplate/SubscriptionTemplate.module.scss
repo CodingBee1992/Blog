@@ -1,24 +1,26 @@
-.verifyContainer {
+.subscriptionContainer {
 	display: flex;
 	justify-content: center;
 	min-height: 100dvh;
 	height: 100%;
 	width: 100%;
 	background-color: var(--pagesBgc);
-	.verifyWrapper {
+	padding: 2rem;
+	.subscriptionWrapper {
 		display: flex;
 		flex-direction: column;
+
 		max-width: 600px;
-		margin-top: 10rem;
 		width: 100%;
 		height: 100%;
 		min-height: 400px;
+		margin-top: 10rem;
 		border-radius: var(--borderRadius08);
 		box-shadow: 0px 0px 4px 4px var(--lightGrayColor);
 		background-color: var(--whiteColor);
 		overflow: hidden;
 
-		.verifyTitle {
+		.subscriptionTitle {
 			padding: 2.4rem 3.2rem;
 			color: var(--whiteColor);
 			background-color: var(--mainColor);
@@ -27,48 +29,16 @@
 			font-family: var(--font-2);
 			font-weight: bold;
 		}
-		.errorTitle {
-			margin-top: 2rem;
-			text-align: center;
-			font-size: var(--textSize_20);
-			font-family: var(--font-2);
-		}
-
 		.apiResponse {
 			display: flex;
 			justify-content: center;
-			margin: 3rem 2rem 0;
-			
+			margin: 3rem 2rem;
 		}
-		.resendButton {
-			display: flex;
-			align-self: flex-start;
-			margin: 4rem auto;
-			padding: 1rem 3.5rem;
-			font-size: var(--textSize_20);
-			border: none;
-			color: var(--whiteColor);
-			font-family: var(--font-2);
-			background-color: var(--mainColor);
-			cursor: pointer;
-			transition: all 0.3s;
-
-			&:hover {
-				background-color: var(--mainColorHover);
-			}
-		}
-		.disabledResend {
-			cursor: not-allowed;
-			background-color: var(--lightGrayColor);
-			&:hover {
-				background-color: var(--lightGrayColor);
-			}
-		}
-
 		.homePageLink {
 			display: flex;
 			align-self: flex-start;
-			margin: 0 auto;
+
+			margin: 2rem auto;
 			padding: 1rem 2rem;
 			color: var(--textColor);
 			font-size: var(--textSize_20);
@@ -80,24 +50,13 @@
 			}
 		}
 
-		.bottomInfo {
-			margin: auto auto 0;
+		.subscriptionInfo {
+			margin-top: auto;
 			padding: 2rem;
 			font-size: var(--textSize_16);
 			color: var(--darkerGrayColor);
+			line-height: 2.2rem;
 			text-align: center;
-		}
-	}
-}
-
-@media (width < 600px) {
-	.verifyContainer {
-		.verifyWrapper {
-			max-width: 90%;
-			width: 100%;
-			.verifyBox {
-				width: 100%;
-			}
 		}
 	}
 }
